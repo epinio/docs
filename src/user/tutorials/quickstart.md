@@ -2,7 +2,7 @@
 
 If you have not already installed `epinio` follow these links
 
-- [Installation Section](https://github.com/epinio/epinio#installation)
+- [Installation Section](../installation/installation.md)
 
 In this tutorial, you will learn how to create a namespace and how to push, list and delete an application in it.
 
@@ -11,7 +11,9 @@ In this tutorial, you will learn how to create a namespace and how to push, list
 ### Clone the sample app
 
 If you just want an application that works use the one inside the
-[sample-app directory](/assets/sample-app). You can copy it to your system with
+[sample-app directory](https://github.com/epinio/epinio/tree/main/assets/sample-app).
+
+You can copy it to your system with
 the following commands:
 
 ```bash
@@ -40,7 +42,8 @@ We also provide information about the more advanced [git model](../explanations/
 
 ***
 
-###### Note: If you want to know the details of the `epinio push` process, please read the [detailed push docs](../explanations/detailed-push-process.md)
+###### Note: If you want to know the details of the `epinio push`
+process, please read the [detailed push docs](../explanations/detailed-push-process.md)
 
 ***
 

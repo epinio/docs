@@ -1,6 +1,6 @@
 #  Installation of the Epinio CLI
 
-If not done already, refer to [System Requirements](https://github.com/epinio/epinio#system-requirements).
+If not done already, refer to [System Requirements](system-requirements).
 
 ## Install Dependencies
 
