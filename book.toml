@@ -1,0 +1,14 @@
+[book]
+title = "Epinio - the application development engine for Kubernetes"
+description = "Documentation for users and developers of Epinio"
+authors = ["many"]
+language = "en"
+multilingual = false
+src = "src"
+
+
+[output.html]
+git-repository-url = "https://github.com/epinio/docs"
+edit-url-template = "https://github.com/epinio/docs/edit/main/{path}"
+site-url = "/"
+cname = "docs.epinio.io"
