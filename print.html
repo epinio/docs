@@ -1,0 +1,1743 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Epinio - the application development engine for Kubernetes</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Documentation for users and developers of Epinio">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="user/tutorials/quickstart.html"><strong aria-hidden="true">2.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="user/index.html"><strong aria-hidden="true">3.</strong> User documentation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user/tutorials/install.html"><strong aria-hidden="true">3.1.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user/tutorials/install_epinio_cli.html"><strong aria-hidden="true">3.1.1.</strong> Install Epinio cli</a></li><li class="chapter-item expanded "><a href="user/tutorials/install_epinio_customDNS.html"><strong aria-hidden="true">3.1.2.</strong> Install Epinio with custom DNS</a></li><li class="chapter-item expanded "><a href="user/tutorials/install_epinio_magicDNS.html"><strong aria-hidden="true">3.1.3.</strong> Install Epinio with &quot;magic&quot; DNS</a></li><li class="chapter-item expanded "><a href="user/tutorials/install_epinio_magicDNS.html"><strong aria-hidden="true">3.1.4.</strong> Install Epinio with &quot;magic&quot; DNS</a></li><li class="chapter-item expanded "><a href="user/tutorials/install_epinio_on_aks.html"><strong aria-hidden="true">3.1.5.</strong> Install Epinio on AKS (Azure)</a></li><li class="chapter-item expanded "><a href="user/tutorials/install_epinio_on_eks.html"><strong aria-hidden="true">3.1.6.</strong> Install Epinio on EKS (Amazon)</a></li><li class="chapter-item expanded "><a href="user/tutorials/install_epinio_on_gke.html"><strong aria-hidden="true">3.1.7.</strong> Install Epinio on GKE (Google)</a></li><li class="chapter-item expanded "><a href="user/tutorials/install_epinio_on_k3d.html"><strong aria-hidden="true">3.1.8.</strong> Install Epinio on k3d (local)</a></li><li class="chapter-item expanded "><a href="user/tutorials/install_wordpress_application.html"><strong aria-hidden="true">3.1.9.</strong> Install Wordpress on Epinio</a></li></ol></li><li class="chapter-item expanded "><a href="user/tutorials/uninstall_epinio.html"><strong aria-hidden="true">3.2.</strong> Uninstall Epinio</a></li><li class="chapter-item expanded "><a href="user/explanations/explanations.html"><strong aria-hidden="true">3.3.</strong> Explanations - Documentation providing background information on key concepts</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user/explanations/advanced.html"><strong aria-hidden="true">3.3.1.</strong> Advanced topics</a></li><li class="chapter-item expanded "><a href="user/explanations/configuration.html"><strong aria-hidden="true">3.3.2.</strong> Configuration</a></li><li class="chapter-item expanded "><a href="user/explanations/detailed-push-process.html"><strong aria-hidden="true">3.3.3.</strong> Detailed Push Process</a></li><li class="chapter-item expanded "><a href="user/explanations/principles.html"><strong aria-hidden="true">3.3.4.</strong> Principles</a></li><li class="chapter-item expanded "><a href="user/explanations/security.html"><strong aria-hidden="true">3.3.5.</strong> Security</a></li><li class="chapter-item expanded "><a href="user/explanations/windows.html"><strong aria-hidden="true">3.3.6.</strong> Windows</a></li></ol></li><li class="chapter-item expanded "><a href="user/howtos/howtos.html"><strong aria-hidden="true">3.4.</strong> HowTos - Documentation solving specific, sometimes advanced, problems in a practical manner.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user/howtos/certificate_issuers.html"><strong aria-hidden="true">3.4.1.</strong> Certificate Issuers</a></li><li class="chapter-item expanded "><a href="user/howtos/provision_external_ip_for_local_kubernetes.html"><strong aria-hidden="true">3.4.2.</strong> Provision external IP address for local Kubernetes</a></li><li class="chapter-item expanded "><a href="user/howtos/gitjob_push.html"><strong aria-hidden="true">3.4.3.</strong> Push with gitjob</a></li><li class="chapter-item expanded "><a href="user/howtos/setup-external-s3.html"><strong aria-hidden="true">3.4.4.</strong> Setup external S3 storage</a></li></ol></li><li class="chapter-item expanded "><a href="user/references/references.html"><strong aria-hidden="true">3.5.</strong> Reference documentation. For example all CLI commands and their arguments.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="user/references/index.html"><strong aria-hidden="true">3.5.1.</strong> Command requirements</a></li><li class="chapter-item expanded "><a href="user/references/commands.html"><strong aria-hidden="true">3.5.2.</strong> Command reference</a></li><li class="chapter-item expanded "><a href="user/references/supported-apps.html"><strong aria-hidden="true">3.5.3.</strong> Supported Applications</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="developer/index.html"><strong aria-hidden="true">4.</strong> Developer documentation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer/explanations/explanations.html"><strong aria-hidden="true">4.1.</strong> Explanations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer/explanations/futureplans.html"><strong aria-hidden="true">4.1.1.</strong> Future plans</a></li></ol></li><li class="chapter-item expanded "><a href="developer/howtos/howtos.html"><strong aria-hidden="true">4.2.</strong> HowTos - Practical Guides to solving practical problems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="developer/howtos/development.html"><strong aria-hidden="true">4.2.1.</strong> Development Guidelines</a></li><li class="chapter-item expanded "><a href="developer/howtos/new-api-user.html"><strong aria-hidden="true">4.2.2.</strong> Add a new API User</a></li><li class="chapter-item expanded "><a href="developer/howtos/acceptance_tests.html"><strong aria-hidden="true">4.2.3.</strong> Run acceptance test suites</a></li><li class="chapter-item expanded "><a href="developer/howtos/custom-python-builder.html"><strong aria-hidden="true">4.2.4.</strong> Create and use a custom builder for Python</a></li></ol></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Epinio - the application development engine for Kubernetes</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/epinio/docs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                        
+
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="quickstart"><a class="header" href="#quickstart">QuickStart</a></h1>
+<p>If you have not already installed <code>epinio</code> follow these links</p>
+<ul>
+<li><a href="https://github.com/epinio/epinio#installation">Installation Section</a></li>
+</ul>
+<p>In this tutorial, you will learn how to create a namespace and how to push, list and delete an application in it.</p>
+<h2 id="push-an-application"><a class="header" href="#push-an-application">Push an application</a></h2>
+<h3 id="clone-the-sample-app"><a class="header" href="#clone-the-sample-app">Clone the sample app</a></h3>
+<p>If you just want an application that works use the one inside the
+<a href="user/tutorials//assets/sample-app">sample-app directory</a>. You can copy it to your system with
+the following commands:</p>
+<pre><code class="language-bash">git clone https://github.com/epinio/epinio.git
+cd epinio/assets/
+</code></pre>
+<h3 id="push-an-app"><a class="header" href="#push-an-app">Push an app</a></h3>
+<pre><code class="language-bash">epinio push sample sample-app
+</code></pre>
+<p>where <code>sample</code> is the name you want to give to your application. This name has to be unique within the targeted namespace in Epinio. <code>sample-app</code> is path to the directory where your application's code resides.</p>
+<hr />
+<h6 id="note-that-the-path-argument-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application"><a class="header" href="#note-that-the-path-argument-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application">Note that the path argument is optional. If not specified the current working directory will be used. Always ensure that the chosen directory contains a supported application.</a></h6>
+<hr />
+<p>If you want to know what applications are supported in Epinio, please read the
+<a href="user/tutorials/../references/supported-apps.html">notes about supported applications</a>.</p>
+<p>We also provide information about the more advanced <a href="user/tutorials/../explanations/advanced.html#git-pushing">git model</a>.</p>
+<hr />
+<h6 id="note-if-you-want-to-know-the-details-of-the-epinio-push-process-please-read-the-a-hrefusertutorialsexplanationsdetailed-push-processhtmldetailed-push-docsa"><a class="header" href="#note-if-you-want-to-know-the-details-of-the-epinio-push-process-please-read-the-a-hrefusertutorialsexplanationsdetailed-push-processhtmldetailed-push-docsa">Note: If you want to know the details of the <code>epinio push</code> process, please read the <a href="user/tutorials/../explanations/detailed-push-process.html">detailed push docs</a></a></h6>
+<hr />
+<h4 id="check-that-your-application-is-working"><a class="header" href="#check-that-your-application-is-working">Check that your application is working</a></h4>
+<p>After the application has been pushed, a unique URL is printed which you can use to access your application. If you don't have this URL available anymore you can find it again by running:</p>
+<pre><code class="language-bash">epinio app show sample
+</code></pre>
+<p>(&quot;Routes&quot; is the part your are looking for)</p>
+<p>Go ahead and open the application route in your browser!</p>
+<h3 id="list-all-commands"><a class="header" href="#list-all-commands">List all commands</a></h3>
+<p>To see all the applications you have deployed use the following command:</p>
+<pre><code class="language-bash">epinio apps list
+</code></pre>
+<h3 id="delete-an-application"><a class="header" href="#delete-an-application">Delete an application</a></h3>
+<p>To delete the application you just deployed run the following command:</p>
+<pre><code class="language-bash">epinio delete sample
+</code></pre>
+<h3 id="create-a-separate-namespace"><a class="header" href="#create-a-separate-namespace">Create a separate namespace</a></h3>
+<p>If you want to keep your various application separated, you can use the concept of namespaces. Create a new namespace with this command:</p>
+<pre><code class="language-bash">epinio namespace create newspace
+</code></pre>
+<p>To start deploying application to this new namespace you have to &quot;target&quot; it:</p>
+<pre><code class="language-bash">epinio target newspace
+</code></pre>
+<p>After this and until you target another namespace, whenever you run <code>epinio push</code> you will be deploying to this new namespace.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="user-documentation"><a class="header" href="#user-documentation">User documentation</a></h1>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="installation-of-the-epinio-cli"><a class="header" href="#installation-of-the-epinio-cli">Installation of the Epinio CLI</a></h1>
+<p>If not done already, refer to <a href="https://github.com/epinio/epinio#system-requirements">System Requirements</a>.</p>
+<h2 id="install-dependencies"><a class="header" href="#install-dependencies">Install Dependencies</a></h2>
+<p>Follow these <a href="user/tutorials/./install_dependencies.html">steps</a> to install dependencies.</p>
+<h2 id="install-epinio-cli"><a class="header" href="#install-epinio-cli">Install Epinio CLI</a></h2>
+<h3 id="download-the-binary"><a class="header" href="#download-the-binary">Download the Binary</a></h3>
+<p>Find the latest version at <a href="https://github.com/epinio/epinio/releases">Releases</a>.
+Run one of the commands below, and replace &lt;epinio-version&gt; with the version of your choice, e.g. &quot;v0.1.0&quot;.</p>
+<h5 id="linux"><a class="header" href="#linux">Linux</a></h5>
+<pre><code class="language-bash">curl -o epinio -L https://github.com/epinio/epinio/releases/download/&lt;epinio-version&gt;/epinio-linux-amd64
+</code></pre>
+<h5 id="macos"><a class="header" href="#macos">MacOS</a></h5>
+<pre><code class="language-bash">curl -o epinio -L https://github.com/epinio/epinio/releases/download/&lt;epinio-version&gt;/epinio-darwin-amd64
+</code></pre>
+<h5 id="windows"><a class="header" href="#windows">Windows</a></h5>
+<pre><code class="language-bash"> curl -LO https://github.com/epinio/epinio/releases/download/&lt;epinio-version&gt;/epinio-windows-amd64.exe
+</code></pre>
+<h3 id="make-the-binary-executable"><a class="header" href="#make-the-binary-executable">Make the Binary Executable</a></h3>
+<p>For example on Linux and Mac:</p>
+<pre><code class="language-bash">chmod +x epinio
+</code></pre>
+<p>Move the binary to your PATH</p>
+<pre><code class="language-bash">sudo mv ./epinio /usr/local/bin/epinio
+</code></pre>
+<h3 id="verify-the-installation"><a class="header" href="#verify-the-installation">Verify the Installation</a></h3>
+<p>Run e.g. <code>epinio version</code> to test the successful installation.</p>
+<pre><code class="language-bash">&gt; epinio version
+Epinio Version: v0.1.0
+Go Version: go1.17
+</code></pre>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="installation-using-a-custom-domain"><a class="header" href="#installation-using-a-custom-domain">Installation using a Custom Domain</a></h1>
+<p>For test and production environments. The installation will be done in three steps.</p>
+<ul>
+<li>Install ingress in cluster</li>
+<li>Configure your custom domain</li>
+<li>Install Epinio in cluster</li>
+</ul>
+<p>If not done already, refer to <a href="https://github.com/epinio/epinio#system-requirements">System Requirements</a> to prepare your kubernetes.</p>
+<h2 id="install-the-epinio-cli"><a class="header" href="#install-the-epinio-cli">Install the Epinio CLI</a></h2>
+<p>If not done already, refer to <a href="user/tutorials/./install_epinio_cli.html">Install the Epinio CLI</a>.</p>
+<h2 id="install-ingress-in-cluster"><a class="header" href="#install-ingress-in-cluster">Install Ingress In Cluster</a></h2>
+<p>First install ingress and wait for the <code>loadbalancer-ip</code> to be provisioned for the <code>traefik</code> public IP. Then map the <code>loadbalancer-ip</code> to your <code>Domain Name</code> e.g. <code>test.example.com</code> and wait for it to be mapped.</p>
+<pre><code class="language-bash">epinio install-ingress
+</code></pre>
+<p>The command prints the <code>loadbalancer-ip</code> (&quot;EXTERNAL-IP&quot;) needed. Note however that it can also print a loadbalanced FQDN instead, which may resolve to multiple IPs.</p>
+<h2 id="configure-your-custom-domain"><a class="header" href="#configure-your-custom-domain">Configure your custom DOMAIN</a></h2>
+<p>Currently we recommend to configure a wildcard domain for Epinio.</p>
+<p>Given you own the domain <strong>&quot;example.com&quot;</strong>, you would configure a subdomain e.g. <strong>&quot;test.example.com&quot;</strong> for Epinio.
+Now you will have to configure your DNS in a way, that any request towards &quot;test.example.com&quot; will resolve to the &quot;EXTERNAL-IP&quot; of Traefik, 
+and Ingress will route the traffic accordingly.</p>
+<ul>
+<li>test.example.com =&gt; &quot;EXTERNAL-IP&quot;</li>
+<li>*.test.example.com =&gt; &quot;EXTERNAL-IP&quot;</li>
+</ul>
+<hr />
+<h6 id="note-you-can-also-check-the-external-ip-by-running-the-command-kubectl-get-svc--n-traefik"><a class="header" href="#note-you-can-also-check-the-external-ip-by-running-the-command-kubectl-get-svc--n-traefik">Note you can also check the &quot;EXTERNAL-IP&quot; by running the command <code>kubectl get svc -n traefik</code>.</a></h6>
+<hr />
+<p>Find <a href="user/tutorials/install_epinio_customDNS.html#dns-configuration-examples">DNS Configuration Examples</a> below.</p>
+<h2 id="install-epinio-in-cluster"><a class="header" href="#install-epinio-in-cluster">Install Epinio In Cluster</a></h2>
+<p>With DNS now available the second step actually installs the cluster:</p>
+<pre><code class="language-bash">epinio install --system-domain test.example.com --tls-issuer=letsencrypt-production --use-internal-registry-node-port=false
+</code></pre>
+<hr />
+<h6 id="note-the-issuer-letsencrypt-production-will-work-only-if-your-custom-domain-eg-testexamplecom-is-reachable-from-the-internet-for-test-or-internal-environments-where-your-custom-domain-isnt-reachable-from-the-internet-you-need-to-choose-a-different-issuer-eg-if-you-would-use-the-custom-domain-testinternalcom-epinio-install---system-domain-testinternalcom-will-default-to-the-epinio-ca-issuer"><a class="header" href="#note-the-issuer-letsencrypt-production-will-work-only-if-your-custom-domain-eg-testexamplecom-is-reachable-from-the-internet-for-test-or-internal-environments-where-your-custom-domain-isnt-reachable-from-the-internet-you-need-to-choose-a-different-issuer-eg-if-you-would-use-the-custom-domain-testinternalcom-epinio-install---system-domain-testinternalcom-will-default-to-the-epinio-ca-issuer">Note: The issuer <code>letsencrypt-production</code> will work only, if your custom domain, e.g. &quot;test.example.com&quot;, is reachable from the internet. For test, or internal environments, where your custom domain isn't reachable from the internet, you need to choose a different issuer. E.g. if you would use the custom domain &quot;test.internal.com&quot;, <code>epinio install --system-domain test.internal.com</code> will default to the <code>epinio-ca</code> issuer.</a></h6>
+<hr />
+<h2 id="dns-configuration-examples"><a class="header" href="#dns-configuration-examples">DNS Configuration Examples</a></h2>
+<h3 id="aws-eks-and-route53"><a class="header" href="#aws-eks-and-route53">AWS EKS and Route53</a></h3>
+<p>As an example we will use the <a href="https://console.aws.amazon.com/route53/v2/home#Dashboard">AWS Service Route53</a> to create a wildcard domain within one of your existing &quot;Hosted zones&quot;, e.g. <strong>example.com</strong>.</p>
+<p>Given Epinio ingress installation provided you with the following hostname:</p>
+<pre><code class="language-bash">Traefik Ingress info: [{&quot;hostname&quot;:&quot;abcdefg12345671234567abcdefg1234-1234567890.eu-west-1.elb.amazonaws.com&quot;}]
+</code></pre>
+<hr />
+<h6 id="note-you-can-also-check-the-external-ipfqdn-by-running-the-command-kubectl-get-svc--n-traefik"><a class="header" href="#note-you-can-also-check-the-external-ipfqdn-by-running-the-command-kubectl-get-svc--n-traefik">Note you can also check the &quot;EXTERNAL-IP&quot;/FQDN by running the command <code>kubectl get svc -n traefik</code>.</a></h6>
+<hr />
+<p>Now you will have to add two CNAME records, for the subdomain, e.g. &quot;test&quot; to have &quot;test.example.com&quot;, resp. &quot;*.test.example.com&quot;.
+Replace &quot;abcdefg12345671234567abcdefg1234-1234567890.eu-west-1.elb.amazonaws.com&quot; with the your EKS FQDN, and &quot;test.example.com&quot; with your custom domain.</p>
+<h5 id="testexamplecom"><a class="header" href="#testexamplecom">test.example.com</a></h5>
+<pre><code class="language-bash">Record name: test
+Record type: CNAME - Routes traffic to another domain name and some AWS resources
+Value: abcdefg12345671234567abcdefg1234-1234567890.eu-west-1.elb.amazonaws.com
+</code></pre>
+<h5 id="testexamplecom-1"><a class="header" href="#testexamplecom-1">*.test.example.com</a></h5>
+<pre><code class="language-bash">Record name: *.test
+Record type: CNAME - Routes traffic to another domain name and some AWS resources
+Value: abcdefg12345671234567abcdefg1234-1234567890.eu-west-1.elb.amazonaws.com
+</code></pre>
+<p>Finally, running </p>
+<p><code>&gt; host test.example.com</code>, or even</p>
+<p><code>&gt; host epinio.test.example.com</code></p>
+<p>should resolve to e.g. &quot;abcdefg12345671234567abcdefg1234-1234567890.eu-west-1.elb.amazonaws.com&quot;.</p>
+<h3 id="azure-aks-and-example-domain"><a class="header" href="#azure-aks-and-example-domain">Azure AKS and &quot;example-domain&quot;</a></h3>
+<p>As an example we will use the Azure resource group &quot;example-domain&quot;, with the zone &quot;example.com&quot;.</p>
+<p>Given Epinio ingress installation provided you with the following hostname:</p>
+<pre><code class="language-bash">Traefik Ingress info: [{&quot;ip&quot;:&quot;10.0.0.1&quot;}]
+</code></pre>
+<hr />
+<h6 id="note-you-can-also-check-the-external-ipfqdn-by-running-the-command-kubectl-get-svc--n-traefik-1"><a class="header" href="#note-you-can-also-check-the-external-ipfqdn-by-running-the-command-kubectl-get-svc--n-traefik-1">Note you can also check the &quot;EXTERNAL-IP&quot;/FQDN by running the command <code>kubectl get svc -n traefik</code>.</a></h6>
+<hr />
+<p>Now you will have to add two A records, for the subdomain, e.g. &quot;test&quot; to have &quot;test.example.com&quot;, resp. &quot;*.test.example.com&quot; to the DNS zone &quot;example.com&quot;.
+Replace &quot;10.0.0.1&quot; with the IP from &quot;Traefik Ingress info&quot;, and &quot;test.example.com&quot; with your custom domain.</p>
+<h5 id="testexamplecom-2"><a class="header" href="#testexamplecom-2">test.example.com</a></h5>
+<pre><code class="language-bash">Record name: test.example.com
+Record type: A
+IP address: 10.0.0.1
+</code></pre>
+<h5 id="testexamplecom-3"><a class="header" href="#testexamplecom-3">*.test.example.com</a></h5>
+<pre><code class="language-bash">Record name: *.test.example.com
+Record type: A
+IP address: 10.0.0.1
+</code></pre>
+<p>Finally, running</p>
+<p><code>&gt; host test.example.com</code>, or even</p>
+<p><code>&gt; host epinio.test.example.com</code></p>
+<p>should resolve to e.g. &quot;10.0.0.1&quot;.</p>
+<h3 id="bind-dns"><a class="header" href="#bind-dns">Bind DNS</a></h3>
+<p>Given Epinio ingress installation provided you with the following hostname:</p>
+<pre><code class="language-bash">Traefik Ingress info: [{&quot;ip&quot;:&quot;10.0.0.1&quot;}]
+</code></pre>
+<hr />
+<h6 id="note-you-can-also-check-the-external-ipfqdn-by-running-the-command-kubectl-get-svc--n-traefik-2"><a class="header" href="#note-you-can-also-check-the-external-ipfqdn-by-running-the-command-kubectl-get-svc--n-traefik-2">Note you can also check the &quot;EXTERNAL-IP&quot;/FQDN by running the command <code>kubectl get svc -n traefik</code>.</a></h6>
+<hr />
+<p>Now you will have to add two A records, for the subdomain, e.g. &quot;test&quot; to have &quot;test.example.com&quot;, resp. &quot;*.test.example.com&quot; to e.g. &quot;/var/lib/named/master/forward/example.com&quot;.
+Replace &quot;10.0.0.1&quot; with the IP from &quot;Traefik Ingress info&quot;, and &quot;test.example.com&quot; with your custom domain.</p>
+<pre><code class="language-bash">$ORIGIN example.com.
+test			A	10.0.0.1
+$ORIGIN test.example.com.
+*			A	10.0.0.1
+</code></pre>
+<p>Restart bind and verify that e.g. <code>&gt; host test.example.com</code> or <code>&gt; host epinio.test.example.com</code> will resolve to &quot;10.0.0.1&quot;.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="install-epinio-using-a-magic-dns-service"><a class="header" href="#install-epinio-using-a-magic-dns-service">Install Epinio using a Magic DNS Service</a></h1>
+<p>This is about just running <code>epinio install</code>. It should work on nearly any kubernetes distribution and provides you with a test environment.
+You will automatically get a magic wildcard domain like &quot;10.0.0.1.omg.howdoi.website&quot; which points to the public IP of Traefik.</p>
+<h2 id="install-the-epinio-cli-1"><a class="header" href="#install-the-epinio-cli-1">Install the Epinio CLI</a></h2>
+<p>If not done already, refer to <a href="user/tutorials/./install_epinio_cli.html">Install the Epinio CLI</a>.</p>
+<h3 id="install-epinio-on-the-cluster"><a class="header" href="#install-epinio-on-the-cluster">Install Epinio on the Cluster</a></h3>
+<pre><code class="language-bash">epinio install
+</code></pre>
+<h3 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h3>
+<h4 id="traefik"><a class="header" href="#traefik">Traefik</a></h4>
+<p>In case of trouble with Epinio's Traefik component or Ingress controllers, the <a href="user/tutorials/../explanations/advanced.html#traefik">Traefik</a> section in the
+<a href="user/tutorials/../explanations/advanced.html">Advanced Topics</a> document shall be your friend.</p>
+<h4 id="dns-rebind-protection"><a class="header" href="#dns-rebind-protection">DNS Rebind Protection</a></h4>
+<p>Some routers filter queries where the answer consists of IP addresses from the private range, like &quot;10.0.0.1&quot;.</p>
+<p>This stops a malicous website from probing the local network for hosts.</p>
+<p>Amongst those routers is the AVM FRITZBox and everything that uses <a href="https://thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html">dnsmasq</a> with <code>stop-dns-rebind</code>, like <a href="https://docs.netgate.com/pfsense/en/latest/services/dns/rebinding.html">pfSense</a> or NetworkManager.</p>
+<p>If you still want to use the default magic DNS, you'll have to whitelist <code>omg.howdoi.website</code> in your local DNS server.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="install-epinio-using-a-magic-dns-service-1"><a class="header" href="#install-epinio-using-a-magic-dns-service-1">Install Epinio using a Magic DNS Service</a></h1>
+<p>This is about just running <code>epinio install</code>. It should work on nearly any kubernetes distribution and provides you with a test environment.
+You will automatically get a magic wildcard domain like &quot;10.0.0.1.omg.howdoi.website&quot; which points to the public IP of Traefik.</p>
+<h2 id="install-the-epinio-cli-2"><a class="header" href="#install-the-epinio-cli-2">Install the Epinio CLI</a></h2>
+<p>If not done already, refer to <a href="user/tutorials/./install_epinio_cli.html">Install the Epinio CLI</a>.</p>
+<h3 id="install-epinio-on-the-cluster-1"><a class="header" href="#install-epinio-on-the-cluster-1">Install Epinio on the Cluster</a></h3>
+<pre><code class="language-bash">epinio install
+</code></pre>
+<h3 id="troubleshooting-1"><a class="header" href="#troubleshooting-1">Troubleshooting</a></h3>
+<h4 id="traefik-1"><a class="header" href="#traefik-1">Traefik</a></h4>
+<p>In case of trouble with Epinio's Traefik component or Ingress controllers, the <a href="user/tutorials/../explanations/advanced.html#traefik">Traefik</a> section in the
+<a href="user/tutorials/../explanations/advanced.html">Advanced Topics</a> document shall be your friend.</p>
+<h4 id="dns-rebind-protection-1"><a class="header" href="#dns-rebind-protection-1">DNS Rebind Protection</a></h4>
+<p>Some routers filter queries where the answer consists of IP addresses from the private range, like &quot;10.0.0.1&quot;.</p>
+<p>This stops a malicous website from probing the local network for hosts.</p>
+<p>Amongst those routers is the AVM FRITZBox and everything that uses <a href="https://thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html">dnsmasq</a> with <code>stop-dns-rebind</code>, like <a href="https://docs.netgate.com/pfsense/en/latest/services/dns/rebinding.html">pfSense</a> or NetworkManager.</p>
+<p>If you still want to use the default magic DNS, you'll have to whitelist <code>omg.howdoi.website</code> in your local DNS server.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="ms-azure-aks-configuration"><a class="header" href="#ms-azure-aks-configuration">MS Azure AKS configuration</a></h1>
+<h2 id="create-an-aks-cluster"><a class="header" href="#create-an-aks-cluster">Create an AKS cluster</a></h2>
+<p>If you don't have an existing cluster, follow the <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough">quickstart</a> to create an AKS cluster.</p>
+<h2 id="aks-prerequisites"><a class="header" href="#aks-prerequisites">AKS Prerequisites</a></h2>
+<ul>
+<li>Epinio v0.1.0 has been tested with Azure AKS incl. kubernetes version v1.20.9</li>
+<li>Epinio installation passed on a 2 node cluster with Standard_D3_v2 instances</li>
+<li>To just try out Epinio, e.g. 2 Standard_D2_v2 are sufficient</li>
+</ul>
+<h2 id="install"><a class="header" href="#install">Install</a></h2>
+<p>Beside advanced installation options, there are two ways of installing Epinio:</p>
+<ol>
+<li><a href="user/tutorials/./install_epinio_magicDNS.html">Installation using a MagicDNS Service</a></li>
+</ol>
+<ul>
+<li>For test environments. This should work on nearly any kubernetes distribution. Epinio will try to automatically create a magic DNS domain, e.g. <strong>10.0.0.1.omg.howdoi.website</strong>.</li>
+</ul>
+<ol start="2">
+<li><a href="user/tutorials/./install_epinio_customDNS.html">Installation using a Custom Domain</a></li>
+</ol>
+<ul>
+<li>For test and production environments. You will define a system domain, e.g. <strong>test.example.com</strong>.</li>
+</ul>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="aws-eks-configuration"><a class="header" href="#aws-eks-configuration">AWS EKS configuration</a></h1>
+<h2 id="create-an-eks-cluster"><a class="header" href="#create-an-eks-cluster">Create an EKS cluster</a></h2>
+<p>If you don't have an existing cluster, follow the <a href="https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html">quickstart</a> to create an EKS cluster.</p>
+<h2 id="eks-prerequisites"><a class="header" href="#eks-prerequisites">EKS Prerequisites</a></h2>
+<ul>
+<li>We follow the documented recommendation of having at least 2 nodes for EKS</li>
+<li>Epinio v0.1.0 has been tested with AWS EKS incl. kubernetes version v1.20.7 and v1.21.2</li>
+<li>To do more extensive testing we recommend a 2 node cluster with &quot;t3.xlarge&quot; instances</li>
+<li>To just try out Epinio, e.g. 2 &quot;t3a.large&quot; are sufficient</li>
+</ul>
+<h4 id="install-1"><a class="header" href="#install-1">Install</a></h4>
+<p>Installing Epinio in an EKS cluster is done in three steps.</p>
+<p>Follow <a href="user/tutorials/./install_epinio_customDNS.html">Installation using a Custom Domain</a> for test and production environments.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="google-gke-configuration"><a class="header" href="#google-gke-configuration">Google GKE Configuration</a></h1>
+<h2 id="create-a-gke-cluster"><a class="header" href="#create-a-gke-cluster">Create a GKE cluster</a></h2>
+<p>Follow the <a href="https://cloud.google.com/kubernetes-engine/docs/quickstart">quickstart</a> to create a GKE cluster.</p>
+<h4 id="install-2"><a class="header" href="#install-2">Install</a></h4>
+<p>Installing Epinio in an GKE cluster is done in three steps.</p>
+<p>Follow <a href="user/tutorials/./install_epinio_customDNS.html">Installation using a Custom Domain</a> for test and production environments.</p>
+<h3 id="troubleshooting-2"><a class="header" href="#troubleshooting-2">Troubleshooting</a></h3>
+<p>In case of trouble with Epinio's Traefik component or Ingress controllers, the <a href="user/tutorials/../explanations/advanced.html#traefik">Traefik</a> section in the <a href="user/tutorials/../explanations/advanced.html">Advanced Topics</a> document shall be your friend.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-k3d-kubernetes-cluster"><a class="header" href="#creating-a-k3d-kubernetes-cluster">Creating a K3d Kubernetes Cluster</a></h1>
+<h2 id="get-k3d-kubernetes-cluster"><a class="header" href="#get-k3d-kubernetes-cluster">Get K3d Kubernetes Cluster</a></h2>
+<h3 id="install-k3d"><a class="header" href="#install-k3d">Install K3d</a></h3>
+<p>Follow the <a href="https://k3d.io/">instructions</a> to install k3d on your system.</p>
+<h4 id="create-a-k3d-kubernetes-cluster"><a class="header" href="#create-a-k3d-kubernetes-cluster">Create a K3d kubernetes cluster</a></h4>
+<pre><code class="language-bash">$ k3d cluster create epinio
+</code></pre>
+<h4 id="create-a-k3d-kubernetes-cluster-when-it-is-inside-a-vm"><a class="header" href="#create-a-k3d-kubernetes-cluster-when-it-is-inside-a-vm">Create a K3d kubernetes cluster when it is inside a VM</a></h4>
+<p>Epinio has to connect to pods inside the cluster. The default installation uses the internal docker IP for this. If docker is running in a VM, e.g. with Docker Desktop for Mac, that IP will not be reachable.</p>
+<p>As a workaround the IP of the host can be used instead, together with port-forwardings:</p>
+<pre><code class="language-bash">k3d cluster create epinio -p '80:80@server[0]' -p '443:443@server[0]'
+</code></pre>
+<p>After the command returns, <code>kubectl</code> should already be talking to your new cluster:</p>
+<pre><code class="language-bash">$ kubectl get nodes
+NAME                  STATUS   ROLES                  AGE   VERSION
+k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
+</code></pre>
+<h3 id="install-epinio-on-the-cluster-2"><a class="header" href="#install-epinio-on-the-cluster-2">Install Epinio on the Cluster</a></h3>
+<p>Follow <a href="user/tutorials/./install_epinio_magicDNS.html">Installation using a MagicDNS Service</a> to install Epinio in your test environment.</p>
+<p>If k3d is inside a VM, in addition to the special k3d setup, explained above, use this system domain instead:</p>
+<pre><code class="language-bash">epinio install --system-domain=&lt;YOUR-IP&gt;.omg.howdoi.website
+</code></pre>
+<p><code>&lt;YOUR-IP&gt;</code> can be found by running</p>
+<pre><code class="language-bash">ifconfig |grep &quot;inet.*broadcast
+</code></pre>
+<h3 id="troubleshooting-3"><a class="header" href="#troubleshooting-3">Troubleshooting</a></h3>
+<h4 id="kubeconfig"><a class="header" href="#kubeconfig">Kubeconfig</a></h4>
+<p>To get the kube config to access the cluster:</p>
+<pre><code>k3d kubeconfig get epinio
+</code></pre>
+<h4 id="traefik-2"><a class="header" href="#traefik-2">Traefik</a></h4>
+<p>In case of trouble with Epinio's Traefik component or Ingress controllers, the <a href="user/tutorials/../explanations/advanced.html#traefik">Traefik</a> section in the
+<a href="user/tutorials/../explanations/advanced.html">Advanced Topics</a> document shall be your friend.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="installing-wordpress-with-epinio"><a class="header" href="#installing-wordpress-with-epinio">Installing Wordpress with Epinio</a></h1>
+<h2 id="create-a-directory-for-your-application"><a class="header" href="#create-a-directory-for-your-application">Create a directory for your application:</a></h2>
+<pre><code class="language-bash">mkdir wordpress
+cd wordpress
+</code></pre>
+<h2 id="get-the-code"><a class="header" href="#get-the-code">Get the code:</a></h2>
+<p>https://wordpress.org/download/#download-install</p>
+<pre><code class="language-bash">wget https://wordpress.org/latest.tar.gz
+tar xvf latest.tar.gz
+mv wordpress htdocs
+rm -rf latest.tar.gz
+</code></pre>
+<h2 id="create-a-buildpackyml-for-your-application"><a class="header" href="#create-a-buildpackyml-for-your-application">Create a buildpack.yml for your application</a></h2>
+<pre><code class="language-bash">cat &lt;&lt; EOF &gt; buildpack.yml
+---
+php:
+  version: 7.3.x
+  script: index.php
+  webserver: nginx
+  webdirectory: htdocs
+EOF
+</code></pre>
+<h2 id="enable-needed-php-extensions"><a class="header" href="#enable-needed-php-extensions">Enable needed php extensions</a></h2>
+<p>The PHP buildpack supports additional ini files for PHP through
+<a href="https://paketo.io/docs/buildpacks/language-family-buildpacks/php/#php_ini_scan_dir">the PHP_INI_SCAN_DIR mechanism</a>.</p>
+<p>We need zlib and mysqli extensions enabled:</p>
+<pre><code class="language-bash">mkdir .php.ini.d
+cat &lt;&lt; EOF &gt; .php.ini.d/extensions.ini
+extension=zlib
+extension=mysqli
+EOF
+</code></pre>
+<h2 id="deploy"><a class="header" href="#deploy">Deploy</a></h2>
+<pre><code>epinio push wordpress
+</code></pre>
+<h2 id="additional-steps"><a class="header" href="#additional-steps">Additional steps</a></h2>
+<p>Wordpress needs a database to work. After visiting the route of your deployed
+application you will have to set the connection details to the database.</p>
+<p>You can install a MySQL database on your cluster or use an external one. One
+option is using a helm chart like this one: https://bitnami.com/stack/mysql/helm</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h3 id="uninstall"><a class="header" href="#uninstall">Uninstall</a></h3>
+<p>NOTE: The command below will delete all the components Epinio originally installed.
+<strong>This includes all the deployed applications.</strong></p>
+<p>If after installing Epinio, you deployed other things on the same cluster
+that depended on those Epinio deployed components (e.g. Traefik, Tekton etc),
+then removing Epinio will remove those components and this may break your other
+workloads that depended on these. Make sure you understand the implications of
+uninstalling Epinio before you proceed.</p>
+<p>If you want to completely uninstall Epinio from your kubernetes cluster, you
+can do this with the command:</p>
+<pre><code class="language-bash">epinio uninstall
+</code></pre>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="explanations---documentation-providing-background-information-on-key-concepts"><a class="header" href="#explanations---documentation-providing-background-information-on-key-concepts">Explanations - Documentation providing background information on key concepts</a></h1>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="epinio-advanced-topics"><a class="header" href="#epinio-advanced-topics">Epinio, Advanced Topics</a></h1>
+<h2 id="contents"><a class="header" href="#contents">Contents</a></h2>
+<p>TODO: Do the same for Minio and list storage class requirements (WaitForFirstConsumer). Add links to upstream docs.
+TODO: Explain how to configure external S3 storage.
+TODO: Consider doing this in a separate document about the components. Or even, one document per components and links here.</p>
+<ul>
+<li>
+<p><a href="user/explanations/advanced.html#epinio-installed-components">Epinio installed components</a></p>
+<ul>
+<li><a href="user/explanations/advanced.html#traefik">Traefik</a></li>
+<li><a href="user/explanations/advanced.html#linkerd">Linkerd</a></li>
+<li><a href="user/explanations/advanced.html#epinio">Epinio</a></li>
+<li><a href="user/explanations/advanced.html#cert-manager">Cert Manager</a></li>
+<li><a href="user/explanations/advanced.html#kubed">Kubed</a></li>
+<li><a href="user/explanations/advanced.html#google-service-broker">Google Service Broker</a> (optional)</li>
+<li><a href="user/explanations/advanced.html#minibroker">Minibroker</a> (optional)</li>
+<li><a href="user/explanations/advanced.html#service-catalog">Service Catalog</a></li>
+<li><a href="user/explanations/advanced.html#minio">Minio</a></li>
+<li><a href="user/explanations/advanced.html#container-registry">Container Registry</a></li>
+<li><a href="user/explanations/advanced.html#tekton">Tekton</a></li>
+</ul>
+</li>
+<li>
+<p><a href="user/explanations/advanced.html#other-advanced-topics">Other advanced topics</a></p>
+<ul>
+<li><a href="user/explanations/advanced.html#git-pushing">Git Pushing</a></li>
+<li><a href="user/explanations/advanced.html#traefik-and-linkerd">Traefik and Linkerd</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="epinio-installed-components"><a class="header" href="#epinio-installed-components">Epinio installed components</a></h2>
+<h3 id="traefik-3"><a class="header" href="#traefik-3">Traefik</a></h3>
+<p>When you installed Epinio, it looked at your cluster to see if you had
+<a href="https://doc.traefik.io/traefik/providers/kubernetes-ingress/">Traefik</a>
+running. If it wasn't there it installed it.</p>
+<p>As Epinio only checks two namespaces for Traefik's presence, namely
+<code>traefik</code> and <code>kube-system</code>, it is possible that it tries to install
+it, despite the cluster having Traefik running. Just in an unexpected
+place.</p>
+<p>The <code>install</code> command provides the option <code>--skip-traefik</code> to handle
+this kind of situation.</p>
+<p>Installing Epinio on your cluster with the command</p>
+<pre><code class="language-bash">$ epinio install --skip-traefik
+</code></pre>
+<p>forces Epinio to not install its own Traefik.</p>
+<p>Note that having some other (non-Traefik) Ingress controller running
+is <strong>not</strong> a reason to prevent Epinio from installing Traefik. All the
+Ingresses used by Epinio expect to be handled by Traefik.</p>
+<p>Also, the Traefik instance installed by Epinio, is configured to redirect all
+http requests to https automatically (e.g. the requests to the Epinio API, and
+the application routes). If you decide to use a Traefik instance which you
+deployed, you have to set this up yourself, Epinio won't change your Traefik
+installation in any way. Here are the relevant upstream docs for the redirection:</p>
+<p>https://doc.traefik.io/traefik/routing/entrypoints/#redirection</p>
+<h3 id="linkerd"><a class="header" href="#linkerd">Linkerd</a></h3>
+<p>By default, Epinio installs <a href="https://linkerd.io/">Linkerd</a> on your cluster. The
+various namespaces created by Epinio become part of the Linkerd Service Mesh and
+thus all communication between pods is secured with mutualTLS.</p>
+<p>In some cases you may not want Epinio to install Linkerd, either because you did
+that manually before you install Epinio or for other reasons. You can provide
+the <code>--skip-linkerd</code> flag to the <code>install</code> command to prevent Epinio from
+installing any of the Linkerd control plane components:</p>
+<pre><code class="language-bash">$ epinio install --skip-linkerd
+</code></pre>
+<h3 id="epinio"><a class="header" href="#epinio">Epinio</a></h3>
+<p>The epinio binary is used as:</p>
+<ul>
+<li>a cli tool, used to push applications, create services etc.</li>
+<li>the API server component which runs inside the cluster (invoked with the <code>epinio server</code> command)</li>
+<li>the installer that installs the various needed components on the cluster. The
+API server from the previous point is one of them.</li>
+</ul>
+<p>Epinio cli functionality is implemented using the endpoints provided by the Epinio API server
+component. For example, when the user asks Epinio to &quot;push&quot; an application, the
+cli will contact the &quot;Upload&quot;, &quot;Stage&quot; and &quot;Deploy&quot; endpoints of the Epinio API to upload the application code,
+create a container image for the application using this code and run the application on the cluster.</p>
+<p>The Epinio API server is running on the cluster and made accessible using Kubernetes resources like
+Deployments, Services,  Ingresses and Secrets.</p>
+<h3 id="cert-manager"><a class="header" href="#cert-manager">Cert Manager</a></h3>
+<p><a href="https://cert-manager.io/docs/">Upstream documentation</a></p>
+<p>The Cert manager component is deployed by Epinio and used to generate and renew the various Certificates needed in order to
+serve the various accessible endpoints over TLS (e.g. the Epinio API server).</p>
+<p>Epinio supports various options when it comes to certificate issuers (let's encrypt, private CA, bring your own CA, self signed certs).
+Cert Manager simplifies the way we handle the various different certificate issuers within Epinio.</p>
+<p>You can read more about certificate issuers here: <a href="user/explanations/../howtos/certificate_issuers.html">certificate issuers documentation</a></p>
+<h3 id="kubed"><a class="header" href="#kubed">Kubed</a></h3>
+<p><a href="https://github.com/kubeops/kubed">Upstream documentation</a></p>
+<p>Kubed is installed by Epinio to keep secrets that are needed in more than
+one namespace synced. For example, the TLS certificate of the <a href="user/explanations/advanced.html#container-registry">Container Registry</a> is also needed
+in the Tekton staging namespace, in order to trust the certificate when pushing the application images.</p>
+<p>Kubed makes sure that if the source secret changes, the copy will change too.</p>
+<p>Warning: this doesn't mean things will still work if you re-generate a secret manually. Secret rotation will be handled by Epinio in the future.</p>
+<h3 id="google-service-broker"><a class="header" href="#google-service-broker">Google Service Broker</a></h3>
+<p><a href="https://github.com/GoogleCloudPlatform/gcp-service-broker">Upstream project link</a></p>
+<p>Many applications need additional services in order to work. Those services could be databases, cache servers, email gateways, log collecting applications or other.
+The various cloud providers already offer such services. Being able to use them in the various Platforms as a Service (PaaS) in a unified way
+gave birth to the concept of the (Open Service Broker API - aka osbapi)[https://www.openservicebrokerapi.org/]. This concept is adopted by various
+providers among which, Google. There seems to be a shift towards the &quot;Operator&quot; pattern, e.g. Google seems to have moved its focus to the <a href="https://cloud.google.com/config-connector/docs/overview">Config Connector</a> as described at the top of the README <a href="https://github.com/googlearchive/k8s-service-catalog">here</a>.</p>
+<p>Since Google's service broker still works and since the common interface provided by the <a href="user/explanations/advanced.html#service-catalog">Service Catalog</a> makes it easy to integrate, Epinio
+lets the user optionally install the Google service broker with the command <a href="user/explanations/../references/cli/epinio_enable_services-google.html"><code>epinio enable services-google</code></a>.</p>
+<p>Warning: This service broker is not actively supported by Google anymore and may be removed from a future Epinio version.</p>
+<h3 id="minibroker"><a class="header" href="#minibroker">Minibroker</a></h3>
+<p><a href="https://github.com/kubernetes-sigs/minibroker">Upstream project link</a></p>
+<p>This is another implementation of the Open Service Broker API which can also be optionally be installed by epinio with the command <a href="user/explanations/../references/cli/epinio_enable_services-incluster.html"><code>epinio enable services-incluster</code></a>.</p>
+<p>Minibroker provisions services on the kubernetes cluster where Epinio is also running, using upstream helm charts. This can be useful for local development with Epinio, because it's fast and doesn't cost anything (services run locally).</p>
+<h3 id="service-catalog"><a class="header" href="#service-catalog">Service Catalog</a></h3>
+<p><a href="https://github.com/kubernetes-sigs/service-catalog">Upstream project link</a></p>
+<p>The service catalog is the component that collects the various services provided by the various installed service brokers and presents them in a unified way to the user.
+The service catalog is the component behind the <a href="user/explanations/../references/cli/epinio_service_list-classes.html"><code>epinio service list-classes</code></a> and <a href="user/explanations/../references/cli/epinio_service_list-plans.html"><code>epinio service list-plans</code></a> commands.</p>
+<h3 id="minio"><a class="header" href="#minio">Minio</a></h3>
+<p><a href="https://github.com/minio/minio">Upstream project link</a></p>
+<p>Minio is a storage solution that implements the same API as <a href="https://aws.amazon.com/s3/">Amazon S3</a>.</p>
+<p>When the user pushes an application using a source code directory (with the <a href="user/explanations/../references/cli/epinio_push.html"><code>epinio push</code></a> command), the first step taken by the cli is to put the source code into a tarball and upload that to the Epinio API server. The server copies that to the configured S3 storage to be used later during the staging of the application.</p>
+<p>When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install Minio on the cluster (<a href="user/explanations/TODO">See here how</a>).</p>
+<h3 id="container-registry"><a class="header" href="#container-registry">Container Registry</a></h3>
+<p>The result of Epinio's application staging is a container image. This image is used to create a Kubernetes deployment to run the application code.
+The <a href="user/explanations/advanced.html#tekton">Tekton</a> pipeline requires that image to be written to some container registry. Epinio installs a registry on the cluster itself to make the process easy and fast.</p>
+<p>Note: In the future, Epinio may offer the option to use an external registry and not install one on the cluster (<a href="https://github.com/epinio/epinio/issues/784">GitHub Issue</a>).</p>
+<h3 id="tekton"><a class="header" href="#tekton">Tekton</a></h3>
+<ul>
+<li><a href="https://github.com/tektoncd/pipeline">Upstream project link</a></li>
+<li><a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.3">Buildpacks pipeline</a></li>
+</ul>
+<p>Pushing an application to Kubernetes with Epinio involves various steps. One of them is staging, which is the process that creates a container image out of the application source code using <a href="https://buildpacks.io/">buildpacks</a>. Epinio runs the staging process via a <a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.3">Tekton Pipeline</a>.</p>
+<h2 id="other-advanced-topics"><a class="header" href="#other-advanced-topics">Other Advanced Topics</a></h2>
+<h3 id="git-pushing"><a class="header" href="#git-pushing">Git Pushing</a></h3>
+<p>The quick way of pushing an application, as explained at
+<a href="user/explanations/../tutorials/quickstart.html#push-an-application">Quickstart: Push an application</a>, uses a local
+directory containing a checkout of the application's sources.</p>
+<p>Internally this is actually <a href="user/explanations/detailed-push-process.html">quite complex</a>. It
+involves the creation and upload of a tarball from these sources by the client
+to the Epinio server, copying into Epinio's internal (or external) S3 storage,
+copying from that storage to a PersistentVolumeClaim to be used in the tekton pipeline for staging,
+i.e. compilation and creation of the docker image to be used by the underlying kubernetes cluster.</p>
+<p>The process is a bit different when using the Epinio client's &quot;git mode&quot;. In
+this mode <code>epinio push</code> does not take a local directory of sources, but the
+location of a git repository holding the sources, and the id of the revision to
+use. The client then asks the Epinio server to pull those sources and store them to the
+S3 storage. The rest of the process is the same.</p>
+<p>The syntax is</p>
+<pre><code>epinio push NAME GIT-REPOSITORY-URL --git REVISION
+</code></pre>
+<p>For comparison all the relevant syntax:</p>
+<pre><code>epinio push NAME
+epinio push NAME DIRECTORY
+epinio push NAME GIT-REPOSITORY-URL --git REVISION
+</code></pre>
+<h2 id="traefik-and-linkerd"><a class="header" href="#traefik-and-linkerd">Traefik and Linkerd</a></h2>
+<p>By default, with Epinio installing both Traefik and Linkerd, Epinio's
+installation process ensures that the Traefik pods are included in the Linkerd
+mesh, thus ensuring that external communication to applications is secured on
+the leg between loadbalancer and application service.</p>
+<p><strong>However</strong>, there are situations where Epinio does not install Traefik.
+This can be because the user specified <code>--skip-traefik</code>, or because Epinio
+detected a running Traefik, thus can forego its own.
+The latter is possible, for example, when using <code>k3d</code> as cluster foundation.</p>
+<p>In these situations the pre-existing Traefik is <strong>not</strong> part of the Linkerd
+mesh. As a consequence the communication from loadbalancer to application
+service is not as secure.</p>
+<p>While it is possible to fix this, the fix requires access to the cluster in
+general, and to Traefik's namespace specifically. In other words, permissions to
+annotate the Traefik namespace are needed, as well as permissions to restart the
+pods in that namespace. The latter is necessary, because Linkerd is not able to
+inject itself into running pods. It can only intercept pod (re)starts.</p>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<p>Assuming that Traefik's namespace is called <code>traefik</code>, with pods
+<code>traefik-6f9cbd9bd4-z4zw8</code> and <code>svclb-traefik-q8g75</code>
+the commands</p>
+<pre><code>kubectl annotate namespace     traefik linkerd.io/inject=enabled
+kubectl delete pod --namespace traefik traefik-6f9cbd9bd4-z4zw8 svclb-traefik-q8g75
+</code></pre>
+<p>will bring the Traefik in that namespace into Epinio's linkerd mesh.</p>
+<p>Note that this recipe also works for a Traefik provided by <code>k3d</code>, in the
+<code>kube-system</code> namespace.</p>
+<p>While it is the namespace which is annotated, only restarted pods are affected
+by that, i.e. Traefik's pods here. The other system pods continue to run as they
+are.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="epinio-cli-configuration"><a class="header" href="#epinio-cli-configuration">Epinio, CLI configuration</a></h1>
+<p>The Epinio command line client uses a configuration file to store
+information which has to persist across invocations. This document
+discusses various aspects around this.</p>
+<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table Of Contents</a></h2>
+<ul>
+<li><a href="user/explanations/configuration.html#location">Location</a></li>
+<li><a href="user/explanations/configuration.html#contents">Contents</a></li>
+<li><a href="user/explanations/configuration.html#commands">Commands</a></li>
+</ul>
+<h2 id="location"><a class="header" href="#location">Location</a></h2>
+<p>Epinio's configuration is located by default at <code>~/.config/epinio/config.yaml</code>.</p>
+<p>The location can be changed from command to command by specifying a
+different path with the global command line option <code>--config-file</code>.</p>
+<p>A more permanent change is possible by setting the environment
+variable <code>EPINIO_CONFIG</code> to the desired path.</p>
+<h2 id="contents-1"><a class="header" href="#contents-1">Contents</a></h2>
+<p>Epinio's configuration contains</p>
+<ul>
+<li>The name of the namespace currently targeted.</li>
+<li>Epinio API user name</li>
+<li>Epinio API password</li>
+<li>Epinio API urls (regular and websocket)</li>
+<li>Epinio API certificate</li>
+</ul>
+<p>The namespace can be changed by running <code>epinio target</code> with the
+name of the desired namespace as its single argument.</p>
+<p>User name and password are used by the client to authenticate itself
+when talking to Epinio's API server. The <code>epinio install</code> command
+saves the initial information to the configuration.</p>
+<p>The installation uses a the wildcard domain <code>omg.howdoi.website</code> and the
+<code>epinio-ca</code> issuer by default.</p>
+<p><code>epinio install</code> saves the associated CA
+certificate to the configuration so that future invocations of the
+client are able to verify the actual certificate when talking to
+Epinio's API server.</p>
+<h2 id="commands"><a class="header" href="#commands">Commands</a></h2>
+<p>The Epinio command line client currently provides 3 commands
+explicitly targeting the configuration. These are:</p>
+<ol>
+<li>
+<p><code>epinio target</code></p>
+<p>As noted in the previous section, this command changes
+the namespace to use with all other commands.</p>
+</li>
+<li>
+<p><code>epinio config show</code></p>
+<p>This command shows the details of the currently stored
+configuration settings. An exception is made for the certificate
+field, due to its expected size. The command's output only notes
+if certificate data is present or not.</p>
+</li>
+<li>
+<p><code>epinio config update</code></p>
+<p>Epinio allows users to switch between multiple installations (on
+different clusters) by simply re-targeting the cluster to talk to
+via changes to the  environment variable <code>KUBECONFIG</code>.</p>
+<p>When such is done the credentials, cert data, and urls stored in
+the configuration will not match the newly targeted cluster,
+except by coincidence.</p>
+<p>To be actually able to talk to the newly targeted installation it
+is necessary to run this command to refresh the stored
+credentials, cert data, and urls with information retrieved from
+the new cluster.</p>
+</li>
+</ol>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="epinio-push-in-detail"><a class="header" href="#epinio-push-in-detail">Epinio Push in Detail</a></h1>
+<p>Epinio strives to make use of well supported, well known, and loved projects instead of re-inventing the wheel (<a href="user/explanations/principles.html#guidelines-soft-principles">link</a>).
+But while doing so, it makes sure those components are deployed correctly and work together seamlessly. Let's go through the <code>epinio push</code> process in detail,
+so you can understand what each components does. You may also want to read the description of every component outside the push process here: <a href="user/explanations/advanced.html#epinio-installed-components">Epinio components</a>.</p>
+<p>You can see an image that visualises the process later in this page. Refer to it while reading the text to help you understand the process more.
+The numbers on the various arrows on the image indicate the order of the various steps.</p>
+<h2 id="1-epinio-push"><a class="header" href="#1-epinio-push">1. Epinio Push</a></h2>
+<p>Epinio exposes an API server running inside the kubernetes cluster for all clients including cli to talk to it. When you run the <code>epinio push</code> command, the first thing the cli is going to do, is to hit the relevant api endpoint for pushing apps. (1a) There is a Traefik ingress which sits in front of the Epinio API server which does BasicAuth for all the requests. (1b) After successful authentication, it routes the request to the Epinio API server. The cli puts your code inside a tarball and sends it to the <code>upload</code> endpoint of the Epinio API server which is running inside the Kubernetes cluster.</p>
+<h2 id="2-copying-the-code-to-s3"><a class="header" href="#2-copying-the-code-to-s3">2. Copying the code to S3</a></h2>
+<p>One of the components Epinio installs on your cluster is <a href="https://min.io/">Minio</a> (unless you <a href="user/explanations/../howtos/setup-external-s3.html">configured external S3</a>).
+Minio is an S3 compatible storage solution. Epinio uses it to store the application's source code. It will later be used by the staging pipeline.</p>
+<p>So the first thing the Epinio API server does when it receives the upload request (the previous step), is to store the source code tarball on S3.</p>
+<h2 id="3-staging-the-app"><a class="header" href="#3-staging-the-app">3. Staging the App</a></h2>
+<p>When the upload request is complete, the cli will send a request to the <code>stage</code> endpoint of the Epinio API server. This will instruct the server to start the staging of the uploaded code.</p>
+<h2 id="4-trigger-the-pipeline"><a class="header" href="#4-trigger-the-pipeline">4. Trigger the Pipeline</a></h2>
+<p>When the Epinio API server receives the stage request, it will create a <a href="https://github.com/tektoncd/pipeline/blob/main/docs/pipelineruns.md"><code>PipelineRun</code></a> that will run the staging Tekton pipeline using the version of the code referenced in the request. This pipeline has 3 steps. Their role is described in the following 3 sections.</p>
+<h2 id="5-fetch-the-code"><a class="header" href="#5-fetch-the-code">5. Fetch the code</a></h2>
+<p>The first step of the staging Tekton pipeline downloads the code from the S3 storage to a <a href="https://github.com/tektoncd/pipeline/blob/main/docs/workspaces.md">workspace</a>. This makes the code available to the following steps.</p>
+<h2 id="6-stage"><a class="header" href="#6-stage">6. Stage</a></h2>
+<p>The second step of the staging Tekton pipeline uses the <a href="https://paketo.io/">paketo buildpacks</a> to create a container image for your application. The definition of this Tekton task can be found <a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.2">in the relevant upstream repo</a> (though a copy of that is embedded in the Epinio binary).
+The result of a successful staging process is a new image pushed to the Registry component of Epinio.</p>
+<p>This component is installed as part of the <code>epinio install</code> command and it is where the application images are stored. This makes the setup easier (by not having to configure an external registry) and staging faster (by keeping all image transferring local to the cluster).
+There is not much to tell about it but if you want to look at how the registry is installed, have a look at the helm chart here:
+https://github.com/epinio/epinio/tree/main/assets/container-registry/chart/container-registry</p>
+<h2 id="7-run"><a class="header" href="#7-run">7. Run</a></h2>
+<p>To run a workload on Kubernetes having a container image is not enough. You need at least a Pod running with at least one container running that image.</p>
+<p>The last step of the staging Tekton pipeline creates the runtime Kubernetes resources that are needed to make your application available to the users outside the Kubernetes cluster. The most important resources that are created are a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>, a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> and an <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> resource.</p>
+<h2 id="8-pull-image"><a class="header" href="#8-pull-image">8. Pull Image</a></h2>
+<p>The Deployment uses the image that was pushed as part of the staging step (see arrow 6). Now, the kubelet will pull the image from the registry for the deployment resource to use it.</p>
+<p>You can read how these resources work in Kubernetes following the provided links but if you have to know one thing is that Ingress is the thing that describes how a request that uses the Application's url is routed to the application container. In Kubernetes, the thing that reads that description and implements the routing is called an Ingress Controller. Such an Ingress Controller is provided by <a href="https://doc.traefik.io/traefik/providers/kubernetes-ingress/">Traefik</a>.</p>
+<h2 id="ingress-implementation-traefik"><a class="header" href="#ingress-implementation-traefik">Ingress Implementation (Traefik)</a></h2>
+<p>When you installed Epinio, it looked at your cluster to see if you had <a href="https://doc.traefik.io/traefik/providers/kubernetes-ingress/">Traefik</a> running. If it wasn't there it installed it. Traefik among other things, is an Ingress Controller. As explained above, the Ingress Controller reads your Ingress Resource Definitions and implements the desired routing to the appropriate Services/Pods.</p>
+<p>In Epinio, for every application we create an Ingress that routes the traffic for this application through a subdomain that looks something like this:</p>
+<pre><code>myapplication.my_epinio_system_domain.com
+</code></pre>
+<p>You can get the route of your application with <code>epinio apps list</code> or <code>epinio apps show myapplication</code></p>
+<h2 id="additional-things"><a class="header" href="#additional-things">Additional Things</a></h2>
+<p>During installation, if you specified a system domain using the <code>--system-domain</code> parameter, then your application routes will be subdomains of that domain.
+Epinio considers this domain to be a production server and thus creates a production level TLS certificate for your application using <a href="https://letsencrypt.org/">Let's Encrypt</a>. This is done by the <a href="https://cert-manager.io/docs/installation/kubernetes/">cert-manager</a>, which is one more of the components Epinio installs with <code>epinio install</code>.</p>
+<p>If you didn't specify a system domain then Epinio uses a &quot;magic DNS&quot; service running on the <code>omg.howdoi.website</code> which is similar to <a href="https://nip.io/">nip.io</a>, and <a href="http://xip.io/">xip.io</a>.
+These services resolve all subdomains of the root domain to the subdomain's IP address. E.g. <code>1.2.3.4.omg.howdoi.website</code> simply resolves to <code>1.2.3.4</code>. They are useful when you don't have a real domain but you still need a wildcard domain to create subdomains for. Depending on your setup, the IP address of the cluster which Epinio discovers automatically may not be accessible by your browser and thus you may need to set the system domain when installing to use another IP. This is the case for example when you run a Kubernetes cluster with docker (e.g. <a href="https://k3d.io/">k3d</a> or <a href="https://github.com/kubernetes-sigs/kind">kind</a>) inside a VM (for example when using docker on Mac). Then the IP address which Epinio detects is the IP address of the docker container but that is not accessible from your host. You will need to bind the container's ports <code>80</code> and <code>443</code> to the VMs ports <code>80</code> and <code>443</code> and then use the VMs IP address instead.</p>
+<h2 id="the-process-visualized"><a class="header" href="#the-process-visualized">The Process Visualized</a></h2>
+<p><img src="user/explanations/epinio-push-detailed.svg?raw=true" alt="epinio-push-detailed" title="Epinio push" /></p>
+<h2 id="credits"><a class="header" href="#credits">Credits</a></h2>
+<ul>
+<li>Icons from: https://materialdesignicons.com/ (Source: https://github.com/Templarian/MaterialDesign)</li>
+</ul>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h2 id="design-principles"><a class="header" href="#design-principles">Design Principles</a></h2>
+<p>Epinio's development is governed by the following principles:</p>
+<ul>
+<li><strong>Greater Developer Experience</strong>
+<ul>
+<li>Single command push for short learning curve</li>
+</ul>
+</li>
+<li><strong>Edge Friendly</strong> 
+<ul>
+<li>Has to fit in less than 4GB of RAM</li>
+</ul>
+</li>
+<li><strong>Easy Installation</strong> 
+<ul>
+<li>Has to install in less than 5 minutes when images are warm</li>
+<li>Has to completely uninstall and leave the cluster in its previous state with a one-line command</li>
+</ul>
+</li>
+<li><strong>Minimum Complexity</strong>
+<ul>
+<li>Scale from desktop/local to data center environment</li>
+<li>Has to install with a one-line command and zero config</li>
+</ul>
+</li>
+<li><strong>API Driven Architecture</strong></li>
+<li><strong>Security Focused</strong></li>
+</ul>
+<h3 id="guidelines-soft-principles"><a class="header" href="#guidelines-soft-principles">Guidelines (Soft Principles)</a></h3>
+<ul>
+<li>When possible, prefer:
+<ul>
+<li>components that are written in go</li>
+<li>Kubernetes primitives over custom resources</li>
+<li>Well known components with active community over custom code</li>
+</ul>
+</li>
+<li>all acceptance tests should run in less than 10 minutes</li>
+<li>all tests should be able to run on the minimal cluster</li>
+</ul>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h4 id="a-quick-note-on-security"><a class="header" href="#a-quick-note-on-security">A Quick Note On Security</a></h4>
+<p>Epinio secures access to its API with TLS and basic authentication.</p>
+<p>The installation process automatically creates and saves the necessary credentials
+(user, password) and certificates. The information is stored in Epinio's configuration,
+for pickup by other Epinio commands.</p>
+<p>For a trial deployment the certificate securing the API will be generated by the
+underlying cluster, and self-signed, and its CA certificate is stored in the
+configuration to allow verification.</p>
+<p>For a production-oriented deployment on the other hand, with a proper
+<code>--system-domain</code> specified, the certificate is obtained from
+<a href="https://letsencrypt.org/">Let's Encrypt</a> instead. Nothing is stored in the
+configuration in that case, as Let's Encrypt is a known CA.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="epinio-on-windows"><a class="header" href="#epinio-on-windows">Epinio On Windows</a></h1>
+<p>Epinio relies on a number of command line tools which are normally
+available on any kind of Unix platform, yet rarely on Windows.</p>
+<p>The general set contains</p>
+<ul>
+<li>sh</li>
+<li>sed</li>
+<li>git</li>
+</ul>
+<p>while the specific set consists of</p>
+<ul>
+<li>kubectl</li>
+<li>helm</li>
+</ul>
+<p>We are currently recommending to install the
+<a href="https://gitforwindows.org/">Git For Windows</a> distribution as it
+provides everything needed from the general set, and more.</p>
+<p>For <code>helm</code>, <code>kubectl</code>, and <code>epinio</code> itself the necessary binaries can
+be retrieved from the relevant release pages or per their
+instructions:</p>
+<ul>
+<li><a href="https://github.com/epinio/epinio/releases">Epinio Releases</a></li>
+<li><a href="https://github.com/helm/helm/releases">Helm Releases</a></li>
+<li><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/">Kubectl Instructions</a></li>
+</ul>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="howtos---documentation-solving-specific-sometimes-advanced-problems-in-a-practical-manner"><a class="header" href="#howtos---documentation-solving-specific-sometimes-advanced-problems-in-a-practical-manner">HowTos - Documentation solving specific, sometimes advanced, problems in a practical manner.</a></h1>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="using-a-certificate-issuer"><a class="header" href="#using-a-certificate-issuer">Using a Certificate Issuer</a></h1>
+<p>Epinio comes with multiple <a href="https://cert-manager.io/docs/configuration/">cert-manager cluster issuers</a> for creating certificates:</p>
+<ul>
+<li>epinio-ca (default)</li>
+<li>letsencrypt-production</li>
+<li>selfsigned-issuer</li>
+</ul>
+<p>The issuer will be used for both, the Epinio API endpoint and workloads (i.e. pushed applications).</p>
+<h2 id="choosing-a-different-issuer"><a class="header" href="#choosing-a-different-issuer">Choosing a Different Issuer</a></h2>
+<p>When installing Epinio, one can choose between those issuers by using the <code>--tls-issuer</code> argument:</p>
+<pre><code>epinio install --tls-issuer=letsencrypt-production
+</code></pre>
+<h2 id="using-a-custom-issuer"><a class="header" href="#using-a-custom-issuer">Using a custom issuer</a></h2>
+<p>It's possible to create a cert-manager cluster issuer in the cluster, before installing Epinio and referencing it by name when installing.</p>
+<p>However, this is only possible if the cert-manager CRD is present in the cluster.</p>
+<p>We can use a split install, to install cert-manager first, then create the cluster issuer and finally install Epinio.</p>
+<h3 id="split-install"><a class="header" href="#split-install">Split Install</a></h3>
+<p>Install cert-manager first:</p>
+<pre><code>epinio install-cert-manager
+</code></pre>
+<p>Then after creating the cluster issuer, install Epinio:</p>
+<pre><code>epinio install --skip-cert-manager
+</code></pre>
+<h3 id="cluster-issuer-for-acme-dns-challenge"><a class="header" href="#cluster-issuer-for-acme-dns-challenge">Cluster Issuer for ACME DNS Challenge</a></h3>
+<p>For example to use Letsencrypt with a DNS challenge, which supports wildcards and private IPs, create this cluster issuer after installing cert-manager:</p>
+<pre><code>apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: dns-staging
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: example-issuer-account-key
+    solvers:
+    - dns01:
+        cloudflare:
+          email: user@example.com
+          apiKeySecretRef:
+            name: cloudflare-apikey-secret
+            key: apikey
+      selector:
+        dnsNames:
+        - 'example.com'
+        - '*.example.com'
+</code></pre>
+<p>Note: This uses the Letsencrypt staging endpoint for testing. More information in the <a href="https://cert-manager.io/docs/configuration/acme/dns01/">cert-manager ACME docs</a>.</p>
+<p>You can then install Epinio, without cert-manager, pointing to the new cluster issuer:</p>
+<pre><code>epinio install --skip-cert-manager --tls-issuer=dns-staging
+</code></pre>
+<h3 id="cluster-issuer-for-existing-private-ca"><a class="header" href="#cluster-issuer-for-existing-private-ca">Cluster Issuer for Existing Private CA</a></h3>
+<p>According to the instructions from https://cert-manager.io/docs/configuration/ca/, follow these steps:</p>
+<h4 id="create-secret-with-ca-cert-and-key"><a class="header" href="#create-secret-with-ca-cert-and-key">Create Secret With CA Cert and Key</a></h4>
+<p>If you don't already have a private CA, use a tool like openssl or easy-rsa to create it.</p>
+<p>The following oneliner creates a CA:</p>
+<pre><code>openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
+  -keyout example.key -out example.crt -subj &quot;/CN=*.omg.howdoi.website&quot;
+</code></pre>
+<p>Create a Kubernetes secret from the CA, in the cert-manager namespace.</p>
+<pre><code>kubectl create secret -n cert-manager tls private-ca-secret \
+  --cert=./example.crt --key=./example.key
+</code></pre>
+<p>The cert-manager documentation has more details about this.</p>
+<h4 id="create-clusterissuer"><a class="header" href="#create-clusterissuer">Create ClusterIssuer</a></h4>
+<p>Then create the cluster issuer:</p>
+<pre><code>apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: private-ca
+spec:
+  ca:
+    secretName: private-ca-secret
+</code></pre>
+<h4 id="install-epinio"><a class="header" href="#install-epinio">Install Epinio</a></h4>
+<p>Use the <code>--tls-issuer</code> argument to choose your cluster issuer:</p>
+<pre><code>epinio install --skip-cert-manager --tls-issuer=private-ca
+</code></pre>
+<h1 id="use-tls-when-pulling-from-internal-registry"><a class="header" href="#use-tls-when-pulling-from-internal-registry">Use TLS When Pulling From Internal Registry</a></h1>
+<p>Epinio comes with its own registry for Docker images. This registry needs to be reachable from the Kubernetes nodes.
+If you are using a certificate issuer whose CA is trusted by the Kubernetes nodes, you can turn on SSL for pulling images from the internal registry:</p>
+<pre><code>epinio install --tls-issuer=letsencrypt-production --use-internal-registry-node-port=false
+</code></pre>
+<p>Without the node port, pushing images to the registry uses the &quot;epinio-registry&quot; ingress, which is handled by Traefik.</p>
+<h1 id="background-on-cert-manager-and-issuers"><a class="header" href="#background-on-cert-manager-and-issuers">Background on Cert Manager and Issuers</a></h1>
+<p>Cert manager watches for a <em>certificate</em> resource and uses the referenced <em>cluster issuer</em> to generate a certificate.
+The certificate is stored in a <em>secret</em>, in the namespace the certificate resources was created in.
+An <em>ingress</em> resource can then use that secret to set up TLS.</p>
+<p>Example:</p>
+<ol>
+<li><code>epinio install</code> creates a certificate resource in epinio namespace</li>
+</ol>
+<pre><code>apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: epinio
+  namespace: epinio
+spec:
+  commonName: epinio.172.27.0.2.omg.howdoi.website
+  dnsNames:
+  - epinio.172.27.0.2.omg.howdoi.website
+  issuerRef:
+    kind: ClusterIssuer
+    name: epinio-ca
+  secretName: epinio-tls
+</code></pre>
+<ol start="2">
+<li>cert-manager creates the 'epinio-tls' secret, using the referenced cluster issuer 'epinio-ca'</li>
+</ol>
+<pre><code>apiVersion: v1
+kind: Secret
+type: kubernetes.io/tls
+metadata:
+  annotations:
+    cert-manager.io/alt-names: epinio.172.27.0.2.omg.howdoi.website
+    cert-manager.io/certificate-name: epinio
+    cert-manager.io/common-name: epinio.172.27.0.2.omg.howdoi.website
+    cert-manager.io/ip-sans: &quot;&quot;
+    cert-manager.io/issuer-group: &quot;&quot;
+    cert-manager.io/issuer-kind: ClusterIssuer
+    cert-manager.io/issuer-name: epinio-ca
+    cert-manager.io/uri-sans: &quot;&quot;
+  name: epinio-tls
+  namespace: epinio
+data:
+  ca.crt: ...
+  tls.crt: ...
+  tls.key: ...
+</code></pre>
+<ol start="3">
+<li>Epinio creates an ingress resource</li>
+</ol>
+<pre><code>apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: epinio-epinio-api-auth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.tls: &quot;true&quot;
+  labels:
+    app.kubernetes.io/name: epinio
+  name: epinio
+  namespace: epinio
+spec:
+  rules:
+  - host: epinio.172.27.0.2.omg.howdoi.website
+    http:
+      paths:
+      - backend:
+          service:
+            name: epinio-server
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - epinio.172.27.0.2.omg.howdoi.website
+    secretName: epinio-tls
+</code></pre>
+<h2 id="epinio-push"><a class="header" href="#epinio-push">Epinio Push</a></h2>
+<p>The same is true for applications, <code>epinio push</code> creates a <code>certificate</code> in the app's workspace and cert-manager creates a secret for the app's ingress.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h2 id="provision-of-external-ip-for-loadbalancer-service-type-in-kubernetes"><a class="header" href="#provision-of-external-ip-for-loadbalancer-service-type-in-kubernetes">Provision of External IP for LoadBalancer service type in Kubernetes</a></h2>
+<p>Local kubernetes platforms do not have the ability to provide external IP address when you create a kubernetes service with <code>LoadBalancer</code> service type. The following steps will enable this ability for different local kubernetes platforms. Follow these steps before installing epinio.</p>
+<h3 id="k3sk3d"><a class="header" href="#k3sk3d">K3s/K3d</a></h3>
+<ul>
+<li>Provision of LoadBalancer IP is enabled by default in K3s/K3d.</li>
+</ul>
+<h3 id="minikube"><a class="header" href="#minikube">Minikube</a></h3>
+<p>:warning: Minikube on podman (<code>minikube start --driver podman</code>) is currently unsupported. :warning:</p>
+<ul>
+<li>Install and configure MetalLB</li>
+</ul>
+<pre><code>minikube addons enable metallb
+
+MINIKUBE_IP=($(minikube ip))
+cat &lt;&lt;EOF | kubectl apply -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - ${MINIKUBE_IP}/28
+EOF
+</code></pre>
+<h3 id="kind"><a class="header" href="#kind">Kind</a></h3>
+<ul>
+<li>
+<p>Install JQ from https://stedolan.github.io/jq/download/</p>
+</li>
+<li>
+<p>Install and configure MetalLB </p>
+</li>
+</ul>
+<pre><code>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey=&quot;$(openssl rand -base64 128)&quot;
+
+SUBNET_IP=`docker network inspect kind | jq -r '.[0].IPAM.Config[0].Gateway'`
+## Use the last few IP addresses
+IP_ARRAY=(${SUBNET_IP//./ })
+SUBNET_IP=&quot;${IP_ARRAY[0]}.${IP_ARRAY[1]}.255.255&quot;
+
+cat &lt;&lt;EOF | kubectl apply -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - ${SUBNET_IP}/28
+EOF
+</code></pre>
+<h3 id="mircok8s"><a class="header" href="#mircok8s">MircoK8s</a></h3>
+<ul>
+<li>Install and configure MetalLB</li>
+</ul>
+<pre><code>INTERFACE=`ip route | grep default | awk '{print $5}'`
+IP=`ifconfig $INTERFACE | sed -n '2 p' | awk '{print $2}'`
+microk8s enable metallb:${IP}/16
+</code></pre>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<ul>
+<li>helm (3.0 or later)</li>
+<li>kubectl (1.18 or later)</li>
+</ul>
+<p>Where no explicit version number is given, a release not older than
+~2 years is assumed.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><p>One of the more interesting features of Rio was that it would let you set up a deployment that rebuilds and republishes when your code stored in Git is changed. </p>
+<p>We can recreate this functionality using the GitJob CRD that's a part of <a href="https://fleet.rancher.io/">Rancher Fleet</a>.</p>
+<p>NOTE: We will improve this experience in the future!</p>
+<h2 id="setup"><a class="header" href="#setup">Setup</a></h2>
+<h3 id="install-gitjob"><a class="header" href="#install-gitjob">Install GitJob</a></h3>
+<p>If you don't have Rancher (or standalone Fleet) installed, we need to install the GitJob operator by following the isntructions found at https://github.com/rancher/gitjob#running.</p>
+<p>Then we need to setup the Service Account to run our Jobs with (since we don't need to do anything directly with the kube api, we don't need to add any role bindings to it):</p>
+<pre><code>apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: epinio-push
+</code></pre>
+<h3 id="upload-epinio-config"><a class="header" href="#upload-epinio-config">Upload Epinio Config</a></h3>
+<p>So the GitJob can authenticate and push correctly, we can upload our Epinio config file to the cluster with:</p>
+<pre><code>kubectl create secret generic epinio-creds --from-file=$HOME/.config/epinio/config.yaml
+</code></pre>
+<p>This will create a secret containing the config.yaml that was created locally when you do <code>epinio install</code> or <code>epinio config update</code></p>
+<h3 id="setup-sample-project"><a class="header" href="#setup-sample-project">Setup Sample Project</a></h3>
+<p>Next, we can use the 12factor app to show how to write a GitJob.</p>
+<p>Create a yaml file called <code>12factor-gitjob.yaml</code> containing:</p>
+<pre><code class="language-yaml">apiVersion: gitjob.cattle.io/v1
+kind: GitJob
+metadata:
+  # The name of the GitJob, doesn't need to match the project.
+  name: samplepush
+spec:
+  syncInterval: 15
+  git:
+    # The git repo and branch to track. 
+    repo: https://github.com/epinio/example-12factor
+    branch: main
+  jobSpec:
+    template:
+      spec:
+        # This should match what we created in the last step
+        serviceAccountName: epinio-gitjob
+        restartPolicy: &quot;Never&quot;
+        containers:
+        # This version should match your epinio deployment
+        - image: &quot;splatform/epinio-server:v0.1.0&quot;
+          name: epinio-push
+          volumeMounts:
+          - name: config
+            mountPath: &quot;/config/&quot;
+            readOnly: true
+          env:
+          - name: EPINIO_CONFIG
+            value: &quot;/config/config.yaml&quot;
+          command:
+          - /epinio 
+          args:
+          - push 
+          # This is the name of the app to push
+          - test12factor
+          workingDir: /workspace/source
+        volumes:
+        - name: config
+          secret:
+            secretName: epinio-creds
+</code></pre>
+<p>You can apply this via:</p>
+<pre><code>kubectl apply -f 12factor-gitjob.yaml
+</code></pre>
+<p>Once applied, you should see a Job and then Pod get created:</p>
+<pre><code>kubectl get job,pod
+</code></pre>
+<p>You can follow the logs of the pod listed above with:</p>
+<pre><code>kubectl logs &lt;pod_name&gt; -f
+</code></pre>
+<h3 id="using-webhooks"><a class="header" href="#using-webhooks">Using Webhooks</a></h3>
+<p>If you prefer to use webhooks instead of polling, set up the job in the same way as before but also follow the instructions found at: https://github.com/rancher/gitjob#webhook</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h2 id="how-to-setup-external-s3-storage"><a class="header" href="#how-to-setup-external-s3-storage">How to setup external S3 storage</a></h2>
+<p>One of the steps involved in running <code>epinio push</code> is storing the requested version of the code
+in the configured Epinio S3 compatible storage. By default, Epinio installs and configures <a href="https://github.com/minio/minio">Minio</a>
+to be used for this purpose. This document describes how to point Epinio to another S3 compatible storage and skip the Minio installation.</p>
+<p>The <a href="user/howtos/../references/cli/epinio_install.html"><code>epinio install</code> command</a>, has the following optional parameters:</p>
+<pre><code>--s3-endpoint
+--s3-access-key-id
+--s3-secret-access-key
+--s3-bucket
+--s3-location
+--s3-use-ssl
+</code></pre>
+<p>To configure Epinio to store application sources to an external S3 compatible storage, at least the following should be set:</p>
+<pre><code>--s3-endpoint
+--s3-access-key-id
+--s3-secret-access-key
+--s3-bucket
+</code></pre>
+<p>the other 2 are optional:</p>
+<pre><code>--s3-location
+--s3-use-ssl
+</code></pre>
+<p>(Some implementations don't need the location (e.g. Minio) and <code>s3-use-ssl</code> has a default value of &quot;false&quot;)</p>
+<p>An example that points Epinio to AWS S3 will look like this:</p>
+<pre><code>epinio install \
+--s3-endpoint s3.amazonaws.com \
+--s3-access-key-id your_access_key_here \
+--s3-secret-access-key your_secret_key_here \
+--s3-bucket epinio_sources \
+--s3-location eu-central-1
+--s3-use-ssl
+</code></pre>
+<p>If the bucket doesn't exist, Epinio will try to create it when it first tries
+to write to it. Make sure the access key and the access secret have enough permissions
+to create a bucket and then write to it.</p>
+<p>When you successfully push a new version of your application, Epinio will remove the resources of the previous staging process from the Kubernetes cluster and
+will also delete the previous version of the sources from S3. This way, Epinio doesn't store more than it needs on the S3 storage and the user doesn't need to manually cleanup.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="reference-documentation-for-example-all-cli-commands-and-their-arguments"><a class="header" href="#reference-documentation-for-example-all-cli-commands-and-their-arguments">Reference documentation. For example all CLI commands and their arguments.</a></h1>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><table><thead><tr><th></th><th>Server</th><th>Admin</th><th>User</th><th></th></tr></thead><tbody>
+<tr><td><em>component</em></td><td><strong>API</strong></td><td><strong>Installation</strong></td><td><strong>CLI</strong></td><td></td></tr>
+<tr><td><em>needs</em></td><td><em>(kubeconfig)</em></td><td><em>kubeconfig</em></td><td><em>kubeconfig</em></td><td><em>config file</em></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><em>commands</em></td><td>server</td><td>install</td><td>config update</td><td>info</td></tr>
+<tr><td></td><td></td><td>install-traefik</td><td></td><td>namespace</td></tr>
+<tr><td></td><td></td><td>install-cert-manager</td><td></td><td>target</td></tr>
+<tr><td></td><td></td><td>enable</td><td></td><td>push</td></tr>
+<tr><td></td><td></td><td>disable</td><td></td><td>config show|colors</td></tr>
+</tbody></table>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="command-reference"><a class="header" href="#command-reference">Command reference</a></h1>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="epinio-supported-applications"><a class="header" href="#epinio-supported-applications">Epinio supported applications</a></h1>
+<p>This section describes what kind of application you can expect to work with Epinio.
+To understand what enables an application to work with Epinio, you need to know how staging works.</p>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How it works</a></h2>
+<p>Epinio relies on <a href="https://buildpacks.io/">Cloud Native Buildpacks</a> to create a container image for your
+application. It does that by installing and using <a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks">the upstream maintained Tekton pipelines</a>.</p>
+<p>Staging starts with you (the developer) running <code>epinio push myapp</code> from the root of your application source code.
+You can see a simplified diagram of the process in the image below:</p>
+<p><img src="user/references/epinio-push-simple.svg?raw=true" alt="epinio-push-simplified" title="Epinio push" /></p>
+<p>After pushing your code, Epinio triggers a Tekton pipeline which uses the <a href="https://paketo.io/">paketo buildpacks</a> to build a runtime image for your application.
+If you are not familiar with how buildpacks work, you should have a look at the official docs: https://buildpacks.io/docs/</p>
+<h2 id="supported-buildpacks"><a class="header" href="#supported-buildpacks">Supported buildpacks</a></h2>
+<p>Epinio uses the <a href="https://github.com/paketo-buildpacks/full-stack-release">full stack paketo builder image</a> which means you can make use of any of the buildpacks
+documented here: https://paketo.io/docs/buildpacks/language-family-buildpacks/</p>
+<p>The various buildpacks provide various configuration options. You can read on how to generally configure a buildpack here: https://paketo.io/docs/buildpacks/configuration/
+Each buildpack may support more configuration options, so you may have to read the documentation of the buildpacks you are interested in.</p>
+<p>E.g. <a href="https://github.com/paketo-buildpacks/php-web#configuring-custom-ini-files">Instructions on how to add custom php.ini files for php-web buildpack</a></p>
+<h2 id="detailed-push-process"><a class="header" href="#detailed-push-process">Detailed push process</a></h2>
+<p>The above image is a simplified explanation of the <code>epinio push</code> process. If you don't want to know all the details on how that works, the above diagram should
+be all the information you need. If you are curious about the details, then read here: <a href="user/references//docs/user/explanations/detailed-push-process.html">Detailed push docs</a></p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="developer-documentation"><a class="header" href="#developer-documentation">Developer documentation</a></h1>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="explanations"><a class="header" href="#explanations">Explanations</a></h1>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h2 id="design-principles-1"><a class="header" href="#design-principles-1">Design Principles</a></h2>
+<p>Epinio's development is governed by the following principles:</p>
+<ul>
+<li><strong>Greater Developer Experience</strong>
+<ul>
+<li>Single command push for short learning curve</li>
+</ul>
+</li>
+<li><strong>Edge Friendly</strong> 
+<ul>
+<li>Has to fit in less than 4GB of RAM</li>
+</ul>
+</li>
+<li><strong>Easy Installation</strong> 
+<ul>
+<li>Has to install in less than 5 minutes when images are warm</li>
+<li>Has to completely uninstall and leave the cluster in its previous state with a one-line command</li>
+</ul>
+</li>
+<li><strong>Minimum Complexity</strong>
+<ul>
+<li>Scale from desktop/local to data center environment</li>
+<li>Has to install with a one-line command and zero config</li>
+</ul>
+</li>
+<li><strong>API Driven Architecture</strong></li>
+<li><strong>Security Focused</strong></li>
+</ul>
+<h3 id="guidelines-soft-principles-1"><a class="header" href="#guidelines-soft-principles-1">Guidelines (Soft Principles)</a></h3>
+<ul>
+<li>When possible, prefer:
+<ul>
+<li>components that are written in go</li>
+<li>Kubernetes primitives over custom resources</li>
+<li>Well known components with active community over custom code</li>
+</ul>
+</li>
+<li>all acceptance tests should run in less than 10 minutes</li>
+<li>all tests should be able to run on the minimal cluster</li>
+</ul>
+<h2 id="features"><a class="header" href="#features">Features</a></h2>
+<ul>
+<li><strong>Security</strong>
+<ul>
+<li>mTLS: Epinio uses <code>linkerd</code> to secure all communication between epinio components inside the kubernetes cluster</li>
+<li>Basic Authentication to access the API.</li>
+</ul>
+</li>
+<li><strong>Epinio Clients</strong>
+<ul>
+<li>Web UI</li>
+<li>Epinio CLI</li>
+</ul>
+</li>
+<li><strong>Full Air-Gap Installation</strong>
+<ul>
+<li>Can be installed and be used without internet</li>
+</ul>
+</li>
+<li><strong>Apps</strong>
+<ul>
+<li>CRUD operations of your app. (An app can be a tarball or in a github repo)</li>
+<li>Cloud Native Buildpacks provide the runtime environment for your apps</li>
+</ul>
+</li>
+<li><strong>Services</strong>
+<ul>
+<li>CRUD operations of your service. A service can be a database, SaaS etc. A service can be an external component or can be created using <code>epinio service</code></li>
+<li>Bind services to apps.</li>
+</ul>
+</li>
+</ul>
+<h2 id="future-plans"><a class="header" href="#future-plans">Future Plans</a></h2>
+<p>Epinio's development is driven by real world problems. That means, if something
+is not a solution to a real user's problem then it is not a priority. This guideline
+helps avoid over-engineering and meaningless work.</p>
+<p>Epinio's main goal is to make existing solutions accessible, to the application
+developer. Those solutions include:</p>
+<ul>
+<li>TLS Certificate Signers</li>
+<li>Service mesh integration and testing</li>
+<li>Open Telemetry</li>
+<li>Multi-Tenancy</li>
+<li>Serverless/Eventing framework</li>
+<li>Supply Chain Secruity</li>
+<li>Authorization/Authentication</li>
+</ul>
+<p>With so many communities working on the same problems at the same time, it's rare
+that a problem doesn't already have a solution. Most of the time, seamless integration
+is the challenge and that's Epinio's domain.</p>
+<p><strong>Note however</strong> that the above list does <strong>not</strong> constitute a Roadmap of things
+we will do. It is only a list of areas of interest to investigate.</p>
+<p>You can see what the team is up to on our
+<a href="https://github.com/epinio/epinio/projects/1">Github Project board</a>.
+Feel free to add issues if you want to discuss future work or comment on
+existing ones.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="howtos---practical-guides-to-solving-practical-problems"><a class="header" href="#howtos---practical-guides-to-solving-practical-problems">HowTos - Practical Guides to solving practical problems.</a></h1>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="development-guidelines"><a class="header" href="#development-guidelines">Development Guidelines</a></h1>
+<h2 id="local-development-environment"><a class="header" href="#local-development-environment">Local development environment</a></h2>
+<h3 id="get-a-cluster"><a class="header" href="#get-a-cluster">Get a cluster</a></h3>
+<p>There are many options on how to get a local cluster for development. Here are a few:</p>
+<ul>
+<li><a href="https://k3d.io/">k3d</a></li>
+<li><a href="https://github.com/k3s-io/k3s">k3s</a></li>
+<li><a href="https://github.com/kubernetes-sigs/kind">kind</a></li>
+<li><a href="https://minikube.sigs.k8s.io/docs/start/">minikube</a></li>
+</ul>
+<p>Assuming you have <code>k3d</code> installed, you can create a cluster with this command:</p>
+<pre><code>k3d cluster create epinio
+</code></pre>
+<p>This command should automatically update your default kubeconfig to point to
+the new cluster but if you need to save your kubeconfig manually you can do it with:</p>
+<pre><code>k3d kubeconfig get epinio &gt; epinio_kubeconfig
+</code></pre>
+<h3 id="build-epinio"><a class="header" href="#build-epinio">Build Epinio</a></h3>
+<p>You can build Epinio with the following make target:</p>
+<pre><code>make build
+</code></pre>
+<p>This is building Epinio for linux on amd64 architecture. If you are on a
+different OS or architecture you can use one of other the available <code>build-*</code> targets.
+Look at the Makefile at the root of the project to see what is available.</p>
+<h3 id="installing-epinio"><a class="header" href="#installing-epinio">Installing Epinio</a></h3>
+<p>You can have a look at <a href="developer/howtos//docs/user/howtos/install.html">the dedicated document</a> for cluster
+specific instructions, but generally this should be sufficient to get you running:</p>
+<pre><code>make install
+./dist/epinio-linux-amd64 namespace create workspace
+./dist/epinio-linux-amd64 target workspace
+</code></pre>
+<p>In case you're curious why <code>make install</code> is used here instead of
+<code>epinio install</code>, we have a section to look
+<a href="developer/howtos/development.html#curtain">Behind the curtains</a> at the end of the document, which
+explains the details of running an Epinio dev environment.</p>
+<p>After making changes to the binary simply invoking <code>make patch-epinio-deployment</code> again will upload the changes into the
+running cluster.</p>
+<p>Another thing <code>epinio install</code> does after deploying all components is
+the creation and targeting of a standard namespace, <code>workspace</code>.</p>
+<p>With the failing server component these actions will fail, making the
+installation fail. Using the option <code>--skip-default-namespace</code> instructs the
+command to forego these actions. Which in turn makes it necessary to
+run them manually to reach the standard state of a cluster. These are
+the last two commands in the above script.</p>
+<p>The one post-deployment action performed by <code>install</code> not affected by
+all of the above is the automatic <code>config update-credentials</code> saving
+API credentials and certs into the client configuration file. As that
+command talks directly to the cluster and not the epinio API the
+failing server component does not matter.</p>
+<p>If the cluster is not running on linux-amd64 it will be necessary to set
+<code>EPINIO_BINARY_PATH</code> to the correct binary to place into the epinio server
+(<a href="https://github.com/epinio/epinio/blob/a4b679af88d58177cecf4a5717c8c96f382058ed/scripts/patch-epinio-deployment.sh#L19">See here</a>).</p>
+<p>If the client operation is performed outside of a git checkout it will be
+necessary to set <code>EPINIO_BINARY_TAG</code> to the correct tag
+(<a href="https://github.com/epinio/epinio/blob/a4b679af88d58177cecf4a5717c8c96f382058ed/scripts/patch-epinio-deployment.sh#L20">See here</a>).</p>
+<p>The make target <code>tag</code> can be used in the checkout the binary came from to
+determine this value.</p>
+<p>Also, the default <code>make build</code> target builds a dynamically linked
+binary. This can cause issues if for example the glibc library in the
+base image doesn't match the one on the build system. To get past that
+issue it is necessary to build a statically linked binary with a
+command like:</p>
+<pre><code>GOARCH=&quot;amd64&quot; GOOS=&quot;linux&quot; CGO_ENABLED=0 go build -o dist/epinio-linux-amd64
+</code></pre>
+<h4 id="mixed-windowslinux-scenario"><a class="header" href="#mixed-windowslinux-scenario">Mixed Windows/Linux Scenario</a></h4>
+<p>A concrete example of the above would be the installation of Epinio from a
+Windows host without a checkout, to a Linux-based cluster.</p>
+<p>In that scenario the Windows host has to have both windows-amd64 and linux-amd64
+binaries. The first to perform the installation, the second for
+<code>EPINIO_BINARY_PATH</code> to be put into the server.</p>
+<p>Furthermore, as the Windows host is without a checkout, the tag has to be
+determined in the actual checkout and set into <code>EPINIO_BINARY_PATH</code>.</p>
+<p>Lastly, do not forget to set up a proper domain so that the client can talk to
+the server after installation is done. While during installation only a suitable
+<code>KUBECONFIG</code> is required after the client will go and use the information from
+the ingress, and that then has to properly resolve in the DNS.</p>
+<a id='curtain'>
+#### Behind the curtains
+<p><code>make install</code> does quite a bit more than the plain</p>
+<pre><code>epinio install
+</code></pre>
+<p>found in the quick install intructions.</p>
+<p>Let's look at what <code>make install</code> actually does:</p>
+<p>When building Epinio, the generated binary assumes that there is a
+container image for the Epinio server components, with a tag that
+matches the commit you built from.  For example, when calling <code>make build</code> on commit <code>7bfb700</code>, the version reported by Epinio is
+something like <code>v0.0.5-75-g7bfb700</code> and an image <code>epinio/server:v0.0.5-75-g7bfb700</code>
+is expected to be found.</p>
+<p>This works fine for released versions, because the release pipeline ensures
+that such an image is built and published.</p>
+<p>However when building locally building and publishing an image for
+every little change is ... inconvenient.</p>
+<p><code>make install</code> is setting</p>
+<pre><code>export EPINIO_DONT_WAIT_FOR_DEPLOYMENT=1
+</code></pre>
+<p>before calling the <code>epinio</code> binary that was created during <code>make build</code>.</p>
+<p>This tells the <code>epinio install</code> command to not wait for the Epinio server
+deployment. Since that will be failing without the image. Inspecting
+the cluster with</p>
+<pre><code>kubectl get pod -n epinio --selector=app.kubernetes.io/name=epinio-server
+</code></pre>
+<p>will confirm this.</p>
+<p>Then <code>make install</code> runs <code>scripts/patch-epinio-deployment.sh</code> which compensates for this
+issue. This make target patches the failing Epinio server deployment
+to use an existing image from some release and then copies the locally
+built <code>dist/epinio-linux-amd64</code> binary into it, ensuring that it runs
+the same binary as the client.</p>
+<p><strong>Note</strong> When building for another OS or architecture the
+<code>dist/epinio-linux-amd64</code> binary will not exist, and the script has to
+be adjusted accordingly.</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="how-to-add-a-new-user-for-api-access"><a class="header" href="#how-to-add-a-new-user-for-api-access">How To Add a New User For API Access</a></h1>
+<h2 id="background-and-specification"><a class="header" href="#background-and-specification">Background and specification</a></h2>
+<p>Access to Epinio's API server is currently controlled by Traefik's BasicAuth middleware.</p>
+<p>The list of allowed users and their credentials (hashes actually) is retrieved from the
+kubernetes secret <code>epinio-api-auth-secret</code> found in namespace <code>epinio</code>. The relevant data
+key is <code>users</code>.</p>
+<p>The value of the secret (before the base64 encoding done by kubernetes) is a text block
+where each line specifies a user with a hash of their credentials. User name and hash are
+separated by a single colon (<code>:</code>) character, with no spaces. Neither leading nor trailing
+spaces are allowed either.</p>
+<p>An entire suitable line of user and hash for user and password can be generated by</p>
+<blockquote>
+<p>htpasswd -bcB hashfile user password</p>
+</blockquote>
+<p>The given options create (<code>-c</code>) the password file, take (<code>-b</code>) the password from the
+command line, and, most importantly use Bcrypt (<code>-B</code>) for the output.</p>
+<h3 id="example-1"><a class="header" href="#example-1">Example</a></h3>
+<p>For our example we use the default user stored in the secret by a particular run of
+<code>epinio install</code>:</p>
+<p>Given user <code>db33fa940b855218</code> and password <code>a1bd8fbc58c6ec55</code> the secret contains the
+single line</p>
+<blockquote>
+<p>db33fa940b855218:$2a$10$upHKr9PT0YB4B1vEaFvWve6l1qW2oSW79VDeFTTbw8mNIcUpjE/lO</p>
+</blockquote>
+<h2 id="adding-a-new-user"><a class="header" href="#adding-a-new-user">Adding a new user</a></h2>
+<p>Given the previous information the process of adding a new user U with password P able to
+access the Epinio API server is as follows:</p>
+<ol>
+<li>
+<p>Get the list of currently allowed users from secret <code>epinio-api-auth-secret</code>
+(namespace <code>epinio</code>) and store it into a file:</p>
+<pre><code>kubectl get secret -n epinio epinio-api-auth-secret -o jsonpath='{.data.users}' | \
+    base64 -d &gt; USERS
+</code></pre>
+</li>
+<li>
+<p>Create the hash line for the new user <code>U</code> and its password <code>P</code>:</p>
+<pre><code>htpasswd -bcB NEW_CREDENTIALS U P
+</code></pre>
+</li>
+<li>
+<p>Edit the file <code>USERS</code> and append the contents of file <code>NEW_CREDENTIALS</code> as a new line
+to it.</p>
+<p><strong>Beware</strong>, the default value created by epinio does not have a terminating end of
+line. Simply using <code>cat &gt;&gt; USERS NEW_CREDENTIALS</code> will extend the existing line
+instead of appending a proper new line. This will break all access should this result
+be uploaded into the cluster.</p>
+</li>
+<li>
+<p>Change the content of key <code>users</code> in secret <code>epinio-api-auth-secret</code> (namespace
+<code>epinio</code>) to the new contents of file <code>USERS</code>:</p>
+<pre><code>kubectl get secret -n epinio epinio-api-auth-secret -o json | \
+    jq --arg newvalue &quot;$(cat USERS | base64)&quot; '.data[&quot;users&quot;]=$newvalue' | \
+    kubectl apply -f -
+</code></pre>
+<p>This non-interactive command directly edit a secret's key by retrieving the entire
+secret, replacing the specific key with the new data (base64-encoded!) and applying
+the changed json as the new secret.</p>
+</li>
+</ol>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="acceptance-tests"><a class="header" href="#acceptance-tests">Acceptance Tests</a></h1>
+<h2 id="basic-run"><a class="header" href="#basic-run">Basic Run</a></h2>
+<p>Invoke <code>make test-acceptance</code> to running the epinio acceptance tests
+with its standard configuration.</p>
+<p>Invoke <code>make showfocus</code> to see if tests have been focused on.</p>
+<p>This target is automatically run as part of <code>make test-acceptance</code> as
+well.</p>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
+<p>The tests can be configured by a mixture of environment variables,
+files, and, of course, by editing the test go files. The latter to
+focus a run on specific tests, as per ginkgo's documentation.</p>
+<h3 id="environment-variables"><a class="header" href="#environment-variables">Environment variables</a></h3>
+<h4 id="required"><a class="header" href="#required">Required</a></h4>
+<ol>
+<li>
+<p><code>KUBCONFIG</code>: This will give access the kubernetes cluster.</p>
+</li>
+<li>
+<p><code>EPINIO_CONFIG</code>: This will provide credentials to be used by tests
+to access the epinio server</p>
+</li>
+<li>
+<p><code>EPINIO_BINARY</code>: This will provide the path of epinio binary to be
+used in the tests.</p>
+</li>
+</ol>
+<h4 id="optional"><a class="header" href="#optional">Optional</a></h4>
+<ol>
+<li>
+<p><code>GINKGO_NODES</code>: The number of ginkgo nodes to distribute the
+tests across. The default is <code>2</code>. The CI flows use <code>8</code>.</p>
+</li>
+<li>
+<p><code>FLAKE_ATTEMPTS</code>: The number of tries to perform when a test
+fails, to ensure that the failure is real, and not a flake,
+i.e. caused by a transient environmental condition. The default
+is <code>2</code>.</p>
+</li>
+</ol>
+<h3 id="files"><a class="header" href="#files">Files</a></h3>
+<p>All file paths are specified relative to the top level directory of
+the epinio checkout running the acceptance tests.</p>
+<ol>
+<li>
+<p><code>tmp/skip_cleanup</code>: If present system shutdown will not uninstall
+epinio from the tests cluster, nor will it tear down the test
+cluster. This allows future test runs to bypass the costly setup
+of a cluster and epinio installation.</p>
+<p>This cannot be avoided if changes are made to the (un)install
+code. This always requires a new epinio installation to test the
+latest changes.</p>
+<p>On the third hand, changing the server code still allows using
+this. In that case we simply cannot skip patching the server (See
+<code>EPINIO_SKIP_PATCH</code>), as that step updates it to the local code,
+and thus the last changes.</p>
+</li>
+<li>
+<p><code>tmp/after_each_sleep</code>: If present, readable, and containing an
+integer number N the system will wait N seconds after each
+test. Enables the developer to inspect the cluster's state after
+a test.</p>
+<p><strong>Note</strong>, the file has contain <strong>only digits</strong>, and nothing
+else. Even a trailing newline after the digits prevents the
+system from recognizing the request.</p>
+</li>
+</ol>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="custom-python-builder"><a class="header" href="#custom-python-builder">Custom Python Builder</a></h1>
+<p>Python buildpacks are not yet part of the builder (paketobuildpacks/builder:full) used in Epinio.
+If the application contains a <code>Procfile</code>, the procfile buildpack will detect that and try to run the commands from the <code>Procfile</code>, but no Python setup is done.</p>
+<p>Supported sample apps can be found here:</p>
+<ul>
+<li>https://github.com/paketo-buildpacks/samples</li>
+<li>https://github.com/buildpacks/samples</li>
+</ul>
+<p>Python sample apps can be found in the Paketo community Python repo:</p>
+<ul>
+<li>https://github.com/paketo-community/python/tree/main/integration/testdata</li>
+</ul>
+<h2 id="pack"><a class="header" href="#pack">Pack</a></h2>
+<p>By using <code>pack</code> and a <code>project.toml</code> it's possible to add the Python buildpack to a project:</p>
+<pre><code class="language-toml">[project]
+id = &quot;sample&quot;
+version = &quot;0.1&quot;
+
+[build]
+
+[[build.buildpacks]]
+id = &quot;paketo-community/python&quot;
+version = &quot;0.4.2&quot;
+</code></pre>
+<p>And then build the image, for any Python sample, by running <code>pack build test/pip -B paketobuildpacks/builder:full</code>.</p>
+<h2 id="tekton-1"><a class="header" href="#tekton-1">Tekton</a></h2>
+<p>However, that is not possible with the Tekton pipeline (https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.3) included in Epinio. It does not recognize the <code>project.toml</code>.</p>
+<ul>
+<li>https://github.com/buildpacks/lifecycle/issues/555</li>
+<li>https://github.com/haliliceylan/rfcs/blob/2152fc5c817d971b6ead2069d82c459f432a7acc/text/0000-prepare-phase.md</li>
+</ul>
+<h2 id="solution-using-a-custom-builder"><a class="header" href="#solution-using-a-custom-builder">Solution: Using a Custom Builder</a></h2>
+<p>We can create a custom builder that supports Python and point the Tekton pipeline to the custom builder.</p>
+<pre><code>git clone git@github.com:paketo-buildpacks/full-builder.git
+
+patch -p1 &lt;&lt;EOF
+diff --git a/builder.toml b/builder.toml
+index f3a35fd..b228671 100644
+--- a/builder.toml
++++ b/builder.toml
+@@ -32,6 +32,10 @@ description = &quot;Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
+   uri = &quot;docker://gcr.io/paketo-buildpacks/php:0.5.0&quot;
+   version = &quot;0.5.0&quot;
+
++[[buildpacks]]
++  uri = &quot;docker://gcr.io/paketo-community/python:0.4.2&quot;
++  version = &quot;0.4.2&quot;
++
+ [[buildpacks]]
+   uri = &quot;docker://gcr.io/paketo-buildpacks/procfile:4.2.2&quot;
+   version = &quot;4.2.2&quot;
+@@ -97,6 +101,12 @@ description = &quot;Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
+     id = &quot;paketo-buildpacks/java&quot;
+     version = &quot;5.9.1&quot;
+
++[[order]]
++
++  [[order.group]]
++    id = &quot;paketo-community/python&quot;
++    version = &quot;0.4.2&quot;
++
+ [[order]]
+
+   [[order.group]]
+EOF
+
+pack builder create epicustombuilder:local --config builder.toml
+</code></pre>
+<p>Make the image <code>epicustombuilder:local</code> available to your cluster, e.g. with k3d:</p>
+<pre><code>k3d image import epicustombuilder:local
+</code></pre>
+<p>Edit the tekton pipeline and replace <code>paketobuildpacks/builder:full</code> with our custom builder <code>epicustombuilder:local</code>:</p>
+<pre><code>kubectl edit -n tekton-staging pipeline/staging-pipeline
+</code></pre>
+<p>Finally, use <code>epinio push</code> with one of the sample Python apps to see that it works.</p>
+<h2 id="reference"><a class="header" href="#reference">Reference</a></h2>
+<ul>
+<li>Project descriptor: https://github.com/buildpacks/spec/blob/main/extensions/project-descriptor.md#projectlicenses</li>
+<li>RFC replace buildpack.yml: https://github.com/paketo-buildpacks/rfcs/blob/main/text/0003-replace-buildpack-yml.md</li>
+<li>RFC environment variable configuration of buildpacks: https://github.com/paketo-buildpacks/rfcs/blob/main/text/0026-environment-variable-configuration-of-buildpacks.md</li>
+<li>Setup a Tekton buildpack pipeline: https://buildpacks.io/docs/tools/tekton/</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
