@@ -8,7 +8,7 @@ NOTE: We will improve this experience in the future!
 
 ### Install GitJob
 
-If you don't have Rancher (or standalone Fleet) installed, we need to install the GitJob operator by following the isntructions found at https://github.com/rancher/gitjob#running.
+If you don't have Rancher (or standalone Fleet) installed, we need to install the GitJob operator by following the instructions found at https://github.com/rancher/gitjob#running.
 
 
 Then we need to setup the Service Account to run our Jobs with (since we don't need to do anything directly with the kube api, we don't need to add any role bindings to it):

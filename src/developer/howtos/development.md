@@ -110,6 +110,7 @@ the server after installation is done. While during installation only a suitable
 the ingress, and that then has to properly resolve in the DNS.
 
 <a id='curtain'>
+
 #### Behind the curtains
 
 `make install` does quite a bit more than the plain
