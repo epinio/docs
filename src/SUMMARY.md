@@ -10,7 +10,6 @@
     - [Install Epinio cli](user/installation/install_epinio_cli.md)
     - [Install Epinio with custom DNS](user/installation/install_epinio_customDNS.md)
     - [Install Epinio with "magic" DNS](user/installation/install_epinio_magicDNS.md)
-    - [Install Epinio with "magic" DNS](user/installation/install_epinio_magicDNS.md)
     - [Install Epinio on AKS (Azure)](user/installation/install_epinio_on_aks.md)
     - [Install Epinio on EKS (Amazon)](user/installation/install_epinio_on_eks.md)
     - [Install Epinio on GKE (Google)](user/installation/install_epinio_on_gke.md)
