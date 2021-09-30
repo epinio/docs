@@ -15,6 +15,7 @@
     - [Install Epinio on GKE (Google)](user/installation/install_epinio_on_gke.md)
     - [Install Epinio on RKE2 (Rancher)](user/installation/install_epinio_on_rke.md)
     - [Install Epinio on k3d (local)](user/installation/install_epinio_on_k3d.md)
+    - [Install Epinio on Rancher Desktop (local)](user/installation/install_epinio_on_rancher_desktop.md)
     - [Install Wordpress on Epinio](user/installation/install_wordpress_application.md)
   - [Uninstall Epinio](user/installation/uninstall_epinio.md)
 
