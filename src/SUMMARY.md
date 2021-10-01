@@ -11,7 +11,9 @@
   - [Install Epinio on AKS (Azure)](installation/install_epinio_on_aks.md)
   - [Install Epinio on EKS (Amazon)](installation/install_epinio_on_eks.md)
   - [Install Epinio on GKE (Google)](installation/install_epinio_on_gke.md)
+  - [Install Epinio on RKE2 (Rancher)](installation/install_epinio_on_rke.md)
   - [Install Epinio on k3d (local)](installation/install_epinio_on_k3d.md)
+  - [Install Epinio on Rancher Desktop (local)](installation/install_epinio_on_rancher_desktop.md)
   - [Install Wordpress on Epinio](installation/install_wordpress_application.md)
 
 - [Uninstall Epinio](installation/uninstall_epinio.md)
