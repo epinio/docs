@@ -1,0 +1,421 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Advanced topics - Epinio - the application development engine for Kubernetes</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Documentation for users and developers of Epinio">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../tutorials/quickstart.html"><strong aria-hidden="true">2.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="../installation/installation.html"><strong aria-hidden="true">3.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installation/install_epinio_cli.html"><strong aria-hidden="true">3.1.</strong> Install Epinio cli</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_customDNS.html"><strong aria-hidden="true">3.2.</strong> Install Epinio with custom DNS</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_magicDNS.html"><strong aria-hidden="true">3.3.</strong> Install Epinio with &quot;magic&quot; DNS</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_aks.html"><strong aria-hidden="true">3.4.</strong> Install Epinio on AKS (Azure)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_eks.html"><strong aria-hidden="true">3.5.</strong> Install Epinio on EKS (Amazon)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_gke.html"><strong aria-hidden="true">3.6.</strong> Install Epinio on GKE (Google)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_rke.html"><strong aria-hidden="true">3.7.</strong> Install Epinio on RKE2 (Rancher)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_k3d.html"><strong aria-hidden="true">3.8.</strong> Install Epinio on k3d (local)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_rancher_desktop.html"><strong aria-hidden="true">3.9.</strong> Install Epinio on Rancher Desktop (local)</a></li><li class="chapter-item expanded "><a href="../installation/install_wordpress_application.html"><strong aria-hidden="true">3.10.</strong> Install Wordpress on Epinio</a></li></ol></li><li class="chapter-item expanded "><a href="../installation/uninstall_epinio.html"><strong aria-hidden="true">4.</strong> Uninstall Epinio</a></li><li class="chapter-item expanded "><a href="../explanations/explanations.html"><strong aria-hidden="true">5.</strong> Explanations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../explanations/advanced.html" class="active"><strong aria-hidden="true">5.1.</strong> Advanced topics</a></li><li class="chapter-item expanded "><a href="../explanations/configuration.html"><strong aria-hidden="true">5.2.</strong> Configuration</a></li><li class="chapter-item expanded "><a href="../explanations/detailed-push-process.html"><strong aria-hidden="true">5.3.</strong> Detailed Push Process</a></li><li class="chapter-item expanded "><a href="../explanations/principles.html"><strong aria-hidden="true">5.4.</strong> Principles</a></li><li class="chapter-item expanded "><a href="../explanations/security.html"><strong aria-hidden="true">5.5.</strong> Security</a></li><li class="chapter-item expanded "><a href="../explanations/windows.html"><strong aria-hidden="true">5.6.</strong> Windows</a></li></ol></li><li class="chapter-item expanded "><a href="../howtos/howtos.html"><strong aria-hidden="true">6.</strong> HowTos</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../howtos/certificate_issuers.html"><strong aria-hidden="true">6.1.</strong> Certificate Issuers</a></li><li class="chapter-item expanded "><a href="../howtos/provision_external_ip_for_local_kubernetes.html"><strong aria-hidden="true">6.2.</strong> Provision external IP address for local Kubernetes</a></li><li class="chapter-item expanded "><a href="../howtos/gitjob_push.html"><strong aria-hidden="true">6.3.</strong> Push with gitjob</a></li><li class="chapter-item expanded "><a href="../howtos/setup-external-s3.html"><strong aria-hidden="true">6.4.</strong> Setup external S3 storage</a></li></ol></li><li class="chapter-item expanded "><a href="../references/references.html"><strong aria-hidden="true">7.</strong> Reference documentation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../references/index.html"><strong aria-hidden="true">7.1.</strong> Command requirements</a></li><li class="chapter-item expanded "><a href="../references/commands.html"><strong aria-hidden="true">7.2.</strong> Command reference</a></li><li class="chapter-item expanded "><a href="../references/supported-apps.html"><strong aria-hidden="true">7.3.</strong> Supported Applications</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Epinio - the application development engine for Kubernetes</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/epinio/docs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/epinio/docs/edit/main/src/explanations/advanced.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+                        
+
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="epinio-advanced-topics"><a class="header" href="#epinio-advanced-topics">Epinio, Advanced Topics</a></h1>
+<h2 id="contents"><a class="header" href="#contents">Contents</a></h2>
+<p>TODO: Do the same for Minio and list storage class requirements (WaitForFirstConsumer). Add links to upstream docs.
+TODO: Explain how to configure external S3 storage.
+TODO: Consider doing this in a separate document about the components. Or even, one document per components and links here.</p>
+<ul>
+<li>
+<p><a href="#epinio-installed-components">Epinio installed components</a></p>
+<ul>
+<li><a href="#traefik">Traefik</a></li>
+<li><a href="#linkerd">Linkerd</a></li>
+<li><a href="#epinio">Epinio</a></li>
+<li><a href="#cert-manager">Cert Manager</a></li>
+<li><a href="#kubed">Kubed</a></li>
+<li><a href="#google-service-broker">Google Service Broker</a> (optional)</li>
+<li><a href="#minibroker">Minibroker</a> (optional)</li>
+<li><a href="#service-catalog">Service Catalog</a></li>
+<li><a href="#minio">Minio</a></li>
+<li><a href="#container-registry">Container Registry</a></li>
+<li><a href="#tekton">Tekton</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#other-advanced-topics">Other advanced topics</a></p>
+<ul>
+<li><a href="#git-pushing">Git Pushing</a></li>
+<li><a href="#traefik-and-linkerd">Traefik and Linkerd</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="epinio-installed-components"><a class="header" href="#epinio-installed-components">Epinio installed components</a></h2>
+<h3 id="traefik"><a class="header" href="#traefik">Traefik</a></h3>
+<p>When you installed Epinio, it looked at your cluster to see if you had
+<a href="https://doc.traefik.io/traefik/providers/kubernetes-ingress/">Traefik</a>
+running. If it wasn't there it installed it.</p>
+<p>As Epinio only checks two namespaces for Traefik's presence, namely
+<code>traefik</code> and <code>kube-system</code>, it is possible that it tries to install
+it, despite the cluster having Traefik running. Just in an unexpected
+place.</p>
+<p>The <code>install</code> command provides the option <code>--skip-traefik</code> to handle
+this kind of situation.</p>
+<p>Installing Epinio on your cluster with the command</p>
+<pre><code class="language-bash">$ epinio install --skip-traefik
+</code></pre>
+<p>forces Epinio to not install its own Traefik.</p>
+<p>Note that having some other (non-Traefik) Ingress controller running
+is <strong>not</strong> a reason to prevent Epinio from installing Traefik. All the
+Ingresses used by Epinio expect to be handled by Traefik.</p>
+<p>Also, the Traefik instance installed by Epinio, is configured to redirect all
+http requests to https automatically (e.g. the requests to the Epinio API, and
+the application routes). If you decide to use a Traefik instance which you
+deployed, you have to set this up yourself, Epinio won't change your Traefik
+installation in any way. Here are the relevant upstream docs for the redirection:</p>
+<p>https://doc.traefik.io/traefik/routing/entrypoints/#redirection</p>
+<h3 id="linkerd"><a class="header" href="#linkerd">Linkerd</a></h3>
+<p>By default, Epinio installs <a href="https://linkerd.io/">Linkerd</a> on your cluster. The
+various namespaces created by Epinio become part of the Linkerd Service Mesh and
+thus all communication between pods is secured with mutualTLS.</p>
+<p>In some cases you may not want Epinio to install Linkerd, either because you did
+that manually before you install Epinio or for other reasons. You can provide
+the <code>--skip-linkerd</code> flag to the <code>install</code> command to prevent Epinio from
+installing any of the Linkerd control plane components:</p>
+<pre><code class="language-bash">$ epinio install --skip-linkerd
+</code></pre>
+<h3 id="epinio"><a class="header" href="#epinio">Epinio</a></h3>
+<p>The epinio binary is used as:</p>
+<ul>
+<li>a cli tool, used to push applications, create services etc.</li>
+<li>the API server component which runs inside the cluster (invoked with the <code>epinio server</code> command)</li>
+<li>the installer that installs the various needed components on the cluster. The
+API server from the previous point is one of them.</li>
+</ul>
+<p>Epinio cli functionality is implemented using the endpoints provided by the Epinio API server
+component. For example, when the user asks Epinio to &quot;push&quot; an application, the
+cli will contact the &quot;Upload&quot;, &quot;Stage&quot; and &quot;Deploy&quot; endpoints of the Epinio API to upload the application code,
+create a container image for the application using this code and run the application on the cluster.</p>
+<p>The Epinio API server is running on the cluster and made accessible using Kubernetes resources like
+Deployments, Services,  Ingresses and Secrets.</p>
+<h3 id="cert-manager"><a class="header" href="#cert-manager">Cert Manager</a></h3>
+<p><a href="https://cert-manager.io/docs/">Upstream documentation</a></p>
+<p>The Cert manager component is deployed by Epinio and used to generate and renew the various Certificates needed in order to
+serve the various accessible endpoints over TLS (e.g. the Epinio API server).</p>
+<p>Epinio supports various options when it comes to certificate issuers (let's encrypt, private CA, bring your own CA, self signed certs).
+Cert Manager simplifies the way we handle the various different certificate issuers within Epinio.</p>
+<p>You can read more about certificate issuers here: <a href="../howtos/certificate_issuers.html">certificate issuers documentation</a></p>
+<h3 id="kubed"><a class="header" href="#kubed">Kubed</a></h3>
+<p><a href="https://github.com/kubeops/kubed">Upstream documentation</a></p>
+<p>Kubed is installed by Epinio to keep secrets that are needed in more than
+one namespace synced. For example, the TLS certificate of the <a href="#container-registry">Container Registry</a> is also needed
+in the Tekton staging namespace, in order to trust the certificate when pushing the application images.</p>
+<p>Kubed makes sure that if the source secret changes, the copy will change too.</p>
+<p>Warning: this doesn't mean things will still work if you re-generate a secret manually. Secret rotation will be handled by Epinio in the future.</p>
+<h3 id="google-service-broker"><a class="header" href="#google-service-broker">Google Service Broker</a></h3>
+<p><a href="https://github.com/GoogleCloudPlatform/gcp-service-broker">Upstream project link</a></p>
+<p>Many applications need additional services in order to work. Those services could be databases, cache servers, email gateways, log collecting applications or other.
+The various cloud providers already offer such services. Being able to use them in the various Platforms as a Service (PaaS) in a unified way
+gave birth to the concept of the (Open Service Broker API - aka osbapi)[https://www.openservicebrokerapi.org/]. This concept is adopted by various
+providers among which, Google. There seems to be a shift towards the &quot;Operator&quot; pattern, e.g. Google seems to have moved its focus to the <a href="https://cloud.google.com/config-connector/docs/overview">Config Connector</a> as described at the top of the README <a href="https://github.com/googlearchive/k8s-service-catalog">here</a>.</p>
+<p>Since Google's service broker still works and since the common interface provided by the <a href="#service-catalog">Service Catalog</a> makes it easy to integrate, Epinio
+lets the user optionally install the Google service broker with the command <a href="../references/cli/epinio_enable_services-google.html"><code>epinio enable services-google</code></a>.</p>
+<p>Warning: This service broker is not actively supported by Google anymore and may be removed from a future Epinio version.</p>
+<h3 id="minibroker"><a class="header" href="#minibroker">Minibroker</a></h3>
+<p><a href="https://github.com/kubernetes-sigs/minibroker">Upstream project link</a></p>
+<p>This is another implementation of the Open Service Broker API which can also be optionally be installed by epinio with the command <a href="../references/cli/epinio_enable_services-incluster.html"><code>epinio enable services-incluster</code></a>.</p>
+<p>Minibroker provisions services on the kubernetes cluster where Epinio is also running, using upstream helm charts. This can be useful for local development with Epinio, because it's fast and doesn't cost anything (services run locally).</p>
+<h3 id="service-catalog"><a class="header" href="#service-catalog">Service Catalog</a></h3>
+<p><a href="https://github.com/kubernetes-sigs/service-catalog">Upstream project link</a></p>
+<p>The service catalog is the component that collects the various services provided by the various installed service brokers and presents them in a unified way to the user.
+The service catalog is the component behind the <a href="../references/cli/epinio_service_list-classes.html"><code>epinio service list-classes</code></a> and <a href="../references/cli/epinio_service_list-plans.html"><code>epinio service list-plans</code></a> commands.</p>
+<h3 id="minio"><a class="header" href="#minio">Minio</a></h3>
+<p><a href="https://github.com/minio/minio">Upstream project link</a></p>
+<p>Minio is a storage solution that implements the same API as <a href="https://aws.amazon.com/s3/">Amazon S3</a>.</p>
+<p>When the user pushes an application using a source code directory (with the <a href="../references/cli/epinio_push.html"><code>epinio push</code></a> command), the first step taken by the cli is to put the source code into a tarball and upload that to the Epinio API server. The server copies that to the configured S3 storage to be used later during the staging of the application.</p>
+<p>When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install Minio on the cluster (<a href="TODO">See here how</a>).</p>
+<h3 id="container-registry"><a class="header" href="#container-registry">Container Registry</a></h3>
+<p>The result of Epinio's application staging is a container image. This image is used to create a Kubernetes deployment to run the application code.
+The <a href="#tekton">Tekton</a> pipeline requires that image to be written to some container registry. Epinio installs a registry on the cluster itself to make the process easy and fast.</p>
+<p>Note: In the future, Epinio may offer the option to use an external registry and not install one on the cluster (<a href="https://github.com/epinio/epinio/issues/784">GitHub Issue</a>).</p>
+<h3 id="tekton"><a class="header" href="#tekton">Tekton</a></h3>
+<ul>
+<li><a href="https://github.com/tektoncd/pipeline">Upstream project link</a></li>
+<li><a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.3">Buildpacks pipeline</a></li>
+</ul>
+<p>Pushing an application to Kubernetes with Epinio involves various steps. One of them is staging, which is the process that creates a container image out of the application source code using <a href="https://buildpacks.io/">buildpacks</a>. Epinio runs the staging process via a <a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.3">Tekton Pipeline</a>.</p>
+<h2 id="other-advanced-topics"><a class="header" href="#other-advanced-topics">Other Advanced Topics</a></h2>
+<h3 id="git-pushing"><a class="header" href="#git-pushing">Git Pushing</a></h3>
+<p>The quick way of pushing an application, as explained at
+<a href="../tutorials/quickstart.html#push-an-application">Quickstart: Push an application</a>, uses a local
+directory containing a checkout of the application's sources.</p>
+<p>Internally this is actually <a href="detailed-push-process.html">quite complex</a>. It
+involves the creation and upload of a tarball from these sources by the client
+to the Epinio server, copying into Epinio's internal (or external) S3 storage,
+copying from that storage to a PersistentVolumeClaim to be used in the tekton pipeline for staging,
+i.e. compilation and creation of the docker image to be used by the underlying kubernetes cluster.</p>
+<p>The process is a bit different when using the Epinio client's &quot;git mode&quot;. In
+this mode <code>epinio push</code> does not take a local directory of sources, but the
+location of a git repository holding the sources, and the id of the revision to
+use. The client then asks the Epinio server to pull those sources and store them to the
+S3 storage. The rest of the process is the same.</p>
+<p>The syntax is</p>
+<pre><code>epinio push NAME GIT-REPOSITORY-URL --git REVISION
+</code></pre>
+<p>For comparison all the relevant syntax:</p>
+<pre><code>epinio push NAME
+epinio push NAME DIRECTORY
+epinio push NAME GIT-REPOSITORY-URL --git REVISION
+</code></pre>
+<h2 id="traefik-and-linkerd"><a class="header" href="#traefik-and-linkerd">Traefik and Linkerd</a></h2>
+<p>By default, with Epinio installing both Traefik and Linkerd, Epinio's
+installation process ensures that the Traefik pods are included in the Linkerd
+mesh, thus ensuring that external communication to applications is secured on
+the leg between loadbalancer and application service.</p>
+<p><strong>However</strong>, there are situations where Epinio does not install Traefik.
+This can be because the user specified <code>--skip-traefik</code>, or because Epinio
+detected a running Traefik, thus can forego its own.
+The latter is possible, for example, when using <code>k3d</code> as cluster foundation.</p>
+<p>In these situations the pre-existing Traefik is <strong>not</strong> part of the Linkerd
+mesh. As a consequence the communication from loadbalancer to application
+service is not as secure.</p>
+<p>While it is possible to fix this, the fix requires access to the cluster in
+general, and to Traefik's namespace specifically. In other words, permissions to
+annotate the Traefik namespace are needed, as well as permissions to restart the
+pods in that namespace. The latter is necessary, because Linkerd is not able to
+inject itself into running pods. It can only intercept pod (re)starts.</p>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<p>Assuming that Traefik's namespace is called <code>traefik</code>, with pods
+<code>traefik-6f9cbd9bd4-z4zw8</code> and <code>svclb-traefik-q8g75</code>
+the commands</p>
+<pre><code>kubectl annotate namespace     traefik linkerd.io/inject=enabled
+kubectl delete pod --namespace traefik traefik-6f9cbd9bd4-z4zw8 svclb-traefik-q8g75
+</code></pre>
+<p>will bring the Traefik in that namespace into Epinio's linkerd mesh.</p>
+<p>Note that this recipe also works for a Traefik provided by <code>k3d</code>, in the
+<code>kube-system</code> namespace.</p>
+<p>While it is the namespace which is annotated, only restarted pods are affected
+by that, i.e. Traefik's pods here. The other system pods continue to run as they
+are.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../explanations/explanations.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../explanations/configuration.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../explanations/explanations.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../explanations/configuration.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
