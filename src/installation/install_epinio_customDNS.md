@@ -6,8 +6,6 @@ For test and production environments. The installation will be done in three ste
 - Configure your custom domain
 - Install Epinio in cluster
 
-If not done already, refer to [System Requirements](https://github.com/epinio/epinio#system-requirements) to prepare your kubernetes.
-
 ## Install the Epinio CLI
 
 If not done already, refer to [Install the Epinio CLI](./install_epinio_cli.md).
