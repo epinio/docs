@@ -38,5 +38,5 @@ to use Kubernetes as a PaaS (Platform as a Service).
 
 ## Quickstart
 
-Follow the [quickstart](user/tutorials/quickstart.md) tutorial to get
+Follow the [quickstart](tutorials/quickstart.md) tutorial to get
 started with Epinio.
