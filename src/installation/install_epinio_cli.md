@@ -1,6 +1,6 @@
 #  Installation of the Epinio CLI
 
-If not done already, refer to [System Requirements](system-requirements).
+If not done already, refer to [System Requirements](./system_requirements.md).
 
 ## Install Dependencies
 
