@@ -16,6 +16,7 @@
   - [Install Epinio on k3d (local)](installation/install_epinio_on_k3d.md)
   - [Install Epinio on k3s (local)](installation/install_epinio_on_k3s.md)
   - [Install Epinio on Rancher Desktop (local)](installation/install_epinio_on_rancher_desktop.md)
+  - [Install Epinio on Minikube (local)](installation/install_epinio_on_minikube.md)
   - [Install Wordpress on Epinio](installation/install_wordpress_application.md)
 
 - [Uninstall Epinio](installation/uninstall_epinio.md)
