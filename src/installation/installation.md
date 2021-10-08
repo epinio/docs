@@ -32,6 +32,8 @@ Beside advanced installation options, there are two ways of installing Epinio:
 ### Installation on Specific Kubernetes Offerings
 
 - [Install on K3d](install_epinio_on_k3d.md) - Install K3d and then install Epinio
+- [Install on Minikube](install_epinio_on_minikube.md) - Install Minikube and then install Epinio
+- [Install on K3s](install_epinio_on_k3s.md) - Install Epinio in k3s clusters
 - [Install on EKS](install_epinio_on_eks.md) - Install Epinio in Amazon EKS clusters
 - [Install on AKS](install_epinio_on_aks.md) - Install Epinio in Azure AKS clusters
 - [Install on GKE](install_epinio_on_gke.md) - Install Epinio in Google GKE clusters
