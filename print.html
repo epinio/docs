@@ -1263,28 +1263,8 @@ spec:
 <li>Provision of LoadBalancer IP is enabled by default in K3s/K3d.</li>
 </ul>
 <h3 id="minikube"><a class="header" href="#minikube">Minikube</a></h3>
-<p>:warning: Minikube on podman (<code>minikube start --driver podman</code>) is currently unsupported. :warning:</p>
-<ul>
-<li>Install and configure MetalLB</li>
-</ul>
-<pre><code>minikube addons enable metallb
-
-MINIKUBE_IP=($(minikube ip))
-cat &lt;&lt;EOF | kubectl apply -f -
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: metallb-system
-  name: config
-data:
-  config: |
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - ${MINIKUBE_IP}/28
-EOF
-</code></pre>
+<p>See <a href="howtos//installation/install_epinio_on_minikube.html">Install Epinio on Minikube</a> on how to
+configure minikube.</p>
 <h3 id="kind"><a class="header" href="#kind">Kind</a></h3>
 <ul>
 <li>
