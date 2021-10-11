@@ -8,28 +8,8 @@ Local kubernetes platforms do not have the ability to provide external IP addres
 
 ### Minikube
 
-:warning: Minikube on podman (`minikube start --driver podman`) is currently unsupported. :warning:
-
-* Install and configure MetalLB
-```
-minikube addons enable metallb
-
-MINIKUBE_IP=($(minikube ip))
-cat <<EOF | kubectl apply -f -
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: metallb-system
-  name: config
-data:
-  config: |
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - ${MINIKUBE_IP}/28
-EOF
-```
+See [Install Epinio on Minikube](/installation/install_epinio_on_minikube.html) on how to
+configure minikube.
 
 ### Kind 
 
