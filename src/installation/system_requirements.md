@@ -20,5 +20,5 @@ In addition, extensive requirements for your workload (apps) would add to that.
 A default storage class (with annotation `storageclass.kubernetes.io/is-default-class: "true"`) is needed.
 
 While Kubernetes 1.22 is supported there is an issue when the container runtime is `containerd > 1.5.6`.
-because the [pack cli](https://github.com/buildpacks/pack) is putting too much information inside the
+The [pack cli](https://github.com/buildpacks/pack) is placing too much information into the
 image layers. The relevant issue is: https://github.com/paketo-buildpacks/full-builder/issues/415
