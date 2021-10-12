@@ -42,3 +42,4 @@
   - [Command requirements](references/README.md)
   - [Command reference](references/commands.md)
   - [Supported Applications](references/supported-apps.md)
+  - [Application Manifests](references/manifests.md)

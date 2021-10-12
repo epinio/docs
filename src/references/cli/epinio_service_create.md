@@ -9,18 +9,16 @@ Create a service
 
 ### Synopsis
 
-Create service by name, class, plan, and optional json data.
+Create service by name and key/value dictionary.
 
 ```
-epinio service create NAME CLASS PLAN [flags]
+epinio service create NAME (KEY VALUE)... [flags]
 ```
 
 ### Options
 
 ```
-      --data string   json data to be passed to the underlying service as parameters
-      --dont-wait     Return immediately, without waiting for the service to be provisioned
-  -h, --help          help for create
+  -h, --help   help for create
 ```
 
 ### Options inherited from parent commands

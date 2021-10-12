@@ -14,7 +14,10 @@ epinio app create NAME [flags]
 ### Options
 
 ```
-  -h, --help   help for create
+  -b, --bind strings      services to bind immediately
+  -e, --env strings       environment variables to be used
+  -h, --help              help for create
+  -i, --instances int32   The number of instances the application should have (default 1)
 ```
 
 ### Options inherited from parent commands
