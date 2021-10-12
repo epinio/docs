@@ -1,5 +1,7 @@
 # Application Manifests
 
+## Overview
+
 An application manifest is a YAML file containing the entire configuration of an
 application as required by `epinio (apps) push` for succesful operation.
 
@@ -9,13 +11,35 @@ This is especially true for the commands `epinio apps create` and `epinio apps u
 Neither of these uses manifests. They operate directly on a named application, and can
 only set and modify a subset of the data provided by a manifest to `epinio (apps) push`.
 
+## Cheat Sheet
+
+The detailed specifications coming after this section provide the following essential ways
+of pushing an application:
+
+  1. With an explicit manifest file as argument.
+
+  2. With a standard manifest file (`epinio.yml`) found in the current directory.
+
+  3. With no manifest file at all. This simply uses all the defaults, except for the name,
+     which has no such.
+
+Further defaults:
+
+  - No environment variables.
+  - No bound services.
+  - One replica/instance.
+  - Standard paketo builder image (`paketobuildpacks/builder:full`).
+  - Current directory for the application sources.
+
 ## Syntax `epinio (apps) push`
 
 Outside of options `epinio (apps) push` supports only a single optional argument.
 This argument is the path to the manifest file to use.
 
-When no such path is specified the command assumes that `$PWD/epinio.yml` is the manifest
-to use.
+When no such path is specified the command looks for an `epinio.yml` file in the current
+directory as the manifest to use.
+
+When no manifest file is found defaults are applied.
 
 Syntax:
 
@@ -77,6 +101,12 @@ allowed. Mixing forms causes push to report an error.
     the nicer separators (`:`, `@`) are both used in urls, making extraction difficult due
     to the ambiguities coming out of that.
 
+The last option controls staging:
+
+  - `--builder-image` `IMAGE`
+
+    The name of the image to use for staging the application's sources.
+
 ## Manifest format
 
 An application manifest is a YAML file containing a single mapping as its main structure.
@@ -96,6 +126,11 @@ The keys of this mapping specify the various elements of an application's config
 
       - `services`. See `--bind`. Optional. Defaults to empty. The value of this keys is a
         sequence of names, for the services to bind.
+
+  - `staging`. Optional. The value of this key is a mapping whose keys specify information
+    controlling the application's staging.
+
+      - `builder`. See `--builder-image`. Optional.
 
   - `origin`. Optional. The value of this key is a mapping whose keys specify the origin
     of the application (sources), namely:
@@ -134,6 +169,8 @@ configuration:
   - snafu
   environment:
     DOGMA: "no"
+staging:
+  builder: "paketobuildpacks/builder:tiny"
 origin:
   path: /somewhere/over/there
 
