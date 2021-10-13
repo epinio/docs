@@ -203,6 +203,15 @@
 <p>While Kubernetes 1.22 is supported there is an issue when the container runtime is <code>containerd &gt; 1.5.6</code>.
 The <a href="https://github.com/buildpacks/pack">pack cli</a> is placing too much information into the
 image layers. The relevant issue is: https://github.com/paketo-buildpacks/full-builder/issues/415</p>
+<h3 id="installing-on-digital-ocean"><a class="header" href="#installing-on-digital-ocean">Installing on Digital Ocean</a></h3>
+<p>When installing Epinio on Rancher-provisioned RKE2 or RKE1
+clusters on Digital Ocean, you might see this error message:</p>
+<pre><code>error installing Epinio:
+timed out waiting for LoadBalancer IP on traefik service
+Ensure your kubernetes platform has the ability to provision a LoadBalancer IP address.
+</code></pre>
+<p>In this case you need to configure RKE/RKE2 with an external cloud
+provider as <a href="https://github.com/digitalocean/digitalocean-cloud-controller-manager">this one</a>.</p>
 
                     </main>
 
