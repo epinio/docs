@@ -9,7 +9,7 @@ Shows information about the Epinio environment
 
 ### Synopsis
 
-Shows status and version for Kubernetes and Epinio server components.
+Shows status and versions for epinio's server-side components.
 
 ```
 epinio info [flags]

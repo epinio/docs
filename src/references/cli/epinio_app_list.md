@@ -5,15 +5,20 @@ weight: 1
 ---
 ## epinio app list
 
-Lists all applications
+Lists applications
+
+### Synopsis
+
+Lists applications in the targeted namespace, or all
 
 ```
-epinio app list [flags]
+epinio app list [--all] [flags]
 ```
 
 ### Options
 
 ```
+      --all    list all applications
   -h, --help   help for list
 ```
 

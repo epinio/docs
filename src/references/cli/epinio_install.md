@@ -23,6 +23,12 @@ epinio install [flags]
   -i, --interactive                       Whether to ask the user or not (default not)
       --loadbalancer-ip string            IP address to be assigned to ingress loadbalancer service
       --password string                   The password for authenticating all API requests
+      --s3-access-key-id string           If you are using your own S3 compatible object storage for blobs, set the access key id with this setting.
+      --s3-bucket string                  If you are using your own S3 compatible object storage for blobs, set the bucket with this setting.
+      --s3-endpoint string                If you are using your own S3 compatible object storage for blobs, set the S3 endpoint with this setting.
+      --s3-location string                If you are using your own S3 compatible object storage for blobs, set the S3 bucket location with this setting.
+      --s3-secret-access-key string       If you are using your own S3 compatible object storage for blobs, set the secret access key with this setting.
+      --s3-use-ssl                        If you are using your own S3 compatible object storage for blobs, toggle SSL on or off.
       --skip-cert-manager                 Assert to epinio that cert-manager is already installed.
   -s, --skip-default-namespace            Set this to skip the creation of a default namespace
       --skip-linkerd                      Assert to epinio that Linkerd is already installed.

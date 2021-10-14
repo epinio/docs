@@ -1,24 +1,20 @@
 ---
-title: "epinio disable services-incluster"
-linkTitle: "epinio disable services-incluster"
+title: "epinio app manifest"
+linkTitle: "epinio app manifest"
 weight: 1
 ---
-## epinio disable services-incluster
+## epinio app manifest
 
-disable in-cluster services in Epinio
-
-### Synopsis
-
-disable in-cluster services in Epinio which will disable provisioning services on the same cluster as Epinio. Doesn't delete already provisioned services by default.
+Save state of the named application as a manifest
 
 ```
-epinio disable services-incluster [flags]
+epinio app manifest NAME MANIFESTPATH [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for services-incluster
+  -h, --help   help for manifest
 ```
 
 ### Options inherited from parent commands
@@ -35,5 +31,5 @@ epinio disable services-incluster [flags]
 
 ### SEE ALSO
 
-* [epinio disable](../epinio_disable)	 - disable Epinio features
+* [epinio app](../epinio_app)	 - Epinio application features
 

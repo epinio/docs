@@ -5,21 +5,24 @@ weight: 1
 ---
 ## epinio push
 
-Push an application from the specified directory, or the current working directory
+Push an application declared in the specified manifest
 
 ```
-epinio push NAME [URL|PATH_TO_APPLICATION_SOURCES] [flags]
+epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
 ```
 
 ### Options
 
 ```
-  -b, --bind strings              services to bind immediately
-      --builder-image string      paketo builder image to use for staging (default "paketobuildpacks/builder:full")
-      --docker-image-url string   docker image url for the app workload image
-      --git string                git revision of sources. PATH becomes repository location
-  -h, --help                      help for push
-  -i, --instances int32           The number of desired instances for the application, default only applies to new deployments (default 1)
+  -b, --bind strings                 services to bind immediately
+      --builder-image string         Paketo builder image to use for staging (default "paketobuildpacks/builder:full")
+      --container-image-url string   Container image url for the app workload image
+  -e, --env strings                  environment variables to be used
+  -g, --git string                   Git repository and revision of sources
+  -h, --help                         help for push
+  -i, --instances int32              The number of instances the application should have (default 1)
+  -n, --name string                  Application name.
+  -p, --path string                  Path to application sources.
 ```
 
 ### Options inherited from parent commands
