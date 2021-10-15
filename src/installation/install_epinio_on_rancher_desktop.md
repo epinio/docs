@@ -23,7 +23,7 @@ Manual verification is possible by executing the command `kubectl get pods -A` i
 
 1. Start a terminal (e.g. type `cmd` in the search field) and change to the directory where `epinio-windows-amd64` is located, e.g. `cd Downloads`
 
-2. Run `epinion-windows-amd64 install`
+2. Run `epinio-windows-amd64 install`
 
 3. Copy the binary to a directory of your choice and add it to the `PATH` variable as described by [Kevin Berg's article](https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53). This allows execution of Epinio directly from any terminal.
 
@@ -31,7 +31,7 @@ Manual verification is possible by executing the command `kubectl get pods -A` i
 
 1. Start a terminal and change to the directory where `epinio-darwin-amd64` is located, e.g. `cd Downloads`
 
-2. Run `epinion-darwin-amd64 install`
+2. Run `epinio-darwin-amd64 install`
 
 ### Linux
 
