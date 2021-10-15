@@ -42,7 +42,7 @@ data:
 EOF
 ```
 
-### MircoK8s
+### MicroK8s
 
 * Install and configure MetalLB
 ```
@@ -50,12 +50,3 @@ INTERFACE=`ip route | grep default | awk '{print $5}'`
 IP=`ifconfig $INTERFACE | sed -n '2 p' | awk '{print $2}'`
 microk8s enable metallb:${IP}/16
 ```
-
-
-## Prerequisites
-
-- helm (3.0 or later)
-- kubectl (1.18 or later)
-
-Where no explicit version number is given, a release not older than
-~2 years is assumed.
