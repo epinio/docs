@@ -17,23 +17,17 @@ For the Epinio server, and related deployments we recommend to consider the foll
 
 In addition, extensive requirements for your workload (apps) would add to that.
 
+### Storage Class
+
 A default storage class (with annotation `storageclass.kubernetes.io/is-default-class: "true"`) is needed.
+
+### Load Balancer
+
+Epinio (Traefik) requires a load-balancer. Depending on your target infrastructure, a load-balancer could exist by default already.
+Also see [Provision of External IP for LoadBalancer service type in Kubernetes](../howtos/provision_external_ip_for_local_kubernetes.md) for more information.
+
+### Troubleshooting
 
 While Kubernetes 1.22 is supported there is an issue when the container runtime is `containerd > 1.5.6`.
 The [pack cli](https://github.com/buildpacks/pack) is placing too much information into the
 image layers. The relevant issue is: https://github.com/paketo-buildpacks/full-builder/issues/415
-
-
-### Installing on Digital Ocean
-
-When installing Epinio on Rancher-provisioned RKE2 or RKE1
-clusters on Digital Ocean, you might see this error message:
-
-```
-error installing Epinio:
-timed out waiting for LoadBalancer IP on traefik service
-Ensure your kubernetes platform has the ability to provision a LoadBalancer IP address.
-```
-
-In this case you need to configure RKE/RKE2 with an external cloud
-provider as [this one](https://github.com/digitalocean/digitalocean-cloud-controller-manager).
