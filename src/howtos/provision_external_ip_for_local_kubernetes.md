@@ -42,7 +42,7 @@ data:
 EOF
 ```
 
-### MircoK8s
+### MicroK8s
 
 * Install and configure MetalLB
 ```
@@ -51,11 +51,16 @@ IP=`ifconfig $INTERFACE | sed -n '2 p' | awk '{print $2}'`
 microk8s enable metallb:${IP}/16
 ```
 
+### Digital Ocean
 
-## Prerequisites
+When installing Epinio on Rancher-provisioned RKE2 or RKE1
+clusters on Digital Ocean, you might see this error message:
 
-- helm (3.0 or later)
-- kubectl (1.18 or later)
+```
+error installing Epinio:
+timed out waiting for LoadBalancer IP on traefik service
+Ensure your kubernetes platform has the ability to provision a LoadBalancer IP address.
+```
 
-Where no explicit version number is given, a release not older than
-~2 years is assumed.
+In this case you need to configure RKE/RKE2 with an external cloud
+provider as [this one](https://github.com/digitalocean/digitalocean-cloud-controller-manager).
