@@ -145,6 +145,8 @@
 <p>If you don't have an existing cluster, follow the <a href="https://docs.rke2.io/install/quickstart/">quickstart</a> to create an RKE2 cluster.</p>
 <h2 id="rke2-prerequisites"><a class="header" href="#rke2-prerequisites">RKE2 Prerequisites</a></h2>
 <ul>
+<li>A load-balancer is mandatory for Epinio to work on RKE2. Here <a href="https://metallb.universe.tf">MetalLB</a> was used as load-balancer.
+See <a href="../howtos/provision_external_ip_for_local_kubernetes.html">Provision of External IP for LoadBalancer service type in Kubernetes</a> for more information.</li>
 <li>Epinio v0.1.0 has been tested with Rancher RKE2 incl. kubernetes version v1.21.4+rke2r3</li>
 <li>Epinio installation passed on a 3 node cluster (1 server, 2 agents) with Longhorn v1.1.1 storage class</li>
 </ul>
