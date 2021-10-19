@@ -20,14 +20,14 @@ Follow [Installation using a MagicDNS Service](./install_epinio_magicDNS.md) to 
 
 ### Troubleshooting
 
-### DNS issues
+#### DNS Issues
 
 In case of trouble with DNS resolution, for example if you have something like this in your logs:
 ```
 dial tcp: lookup epinio-registry.192.168.1.10.omg.howdoi.website on 10.43.0.10:53: no such host
 ```
 
-You can can try to install K3s with one known-to-work DNS server:
+You can try to install K3s with one known-to-work DNS server:
 ```
 curl -sfL https://get.k3s.io | K3S_RESOLV_CONF=/etc/my-good-resolv.conf sh -
 ```
@@ -37,7 +37,7 @@ With `/etc/my-good-resolv.conf` containing:
 nameserver 1.1.1.1
 ```
 
-This kind of issue could happen for example when you have multiples DNS servers and some of them are not able to resolv some domain names.
+This kind of issue could happen for example when you have multiple DNS servers and some of them are not able to resolve some domain names.
 
 #### Traefik
 
