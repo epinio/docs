@@ -32,7 +32,7 @@ epinio push manifest.yaml
 ```
 
 2. You can provide the configuration as parameters in which case the parameter `--name` is mandatory.
-This name has to be unique within the targeted namespace in Epinio.
+Because of the default route the name has to be unique across all namespaces.
 
 ```bash
 epinio push --name sample --path samle-app
