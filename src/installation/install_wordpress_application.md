@@ -49,7 +49,7 @@ EOF
 ## Deploy
 
 ```
-epinio push -n wordpress wordpress
+epinio push --name wordpress
 ```
 
 ## Additional steps

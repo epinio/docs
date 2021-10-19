@@ -191,15 +191,17 @@ S3 storage. The rest of the process is the same.
 The syntax is
 
 ```
-epinio push NAME GIT-REPOSITORY-URL --git REVISION
+epinio push --name NAME --git GIT-REPOSITORY-URL,REVISION
 ```
 
 For comparison all the relevant syntax:
 
 ```
-epinio push NAME
-epinio push NAME DIRECTORY
-epinio push NAME GIT-REPOSITORY-URL --git REVISION
+epinio push
+epinio push MANIFEST-PATH
+epinio push --name NAME
+epinio push --name NAME --path DIRECTORY
+epinio push --name NAME --git GIT-REPOSITORY-URL,REVISION
 ```
 
 ## Traefik and Linkerd

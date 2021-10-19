@@ -23,15 +23,24 @@ cd epinio/assets/
 
 ### Push an app
 
+There are two ways to push an application:
+
+1. You can provide an [Application Manifest](../references/manifests.md) which contains the required configuration for the applications.
+
 ```bash
-epinio push sample sample-app
+epinio push manifest.yaml
 ```
 
-where `sample` is the name you want to give to your application. This name has to be unique within the targeted namespace in Epinio. `sample-app` is path to the directory where your application's code resides.
+2. You can provide the configuration as parameters in which case the parameter `--name` is mandatory.
+Because of the default route the name has to be unique across all namespaces.
+
+```bash
+epinio push --name sample --path samle-app
+```
 
 ***
 
-###### Note that the path argument is optional. If not specified the current working directory will be used. Always ensure that the chosen directory contains a supported application.
+###### Note that the `--path` parameter is optional. If not specified the current working directory will be used. Always ensure that the chosen directory contains a supported application.
 
 ***
 
