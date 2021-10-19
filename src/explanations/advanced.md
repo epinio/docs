@@ -197,6 +197,7 @@ epinio push --name NAME --git GIT-REPOSITORY-URL,REVISION
 For comparison all the relevant syntax:
 
 ```
+epinio push
 epinio push MANIFEST-PATH
 epinio push --name NAME
 epinio push --name NAME --path DIRECTORY
