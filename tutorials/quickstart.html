@@ -156,11 +156,20 @@ the following commands:</p>
 cd epinio/assets/
 </code></pre>
 <h3 id="push-an-app"><a class="header" href="#push-an-app">Push an app</a></h3>
-<pre><code class="language-bash">epinio push sample sample-app
+<p>There are two ways to push an application:</p>
+<ol>
+<li>You can provide an <a href="../references/manifests.html">Application Manifest</a> which contains the required configuration for the applications.</li>
+</ol>
+<pre><code class="language-bash">epinio push manifest.yaml
 </code></pre>
-<p>where <code>sample</code> is the name you want to give to your application. This name has to be unique within the targeted namespace in Epinio. <code>sample-app</code> is path to the directory where your application's code resides.</p>
+<ol start="2">
+<li>You can provide the configuration as parameters in which case the parameter <code>--name</code> is mandatory.
+Because of the default route the name has to be unique across all namespaces.</li>
+</ol>
+<pre><code class="language-bash">epinio push --name sample --path samle-app
+</code></pre>
 <hr />
-<h6 id="note-that-the-path-argument-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application"><a class="header" href="#note-that-the-path-argument-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application">Note that the path argument is optional. If not specified the current working directory will be used. Always ensure that the chosen directory contains a supported application.</a></h6>
+<h6 id="note-that-the---path-parameter-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application"><a class="header" href="#note-that-the---path-parameter-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application">Note that the <code>--path</code> parameter is optional. If not specified the current working directory will be used. Always ensure that the chosen directory contains a supported application.</a></h6>
 <hr />
 <p>If you want to know what applications are supported in Epinio, please read the
 <a href="../references/supported-apps.html">notes about supported applications</a>.</p>

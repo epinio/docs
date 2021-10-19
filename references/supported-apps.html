@@ -146,7 +146,7 @@ To understand what enables an application to work with Epinio, you need to know 
 <h2 id="how-it-works"><a class="header" href="#how-it-works">How it works</a></h2>
 <p>Epinio relies on <a href="https://buildpacks.io/">Cloud Native Buildpacks</a> to create a container image for your
 application. It does that by installing and using <a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks">the upstream maintained Tekton pipelines</a>.</p>
-<p>Staging starts with you (the developer) running <code>epinio push myapp</code> from the root of your application source code.
+<p>Staging starts with you (the developer) running <code>epinio push --name myapp</code> from the root of your application source code.
 You can see a simplified diagram of the process in the image below:</p>
 <p><img src="epinio-push-simple.svg?raw=true" alt="epinio-push-simplified" title="Epinio push" /></p>
 <p>After pushing your code, Epinio triggers a Tekton pipeline which uses the <a href="https://paketo.io/">paketo buildpacks</a> to build a runtime image for your application.

@@ -202,11 +202,20 @@ the following commands:</p>
 cd epinio/assets/
 </code></pre>
 <h3 id="push-an-app"><a class="header" href="#push-an-app">Push an app</a></h3>
-<pre><code class="language-bash">epinio push sample sample-app
+<p>There are two ways to push an application:</p>
+<ol>
+<li>You can provide an <a href="tutorials/../references/manifests.html">Application Manifest</a> which contains the required configuration for the applications.</li>
+</ol>
+<pre><code class="language-bash">epinio push manifest.yaml
 </code></pre>
-<p>where <code>sample</code> is the name you want to give to your application. This name has to be unique within the targeted namespace in Epinio. <code>sample-app</code> is path to the directory where your application's code resides.</p>
+<ol start="2">
+<li>You can provide the configuration as parameters in which case the parameter <code>--name</code> is mandatory.
+Because of the default route the name has to be unique across all namespaces.</li>
+</ol>
+<pre><code class="language-bash">epinio push --name sample --path samle-app
+</code></pre>
 <hr />
-<h6 id="note-that-the-path-argument-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application"><a class="header" href="#note-that-the-path-argument-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application">Note that the path argument is optional. If not specified the current working directory will be used. Always ensure that the chosen directory contains a supported application.</a></h6>
+<h6 id="note-that-the---path-parameter-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application"><a class="header" href="#note-that-the---path-parameter-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application">Note that the <code>--path</code> parameter is optional. If not specified the current working directory will be used. Always ensure that the chosen directory contains a supported application.</a></h6>
 <hr />
 <p>If you want to know what applications are supported in Epinio, please read the
 <a href="tutorials/../references/supported-apps.html">notes about supported applications</a>.</p>
@@ -668,7 +677,7 @@ extension=mysqli
 EOF
 </code></pre>
 <h2 id="deploy"><a class="header" href="#deploy">Deploy</a></h2>
-<pre><code>epinio push -n wordpress wordpress
+<pre><code>epinio push --name wordpress
 </code></pre>
 <h2 id="additional-steps"><a class="header" href="#additional-steps">Additional steps</a></h2>
 <p>Wordpress needs a database to work. After visiting the route of your deployed
@@ -837,12 +846,14 @@ location of a git repository holding the sources, and the id of the revision to
 use. The client then asks the Epinio server to pull those sources and store them to the
 S3 storage. The rest of the process is the same.</p>
 <p>The syntax is</p>
-<pre><code>epinio push NAME GIT-REPOSITORY-URL --git REVISION
+<pre><code>epinio push --name NAME --git GIT-REPOSITORY-URL,REVISION
 </code></pre>
 <p>For comparison all the relevant syntax:</p>
-<pre><code>epinio push NAME
-epinio push NAME DIRECTORY
-epinio push NAME GIT-REPOSITORY-URL --git REVISION
+<pre><code>epinio push
+epinio push MANIFEST-PATH
+epinio push --name NAME
+epinio push --name NAME --path DIRECTORY
+epinio push --name NAME --git GIT-REPOSITORY-URL,REVISION
 </code></pre>
 <h2 id="traefik-and-linkerd"><a class="header" href="#traefik-and-linkerd">Traefik and Linkerd</a></h2>
 <p>By default, with Epinio installing both Traefik and Linkerd, Epinio's
@@ -1426,7 +1437,7 @@ To understand what enables an application to work with Epinio, you need to know 
 <h2 id="how-it-works"><a class="header" href="#how-it-works">How it works</a></h2>
 <p>Epinio relies on <a href="https://buildpacks.io/">Cloud Native Buildpacks</a> to create a container image for your
 application. It does that by installing and using <a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks">the upstream maintained Tekton pipelines</a>.</p>
-<p>Staging starts with you (the developer) running <code>epinio push myapp</code> from the root of your application source code.
+<p>Staging starts with you (the developer) running <code>epinio push --name myapp</code> from the root of your application source code.
 You can see a simplified diagram of the process in the image below:</p>
 <p><img src="references/epinio-push-simple.svg?raw=true" alt="epinio-push-simplified" title="Epinio push" /></p>
 <p>After pushing your code, Epinio triggers a Tekton pipeline which uses the <a href="https://paketo.io/">paketo buildpacks</a> to build a runtime image for your application.

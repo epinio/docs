@@ -280,12 +280,14 @@ location of a git repository holding the sources, and the id of the revision to
 use. The client then asks the Epinio server to pull those sources and store them to the
 S3 storage. The rest of the process is the same.</p>
 <p>The syntax is</p>
-<pre><code>epinio push NAME GIT-REPOSITORY-URL --git REVISION
+<pre><code>epinio push --name NAME --git GIT-REPOSITORY-URL,REVISION
 </code></pre>
 <p>For comparison all the relevant syntax:</p>
-<pre><code>epinio push NAME
-epinio push NAME DIRECTORY
-epinio push NAME GIT-REPOSITORY-URL --git REVISION
+<pre><code>epinio push
+epinio push MANIFEST-PATH
+epinio push --name NAME
+epinio push --name NAME --path DIRECTORY
+epinio push --name NAME --git GIT-REPOSITORY-URL,REVISION
 </code></pre>
 <h2 id="traefik-and-linkerd"><a class="header" href="#traefik-and-linkerd">Traefik and Linkerd</a></h2>
 <p>By default, with Epinio installing both Traefik and Linkerd, Epinio's
