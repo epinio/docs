@@ -43,3 +43,4 @@
   - [Command reference](references/commands.md)
   - [Supported Applications](references/supported-apps.md)
   - [Application Manifests](references/manifests.md)
+  - [Services](references/services.md)
