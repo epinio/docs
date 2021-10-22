@@ -35,11 +35,11 @@ epinio service [flags]
 
 ### SEE ALSO
 
-* [epinio](../epinio)	 - Epinio cli
-* [epinio service bind](../epinio_service_bind)	 - Bind a service to an application
-* [epinio service create](../epinio_service_create)	 - Create a service
-* [epinio service delete](../epinio_service_delete)	 - Delete a service
-* [epinio service list](../epinio_service_list)	 - Lists all services
-* [epinio service show](../epinio_service_show)	 - Service information
-* [epinio service unbind](../epinio_service_unbind)	 - Unbind service from an application
+* [epinio](epinio.md)	 - Epinio cli
+* [epinio service bind](epinio_service_bind.md)	 - Bind a service to an application
+* [epinio service create](epinio_service_create.md)	 - Create a service
+* [epinio service delete](epinio_service_delete.md)	 - Delete a service
+* [epinio service list](epinio_service_list.md)	 - Lists all services
+* [epinio service show](epinio_service_show.md)	 - Service information
+* [epinio service unbind](epinio_service_unbind.md)	 - Unbind service from an application
 

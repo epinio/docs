@@ -38,5 +38,5 @@ epinio install-ingress [flags]
 
 ### SEE ALSO
 
-* [epinio](../epinio)	 - Epinio cli
+* [epinio](epinio.md)	 - Epinio cli
 

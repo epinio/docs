@@ -31,5 +31,5 @@ epinio version [flags]
 
 ### SEE ALSO
 
-* [epinio](../epinio)	 - Epinio cli
+* [epinio](epinio.md)	 - Epinio cli
 

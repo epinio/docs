@@ -35,9 +35,9 @@ epinio app env [flags]
 
 ### SEE ALSO
 
-* [epinio app](../epinio_app)	 - Epinio application features
-* [epinio app env list](../epinio_app_env_list)	 - Lists application environment
-* [epinio app env set](../epinio_app_env_set)	 - Extend application environment
-* [epinio app env show](../epinio_app_env_show)	 - Describe application's environment variable
-* [epinio app env unset](../epinio_app_env_unset)	 - Shrink application environment
+* [epinio app](epinio_app.md)	 - Epinio application features
+* [epinio app env list](epinio_app_env_list.md)	 - Lists application environment
+* [epinio app env set](epinio_app_env_set.md)	 - Extend application environment
+* [epinio app env show](epinio_app_env_show.md)	 - Describe application's environment variable
+* [epinio app env unset](epinio_app_env_unset.md)	 - Shrink application environment
 

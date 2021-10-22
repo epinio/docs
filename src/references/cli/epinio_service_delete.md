@@ -36,5 +36,5 @@ epinio service delete NAME [flags]
 
 ### SEE ALSO
 
-* [epinio service](../epinio_service)	 - Epinio service features
+* [epinio service](epinio_service.md)	 - Epinio service features
 

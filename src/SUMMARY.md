@@ -76,6 +76,7 @@
         - [epinio_namespace_create](references/cli/epinio_namespace_create.md)
         - [epinio_namespace_delete](references/cli/epinio_namespace_delete.md)
         - [epinio_namespace_list](references/cli/epinio_namespace_list.md)
+        - [epinio_namespace_show](references/cli/epinio_namespace_show.md)
 
       - [epinio_push](references/cli/epinio_push.md)
       - [epinio_server](references/cli/epinio_server.md)

@@ -34,6 +34,7 @@
       - [epinio namespace create](cli/epinio_namespace_create.md)
       - [epinio namespace delete](cli/epinio_namespace_delete.md)
       - [epinio namespace list](cli/epinio_namespace_list.md)
+      - [epinio namespace show](cli/epinio_namespace_show.md)
 
     - [epinio push](cli/epinio_push.md)
     - [epinio server](cli/epinio_server.md)

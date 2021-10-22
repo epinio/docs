@@ -34,5 +34,5 @@ epinio app create NAME [flags]
 
 ### SEE ALSO
 
-* [epinio app](../epinio_app)	 - Epinio application features
+* [epinio app](epinio_app.md)	 - Epinio application features
 
