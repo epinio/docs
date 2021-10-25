@@ -31,5 +31,4 @@ epinio namespace show NAME [flags]
 
 ### SEE ALSO
 
-* [epinio namespace](../epinio_namespace)	 - Epinio-controlled namespaces
-
+* [epinio namespace](epinio_namespace.md)	 - Epinio-controlled namespaces

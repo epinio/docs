@@ -35,5 +35,5 @@ epinio config colors BOOL [flags]
 
 ### SEE ALSO
 
-* [epinio config](../epinio_config)	 - Epinio config management
+* [epinio config](epinio_config.md)	 - Epinio config management
 

@@ -78,5 +78,5 @@ epinio completion [bash|zsh|fish|powershell]
 
 ### SEE ALSO
 
-* [epinio](../epinio)	 - Epinio cli
+* [epinio](epinio.md)	 - Epinio cli
 

@@ -31,5 +31,5 @@ epinio app env show APPNAME NAME [flags]
 
 ### SEE ALSO
 
-* [epinio app env](../epinio_app_env)	 - Epinio application configuration
+* [epinio app env](epinio_app_env.md)	 - Epinio application configuration
 

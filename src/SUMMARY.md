@@ -41,5 +41,58 @@
 
   - [Command requirements](references/README.md)
   - [Command reference](references/commands.md)
+
+    - [epinio](references/cli/epinio.md)
+
+      - [epinio_app](references/cli/epinio_app.md)
+
+        - [epinio_app_create](references/cli/epinio_app_create.md)
+        - [epinio_app_delete](references/cli/epinio_app_delete.md)
+        - [epinio_app_env](references/cli/epinio_app_env.md)
+
+          - [epinio_app_env_list](references/cli/epinio_app_env_list.md)
+          - [epinio_app_env_set](references/cli/epinio_app_env_set.md)
+          - [epinio_app_env_show](references/cli/epinio_app_env_show.md)
+          - [epinio_app_env_unset](references/cli/epinio_app_env_unset.md)
+
+        - [epinio_app_list](references/cli/epinio_app_list.md)
+        - [epinio_app_logs](references/cli/epinio_app_logs.md)
+        - [epinio_app_manifest](references/cli/epinio_app_manifest.md)
+        - [epinio_app_show](references/cli/epinio_app_show.md)
+        - [epinio_app_update](references/cli/epinio_app_update.md)
+
+      - [epinio_config](references/cli/epinio_config.md)
+
+        - [epinio_config_colors](references/cli/epinio_config_colors.md)
+        - [epinio_config_show](references/cli/epinio_config_show.md)
+        - [epinio_config_update](references/cli/epinio_config_update.md)
+
+      - [epinio_info](references/cli/epinio_info.md)
+      - [epinio_install-cert-manager](references/cli/epinio_install-cert-manager.md)
+      - [epinio_install-ingress](references/cli/epinio_install-ingress.md)
+      - [epinio_install](references/cli/epinio_install.md)
+      - [epinio_namespace](references/cli/epinio_namespace.md)
+
+        - [epinio_namespace_create](references/cli/epinio_namespace_create.md)
+        - [epinio_namespace_delete](references/cli/epinio_namespace_delete.md)
+        - [epinio_namespace_list](references/cli/epinio_namespace_list.md)
+        - [epinio_namespace_show](references/cli/epinio_namespace_show.md)
+
+      - [epinio_push](references/cli/epinio_push.md)
+      - [epinio_server](references/cli/epinio_server.md)
+      - [epinio_service](references/cli/epinio_service.md)
+
+        - [epinio_service_bind](references/cli/epinio_service_bind.md)
+        - [epinio_service_create](references/cli/epinio_service_create.md)
+        - [epinio_service_delete](references/cli/epinio_service_delete.md)
+        - [epinio_service_list](references/cli/epinio_service_list.md)
+        - [epinio_service_show](references/cli/epinio_service_show.md)
+        - [epinio_service_unbind](references/cli/epinio_service_unbind.md)
+
+      - [epinio_target](references/cli/epinio_target.md)
+      - [epinio_uninstall](references/cli/epinio_uninstall.md)
+      - [epinio_version](references/cli/epinio_version.md)
+
   - [Supported Applications](references/supported-apps.md)
   - [Application Manifests](references/manifests.md)
+  - [Services](references/services.md)

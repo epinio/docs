@@ -35,8 +35,8 @@ epinio config [flags]
 
 ### SEE ALSO
 
-* [epinio](../epinio)	 - Epinio cli
-* [epinio config colors](../epinio_config_colors)	 - Manage colored output
-* [epinio config show](../epinio_config_show)	 - Show the current configuration
-* [epinio config update](../epinio_config_update)	 - Update the api location & stored credentials
+* [epinio](epinio.md)	 - Epinio cli
+* [epinio config colors](epinio_config_colors.md)	 - Manage colored output
+* [epinio config show](epinio_config_show.md)	 - Show the current configuration
+* [epinio config update](epinio_config_update.md)	 - Update the api location & stored credentials
 

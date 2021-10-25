@@ -31,5 +31,5 @@ epinio target [namespace] [flags]
 
 ### SEE ALSO
 
-* [epinio](../epinio)	 - Epinio cli
+* [epinio](epinio.md)	 - Epinio cli
 

@@ -35,9 +35,8 @@ epinio namespace [flags]
 
 ### SEE ALSO
 
-* [epinio](../epinio)	 - Epinio cli
-* [epinio namespace create](../epinio_namespace_create)	 - Creates an epinio-controlled namespace
-* [epinio namespace delete](../epinio_namespace_delete)	 - Deletes an epinio-controlled namespace
-* [epinio namespace list](../epinio_namespace_list)	 - Lists all epinio-controlled namespaces
-* [epinio namespace show](../epinio_namespace_show)	 - Shows the details of an epinio-controlled namespace
-
+* [epinio](epinio.md)	 - Epinio cli
+* [epinio namespace create](epinio_namespace_create.md)	 - Creates an epinio-controlled namespace
+* [epinio namespace delete](epinio_namespace_delete.md)	 - Deletes an epinio-controlled namespace
+* [epinio namespace list](epinio_namespace_list.md)	 - Lists all epinio-controlled namespaces
+* [epinio namespace show](epinio_namespace_show.md)	 - Shows the details of an epinio-controlled namespace
