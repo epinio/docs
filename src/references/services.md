@@ -48,7 +48,7 @@ The connections between services and applications specifically are managed by th
 
 From the point of view of an epinio-staged application, a bound service appears in the
 application's file system as a directory under the path `/services`. This directory will
-have the same name as the service and contains a set of files holding the attributes of the
+have the same name as the service and will contain a set of files holding the attributes of the
 service. Each attribute is mapped to a file of the same name as the attribute, and this
 file contains the value of the attribute.
 
