@@ -2,7 +2,7 @@
 
 ## Overview
 
-Services are, in general, external components providing some kind service (sic!) to
+Services are, in general, external components providing some kind of service (sic!) to
 applications, without being a direct part of the applications.
 
 Examples of services are
@@ -17,13 +17,13 @@ that they consist of a collection of arbitrarily named attributes and values whi
 consumed by an application, tell that aplication how to connect to and interact with that
 service.
 
-Note that while there a guidelines what kind of attributes are required for the above, and
+Note that while there are guidelines what kind of attributes are required for the above, and
 how they should be named, and what their content should be, these guidelines are outside
 of the scope for Epinio. Epinio is not aware of such, and cannot validate service
 definition against such. It will simply pass any attributes to using applications as they
 are, and assumes that they are what the application requires for proper function.
 
-For an application to use a service the service has to be __bound__ to the application. In
+For an application to use a service, the service has to be __bound__ to the application. In
 other words, the application has to be made aware of the service.
 
 Note how this constrains the lifetimes of services with respect to applications. A service
@@ -33,7 +33,7 @@ using applications are gone.
 Deleting a service used by an application is considered an error and generally
 prevented. While it can be forced it should then be expected to break the application.
 
-As a limitation applications can only bind services defined in the same namespace as the
+As a limitation, applications can only bind services defined in the same namespace as the
 application itself.
 
 ## Management
@@ -46,9 +46,9 @@ The connections between services and applications specifically are managed by th
 
 ## Application Interface
 
-From the point of view of an epinio-staged application a bound service appears in the
+From the point of view of an epinio-staged application, a bound service appears in the
 application's file system as a directory under the path `/services`. This directory will
-have the same name as the service and contain a set of files holding the attributes of the
+have the same name as the service and contains a set of files holding the attributes of the
 service. Each attribute is mapped to a file of the same name as the attribute, and this
 file contains the value of the attribute.
 
