@@ -12,8 +12,8 @@ Examples of services are
   - interfaces to other kinds of systems,
   - etc.
 
-In epinio services are identified by a name and the namespace they are defined in. Beyond
-that they consist of a collection of arbitrarily named attributes and values which, when
+In Epinio services are identified by a name and the namespace they are defined in. Beyond
+that they consist of a collection of arbitrarily named attributes and values, which when
 consumed by an application, tell that aplication how to connect to and interact with that
 service.
 
