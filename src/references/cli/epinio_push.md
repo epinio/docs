@@ -15,13 +15,13 @@ epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
 
 ```
   -b, --bind strings                 services to bind immediately
-      --builder-image string         Paketo builder image to use for staging (default "paketobuildpacks/builder:full")
+      --builder-image string         Paketo builder image to use for staging
       --container-image-url string   Container image url for the app workload image
   -e, --env strings                  environment variables to be used
-  -g, --git string                   Git repository and revision of sources
+  -g, --git string                   Git repository and revision of sources separated by comma (e.g. GIT_URL,REVISION)
   -h, --help                         help for push
   -i, --instances int32              The number of instances the application should have (default 1)
-  -n, --name string                  Application name.
+  -n, --name string                  Application name. (mandatory if no manifest is provided)
   -p, --path string                  Path to application sources.
 ```
 

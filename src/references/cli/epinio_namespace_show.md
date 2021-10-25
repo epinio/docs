@@ -1,24 +1,20 @@
 ---
-title: "epinio namespace"
-linkTitle: "epinio namespace"
+title: "epinio namespace show"
+linkTitle: "epinio namespace show"
 weight: 1
 ---
-## epinio namespace
+## epinio namespace show
 
-Epinio-controlled namespaces
-
-### Synopsis
-
-Manage epinio-controlled namespaces
+Shows the details of an epinio-controlled namespace
 
 ```
-epinio namespace [flags]
+epinio namespace show NAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for namespace
+  -h, --help   help for show
 ```
 
 ### Options inherited from parent commands
@@ -35,9 +31,5 @@ epinio namespace [flags]
 
 ### SEE ALSO
 
-* [epinio](../epinio)	 - Epinio cli
-* [epinio namespace create](../epinio_namespace_create)	 - Creates an epinio-controlled namespace
-* [epinio namespace delete](../epinio_namespace_delete)	 - Deletes an epinio-controlled namespace
-* [epinio namespace list](../epinio_namespace_list)	 - Lists all epinio-controlled namespaces
-* [epinio namespace show](../epinio_namespace_show)	 - Shows the details of an epinio-controlled namespace
+* [epinio namespace](../epinio_namespace)	 - Epinio-controlled namespaces
 
