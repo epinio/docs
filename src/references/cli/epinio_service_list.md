@@ -5,15 +5,20 @@ weight: 1
 ---
 ## epinio service list
 
-Lists all services
+Lists services
+
+### Synopsis
+
+Lists services in the targeted namespace, or all
 
 ```
-epinio service list [flags]
+epinio service list [--all] [flags]
 ```
 
 ### Options
 
 ```
+      --all    list all services
   -h, --help   help for list
 ```
 

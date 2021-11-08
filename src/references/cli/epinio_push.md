@@ -23,6 +23,7 @@ epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
   -i, --instances int32              The number of instances the application should have (default 1)
   -n, --name string                  Application name. (mandatory if no manifest is provided)
   -p, --path string                  Path to application sources.
+  -r, --route strings                Custom route to use for the application (a subdomain of the default domain will be used if this is not set). Can be set multiple times to use multiple routes with the same application.
 ```
 
 ### Options inherited from parent commands

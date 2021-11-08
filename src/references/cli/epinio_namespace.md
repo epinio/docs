@@ -40,3 +40,4 @@ epinio namespace [flags]
 * [epinio namespace delete](epinio_namespace_delete.md)	 - Deletes an epinio-controlled namespace
 * [epinio namespace list](epinio_namespace_list.md)	 - Lists all epinio-controlled namespaces
 * [epinio namespace show](epinio_namespace_show.md)	 - Shows the details of an epinio-controlled namespace
+
