@@ -1646,6 +1646,7 @@ weight: 1</h2>
   -e, --env strings       environment variables to be used
   -h, --help              help for create
   -i, --instances int32   The number of instances the application should have (default 1)
+  -r, --route strings     Custom route to use for the application (a subdomain of the default domain will be used if this is not set). Can be set multiple times to use multiple routes with the same application.
 </code></pre>
 <h3 id="options-inherited-from-parent-commands-1"><a class="header" href="#options-inherited-from-parent-commands-1">Options inherited from parent commands</a></h3>
 <pre><code>      --config-file string       (EPINIO_CONFIG) set path of configuration file (default &quot;~/.config/epinio/config.yaml&quot;)
@@ -1932,6 +1933,7 @@ weight: 1</h2>
   -e, --env strings       environment variables to be used
   -h, --help              help for update
   -i, --instances int32   The number of instances the application should have (default 1)
+  -r, --route strings     Custom route to use for the application (a subdomain of the default domain will be used if this is not set). Can be set multiple times to use multiple routes with the same application.
 </code></pre>
 <h3 id="options-inherited-from-parent-commands-12"><a class="header" href="#options-inherited-from-parent-commands-12">Options inherited from parent commands</a></h3>
 <pre><code>      --config-file string       (EPINIO_CONFIG) set path of configuration file (default &quot;~/.config/epinio/config.yaml&quot;)
@@ -2145,25 +2147,26 @@ weight: 1</h2>
 <pre><code>epinio install [flags]
 </code></pre>
 <h3 id="options-21"><a class="header" href="#options-21">Options</a></h3>
-<pre><code>      --email-address string              The email address you are planning to use for getting notifications about your certificates (default &quot;epinio@suse.com&quot;)
-  -h, --help                              help for install
-  -i, --interactive                       Whether to ask the user or not (default not)
-      --loadbalancer-ip string            IP address to be assigned to ingress loadbalancer service
-      --password string                   The password for authenticating all API requests
-      --s3-access-key-id string           If you are using your own S3 compatible object storage for blobs, set the access key id with this setting.
-      --s3-bucket string                  If you are using your own S3 compatible object storage for blobs, set the bucket with this setting.
-      --s3-endpoint string                If you are using your own S3 compatible object storage for blobs, set the S3 endpoint with this setting.
-      --s3-location string                If you are using your own S3 compatible object storage for blobs, set the S3 bucket location with this setting.
-      --s3-secret-access-key string       If you are using your own S3 compatible object storage for blobs, set the secret access key with this setting.
-      --s3-use-ssl                        If you are using your own S3 compatible object storage for blobs, toggle SSL on or off.
-      --skip-cert-manager                 Assert to epinio that cert-manager is already installed.
-  -s, --skip-default-namespace            Set this to skip the creation of a default namespace
-      --skip-linkerd                      Assert to epinio that Linkerd is already installed.
-      --skip-traefik                      Assert to epinio that there is a Traefik active, even if epinio cannot find it.
-      --system-domain string              The domain you are planning to use for Epinio. Should be pointing to the traefik public IP (Leave empty to use a omg.howdoi.website domain).
-      --tls-issuer string                 The name of the cluster issuer to use. Epinio creates three options: 'epinio-ca', 'letsencrypt-production', and 'selfsigned-issuer'. (default &quot;epinio-ca&quot;)
-      --use-internal-registry-node-port   Make the internal registry accessible via a node port, so kubelet can access the registry without trusting its cert. (default true)
-      --user string                       The user name for authenticating all API requests
+<pre><code>      --access-control-allow-origin string   Domain allowed to access the API. Comma-separated.
+      --email-address string                 The email address you are planning to use for getting notifications about your certificates (default &quot;epinio@suse.com&quot;)
+  -h, --help                                 help for install
+  -i, --interactive                          Whether to ask the user or not (default not)
+      --loadbalancer-ip string               IP address to be assigned to ingress loadbalancer service
+      --password string                      The password for authenticating all API requests
+      --s3-access-key-id string              If you are using your own S3 compatible object storage for blobs, set the access key id with this setting.
+      --s3-bucket string                     If you are using your own S3 compatible object storage for blobs, set the bucket with this setting.
+      --s3-endpoint string                   If you are using your own S3 compatible object storage for blobs, set the S3 endpoint with this setting.
+      --s3-location string                   If you are using your own S3 compatible object storage for blobs, set the S3 bucket location with this setting.
+      --s3-secret-access-key string          If you are using your own S3 compatible object storage for blobs, set the secret access key with this setting.
+      --s3-use-ssl                           If you are using your own S3 compatible object storage for blobs, toggle SSL on or off.
+      --skip-cert-manager                    Assert to epinio that cert-manager is already installed.
+  -s, --skip-default-namespace               Set this to skip the creation of a default namespace
+      --skip-linkerd                         Assert to epinio that Linkerd is already installed.
+      --skip-traefik                         Assert to epinio that there is a Traefik active, even if epinio cannot find it.
+      --system-domain string                 The domain you are planning to use for Epinio. Should be pointing to the traefik public IP (Leave empty to use a omg.howdoi.website domain).
+      --tls-issuer string                    The name of the cluster issuer to use. Epinio creates three options: 'epinio-ca', 'letsencrypt-production', and 'selfsigned-issuer'. (default &quot;epinio-ca&quot;)
+      --use-internal-registry-node-port      Make the internal registry accessible via a node port, so kubelet can access the registry without trusting its cert. (default true)
+      --user string                          The user name for authenticating all API requests
 </code></pre>
 <h3 id="options-inherited-from-parent-commands-20"><a class="header" href="#options-inherited-from-parent-commands-20">Options inherited from parent commands</a></h3>
 <pre><code>      --config-file string       (EPINIO_CONFIG) set path of configuration file (default &quot;~/.config/epinio/config.yaml&quot;)
@@ -2323,6 +2326,7 @@ weight: 1</h2>
   -i, --instances int32              The number of instances the application should have (default 1)
   -n, --name string                  Application name. (mandatory if no manifest is provided)
   -p, --path string                  Path to application sources.
+  -r, --route strings                Custom route to use for the application (a subdomain of the default domain will be used if this is not set). Can be set multiple times to use multiple routes with the same application.
 </code></pre>
 <h3 id="options-inherited-from-parent-commands-26"><a class="header" href="#options-inherited-from-parent-commands-26">Options inherited from parent commands</a></h3>
 <pre><code>      --config-file string       (EPINIO_CONFIG) set path of configuration file (default &quot;~/.config/epinio/config.yaml&quot;)
@@ -2348,10 +2352,11 @@ weight: 1</h2>
 <pre><code>epinio server [flags]
 </code></pre>
 <h3 id="options-28"><a class="header" href="#options-28">Options</a></h3>
-<pre><code>  -h, --help                              help for server
-      --port int                          (PORT) The port to listen on. Leave empty to auto-assign a random port
-      --tls-issuer string                 (TLS_ISSUER) The cluster issuer to use for workload certificates (default &quot;epinio-ca&quot;)
-      --use-internal-registry-node-port   (USE_INTERNAL_REGISTRY_NODE_PORT) Use the internal registry via a node port (default true)
+<pre><code>      --access-control-allow-origin string   (ACCESS_CONTROL_ALLOW_ORIGIN) Domains allowed to use the API
+  -h, --help                                 help for server
+      --port int                             (PORT) The port to listen on. Leave empty to auto-assign a random port
+      --tls-issuer string                    (TLS_ISSUER) The cluster issuer to use for workload certificates (default &quot;epinio-ca&quot;)
+      --use-internal-registry-node-port      (USE_INTERNAL_REGISTRY_NODE_PORT) Use the internal registry via a node port (default true)
 </code></pre>
 <h3 id="options-inherited-from-parent-commands-27"><a class="header" href="#options-inherited-from-parent-commands-27">Options inherited from parent commands</a></h3>
 <pre><code>      --config-file string       (EPINIO_CONFIG) set path of configuration file (default &quot;~/.config/epinio/config.yaml&quot;)
@@ -2394,7 +2399,7 @@ weight: 1</h2>
 <li><a href="references/cli/epinio_service_bind.html">epinio service bind</a>	 - Bind a service to an application</li>
 <li><a href="references/cli/epinio_service_create.html">epinio service create</a>	 - Create a service</li>
 <li><a href="references/cli/epinio_service_delete.html">epinio service delete</a>	 - Delete a service</li>
-<li><a href="references/cli/epinio_service_list.html">epinio service list</a>	 - Lists all services</li>
+<li><a href="references/cli/epinio_service_list.html">epinio service list</a>	 - Lists services</li>
 <li><a href="references/cli/epinio_service_show.html">epinio service show</a>	 - Service information</li>
 <li><a href="references/cli/epinio_service_unbind.html">epinio service unbind</a>	 - Unbind service from an application</li>
 </ul>
@@ -2482,11 +2487,14 @@ weight: 1</h2>
 linkTitle: &quot;epinio service list&quot;
 weight: 1</h2>
 <h2 id="epinio-service-list"><a class="header" href="#epinio-service-list">epinio service list</a></h2>
-<p>Lists all services</p>
-<pre><code>epinio service list [flags]
+<p>Lists services</p>
+<h3 id="synopsis-21"><a class="header" href="#synopsis-21">Synopsis</a></h3>
+<p>Lists services in the targeted namespace, or all</p>
+<pre><code>epinio service list [--all] [flags]
 </code></pre>
 <h3 id="options-33"><a class="header" href="#options-33">Options</a></h3>
-<pre><code>  -h, --help   help for list
+<pre><code>      --all    list all services
+  -h, --help   help for list
 </code></pre>
 <h3 id="options-inherited-from-parent-commands-32"><a class="header" href="#options-inherited-from-parent-commands-32">Options inherited from parent commands</a></h3>
 <pre><code>      --config-file string       (EPINIO_CONFIG) set path of configuration file (default &quot;~/.config/epinio/config.yaml&quot;)
@@ -2507,7 +2515,7 @@ linkTitle: &quot;epinio service show&quot;
 weight: 1</h2>
 <h2 id="epinio-service-show"><a class="header" href="#epinio-service-show">epinio service show</a></h2>
 <p>Service information</p>
-<h3 id="synopsis-21"><a class="header" href="#synopsis-21">Synopsis</a></h3>
+<h3 id="synopsis-22"><a class="header" href="#synopsis-22">Synopsis</a></h3>
 <p>Show detailed information of the named service.</p>
 <pre><code>epinio service show NAME [flags]
 </code></pre>
@@ -2533,7 +2541,7 @@ linkTitle: &quot;epinio service unbind&quot;
 weight: 1</h2>
 <h2 id="epinio-service-unbind"><a class="header" href="#epinio-service-unbind">epinio service unbind</a></h2>
 <p>Unbind service from an application</p>
-<h3 id="synopsis-22"><a class="header" href="#synopsis-22">Synopsis</a></h3>
+<h3 id="synopsis-23"><a class="header" href="#synopsis-23">Synopsis</a></h3>
 <p>Unbind service by name, from named application.</p>
 <pre><code>epinio service unbind NAME APP [flags]
 </code></pre>
@@ -2583,7 +2591,7 @@ linkTitle: &quot;epinio uninstall&quot;
 weight: 1</h2>
 <h2 id="epinio-uninstall"><a class="header" href="#epinio-uninstall">epinio uninstall</a></h2>
 <p>uninstall Epinio from your configured kubernetes cluster</p>
-<h3 id="synopsis-23"><a class="header" href="#synopsis-23">Synopsis</a></h3>
+<h3 id="synopsis-24"><a class="header" href="#synopsis-24">Synopsis</a></h3>
 <p>uninstall Epinio PaaS from your configured kubernetes cluster</p>
 <pre><code>epinio uninstall [flags]
 </code></pre>

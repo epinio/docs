@@ -151,10 +151,11 @@ weight: 1</h2>
 <pre><code>epinio server [flags]
 </code></pre>
 <h3 id="options"><a class="header" href="#options">Options</a></h3>
-<pre><code>  -h, --help                              help for server
-      --port int                          (PORT) The port to listen on. Leave empty to auto-assign a random port
-      --tls-issuer string                 (TLS_ISSUER) The cluster issuer to use for workload certificates (default &quot;epinio-ca&quot;)
-      --use-internal-registry-node-port   (USE_INTERNAL_REGISTRY_NODE_PORT) Use the internal registry via a node port (default true)
+<pre><code>      --access-control-allow-origin string   (ACCESS_CONTROL_ALLOW_ORIGIN) Domains allowed to use the API
+  -h, --help                                 help for server
+      --port int                             (PORT) The port to listen on. Leave empty to auto-assign a random port
+      --tls-issuer string                    (TLS_ISSUER) The cluster issuer to use for workload certificates (default &quot;epinio-ca&quot;)
+      --use-internal-registry-node-port      (USE_INTERNAL_REGISTRY_NODE_PORT) Use the internal registry via a node port (default true)
 </code></pre>
 <h3 id="options-inherited-from-parent-commands"><a class="header" href="#options-inherited-from-parent-commands">Options inherited from parent commands</a></h3>
 <pre><code>      --config-file string       (EPINIO_CONFIG) set path of configuration file (default &quot;~/.config/epinio/config.yaml&quot;)
