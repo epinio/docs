@@ -1,8 +1,3 @@
----
-title: "epinio app list"
-linkTitle: "epinio app list"
-weight: 1
----
 ## epinio app list
 
 Lists applications

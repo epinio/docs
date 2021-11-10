@@ -1,8 +1,3 @@
----
-title: "epinio version"
-linkTitle: "epinio version"
-weight: 1
----
 ## epinio version
 
 Print the version number

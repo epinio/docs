@@ -1,8 +1,3 @@
----
-title: "epinio service show"
-linkTitle: "epinio service show"
-weight: 1
----
 ## epinio service show
 
 Service information

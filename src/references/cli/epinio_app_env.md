@@ -1,8 +1,3 @@
----
-title: "epinio app env"
-linkTitle: "epinio app env"
-weight: 1
----
 ## epinio app env
 
 Epinio application configuration

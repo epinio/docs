@@ -1,8 +1,3 @@
----
-title: "epinio config colors"
-linkTitle: "epinio config colors"
-weight: 1
----
 ## epinio config colors
 
 Manage colored output

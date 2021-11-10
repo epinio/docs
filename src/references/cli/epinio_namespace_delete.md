@@ -1,8 +1,3 @@
----
-title: "epinio namespace delete"
-linkTitle: "epinio namespace delete"
-weight: 1
----
 ## epinio namespace delete
 
 Deletes an epinio-controlled namespace

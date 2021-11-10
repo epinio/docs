@@ -1,8 +1,3 @@
----
-title: "epinio install-ingress"
-linkTitle: "epinio install-ingress"
-weight: 1
----
 ## epinio install-ingress
 
 install Epinio's Ingress in your configured kubernetes cluster

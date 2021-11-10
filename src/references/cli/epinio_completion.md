@@ -1,8 +1,3 @@
----
-title: "epinio completion"
-linkTitle: "epinio completion"
-weight: 1
----
 ## epinio completion
 
 Generate completion script for a shell

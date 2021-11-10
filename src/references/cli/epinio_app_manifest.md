@@ -1,8 +1,3 @@
----
-title: "epinio app manifest"
-linkTitle: "epinio app manifest"
-weight: 1
----
 ## epinio app manifest
 
 Save state of the named application as a manifest

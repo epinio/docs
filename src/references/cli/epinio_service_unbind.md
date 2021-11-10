@@ -1,8 +1,3 @@
----
-title: "epinio service unbind"
-linkTitle: "epinio service unbind"
-weight: 1
----
 ## epinio service unbind
 
 Unbind service from an application

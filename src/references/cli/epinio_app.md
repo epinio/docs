@@ -1,8 +1,3 @@
----
-title: "epinio app"
-linkTitle: "epinio app"
-weight: 1
----
 ## epinio app
 
 Epinio application features

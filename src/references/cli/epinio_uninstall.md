@@ -1,8 +1,3 @@
----
-title: "epinio uninstall"
-linkTitle: "epinio uninstall"
-weight: 1
----
 ## epinio uninstall
 
 uninstall Epinio from your configured kubernetes cluster

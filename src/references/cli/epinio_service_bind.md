@@ -1,8 +1,3 @@
----
-title: "epinio service bind"
-linkTitle: "epinio service bind"
-weight: 1
----
 ## epinio service bind
 
 Bind a service to an application

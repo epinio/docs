@@ -1,8 +1,3 @@
----
-title: "epinio info"
-linkTitle: "epinio info"
-weight: 1
----
 ## epinio info
 
 Shows information about the Epinio environment

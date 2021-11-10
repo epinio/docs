@@ -1,8 +1,3 @@
----
-title: "epinio push"
-linkTitle: "epinio push"
-weight: 1
----
 ## epinio push
 
 Push an application declared in the specified manifest

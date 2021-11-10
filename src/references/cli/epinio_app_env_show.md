@@ -1,8 +1,3 @@
----
-title: "epinio app env show"
-linkTitle: "epinio app env show"
-weight: 1
----
 ## epinio app env show
 
 Describe application's environment variable

@@ -1,8 +1,3 @@
----
-title: "epinio namespace list"
-linkTitle: "epinio namespace list"
-weight: 1
----
 ## epinio namespace list
 
 Lists all epinio-controlled namespaces

@@ -1,8 +1,3 @@
----
-title: "epinio server"
-linkTitle: "epinio server"
-weight: 1
----
 ## epinio server
 
 Starts the Epinio server.

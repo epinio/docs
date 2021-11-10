@@ -1,8 +1,3 @@
----
-title: "epinio app show"
-linkTitle: "epinio app show"
-weight: 1
----
 ## epinio app show
 
 Describe the named application
