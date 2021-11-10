@@ -1,8 +1,3 @@
----
-title: "epinio app update"
-linkTitle: "epinio app update"
-weight: 1
----
 ## epinio app update
 
 Update the named application

@@ -1,8 +1,3 @@
----
-title: "epinio namespace create"
-linkTitle: "epinio namespace create"
-weight: 1
----
 ## epinio namespace create
 
 Creates an epinio-controlled namespace

@@ -1,8 +1,3 @@
----
-title: "epinio"
-linkTitle: "epinio"
-weight: 1
----
 ## epinio
 
 Epinio cli

@@ -1,8 +1,3 @@
----
-title: "epinio install"
-linkTitle: "epinio install"
-weight: 1
----
 ## epinio install
 
 install Epinio in your configured kubernetes cluster

@@ -1,8 +1,3 @@
----
-title: "epinio app delete"
-linkTitle: "epinio app delete"
-weight: 1
----
 ## epinio app delete
 
 Deletes an application

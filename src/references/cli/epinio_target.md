@@ -1,8 +1,3 @@
----
-title: "epinio target"
-linkTitle: "epinio target"
-weight: 1
----
 ## epinio target
 
 Targets an epinio-controlled namespace.

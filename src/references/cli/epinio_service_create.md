@@ -1,8 +1,3 @@
----
-title: "epinio service create"
-linkTitle: "epinio service create"
-weight: 1
----
 ## epinio service create
 
 Create a service

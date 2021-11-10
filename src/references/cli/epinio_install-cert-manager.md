@@ -1,8 +1,3 @@
----
-title: "epinio install-cert-manager"
-linkTitle: "epinio install-cert-manager"
-weight: 1
----
 ## epinio install-cert-manager
 
 install Epinio's cert-manager in your configured kubernetes cluster

@@ -1,8 +1,3 @@
----
-title: "epinio config"
-linkTitle: "epinio config"
-weight: 1
----
 ## epinio config
 
 Epinio config management

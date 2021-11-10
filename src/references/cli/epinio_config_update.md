@@ -1,8 +1,3 @@
----
-title: "epinio config update"
-linkTitle: "epinio config update"
-weight: 1
----
 ## epinio config update
 
 Update the api location & stored credentials

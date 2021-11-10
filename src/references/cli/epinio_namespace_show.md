@@ -1,8 +1,3 @@
----
-title: "epinio namespace show"
-linkTitle: "epinio namespace show"
-weight: 1
----
 ## epinio namespace show
 
 Shows the details of an epinio-controlled namespace

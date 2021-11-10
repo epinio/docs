@@ -1,8 +1,3 @@
----
-title: "epinio service delete"
-linkTitle: "epinio service delete"
-weight: 1
----
 ## epinio service delete
 
 Delete a service

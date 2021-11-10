@@ -1,8 +1,3 @@
----
-title: "epinio app logs"
-linkTitle: "epinio app logs"
-weight: 1
----
 ## epinio app logs
 
 Streams the logs of the application

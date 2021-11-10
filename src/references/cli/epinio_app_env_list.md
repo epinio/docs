@@ -1,8 +1,3 @@
----
-title: "epinio app env list"
-linkTitle: "epinio app env list"
-weight: 1
----
 ## epinio app env list
 
 Lists application environment

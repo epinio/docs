@@ -1,8 +1,3 @@
----
-title: "epinio config show"
-linkTitle: "epinio config show"
-weight: 1
----
 ## epinio config show
 
 Show the current configuration

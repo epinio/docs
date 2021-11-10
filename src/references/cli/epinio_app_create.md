@@ -1,8 +1,3 @@
----
-title: "epinio app create"
-linkTitle: "epinio app create"
-weight: 1
----
 ## epinio app create
 
 Create just the app, without creating a workload
