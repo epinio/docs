@@ -57,7 +57,7 @@ In Epinio, for every application we create an Ingress that routes the traffic fo
 myapplication.my_epinio_system_domain.com
 ```
 
-You can get the route of your application with `epinio apps list` or `epinio apps show myapplication`. You can also use arbitrary route for you application by specifying `--route` either on the `epinio push` command or later with `epinio app update`. You just have to make sure that the domain you use points to the Traefik Ingress controller IP of epinio (that is the same IP address your system-domain points to).
+You can get the route of your application with `epinio apps list` or `epinio apps show myapplication`. By specifying one or more `--route` options, either with the `epinio push` command or later with `epinio app update`, it is possible to set and use arbitrary custom routes for the application . __Make sure__ that these custom domains point to the Traefik Ingress controller IP of epinio (that is the same IP address your system-domain points to).
 
 ## Additional Things
 
