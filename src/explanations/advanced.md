@@ -157,9 +157,33 @@ When installing Epinio, the user can choose to use an external S3 compatible sto
 ### Container Registry
 
 The result of Epinio's application staging is a container image. This image is used to create a Kubernetes deployment to run the application code.
-The [Tekton](#tekton) pipeline requires that image to be written to some container registry. Epinio installs a registry on the cluster itself to make the process easy and fast.
+The [Tekton](#tekton) pipeline requires that image to be written to some container registry (See also [Detailed push process](../explanations/detailed-push-process.md)). 
 
-Note: In the future, Epinio may offer the option to use an external registry and not install one on the cluster ([GitHub Issue](https://github.com/epinio/epinio/issues/784)).
+By default, `epinio install` deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
+If you want to look at how this registry is installed, have a look at the helm chart here:
+
+- https://github.com/epinio/epinio/tree/main/assets/container-registry/chart/container-registry
+
+Epinio comes with two consumers of this registry:
+
+1. Tekton - pushing the images
+2. Kubernetes - pulling the images when a Deployment is created for the Application
+
+Ideally all consumers will communicate with the registry over TLS to keep the communication encrypted.
+Epinio controls the Tekton deployment and ensures that whatever CA is used to sign the registry certificate is trusted by Tekton. Achieving the same for Kubernetes however requires configuration that cannot happen from within the cluster, therefore Epinio has no way to ensure that. There are 3 options here:
+
+1. Let the Epinio user manually configure Kubernetes to trust the CA
+2. Use a well-known trusted CA, so that no configuration is needed
+3. Don't encrypt the communication at all
+
+Depending on the use case all 3 options may be valid:
+
+- Option #1 can be selected when the user is installing Epinio with a custom tls-issuer. The user controls the CA and can make sure that this CA is trusted by the cluster before even installing Epinio.
+  In this case, since the user knows that Kubernetes will trust the registry's certificate, the `--force-kube-internal-registry-tls` flag should be used on `epinio install`.
+- Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. `letsencrypt-production`). The flag `--force-kube-internal-registry-tls` should be used in that case as well.
+- Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the `--force-kube-internal-registry-tls` flag in this case (default is "false"). Even in this case, Tekton still accesses the registry over TLS.
+
+Epinio also allows the use of an external registry. The [instructions](../howtos/setup-external-registry.md) on how such can be set up are in a [separate document](../howtos/setup-external-registry.md).
 
 ### Tekton
 

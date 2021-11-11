@@ -15,6 +15,11 @@ epinio install [flags]
 ```
       --access-control-allow-origin string   Domain allowed to access the API. Comma-separated.
       --email-address string                 The email address you are planning to use for getting notifications about your certificates (default "epinio@suse.com")
+      --external-registry-namespace string   Provide a namespace (or organization) of the external registry to which you have push access. It can be left empty.
+      --external-registry-password string    Provide a password for an external registry. This disables installation of the internal registry.
+      --external-registry-url string         Provide a url for an external registry. This disables installation of the internal registry.
+      --external-registry-username string    Provide a username for an external registry. This disables installation of the internal registry.
+      --force-kube-internal-registry-tls     When true, the application images will be pulled by Kubernetes over TLS. Only applies to the internal registry.
   -h, --help                                 help for install
   -i, --interactive                          Whether to ask the user or not (default not)
       --loadbalancer-ip string               IP address to be assigned to ingress loadbalancer service
@@ -31,7 +36,6 @@ epinio install [flags]
       --skip-traefik                         Assert to epinio that there is a Traefik active, even if epinio cannot find it.
       --system-domain string                 The domain you are planning to use for Epinio. Should be pointing to the traefik public IP (Leave empty to use a omg.howdoi.website domain).
       --tls-issuer string                    The name of the cluster issuer to use. Epinio creates three options: 'epinio-ca', 'letsencrypt-production', and 'selfsigned-issuer'. (default "epinio-ca")
-      --use-internal-registry-node-port      Make the internal registry accessible via a node port, so kubelet can access the registry without trusting its cert. (default true)
       --user string                          The user name for authenticating all API requests
 ```
 

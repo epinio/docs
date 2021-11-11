@@ -15,3 +15,5 @@ For a production-oriented deployment on the other hand, with a proper
 [Let's Encrypt](https://letsencrypt.org/) instead. Nothing is stored in the
 configuration in that case, as Let's Encrypt is a known CA.
 
+How Kubernetes accesses the Epinio registry (TLS or not) is handled a bit differently depending on installation flags.
+More details here: [Epinio Registry](../explanations/advanced.md#container-registry).
