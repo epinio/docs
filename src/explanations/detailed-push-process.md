@@ -33,11 +33,7 @@ The first step of the staging Tekton pipeline downloads the code from the S3 sto
 ## 6. Stage
 
 The second step of the staging Tekton pipeline uses the [paketo buildpacks](https://paketo.io/) to create a container image for your application. The definition of this Tekton task can be found [in the relevant upstream repo](https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.2) (though a copy of that is embedded in the Epinio binary).
-The result of a successful staging process is a new image pushed to the Registry component of Epinio.
-
-This component is installed as part of the `epinio install` command and it is where the application images are stored. This makes the setup easier (by not having to configure an external registry) and staging faster (by keeping all image transferring local to the cluster).
-There is not much to tell about it but if you want to look at how the registry is installed, have a look at the helm chart here:
-https://github.com/epinio/epinio/tree/main/assets/container-registry/chart/container-registry
+The result of a successful staging process is a new image pushed to the Registry component of Epinio. Read more about the registry here: [Epinio Registry](../explanations/advanced.md#container-registry).
 
 ## 7. Run
 
