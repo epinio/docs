@@ -57,13 +57,11 @@ In Epinio, for every application we create an Ingress that routes the traffic fo
 myapplication.my_epinio_system_domain.com
 ```
 
-You can get the route of your application with `epinio apps list` or `epinio apps show myapplication`
+You can get the route of your application with `epinio apps list` or `epinio apps show myapplication`. You can also use arbitrary route for you application by specifying `--route` either on the `epinio push` command or later with `epinio app update`. You just have to make sure that the domain you use points to the Traefik Ingress controller IP of epinio (that is the same IP address your system-domain points to).
 
 ## Additional Things
 
 During installation, if you specified a system domain using the `--system-domain` parameter, then your application routes will be subdomains of that domain.
-Epinio considers this domain to be a production server and thus creates a production level TLS certificate for your application using [Let's Encrypt](https://letsencrypt.org/). This is done by the [cert-manager](https://cert-manager.io/docs/installation/kubernetes/), which is one more of the components Epinio installs with `epinio install`.
-
 If you didn't specify a system domain then Epinio uses a "magic DNS" service running on the `omg.howdoi.website` which is similar to [nip.io](https://nip.io/), and [xip.io](http://xip.io/).
 These services resolve all subdomains of the root domain to the subdomain's IP address. E.g. `1.2.3.4.omg.howdoi.website` simply resolves to `1.2.3.4`. They are useful when you don't have a real domain but you still need a wildcard domain to create subdomains for. Depending on your setup, the IP address of the cluster which Epinio discovers automatically may not be accessible by your browser and thus you may need to set the system domain when installing to use another IP. This is the case for example when you run a Kubernetes cluster with docker (e.g. [k3d](https://k3d.io/) or [kind](https://github.com/kubernetes-sigs/kind)) inside a VM (for example when using docker on Mac). Then the IP address which Epinio detects is the IP address of the docker container but that is not accessible from your host. You will need to bind the container's ports `80` and `443` to the VMs ports `80` and `443` and then use the VMs IP address instead.
 
