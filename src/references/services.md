@@ -60,8 +60,8 @@ To be a bit more concrete, let us assume that we have a service created by the c
 When an application binds that service several additional paths will appear in the
 filesystem of that application, namely:
 
-|Path				|Kind		|Content	|
-|---				|---		|---		|
+| Path | Kind	| Content	|
+| ---- | ---- | ------- |
 |/services/orders		|Directory	|		|
 |/services/orders/host		|File		|`over-there`	|
 |/services/orders/port		|File		|`99`		|
