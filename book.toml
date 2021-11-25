@@ -13,3 +13,7 @@ edit-url-template = "https://github.com/epinio/docs/edit/main/{path}"
 site-url = "/"
 cname = "docs.epinio.io"
 google-analytics = "UA-56382716-12"
+
+[output.html.fold]
+enable = true
+level = 0
