@@ -152,14 +152,14 @@ Minio is a storage solution that implements the same API as [Amazon S3](https://
 
 When the user pushes an application using a source code directory (with the [`epinio push`](../references/cli/epinio_push.md) command), the first step taken by the cli is to put the source code into a tarball and upload that to the Epinio API server. The server copies that to the configured S3 storage to be used later during the staging of the application.
 
-When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install Minio on the cluster ([See here how](TODO)).
+When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install Minio on the cluster ([See here how](../howtos/setup-external-s3.md)).
 
 ### Container Registry
 
 The result of Epinio's application staging is a container image. This image is used to create a Kubernetes deployment to run the application code.
 The [Tekton](#tekton) pipeline requires that image to be written to some container registry (See also [Detailed push process](../explanations/detailed-push-process.md)). 
 
-By default, `epinio install` deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
+By default, [`epinio install`](../references/cli/epinio_install.md) deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
 If you want to look at how this registry is installed, have a look at the helm chart here:
 
 - https://github.com/epinio/epinio/tree/main/assets/container-registry/chart/container-registry
@@ -179,11 +179,11 @@ Epinio controls the Tekton deployment and ensures that whatever CA is used to si
 Depending on the use case all 3 options may be valid:
 
 - Option #1 can be selected when the user is installing Epinio with a custom tls-issuer. The user controls the CA and can make sure that this CA is trusted by the cluster before even installing Epinio.
-  In this case, since the user knows that Kubernetes will trust the registry's certificate, the `--force-kube-internal-registry-tls` flag should be used on `epinio install`.
+  In this case, since the user knows that Kubernetes will trust the registry's certificate, the `--force-kube-internal-registry-tls` flag should be used on [`epinio install`](../references/cli/epinio_install.md).
 - Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. `letsencrypt-production`). The flag `--force-kube-internal-registry-tls` should be used in that case as well.
 - Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the `--force-kube-internal-registry-tls` flag in this case (default is "false"). Even in this case, Tekton still accesses the registry over TLS.
 
-Epinio also allows the use of an external registry. The [instructions](../howtos/setup-external-registry.md) on how such can be set up are in a [separate document](../howtos/setup-external-registry.md).
+Epinio also allows the use of an external registry. The [instructions](../howtos/setup-external-registry.md) on how such a registry can be set up are in a separate document.
 
 ### Tekton
 
@@ -207,7 +207,7 @@ copying from that storage to a PersistentVolumeClaim to be used in the tekton pi
 i.e. compilation and creation of the docker image to be used by the underlying kubernetes cluster.
 
 The process is a bit different when using the Epinio client's "git mode". In
-this mode `epinio push` does not take a local directory of sources, but the
+this mode [`epinio push`](../references/cli/epinio_push.md) does not take a local directory of sources, but the
 location of a git repository holding the sources, and the id of the revision to
 use. The client then asks the Epinio server to pull those sources and store them to the
 S3 storage. The rest of the process is the same.
