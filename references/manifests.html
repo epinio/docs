@@ -1,0 +1,369 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Application Manifests - Epinio - the application development engine for Kubernetes</title>
+        <!-- Custom HTML head -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
+Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('set','anonymizeIp',!0);
+ga('create', 'UA-56382716-12', 'auto');
+ga('send', 'pageview');
+</script>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Documentation for users and developers of Epinio">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../tutorials/quickstart.html"><strong aria-hidden="true">2.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="../installation/installation.html"><strong aria-hidden="true">3.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installation/system_requirements.html"><strong aria-hidden="true">3.1.</strong> System Requirements</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_cli.html"><strong aria-hidden="true">3.2.</strong> Install Epinio cli</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_customDNS.html"><strong aria-hidden="true">3.3.</strong> Install Epinio with custom DNS</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_magicDNS.html"><strong aria-hidden="true">3.4.</strong> Install Epinio with &quot;magic&quot; DNS</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_aks.html"><strong aria-hidden="true">3.5.</strong> Install Epinio on AKS (Azure)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_eks.html"><strong aria-hidden="true">3.6.</strong> Install Epinio on EKS (Amazon)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_gke.html"><strong aria-hidden="true">3.7.</strong> Install Epinio on GKE (Google)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_rke.html"><strong aria-hidden="true">3.8.</strong> Install Epinio on RKE2 (Rancher)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_k3d.html"><strong aria-hidden="true">3.9.</strong> Install Epinio on k3d (local)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_k3s.html"><strong aria-hidden="true">3.10.</strong> Install Epinio on k3s (local)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_rancher_desktop.html"><strong aria-hidden="true">3.11.</strong> Install Epinio on Rancher Desktop (local)</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_on_minikube.html"><strong aria-hidden="true">3.12.</strong> Install Epinio on Minikube (local)</a></li><li class="chapter-item expanded "><a href="../installation/install_wordpress_application.html"><strong aria-hidden="true">3.13.</strong> Install Wordpress on Epinio</a></li><li class="chapter-item expanded "><a href="../installation/install_epinio_with_helm.html"><strong aria-hidden="true">3.14.</strong> Install Epinio with Helm</a></li></ol></li><li class="chapter-item expanded "><a href="../installation/uninstall_epinio.html"><strong aria-hidden="true">4.</strong> Uninstall Epinio</a></li><li class="chapter-item expanded "><a href="../explanations/explanations.html"><strong aria-hidden="true">5.</strong> Explanations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../explanations/advanced.html"><strong aria-hidden="true">5.1.</strong> Advanced topics</a></li><li class="chapter-item expanded "><a href="../explanations/configuration.html"><strong aria-hidden="true">5.2.</strong> Configuration</a></li><li class="chapter-item expanded "><a href="../explanations/detailed-push-process.html"><strong aria-hidden="true">5.3.</strong> Detailed Push Process</a></li><li class="chapter-item expanded "><a href="../explanations/principles.html"><strong aria-hidden="true">5.4.</strong> Principles</a></li><li class="chapter-item expanded "><a href="../explanations/security.html"><strong aria-hidden="true">5.5.</strong> Security</a></li><li class="chapter-item expanded "><a href="../explanations/windows.html"><strong aria-hidden="true">5.6.</strong> Windows</a></li></ol></li><li class="chapter-item expanded "><a href="../howtos/howtos.html"><strong aria-hidden="true">6.</strong> HowTos</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../howtos/certificate_issuers.html"><strong aria-hidden="true">6.1.</strong> Certificate Issuers</a></li><li class="chapter-item expanded "><a href="../howtos/provision_external_ip_for_local_kubernetes.html"><strong aria-hidden="true">6.2.</strong> Provision external IP address for local Kubernetes</a></li><li class="chapter-item expanded "><a href="../howtos/gitjob_push.html"><strong aria-hidden="true">6.3.</strong> Push with gitjob</a></li><li class="chapter-item expanded "><a href="../howtos/setup-external-s3.html"><strong aria-hidden="true">6.4.</strong> Setup external S3 storage</a></li><li class="chapter-item expanded "><a href="../howtos/setup-external-registry.html"><strong aria-hidden="true">6.5.</strong> Setup external container registry</a></li></ol></li><li class="chapter-item expanded "><a href="../references/references.html"><strong aria-hidden="true">7.</strong> Reference documentation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../references/index.html"><strong aria-hidden="true">7.1.</strong> Command requirements</a></li><li class="chapter-item expanded "><a href="../references/commands.html"><strong aria-hidden="true">7.2.</strong> Command reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../references/cli/epinio.html"><strong aria-hidden="true">7.2.1.</strong> epinio</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../references/cli/epinio_app.html"><strong aria-hidden="true">7.2.1.1.</strong> epinio_app</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../references/cli/epinio_app_create.html"><strong aria-hidden="true">7.2.1.1.1.</strong> epinio_app_create</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_app_delete.html"><strong aria-hidden="true">7.2.1.1.2.</strong> epinio_app_delete</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_app_env.html"><strong aria-hidden="true">7.2.1.1.3.</strong> epinio_app_env</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../references/cli/epinio_app_env_list.html"><strong aria-hidden="true">7.2.1.1.3.1.</strong> epinio_app_env_list</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_app_env_set.html"><strong aria-hidden="true">7.2.1.1.3.2.</strong> epinio_app_env_set</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_app_env_show.html"><strong aria-hidden="true">7.2.1.1.3.3.</strong> epinio_app_env_show</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_app_env_unset.html"><strong aria-hidden="true">7.2.1.1.3.4.</strong> epinio_app_env_unset</a></li></ol></li><li class="chapter-item expanded "><a href="../references/cli/epinio_app_list.html"><strong aria-hidden="true">7.2.1.1.4.</strong> epinio_app_list</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_app_logs.html"><strong aria-hidden="true">7.2.1.1.5.</strong> epinio_app_logs</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_app_manifest.html"><strong aria-hidden="true">7.2.1.1.6.</strong> epinio_app_manifest</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_app_show.html"><strong aria-hidden="true">7.2.1.1.7.</strong> epinio_app_show</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_app_update.html"><strong aria-hidden="true">7.2.1.1.8.</strong> epinio_app_update</a></li></ol></li><li class="chapter-item expanded "><a href="../references/cli/epinio_config.html"><strong aria-hidden="true">7.2.1.2.</strong> epinio_config</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../references/cli/epinio_config_colors.html"><strong aria-hidden="true">7.2.1.2.1.</strong> epinio_config_colors</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_config_show.html"><strong aria-hidden="true">7.2.1.2.2.</strong> epinio_config_show</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_config_update.html"><strong aria-hidden="true">7.2.1.2.3.</strong> epinio_config_update</a></li></ol></li><li class="chapter-item expanded "><a href="../references/cli/epinio_info.html"><strong aria-hidden="true">7.2.1.3.</strong> epinio_info</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_install-cert-manager.html"><strong aria-hidden="true">7.2.1.4.</strong> epinio_install-cert-manager</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_install-ingress.html"><strong aria-hidden="true">7.2.1.5.</strong> epinio_install-ingress</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_install.html"><strong aria-hidden="true">7.2.1.6.</strong> epinio_install</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_namespace.html"><strong aria-hidden="true">7.2.1.7.</strong> epinio_namespace</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../references/cli/epinio_namespace_create.html"><strong aria-hidden="true">7.2.1.7.1.</strong> epinio_namespace_create</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_namespace_delete.html"><strong aria-hidden="true">7.2.1.7.2.</strong> epinio_namespace_delete</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_namespace_list.html"><strong aria-hidden="true">7.2.1.7.3.</strong> epinio_namespace_list</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_namespace_show.html"><strong aria-hidden="true">7.2.1.7.4.</strong> epinio_namespace_show</a></li></ol></li><li class="chapter-item expanded "><a href="../references/cli/epinio_push.html"><strong aria-hidden="true">7.2.1.8.</strong> epinio_push</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_server.html"><strong aria-hidden="true">7.2.1.9.</strong> epinio_server</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_service.html"><strong aria-hidden="true">7.2.1.10.</strong> epinio_service</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../references/cli/epinio_service_bind.html"><strong aria-hidden="true">7.2.1.10.1.</strong> epinio_service_bind</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_service_create.html"><strong aria-hidden="true">7.2.1.10.2.</strong> epinio_service_create</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_service_delete.html"><strong aria-hidden="true">7.2.1.10.3.</strong> epinio_service_delete</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_service_list.html"><strong aria-hidden="true">7.2.1.10.4.</strong> epinio_service_list</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_service_show.html"><strong aria-hidden="true">7.2.1.10.5.</strong> epinio_service_show</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_service_unbind.html"><strong aria-hidden="true">7.2.1.10.6.</strong> epinio_service_unbind</a></li></ol></li><li class="chapter-item expanded "><a href="../references/cli/epinio_target.html"><strong aria-hidden="true">7.2.1.11.</strong> epinio_target</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_uninstall.html"><strong aria-hidden="true">7.2.1.12.</strong> epinio_uninstall</a></li><li class="chapter-item expanded "><a href="../references/cli/epinio_version.html"><strong aria-hidden="true">7.2.1.13.</strong> epinio_version</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../references/supported-apps.html"><strong aria-hidden="true">7.3.</strong> Supported Applications</a></li><li class="chapter-item expanded "><a href="../references/manifests.html" class="active"><strong aria-hidden="true">7.4.</strong> Application Manifests</a></li><li class="chapter-item expanded "><a href="../references/services.html"><strong aria-hidden="true">7.5.</strong> Services</a></li><li class="chapter-item expanded "><a href="../references/api.html"><strong aria-hidden="true">7.6.</strong> API</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Epinio - the application development engine for Kubernetes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/epinio/docs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/epinio/docs/edit/main/src/references/manifests.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="application-manifests"><a class="header" href="#application-manifests">Application Manifests</a></h1>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>An application manifest is a YAML file containing the entire configuration of an
+application as required by <code>epinio (apps) push</code> for succesful operation.</p>
+<p>Manifests are irrelevant for all other epinio commands.</p>
+<p>This is especially true for the commands <code>epinio apps create</code> and <code>epinio apps update</code>.
+Neither of these uses manifests. They operate directly on a named application, and can
+only set and modify a subset of the data provided by a manifest to <code>epinio (apps) push</code>.</p>
+<h2 id="cheat-sheet"><a class="header" href="#cheat-sheet">Cheat Sheet</a></h2>
+<p>The detailed specifications coming after this section provide the following essential ways
+of pushing an application:</p>
+<ol>
+<li>
+<p>With an explicit manifest file as argument.</p>
+</li>
+<li>
+<p>With a standard manifest file (<code>epinio.yml</code>) found in the current directory.</p>
+</li>
+<li>
+<p>With no manifest file at all. This simply uses all the defaults, except for the name,
+which has no such.</p>
+</li>
+</ol>
+<p>Further defaults:</p>
+<ul>
+<li>No environment variables.</li>
+<li>No bound services.</li>
+<li>One replica/instance.</li>
+<li>Standard paketo builder image (<code>paketobuildpacks/builder:full</code>).</li>
+<li>Current directory for the application sources.</li>
+</ul>
+<h2 id="syntax-epinio-apps-push"><a class="header" href="#syntax-epinio-apps-push">Syntax <code>epinio (apps) push</code></a></h2>
+<p>Outside of options <code>epinio (apps) push</code> supports only a single optional argument.
+This argument is the path to the manifest file to use.</p>
+<p>When no such path is specified the command looks for an <code>epinio.yml</code> file in the current
+directory as the manifest to use.</p>
+<p>When no manifest file is found defaults are applied.</p>
+<p>Syntax:</p>
+<ul>
+<li><code>push [flags] [MANIFEST-PATH]</code></li>
+</ul>
+<p>The command does support a number of options with which the user can <strong>override</strong> the
+information read from the manifest. In other words, the data in the manifest is the
+primary source, and the options just tweak things.</p>
+<p>When an option is specified its value replaces the data from the manifest.
+Options do not extend any manifest values.</p>
+<h3 id="options"><a class="header" href="#options">Options</a></h3>
+<ul>
+<li>
+<p><code>--instances</code>, <code>-i</code> <code>N</code></p>
+<p>The application's number of desired instances/replicas.</p>
+</li>
+<li>
+<p><code>--env</code>, <code>-e</code> <code>NAME=VALUE</code></p>
+<p>Adds the environment variable <code>NAME</code> to the application's environment, with the
+specified <code>VALUE</code>. Multiple uses of the option accumulate. In case of multiple
+assignments to the same <code>NAME</code> the last wins.</p>
+</li>
+<li>
+<p><code>--bind</code>, <code>-b</code> <code>SERVICE</code></p>
+<p>Binds the named service to the application. Multiple uses of the option accumulate.</p>
+</li>
+</ul>
+<p><strong>Side note</strong>: The three preceding options are supported by the <code>apps create</code> and <code>apps update</code> commands as well. The following options are not.</p>
+<ul>
+<li>
+<p><code>--name</code>, <code>-n</code> <code>NAME</code></p>
+<p>The application's name. When used more than once the last use wins.</p>
+</li>
+</ul>
+<p>The next three options specify the location of the application's sources. Only one form is
+allowed. Mixing forms causes push to report an error.</p>
+<ul>
+<li>
+<p><code>--path</code>, <code>-p</code> <code>SRC-PATH</code></p>
+<p>A path in the local filesystem, the directory holding the application's sources.
+When used more than once the last use wins.</p>
+<p>A relative path is resolved relative to the current working directory.</p>
+</li>
+<li>
+<p><code>--container-image</code>, <code>-c</code> <code>URL</code></p>
+<p>The url of the container image containing the ready-to-run application. In other
+words, this is a pre-staged application, not sources.
+When used more than once the last use wins.</p>
+</li>
+<li>
+<p><code>--git</code>, <code>-g</code> <code>REPO?,REV?</code></p>
+<p>The url of the git repository holding the appliction's sources, and the revision to
+use. If the revision is not specified the head of the main branch is assumed.
+When used more than once the last use wins.</p>
+<p><strong>Note</strong>: The comma (<code>,</code>) is used as separator between repo url and revision because
+the nicer separators (<code>:</code>, <code>@</code>) are both used in urls, making extraction difficult due
+to the ambiguities coming out of that.</p>
+</li>
+</ul>
+<p>The last option controls staging:</p>
+<ul>
+<li>
+<p><code>--builder-image</code> <code>IMAGE</code></p>
+<p>The name of the image to use for staging the application's sources.</p>
+</li>
+</ul>
+<h2 id="manifest-format"><a class="header" href="#manifest-format">Manifest format</a></h2>
+<p>An application manifest is a YAML file containing a single mapping as its main structure.</p>
+<p>The keys of this mapping specify the various elements of an application's configuration.</p>
+<ul>
+<li>
+<p><code>name</code>. See <code>--name</code>. Required.</p>
+</li>
+<li>
+<p><code>configuration</code>. Optional. The value of this key is a mapping whose keys specify the
+basic configuration of the application, namely:</p>
+<ul>
+<li>
+<p><code>instances</code>. See <code>--instances</code>. Optional. Defaults to <code>1</code>.</p>
+</li>
+<li>
+<p><code>environment</code>. See <code>--env</code>. Optional. Defaults to empty. The value of this key is
+a mapping whose keys are the names of the desired environment variables, and their
+desired values.</p>
+</li>
+<li>
+<p><code>services</code>. See <code>--bind</code>. Optional. Defaults to empty. The value of this keys is a
+sequence of names, for the services to bind.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>staging</code>. Optional. The value of this key is a mapping whose keys specify information
+controlling the application's staging.</p>
+<ul>
+<li><code>builder</code>. See <code>--builder-image</code>. Optional.</li>
+</ul>
+</li>
+<li>
+<p><code>origin</code>. Optional. The value of this key is a mapping whose keys specify the origin
+of the application (sources), namely:</p>
+<ul>
+<li>
+<p><code>path</code>. See <code>--path</code>. Optional. See below.</p>
+<p>A relative path is resolved relative to the directory containing the manifest
+file.</p>
+</li>
+<li>
+<p><code>container</code>. See <code>--container-image</code>. Optional. See below.</p>
+</li>
+<li>
+<p><code>git</code>. See <code>--git</code>. Optional. See below. The value of this key is a mapping with
+keys <code>url</code> and <code>revision</code>, for the two part of the git reference. If revision is
+not present it defaults to the head of the repositories' main branch.</p>
+</li>
+</ul>
+<p>As with the options the keys <code>path</code>, <code>container</code>, and <code>git</code> exclude each other.  Only
+one may be specified in the manifest.</p>
+<p>If none is specified the system defaults to <code>path</code> and the sources are expected to
+reside in the directory containing the manifest file.</p>
+<p>Note that specifying any of the origin options replaces any of the origin keys.
+I.e. a <code>--path</code> options replaces/displace/overides a <code>container</code> key. Etc.</p>
+</li>
+</ul>
+<p>Last, in case it was missed reading the descriptions above, <code>name</code> is the only required
+key in a manifest file. The same as the <code>NAME</code> argument of pre-manifest <code>push</code> was the
+only required argument.</p>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<pre><code>name: zanzibar
+configuration:
+  instances: 333
+  services:
+  - snafu
+  environment:
+    DOGMA: &quot;no&quot;
+staging:
+  builder: &quot;paketobuildpacks/builder:tiny&quot;
+origin:
+  path: /somewhere/over/there
+
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../references/supported-apps.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../references/services.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../references/supported-apps.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../references/services.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
