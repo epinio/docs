@@ -1,10 +1,5 @@
 # Installation
 
-The Epinio CLI will typically run on a host, which will need network access to your kubernetes cluster.
-Usually you will use the same host to run tooling, like e.g. "kubectl" and "helm".
-
-The compiled binary will use about 40-50MB disk space, incl. local configuration files.
-
 ## System requirements
 
 Epinio is a Kubernetes application and thus needs a running Kubernetes
@@ -13,23 +8,17 @@ cluster for installation.
 See [system requirements](system_requirements.md) about the Kubernetes
 environment Epinio expects to run on.
 
-### Install the Epinio CLI
+## Installation Methods
 
-Refer to [Install the Epinio CLI](install_epinio_cli.md).
+There are at least 3 ways to install Epinio on a Kubernetes cluster. Which one
+you choose depends on the target environment and the amount of customization
+you want over the default Epinio installation.
 
-### Installation Methods (in Cluster)
+- [Install Epinio and automatically install dependencies](installation/install_epinio_auto.md) - Start here if you are new to Epinio
+- [Install Epinio and manually install components](installation/install_epinio_manual.md) - Full control over installation, mostly for production setups
+- [Install Epinio and components using a manifest and the binary installer](installation/install_epinio_binary.md) - Automated installation with the ability to change what is being deployed
 
-Beside advanced installation options, there are two ways of installing Epinio:
-
-1. [Installation using a MagicDNS Service](install_epinio_magicDNS.md)
-
-- For test environments. This should work on nearly any kubernetes distribution. Epinio will try to automatically create a magic DNS domain, e.g. **10.0.0.1.omg.howdoi.website**.
-
-2. [Installation using a Custom Domain](install_epinio_customDNS.md)
-
-- For test and production environments. You will have to define a system domain, e.g. **test.example.com**.
-
-### Installation on Specific Kubernetes Offerings
+## Installation on Specific Kubernetes Offerings
 
 - [Install on K3d](install_epinio_on_k3d.md) - Install K3d and then install Epinio
 - [Install on Minikube](install_epinio_on_minikube.md) - Install Minikube and then install Epinio

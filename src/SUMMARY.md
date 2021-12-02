@@ -6,6 +6,10 @@
 
 - [Installation](installation/installation.md)
   - [System Requirements](installation/system_requirements.md)
+  - [Method 1: Install Epinio and automatically install dependencies](installation/install_epinio_auto.md)
+  - [Method 2: Install Epinio and manually install components](installation/install_epinio_manual.md)
+  - [Method 3: Install Epinio and components using a manifest and the binary installer](installation/install_epinio_binary.md)
+
   - [Install Epinio cli](installation/install_epinio_cli.md)
   - [Install Epinio with custom DNS](installation/install_epinio_customDNS.md)
   - [Install Epinio with "magic" DNS](installation/install_epinio_magicDNS.md)
