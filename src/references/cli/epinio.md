@@ -25,14 +25,10 @@ epinio cli is the official command line interface for Epinio PaaS
 * [epinio completion](epinio_completion.md)	 - Generate completion script for a shell
 * [epinio config](epinio_config.md)	 - Epinio config management
 * [epinio info](epinio_info.md)	 - Shows information about the Epinio environment
-* [epinio install](epinio_install.md)	 - install Epinio in your configured kubernetes cluster
-* [epinio install-cert-manager](epinio_install-cert-manager.md)	 - install Epinio's cert-manager in your configured kubernetes cluster
-* [epinio install-ingress](epinio_install-ingress.md)	 - install Epinio's Ingress in your configured kubernetes cluster
 * [epinio namespace](epinio_namespace.md)	 - Epinio-controlled namespaces
 * [epinio push](epinio_push.md)	 - Push an application declared in the specified manifest
 * [epinio server](epinio_server.md)	 - Starts the Epinio server.
 * [epinio service](epinio_service.md)	 - Epinio service features
 * [epinio target](epinio_target.md)	 - Targets an epinio-controlled namespace.
-* [epinio uninstall](epinio_uninstall.md)	 - uninstall Epinio from your configured kubernetes cluster
 * [epinio version](epinio_version.md)	 - Print the version number
 
