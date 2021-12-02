@@ -56,7 +56,7 @@ epinio install --system-domain test.example.com --tls-issuer=letsencrypt-product
 
 ### AWS EKS and Route53
 
-As an example we will use the [AWS Service Route53](https://console.aws.amazon.com/route53/v2/home#Dashboard) to create a wildcard domain within one of your existing "Hosted zones", e.g. **example.com**.
+As an example we will use the [AWS Service Route53](https://aws.amazon.com/route53/) to create a wildcard domain within one of your existing "Hosted zones", e.g. **example.com**.
 
 Given Epinio ingress installation provided you with the following hostname:
 
