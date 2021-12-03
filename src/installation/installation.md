@@ -14,9 +14,19 @@ There are at least 3 ways to install Epinio on a Kubernetes cluster. Which one
 you choose depends on the target environment and the amount of customization
 you want over the default Epinio installation.
 
-- [Install Epinio and automatically install dependencies](installation/install_epinio_auto.md) - Start here if you are new to Epinio
-- [Install Epinio and manually install components](installation/install_epinio_manual.md) - Full control over installation, mostly for production setups
-- [Install Epinio and components using a manifest and the binary installer](installation/install_epinio_binary.md) - Automated installation with the ability to change what is being deployed
+1. [Install Epinio and automatically install dependencies](installation/install_epinio_auto.md) - Start here if you are new to Epinio
+2. [Install Epinio and manually install components](installation/install_epinio_manual.md) - Full control over installation, mostly for production setups
+3. [Install Epinio and components using a manifest and the binary installer](installation/install_epinio_binary.md) - Automated installation with the ability to change what is being deployed
+
+Epinio is not just one application running on your cluster. It depends on other well known Kubernetes components for some of its functionality. The 3 different installation methods above,
+provide different level of configurability on how you get those dependencies installed on your cluster. If you are just starting out with a fresh cluster and you don't have an opinion on
+how things should be installed, then the first method is the best for you.
+
+If you've done your due diligence and you are now ready to deploy Epinio on your production clusters, maybe your Dev Ops team wants to fully control what is being installed an how. In that
+ case, the second installation option may be better.
+
+Lastly, if you only have preferences on a specific Epinio dependency (e.g. you want to deploy cert-manager with some additional values passed to its helm chart), then the third option will
+give you the best of both worlds.
 
 ## Installation on Specific Kubernetes Offerings
 
