@@ -15,4 +15,4 @@ cname = "docs.epinio.io"
 
 [output.html.fold]
 enable = true
-level = 0
+level = 1
