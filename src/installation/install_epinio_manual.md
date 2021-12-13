@@ -101,12 +101,12 @@ $ kubectl label namespace epinio "linkerd.io/inject"="enabled"
 
 Create a `values.yaml` file for Epinio. Look at the available options here:
 
-https://github.com/epinio/epinio-helm-chart/blob/main/chart/epinio/values.yaml
+https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml
 
 Install Epinio with:
 
 ```
-$ helm repo add epinio https://epinio.github.io/epinio-helm-chart
+$ helm repo add epinio https://epinio.github.io/helm-charts
 $ helm upgrade --install epinio epinio/epinio -n epinio --values values.yaml
 ```
 

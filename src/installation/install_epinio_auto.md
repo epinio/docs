@@ -49,7 +49,7 @@ Add the Epinio helm chart repository:
 
 
 ```
-$ helm repo add epinio https://epinio.github.io/epinio-helm-chart
+$ helm repo add epinio https://epinio.github.io/helm-charts
 ```
 
 
