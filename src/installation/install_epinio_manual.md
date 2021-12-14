@@ -14,7 +14,11 @@ may be configurable on the Epinio Helm chart.
 
 - Optional
 
-Download the linkerd cli from here: https://github.com/linkerd/linkerd2/releases/tag/stable-2.10.2
+Linkerd ensures all communication between the various components is encrypted.
+Epinio runs fine with and without Linkerd.
+
+Download the linkerd cli from here: https://github.com/linkerd/linkerd2/releases/
+([stable-2.10.2 is known to work](https://github.com/epinio/installer/blob/e32f838c758e76c6c47559fa8d3c7f69a1c288cc/assets/installer/linkerd-job.yaml#L52))
 
 Install linkerd with:
 
@@ -62,6 +66,8 @@ $ helm install cert-manager --namespace cert-manager jetstack/cert-manager \
 
 ### Install Tekton
 
+(If you skipped Linkerd installation, you can skip the namespace label too)
+
 ```
 $ kubectl create namespace tekton
 $ kubectl label namespace tekton "linkerd.io/inject"="enabled"
@@ -92,7 +98,8 @@ Both of them should be able to access the registry and should trust the CA certi
 
 The Epinio specific resources can be deployed on the cluster using [the epinio helm chart](https://artifacthub.io/packages/helm/epinio/epinio)
 
-First create the epinio namespace and add it to the Linkerd mesh.
+First create the epinio namespace and add it to the Linkerd mesh (you can skip
+the label if you didn't install Linkerd).
 
 ```
 $ kubectl create namespace epinio
