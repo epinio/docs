@@ -18,4 +18,4 @@ $ helm uninstall epinio-installer
 ```
 
 If you followed the manual method, you can uninstall each component using `helm` or `kubectl`, depending
-on how you installed.
+on how you installed them.
