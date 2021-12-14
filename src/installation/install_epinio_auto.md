@@ -5,13 +5,13 @@ running. It's using [`Helm`](https://helm.sh/) with a chart to deploy all Epinio
 
 ## Prerequisites
 
-You need to have these two binaries installed on your system:
+You need to have these three binaries installed on your system:
 
 - [helm](https://helm.sh/docs/intro/install/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [epinio](install_epinio_cli.md)
 
-The rest of this guide will assume they are on your PATH.
+The rest of this guide will assume they are in your PATH.
 
 ## Installation
 
@@ -27,7 +27,7 @@ the IP address of the k3d can be used).
 In other cases, the IP address that the domain should point to, becomes known
 only after Traefik is deployed (e.g. when the cluster is running on some public cloud
 provider). And finally, sometimes, an IP address can be bought separately and
-Epinio should be instructed to used it (using the "loadbalancerIP" helm value).
+Epinio should be instructed to use it (using the `loadbalancerIP` helm value).
 
 In any case, the deployment of Epinio can happen before the DNS setup. This means,
 after installation, Epinio may not be accessible until the domain that was
