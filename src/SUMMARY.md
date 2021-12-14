@@ -6,6 +6,8 @@
 
 - [Installation](installation/installation.md)
   - [System Requirements](installation/system_requirements.md)
+  - [Method 1: Install Epinio and automatically install dependencies](installation/install_epinio_auto.md)
+  - [Method 2: Install Epinio and manually install dependencies](installation/install_epinio_manual.md)
   - [Install Epinio cli](installation/install_epinio_cli.md)
   - [Install Epinio with custom DNS](installation/install_epinio_customDNS.md)
   - [Install Epinio with "magic" DNS](installation/install_epinio_magicDNS.md)
@@ -18,7 +20,6 @@
   - [Install Epinio on Rancher Desktop (local)](installation/install_epinio_on_rancher_desktop.md)
   - [Install Epinio on Minikube (local)](installation/install_epinio_on_minikube.md)
   - [Install Wordpress on Epinio](installation/install_wordpress_application.md)
-  - [Install Epinio with Helm](installation/install_epinio_with_helm.md)
 
 - [Uninstall Epinio](installation/uninstall_epinio.md)
 

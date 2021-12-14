@@ -9,9 +9,13 @@ then removing Epinio will remove those components and this may break your other
 workloads that depended on these. Make sure you understand the implications of
 uninstalling Epinio before you proceed.
 
-If you want to completely uninstall Epinio from your kubernetes cluster, you
-can do this with the command:
+Depending on the method you used to install Epinio ([auto](./install_epinio_auto.md) or [manual](./install_epinio_manual.md)),
+the uninstallation method is different. If you used the "auto" method, then you can uninstall
+using the same helm chart:
 
 ```bash
-epinio uninstall
+$ helm uninstall epinio-installer
 ```
+
+If you followed the manual method, you can uninstall each component using `helm` or `kubectl`, depending
+on how you installed them.

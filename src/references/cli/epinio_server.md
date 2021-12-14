@@ -14,10 +14,10 @@ epinio server [flags]
 
 ```
       --access-control-allow-origin string   (ACCESS_CONTROL_ALLOW_ORIGIN) Domains allowed to use the API
-      --force-kube-internal-registry-tls     (FORCE_KUBE_INTERNAL_REGISTRY_TLS) Kubernetes accesses the internal registry over TLS
   -h, --help                                 help for server
       --port int                             (PORT) The port to listen on. Leave empty to auto-assign a random port
-      --tls-issuer string                    (TLS_ISSUER) The cluster issuer to use for workload certificates (default "epinio-ca")
+      --registry-certificate-secret string   (REGISTRY_CERTIFICATE_SECRET) Secret for the registry's TLS certificate
+      --tls-issuer string                    (TLS_ISSUER) The cluster issuer to use for workload certificates
 ```
 
 ### Options inherited from parent commands
