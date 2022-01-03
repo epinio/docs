@@ -154,33 +154,26 @@ ga('send', 'pageview');
 <p>One of the steps involved in running <code>epinio push</code> is storing the requested version of the code
 in the configured Epinio S3 compatible storage. By default, Epinio installs and configures <a href="https://github.com/minio/minio">Minio</a>
 to be used for this purpose. This document describes how to point Epinio to another S3 compatible storage and skip the Minio installation.</p>
-<p>The <a href="../references/cli/epinio_install.html"><code>epinio install</code> command</a>, has the following optional parameters:</p>
-<pre><code>--s3-endpoint
---s3-access-key-id
---s3-secret-access-key
---s3-bucket
---s3-location
---s3-use-ssl
-</code></pre>
-<p>To configure Epinio to store application sources to an external S3 compatible storage, at least the following should be set:</p>
-<pre><code>--s3-endpoint
---s3-access-key-id
---s3-secret-access-key
---s3-bucket
-</code></pre>
-<p>the other 2 are optional:</p>
-<pre><code>--s3-location
---s3-use-ssl
-</code></pre>
-<p>(Some implementations don't need the location (e.g. Minio) and <code>s3-use-ssl</code> has a default value of &quot;false&quot;)</p>
-<p>An example that points Epinio to AWS S3 will look like this:</p>
-<pre><code>epinio install \
---s3-endpoint s3.amazonaws.com \
---s3-access-key-id your_access_key_here \
---s3-secret-access-key your_secret_key_here \
---s3-bucket epinio_sources \
---s3-location eu-central-1
---s3-use-ssl
+<p>The Epinio Helm chart has the following optional parameters:</p>
+<table><thead><tr><th align="left">Variable name</th><th align="left">Description</th><th align="center">Mandatory</th><th align="center">Default</th></tr></thead><tbody>
+<tr><td align="left"><code>useS3Storage</code></td><td align="left">Use S3 storage</td><td align="center">yes</td><td align="center">&quot;&quot;</td></tr>
+<tr><td align="left"><code>s3Bucket</code></td><td align="left">S3 bucket where you want to store your apps</td><td align="center">yes</td><td align="center"><code>epinio</code></td></tr>
+<tr><td align="left"><code>s3Endpoint</code></td><td align="left">S3 endpoint</td><td align="center">yes</td><td align="center"><code>minio.minio-epinio.svc.cluster.local</code></td></tr>
+<tr><td align="left"><code>s3AccessKeyId</code></td><td align="left">S3 access key id to authenticate to the endpoint</td><td align="center">yes</td><td align="center">&quot;&quot;</td></tr>
+<tr><td align="left"><code>s3SecretAccessKey</code></td><td align="left">S3 secret access key id to authenticate to the endpoint</td><td align="center">yes</td><td align="center">&quot;&quot;</td></tr>
+<tr><td align="left"><code>s3UseSSL</code></td><td align="left">Use SSL for encryption</td><td align="center">no</td><td align="center"><code>false</code></td></tr>
+<tr><td align="left"><code>s3Location</code></td><td align="left">S3 region where your bucket is</td><td align="center">no</td><td align="center">&quot;&quot;</td></tr>
+</tbody></table>
+<p>To configure Epinio to store application sources to an external S3 compatible storage, at least the mandatory options should be set.
+(Some implementations don't need the location (e.g. Minio) and <code>s3-use-ssl</code> has a default value of &quot;false&quot;)</p>
+<p>For instance, add the following options to your Helm command to make Epinio pointing to AWS:</p>
+<pre><code>--set useS3Storage=true \
+--set s3UseSSL=true \
+--set s3Bucket=&lt;your_bucket_here&gt; \
+--set s3Location=&lt;your_region_here&gt; \
+--set s3Endpoint=s3.amazonaws.com \
+--set s3AccessKeyId=&lt;your_access_key_here&gt; \
+--set s3SecretAccessKey=&lt;your_secret_access_key_here&gt; \
 </code></pre>
 <p>If the bucket doesn't exist, Epinio will try to create it when it first tries
 to write to it. Make sure the access key and the access secret have enough permissions
