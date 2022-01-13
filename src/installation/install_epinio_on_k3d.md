@@ -43,7 +43,7 @@ epinio install --system-domain=<YOUR-IP>.omg.howdoi.website
 `<YOUR-IP>` can be found by running
 
 ```bash
-ifconfig |grep "inet.*broadcast
+ifconfig | grep "inet.*broadcast"
 ```
 
 

@@ -1,6 +1,6 @@
 # Install Epinio (the manual way)
 
-As described [in the top level document](src/installation/installation.md#installation-methods), this method is intended for production level setups where operators want to have full control of the process.
+As described [in the top level document](./installation.md#installation-methods) this method is intended for production level setups where operators want to have full control of the process.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ may be configurable on the Epinio Helm chart.
 Linkerd ensures all communication between the various components is encrypted.
 Epinio runs fine with and without Linkerd.
 
-Download the linkerd cli from here: https://github.com/linkerd/linkerd2/releases/
+Download the linkerd cli from here: [https://github.com/linkerd/linkerd2/releases/](https://github.com/linkerd/linkerd2/releases/)
 ([stable-2.10.2 is known to work](https://github.com/epinio/installer/blob/e32f838c758e76c6c47559fa8d3c7f69a1c288cc/assets/installer/linkerd-job.yaml#L52))
 
 Install linkerd with:

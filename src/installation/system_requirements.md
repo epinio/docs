@@ -28,6 +28,7 @@ Also see [Provision of External IP for LoadBalancer service type in Kubernetes](
 
 ### Troubleshooting
 
-While Kubernetes 1.22 is supported there is an issue when the container runtime is `containerd > 1.5.6`.
-The [pack cli](https://github.com/buildpacks/pack) is placing too much information into the
-image layers. The relevant issue is: https://github.com/paketo-buildpacks/full-builder/issues/415
+While Kubernetes 1.22 is supported there is an issue when the container runtime is `containerd > 1.5.6`: the [pack cli](https://github.com/buildpacks/pack) is placing too much information into the
+image layers ([relevant issue](https://github.com/paketo-buildpacks/full-builder/issues/415)).
+
+This was fixed from the v1.5.8 of `containerd`, and the updated runtime is available from Kubernetes 1.22.4, so if you have a lower version please update.
