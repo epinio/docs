@@ -1,7 +1,7 @@
 # Install Epinio (automatic dependencies)
 
 As described [in the top level document](./installation.md#installation-methods) the easiest method to get Epinio
-running is using an [`Helm`](https://helm.sh/) chart to deploy all Epinio's dependencies on the target cluster automatically.
+running is using a [`Helm`](https://helm.sh/) chart to deploy all Epinio's dependencies on the target cluster automatically.
 
 ## Prerequisites
 
