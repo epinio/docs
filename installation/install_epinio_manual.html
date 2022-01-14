@@ -151,7 +151,7 @@ ga('send', 'pageview');
                 <div id="content" class="content">
                     <main>
                         <h1 id="install-epinio-the-manual-way"><a class="header" href="#install-epinio-the-manual-way">Install Epinio (the manual way)</a></h1>
-<p>As described <a href="src/installation/installation.html#installation-methods">in the top level document</a>, this method is intended for production level setups where operators want to have full control of the process.</p>
+<p>As described <a href="./installation.html#installation-methods">in the top level document</a> this method is intended for production level setups where operators want to have full control of the process.</p>
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
 <p>Epinio needs a number of external components to be running on your cluster in order to work. You may already have those deployed, otherwise follow the instructions here to deploy them.</p>
 <p>Important: Some of the namespaces of the components are hardcoded in the Epinio
@@ -163,7 +163,7 @@ may be configurable on the Epinio Helm chart.</p>
 </ul>
 <p>Linkerd ensures all communication between the various components is encrypted.
 Epinio runs fine with and without Linkerd.</p>
-<p>Download the linkerd cli from here: https://github.com/linkerd/linkerd2/releases/
+<p>Download the linkerd cli from here: <a href="https://github.com/linkerd/linkerd2/releases/">https://github.com/linkerd/linkerd2/releases/</a>
 (<a href="https://github.com/epinio/installer/blob/e32f838c758e76c6c47559fa8d3c7f69a1c288cc/assets/installer/linkerd-job.yaml#L52">stable-2.10.2 is known to work</a>)</p>
 <p>Install linkerd with:</p>
 <pre><code>$ kubectl create namespace linkerd

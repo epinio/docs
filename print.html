@@ -222,7 +222,7 @@ cd epinio/assets/
 <li>You can provide the configuration as parameters in which case the parameter <code>--name</code> is mandatory.
 Because of the default route the name has to be unique across all namespaces.</li>
 </ol>
-<pre><code class="language-bash">epinio push --name sample --path samle-app
+<pre><code class="language-bash">epinio push --name sample --path sample-app
 </code></pre>
 <hr />
 <h6 id="note-that-the---path-parameter-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application"><a class="header" href="#note-that-the---path-parameter-is-optional-if-not-specified-the-current-working-directory-will-be-used-always-ensure-that-the-chosen-directory-contains-a-supported-application">Note that the <code>--path</code> parameter is optional. If not specified the current working directory will be used. Always ensure that the chosen directory contains a supported application.</a></h6>
@@ -267,8 +267,8 @@ environment Epinio expects to run on.</p>
 you choose depends on the target environment and the amount of customization
 you want over the default Epinio installation.</p>
 <ol>
-<li><a href="installation/installation/install_epinio_auto.html">Install Epinio and automatically install dependencies</a> - Start here if you are new to Epinio</li>
-<li><a href="installation/installation/install_epinio_manual.html">Install Epinio and manually install components</a> - Full control over installation, mostly for production setups</li>
+<li><a href="installation/install_epinio_auto.html">Install Epinio and automatically install dependencies</a> - Start here if you are new to Epinio</li>
+<li><a href="installation/install_epinio_manual.html">Install Epinio and manually install components</a> - Full control over installation, mostly for production setups</li>
 </ol>
 <p>Epinio is not just one application running on your cluster. It depends on other Kubernetes components for some of its functionality. The 2 different installation methods above, provide different level of configurability on how you get those dependencies installed on your cluster. If you are just starting out with a fresh cluster and you don't have an opinion on how things should be installed, then the first method is the best for you.</p>
 <p>If you've done your due diligence and you are now ready to deploy Epinio on your production clusters, maybe your Dev Ops team wants to fully control what is being installed an how. In that case, the second installation option may be better.</p>
@@ -314,12 +314,12 @@ you want over the default Epinio installation.</p>
 <p>Epinio (Traefik) requires a load-balancer. Depending on your target infrastructure, you can use embedded ones (like on Public Cloud, k3d, aso.) or configure your own.
 Also see <a href="installation/../howtos/provision_external_ip_for_local_kubernetes.html">Provision of External IP for LoadBalancer service type in Kubernetes</a> for more information.</p>
 <h3 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h3>
-<p>While Kubernetes 1.22 is supported there is an issue when the container runtime is <code>containerd &gt; 1.5.6</code>.
-The <a href="https://github.com/buildpacks/pack">pack cli</a> is placing too much information into the
-image layers. The relevant issue is: https://github.com/paketo-buildpacks/full-builder/issues/415</p>
+<p>While Kubernetes 1.22 is supported there is an issue when the container runtime is <code>containerd &gt; 1.5.6</code>: the <a href="https://github.com/buildpacks/pack">pack cli</a> is placing too much information into the
+image layers (<a href="https://github.com/paketo-buildpacks/full-builder/issues/415">relevant issue</a>).</p>
+<p>This was fixed in version v1.5.8 of <code>containerd</code>, and the updated runtime is available from Kubernetes 1.22.4 onwward, so if you have a lower version please update.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="install-epinio-automatic-dependencies"><a class="header" href="#install-epinio-automatic-dependencies">Install Epinio (automatic dependencies)</a></h1>
-<p>As described <a href="installation/src/installation/installation.html#installation-methods">in the top level document</a>, this is the easiest method to get Epinio
-running. It's using <a href="https://helm.sh/"><code>Helm</code></a> with a chart to deploy all Epinio's dependencies on the target cluster automatically.</p>
+<p>As described <a href="installation/./installation.html#installation-methods">in the top level document</a> the easiest method to get Epinio
+running is using a <a href="https://helm.sh/"><code>Helm</code></a> chart to deploy all Epinio's dependencies on the target cluster automatically.</p>
 <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
 <p>You need to have these three binaries installed on your system:</p>
 <ul>
@@ -369,7 +369,7 @@ Epinio instance that runs on the currently targeted Kubernetes cluster:</p>
 </code></pre>
 <p>If this command succeeds, Epinio is accessible and you can now <a href="installation/../tutorials/quickstart.html">deploy your first application</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="install-epinio-the-manual-way"><a class="header" href="#install-epinio-the-manual-way">Install Epinio (the manual way)</a></h1>
-<p>As described <a href="installation/src/installation/installation.html#installation-methods">in the top level document</a>, this method is intended for production level setups where operators want to have full control of the process.</p>
+<p>As described <a href="installation/./installation.html#installation-methods">in the top level document</a> this method is intended for production level setups where operators want to have full control of the process.</p>
 <h2 id="prerequisites-1"><a class="header" href="#prerequisites-1">Prerequisites</a></h2>
 <p>Epinio needs a number of external components to be running on your cluster in order to work. You may already have those deployed, otherwise follow the instructions here to deploy them.</p>
 <p>Important: Some of the namespaces of the components are hardcoded in the Epinio
@@ -381,7 +381,7 @@ may be configurable on the Epinio Helm chart.</p>
 </ul>
 <p>Linkerd ensures all communication between the various components is encrypted.
 Epinio runs fine with and without Linkerd.</p>
-<p>Download the linkerd cli from here: https://github.com/linkerd/linkerd2/releases/
+<p>Download the linkerd cli from here: <a href="https://github.com/linkerd/linkerd2/releases/">https://github.com/linkerd/linkerd2/releases/</a>
 (<a href="https://github.com/epinio/installer/blob/e32f838c758e76c6c47559fa8d3c7f69a1c288cc/assets/installer/linkerd-job.yaml#L52">stable-2.10.2 is known to work</a>)</p>
 <p>Install linkerd with:</p>
 <pre><code>$ kubectl create namespace linkerd
@@ -693,7 +693,7 @@ k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
 <pre><code class="language-bash">epinio install --system-domain=&lt;YOUR-IP&gt;.omg.howdoi.website
 </code></pre>
 <p><code>&lt;YOUR-IP&gt;</code> can be found by running</p>
-<pre><code class="language-bash">ifconfig |grep &quot;inet.*broadcast
+<pre><code class="language-bash">ifconfig | grep &quot;inet.*broadcast&quot;
 </code></pre>
 <h3 id="troubleshooting-3"><a class="header" href="#troubleshooting-3">Troubleshooting</a></h3>
 <h4 id="kubeconfig"><a class="header" href="#kubeconfig">Kubeconfig</a></h4>

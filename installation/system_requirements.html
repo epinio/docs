@@ -182,9 +182,9 @@ ga('send', 'pageview');
 <p>Epinio (Traefik) requires a load-balancer. Depending on your target infrastructure, you can use embedded ones (like on Public Cloud, k3d, aso.) or configure your own.
 Also see <a href="../howtos/provision_external_ip_for_local_kubernetes.html">Provision of External IP for LoadBalancer service type in Kubernetes</a> for more information.</p>
 <h3 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h3>
-<p>While Kubernetes 1.22 is supported there is an issue when the container runtime is <code>containerd &gt; 1.5.6</code>.
-The <a href="https://github.com/buildpacks/pack">pack cli</a> is placing too much information into the
-image layers. The relevant issue is: https://github.com/paketo-buildpacks/full-builder/issues/415</p>
+<p>While Kubernetes 1.22 is supported there is an issue when the container runtime is <code>containerd &gt; 1.5.6</code>: the <a href="https://github.com/buildpacks/pack">pack cli</a> is placing too much information into the
+image layers (<a href="https://github.com/paketo-buildpacks/full-builder/issues/415">relevant issue</a>).</p>
+<p>This was fixed in version v1.5.8 of <code>containerd</code>, and the updated runtime is available from Kubernetes 1.22.4 onwward, so if you have a lower version please update.</p>
 
                     </main>
 
