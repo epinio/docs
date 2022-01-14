@@ -35,7 +35,7 @@ epinio push manifest.yaml
 Because of the default route the name has to be unique across all namespaces.
 
 ```bash
-epinio push --name sample --path samle-app
+epinio push --name sample --path sample-app
 ```
 
 ***
