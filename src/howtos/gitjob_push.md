@@ -28,7 +28,7 @@ So the GitJob can authenticate and push correctly, we can upload our Epinio conf
 kubectl create secret generic epinio-creds --from-file=$HOME/.config/epinio/config.yaml
 ```
 
-This will create a secret containing the config.yaml that was created locally when you do `epinio install` or `epinio config update`
+This will create a secret containing the config.yaml that was created locally when you do `epinio config update`
 
 ### Setup Sample Project
 

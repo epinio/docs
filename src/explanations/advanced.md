@@ -6,22 +6,25 @@ TODO: Do the same for Minio and list storage class requirements (WaitForFirstCon
 TODO: Explain how to configure external S3 storage.
 TODO: Consider doing this in a separate document about the components. Or even, one document per components and links here.
 
-- [Epinio installed components](#epinio-installed-components)
-  - [Traefik](#traefik)
-  - [Linkerd](#linkerd)
-  - [Epinio](#epinio)
-  - [Cert Manager](#cert-manager)
-  - [Kubed](#kubed)
-  - [Google Service Broker](#google-service-broker) (optional)
-  - [Minibroker](#minibroker) (optional)
-  - [Service Catalog](#service-catalog)
-  - [Minio](#minio)
-  - [Container Registry](#container-registry)
-  - [Tekton](#tekton)
+- [Epinio, Advanced Topics](#epinio-advanced-topics)
+  - [Contents](#contents)
+  - [Epinio installed components](#epinio-installed-components)
+    - [Traefik](#traefik)
+    - [Linkerd](#linkerd)
+    - [Epinio](#epinio)
+    - [Cert Manager](#cert-manager)
+    - [Kubed](#kubed)
+    - [Google Service Broker](#google-service-broker)
+    - [Minibroker](#minibroker)
+    - [Service Catalog](#service-catalog)
+    - [Minio](#minio)
+    - [Container Registry](#container-registry)
+    - [Tekton](#tekton)
+  - [Other Advanced Topics](#other-advanced-topics)
+    - [Git Pushing](#git-pushing)
+    - [Traefik and Linkerd](#traefik-and-linkerd)
+    - [Example](#example)
 
-- [Other advanced topics](#other-advanced-topics)
-  - [Git Pushing](#git-pushing)
-  - [Traefik and Linkerd](#traefik-and-linkerd)
 
 ## Epinio installed components
 
@@ -36,16 +39,6 @@ As Epinio only checks two namespaces for Traefik's presence, namely
 it, despite the cluster having Traefik running. Just in an unexpected
 place.
 
-The `install` command provides the option `--skip-traefik` to handle
-this kind of situation.
-
-Installing Epinio on your cluster with the command
-
-```bash
-$ epinio install --skip-traefik
-```
-
-forces Epinio to not install its own Traefik.
 
 Note that having some other (non-Traefik) Ingress controller running
 is __not__ a reason to prevent Epinio from installing Traefik. All the
@@ -65,14 +58,6 @@ By default, Epinio installs [Linkerd](https://linkerd.io/) on your cluster. The
 various namespaces created by Epinio become part of the Linkerd Service Mesh and
 thus all communication between pods is secured with mutualTLS.
 
-In some cases you may not want Epinio to install Linkerd, either because you did
-that manually before you install Epinio or for other reasons. You can provide
-the `--skip-linkerd` flag to the `install` command to prevent Epinio from
-installing any of the Linkerd control plane components:
-
-```bash
-$ epinio install --skip-linkerd
-```
 
 ### Epinio
 
@@ -80,8 +65,6 @@ The epinio binary is used as:
 
 - a cli tool, used to push applications, create services etc.
 - the API server component which runs inside the cluster (invoked with the `epinio server` command)
-- the installer that installs the various needed components on the cluster. The
-  API server from the previous point is one of them.
 
 Epinio cli functionality is implemented using the endpoints provided by the Epinio API server
 component. For example, when the user asks Epinio to "push" an application, the
@@ -159,10 +142,10 @@ When installing Epinio, the user can choose to use an external S3 compatible sto
 The result of Epinio's application staging is a container image. This image is used to create a Kubernetes deployment to run the application code.
 The [Tekton](#tekton) pipeline requires that image to be written to some container registry (See also [Detailed push process](../explanations/detailed-push-process.md)). 
 
-By default, [`epinio install`](../references/cli/epinio_install.md) deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
+By default the Epinio installation deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
 If you want to look at how this registry is installed, have a look at the helm chart here:
 
-- https://github.com/epinio/epinio/tree/main/assets/container-registry/chart/container-registry
+- https://github.com/epinio/helm-charts/tree/main/chart/container-registry
 
 Epinio comes with two consumers of this registry:
 
@@ -179,9 +162,9 @@ Epinio controls the Tekton deployment and ensures that whatever CA is used to si
 Depending on the use case all 3 options may be valid:
 
 - Option #1 can be selected when the user is installing Epinio with a custom tls-issuer. The user controls the CA and can make sure that this CA is trusted by the cluster before even installing Epinio.
-  In this case, since the user knows that Kubernetes will trust the registry's certificate, the `--force-kube-internal-registry-tls` flag should be used on [`epinio install`](../references/cli/epinio_install.md).
-- Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. `letsencrypt-production`). The flag `--force-kube-internal-registry-tls` should be used in that case as well.
-- Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the `--force-kube-internal-registry-tls` flag in this case (default is "false"). Even in this case, Tekton still accesses the registry over TLS.
+  In this case, since the user knows that Kubernetes will trust the registry's certificate, the `forceKubeInternalRegistryTLS` variable should be used during the installation.
+- Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. `letsencrypt-production`). The `forceKubeInternalRegistryTLS` variable should be used in that case as well.
+- Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the `forceKubeInternalRegistryTLS` variable in this case (default is "false"). Even in this case, Tekton still accesses the registry over TLS.
 
 Epinio also allows the use of an external registry. The [instructions](../howtos/setup-external-registry.md) on how such a registry can be set up are in a separate document.
 
@@ -228,7 +211,7 @@ epinio push --name NAME --path DIRECTORY
 epinio push --name NAME --git GIT-REPOSITORY-URL,REVISION
 ```
 
-## Traefik and Linkerd
+### Traefik and Linkerd
 
 By default, with Epinio installing both Traefik and Linkerd, Epinio's
 installation process ensures that the Traefik pods are included in the Linkerd

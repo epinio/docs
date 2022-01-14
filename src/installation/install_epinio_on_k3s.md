@@ -6,7 +6,7 @@ Note: this documentation was tested with Epinio v0.1.3 and k3s v1.21.5+k3s2 on o
 
 ### Install K3s
 
-Follow the [instructions](https://k3s.io/) to install k3d on your system.
+Follow the [instructions](https://k3s.io/) to install k3s on your system.
 
 ### Install Epinio on the Cluster
 

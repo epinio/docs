@@ -19,19 +19,7 @@ Make sure Rancher Desktop is running.
 Rancher Desktop can report Kubernetes as running while some pods are actually not yet ready.
 Manual verification is possible by executing the command `kubectl get pods -A` in a terminal and checking that all pods report either `Running` or `Completed` as their status.
 
-### Windows
-
-1. Start a terminal (e.g. type `cmd` in the search field) and change to the directory where `epinio-windows-amd64` is located, e.g. `cd Downloads`
-
-2. Run `epinio-windows-amd64 install`
-
-3. Copy the binary to a directory of your choice and add it to the `PATH` variable as described by [Kevin Berg's article](https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53). This allows execution of Epinio directly from any terminal.
-
-### Mac
-
-1. Start a terminal and change to the directory where `epinio-darwin-amd64` is located, e.g. `cd Downloads`
-
-2. Run `epinio-darwin-amd64 install`
+Follow [Installation using a Custom Domain](./install_epinio_customDNS.md) for test and production environments.
 
 ### Linux
 

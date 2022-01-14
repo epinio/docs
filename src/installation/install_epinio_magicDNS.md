@@ -1,17 +1,7 @@
 # Install Epinio using a Magic DNS Service
 
-This is about just running `epinio install`. It should work on nearly any kubernetes distribution and provides you with a test environment.
-You will automatically get a magic wildcard domain like "10.0.0.1.omg.howdoi.website" which points to the public IP of Traefik.
+In order to use a magic domain that will resolve to a local/private IP you can use the [auto installation method](./install_epinio_auto.md) and set the EPINIO_SYSTEM_DOMAIN variable to `<IP>.omg.howdoi.website`.
 
-## Install the Epinio CLI
-
-If not done already, refer to [Install the Epinio CLI](./install_epinio_cli.md).
-
-### Install Epinio on the Cluster
-
-```bash
-epinio install
-```
 
 ### Troubleshooting
 
