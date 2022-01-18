@@ -178,11 +178,11 @@ variable <code>EPINIO_CONFIG</code> to the desired path.</p>
 <p>The namespace can be changed by running <code>epinio target</code> with the
 name of the desired namespace as its single argument.</p>
 <p>User name and password are used by the client to authenticate itself
-when talking to Epinio's API server. The <code>epinio install</code> command
+when talking to Epinio's API server. The <code>epinio config update</code> command
 saves the initial information to the configuration.</p>
 <p>The installation uses a the wildcard domain <code>omg.howdoi.website</code> and the
 <code>epinio-ca</code> issuer by default.</p>
-<p><code>epinio install</code> saves the associated CA
+<p><code>epinio config update</code> saves the associated CA
 certificate to the configuration so that future invocations of the
 client are able to verify the actual certificate when talking to
 Epinio's API server.</p>

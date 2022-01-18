@@ -159,20 +159,11 @@ ga('send', 'pageview');
 </ul>
 <p>The issuer will be used for both, the Epinio API endpoint and workloads (i.e. pushed applications).</p>
 <h2 id="choosing-a-different-issuer"><a class="header" href="#choosing-a-different-issuer">Choosing a Different Issuer</a></h2>
-<p>When installing Epinio, one can choose between those issuers by using the <code>--tls-issuer</code> argument:</p>
-<pre><code>epinio install --tls-issuer=letsencrypt-production
-</code></pre>
+<p>When installing Epinio, one can choose between those issuers by using the <code>tlsIssuer</code> variable:</p>
 <h2 id="using-a-custom-issuer"><a class="header" href="#using-a-custom-issuer">Using a custom issuer</a></h2>
 <p>It's possible to create a cert-manager cluster issuer in the cluster, before installing Epinio and referencing it by name when installing.</p>
 <p>However, this is only possible if the cert-manager CRD is present in the cluster.</p>
-<p>We can use a split install, to install cert-manager first, then create the cluster issuer and finally install Epinio.</p>
-<h3 id="split-install"><a class="header" href="#split-install">Split Install</a></h3>
-<p>Install cert-manager first:</p>
-<pre><code>epinio install-cert-manager
-</code></pre>
-<p>Then after creating the cluster issuer, install Epinio:</p>
-<pre><code>epinio install --skip-cert-manager
-</code></pre>
+<p>Install cert-manager first, then create the cluster issuer and finally install Epinio with the correct <code>tlsIssuer</code>.</p>
 <h3 id="cluster-issuer-for-acme-dns-challenge"><a class="header" href="#cluster-issuer-for-acme-dns-challenge">Cluster Issuer for ACME DNS Challenge</a></h3>
 <p>For example to use Letsencrypt with a DNS challenge, which supports wildcards and private IPs, create this cluster issuer after installing cert-manager:</p>
 <pre><code>apiVersion: cert-manager.io/v1
@@ -197,8 +188,11 @@ spec:
         - '*.example.com'
 </code></pre>
 <p>Note: This uses the Letsencrypt staging endpoint for testing. More information in the <a href="https://cert-manager.io/docs/configuration/acme/dns01/">cert-manager ACME docs</a>.</p>
-<p>You can then install Epinio, without cert-manager, pointing to the new cluster issuer:</p>
-<pre><code>epinio install --skip-cert-manager --tls-issuer=dns-staging
+<p>You can then install Epinio, with the <code>skipCertManager</code> variable, and the <code>tlsIssuer</code> pointing to the new cluster issuer:</p>
+<pre><code>helm install \
+  --set skipCertManager=true \
+  --set tlsIssuer=dns-staging \
+  epinio-installer epinio/epinio-installer
 </code></pre>
 <h3 id="cluster-issuer-for-existing-private-ca"><a class="header" href="#cluster-issuer-for-existing-private-ca">Cluster Issuer for Existing Private CA</a></h3>
 <p>According to the instructions from https://cert-manager.io/docs/configuration/ca/, follow these steps:</p>
@@ -224,13 +218,20 @@ spec:
     secretName: private-ca-secret
 </code></pre>
 <h4 id="install-epinio"><a class="header" href="#install-epinio">Install Epinio</a></h4>
-<p>Use the <code>--tls-issuer</code> argument to choose your cluster issuer:</p>
-<pre><code>epinio install --skip-cert-manager --tls-issuer=private-ca
+<p>Use the <code>tlsIssuer</code> variable to choose your cluster issuer:</p>
+<pre><code>helm install \
+  --set skipCertManager=true \
+  --set tlsIssuer=private-ca \
+  epinio-installer epinio/epinio-installer
 </code></pre>
 <h1 id="use-tls-when-pulling-from-internal-registry"><a class="header" href="#use-tls-when-pulling-from-internal-registry">Use TLS When Pulling From Internal Registry</a></h1>
 <p>Epinio comes with its own registry for Docker images. This registry needs to be reachable from the Kubernetes nodes.
 If you are using a certificate issuer whose CA is trusted by the Kubernetes nodes, you can turn on SSL for pulling images from the internal registry:</p>
 <pre><code>epinio install --tls-issuer=letsencrypt-production --use-internal-registry-node-port=false
+</code></pre>
+<pre><code>helm install \
+  --set tlsIssuer=letsencrypt-production \
+  epinio-installer epinio/epinio-installer
 </code></pre>
 <p>Without the node port, pushing images to the registry uses the &quot;epinio-registry&quot; ingress, which is handled by Traefik.</p>
 <h1 id="background-on-cert-manager-and-issuers"><a class="header" href="#background-on-cert-manager-and-issuers">Background on Cert Manager and Issuers</a></h1>
@@ -239,7 +240,7 @@ The certificate is stored in a <em>secret</em>, in the namespace the certificate
 An <em>ingress</em> resource can then use that secret to set up TLS.</p>
 <p>Example:</p>
 <ol>
-<li><code>epinio install</code> creates a certificate resource in epinio namespace</li>
+<li>The Epinio installation creates a certificate resource in epinio namespace</li>
 </ol>
 <pre><code>apiVersion: cert-manager.io/v1alpha2
 kind: Certificate

@@ -156,27 +156,31 @@ ga('send', 'pageview');
 TODO: Explain how to configure external S3 storage.
 TODO: Consider doing this in a separate document about the components. Or even, one document per components and links here.</p>
 <ul>
-<li>
-<p><a href="#epinio-installed-components">Epinio installed components</a></p>
+<li><a href="#epinio-advanced-topics">Epinio, Advanced Topics</a>
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#epinio-installed-components">Epinio installed components</a>
 <ul>
 <li><a href="#traefik">Traefik</a></li>
 <li><a href="#linkerd">Linkerd</a></li>
 <li><a href="#epinio">Epinio</a></li>
 <li><a href="#cert-manager">Cert Manager</a></li>
 <li><a href="#kubed">Kubed</a></li>
-<li><a href="#google-service-broker">Google Service Broker</a> (optional)</li>
-<li><a href="#minibroker">Minibroker</a> (optional)</li>
+<li><a href="#google-service-broker">Google Service Broker</a></li>
+<li><a href="#minibroker">Minibroker</a></li>
 <li><a href="#service-catalog">Service Catalog</a></li>
 <li><a href="#minio">Minio</a></li>
 <li><a href="#container-registry">Container Registry</a></li>
 <li><a href="#tekton">Tekton</a></li>
 </ul>
 </li>
-<li>
-<p><a href="#other-advanced-topics">Other advanced topics</a></p>
+<li><a href="#other-advanced-topics">Other Advanced Topics</a>
 <ul>
 <li><a href="#git-pushing">Git Pushing</a></li>
 <li><a href="#traefik-and-linkerd">Traefik and Linkerd</a></li>
+<li><a href="#example">Example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -189,12 +193,6 @@ running. If it wasn't there it installed it.</p>
 <code>traefik</code> and <code>kube-system</code>, it is possible that it tries to install
 it, despite the cluster having Traefik running. Just in an unexpected
 place.</p>
-<p>The <code>install</code> command provides the option <code>--skip-traefik</code> to handle
-this kind of situation.</p>
-<p>Installing Epinio on your cluster with the command</p>
-<pre><code class="language-bash">$ epinio install --skip-traefik
-</code></pre>
-<p>forces Epinio to not install its own Traefik.</p>
 <p>Note that having some other (non-Traefik) Ingress controller running
 is <strong>not</strong> a reason to prevent Epinio from installing Traefik. All the
 Ingresses used by Epinio expect to be handled by Traefik.</p>
@@ -208,19 +206,11 @@ installation in any way. Here are the relevant upstream docs for the redirection
 <p>By default, Epinio installs <a href="https://linkerd.io/">Linkerd</a> on your cluster. The
 various namespaces created by Epinio become part of the Linkerd Service Mesh and
 thus all communication between pods is secured with mutualTLS.</p>
-<p>In some cases you may not want Epinio to install Linkerd, either because you did
-that manually before you install Epinio or for other reasons. You can provide
-the <code>--skip-linkerd</code> flag to the <code>install</code> command to prevent Epinio from
-installing any of the Linkerd control plane components:</p>
-<pre><code class="language-bash">$ epinio install --skip-linkerd
-</code></pre>
 <h3 id="epinio"><a class="header" href="#epinio">Epinio</a></h3>
 <p>The epinio binary is used as:</p>
 <ul>
 <li>a cli tool, used to push applications, create services etc.</li>
 <li>the API server component which runs inside the cluster (invoked with the <code>epinio server</code> command)</li>
-<li>the installer that installs the various needed components on the cluster. The
-API server from the previous point is one of them.</li>
 </ul>
 <p>Epinio cli functionality is implemented using the endpoints provided by the Epinio API server
 component. For example, when the user asks Epinio to &quot;push&quot; an application, the
@@ -267,10 +257,10 @@ The service catalog is the component behind the <a href="../references/cli/epini
 <h3 id="container-registry"><a class="header" href="#container-registry">Container Registry</a></h3>
 <p>The result of Epinio's application staging is a container image. This image is used to create a Kubernetes deployment to run the application code.
 The <a href="#tekton">Tekton</a> pipeline requires that image to be written to some container registry (See also <a href="../explanations/detailed-push-process.html">Detailed push process</a>). </p>
-<p>By default, <a href="../references/cli/epinio_install.html"><code>epinio install</code></a> deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
+<p>By default the Epinio installation deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
 If you want to look at how this registry is installed, have a look at the helm chart here:</p>
 <ul>
-<li>https://github.com/epinio/epinio/tree/main/assets/container-registry/chart/container-registry</li>
+<li>https://github.com/epinio/helm-charts/tree/main/chart/container-registry</li>
 </ul>
 <p>Epinio comes with two consumers of this registry:</p>
 <ol>
@@ -287,9 +277,9 @@ Epinio controls the Tekton deployment and ensures that whatever CA is used to si
 <p>Depending on the use case all 3 options may be valid:</p>
 <ul>
 <li>Option #1 can be selected when the user is installing Epinio with a custom tls-issuer. The user controls the CA and can make sure that this CA is trusted by the cluster before even installing Epinio.
-In this case, since the user knows that Kubernetes will trust the registry's certificate, the <code>--force-kube-internal-registry-tls</code> flag should be used on <a href="../references/cli/epinio_install.html"><code>epinio install</code></a>.</li>
-<li>Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. <code>letsencrypt-production</code>). The flag <code>--force-kube-internal-registry-tls</code> should be used in that case as well.</li>
-<li>Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the <code>--force-kube-internal-registry-tls</code> flag in this case (default is &quot;false&quot;). Even in this case, Tekton still accesses the registry over TLS.</li>
+In this case, since the user knows that Kubernetes will trust the registry's certificate, the <code>forceKubeInternalRegistryTLS</code> variable should be used during the installation.</li>
+<li>Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. <code>letsencrypt-production</code>). The <code>forceKubeInternalRegistryTLS</code> variable should be used in that case as well.</li>
+<li>Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the <code>forceKubeInternalRegistryTLS</code> variable in this case (default is &quot;false&quot;). Even in this case, Tekton still accesses the registry over TLS.</li>
 </ul>
 <p>Epinio also allows the use of an external registry. The <a href="../howtos/setup-external-registry.html">instructions</a> on how such a registry can be set up are in a separate document.</p>
 <h3 id="tekton"><a class="header" href="#tekton">Tekton</a></h3>
@@ -323,7 +313,7 @@ epinio push --name NAME
 epinio push --name NAME --path DIRECTORY
 epinio push --name NAME --git GIT-REPOSITORY-URL,REVISION
 </code></pre>
-<h2 id="traefik-and-linkerd"><a class="header" href="#traefik-and-linkerd">Traefik and Linkerd</a></h2>
+<h3 id="traefik-and-linkerd"><a class="header" href="#traefik-and-linkerd">Traefik and Linkerd</a></h3>
 <p>By default, with Epinio installing both Traefik and Linkerd, Epinio's
 installation process ensures that the Traefik pods are included in the Linkerd
 mesh, thus ensuring that external communication to applications is secured on

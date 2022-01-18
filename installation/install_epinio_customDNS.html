@@ -159,11 +159,6 @@ ga('send', 'pageview');
 </ul>
 <h2 id="install-the-epinio-cli"><a class="header" href="#install-the-epinio-cli">Install the Epinio CLI</a></h2>
 <p>If not done already, refer to <a href="./install_epinio_cli.html">Install the Epinio CLI</a>.</p>
-<h2 id="install-ingress-in-cluster"><a class="header" href="#install-ingress-in-cluster">Install Ingress In Cluster</a></h2>
-<p>First install ingress and wait for the <code>loadbalancer-ip</code> to be provisioned for the <code>traefik</code> public IP. Then map the <code>loadbalancer-ip</code> to your <code>Domain Name</code> e.g. <code>test.example.com</code> and wait for it to be mapped.</p>
-<pre><code class="language-bash">epinio install-ingress
-</code></pre>
-<p>The command prints the <code>loadbalancer-ip</code> (&quot;EXTERNAL-IP&quot;) needed. Note however that it can also print a loadbalanced FQDN instead, which may resolve to multiple IPs.</p>
 <h2 id="configure-your-custom-domain"><a class="header" href="#configure-your-custom-domain">Configure your custom DOMAIN</a></h2>
 <p>Currently we recommend to configure a wildcard domain for Epinio.</p>
 <p>Given you own the domain <strong>&quot;example.com&quot;</strong>, you would configure a subdomain e.g. <strong>&quot;test.example.com&quot;</strong> for Epinio.
@@ -177,13 +172,6 @@ and Ingress will route the traffic accordingly.</p>
 <h6 id="note-you-can-also-check-the-external-ip-by-running-the-command-kubectl-get-svc--n-traefik"><a class="header" href="#note-you-can-also-check-the-external-ip-by-running-the-command-kubectl-get-svc--n-traefik">Note you can also check the &quot;EXTERNAL-IP&quot; by running the command <code>kubectl get svc -n traefik</code>.</a></h6>
 <hr />
 <p>Find <a href="#dns-configuration-examples">DNS Configuration Examples</a> below.</p>
-<h2 id="install-epinio-in-cluster"><a class="header" href="#install-epinio-in-cluster">Install Epinio In Cluster</a></h2>
-<p>With DNS now available the second step actually installs the cluster:</p>
-<pre><code class="language-bash">epinio install --system-domain test.example.com --tls-issuer=letsencrypt-production --use-internal-registry-node-port=false
-</code></pre>
-<hr />
-<h6 id="note-the-issuer-letsencrypt-production-will-work-only-if-your-custom-domain-eg-testexamplecom-is-reachable-from-the-internet-for-test-or-internal-environments-where-your-custom-domain-isnt-reachable-from-the-internet-you-need-to-choose-a-different-issuer-eg-if-you-would-use-the-custom-domain-testinternalcom-epinio-install---system-domain-testinternalcom-will-default-to-the-epinio-ca-issuer"><a class="header" href="#note-the-issuer-letsencrypt-production-will-work-only-if-your-custom-domain-eg-testexamplecom-is-reachable-from-the-internet-for-test-or-internal-environments-where-your-custom-domain-isnt-reachable-from-the-internet-you-need-to-choose-a-different-issuer-eg-if-you-would-use-the-custom-domain-testinternalcom-epinio-install---system-domain-testinternalcom-will-default-to-the-epinio-ca-issuer">Note: The issuer <code>letsencrypt-production</code> will work only, if your custom domain, e.g. &quot;test.example.com&quot;, is reachable from the internet. For test, or internal environments, where your custom domain isn't reachable from the internet, you need to choose a different issuer. E.g. if you would use the custom domain &quot;test.internal.com&quot;, <code>epinio install --system-domain test.internal.com</code> will default to the <code>epinio-ca</code> issuer.</a></h6>
-<hr />
 <h2 id="dns-configuration-examples"><a class="header" href="#dns-configuration-examples">DNS Configuration Examples</a></h2>
 <h3 id="aws-eks-and-route53"><a class="header" href="#aws-eks-and-route53">AWS EKS and Route53</a></h3>
 <p>As an example we will use the <a href="https://aws.amazon.com/route53/">AWS Service Route53</a> to create a wildcard domain within one of your existing &quot;Hosted zones&quot;, e.g. <strong>example.com</strong>.</p>

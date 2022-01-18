@@ -496,11 +496,6 @@ Go Version: go1.17
 </ul>
 <h2 id="install-the-epinio-cli"><a class="header" href="#install-the-epinio-cli">Install the Epinio CLI</a></h2>
 <p>If not done already, refer to <a href="installation/./install_epinio_cli.html">Install the Epinio CLI</a>.</p>
-<h2 id="install-ingress-in-cluster"><a class="header" href="#install-ingress-in-cluster">Install Ingress In Cluster</a></h2>
-<p>First install ingress and wait for the <code>loadbalancer-ip</code> to be provisioned for the <code>traefik</code> public IP. Then map the <code>loadbalancer-ip</code> to your <code>Domain Name</code> e.g. <code>test.example.com</code> and wait for it to be mapped.</p>
-<pre><code class="language-bash">epinio install-ingress
-</code></pre>
-<p>The command prints the <code>loadbalancer-ip</code> (&quot;EXTERNAL-IP&quot;) needed. Note however that it can also print a loadbalanced FQDN instead, which may resolve to multiple IPs.</p>
 <h2 id="configure-your-custom-domain"><a class="header" href="#configure-your-custom-domain">Configure your custom DOMAIN</a></h2>
 <p>Currently we recommend to configure a wildcard domain for Epinio.</p>
 <p>Given you own the domain <strong>&quot;example.com&quot;</strong>, you would configure a subdomain e.g. <strong>&quot;test.example.com&quot;</strong> for Epinio.
@@ -514,13 +509,6 @@ and Ingress will route the traffic accordingly.</p>
 <h6 id="note-you-can-also-check-the-external-ip-by-running-the-command-kubectl-get-svc--n-traefik"><a class="header" href="#note-you-can-also-check-the-external-ip-by-running-the-command-kubectl-get-svc--n-traefik">Note you can also check the &quot;EXTERNAL-IP&quot; by running the command <code>kubectl get svc -n traefik</code>.</a></h6>
 <hr />
 <p>Find <a href="installation/install_epinio_customDNS.html#dns-configuration-examples">DNS Configuration Examples</a> below.</p>
-<h2 id="install-epinio-in-cluster"><a class="header" href="#install-epinio-in-cluster">Install Epinio In Cluster</a></h2>
-<p>With DNS now available the second step actually installs the cluster:</p>
-<pre><code class="language-bash">epinio install --system-domain test.example.com --tls-issuer=letsencrypt-production --use-internal-registry-node-port=false
-</code></pre>
-<hr />
-<h6 id="note-the-issuer-letsencrypt-production-will-work-only-if-your-custom-domain-eg-testexamplecom-is-reachable-from-the-internet-for-test-or-internal-environments-where-your-custom-domain-isnt-reachable-from-the-internet-you-need-to-choose-a-different-issuer-eg-if-you-would-use-the-custom-domain-testinternalcom-epinio-install---system-domain-testinternalcom-will-default-to-the-epinio-ca-issuer"><a class="header" href="#note-the-issuer-letsencrypt-production-will-work-only-if-your-custom-domain-eg-testexamplecom-is-reachable-from-the-internet-for-test-or-internal-environments-where-your-custom-domain-isnt-reachable-from-the-internet-you-need-to-choose-a-different-issuer-eg-if-you-would-use-the-custom-domain-testinternalcom-epinio-install---system-domain-testinternalcom-will-default-to-the-epinio-ca-issuer">Note: The issuer <code>letsencrypt-production</code> will work only, if your custom domain, e.g. &quot;test.example.com&quot;, is reachable from the internet. For test, or internal environments, where your custom domain isn't reachable from the internet, you need to choose a different issuer. E.g. if you would use the custom domain &quot;test.internal.com&quot;, <code>epinio install --system-domain test.internal.com</code> will default to the <code>epinio-ca</code> issuer.</a></h6>
-<hr />
 <h2 id="dns-configuration-examples"><a class="header" href="#dns-configuration-examples">DNS Configuration Examples</a></h2>
 <h3 id="aws-eks-and-route53"><a class="header" href="#aws-eks-and-route53">AWS EKS and Route53</a></h3>
 <p>As an example we will use the <a href="https://aws.amazon.com/route53/">AWS Service Route53</a> to create a wildcard domain within one of your existing &quot;Hosted zones&quot;, e.g. <strong>example.com</strong>.</p>
@@ -586,13 +574,7 @@ $ORIGIN test.example.com.
 </code></pre>
 <p>Restart bind and verify that e.g. <code>&gt; host test.example.com</code> or <code>&gt; host epinio.test.example.com</code> will resolve to &quot;10.0.0.1&quot;.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="install-epinio-using-a-magic-dns-service"><a class="header" href="#install-epinio-using-a-magic-dns-service">Install Epinio using a Magic DNS Service</a></h1>
-<p>This is about just running <code>epinio install</code>. It should work on nearly any kubernetes distribution and provides you with a test environment.
-You will automatically get a magic wildcard domain like &quot;10.0.0.1.omg.howdoi.website&quot; which points to the public IP of Traefik.</p>
-<h2 id="install-the-epinio-cli-1"><a class="header" href="#install-the-epinio-cli-1">Install the Epinio CLI</a></h2>
-<p>If not done already, refer to <a href="installation/./install_epinio_cli.html">Install the Epinio CLI</a>.</p>
-<h3 id="install-epinio-on-the-cluster"><a class="header" href="#install-epinio-on-the-cluster">Install Epinio on the Cluster</a></h3>
-<pre><code class="language-bash">epinio install
-</code></pre>
+<p>In order to use a magic domain that will resolve to a local/private IP you can use the <a href="installation/./install_epinio_auto.html">auto installation method</a> and set the EPINIO_SYSTEM_DOMAIN variable to <code>&lt;IP&gt;.omg.howdoi.website</code>.</p>
 <h3 id="troubleshooting-1"><a class="header" href="#troubleshooting-1">Troubleshooting</a></h3>
 <h4 id="traefik-1"><a class="header" href="#traefik-1">Traefik</a></h4>
 <p>In case of trouble with Epinio's Traefik component or Ingress controllers, the <a href="installation/../explanations/advanced.html#traefik">Traefik</a> section in the
@@ -687,11 +669,8 @@ See <a href="installation/../howtos/provision_external_ip_for_local_kubernetes.h
 NAME                  STATUS   ROLES                  AGE   VERSION
 k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
 </code></pre>
-<h3 id="install-epinio-on-the-cluster-1"><a class="header" href="#install-epinio-on-the-cluster-1">Install Epinio on the Cluster</a></h3>
+<h3 id="install-epinio-on-the-cluster"><a class="header" href="#install-epinio-on-the-cluster">Install Epinio on the Cluster</a></h3>
 <p>Follow <a href="installation/./install_epinio_magicDNS.html">Installation using a MagicDNS Service</a> to install Epinio in your test environment.</p>
-<p>If k3d is inside a VM, in addition to the special k3d setup, explained above, use this system domain instead:</p>
-<pre><code class="language-bash">epinio install --system-domain=&lt;YOUR-IP&gt;.omg.howdoi.website
-</code></pre>
 <p><code>&lt;YOUR-IP&gt;</code> can be found by running</p>
 <pre><code class="language-bash">ifconfig | grep &quot;inet.*broadcast&quot;
 </code></pre>
@@ -707,8 +686,8 @@ k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
 <p>Note: this documentation was tested with Epinio v0.1.3 and k3s v1.21.5+k3s2 on openSUSE Leap 15.3.</p>
 <h2 id="get-k3s-kubernetes-cluster"><a class="header" href="#get-k3s-kubernetes-cluster">Get K3s Kubernetes Cluster</a></h2>
 <h3 id="install-k3s"><a class="header" href="#install-k3s">Install K3s</a></h3>
-<p>Follow the <a href="https://k3s.io/">instructions</a> to install k3d on your system.</p>
-<h3 id="install-epinio-on-the-cluster-2"><a class="header" href="#install-epinio-on-the-cluster-2">Install Epinio on the Cluster</a></h3>
+<p>Follow the <a href="https://k3s.io/">instructions</a> to install k3s on your system.</p>
+<h3 id="install-epinio-on-the-cluster-1"><a class="header" href="#install-epinio-on-the-cluster-1">Install Epinio on the Cluster</a></h3>
 <p>Export the k3s cluster configration first:</p>
 <pre><code class="language-bash">export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 </code></pre>
@@ -741,27 +720,7 @@ k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
 <p>Make sure Rancher Desktop is running.</p>
 <p>Rancher Desktop can report Kubernetes as running while some pods are actually not yet ready.
 Manual verification is possible by executing the command <code>kubectl get pods -A</code> in a terminal and checking that all pods report either <code>Running</code> or <code>Completed</code> as their status.</p>
-<h3 id="windows-1"><a class="header" href="#windows-1">Windows</a></h3>
-<ol>
-<li>
-<p>Start a terminal (e.g. type <code>cmd</code> in the search field) and change to the directory where <code>epinio-windows-amd64</code> is located, e.g. <code>cd Downloads</code></p>
-</li>
-<li>
-<p>Run <code>epinio-windows-amd64 install</code></p>
-</li>
-<li>
-<p>Copy the binary to a directory of your choice and add it to the <code>PATH</code> variable as described by <a href="https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53">Kevin Berg's article</a>. This allows execution of Epinio directly from any terminal.</p>
-</li>
-</ol>
-<h3 id="mac"><a class="header" href="#mac">Mac</a></h3>
-<ol>
-<li>
-<p>Start a terminal and change to the directory where <code>epinio-darwin-amd64</code> is located, e.g. <code>cd Downloads</code></p>
-</li>
-<li>
-<p>Run <code>epinio-darwin-amd64 install</code></p>
-</li>
-</ol>
+<p>Follow <a href="installation/./install_epinio_customDNS.html">Installation using a Custom Domain</a> for test and production environments.</p>
 <h3 id="linux-1"><a class="header" href="#linux-1">Linux</a></h3>
 <p>Linux is not yet supported by Rancher Desktop - see https://github.com/rancher-sandbox/rancher-desktop/issues/426</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-minikube-kubernetes-cluster"><a class="header" href="#creating-a-minikube-kubernetes-cluster">Creating a Minikube Kubernetes Cluster</a></h1>
@@ -791,7 +750,7 @@ Configure the addon with those values.</p>
   metallb was successfully configured
 </code></pre>
 <p>Now you can install Epinio on the Cluster.</p>
-<h3 id="install-epinio-on-the-cluster-3"><a class="header" href="#install-epinio-on-the-cluster-3">Install Epinio on the Cluster</a></h3>
+<h3 id="install-epinio-on-the-cluster-2"><a class="header" href="#install-epinio-on-the-cluster-2">Install Epinio on the Cluster</a></h3>
 <p>Follow <a href="installation/./install_epinio_magicDNS.html">Installation using a MagicDNS Service</a> to install Epinio in your test environment.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installing-wordpress-with-epinio"><a class="header" href="#installing-wordpress-with-epinio">Installing Wordpress with Epinio</a></h1>
 <h2 id="create-a-directory-for-your-application"><a class="header" href="#create-a-directory-for-your-application">Create a directory for your application:</a></h2>
@@ -864,27 +823,31 @@ on how you installed them.</p>
 TODO: Explain how to configure external S3 storage.
 TODO: Consider doing this in a separate document about the components. Or even, one document per components and links here.</p>
 <ul>
-<li>
-<p><a href="explanations/advanced.html#epinio-installed-components">Epinio installed components</a></p>
+<li><a href="explanations/advanced.html#epinio-advanced-topics">Epinio, Advanced Topics</a>
+<ul>
+<li><a href="explanations/advanced.html#contents">Contents</a></li>
+<li><a href="explanations/advanced.html#epinio-installed-components">Epinio installed components</a>
 <ul>
 <li><a href="explanations/advanced.html#traefik">Traefik</a></li>
 <li><a href="explanations/advanced.html#linkerd">Linkerd</a></li>
 <li><a href="explanations/advanced.html#epinio">Epinio</a></li>
 <li><a href="explanations/advanced.html#cert-manager">Cert Manager</a></li>
 <li><a href="explanations/advanced.html#kubed">Kubed</a></li>
-<li><a href="explanations/advanced.html#google-service-broker">Google Service Broker</a> (optional)</li>
-<li><a href="explanations/advanced.html#minibroker">Minibroker</a> (optional)</li>
+<li><a href="explanations/advanced.html#google-service-broker">Google Service Broker</a></li>
+<li><a href="explanations/advanced.html#minibroker">Minibroker</a></li>
 <li><a href="explanations/advanced.html#service-catalog">Service Catalog</a></li>
 <li><a href="explanations/advanced.html#minio">Minio</a></li>
 <li><a href="explanations/advanced.html#container-registry">Container Registry</a></li>
 <li><a href="explanations/advanced.html#tekton">Tekton</a></li>
 </ul>
 </li>
-<li>
-<p><a href="explanations/advanced.html#other-advanced-topics">Other advanced topics</a></p>
+<li><a href="explanations/advanced.html#other-advanced-topics">Other Advanced Topics</a>
 <ul>
 <li><a href="explanations/advanced.html#git-pushing">Git Pushing</a></li>
 <li><a href="explanations/advanced.html#traefik-and-linkerd">Traefik and Linkerd</a></li>
+<li><a href="explanations/advanced.html#example">Example</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -897,12 +860,6 @@ running. If it wasn't there it installed it.</p>
 <code>traefik</code> and <code>kube-system</code>, it is possible that it tries to install
 it, despite the cluster having Traefik running. Just in an unexpected
 place.</p>
-<p>The <code>install</code> command provides the option <code>--skip-traefik</code> to handle
-this kind of situation.</p>
-<p>Installing Epinio on your cluster with the command</p>
-<pre><code class="language-bash">$ epinio install --skip-traefik
-</code></pre>
-<p>forces Epinio to not install its own Traefik.</p>
 <p>Note that having some other (non-Traefik) Ingress controller running
 is <strong>not</strong> a reason to prevent Epinio from installing Traefik. All the
 Ingresses used by Epinio expect to be handled by Traefik.</p>
@@ -916,19 +873,11 @@ installation in any way. Here are the relevant upstream docs for the redirection
 <p>By default, Epinio installs <a href="https://linkerd.io/">Linkerd</a> on your cluster. The
 various namespaces created by Epinio become part of the Linkerd Service Mesh and
 thus all communication between pods is secured with mutualTLS.</p>
-<p>In some cases you may not want Epinio to install Linkerd, either because you did
-that manually before you install Epinio or for other reasons. You can provide
-the <code>--skip-linkerd</code> flag to the <code>install</code> command to prevent Epinio from
-installing any of the Linkerd control plane components:</p>
-<pre><code class="language-bash">$ epinio install --skip-linkerd
-</code></pre>
 <h3 id="epinio"><a class="header" href="#epinio">Epinio</a></h3>
 <p>The epinio binary is used as:</p>
 <ul>
 <li>a cli tool, used to push applications, create services etc.</li>
 <li>the API server component which runs inside the cluster (invoked with the <code>epinio server</code> command)</li>
-<li>the installer that installs the various needed components on the cluster. The
-API server from the previous point is one of them.</li>
 </ul>
 <p>Epinio cli functionality is implemented using the endpoints provided by the Epinio API server
 component. For example, when the user asks Epinio to &quot;push&quot; an application, the
@@ -975,10 +924,10 @@ The service catalog is the component behind the <a href="explanations/../referen
 <h3 id="container-registry"><a class="header" href="#container-registry">Container Registry</a></h3>
 <p>The result of Epinio's application staging is a container image. This image is used to create a Kubernetes deployment to run the application code.
 The <a href="explanations/advanced.html#tekton">Tekton</a> pipeline requires that image to be written to some container registry (See also <a href="explanations/../explanations/detailed-push-process.html">Detailed push process</a>). </p>
-<p>By default, <a href="explanations/../references/cli/epinio_install.html"><code>epinio install</code></a> deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
+<p>By default the Epinio installation deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
 If you want to look at how this registry is installed, have a look at the helm chart here:</p>
 <ul>
-<li>https://github.com/epinio/epinio/tree/main/assets/container-registry/chart/container-registry</li>
+<li>https://github.com/epinio/helm-charts/tree/main/chart/container-registry</li>
 </ul>
 <p>Epinio comes with two consumers of this registry:</p>
 <ol>
@@ -995,9 +944,9 @@ Epinio controls the Tekton deployment and ensures that whatever CA is used to si
 <p>Depending on the use case all 3 options may be valid:</p>
 <ul>
 <li>Option #1 can be selected when the user is installing Epinio with a custom tls-issuer. The user controls the CA and can make sure that this CA is trusted by the cluster before even installing Epinio.
-In this case, since the user knows that Kubernetes will trust the registry's certificate, the <code>--force-kube-internal-registry-tls</code> flag should be used on <a href="explanations/../references/cli/epinio_install.html"><code>epinio install</code></a>.</li>
-<li>Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. <code>letsencrypt-production</code>). The flag <code>--force-kube-internal-registry-tls</code> should be used in that case as well.</li>
-<li>Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the <code>--force-kube-internal-registry-tls</code> flag in this case (default is &quot;false&quot;). Even in this case, Tekton still accesses the registry over TLS.</li>
+In this case, since the user knows that Kubernetes will trust the registry's certificate, the <code>forceKubeInternalRegistryTLS</code> variable should be used during the installation.</li>
+<li>Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. <code>letsencrypt-production</code>). The <code>forceKubeInternalRegistryTLS</code> variable should be used in that case as well.</li>
+<li>Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the <code>forceKubeInternalRegistryTLS</code> variable in this case (default is &quot;false&quot;). Even in this case, Tekton still accesses the registry over TLS.</li>
 </ul>
 <p>Epinio also allows the use of an external registry. The <a href="explanations/../howtos/setup-external-registry.html">instructions</a> on how such a registry can be set up are in a separate document.</p>
 <h3 id="tekton"><a class="header" href="#tekton">Tekton</a></h3>
@@ -1031,7 +980,7 @@ epinio push --name NAME
 epinio push --name NAME --path DIRECTORY
 epinio push --name NAME --git GIT-REPOSITORY-URL,REVISION
 </code></pre>
-<h2 id="traefik-and-linkerd"><a class="header" href="#traefik-and-linkerd">Traefik and Linkerd</a></h2>
+<h3 id="traefik-and-linkerd"><a class="header" href="#traefik-and-linkerd">Traefik and Linkerd</a></h3>
 <p>By default, with Epinio installing both Traefik and Linkerd, Epinio's
 installation process ensures that the Traefik pods are included in the Linkerd
 mesh, thus ensuring that external communication to applications is secured on
@@ -1089,11 +1038,11 @@ variable <code>EPINIO_CONFIG</code> to the desired path.</p>
 <p>The namespace can be changed by running <code>epinio target</code> with the
 name of the desired namespace as its single argument.</p>
 <p>User name and password are used by the client to authenticate itself
-when talking to Epinio's API server. The <code>epinio install</code> command
+when talking to Epinio's API server. The <code>epinio config update</code> command
 saves the initial information to the configuration.</p>
 <p>The installation uses a the wildcard domain <code>omg.howdoi.website</code> and the
 <code>epinio-ca</code> issuer by default.</p>
-<p><code>epinio install</code> saves the associated CA
+<p><code>epinio config update</code> saves the associated CA
 certificate to the configuration so that future invocations of the
 client are able to verify the actual certificate when talking to
 Epinio's API server.</p>
@@ -1267,20 +1216,11 @@ instructions:</p>
 </ul>
 <p>The issuer will be used for both, the Epinio API endpoint and workloads (i.e. pushed applications).</p>
 <h2 id="choosing-a-different-issuer"><a class="header" href="#choosing-a-different-issuer">Choosing a Different Issuer</a></h2>
-<p>When installing Epinio, one can choose between those issuers by using the <code>--tls-issuer</code> argument:</p>
-<pre><code>epinio install --tls-issuer=letsencrypt-production
-</code></pre>
+<p>When installing Epinio, one can choose between those issuers by using the <code>tlsIssuer</code> variable:</p>
 <h2 id="using-a-custom-issuer"><a class="header" href="#using-a-custom-issuer">Using a custom issuer</a></h2>
 <p>It's possible to create a cert-manager cluster issuer in the cluster, before installing Epinio and referencing it by name when installing.</p>
 <p>However, this is only possible if the cert-manager CRD is present in the cluster.</p>
-<p>We can use a split install, to install cert-manager first, then create the cluster issuer and finally install Epinio.</p>
-<h3 id="split-install"><a class="header" href="#split-install">Split Install</a></h3>
-<p>Install cert-manager first:</p>
-<pre><code>epinio install-cert-manager
-</code></pre>
-<p>Then after creating the cluster issuer, install Epinio:</p>
-<pre><code>epinio install --skip-cert-manager
-</code></pre>
+<p>Install cert-manager first, then create the cluster issuer and finally install Epinio with the correct <code>tlsIssuer</code>.</p>
 <h3 id="cluster-issuer-for-acme-dns-challenge"><a class="header" href="#cluster-issuer-for-acme-dns-challenge">Cluster Issuer for ACME DNS Challenge</a></h3>
 <p>For example to use Letsencrypt with a DNS challenge, which supports wildcards and private IPs, create this cluster issuer after installing cert-manager:</p>
 <pre><code>apiVersion: cert-manager.io/v1
@@ -1305,8 +1245,11 @@ spec:
         - '*.example.com'
 </code></pre>
 <p>Note: This uses the Letsencrypt staging endpoint for testing. More information in the <a href="https://cert-manager.io/docs/configuration/acme/dns01/">cert-manager ACME docs</a>.</p>
-<p>You can then install Epinio, without cert-manager, pointing to the new cluster issuer:</p>
-<pre><code>epinio install --skip-cert-manager --tls-issuer=dns-staging
+<p>You can then install Epinio, with the <code>skipCertManager</code> variable, and the <code>tlsIssuer</code> pointing to the new cluster issuer:</p>
+<pre><code>helm install \
+  --set skipCertManager=true \
+  --set tlsIssuer=dns-staging \
+  epinio-installer epinio/epinio-installer
 </code></pre>
 <h3 id="cluster-issuer-for-existing-private-ca"><a class="header" href="#cluster-issuer-for-existing-private-ca">Cluster Issuer for Existing Private CA</a></h3>
 <p>According to the instructions from https://cert-manager.io/docs/configuration/ca/, follow these steps:</p>
@@ -1332,13 +1275,20 @@ spec:
     secretName: private-ca-secret
 </code></pre>
 <h4 id="install-epinio-2"><a class="header" href="#install-epinio-2">Install Epinio</a></h4>
-<p>Use the <code>--tls-issuer</code> argument to choose your cluster issuer:</p>
-<pre><code>epinio install --skip-cert-manager --tls-issuer=private-ca
+<p>Use the <code>tlsIssuer</code> variable to choose your cluster issuer:</p>
+<pre><code>helm install \
+  --set skipCertManager=true \
+  --set tlsIssuer=private-ca \
+  epinio-installer epinio/epinio-installer
 </code></pre>
 <h1 id="use-tls-when-pulling-from-internal-registry"><a class="header" href="#use-tls-when-pulling-from-internal-registry">Use TLS When Pulling From Internal Registry</a></h1>
 <p>Epinio comes with its own registry for Docker images. This registry needs to be reachable from the Kubernetes nodes.
 If you are using a certificate issuer whose CA is trusted by the Kubernetes nodes, you can turn on SSL for pulling images from the internal registry:</p>
 <pre><code>epinio install --tls-issuer=letsencrypt-production --use-internal-registry-node-port=false
+</code></pre>
+<pre><code>helm install \
+  --set tlsIssuer=letsencrypt-production \
+  epinio-installer epinio/epinio-installer
 </code></pre>
 <p>Without the node port, pushing images to the registry uses the &quot;epinio-registry&quot; ingress, which is handled by Traefik.</p>
 <h1 id="background-on-cert-manager-and-issuers"><a class="header" href="#background-on-cert-manager-and-issuers">Background on Cert Manager and Issuers</a></h1>
@@ -1347,7 +1297,7 @@ The certificate is stored in a <em>secret</em>, in the namespace the certificate
 An <em>ingress</em> resource can then use that secret to set up TLS.</p>
 <p>Example:</p>
 <ol>
-<li><code>epinio install</code> creates a certificate resource in epinio namespace</li>
+<li>The Epinio installation creates a certificate resource in epinio namespace</li>
 </ol>
 <pre><code>apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
@@ -1495,7 +1445,7 @@ metadata:
 <p>So the GitJob can authenticate and push correctly, we can upload our Epinio config file to the cluster with:</p>
 <pre><code>kubectl create secret generic epinio-creds --from-file=$HOME/.config/epinio/config.yaml
 </code></pre>
-<p>This will create a secret containing the config.yaml that was created locally when you do <code>epinio install</code> or <code>epinio config update</code></p>
+<p>This will create a secret containing the config.yaml that was created locally when you do <code>epinio config update</code></p>
 <h3 id="setup-sample-project"><a class="header" href="#setup-sample-project">Setup Sample Project</a></h3>
 <p>Next, we can use the 12factor app to show how to write a GitJob.</p>
 <p>Create a yaml file called <code>12factor-gitjob.yaml</code> containing:</p>
@@ -1581,17 +1531,16 @@ to create a bucket and then write to it.</p>
 <p>When you successfully push a new version of your application, Epinio will remove the resources of the previous staging process from the Kubernetes cluster and
 will also delete the previous version of the sources from S3. This way, Epinio doesn't store more than it needs on the S3 storage and the user doesn't need to manually cleanup.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="how-to-setup-external-epinio-registry"><a class="header" href="#how-to-setup-external-epinio-registry">How to setup external Epinio registry</a></h2>
-<p>Epinio allows the use of an external registry for the storage of application images.  This can be achieved by setting the following arguments during <code>epinio install</code>:</p>
-<pre><code>epinio install \
-  --external-registry-namespace=$REGISTRY_NAMESPACE \
-  --external-registry-password=$REGISTRY_PASSWORD \
-  --external-registry-url=$REGISTRY_URL \
-  --external-registry-username=$REGISTRY_USER \
-  ...
+<p>Epinio allows the use of an external registry for the storage of application images.  This can be achieved by setting the following variables during the <code>helm install</code>:</p>
+<pre><code>helm install \
+  --set externalRegistryNamespace=$REGISTRY_NAMESPACE \
+  --set externalRegistryURL=$REGISTRY_URL \
+  --set externalRegistryUsername=$REGISTRY_USER \
+  --set externalRegistryPassword=$REGISTRY_PASSWORD \
+  epinio-installer epinio/epinio-installer
 </code></pre>
-<p>(See also <code>epinio install --help</code>)</p>
 <p>Using <a href="https://hub.docker.com/">dockerhub</a> as an example, the user would have to set the value of <code>$REGISTRY_URL</code> to <code>registry.hub.docker.com</code>, <code>$REGISTRY_USER</code> and <code>$REGISTRY_PASSWORD</code> would be set to the dockerhub credentials, and <code>$REGISTRY_NAMESPACE</code> would be either an organization or the username.</p>
-<p>When the above arguments are set, Epinio doesn't deploy a registry on the cluster. Also the <code>--force-kube-internal-registry-tls</code> flag should not be used because it would have no effect.</p>
+<p>When the above arguments are set, Epinio doesn't deploy a registry on the cluster. Also the <code>forceKubeInternalRegistryTLS</code> variable should not be set because it would have no effect.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="reference-documentation"><a class="header" href="#reference-documentation">Reference documentation</a></h1>
 <p>For example all CLI commands and their arguments.</p>
 <ul>

@@ -166,7 +166,7 @@ metadata:
 <p>So the GitJob can authenticate and push correctly, we can upload our Epinio config file to the cluster with:</p>
 <pre><code>kubectl create secret generic epinio-creds --from-file=$HOME/.config/epinio/config.yaml
 </code></pre>
-<p>This will create a secret containing the config.yaml that was created locally when you do <code>epinio install</code> or <code>epinio config update</code></p>
+<p>This will create a secret containing the config.yaml that was created locally when you do <code>epinio config update</code></p>
 <h3 id="setup-sample-project"><a class="header" href="#setup-sample-project">Setup Sample Project</a></h3>
 <p>Next, we can use the 12factor app to show how to write a GitJob.</p>
 <p>Create a yaml file called <code>12factor-gitjob.yaml</code> containing:</p>

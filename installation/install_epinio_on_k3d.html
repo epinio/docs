@@ -169,9 +169,6 @@ k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
 </code></pre>
 <h3 id="install-epinio-on-the-cluster"><a class="header" href="#install-epinio-on-the-cluster">Install Epinio on the Cluster</a></h3>
 <p>Follow <a href="./install_epinio_magicDNS.html">Installation using a MagicDNS Service</a> to install Epinio in your test environment.</p>
-<p>If k3d is inside a VM, in addition to the special k3d setup, explained above, use this system domain instead:</p>
-<pre><code class="language-bash">epinio install --system-domain=&lt;YOUR-IP&gt;.omg.howdoi.website
-</code></pre>
 <p><code>&lt;YOUR-IP&gt;</code> can be found by running</p>
 <pre><code class="language-bash">ifconfig | grep &quot;inet.*broadcast&quot;
 </code></pre>

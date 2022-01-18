@@ -163,27 +163,7 @@ ga('send', 'pageview');
 <p>Make sure Rancher Desktop is running.</p>
 <p>Rancher Desktop can report Kubernetes as running while some pods are actually not yet ready.
 Manual verification is possible by executing the command <code>kubectl get pods -A</code> in a terminal and checking that all pods report either <code>Running</code> or <code>Completed</code> as their status.</p>
-<h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
-<ol>
-<li>
-<p>Start a terminal (e.g. type <code>cmd</code> in the search field) and change to the directory where <code>epinio-windows-amd64</code> is located, e.g. <code>cd Downloads</code></p>
-</li>
-<li>
-<p>Run <code>epinio-windows-amd64 install</code></p>
-</li>
-<li>
-<p>Copy the binary to a directory of your choice and add it to the <code>PATH</code> variable as described by <a href="https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53">Kevin Berg's article</a>. This allows execution of Epinio directly from any terminal.</p>
-</li>
-</ol>
-<h3 id="mac"><a class="header" href="#mac">Mac</a></h3>
-<ol>
-<li>
-<p>Start a terminal and change to the directory where <code>epinio-darwin-amd64</code> is located, e.g. <code>cd Downloads</code></p>
-</li>
-<li>
-<p>Run <code>epinio-darwin-amd64 install</code></p>
-</li>
-</ol>
+<p>Follow <a href="./install_epinio_customDNS.html">Installation using a Custom Domain</a> for test and production environments.</p>
 <h3 id="linux"><a class="header" href="#linux">Linux</a></h3>
 <p>Linux is not yet supported by Rancher Desktop - see https://github.com/rancher-sandbox/rancher-desktop/issues/426</p>
 

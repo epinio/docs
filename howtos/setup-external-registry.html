@@ -151,17 +151,16 @@ ga('send', 'pageview');
                 <div id="content" class="content">
                     <main>
                         <h2 id="how-to-setup-external-epinio-registry"><a class="header" href="#how-to-setup-external-epinio-registry">How to setup external Epinio registry</a></h2>
-<p>Epinio allows the use of an external registry for the storage of application images.  This can be achieved by setting the following arguments during <code>epinio install</code>:</p>
-<pre><code>epinio install \
-  --external-registry-namespace=$REGISTRY_NAMESPACE \
-  --external-registry-password=$REGISTRY_PASSWORD \
-  --external-registry-url=$REGISTRY_URL \
-  --external-registry-username=$REGISTRY_USER \
-  ...
+<p>Epinio allows the use of an external registry for the storage of application images.  This can be achieved by setting the following variables during the <code>helm install</code>:</p>
+<pre><code>helm install \
+  --set externalRegistryNamespace=$REGISTRY_NAMESPACE \
+  --set externalRegistryURL=$REGISTRY_URL \
+  --set externalRegistryUsername=$REGISTRY_USER \
+  --set externalRegistryPassword=$REGISTRY_PASSWORD \
+  epinio-installer epinio/epinio-installer
 </code></pre>
-<p>(See also <code>epinio install --help</code>)</p>
 <p>Using <a href="https://hub.docker.com/">dockerhub</a> as an example, the user would have to set the value of <code>$REGISTRY_URL</code> to <code>registry.hub.docker.com</code>, <code>$REGISTRY_USER</code> and <code>$REGISTRY_PASSWORD</code> would be set to the dockerhub credentials, and <code>$REGISTRY_NAMESPACE</code> would be either an organization or the username.</p>
-<p>When the above arguments are set, Epinio doesn't deploy a registry on the cluster. Also the <code>--force-kube-internal-registry-tls</code> flag should not be used because it would have no effect.</p>
+<p>When the above arguments are set, Epinio doesn't deploy a registry on the cluster. Also the <code>forceKubeInternalRegistryTLS</code> variable should not be set because it would have no effect.</p>
 
                     </main>
 

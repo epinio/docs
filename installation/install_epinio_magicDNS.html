@@ -151,13 +151,7 @@ ga('send', 'pageview');
                 <div id="content" class="content">
                     <main>
                         <h1 id="install-epinio-using-a-magic-dns-service"><a class="header" href="#install-epinio-using-a-magic-dns-service">Install Epinio using a Magic DNS Service</a></h1>
-<p>This is about just running <code>epinio install</code>. It should work on nearly any kubernetes distribution and provides you with a test environment.
-You will automatically get a magic wildcard domain like &quot;10.0.0.1.omg.howdoi.website&quot; which points to the public IP of Traefik.</p>
-<h2 id="install-the-epinio-cli"><a class="header" href="#install-the-epinio-cli">Install the Epinio CLI</a></h2>
-<p>If not done already, refer to <a href="./install_epinio_cli.html">Install the Epinio CLI</a>.</p>
-<h3 id="install-epinio-on-the-cluster"><a class="header" href="#install-epinio-on-the-cluster">Install Epinio on the Cluster</a></h3>
-<pre><code class="language-bash">epinio install
-</code></pre>
+<p>In order to use a magic domain that will resolve to a local/private IP you can use the <a href="./install_epinio_auto.html">auto installation method</a> and set the EPINIO_SYSTEM_DOMAIN variable to <code>&lt;IP&gt;.omg.howdoi.website</code>.</p>
 <h3 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h3>
 <h4 id="traefik"><a class="header" href="#traefik">Traefik</a></h4>
 <p>In case of trouble with Epinio's Traefik component or Ingress controllers, the <a href="../explanations/advanced.html#traefik">Traefik</a> section in the
