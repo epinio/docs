@@ -10,15 +10,6 @@ For test and production environments. The installation will be done in three ste
 
 If not done already, refer to [Install the Epinio CLI](./install_epinio_cli.md).
 
-## Install Ingress In Cluster
-
-First install ingress and wait for the `loadbalancer-ip` to be provisioned for the `traefik` public IP. Then map the `loadbalancer-ip` to your `Domain Name` e.g. `test.example.com` and wait for it to be mapped.
-
-```bash
-epinio install-ingress
-```
-
-The command prints the `loadbalancer-ip` ("EXTERNAL-IP") needed. Note however that it can also print a loadbalanced FQDN instead, which may resolve to multiple IPs.
 
 ## Configure your custom DOMAIN
 
@@ -39,18 +30,6 @@ and Ingress will route the traffic accordingly.
 
 Find [DNS Configuration Examples](#dns-configuration-examples) below.
 
-## Install Epinio In Cluster
-With DNS now available the second step actually installs the cluster:
-
-```bash
-epinio install --system-domain test.example.com --tls-issuer=letsencrypt-production --use-internal-registry-node-port=false
-```
-
-***
-
-###### Note: The issuer `letsencrypt-production` will work only, if your custom domain, e.g. "test.example.com", is reachable from the internet. For test, or internal environments, where your custom domain isn't reachable from the internet, you need to choose a different issuer. E.g. if you would use the custom domain "test.internal.com", `epinio install --system-domain test.internal.com` will default to the `epinio-ca` issuer.
-
-***
 
 ## DNS Configuration Examples
 

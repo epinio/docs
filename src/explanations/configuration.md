@@ -34,13 +34,13 @@ The namespace can be changed by running `epinio target` with the
 name of the desired namespace as its single argument.
 
 User name and password are used by the client to authenticate itself
-when talking to Epinio's API server. The `epinio install` command
+when talking to Epinio's API server. The `epinio config update` command
 saves the initial information to the configuration.
 
 The installation uses a the wildcard domain `omg.howdoi.website` and the
 `epinio-ca` issuer by default.
 
-`epinio install` saves the associated CA
+`epinio config update` saves the associated CA
 certificate to the configuration so that future invocations of the
 client are able to verify the actual certificate when talking to
 Epinio's API server.
