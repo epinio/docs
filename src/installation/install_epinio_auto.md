@@ -56,7 +56,7 @@ $ helm repo add epinio https://epinio.github.io/helm-charts
 Install Epinio with the epinio-installer helm chart:
 
 ```
-helm install --set systemDomain=$EPINIO_SYSTEM_DOMAIN epinio-installer epinio/epinio-installer
+helm install --set domain=$EPINIO_SYSTEM_DOMAIN epinio-installer epinio/epinio-installer
 ```
 
 ### Setup DNS
