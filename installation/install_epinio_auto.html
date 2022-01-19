@@ -185,7 +185,7 @@ next step:</p>
 <pre><code>$ helm repo add epinio https://epinio.github.io/helm-charts
 </code></pre>
 <p>Install Epinio with the epinio-installer helm chart:</p>
-<pre><code>helm install --set systemDomain=$EPINIO_SYSTEM_DOMAIN epinio-installer epinio/epinio-installer
+<pre><code>helm install --set domain=$EPINIO_SYSTEM_DOMAIN epinio-installer epinio/epinio-installer
 </code></pre>
 <h3 id="setup-dns"><a class="header" href="#setup-dns">Setup DNS</a></h3>
 <p>After the installation is complete, the domain should point to the IP address of
