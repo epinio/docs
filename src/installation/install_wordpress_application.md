@@ -58,4 +58,4 @@ Wordpress needs a database to work. After visiting the route of your deployed
 application you will have to set the connection details to the database.
 
 You can install a MySQL database on your cluster or use an external one. One
-option is using a helm chart like this one: https://bitnami.com/stack/mysql/helm
+option is using a helm chart like [this one](https://bitnami.com/stack/mysql/helm)
