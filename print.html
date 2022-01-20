@@ -710,19 +710,38 @@ k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rancher-desktop-configuration"><a class="header" href="#rancher-desktop-configuration">Rancher Desktop configuration</a></h1>
 <h2 id="rancher-desktop-prerequisites"><a class="header" href="#rancher-desktop-prerequisites">Rancher Desktop Prerequisites</a></h2>
 <ul>
-<li>Running on Windows requires Windows Subsystem for Linux (WSL) which is automatically installed by Rancher Desktop</li>
+<li>Running on Windows requires Windows Subsystem for Linux (WSL) which is automatically installed by Rancher Desktop.</li>
 </ul>
 <h3 id="install-rancher-desktop"><a class="header" href="#install-rancher-desktop">Install Rancher Desktop</a></h3>
-<p>Install the <a href="https://github.com/rancher-sandbox/rancher-desktop/releases">latest version</a> from Rancher Desktop for your operating system</p>
+<p>Install the <a href="https://github.com/rancher-sandbox/rancher-desktop/releases">latest version</a> of Rancher Desktop for your operating system.</p>
 <h2 id="setup-kubernetes"><a class="header" href="#setup-kubernetes">Setup Kubernetes</a></h2>
-<p>When running Rancher Desktop for the first time wait until the initialization is completed. Make sure that a supported Kubernetes version is selected under <code>Kubernetes Settings</code>, e.g. <strong>v1.21.5</strong></p>
+<p>When running Rancher Desktop for the first time wait until the initialization is completed.</p>
+<p>Make sure that a supported Kubernetes version is selected under <code>Kubernetes Settings</code> (Epinio has been tested on <strong>v1.21.8</strong>, <strong>v1.22.5</strong> and <strong>v1.23.1</strong>).</p>
 <h2 id="install-epinio-1"><a class="header" href="#install-epinio-1">Install epinio</a></h2>
 <p>Make sure Rancher Desktop is running.</p>
 <p>Rancher Desktop can report Kubernetes as running while some pods are actually not yet ready.
 Manual verification is possible by executing the command <code>kubectl get pods -A</code> in a terminal and checking that all pods report either <code>Running</code> or <code>Completed</code> as their status.</p>
-<p>Follow <a href="installation/./install_epinio_customDNS.html">Installation using a Custom Domain</a> for test and production environments.</p>
-<h3 id="linux-1"><a class="header" href="#linux-1">Linux</a></h3>
-<p>Linux is not yet supported by Rancher Desktop - see https://github.com/rancher-sandbox/rancher-desktop/issues/426</p>
+<p>For now, Rancher Desktop configures his own loadbalancer (Traefik through K3s) and you have to set Epinio system domain according to the provided IP, for example:</p>
+<pre><code>LB_IP=$(kubectl describe svc traefik --namespace traefik \
+        | awk '/Ingress/ { print $3 }')
+
+export EPINIO_SYSTEM_DOMAIN=${LB_IP}.omg.howdoi.website
+</code></pre>
+<p>Previous commands are for Bash, but can be easily adapted for Windows shell.</p>
+<p>If you don't want to use the default &quot;magic&quot; DNS please follow <a href="installation/./install_epinio_magicDNS.html">Install Epinio with &quot;magic&quot; DNS</a>.</p>
+<p>The Epinio installation is pretty much identical on Linux, MacOS and Windows:</p>
+<ol>
+<li>
+<p>Start a terminal, use <code>cmd</code> or <code>powershell</code> on Windows (latest one is preferred) and your preferred one on Linux/MacOS.</p>
+</li>
+<li>
+<p>Download the <a href="https://github.com/epinio/epinio/releases">latest version</a> of Epinio binary and copy it on your client. It is recommended to add it to the <code>PATH</code> variable (<code>export PATH=&lt;epinio-binary-path&gt;:$PATH</code> on Linux/MacOS with Bash and on Windows please follow <a href="https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53">Kevin Berg's article</a>).</p>
+</li>
+<li>
+<p>Use <code>helm</code> to install Epinio by following either the <a href="installation/./install_epinio_auto.html">Method 1</a> (recommended for most cases) or the <a href="installation/./install_epinio_manual.html">Method 2</a> (useful for advanced configuration or if you already have some components in your environment). As <strong>Traefik</strong> is already installed, just bypass this step (by adding option <code>--set skipTraefik=true</code> for Method 1).</p>
+</li>
+</ol>
+<p><strong>NOTE:</strong> <em>there is currently a <a href="https://github.com/rancher-sandbox/rancher-desktop/issues/576">blocking issue</a> on Linux which prevent Epinio to push application!</em></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-minikube-kubernetes-cluster"><a class="header" href="#creating-a-minikube-kubernetes-cluster">Creating a Minikube Kubernetes Cluster</a></h1>
 <h2 id="get-minikube-kubernetes-cluster"><a class="header" href="#get-minikube-kubernetes-cluster">Get Minikube Kubernetes Cluster</a></h2>
 <h3 id="install-minikube"><a class="header" href="#install-minikube">Install Minikube</a></h3>
