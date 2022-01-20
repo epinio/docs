@@ -154,12 +154,18 @@ ga('send', 'pageview');
 <p>For test and production environments. The installation will be done in three steps.</p>
 <ul>
 <li>Install ingress in cluster</li>
-<li>Configure your custom domain</li>
 <li>Install Epinio in cluster</li>
+<li>Configure your Custom Domain</li>
 </ul>
 <h2 id="install-the-epinio-cli"><a class="header" href="#install-the-epinio-cli">Install the Epinio CLI</a></h2>
 <p>If not done already, refer to <a href="./install_epinio_cli.html">Install the Epinio CLI</a>.</p>
-<h2 id="configure-your-custom-domain"><a class="header" href="#configure-your-custom-domain">Configure your custom DOMAIN</a></h2>
+<h2 id="install-epinio-on-your-cluster"><a class="header" href="#install-epinio-on-your-cluster">Install Epinio on your cluster</a></h2>
+<p>Use <code>helm</code> to install Epinio by following either:</p>
+<ul>
+<li><a href="./install_epinio_auto.html">Method 1</a>, recommended for most cases</li>
+<li><a href="./install_epinio_manual.html">Method 2</a>, useful for advanced configuration or if you already have some components in your environment</li>
+</ul>
+<h2 id="configure-your-custom-domain"><a class="header" href="#configure-your-custom-domain">Configure your Custom Domain</a></h2>
 <p>Currently we recommend to configure a wildcard domain for Epinio.</p>
 <p>Given you own the domain <strong>&quot;example.com&quot;</strong>, you would configure a subdomain e.g. <strong>&quot;test.example.com&quot;</strong> for Epinio.
 Now you will have to configure your DNS in a way, that any request towards &quot;test.example.com&quot; will resolve to the &quot;EXTERNAL-IP&quot; of Traefik, 

@@ -491,12 +491,18 @@ Go Version: go1.17
 <p>For test and production environments. The installation will be done in three steps.</p>
 <ul>
 <li>Install ingress in cluster</li>
-<li>Configure your custom domain</li>
 <li>Install Epinio in cluster</li>
+<li>Configure your Custom Domain</li>
 </ul>
 <h2 id="install-the-epinio-cli"><a class="header" href="#install-the-epinio-cli">Install the Epinio CLI</a></h2>
 <p>If not done already, refer to <a href="installation/./install_epinio_cli.html">Install the Epinio CLI</a>.</p>
-<h2 id="configure-your-custom-domain"><a class="header" href="#configure-your-custom-domain">Configure your custom DOMAIN</a></h2>
+<h2 id="install-epinio-on-your-cluster"><a class="header" href="#install-epinio-on-your-cluster">Install Epinio on your cluster</a></h2>
+<p>Use <code>helm</code> to install Epinio by following either:</p>
+<ul>
+<li><a href="installation/./install_epinio_auto.html">Method 1</a>, recommended for most cases</li>
+<li><a href="installation/./install_epinio_manual.html">Method 2</a>, useful for advanced configuration or if you already have some components in your environment</li>
+</ul>
+<h2 id="configure-your-custom-domain"><a class="header" href="#configure-your-custom-domain">Configure your Custom Domain</a></h2>
 <p>Currently we recommend to configure a wildcard domain for Epinio.</p>
 <p>Given you own the domain <strong>&quot;example.com&quot;</strong>, you would configure a subdomain e.g. <strong>&quot;test.example.com&quot;</strong> for Epinio.
 Now you will have to configure your DNS in a way, that any request towards &quot;test.example.com&quot; will resolve to the &quot;EXTERNAL-IP&quot; of Traefik, 
@@ -574,7 +580,7 @@ $ORIGIN test.example.com.
 </code></pre>
 <p>Restart bind and verify that e.g. <code>&gt; host test.example.com</code> or <code>&gt; host epinio.test.example.com</code> will resolve to &quot;10.0.0.1&quot;.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="install-epinio-using-a-magic-dns-service"><a class="header" href="#install-epinio-using-a-magic-dns-service">Install Epinio using a Magic DNS Service</a></h1>
-<p>In order to use a magic domain that will resolve to a local/private IP you can use the <a href="installation/./install_epinio_auto.html">auto installation method</a> and set the EPINIO_SYSTEM_DOMAIN variable to <code>&lt;IP&gt;.omg.howdoi.website</code>.</p>
+<p>In order to use a magic domain that will resolve to a local/private IP you can use the <a href="installation/./install_epinio_auto.html">auto installation method (aka. Method 1)</a> and set the <strong>EPINIO_SYSTEM_DOMAIN</strong> variable to <code>&lt;IP&gt;.omg.howdoi.website</code>.</p>
 <h3 id="troubleshooting-1"><a class="header" href="#troubleshooting-1">Troubleshooting</a></h3>
 <h4 id="traefik-1"><a class="header" href="#traefik-1">Traefik</a></h4>
 <p>In case of trouble with Epinio's Traefik component or Ingress controllers, the <a href="installation/../explanations/advanced.html#traefik">Traefik</a> section in the
