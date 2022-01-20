@@ -14,7 +14,7 @@ Epinio can be installed on any Kubernetes distribution, including the Public Clo
 
 ### Create an AKS cluster
 
-If you don't have an existing cluster, follow the [quickstart](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough) to create an AKS cluster.
+If you do not have an existing cluster, follow the [quickstart](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough) to create an AKS cluster.
 </details>
 
 <details>
