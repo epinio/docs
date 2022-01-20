@@ -40,7 +40,7 @@ If you don't have an existing cluster, follow the [quickstart](https://docs.aws.
 
 ### Create a GKE cluster
 
-If you don't have an existing cluster, follow the [quickstart](https://cloud.google.com/kubernetes-engine/docs/quickstart) to create a GKE cluster.
+If you do not have an existing cluster, follow the [quickstart](https://cloud.google.com/kubernetes-engine/docs/quickstart) to create a GKE cluster.
 </details>
 
 ## Installation on Public Clouds
