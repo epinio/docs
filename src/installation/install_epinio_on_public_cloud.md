@@ -27,7 +27,7 @@ If you do not have an existing cluster, follow the [quickstart](https://docs.mic
 
 ### Create an EKS cluster
 
-If you don't have an existing cluster, follow the [quickstart](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) to create an EKS cluster.
+If you do not have an existing cluster, follow the [quickstart](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) to create an EKS cluster.
 </details>
 
 <details>
