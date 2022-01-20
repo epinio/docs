@@ -30,13 +30,13 @@ export EPINIO_SYSTEM_DOMAIN=${LB_IP}.omg.howdoi.website
 ```
 Previous commands are for Bash, but can be easily adapted for Windows shell.
 
-If you don't want to use the default "magic" DNS please follow [Install Epinio with "magic" DNS](./install_epinio_magicDNS.md).
+If you don't want to use the default "magic" DNS please follow [Install Epinio with custom DNS](install_epinio_customDNS.md).
 
 The Epinio installation is pretty much identical on Linux, MacOS and Windows:
 1. Start a terminal, use `cmd` or `powershell` on Windows (latest one is preferred) and your preferred one on Linux/MacOS.
 
 2. Download the [latest version](https://github.com/epinio/epinio/releases) of Epinio binary and copy it on your client. It is recommended to add it to the `PATH` variable (`export PATH=<epinio-binary-path>:$PATH` on Linux/MacOS with Bash and on Windows please follow [Kevin Berg's article](https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53)).
 
-3. Use `helm` to install Epinio by following either the [Method 1](./install_epinio_auto.md) (recommended for most cases) or the [Method 2](./install_epinio_manual.md) (useful for advanced configuration or if you already have some components in your environment). As **Traefik** is already installed, just bypass this step (by adding option `--set skipTraefik=true` for Method 1).
+3. Use `helm` to install Epinio by following either the [Method 1](install_epinio_auto.md) (recommended for most cases) or the [Method 2](install_epinio_manual.md) (useful for advanced configuration or if you already have some components in your environment). As **Traefik** is already installed, just bypass this step (by adding option `--set skipTraefik=true` for Method 1).
 
 **NOTE:** *there is currently a [blocking issue](https://github.com/rancher-sandbox/rancher-desktop/issues/576) on Linux which prevent Epinio to push application!*
