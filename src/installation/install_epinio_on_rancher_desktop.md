@@ -30,7 +30,7 @@ export EPINIO_SYSTEM_DOMAIN=${LB_IP}.omg.howdoi.website
 ```
 Previous commands are for Bash, but can be easily adapted for Windows shell.
 
-If you don't want to use the default "magic" DNS please follow [Install Epinio with custom DNS](install_epinio_customDNS.md).
+If you do not want to use the default "magic" DNS please follow [Install Epinio with custom DNS](install_epinio_customDNS.md).
 
 The Epinio installation is pretty much identical on Linux, MacOS and Windows:
 1. Start a terminal, use `cmd` or `powershell` on Windows (latest one is preferred) and your preferred one on Linux/MacOS.
