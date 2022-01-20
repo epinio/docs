@@ -152,14 +152,19 @@ ga('send', 'pageview');
                     <main>
                         <h1 id="rancher-configuration"><a class="header" href="#rancher-configuration">Rancher configuration</a></h1>
 <p>Before installing Epinio, you need a running Rancher instance.</p>
-<p>If you don't get it installed yet, feel free to follow installation guides <a href="https://rancher.com/docs">here</a>.</p>
+<p>If you do not have such, please use the Rancher's <a href="https://rancher.com/docs">installation guides</a> to set one up.</p>
+<p>When I wrote this documentation, I used the following versions:</p>
+<ul>
+<li>epinio-installer (Helm chart) 0.3.5 </li>
+<li>Rancher 2.6.3</li>
+</ul>
 <h2 id="epinio-prerequisites"><a class="header" href="#epinio-prerequisites">Epinio Prerequisites</a></h2>
 <h3 id="kubernetes-cluster"><a class="header" href="#kubernetes-cluster">Kubernetes cluster</a></h3>
-<p>The supported configuration is to either deploy a new cluster or import an existing one in Rancher (those steps are detailed in the Rancher docs).</br>
-<em>For development purpose, you can imagine deploying Epinio on the same node where Rancher is installed but it requires more steps and keep in mind it's not supported by Rancher.</em></p>
+<p>The two supported methods are to either deploy a new cluster or to import an existing one into Rancher. The steps to take for either method are detailed in the Rancher documentation (See <code>Cluster Provisioning</code>).</br>
+<em>While it is possible (for development) to deploy Epinio on the same node where Rancher is installed, this requires more steps and is not supported by Rancher either.</em></p>
 <h3 id="rancher-settings"><a class="header" href="#rancher-settings">Rancher settings</a></h3>
 <p>At the time of writing, Epinio is not included in the latest stable Rancher version.</br>
-This means you need to update two settings in your Rancher dashboard.</br>
+This means that you have to update two settings in your Rancher dashboard.</br>
 Go to <code>Global settings</code> &gt; <code>Advanced settings</code>  and update the following settings:</br></p>
 <table><thead><tr><th></th><th></th></tr></thead><tbody>
 <tr><td><code>ui-dashboard-index</code></td><td><code>https://releases.rancher.com/dashboard/epinio-v0.3.0/index.html</code></td></tr>
@@ -170,19 +175,19 @@ Go to <code>Global settings</code> &gt; <code>Advanced settings</code>  and upda
 <p>In the Rancher Dashboard, go to the cluster on where you want to install Epinio.</p>
 <p>Add the Epinio Helm repo in <code>Apps &amp; Marketplace</code> &gt;  <code>Repositories</code> &gt; <code>Create</code></p>
 <p>Give a name to the repo and use <code>https://epinio.github.io/helm-charts</code> as index URL.</p>
-<p>Once done, go to Chart menu and install the <code>epinio-installer</code> chart.</p>
-<p>You can select the version you want but most of the time you will choose the latest one (default), then click install in the top right corner.</p>
-<p>On the next screen, you can select a namespace where the deployment will happen and you have to set a name to the deployment.</p>
-<p>Next screen is where you can configure Epinio according to your needs.</br>
-One of the most important setting here is <code>Access control allow origin</code>, it's mandatory filling your Rancher dashboard URL there.</br>
+<p>Once done, go to the Chart menu and install the <code>epinio-installer</code> chart.</p>
+<p>While you can select the version you want most of the time you should choose the latest one (default). Then click install in the top right corner.</p>
+<p>On the next screen, you can select a namespace where the deployment will happen. You also have to set a name for the deployment.</p>
+<p>The following screen is where you can configure Epinio according to your needs.</br>
+The most important setting here is <code>Access control allow origin</code>. It is mandatory to insert your Rancher dashboard URL into this field.</br>
 It basically allows Rancher to talk with the Epinio API.</p>
-<p>Once everything configured, click on the install button and wait few minutes for the installation to complete.</br>
-Follow instructions given by the Helm install command output.</p>
+<p>Once everything is configured, click on the install button and then wait a few minutes for the installation to complete.</br>
+After that follow the instructions given by the Helm install command output.</p>
 <h2 id="access-the-epinio-menu"><a class="header" href="#access-the-epinio-menu">Access the Epinio menu</a></h2>
 <p>Click on the Epinio icon in the main side menu (under <strong>GLOBAL APPS</strong>).</p>
 <p>You should see your fresh Epinio instance there.</p>
-<p><em>Pay attention, if you use an untrusted certificate, you have to click on the URL, accept the security exception and use the refresh button below Epinio instances.</br>
-Now the state should be available and you can access the instance by clicking on its name.</em></p>
+<p><strong>Attention</strong>. If you use an untrusted certificate, you have to click on the URL, accept the security exception and use the refresh button shown below the page title, i.e. <strong>Epinio instances</strong>.</br>
+Now the state should be available and you can access the instance by clicking on its name.*</p>
 <p>Once you are in your Epinio instance, you can either deploy or delete things like applications, namespace or services.</p>
 
                     </main>
