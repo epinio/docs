@@ -3,15 +3,20 @@
 For test and production environments. The installation will be done in three steps.
 
 - Install ingress in cluster
-- Configure your custom domain
 - Install Epinio in cluster
+- Configure your Custom Domain
 
 ## Install the Epinio CLI
 
 If not done already, refer to [Install the Epinio CLI](./install_epinio_cli.md).
 
+## Install Epinio on your cluster
 
-## Configure your custom DOMAIN
+Use `helm` to install Epinio by following either:
+- [Method 1](./install_epinio_auto.md), recommended for most cases
+- [Method 2](./install_epinio_manual.md), useful for advanced configuration or if you already have some components in your environment
+
+## Configure your Custom Domain
 
 Currently we recommend to configure a wildcard domain for Epinio.
 
