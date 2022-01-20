@@ -10,7 +10,7 @@ For the Epinio server, and related deployments we recommend to consider the foll
   - Windows
     - [Rancher Desktop](install_epinio_on_rancher_desktop.md)
   - MacOS
-- Kubernetes versions 1.18 .. 1.21
+- Kubernetes versions 1.20 .. 1.23
 - 2-4 VCPUs
 - 8GB RAM (system memory + 4GB)
 - 10GB Disk space (system disk + 5GB)
