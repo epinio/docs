@@ -56,7 +56,7 @@ $ helm repo add epinio https://epinio.github.io/helm-charts
 Install Epinio with the epinio-installer helm chart:
 
 ```
-helm install --set domain=$EPINIO_SYSTEM_DOMAIN epinio-installer epinio/epinio-installer
+$ helm install --set domain=$EPINIO_SYSTEM_DOMAIN epinio-installer epinio/epinio-installer
 ```
 
 ### Setup DNS
@@ -65,7 +65,7 @@ After the installation is complete, the domain should point to the IP address of
 Traefik. The following command may be used to find that IP address:
 
 ```
-$ kubectl  get svc -n traefik -o jsonpath="{.items[0].status.loadBalancer.ingress[0]}"
+$ kubectl get svc -n traefik -o jsonpath="{.items[0].status.loadBalancer.ingress[0]}"
 ```
 
 ### Access Epinio

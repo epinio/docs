@@ -18,6 +18,11 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 Follow [Installation using a MagicDNS Service](./install_epinio_magicDNS.md) to install Epinio in your test environment.
 
+`<IP>` can be found by running:
+```
+$ kubectl get svc -n kube-system traefik -o jsonpath="{.status.loadBalancer.ingress[0]}"
+```
+
 ### Troubleshooting
 
 #### DNS Issues

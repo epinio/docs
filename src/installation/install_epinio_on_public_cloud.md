@@ -43,17 +43,9 @@ If you do not have an existing cluster, follow the [quickstart](https://docs.aws
 If you do not have an existing cluster, follow the [quickstart](https://cloud.google.com/kubernetes-engine/docs/quickstart) to create a GKE cluster.
 </details>
 
-## Installation on Public Clouds
+## Installation on Public Clouds using Custom Domain
 
-Beside advanced installation options, there are two ways of installing Epinio:
-
-1. [Installation using a MagicDNS Service](./install_epinio_magicDNS.md)
-
-- For test environments, this should work on nearly any kubernetes distribution. Epinio will try to automatically create a magic DNS domain, e.g. **10.0.0.1.omg.howdoi.website**.
-
-2. [Installation using a Custom Domain](./install_epinio_customDNS.md)
-
-- For test and production environments, you will define a system domain, e.g. **test.example.com**.
+For test and production environments, you will define a system domain, e.g. **test.example.com** and you have to follow [Installation using a Custom Domain](./install_epinio_customDNS.md) documentation.
 
 ## Troubleshooting
 
