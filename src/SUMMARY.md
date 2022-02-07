@@ -38,6 +38,7 @@
   - [Push with gitjob](howtos/03_gitjob_push.md)
   - [Setup external S3 storage](howtos/04_setup_external_s3.md)
   - [Setup external container registry](howtos/05_setup_external_registry.md)
+  - [Port Forwarding](howtos/06_port_forwarding.md)
 
 - [Reference documentation](references/references.md)
 
