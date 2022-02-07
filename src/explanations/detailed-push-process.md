@@ -14,7 +14,7 @@ Epinio exposes an API server running inside the kubernetes cluster for all clien
 ## 2. Copying the code to S3
 
 One of the components Epinio installs on your cluster is [Minio](https://min.io/) (unless you [configured external S3](../howtos/setup-external-s3.md)).
-Minio is an S3 compatible storage solution. Epinio uses it to store the application's source code. It will later be used by the staging pipeline.
+Minio is an S3 compatible storage solution. Epinio uses it to store the application's source code. It will later be used by the staging job.
 
 So the first thing the Epinio API server does when it receives the upload request (the previous step), is to store the source code tarball on S3.
 
@@ -22,26 +22,33 @@ So the first thing the Epinio API server does when it receives the upload reques
 
 When the upload request is complete, the cli will send a request to the `stage` endpoint of the Epinio API server. This will instruct the server to start the staging of the uploaded code.
 
-## 4. Trigger the Pipeline
+## 4. Trigger the Job
 
-When the Epinio API server receives the stage request, it will create a [`PipelineRun`](https://github.com/tektoncd/pipeline/blob/main/docs/pipelineruns.md) that will run the staging Tekton pipeline using the version of the code referenced in the request. This pipeline has 3 steps. Their role is described in the following 3 sections.
+When the Epinio API server receives the stage request, it will create a [`Job`](https://kubernetes.io/docs/concepts/workloads/controllers/job/) that will run the staging scripts using the version of the code referenced in the request. This job has 3 steps. Their role is described in the following 3 sections.
 
 ## 5. Fetch the code
 
-The first step of the staging Tekton pipeline downloads the code from the S3 storage to a [workspace](https://github.com/tektoncd/pipeline/blob/main/docs/workspaces.md). This makes the code available to the following steps.
+The first step of staging downloads the code from the S3 storage to a workspace, i.e. directory. This makes the code available to the following steps.
 
-## 6. Stage
+## 6. Unpack the sources
 
-The second step of the staging Tekton pipeline uses the [paketo buildpacks](https://paketo.io/) to create a container image for your application. The definition of this Tekton task can be found [in the relevant upstream repo](https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.2) (though a copy of that is embedded in the Epinio binary).
-The result of a successful staging process is a new image pushed to the Registry component of Epinio. Read more about the registry here: [Epinio Registry](../explanations/advanced.md#container-registry).
+The second step of staging unpacks the downloaded archive into a sub-directory of the workspace. 
 
-## 7. Run
+## 7. Stage
+
+The third step of staging uses the [paketo buildpacks](https://paketo.io/) to create a container image for your application.
+The result of a successful staging process is a new image pushed to the Registry component of Epinio.
+Read more about the registry here: [Epinio Registry](../explanations/advanced.md#container-registry).
+
+## 8. Run
 
 To run a workload on Kubernetes having a container image is not enough. You need at least a Pod running with at least one container running that image.
 
-The last step of the staging Tekton pipeline creates the runtime Kubernetes resources that are needed to make your application available to the users outside the Kubernetes cluster. The most important resources that are created are a [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), a [Service](https://kubernetes.io/docs/concepts/services-networking/service/) and an [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) resource.
+This is done again by the API server, on demand by the client after noting the completion of the staging process.
 
-## 8. Pull Image
+The most important resources that are created are a [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), a [Service](https://kubernetes.io/docs/concepts/services-networking/service/) and an [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) resource.
+
+## 9. Pull Image
 
 The Deployment uses the image that was pushed as part of the staging step (see arrow 6). Now, the kubelet will pull the image from the registry for the deployment resource to use it.
 

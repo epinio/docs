@@ -64,16 +64,6 @@ $ helm install cert-manager --namespace cert-manager jetstack/cert-manager \
 		--set extraArgs[0]=--enable-certificate-owner-ref=true
 ```
 
-### Install Tekton
-
-(If you skipped Linkerd installation, you can skip the namespace label too)
-
-```
-$ kubectl create namespace tekton
-$ kubectl label namespace tekton "linkerd.io/inject"="enabled"
-$ kubectl apply -f https://raw.githubusercontent.com/epinio/installer/main/assets/installer/pipeline-v0.28.0.yaml
-```
-
 ### S3 compatible storage
 
 Epinio needs an S3 compatible storage solution to store the code of the various applications
@@ -89,7 +79,7 @@ the [epinio-install](.install_epinio_auto.md) deploys can also be used.
 The deployment of a registry inside the cluster is out of scope for this guide.
 One thing to keep in mind is that there are 2 consumers of that registry inside Epinio:
 
-- The Tekton pipeline that pushes the images
+- The staging job that pushes the images
 - Kubernetes when it pulls the generated application images to create the application pods
 
 Both of them should be able to access the registry and should trust the CA certificate that signs its TLS certificate.
