@@ -1,20 +1,21 @@
-## epinio service delete
+## epinio service update
 
-Delete a service
+Update a service
 
 ### Synopsis
 
-Delete service by name.
+Update service by name and change instructions through flags.
 
 ```
-epinio service delete NAME [flags]
+epinio service update NAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help     help for delete
-      --unbind   Unbind from applications before deleting
+  -h, --help             help for update
+  -r, --remove strings   service keys to remove
+  -s, --set strings      service key/value assignments to add/modify
 ```
 
 ### Options inherited from parent commands

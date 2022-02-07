@@ -31,13 +31,13 @@
   - [Security](explanations/security.md)
   - [Windows](explanations/windows.md)
 
-- [HowTos](howtos/howtos.md)
+- [HowTos](howtos/00_howtos.md)
 
-  - [Certificate Issuers](howtos/certificate_issuers.md)
-  - [Provision external IP address for local Kubernetes](howtos/provision_external_ip_for_local_kubernetes.md)
-  - [Push with gitjob](howtos/gitjob_push.md)
-  - [Setup external S3 storage](howtos/setup-external-s3.md)
-  - [Setup external container registry](howtos/setup-external-registry.md)
+  - [Certificate Issuers](howtos/01_certificate_issuers.md)
+  - [Provision external IP address for local Kubernetes](howtos/02_provision_external_ip_for_local_kubernetes.md)
+  - [Push with gitjob](howtos/03_gitjob_push.md)
+  - [Setup external S3 storage](howtos/04_setup_external_s3.md)
+  - [Setup external container registry](howtos/05_setup_external_registry.md)
 
 - [Reference documentation](references/references.md)
 
