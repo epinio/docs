@@ -70,9 +70,6 @@
         - [epinio_config_update](references/cli/epinio_config_update.md)
 
       - [epinio_info](references/cli/epinio_info.md)
-      - [epinio_install-cert-manager](references/cli/epinio_install-cert-manager.md)
-      - [epinio_install-ingress](references/cli/epinio_install-ingress.md)
-      - [epinio_install](references/cli/epinio_install.md)
       - [epinio_namespace](references/cli/epinio_namespace.md)
 
         - [epinio_namespace_create](references/cli/epinio_namespace_create.md)
@@ -92,7 +89,6 @@
         - [epinio_service_unbind](references/cli/epinio_service_unbind.md)
 
       - [epinio_target](references/cli/epinio_target.md)
-      - [epinio_uninstall](references/cli/epinio_uninstall.md)
       - [epinio_version](references/cli/epinio_version.md)
 
   - [Supported Applications](references/supported-apps.md)

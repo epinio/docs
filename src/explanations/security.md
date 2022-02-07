@@ -2,7 +2,7 @@
 
 Epinio secures access to its API with TLS and basic authentication.
 
-The installation process automatically creates and saves the necessary credentials
+Use the `epinio config update` command after installation to extract and save the necessary credentials
 (user, password) and certificates. The information is stored in Epinio's configuration,
 for pickup by other Epinio commands.
 
@@ -11,7 +11,7 @@ underlying cluster, and self-signed, and its CA certificate is stored in the
 configuration to allow verification.
 
 For a production-oriented deployment on the other hand, with a proper
-`--system-domain` specified, the certificate is obtained from
+domain specified (`--set domain=...` when installing the chart), the certificate is obtained from
 [Let's Encrypt](https://letsencrypt.org/) instead. Nothing is stored in the
 configuration in that case, as Let's Encrypt is a known CA.
 
