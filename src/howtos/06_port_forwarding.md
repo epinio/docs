@@ -1,26 +1,26 @@
 ## How to use Port Forwarding
 
-If you would like to use port forwarding to access or debug your running application this how-to will show you how to do it.
+This how-to demonstrates how to use port forwarding to access or debug a running application.
 
-If you want to debug your app you will need to set to `true` the [`BPL_DEBUG_ENABLED`](https://paketo.io/docs/howto/java/#enable-remote-debugging) flag.  
-To do so you can use the cli to set the environment variable on your app:
+To prepare the application for debugging the flag [`BPL_DEBUG_ENABLED`](https://paketo.io/docs/howto/java/#enable-remote-debugging) has to be set to `true`.  
+With the epinio cli this is done by setting the environment variable for the application:
 
 ```
 epinio app env set samplejava BPL_DEBUG_ENABLED true
 ```
 
-Then you can start port forwarding with the `port-forward` command:
+After the application has restarted (to integrate the change of the environment) port forwarding can be started with the `port-forward` command:
 
 ```
 epinio app port-forward samplejava 34505:8000 34506:8080
 ```
 
 This will forward the traffic coming from `localhost:34505` to the remote `:8000` and the `localhost:34506` to the remote `:8080`.
-The local port is optional, if none is provided then a random port will be selected.
+__Note__ that specification of the local port is optional. When none is provided a random port will be selected.
 
 ### Point to a specific instance
 
-You can also point to a specific instance of your app. Just list them and pick the corresponding ID, then point to the app specifying it with the `--instance` flag:
+Port forwarding can be directed to a specific instance of your app. To do this list all the instances of the application, pick the desired ID, and then use the `--instance` flag to direct the port forwarding to that instance:
 
 ```
 -> % epinio app show samplejava

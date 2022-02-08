@@ -1,6 +1,6 @@
 ## epinio app port-forward
 
-creates a shell to the application
+forward one or more local ports to a pod
 
 ```
 epinio app port-forward NAME [LOCAL_PORT:]REMOTE_PORT [...[LOCAL_PORT_N:]REMOTE_PORT_N] [flags]

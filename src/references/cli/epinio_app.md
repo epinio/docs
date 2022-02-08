@@ -34,7 +34,7 @@ Manage epinio application
 * [epinio app list](epinio_app_list.md)	 - Lists applications
 * [epinio app logs](epinio_app_logs.md)	 - Streams the logs of the application
 * [epinio app manifest](epinio_app_manifest.md)	 - Save state of the named application as a manifest
-* [epinio app port-forward](epinio_app_port-forward.md)	 - creates a shell to the application
+* [epinio app port-forward](epinio_app_port-forward.md)	 - forward one or more local ports to a pod
 * [epinio app push](epinio_app_push.md)	 - Push an application declared in the specified manifest
 * [epinio app show](epinio_app_show.md)	 - Describe the named application
 * [epinio app update](epinio_app_update.md)	 - Update the named application
