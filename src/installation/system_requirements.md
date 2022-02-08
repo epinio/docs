@@ -24,7 +24,7 @@ A default storage class (with annotation `storageclass.kubernetes.io/is-default-
 ### Load Balancer
 
 Epinio (Traefik) requires a load-balancer. Depending on your target infrastructure, you can use embedded ones (like on Public Cloud, K3d, aso.) or configure your own.
-Also see [Provision of External IP for LoadBalancer service type in Kubernetes](../howtos/02_provision_external_ip_for_local_kubernetes.md) for more information.
+Also see [Provision of External IP for LoadBalancer service type in Kubernetes](../howtos/provision_external_ip_for_local_kubernetes.md) for more information.
 
 ### Troubleshooting
 

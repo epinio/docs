@@ -83,7 +83,7 @@ serve the various accessible endpoints over TLS (e.g. the Epinio API server).
 Epinio supports various options when it comes to certificate issuers (let's encrypt, private CA, bring your own CA, self signed certs).
 Cert Manager simplifies the way we handle the various different certificate issuers within Epinio.
 
-You can read more about certificate issuers here: [certificate issuers documentation](../howtos/01_certificate_issuers.md)
+You can read more about certificate issuers here: [certificate issuers documentation](../howtos/certificate_issuers.md)
 
 ### Kubed
 
@@ -134,7 +134,7 @@ Minio is a storage solution that implements the same API as [Amazon S3](https://
 
 When the user pushes an application using a source code directory (with the [`epinio push`](../references/cli/epinio_push.md) command), the first step taken by the cli is to put the source code into a tarball and upload that to the Epinio API server. The server copies that to the configured S3 storage to be used later during the staging of the application.
 
-When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install Minio on the cluster ([See here how](../howtos/04_setup_external_s3.md)).
+When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install Minio on the cluster ([See here how](../howtos/setup_external_s3.md)).
 
 ### Container Registry
 
@@ -165,7 +165,7 @@ Depending on the use case all 3 options may be valid:
 - Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. `letsencrypt-production`). The `forceKubeInternalRegistryTLS` variable should be used in that case as well.
 - Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the `forceKubeInternalRegistryTLS` variable in this case (default is "false"). Even in this case, the staging job still accesses the registry over TLS.
 
-Epinio also allows the use of an external registry. The [instructions](../howtos/05_setup_external_registry.md) on how such a registry can be set up are in a separate document.
+Epinio also allows the use of an external registry. The [instructions](../howtos/setup_external_registry.md) on how such a registry can be set up are in a separate document.
 
 ## Other Advanced Topics
 
