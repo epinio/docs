@@ -36,8 +36,9 @@
   - [Certificate Issuers](howtos/certificate_issuers.md)
   - [Provision external IP address for local Kubernetes](howtos/provision_external_ip_for_local_kubernetes.md)
   - [Push with gitjob](howtos/gitjob_push.md)
-  - [Setup external S3 storage](howtos/setup-external-s3.md)
-  - [Setup external container registry](howtos/setup-external-registry.md)
+  - [Setup external S3 storage](howtos/setup_external_s3.md)
+  - [Setup external container registry](howtos/setup_external_registry.md)
+  - [Port Forwarding](howtos/port_forwarding.md)
 
 - [Reference documentation](references/references.md)
 

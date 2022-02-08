@@ -13,7 +13,8 @@ Epinio exposes an API server running inside the kubernetes cluster for all clien
 
 ## 2. Copying the code to S3
 
-One of the components Epinio installs on your cluster is [Minio](https://min.io/) (unless you [configured external S3](../howtos/setup-external-s3.md)).
+
+One of the components Epinio installs on your cluster is [Minio](https://min.io/) (unless you [configured external S3](../howtos/setup_external_s3.md)).
 Minio is an S3 compatible storage solution. Epinio uses it to store the application's source code. It will later be used by the staging job.
 
 So the first thing the Epinio API server does when it receives the upload request (the previous step), is to store the source code tarball on S3.

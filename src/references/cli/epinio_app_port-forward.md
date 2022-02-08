@@ -1,20 +1,17 @@
-## epinio service delete
+## epinio app port-forward
 
-Delete a service
-
-### Synopsis
-
-Delete service by name.
+forward one or more local ports to a pod
 
 ```
-epinio service delete NAME [flags]
+epinio app port-forward NAME [LOCAL_PORT:]REMOTE_PORT [...[LOCAL_PORT_N:]REMOTE_PORT_N] [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help     help for delete
-      --unbind   Unbind from applications before deleting
+      --address strings   Addresses to listen on (comma separated). Only accepts IP addresses or localhost as a value. When localhost is supplied, kubectl will try to bind on both 127.0.0.1 and ::1 and will fail if neither of these addresses are available to bind. (default [localhost])
+  -h, --help              help for port-forward
+  -i, --instance string   The name of the instance to shell to
 ```
 
 ### Options inherited from parent commands
@@ -31,5 +28,5 @@ epinio service delete NAME [flags]
 
 ### SEE ALSO
 
-* [epinio service](epinio_service.md)	 - Epinio service features
+* [epinio app](epinio_app.md)	 - Epinio application features
 

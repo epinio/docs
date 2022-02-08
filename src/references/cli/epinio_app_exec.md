@@ -1,20 +1,16 @@
-## epinio service delete
+## epinio app exec
 
-Delete a service
-
-### Synopsis
-
-Delete service by name.
+creates a shell to the application
 
 ```
-epinio service delete NAME [flags]
+epinio app exec NAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help     help for delete
-      --unbind   Unbind from applications before deleting
+  -h, --help              help for exec
+  -i, --instance string   The name of the instance to shell to
 ```
 
 ### Options inherited from parent commands
@@ -31,5 +27,5 @@ epinio service delete NAME [flags]
 
 ### SEE ALSO
 
-* [epinio service](epinio_service.md)	 - Epinio service features
+* [epinio app](epinio_app.md)	 - Epinio application features
 
