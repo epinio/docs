@@ -39,6 +39,7 @@
   - [Setup external S3 storage](howtos/setup_external_s3.md)
   - [Setup external container registry](howtos/setup_external_registry.md)
   - [Port Forwarding](howtos/port_forwarding.md)
+  - [Custom Routes](howtos/custom_routes.md)
 
 - [Reference documentation](references/references.md)
 
