@@ -171,7 +171,6 @@ TODO: Consider doing this in a separate document about the components. Or even, 
 <li><a href="#service-catalog">Service Catalog</a></li>
 <li><a href="#minio">Minio</a></li>
 <li><a href="#container-registry">Container Registry</a></li>
-<li><a href="#tekton">Tekton</a></li>
 </ul>
 </li>
 <li><a href="#other-advanced-topics">Other Advanced Topics</a>
@@ -229,7 +228,7 @@ Cert Manager simplifies the way we handle the various different certificate issu
 <p><a href="https://github.com/kubeops/kubed">Upstream documentation</a></p>
 <p>Kubed is installed by Epinio to keep secrets that are needed in more than
 one namespace synced. For example, the TLS certificate of the <a href="#container-registry">Container Registry</a> is also needed
-in the Tekton staging namespace, in order to trust the certificate when pushing the application images.</p>
+in Epinio's staging namespace, in order to trust the certificate when pushing the application images.</p>
 <p>Kubed makes sure that if the source secret changes, the copy will change too.</p>
 <p>Warning: this doesn't mean things will still work if you re-generate a secret manually. Secret rotation will be handled by Epinio in the future.</p>
 <h3 id="google-service-broker"><a class="header" href="#google-service-broker">Google Service Broker</a></h3>
@@ -256,7 +255,7 @@ The service catalog is the component behind the <a href="../references/cli/epini
 <p>When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install Minio on the cluster (<a href="../howtos/setup-external-s3.html">See here how</a>).</p>
 <h3 id="container-registry"><a class="header" href="#container-registry">Container Registry</a></h3>
 <p>The result of Epinio's application staging is a container image. This image is used to create a Kubernetes deployment to run the application code.
-The <a href="#tekton">Tekton</a> pipeline requires that image to be written to some container registry (See also <a href="../explanations/detailed-push-process.html">Detailed push process</a>). </p>
+The staging Job requires that image to be written to some container registry (See also <a href="../explanations/detailed-push-process.html">Detailed push process</a>). </p>
 <p>By default the Epinio installation deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
 If you want to look at how this registry is installed, have a look at the helm chart here:</p>
 <ul>
@@ -264,11 +263,11 @@ If you want to look at how this registry is installed, have a look at the helm c
 </ul>
 <p>Epinio comes with two consumers of this registry:</p>
 <ol>
-<li>Tekton - pushing the images</li>
+<li>Staging job - pushing the images</li>
 <li>Kubernetes - pulling the images when a Deployment is created for the Application</li>
 </ol>
 <p>Ideally all consumers will communicate with the registry over TLS to keep the communication encrypted.
-Epinio controls the Tekton deployment and ensures that whatever CA is used to sign the registry certificate is trusted by Tekton. Achieving the same for Kubernetes however requires configuration that cannot happen from within the cluster, therefore Epinio has no way to ensure that. There are 3 options here:</p>
+Epinio controls the staging job and ensures that whatever CA is used to sign the registry certificate is trusted by it. Achieving the same for Kubernetes however requires configuration that cannot happen from within the cluster, therefore Epinio has no way to ensure that. There are 3 options here:</p>
 <ol>
 <li>Let the Epinio user manually configure Kubernetes to trust the CA</li>
 <li>Use a well-known trusted CA, so that no configuration is needed</li>
@@ -279,24 +278,18 @@ Epinio controls the Tekton deployment and ensures that whatever CA is used to si
 <li>Option #1 can be selected when the user is installing Epinio with a custom tls-issuer. The user controls the CA and can make sure that this CA is trusted by the cluster before even installing Epinio.
 In this case, since the user knows that Kubernetes will trust the registry's certificate, the <code>forceKubeInternalRegistryTLS</code> variable should be used during the installation.</li>
 <li>Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. <code>letsencrypt-production</code>). The <code>forceKubeInternalRegistryTLS</code> variable should be used in that case as well.</li>
-<li>Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the <code>forceKubeInternalRegistryTLS</code> variable in this case (default is &quot;false&quot;). Even in this case, Tekton still accesses the registry over TLS.</li>
+<li>Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the <code>forceKubeInternalRegistryTLS</code> variable in this case (default is &quot;false&quot;). Even in this case, the staging job still accesses the registry over TLS.</li>
 </ul>
 <p>Epinio also allows the use of an external registry. The <a href="../howtos/setup-external-registry.html">instructions</a> on how such a registry can be set up are in a separate document.</p>
-<h3 id="tekton"><a class="header" href="#tekton">Tekton</a></h3>
-<ul>
-<li><a href="https://github.com/tektoncd/pipeline">Upstream project link</a></li>
-<li><a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.3">Buildpacks pipeline</a></li>
-</ul>
-<p>Pushing an application to Kubernetes with Epinio involves various steps. One of them is staging, which is the process that creates a container image out of the application source code using <a href="https://buildpacks.io/">buildpacks</a>. Epinio runs the staging process via a <a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.3">Tekton Pipeline</a>.</p>
 <h2 id="other-advanced-topics"><a class="header" href="#other-advanced-topics">Other Advanced Topics</a></h2>
 <h3 id="git-pushing"><a class="header" href="#git-pushing">Git Pushing</a></h3>
 <p>The quick way of pushing an application, as explained at
 <a href="../tutorials/quickstart.html#push-an-application">Quickstart: Push an application</a>, uses a local
 directory containing a checkout of the application's sources.</p>
 <p>Internally this is actually <a href="detailed-push-process.html">quite complex</a>. It
-involves the creation and upload of a tarball from these sources by the client
+involves the creation and upload of an archive (tarball or zip) from these sources by the client
 to the Epinio server, copying into Epinio's internal (or external) S3 storage,
-copying from that storage to a PersistentVolumeClaim to be used in the tekton pipeline for staging,
+copying from that storage to a PersistentVolumeClaim to be used in the job for staging,
 i.e. compilation and creation of the docker image to be used by the underlying kubernetes cluster.</p>
 <p>The process is a bit different when using the Epinio client's &quot;git mode&quot;. In
 this mode <a href="../references/cli/epinio_push.html"><code>epinio push</code></a> does not take a local directory of sources, but the

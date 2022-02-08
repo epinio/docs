@@ -305,7 +305,7 @@
          sodipodi:role="line"
          id="tspan1390"
          x="347.72009"
-         y="654.07959">Tekton pipeline</tspan></text>
+         y="654.07959">Staging Job</tspan></text>
     <g
        id="g1456"
        transform="translate(-0.00428564,1.4755104)">
@@ -324,8 +324,8 @@
          id="text1398"><tspan
            sodipodi:role="line"
            id="tspan1396"
-           x="397.17426"
-           y="727.36102">fetch sources</tspan></text>
+           x="380.17426"
+           y="727.36102">fetch, unpack</tspan></text>
     </g>
     <g
        id="g1446"

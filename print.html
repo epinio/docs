@@ -414,12 +414,6 @@ $ helm install cert-manager --namespace cert-manager jetstack/cert-manager \
 		--set installCRDs=true \
 		--set extraArgs[0]=--enable-certificate-owner-ref=true
 </code></pre>
-<h3 id="install-tekton"><a class="header" href="#install-tekton">Install Tekton</a></h3>
-<p>(If you skipped Linkerd installation, you can skip the namespace label too)</p>
-<pre><code>$ kubectl create namespace tekton
-$ kubectl label namespace tekton &quot;linkerd.io/inject&quot;=&quot;enabled&quot;
-$ kubectl apply -f https://raw.githubusercontent.com/epinio/installer/main/assets/installer/pipeline-v0.28.0.yaml
-</code></pre>
 <h3 id="s3-compatible-storage"><a class="header" href="#s3-compatible-storage">S3 compatible storage</a></h3>
 <p>Epinio needs an S3 compatible storage solution to store the code of the various applications
 to be staged. Any S3 compatible storage can be used. <a href="https://github.com/minio/operator">MinIO</a> 
@@ -431,7 +425,7 @@ the <a href="installation/.install_epinio_auto.html">epinio-install</a> deploys 
 <p>The deployment of a registry inside the cluster is out of scope for this guide.
 One thing to keep in mind is that there are 2 consumers of that registry inside Epinio:</p>
 <ul>
-<li>The Tekton pipeline that pushes the images</li>
+<li>The staging job that pushes the images</li>
 <li>Kubernetes when it pulls the generated application images to create the application pods</li>
 </ul>
 <p>Both of them should be able to access the registry and should trust the CA certificate that signs its TLS certificate.</p>
@@ -858,7 +852,7 @@ option is using a helm chart like <a href="https://bitnami.com/stack/mysql/helm"
 <p>NOTE: The command below will delete all the components Epinio originally installed.
 <strong>This includes all the deployed applications.</strong></p>
 <p>If after installing Epinio, you deployed other things on the same cluster
-that depended on those Epinio deployed components (e.g. Traefik, Tekton etc),
+that depended on those Epinio deployed components (e.g. Traefik, etc),
 then removing Epinio will remove those components and this may break your other
 workloads that depended on these. Make sure you understand the implications of
 uninstalling Epinio before you proceed.</p>
@@ -900,7 +894,6 @@ TODO: Consider doing this in a separate document about the components. Or even, 
 <li><a href="explanations/advanced.html#service-catalog">Service Catalog</a></li>
 <li><a href="explanations/advanced.html#minio">Minio</a></li>
 <li><a href="explanations/advanced.html#container-registry">Container Registry</a></li>
-<li><a href="explanations/advanced.html#tekton">Tekton</a></li>
 </ul>
 </li>
 <li><a href="explanations/advanced.html#other-advanced-topics">Other Advanced Topics</a>
@@ -958,7 +951,7 @@ Cert Manager simplifies the way we handle the various different certificate issu
 <p><a href="https://github.com/kubeops/kubed">Upstream documentation</a></p>
 <p>Kubed is installed by Epinio to keep secrets that are needed in more than
 one namespace synced. For example, the TLS certificate of the <a href="explanations/advanced.html#container-registry">Container Registry</a> is also needed
-in the Tekton staging namespace, in order to trust the certificate when pushing the application images.</p>
+in Epinio's staging namespace, in order to trust the certificate when pushing the application images.</p>
 <p>Kubed makes sure that if the source secret changes, the copy will change too.</p>
 <p>Warning: this doesn't mean things will still work if you re-generate a secret manually. Secret rotation will be handled by Epinio in the future.</p>
 <h3 id="google-service-broker"><a class="header" href="#google-service-broker">Google Service Broker</a></h3>
@@ -985,7 +978,7 @@ The service catalog is the component behind the <a href="explanations/../referen
 <p>When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install Minio on the cluster (<a href="explanations/../howtos/setup-external-s3.html">See here how</a>).</p>
 <h3 id="container-registry"><a class="header" href="#container-registry">Container Registry</a></h3>
 <p>The result of Epinio's application staging is a container image. This image is used to create a Kubernetes deployment to run the application code.
-The <a href="explanations/advanced.html#tekton">Tekton</a> pipeline requires that image to be written to some container registry (See also <a href="explanations/../explanations/detailed-push-process.html">Detailed push process</a>). </p>
+The staging Job requires that image to be written to some container registry (See also <a href="explanations/../explanations/detailed-push-process.html">Detailed push process</a>). </p>
 <p>By default the Epinio installation deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
 If you want to look at how this registry is installed, have a look at the helm chart here:</p>
 <ul>
@@ -993,11 +986,11 @@ If you want to look at how this registry is installed, have a look at the helm c
 </ul>
 <p>Epinio comes with two consumers of this registry:</p>
 <ol>
-<li>Tekton - pushing the images</li>
+<li>Staging job - pushing the images</li>
 <li>Kubernetes - pulling the images when a Deployment is created for the Application</li>
 </ol>
 <p>Ideally all consumers will communicate with the registry over TLS to keep the communication encrypted.
-Epinio controls the Tekton deployment and ensures that whatever CA is used to sign the registry certificate is trusted by Tekton. Achieving the same for Kubernetes however requires configuration that cannot happen from within the cluster, therefore Epinio has no way to ensure that. There are 3 options here:</p>
+Epinio controls the staging job and ensures that whatever CA is used to sign the registry certificate is trusted by it. Achieving the same for Kubernetes however requires configuration that cannot happen from within the cluster, therefore Epinio has no way to ensure that. There are 3 options here:</p>
 <ol>
 <li>Let the Epinio user manually configure Kubernetes to trust the CA</li>
 <li>Use a well-known trusted CA, so that no configuration is needed</li>
@@ -1008,24 +1001,18 @@ Epinio controls the Tekton deployment and ensures that whatever CA is used to si
 <li>Option #1 can be selected when the user is installing Epinio with a custom tls-issuer. The user controls the CA and can make sure that this CA is trusted by the cluster before even installing Epinio.
 In this case, since the user knows that Kubernetes will trust the registry's certificate, the <code>forceKubeInternalRegistryTLS</code> variable should be used during the installation.</li>
 <li>Option #2 is valid when the tls-issuer used is one that uses a well known CA (e.g. <code>letsencrypt-production</code>). The <code>forceKubeInternalRegistryTLS</code> variable should be used in that case as well.</li>
-<li>Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the <code>forceKubeInternalRegistryTLS</code> variable in this case (default is &quot;false&quot;). Even in this case, Tekton still accesses the registry over TLS.</li>
+<li>Option #3 is ok if the user works with a local cluster, doing development or just preparing a demo. In this case, to keep things simple and save the user from having to configure Kubernetes to trust a CA, Epinio let's Kubernetes access the registry without TLS. This is done by exposing the Registry as a NodePort service and letting Kubernetes access it on localhost. User shouldn't specify the <code>forceKubeInternalRegistryTLS</code> variable in this case (default is &quot;false&quot;). Even in this case, the staging job still accesses the registry over TLS.</li>
 </ul>
 <p>Epinio also allows the use of an external registry. The <a href="explanations/../howtos/setup-external-registry.html">instructions</a> on how such a registry can be set up are in a separate document.</p>
-<h3 id="tekton"><a class="header" href="#tekton">Tekton</a></h3>
-<ul>
-<li><a href="https://github.com/tektoncd/pipeline">Upstream project link</a></li>
-<li><a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.3">Buildpacks pipeline</a></li>
-</ul>
-<p>Pushing an application to Kubernetes with Epinio involves various steps. One of them is staging, which is the process that creates a container image out of the application source code using <a href="https://buildpacks.io/">buildpacks</a>. Epinio runs the staging process via a <a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.3">Tekton Pipeline</a>.</p>
 <h2 id="other-advanced-topics"><a class="header" href="#other-advanced-topics">Other Advanced Topics</a></h2>
 <h3 id="git-pushing"><a class="header" href="#git-pushing">Git Pushing</a></h3>
 <p>The quick way of pushing an application, as explained at
 <a href="explanations/../tutorials/quickstart.html#push-an-application">Quickstart: Push an application</a>, uses a local
 directory containing a checkout of the application's sources.</p>
 <p>Internally this is actually <a href="explanations/detailed-push-process.html">quite complex</a>. It
-involves the creation and upload of a tarball from these sources by the client
+involves the creation and upload of an archive (tarball or zip) from these sources by the client
 to the Epinio server, copying into Epinio's internal (or external) S3 storage,
-copying from that storage to a PersistentVolumeClaim to be used in the tekton pipeline for staging,
+copying from that storage to a PersistentVolumeClaim to be used in the job for staging,
 i.e. compilation and creation of the docker image to be used by the underlying kubernetes cluster.</p>
 <p>The process is a bit different when using the Epinio client's &quot;git mode&quot;. In
 this mode <a href="explanations/../references/cli/epinio_push.html"><code>epinio push</code></a> does not take a local directory of sources, but the
@@ -1148,21 +1135,25 @@ The numbers on the various arrows on the image indicate the order of the various
 <p>Epinio exposes an API server running inside the kubernetes cluster for all clients including cli to talk to it. When you run the <code>epinio push</code> command, the first thing the cli is going to do, is to hit the relevant api endpoint for pushing apps. (1a) There is a Traefik ingress which sits in front of the Epinio API server which does BasicAuth for all the requests. (1b) After successful authentication, it routes the request to the Epinio API server. The cli puts your code inside a tarball and sends it to the <code>upload</code> endpoint of the Epinio API server which is running inside the Kubernetes cluster.</p>
 <h2 id="2-copying-the-code-to-s3"><a class="header" href="#2-copying-the-code-to-s3">2. Copying the code to S3</a></h2>
 <p>One of the components Epinio installs on your cluster is <a href="https://min.io/">Minio</a> (unless you <a href="explanations/../howtos/setup-external-s3.html">configured external S3</a>).
-Minio is an S3 compatible storage solution. Epinio uses it to store the application's source code. It will later be used by the staging pipeline.</p>
+Minio is an S3 compatible storage solution. Epinio uses it to store the application's source code. It will later be used by the staging job.</p>
 <p>So the first thing the Epinio API server does when it receives the upload request (the previous step), is to store the source code tarball on S3.</p>
 <h2 id="3-staging-the-app"><a class="header" href="#3-staging-the-app">3. Staging the App</a></h2>
 <p>When the upload request is complete, the cli will send a request to the <code>stage</code> endpoint of the Epinio API server. This will instruct the server to start the staging of the uploaded code.</p>
-<h2 id="4-trigger-the-pipeline"><a class="header" href="#4-trigger-the-pipeline">4. Trigger the Pipeline</a></h2>
-<p>When the Epinio API server receives the stage request, it will create a <a href="https://github.com/tektoncd/pipeline/blob/main/docs/pipelineruns.md"><code>PipelineRun</code></a> that will run the staging Tekton pipeline using the version of the code referenced in the request. This pipeline has 3 steps. Their role is described in the following 3 sections.</p>
+<h2 id="4-trigger-the-job"><a class="header" href="#4-trigger-the-job">4. Trigger the Job</a></h2>
+<p>When the Epinio API server receives the stage request, it will create a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/job/"><code>Job</code></a> that will run the staging scripts using the version of the code referenced in the request. This job has 3 steps. Their role is described in the following 3 sections.</p>
 <h2 id="5-fetch-the-code"><a class="header" href="#5-fetch-the-code">5. Fetch the code</a></h2>
-<p>The first step of the staging Tekton pipeline downloads the code from the S3 storage to a <a href="https://github.com/tektoncd/pipeline/blob/main/docs/workspaces.md">workspace</a>. This makes the code available to the following steps.</p>
-<h2 id="6-stage"><a class="header" href="#6-stage">6. Stage</a></h2>
-<p>The second step of the staging Tekton pipeline uses the <a href="https://paketo.io/">paketo buildpacks</a> to create a container image for your application. The definition of this Tekton task can be found <a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks/0.2">in the relevant upstream repo</a> (though a copy of that is embedded in the Epinio binary).
-The result of a successful staging process is a new image pushed to the Registry component of Epinio. Read more about the registry here: <a href="explanations/../explanations/advanced.html#container-registry">Epinio Registry</a>.</p>
-<h2 id="7-run"><a class="header" href="#7-run">7. Run</a></h2>
+<p>The first step of staging downloads the code from the S3 storage to a workspace, i.e. directory. This makes the code available to the following steps.</p>
+<h2 id="6-unpack-the-sources"><a class="header" href="#6-unpack-the-sources">6. Unpack the sources</a></h2>
+<p>The second step of staging unpacks the downloaded archive into a sub-directory of the workspace. </p>
+<h2 id="7-stage"><a class="header" href="#7-stage">7. Stage</a></h2>
+<p>The third step of staging uses the <a href="https://paketo.io/">paketo buildpacks</a> to create a container image for your application.
+The result of a successful staging process is a new image pushed to the Registry component of Epinio.
+Read more about the registry here: <a href="explanations/../explanations/advanced.html#container-registry">Epinio Registry</a>.</p>
+<h2 id="8-run"><a class="header" href="#8-run">8. Run</a></h2>
 <p>To run a workload on Kubernetes having a container image is not enough. You need at least a Pod running with at least one container running that image.</p>
-<p>The last step of the staging Tekton pipeline creates the runtime Kubernetes resources that are needed to make your application available to the users outside the Kubernetes cluster. The most important resources that are created are a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>, a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> and an <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> resource.</p>
-<h2 id="8-pull-image"><a class="header" href="#8-pull-image">8. Pull Image</a></h2>
+<p>This is done again by the API server, on demand by the client after noting the completion of the staging process.</p>
+<p>The most important resources that are created are a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployment</a>, a <a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service</a> and an <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Ingress</a> resource.</p>
+<h2 id="9-pull-image"><a class="header" href="#9-pull-image">9. Pull Image</a></h2>
 <p>The Deployment uses the image that was pushed as part of the staging step (see arrow 6). Now, the kubelet will pull the image from the registry for the deployment resource to use it.</p>
 <p>You can read how these resources work in Kubernetes following the provided links but if you have to know one thing is that Ingress is the thing that describes how a request that uses the Application's url is routed to the application container. In Kubernetes, the thing that reads that description and implements the routing is called an Ingress Controller. Such an Ingress Controller is provided by <a href="https://doc.traefik.io/traefik/providers/kubernetes-ingress/">Traefik</a>.</p>
 <h2 id="ingress-implementation-traefik"><a class="header" href="#ingress-implementation-traefik">Ingress Implementation (Traefik)</a></h2>
@@ -2526,11 +2517,11 @@ will also delete the previous version of the sources from S3. This way, Epinio d
 To understand what enables an application to work with Epinio, you need to know how staging works.</p>
 <h2 id="how-it-works"><a class="header" href="#how-it-works">How it works</a></h2>
 <p>Epinio relies on <a href="https://buildpacks.io/">Cloud Native Buildpacks</a> to create a container image for your
-application. It does that by installing and using <a href="https://github.com/tektoncd/catalog/tree/main/task/buildpacks">the upstream maintained Tekton pipelines</a>.</p>
+application. It does that by creating Kubernetes Jobs.</p>
 <p>Staging starts with you (the developer) running <code>epinio push --name myapp</code> from the root of your application source code.
 You can see a simplified diagram of the process in the image below:</p>
 <p><img src="references/epinio-push-simple.svg?raw=true" alt="epinio-push-simplified" title="Epinio push" /></p>
-<p>After pushing your code, Epinio triggers a Tekton pipeline which uses the <a href="https://paketo.io/">paketo buildpacks</a> to build a runtime image for your application.
+<p>After pushing your code, Epinio creates staging job which uses the <a href="https://paketo.io/">paketo buildpacks</a> to build a runtime image for your application.
 If you are not familiar with how buildpacks work, you should have a look at the official docs: https://buildpacks.io/docs/</p>
 <h2 id="supported-buildpacks"><a class="header" href="#supported-buildpacks">Supported buildpacks</a></h2>
 <p>Epinio uses the <a href="https://github.com/paketo-buildpacks/full-stack-release">full stack paketo builder image</a> which means you can make use of any of the buildpacks
