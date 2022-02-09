@@ -7,24 +7,24 @@ Epinio (with the `domain` helm value). It must be a [wildcard domain](https://en
 - To create a URL for the Epinio registry, when it's running inside the cluster (Optional)
 - To create URLs for the applications deployed with Epinio (also known as "Routes")
 
-For example, if you deployed Epinio with `domain` set to `myawesomedomain.org`:
+For example, if Epinio was deployed with `domain` set to `myawesomedomain.org`:
 
-- Epinio API would be accessed at `https://epinio.myawesomedomain.org`
-- Epinio registry would be `https://epinio-registry.myawesomedomain.org`
+- The Epinio API would be accessible at `https://epinio.myawesomedomain.org`
+- The Epinio registry would be accessible at `https://epinio-registry.myawesomedomain.org`
 
 and an application named "myapp" would be accessible at: `myapp.myawesomedomain.org`
 
-This requires zero setup for each application but it is sometimes needed to add
-a custom domain, a dedicated one to your application. Let's assume the ap
+This requires zero setup for each application. However, sometimes it is needed or desired to add
+a custom domain, dedicated to the application. Let's assume that the application
 above must also be accessible on `https://i-own-this-awesome-domain.org`. 
 
-You can add this domain to your application with the command below:
+Add this domain to your application with the command below:
 
 ```
 epinio app update sample --route i-own-this-awesome-domain.org
 ```
 
-If you want to keep the original route too, you need to specify that explicitly:
+__Attention__, this removed the original route! To keep it, it has to be explicitly specified:
 
 ```
 epinio app update sample --route i-own-this-awesome-domain.org --route myapp.myawesomedomain.org
