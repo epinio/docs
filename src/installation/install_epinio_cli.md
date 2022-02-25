@@ -19,13 +19,13 @@ Run one of the commands below, and replace \<epinio-version\> with the version o
 ##### Linux
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/<epinio-version>/epinio-linux-amd64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/<epinio-version>/epinio-linux-x86_64
 ```
 
 ##### MacOS
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/<epinio-version>/epinio-darwin-amd64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/<epinio-version>/epinio-darwin-x86_64
 ```
 
 ##### Windows
