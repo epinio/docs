@@ -160,19 +160,19 @@ ga('send', 'pageview');
 <li>Quick local setup with zero configuration</li>
 <li>Deploying to production similar to development</li>
 </ul>
-<p>Kubernetes is becoming the de-facto standard for container orchestration.
+<p><a href="https://kubernetes.io/">Kubernetes</a> is becoming the de-facto standard for container orchestration.
 Developers may want to use Kubernetes for all the benefits it provides or may
 have to do so because that's what their Ops team has chosen. Whatever the case,
 using Kubernetes is not simple. It has a steep learning curve and doing it right
 is a full time job. Developers should spend their time working on their applications,
 not doing operations.</p>
 <p>Epinio is adding the needed abstractions and intelligence to allow Developers
-to use Kubernetes as a PaaS (Platform as a Service).</p>
+to use Kubernetes as a <a href="https://en.wikipedia.org/wiki/Platform_as_a_service">PaaS (Platform as a Service)</a>.</p>
 <h2 id="features"><a class="header" href="#features">Features</a></h2>
 <ul>
 <li><strong>Security</strong>
 <ul>
-<li>mTLS: Epinio uses <code>linkerd</code> to secure all communication between epinio components inside the kubernetes cluster</li>
+<li>mTLS: Epinio uses <a href="https://linkerd.io/"><code>linkerd</code></a> to secure all communication between Epinio components inside the Kubernetes cluster</li>
 <li>Basic Authentication to access the API.</li>
 </ul>
 </li>
@@ -185,7 +185,7 @@ to use Kubernetes as a PaaS (Platform as a Service).</p>
 <li><strong>Apps</strong>
 <ul>
 <li>CRUD operations of your app. (An app can be a tarball or in a github repo)</li>
-<li>Cloud Native Buildpacks provide the runtime environment for your apps</li>
+<li><a href="https://buildpacks.io/">Cloud Native Buildpacks</a> provide the runtime environment for your apps</li>
 </ul>
 </li>
 <li><strong>Services</strong>
@@ -195,9 +195,13 @@ to use Kubernetes as a PaaS (Platform as a Service).</p>
 </ul>
 </li>
 </ul>
-<h2 id="quickstart"><a class="header" href="#quickstart">Quickstart</a></h2>
-<p>Follow the <a href="tutorials/quickstart.html">quickstart</a> tutorial to get
-started with Epinio.</p>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next steps</a></h2>
+<p>If you want to try Epinio, we suggest you to have a look at
+our <a href="tutorials/quickstart.html">quickstart</a> tutorial to get started with Epinio.</p>
+<p>For a more detailed information, you can check the <a href="/explanations/explanations.html">Explanations</a> section,
+where different topics such as &quot;Principles&quot; or &quot;Security&quot; are explained.</p>
+<p>Finally, if you want to test Epinio directly, our <a href="/howtos/howtos.html"><code>HowTos</code></a> section
+will show concrete examples on how to use Epinio for different use-cases.</p>
 
                     </main>
 
