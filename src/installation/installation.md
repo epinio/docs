@@ -1,8 +1,10 @@
 # Installation of Epinio
 
 ## Introduction
-Epinio is installed from a single Helm chart, which checks for the dependencies required 
-and install them if they're not present in your Kubernetes cluster.
+Epinio is installed from a single Helm chart and, by default, it also installs [`Kubed`](#kubed) and [`MinIO`](#s3-storage) in your Kubernetes cluster.
+
+You can disable the installation of `Kubed` and `MinIO` by changing the settings as described in the respective sections.
+
 
 ## Prerequisites
 
