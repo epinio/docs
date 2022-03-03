@@ -1,7 +1,7 @@
 # Installation of Epinio
 
 ## Introduction
-Epinio is installed from a single Helm chart, which checks for the [dependencies]() required 
+Epinio is installed from a single Helm chart, which checks for the dependencies required 
 and install them if they're not present in your Kubernetes cluster.
 
 ## Prerequisites
