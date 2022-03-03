@@ -1,27 +1,97 @@
-# Installation
+# Installation of Epinio
 
-## System requirements
+## Introduction
+Epinio is installed from a single Helm chart, which checks for the [dependencies]() required 
+and install them if they're not present in your Kubernetes cluster.
 
-Epinio is a Kubernetes application and thus needs a running Kubernetes
-cluster for installation.
+## Prerequisites
 
-See [system requirements](system_requirements.md) about the Kubernetes
-environment Epinio expects to run on.
+See [system requirements](system_requirements.md) for a detailed list of external components your
+Kubernetes cluster needs to have before you install Epinio.
 
-## Installation Methods
+> **IMPORTANT:** Some of the namespaces of the components are hardcoded in the Epinio
+code and thus are important to be the same as described here. In the future this
+may be configurable on the Epinio Helm chart.
 
-There are at least 2 ways to install Epinio on a Kubernetes cluster. Which one
-you choose depends on the target environment and the amount of customization
-you want over the default Epinio installation.
+## Installation
+### Ingress Controller
 
-1. [Install Epinio and automatically install dependencies](install_epinio_auto.md) - Start here if you are new to Epinio
-2. [Install Epinio and manually install components](install_epinio_manual.md) - Full control over installation, mostly for production setups
+Epinio creates Ingress resources for the API server, the applications and depending
+on your setup, the internal container registry. Those resources won't work unless
+an Ingress controller is running on your cluster.
 
-Epinio is not just one application running on your cluster. It depends on other Kubernetes components for some of its functionality. The 2 different installation methods above, provide different level of configurability on how you get those dependencies installed on your cluster. If you are just starting out with a fresh cluster and you don't have an opinion on how things should be installed, then the first method is the best for you.
+If you don't have an Ingress controller already running, you can install Traefik with:
 
-If you've done your due diligence and you are now ready to deploy Epinio on your production clusters, maybe your Dev Ops team wants to fully control what is being installed an how. In that case, the second installation option may be better.
+```
+$ kubectl create namespace traefik
+$ export LOAD_BALANCER_IP=$(LOAD_BALANCER_IP:-) # Set this to the IP of your load balancer if you know that
+$ helm install traefik --namespace traefik "https://helm.traefik.io/traefik/traefik-10.3.4.tgz" \
+		--set globalArguments='' \
+		--set-string ports.web.redirectTo=websecure \
+		--set-string ingressClass.enabled=true \
+		--set-string ingressClass.isDefaultClass=true \
+		--set-string service.spec.loadBalancerIP=$LOAD_BALANCER_IP
+```
+
+### Cert Manager
+
+Epinio needs [cert-manager](https://cert-manager.io/) in order to create TLS
+certificates for the various Ingresses (see "Ingress controller" above).
+
+If cert-manager is not already installed on the cluster, it can be installed like this:
+
+```
+$ kubectl create namespace cert-manager
+$ helm repo add jetstack https://charts.jetstack.io
+$ helm repo update
+$ helm install cert-manager --namespace cert-manager jetstack/cert-manager \
+		--set installCRDs=true \
+		--set extraArgs[0]=--enable-certificate-owner-ref=true
+```
+
+### Kubed
+
+Kubed is installed as a subchart when `.Values.kubed.enabled` is true (default).
+If you already have kubed running, you can skip the installation by setting
+the helm value "kubed.enabled" to "false".
+
+### S3 storage
+
+Epinio is using an S3 compatible storage to store the application source code.
+This chart will install [Minio](https://min.io/) when `.Values.minio.enabled` is
+true (default). Any S3 compatible solution can be used instead by setting this
+value to `false` and using [the values under `s3`](https://github.com/epinio/helm-charts/blob/7ce84a4b391105551ba52f9ab8ea7213b5358977/chart/epinio/values.yaml#L49)
+to point to the desired S3 server. 
+
+### Container Registry
+
+When Epinio builds a container image for an application from source, it needs
+to store that image to a container registry. Epinio installs a container registry
+on the cluster when `.Values.containerregistry.enabled` is `true` (default).
+
+Any container registry that supports basic auth authentication can be used (e.g. gcr, dockerhub etc)
+instead by setting this value to `false` and using
+[the values under `registry`](https://github.com/epinio/helm-charts/blob/7ce84a4b391105551ba52f9ab8ea7213b5358977/chart/epinio/values.yaml#L57-L76)
+to point to the desired container registry.
+
+### Install Epinio
+
+If the above dependencies are available or going to be installed by this chart,
+Epinio can be installed with the following:
+
+```
+$ helm install epinio -n epinio --create-namespace epinio/epinio --values epinio-values.yaml --set global.domain=myepiniodomain.org
+```
+
+The only value that is mandatory is the `.Values.global.domain` which
+should be a wildcard domain, pointing to the IP address of your running
+Ingress controller.
 
 ## Installation on Specific Kubernetes Offerings
+
+Installing Epinio is a standard process as explained above, however you might need to configure it for a specific Kubernetes cluster.
+
+To help you, see the following HowTos for various well-known Kubernetes clusters:
 
 - [Install on Rancher](install_epinio_on_rancher.md) - Install Epinio on Rancher
 - [Install on Public Cloud](install_epinio_on_public_cloud.md) - Install Epinio on Public Cloud cluster
@@ -30,3 +100,5 @@ If you've done your due diligence and you are now ready to deploy Epinio on your
 - [Install on K3s](install_epinio_on_k3s.md) - Install Epinio on K3s cluster
 - [Install on Rancher Desktop](install_epinio_on_rancher_desktop.md) - Install Epinio on Rancher Desktop
 - [Install on Minikube](install_epinio_on_minikube.md) - Install Epinio on Minikube cluster
+
+> *NOTE*: The Public Cloud howto lists the three major Cloud providers.
