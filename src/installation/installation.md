@@ -101,4 +101,4 @@ To help you, see the following HowTos for various well-known Kubernetes clusters
 - [Install on Rancher Desktop](install_epinio_on_rancher_desktop.md) - Install Epinio on Rancher Desktop
 - [Install on Minikube](install_epinio_on_minikube.md) - Install Epinio on Minikube cluster
 
-> *NOTE*: The Public Cloud howto lists the three major Cloud providers.
+> *NOTE*: The Public Cloud howto lists the three major Cloud providers but Epinio can run on any Kubernetes cluster.
