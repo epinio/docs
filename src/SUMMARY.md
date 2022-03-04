@@ -5,30 +5,18 @@
 - [Quick Start](tutorials/quickstart.md)
 
 - [Installation](installation/installation.md)
-  - [System Requirements](installation/system_requirements.md)
   - [Install Epinio](installation/installation.md)
-  - [Install Epinio on Rancher](installation/install_epinio_on_rancher.md)
   - [Install Epinio cli](installation/install_epinio_cli.md)
   - [Install Epinio with custom DNS](installation/install_epinio_customDNS.md)
   - [Install Epinio with "magic" DNS](installation/install_epinio_magicDNS.md)
-  - [Install Epinio on Public Clouds](installation/install_epinio_on_public_cloud.md)
-  - [Install Epinio on RKE2 (Rancher)](installation/install_epinio_on_rke.md)
-  - [Install Epinio on K3d (local)](installation/install_epinio_on_k3d.md)
-  - [Install Epinio on K3s (local)](installation/install_epinio_on_k3s.md)
-  - [Install Epinio on Rancher Desktop (local)](installation/install_epinio_on_rancher_desktop.md)
-  - [Install Epinio on Minikube (local)](installation/install_epinio_on_minikube.md)
-  - [Install Wordpress on Epinio](installation/install_wordpress_application.md)
-
-- [Uninstall Epinio](installation/uninstall_epinio.md)
+  - [Uninstall Epinio](installation/uninstall_epinio.md)
 
 - [Explanations](explanations/explanations.md)
 
   - [Advanced topics](explanations/advanced.md)
-  - [Configuration](explanations/configuration.md)
   - [Detailed Push Process](explanations/detailed-push-process.md)
   - [Principles](explanations/principles.md)
   - [Security](explanations/security.md)
-  - [Windows](explanations/windows.md)
 
 - [HowTos](howtos/howtos.md)
 
@@ -39,9 +27,18 @@
   - [Setup external container registry](howtos/setup_external_registry.md)
   - [Port Forwarding](howtos/port_forwarding.md)
   - [Custom Routes](howtos/custom_routes.md)
+  - [Install Epinio on RKE2 (Rancher)](howtos/install_epinio_on_rke.md)
+  - [Install Epinio on K3s (local)](howtos/install_epinio_on_k3s.md)
+  - [Install Epinio on Rancher Desktop (local)](howtos/install_epinio_on_rancher_desktop.md)
+  - [Install Epinio on K3d (local)](howtos/install_epinio_on_k3d.md)
+  - [Install Epinio on Minikube (local)](howtos/install_epinio_on_minikube.md)
+  - [Install Epinio on Public Clouds](howtos/install_epinio_on_public_cloud.md)
+  - [Install Wordpress on Epinio](howtos/install_wordpress_application.md)
 
 - [Reference documentation](references/references.md)
 
+  - [System Requirements](references/system_requirements.md)
+      - [Windows](references/windows.md)
   - [Command requirements](references/README.md)
   - [Command reference](references/commands.md)
 
@@ -91,7 +88,7 @@
 
       - [epinio_target](references/cli/epinio_target.md)
       - [epinio_version](references/cli/epinio_version.md)
-
+  - [CLI Configuration](references/configuration.md)
   - [Supported Applications](references/supported-apps.md)
   - [Application Manifests](references/manifests.md)
   - [Services](references/services.md)
