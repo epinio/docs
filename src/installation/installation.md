@@ -51,6 +51,9 @@ $ helm install cert-manager --namespace cert-manager jetstack/cert-manager \
 		--set extraArgs[0]=--enable-certificate-owner-ref=true
 ```
 
+> **WARNING**: if cert-manager isn't installed in the namespace `cert-manager`,
+> you have to set `.Values.certManagerNamespace` accordingly, otherwise Epinio installation will fail.
+
 ### Kubed
 
 Kubed is installed as a subchart when `.Values.kubed.enabled` is true (default).
