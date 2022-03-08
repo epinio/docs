@@ -2,12 +2,12 @@
 
 ## Before you begin
 
-If not done already, refer to [System Requirements](./system_requirements.md).
+If not done already, refer to [System Requirements](/references/system_requirements.md).
 
 ## Install Dependencies
 
-- `kubectl`: Follow instructions here: https://kubernetes.io/docs/tasks/tools/#kubectl
-- `helm`: Follow instructions here: https://helm.sh/docs/intro/install/
+- `kubectl`: Follow instructions [here](https://kubernetes.io/docs/tasks/tools/#kubectl)
+- `helm`: Follow instructions [here](https://helm.sh/docs/intro/install/)
 
 ## Install Epinio CLI
 

@@ -27,6 +27,7 @@
   - [Setup external container registry](howtos/setup_external_registry.md)
   - [Port Forwarding](howtos/port_forwarding.md)
   - [Custom Routes](howtos/custom_routes.md)
+  - [Install Epinio on Rancher](howtos/install_epinio_on_rancher.md)
   - [Install Epinio on RKE2 (Rancher)](howtos/install_epinio_on_rke.md)
   - [Install Epinio on K3s (local)](howtos/install_epinio_on_k3s.md)
   - [Install Epinio on Rancher Desktop (local)](howtos/install_epinio_on_rancher_desktop.md)
