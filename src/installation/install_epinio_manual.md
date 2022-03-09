@@ -107,10 +107,10 @@ $ helm repo add epinio https://epinio.github.io/helm-charts
 $ helm upgrade --install epinio epinio/epinio -n epinio --values values.yaml
 ```
 
-The following command will update the local Epinio config:
+The following command will update the local Epinio settings:
 
 ```
-$ epinio config update
+$ epinio settings update
 ```
 
 Now the installation is done. The configured system domain needs to point to the

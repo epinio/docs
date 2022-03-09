@@ -61,11 +61,11 @@
         - [epinio_app_show](references/cli/epinio_app_show.md)
         - [epinio_app_update](references/cli/epinio_app_update.md)
 
-      - [epinio_config](references/cli/epinio_config.md)
+      - [epinio_settings](references/cli/epinio_settings.md)
 
-        - [epinio_config_colors](references/cli/epinio_config_colors.md)
-        - [epinio_config_show](references/cli/epinio_config_show.md)
-        - [epinio_config_update](references/cli/epinio_config_update.md)
+        - [epinio_settings_colors](references/cli/epinio_settings_colors.md)
+        - [epinio_settings_show](references/cli/epinio_settings_show.md)
+        - [epinio_settings_update](references/cli/epinio_settings_update.md)
 
       - [epinio_info](references/cli/epinio_info.md)
       - [epinio_namespace](references/cli/epinio_namespace.md)
@@ -88,7 +88,7 @@
 
       - [epinio_target](references/cli/epinio_target.md)
       - [epinio_version](references/cli/epinio_version.md)
-  - [CLI Configuration](references/configuration.md)
+  - [CLI Settings](references/settings.md)
   - [Supported Applications](references/supported-apps.md)
   - [Application Manifests](references/manifests.md)
   - [Services](references/services.md)

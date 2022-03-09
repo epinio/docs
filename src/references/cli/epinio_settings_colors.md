@@ -1,15 +1,19 @@
-## epinio app manifest
+## epinio settings colors
 
-Save state of the named application as a manifest
+Manage colored output
+
+### Synopsis
+
+Enable/Disable colored output
 
 ```
-epinio app manifest NAME MANIFESTPATH [flags]
+epinio settings colors BOOL [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for manifest
+  -h, --help   help for colors
 ```
 
 ### Options inherited from parent commands
@@ -26,5 +30,5 @@ epinio app manifest NAME MANIFESTPATH [flags]
 
 ### SEE ALSO
 
-* [epinio app](epinio_app.md)	 - Epinio application features
+* [epinio settings](epinio_settings.md)	 - Epinio settings management
 
