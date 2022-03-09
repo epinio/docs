@@ -70,11 +70,11 @@ $ kubectl get svc -n traefik -o jsonpath="{.items[0].status.loadBalancer.ingress
 
 ### Access Epinio
 
-The following command will update your local Epinio config file to point to the
+The following command will update your local Epinio settings file to point to the
 Epinio instance that runs on the currently targeted Kubernetes cluster:
 
 ```
-$ epinio config update
+$ epinio settings update
 ```
 
 Verify you can talk to Epinio:

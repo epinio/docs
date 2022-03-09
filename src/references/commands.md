@@ -19,11 +19,11 @@
       - [epinio app show](cli/epinio_app_show.md)
       - [epinio app update](cli/epinio_app_update.md)
 
-    - [epinio config](cli/epinio_config.md)
+    - [epinio settings](cli/epinio_settings.md)
 
-      - [epinio config colors](cli/epinio_config_colors.md)
-      - [epinio config show](cli/epinio_config_show.md)
-      - [epinio config update](cli/epinio_config_update.md)
+      - [epinio settings colors](cli/epinio_settings_colors.md)
+      - [epinio settings show](cli/epinio_settings_show.md)
+      - [epinio settings update](cli/epinio_settings_update.md)
 
     - [epinio info](cli/epinio_info.md)
     - [epinio install-cert-manager](cli/epinio_install-cert-manager.md)

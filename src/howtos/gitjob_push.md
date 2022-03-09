@@ -20,15 +20,15 @@ metadata:
   name: epinio-push
 ```
 
-### Upload Epinio Config
+### Upload Epinio Settings
 
-So the GitJob can authenticate and push correctly, we can upload our Epinio config file to the cluster with:
+So the GitJob can authenticate and push correctly, we can upload our Epinio settings file to the cluster with:
 
 ```
-kubectl create secret generic epinio-creds --from-file=$HOME/.config/epinio/config.yaml
+kubectl create secret generic epinio-creds --from-file=$HOME/.config/epinio/settings.yaml
 ```
 
-This will create a secret containing the config.yaml that was created locally when you do `epinio config update`
+This will create a secret containing the settings.yaml that was created locally when you do `epinio settings update`
 
 ### Setup Sample Project
 
@@ -59,12 +59,12 @@ spec:
         - image: "splatform/epinio-server:v0.1.0"
           name: epinio-push
           volumeMounts:
-          - name: config
-            mountPath: "/config/"
+          - name: settings
+            mountPath: "/settings/"
             readOnly: true
           env:
           - name: EPINIO_CONFIG
-            value: "/config/config.yaml"
+            value: "/settings/settings.yaml"
           command:
           - /epinio 
           args:
@@ -73,7 +73,7 @@ spec:
           - test12factor
           workingDir: /workspace/source
         volumes:
-        - name: config
+        - name: settings
           secret:
             secretName: epinio-creds
 ```

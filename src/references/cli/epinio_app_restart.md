@@ -1,27 +1,23 @@
-## epinio config colors
+## epinio app restart
 
-Manage colored output
-
-### Synopsis
-
-Enable/Disable colored output
+Restart the application
 
 ```
-epinio config colors BOOL [flags]
+epinio app restart NAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for colors
+  -h, --help   help for restart
 ```
 
 ### Options inherited from parent commands
 
 ```
-      --config-file string       (EPINIO_CONFIG) set path of configuration file (default "~/.config/epinio/config.yaml")
   -c, --kubeconfig string        (KUBECONFIG) path to a kubeconfig, not required in-cluster
       --no-colors                Suppress colorized output
+      --settings-file string     (EPINIO_SETTINGS) set path of settings file (default "~/.config/epinio/settings.yaml")
       --skip-ssl-verification    (SKIP_SSL_VERIFICATION) Skip the verification of TLS certificates
       --timeout-multiplier int   (EPINIO_TIMEOUT_MULTIPLIER) Multiply timeouts by this factor (default 1)
       --trace-level int          (TRACE_LEVEL) Only print trace messages at or above this level (0 to 255, default 0, print nothing)
@@ -30,5 +26,5 @@ epinio config colors BOOL [flags]
 
 ### SEE ALSO
 
-* [epinio config](epinio_config.md)	 - Epinio config management
+* [epinio app](epinio_app.md)	 - Epinio application features
 
