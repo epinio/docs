@@ -26,7 +26,7 @@ of pushing an application:
 Further defaults:
 
   - No environment variables.
-  - No bound services.
+  - No bound configurations.
   - One replica/instance.
   - Standard paketo builder image (`paketobuildpacks/builder:full`).
   - Current directory for the application sources.
@@ -64,9 +64,9 @@ Options do not extend any manifest values.
     specified `VALUE`. Multiple uses of the option accumulate. In case of multiple
     assignments to the same `NAME` the last wins.
 
-  - `--bind`, `-b` `SERVICE`
+  - `--bind`, `-b` `CONFIGURATION`
 
-    Binds the named service to the application. Multiple uses of the option accumulate.
+    Binds the named configuration to the application. Multiple uses of the option accumulate.
 
 __Side note__: The three preceding options are supported by the `apps create` and `apps
 update` commands as well. The following options are not.
@@ -124,8 +124,8 @@ The keys of this mapping specify the various elements of an application's config
         a mapping whose keys are the names of the desired environment variables, and their
         desired values.
 
-      - `services`. See `--bind`. Optional. Defaults to empty. The value of this keys is a
-        sequence of names, for the services to bind.
+      - `configurations`. See `--bind`. Optional. Defaults to empty. The value of this keys is a
+        sequence of names, for the configurations to bind.
 
   - `staging`. Optional. The value of this key is a mapping whose keys specify information
     controlling the application's staging.
@@ -165,7 +165,7 @@ only required argument.
 name: zanzibar
 configuration:
   instances: 333
-  services:
+  configurations:
   - snafu
   environment:
     DOGMA: "no"

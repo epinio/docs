@@ -1,20 +1,19 @@
-## epinio service delete
+## epinio configuration create
 
-Delete a service
+Create a configuration
 
 ### Synopsis
 
-Delete service by name.
+Create configuration by name and key/value dictionary.
 
 ```
-epinio service delete NAME [flags]
+epinio configuration create NAME (KEY VALUE)... [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help     help for delete
-      --unbind   Unbind from applications before deleting
+  -h, --help   help for create
 ```
 
 ### Options inherited from parent commands
@@ -31,5 +30,5 @@ epinio service delete NAME [flags]
 
 ### SEE ALSO
 
-* [epinio service](epinio_service.md)	 - Epinio service features
+* [epinio configuration](epinio_configuration.md)	 - Epinio configuration features
 

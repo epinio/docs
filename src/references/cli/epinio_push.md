@@ -9,7 +9,7 @@ epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
 ### Options
 
 ```
-  -b, --bind strings                 services to bind immediately
+  -b, --bind strings                 configurations to bind immediately
       --builder-image string         Paketo builder image to use for staging
       --container-image-url string   Container image url for the app workload image
   -e, --env strings                  environment variables to be used

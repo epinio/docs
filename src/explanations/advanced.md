@@ -14,9 +14,6 @@ TODO: Consider doing this in a separate document about the components. Or even, 
     - [Epinio](#epinio)
     - [Cert Manager](#cert-manager)
     - [Kubed](#kubed)
-    - [Google Service Broker](#google-service-broker)
-    - [Minibroker](#minibroker)
-    - [Service Catalog](#service-catalog)
     - [Minio](#minio)
     - [Container Registry](#container-registry)
   - [Other Advanced Topics](#other-advanced-topics)
@@ -96,35 +93,6 @@ in Epinio's staging namespace, in order to trust the certificate when pushing th
 Kubed makes sure that if the source secret changes, the copy will change too.
 
 Warning: this doesn't mean things will still work if you re-generate a secret manually. Secret rotation will be handled by Epinio in the future.
-
-### Google Service Broker
-
-[Upstream project link](https://github.com/GoogleCloudPlatform/gcp-service-broker)
-
-Many applications need additional services in order to work. Those services could be databases, cache servers, email gateways, log collecting applications or other.
-The various cloud providers already offer such services. Being able to use them in the various Platforms as a Service (PaaS) in a unified way
-gave birth to the concept of the (Open Service Broker API - aka osbapi)[https://www.openservicebrokerapi.org/]. This concept is adopted by various
-providers among which, Google. There seems to be a shift towards the "Operator" pattern, e.g. Google seems to have moved its focus to the [Config Connector](https://cloud.google.com/config-connector/docs/overview) as described at the top of the README [here](https://github.com/googlearchive/k8s-service-catalog).
-
-Since Google's service broker still works and since the common interface provided by the [Service Catalog](#service-catalog) makes it easy to integrate, Epinio
-lets the user optionally install the Google service broker with the command [`epinio enable services-google`](../references/cli/epinio_enable_services-google.md).
-
-Warning: This service broker is not actively supported by Google anymore and may be removed from a future Epinio version.
-
-### Minibroker
-
-[Upstream project link](https://github.com/kubernetes-sigs/minibroker)
-
-This is another implementation of the Open Service Broker API which can also be optionally be installed by epinio with the command [`epinio enable services-incluster`](../references/cli/epinio_enable_services-incluster.md).
-
-Minibroker provisions services on the kubernetes cluster where Epinio is also running, using upstream helm charts. This can be useful for local development with Epinio, because it's fast and doesn't cost anything (services run locally).
-
-### Service Catalog
-
-[Upstream project link](https://github.com/kubernetes-sigs/service-catalog)
-
-The service catalog is the component that collects the various services provided by the various installed service brokers and presents them in a unified way to the user.
-The service catalog is the component behind the [`epinio service list-classes`](../references/cli/epinio_service_list-classes.md) and [`epinio service list-plans`](../references/cli/epinio_service_list-plans.md) commands.
 
 ### Minio
 

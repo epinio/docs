@@ -32,9 +32,9 @@ to use Kubernetes as a [PaaS (Platform as a Service)](https://en.wikipedia.org/w
 - **Apps**
   - CRUD operations of your app. (An app can be a tarball or in a github repo)
   - [Cloud Native Buildpacks](https://buildpacks.io/) provide the runtime environment for your apps
-- **Services**
-  - CRUD operations of your service. A service can be a database, SaaS etc. A service can be an external component or can be created using `epinio service`
-  - Bind services to apps.
+- **Configurations**
+  - CRUD operations of your configuration. A configuration can be connection details for a database, SaaS etc.
+  - Bind configurations to apps.
 
 ## Next steps
 
