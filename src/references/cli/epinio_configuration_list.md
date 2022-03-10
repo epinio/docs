@@ -1,19 +1,19 @@
-## epinio service list
+## epinio configuration list
 
-Lists services
+Lists configurations
 
 ### Synopsis
 
-Lists services in the targeted namespace, or all
+Lists configurations in the targeted namespace, or all
 
 ```
-epinio service list [--all] [flags]
+epinio configuration list [--all] [flags]
 ```
 
 ### Options
 
 ```
-      --all    list all services
+      --all    list all configurations
   -h, --help   help for list
 ```
 
@@ -31,5 +31,5 @@ epinio service list [--all] [flags]
 
 ### SEE ALSO
 
-* [epinio service](epinio_service.md)	 - Epinio service features
+* [epinio configuration](epinio_configuration.md)	 - Epinio configuration features
 

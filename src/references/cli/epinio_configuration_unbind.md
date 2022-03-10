@@ -1,13 +1,13 @@
-## epinio service unbind
+## epinio configuration unbind
 
-Unbind service from an application
+Unbind configuration from an application
 
 ### Synopsis
 
-Unbind service by name, from named application.
+Unbind configuration by name, from named application.
 
 ```
-epinio service unbind NAME APP [flags]
+epinio configuration unbind NAME APP [flags]
 ```
 
 ### Options
@@ -30,5 +30,5 @@ epinio service unbind NAME APP [flags]
 
 ### SEE ALSO
 
-* [epinio service](epinio_service.md)	 - Epinio service features
+* [epinio configuration](epinio_configuration.md)	 - Epinio configuration features
 

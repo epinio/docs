@@ -1,19 +1,19 @@
-## epinio service
+## epinio configuration
 
-Epinio service features
+Epinio configuration features
 
 ### Synopsis
 
-Handle service features with Epinio
+Handle configuration features with Epinio
 
 ```
-epinio service [flags]
+epinio configuration [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for service
+  -h, --help   help for configuration
 ```
 
 ### Options inherited from parent commands
@@ -31,11 +31,11 @@ epinio service [flags]
 ### SEE ALSO
 
 * [epinio](epinio.md)	 - Epinio cli
-* [epinio service bind](epinio_service_bind.md)	 - Bind a service to an application
-* [epinio service create](epinio_service_create.md)	 - Create a service
-* [epinio service delete](epinio_service_delete.md)	 - Delete a service
-* [epinio service list](epinio_service_list.md)	 - Lists services
-* [epinio service show](epinio_service_show.md)	 - Service information
-* [epinio service unbind](epinio_service_unbind.md)	 - Unbind service from an application
-* [epinio service update](epinio_service_update.md)	 - Update a service
+* [epinio configuration bind](epinio_configuration_bind.md)	 - Bind a configuration to an application
+* [epinio configuration create](epinio_configuration_create.md)	 - Create a configuration
+* [epinio configuration delete](epinio_configuration_delete.md)	 - Delete a configuration
+* [epinio configuration list](epinio_configuration_list.md)	 - Lists configurations
+* [epinio configuration show](epinio_configuration_show.md)	 - Configuration information
+* [epinio configuration unbind](epinio_configuration_unbind.md)	 - Unbind configuration from an application
+* [epinio configuration update](epinio_configuration_update.md)	 - Update a configuration
 

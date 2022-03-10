@@ -1,19 +1,20 @@
-## epinio service bind
+## epinio configuration delete
 
-Bind a service to an application
+Delete a configuration
 
 ### Synopsis
 
-Bind service by name, to named application.
+Delete configuration by name.
 
 ```
-epinio service bind NAME APP [flags]
+epinio configuration delete NAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for bind
+  -h, --help     help for delete
+      --unbind   Unbind from applications before deleting
 ```
 
 ### Options inherited from parent commands
@@ -30,5 +31,5 @@ epinio service bind NAME APP [flags]
 
 ### SEE ALSO
 
-* [epinio service](epinio_service.md)	 - Epinio service features
+* [epinio configuration](epinio_configuration.md)	 - Epinio configuration features
 

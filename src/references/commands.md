@@ -38,14 +38,14 @@
 
     - [epinio push](cli/epinio_push.md)
     - [epinio server](cli/epinio_server.md)
-    - [epinio service](cli/epinio_service.md)
+    - [epinio configuration](cli/epinio_configuration.md)
 
-      - [epinio service bind](cli/epinio_service_bind.md)
-      - [epinio service create](cli/epinio_service_create.md)
-      - [epinio service delete](cli/epinio_service_delete.md)
-      - [epinio service list](cli/epinio_service_list.md)
-      - [epinio service show](cli/epinio_service_show.md)
-      - [epinio service unbind](cli/epinio_service_unbind.md)
+      - [epinio configuration bind](cli/epinio_configuration_bind.md)
+      - [epinio configuration create](cli/epinio_configuration_create.md)
+      - [epinio configuration delete](cli/epinio_configuration_delete.md)
+      - [epinio configuration list](cli/epinio_configuration_list.md)
+      - [epinio configuration show](cli/epinio_configuration_show.md)
+      - [epinio configuration unbind](cli/epinio_configuration_unbind.md)
 
     - [epinio target](cli/epinio_target.md)
     - [epinio uninstall](cli/epinio_uninstall.md)

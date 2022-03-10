@@ -30,18 +30,18 @@ Namespace: workspace
 Application: samplejava
 
 ✔️  Details:
-|        KEY        |                    VALUE                    |
-|-------------------|---------------------------------------------|
-| Origin            | /home/user/sample                           |
-| Status            | 1/1                                         |
-| Username          | admin                                       |
-| StageId           | cac0d6fec92e0a1f                            |
-| Age               | 2m50s                                       |
-| Active Routes     |                                             |
-|                   | samplejava.172.19.0.4.omg.howdoi.website    |
-| Desired Instances |                                           1 |
-| Bound Services    |                                             |
-| Environment       |                                             |
+|        KEY           |                    VALUE                    |
+|----------------------|---------------------------------------------|
+| Origin               | /home/user/sample                           |
+| Status               | 1/1                                         |
+| Username             | admin                                       |
+| StageId              | cac0d6fec92e0a1f                            |
+| Age                  | 2m50s                                       |
+| Active Routes        |                                             |
+|                      | samplejava.172.19.0.4.omg.howdoi.website    |
+| Desired Instances    |                                           1 |
+| Bound Configurations |                                             |
+| Environment          |                                             |
 
 ✔️  Instances: 
 |            NAME             | READY |  MEMORY   | MILLICPUS | RESTARTS |  AGE  |

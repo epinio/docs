@@ -1,21 +1,19 @@
-## epinio service update
+## epinio configuration show
 
-Update a service
+Configuration information
 
 ### Synopsis
 
-Update service by name and change instructions through flags.
+Show detailed information of the named configuration.
 
 ```
-epinio service update NAME [flags]
+epinio configuration show NAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help             help for update
-  -r, --remove strings   service keys to remove
-  -s, --set strings      service key/value assignments to add/modify
+  -h, --help   help for show
 ```
 
 ### Options inherited from parent commands
@@ -32,5 +30,5 @@ epinio service update NAME [flags]
 
 ### SEE ALSO
 
-* [epinio service](epinio_service.md)	 - Epinio service features
+* [epinio configuration](epinio_configuration.md)	 - Epinio configuration features
 

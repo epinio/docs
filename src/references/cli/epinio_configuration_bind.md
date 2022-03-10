@@ -1,19 +1,19 @@
-## epinio service create
+## epinio configuration bind
 
-Create a service
+Bind a configuration to an application
 
 ### Synopsis
 
-Create service by name and key/value dictionary.
+Bind configuration by name, to named application.
 
 ```
-epinio service create NAME (KEY VALUE)... [flags]
+epinio configuration bind NAME APP [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for create
+  -h, --help   help for bind
 ```
 
 ### Options inherited from parent commands
@@ -30,5 +30,5 @@ epinio service create NAME (KEY VALUE)... [flags]
 
 ### SEE ALSO
 
-* [epinio service](epinio_service.md)	 - Epinio service features
+* [epinio configuration](epinio_configuration.md)	 - Epinio configuration features
 
