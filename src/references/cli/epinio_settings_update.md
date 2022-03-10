@@ -13,7 +13,8 @@ epinio settings update [flags]
 ### Options
 
 ```
-  -h, --help   help for update
+  -h, --help               help for update
+  -n, --namespace string   (NAMESPACE) The namespace to use (default "epinio")
 ```
 
 ### Options inherited from parent commands
