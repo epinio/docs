@@ -1,15 +1,24 @@
 # Introduction
 
-From App to URL in one step.
+From application sources to URL in one step.
 
-## What problem does Epinio solve
+Epinio is an application Platform. It deploys on Kubernetes and allows application developers and operators to work together without stepping on each others work.
 
-Epinio makes it easy for developers to deploy their applications to Kubernetes. Easy means:
+Developers:
 
-- No previous experience with Kubernetes is required
-- No steep learning curve
+- They use the `epinio` cli to deploy applications
+- They don't have to know about Kubernetes (no steep learning curve)
+- They can use any available [paketo buildpack](https://paketo.io/) or pre-built images to deploy their applications
 - Quick local setup with zero configuration
 - Deploying to production similar to development
+
+Operators:
+
+- They work directly with Kubernetes
+- They decide how the cluster is set up (including how Epinio is installed)
+- They can decide how applications are deployed
+
+## Why Kubernetes
 
 [Kubernetes](https://kubernetes.io/) is becoming the de-facto standard for container orchestration.
 Developers may want to use Kubernetes for all the benefits it provides or may
@@ -24,7 +33,7 @@ to use Kubernetes as a [PaaS (Platform as a Service)](https://en.wikipedia.org/w
 ## Features
 
 - **Security**
-  - mTLS: Epinio uses [`linkerd`](https://linkerd.io/) to secure all communication between Epinio components inside the Kubernetes cluster
+  - Epinio uses TLS to encrypt communication between its components. It also uses TLS for applications by default.
   - Basic Authentication to access the API.
 - **Epinio Clients**
   - Web UI
