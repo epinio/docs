@@ -66,7 +66,7 @@ the helm value "kubed.enabled" to "false".
 Epinio is using an S3 compatible storage to store the application source code.
 This chart will install [Minio](https://min.io/) when `.Values.minio.enabled` is
 true (default). Any S3 compatible solution can be used instead by setting this
-value to `false` and using [the values under `s3`](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml#L44)
+value to `false` and using [the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44)
 to point to the desired S3 server. 
 
 ### Container Registry
@@ -75,15 +75,19 @@ When Epinio builds a container image for an application from source, it needs
 to store that image to a container registry. Epinio installs a container registry
 on the cluster when `.Values.containerregistry.enabled` is `true` (default).
 
-Any container registry that supports basic auth authentication can be used (e.g. gcr, dockerhub etc)
-instead by setting this value to `false` and using
-[the values under `registry`](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml#L104-L107)
+Any container registry that supports basic auth authentication (e.g. gcr, dockerhub etc) can be used
+instead, by setting this value to `false` and using
+[the relevant global values](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L107-L111)
 to point to the desired container registry.
 
 ### Install Epinio
 
 If the above dependencies are available or going to be installed by this chart,
 Epinio can be installed with the following:
+
+```
+$ helm repo add epinio https://epinio.github.io/helm-charts
+```
 
 ```
 $ helm install epinio -n epinio --create-namespace epinio/epinio --values epinio-values.yaml --set global.domain=myepiniodomain.org
