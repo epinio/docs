@@ -36,6 +36,7 @@ Manage epinio application
 * [epinio app manifest](epinio_app_manifest.md)	 - Save state of the named application as a manifest
 * [epinio app port-forward](epinio_app_port-forward.md)	 - forward one or more local ports to a pod
 * [epinio app push](epinio_app_push.md)	 - Push an application declared in the specified manifest
+* [epinio app restage](epinio_app_restage.md)	 - Restage the application
 * [epinio app restart](epinio_app_restart.md)	 - Restart the application
 * [epinio app show](epinio_app_show.md)	 - Describe the named application
 * [epinio app update](epinio_app_update.md)	 - Update the named application
