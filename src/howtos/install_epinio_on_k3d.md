@@ -30,7 +30,7 @@ k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
 
 ### Install Epinio on the Cluster
 
-Follow [Installation using a MagicDNS Service](./install_epinio_magicDNS.md) to install Epinio in your test environment.
+Follow ["magic" DNS setup](../installation/magicDNS_setup.md) to install Epinio in your test environment.
 
 `<IP>` can be found by running:
 ```bash

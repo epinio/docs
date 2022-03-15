@@ -45,7 +45,7 @@ If you do not have an existing cluster, follow the [quickstart](https://cloud.go
 
 ## Installation on Public Clouds using Custom Domain
 
-For test and production environments, you will define a system domain, e.g. **test.example.com** and you have to follow [Installation using a Custom Domain](./install_epinio_customDNS.md) documentation.
+For test and production environments, you will define a system domain, e.g. **test.example.com** and you have to follow [DNS setup](./dns_setup.md) documentation.
 
 ## Troubleshooting
 

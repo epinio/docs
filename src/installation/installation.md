@@ -1,7 +1,7 @@
 # Installation of Epinio
 
 ## Introduction
-Epinio is installed from a single Helm chart and, by default, it also installs [`Kubed`](#kubed), [`MinIO`](#s3-storage) 
+Epinio is installed from a single Helm chart and, by default, it also installs [`Kubed`](#kubed), [`MinIO`](#s3-storage)
 and a [container registry](#container-registry) in your Kubernetes cluster.
 
 You can disable the installation of `Kubed`, `MinIO` and the `container registry` by changing the settings as described in the respective sections.
@@ -67,7 +67,7 @@ Epinio is using an S3 compatible storage to store the application source code.
 This chart will install [Minio](https://min.io/) when `.Values.minio.enabled` is
 true (default). Any S3 compatible solution can be used instead by setting this
 value to `false` and using [the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44)
-to point to the desired S3 server. 
+to point to the desired S3 server.
 
 ### Container Registry
 
@@ -97,7 +97,9 @@ The only value that is mandatory is the `.Values.global.domain` which
 should be a wildcard domain, pointing to the IP address of your running
 Ingress controller.
 
-> *NOTE*: If you're deploying Epinio in a "localhost" environment, you can use a "[magic domain name](install_epinio_magicDNS.md)". 
+Read more on how to setup DNS here: [DNS setup](dns_setup.md)
+
+> *NOTE*: If you're deploying Epinio in a "localhost" environment, you can use a "[magic domain name](magicDNS_setup.md)".
 
 ## Installation on Specific Kubernetes Offerings
 
