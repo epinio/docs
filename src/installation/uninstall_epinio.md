@@ -4,18 +4,13 @@ NOTE: The command below will delete all the components Epinio originally install
 **This includes all the deployed applications.**
 
 If after installing Epinio, you deployed other things on the same cluster
-that depended on those Epinio deployed components (e.g. Traefik, etc),
+that depended on those Epinio deployed components (e.g. Kubed, Minio etc),
 then removing Epinio will remove those components and this may break your other
 workloads that depended on these. Make sure you understand the implications of
 uninstalling Epinio before you proceed.
 
-Depending on the method you used to install Epinio ([auto](./install_epinio_auto.md) or [manual](./install_epinio_manual.md)),
-the uninstallation method is different. If you used the "auto" method, then you can uninstall
-using the same helm chart:
+Assuming you installed Epinio in a namespace `epinio`, uninstall with the command:
 
 ```bash
-$ helm uninstall epinio-installer
+$ helm uninstall -n epinio epinio
 ```
-
-If you followed the manual method, you can uninstall each component using `helm` or `kubectl`, depending
-on how you installed them.
