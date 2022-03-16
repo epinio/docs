@@ -1769,6 +1769,7 @@ instructions:</p>
 <li><a href="references/cli/epinio_app_manifest.html">epinio app manifest</a>	 - Save state of the named application as a manifest</li>
 <li><a href="references/cli/epinio_app_port-forward.html">epinio app port-forward</a>	 - forward one or more local ports to a pod</li>
 <li><a href="references/cli/epinio_app_push.html">epinio app push</a>	 - Push an application declared in the specified manifest</li>
+<li><a href="references/cli/epinio_app_restage.html">epinio app restage</a>	 - Restage the application</li>
 <li><a href="references/cli/epinio_app_restart.html">epinio app restart</a>	 - Restart the application</li>
 <li><a href="references/cli/epinio_app_show.html">epinio app show</a>	 - Describe the named application</li>
 <li><a href="references/cli/epinio_app_update.html">epinio app update</a>	 - Update the named application</li>
@@ -2112,7 +2113,8 @@ instructions:</p>
 <pre><code>epinio settings update [flags]
 </code></pre>
 <h3 id="options-17"><a class="header" href="#options-17">Options</a></h3>
-<pre><code>  -h, --help   help for update
+<pre><code>  -h, --help               help for update
+  -n, --namespace string   (NAMESPACE) The namespace to use (default &quot;epinio&quot;)
 </code></pre>
 <h3 id="options-inherited-from-parent-commands-16"><a class="header" href="#options-inherited-from-parent-commands-16">Options inherited from parent commands</a></h3>
 <pre><code>  -c, --kubeconfig string        (KUBECONFIG) path to a kubeconfig, not required in-cluster
@@ -2295,6 +2297,7 @@ instructions:</p>
 <pre><code>      --access-control-allow-origin string   (ACCESS_CONTROL_ALLOW_ORIGIN) Domains allowed to use the API
   -h, --help                                 help for server
       --ingress-class-name string            (INGRESS_CLASS_NAME) Name of the ingress class to use for apps. Leave empty to add no ingressClassName to the ingress.
+  -n, --namespace string                     (NAMESPACE) The namespace to use (default &quot;epinio&quot;)
       --port int                             (PORT) The port to listen on. Leave empty to auto-assign a random port
       --registry-certificate-secret string   (REGISTRY_CERTIFICATE_SECRET) Secret for the registry's TLS certificate
       --s3-certificate-secret string         (S3_CERTIFICATE_SECRET) Secret for the S3 endpoint TLS certificate. Can be left empty if S3 is served with a trusted certificate.
