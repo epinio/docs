@@ -37,3 +37,7 @@ This stops a malicious website from probing the local network for hosts.
 Amongst those routers is the AVM FRITZBox and everything that uses [dnsmasq](https://thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html) with `stop-dns-rebind`, like [pfSense](https://docs.netgate.com/pfsense/en/latest/services/dns/rebinding.html) or NetworkManager.
 
 If you still want to use the default magic DNS, you'll have to whitelist `omg.howdoi.website` in your local DNS server.
+
+### Cluster running in a VM
+
+Sometimes the IP address of the ingress controller may not be accessible by your browser and thus you may need to set the domain to another IP. This is the case for example when you run a Kubernetes cluster with docker (e.g. [k3d](https://k3d.io/) or [kind](https://github.com/kubernetes-sigs/kind)) inside a VM (for example when using docker on Mac). Then the IP address assigned to the ingress controller is the IP address of the docker container but that is not accessible from your host. You will need to bind the container's ports `80` and `443` to the VMs ports `80` and `443` and then use the VMs IP address when constructing the "magic" domain.

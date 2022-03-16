@@ -1,4 +1,4 @@
-# Epinio, Advanced Topics
+# Advanced Topics
 
 ## Contents
 
