@@ -1,20 +1,15 @@
-## epinio settings update
+## epinio app restage
 
-Update the api location & stored credentials
-
-### Synopsis
-
-Update the api location and stored credentials from the current cluster
+Restage the application
 
 ```
-epinio settings update [flags]
+epinio app restage NAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help               help for update
-  -n, --namespace string   (NAMESPACE) The namespace to use (default "epinio")
+  -h, --help   help for restage
 ```
 
 ### Options inherited from parent commands
@@ -31,5 +26,5 @@ epinio settings update [flags]
 
 ### SEE ALSO
 
-* [epinio settings](epinio_settings.md)	 - Epinio settings management
+* [epinio app](epinio_app.md)	 - Epinio application features
 

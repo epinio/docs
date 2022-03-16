@@ -16,6 +16,7 @@ epinio server [flags]
       --access-control-allow-origin string   (ACCESS_CONTROL_ALLOW_ORIGIN) Domains allowed to use the API
   -h, --help                                 help for server
       --ingress-class-name string            (INGRESS_CLASS_NAME) Name of the ingress class to use for apps. Leave empty to add no ingressClassName to the ingress.
+  -n, --namespace string                     (NAMESPACE) The namespace to use (default "epinio")
       --port int                             (PORT) The port to listen on. Leave empty to auto-assign a random port
       --registry-certificate-secret string   (REGISTRY_CERTIFICATE_SECRET) Secret for the registry's TLS certificate
       --s3-certificate-secret string         (S3_CERTIFICATE_SECRET) Secret for the S3 endpoint TLS certificate. Can be left empty if S3 is served with a trusted certificate.
