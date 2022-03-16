@@ -10,17 +10,9 @@ The issuer will be used for both, the Epinio API endpoint and workloads (i.e. pu
 
 ## Choosing a Different Issuer
 
-When installing Epinio, one can choose between those issuers by using the `tlsIssuer` variable:
+When [installing Epinio with helm](../installation/installation.html#install-epinio), one can choose between those issuers by using the `global.tlsIssuer` helm variable.
 
-
-## Using a custom issuer
-
-It's possible to create a cert-manager cluster issuer in the cluster, before installing Epinio and referencing it by name when installing.
-
-However, this is only possible if the cert-manager CRD is present in the cluster.
-
-Install cert-manager first, then create the cluster issuer and finally install Epinio with the correct `tlsIssuer`.
-
+It's also possible to create a cert-manager cluster issuer in the cluster, before installing Epinio and referencing it by name when installing.
 
 ### Cluster Issuer for ACME DNS Challenge
 
@@ -51,13 +43,10 @@ spec:
 
 Note: This uses the Letsencrypt staging endpoint for testing. More information in the [cert-manager ACME docs](https://cert-manager.io/docs/configuration/acme/dns01/).
 
-You can then install Epinio, with the `skipCertManager` variable, and the `tlsIssuer` pointing to the new cluster issuer:
+You can then install Epinio with the `global.tlsIssuer` pointing to the new cluster issuer:
 
 ```
-helm install \
-  --set skipCertManager=true \
-  --set tlsIssuer=dns-staging \
-  epinio-installer epinio/epinio-installer
+helm install epinio epinio/epinio --set global.tlsIssuer=dns-staging ...(other values here)
 ```
 
 ### Cluster Issuer for Existing Private CA
@@ -72,8 +61,10 @@ The following oneliner creates a CA:
 
 ```
 openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
-  -keyout example.key -out example.crt -subj "/CN=*.omg.howdoi.website"
+  -keyout example.key -out example.crt -subj "/CN=*.yourdomainhere.org"
 ```
+
+(make sure the `CN` field matches the domain you are planning to use with Epinio)
 
 Create a Kubernetes secret from the CA, in the cert-manager namespace.
 
@@ -100,34 +91,14 @@ spec:
 
 #### Install Epinio
 
-Use the `tlsIssuer` variable to choose your cluster issuer:
+Use the `global.tlsIssuer` variable to choose your cluster issuer:
 
 
 ```
-helm install \
-  --set skipCertManager=true \
-  --set tlsIssuer=private-ca \
-  epinio-installer epinio/epinio-installer
+helm install --set global.tlsIssuer=private-ca epinio epinio/epinio --global.domain=epinio.yourdomainhere.org
 ```
 
-# Use TLS When Pulling From Internal Registry
-
-Epinio comes with its own registry for Docker images. This registry needs to be reachable from the Kubernetes nodes.
-If you are using a certificate issuer whose CA is trusted by the Kubernetes nodes, you can turn on SSL for pulling images from the internal registry:
-
-```
-epinio install --tls-issuer=letsencrypt-production --use-internal-registry-node-port=false
-```
-
-```
-helm install \
-  --set tlsIssuer=letsencrypt-production \
-  epinio-installer epinio/epinio-installer
-```
-
-Without the node port, pushing images to the registry uses the "epinio-registry" ingress, which is handled by Traefik.
-
-# Background on Cert Manager and Issuers
+## Background on Cert Manager and Issuers
 
 Cert manager watches for a *certificate* resource and uses the referenced *cluster issuer* to generate a certificate.
 The certificate is stored in a *secret*, in the namespace the certificate resources was created in.
