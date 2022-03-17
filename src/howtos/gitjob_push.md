@@ -1,8 +1,10 @@
-One of the more interesting features of Rio was that it would let you set up a deployment that rebuilds and republishes when your code stored in Git is changed. 
+# Push with gitjob
 
-We can recreate this functionality using the GitJob CRD that's a part of [Rancher Fleet](https://fleet.rancher.io/).
+In some other "application deployment" solutions, they have a feature that allows you to set up a deployment that rebuilds and republishes when your code stored in Git is changed.
 
-NOTE: We will improve this experience in the future!
+We can recreate this functionality in Epinio using the GitJob CRD from [Rancher Fleet](https://fleet.rancher.io/).
+
+NOTE: [We will improve this experience in the future](https://github.com/epinio/epinio/issues/1269)!
 
 ## Setup
 
@@ -56,7 +58,7 @@ spec:
         restartPolicy: "Never"
         containers:
         # This version should match your epinio deployment
-        - image: "splatform/epinio-server:v0.1.0"
+        - image: "splatform/epinio-server:v0.6.0"
           name: epinio-push
           volumeMounts:
           - name: settings

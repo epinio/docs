@@ -7,8 +7,8 @@
 - [Installation](installation/installation.md)
   - [Install Epinio](installation/installation.md)
   - [Install Epinio cli](installation/install_epinio_cli.md)
-  - [Install Epinio with custom DNS](installation/install_epinio_customDNS.md)
-  - [Install Epinio with "magic" DNS](installation/install_epinio_magicDNS.md)
+  - [DNS setup](installation/dns_setup.md)
+  - ["magic" DNS setup](installation/magicDNS_setup.md)
   - [Uninstall Epinio](installation/uninstall_epinio.md)
 
 - [Explanations](explanations/explanations.md)

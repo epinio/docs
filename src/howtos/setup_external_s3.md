@@ -8,27 +8,27 @@ The Epinio Helm chart has the following optional parameters:
 
 |  Variable name | Description | Mandatory |Default |
 |:---|:---|:---:|:---:|
-| `useS3Storage`  | Use S3 storage | yes | "" |
-| `s3Bucket`  | S3 bucket where you want to store your apps | yes | `epinio` |
-| `s3Endpoint`  | S3 endpoint | yes | `minio.minio-epinio.svc.cluster.local` |
-| `s3AccessKeyId`  | S3 access key id to authenticate to the endpoint | yes | "" |
-| `s3SecretAccessKey`  | S3 secret access key id to authenticate to the endpoint| yes | "" |
-| `s3UseSSL`  | Use SSL for encryption | no | `false` |
-| `s3Location`  | S3 region where your bucket is | no | "" |
+| `minio.enabled`  | Whether to install Minio or not | yes | "true" |
+| `s3.bucket`  | S3 bucket where you want to store your apps | yes | `epinio` |
+| `s3.endpoint`  | S3 endpoint | yes | `minio.epinio.svc.cluster.local` |
+| `s3.accessKeyID`  | S3 access key id to authenticate to the endpoint | yes | random value when Minio is enabled |
+| `s3.secretAccessKey`  | S3 secret access key id to authenticate to the endpoint| yes | random value when Minio is enabled |
+| `s3.useSSL`  | Use SSL for encryption | no | `true` |
+| `s3.region`  | S3 region where your bucket is | no | "" |
+| `s3.certificateSecret`  | An existing TLS secret to be trusted (if self signed) | no | "minio-tls" if Minio is enabled |
 
 To configure Epinio to store application sources to an external S3 compatible storage, at least the mandatory options should be set.
-(Some implementations don't need the location (e.g. Minio) and `s3-use-ssl` has a default value of "false")
+> NOTE: Some implementations don't need the location (e.g. Minio) and `s3.useSSL` has a default value of "true".
 
 For instance, add the following options to your Helm command to make Epinio pointing to AWS:
 
 ```
---set useS3Storage=true \
---set s3UseSSL=true \
---set s3Bucket=<your_bucket_here> \
---set s3Location=<your_region_here> \
---set s3Endpoint=s3.amazonaws.com \
---set s3AccessKeyId=<your_access_key_here> \
---set s3SecretAccessKey=<your_secret_access_key_here> \
+--set minio.enabled=false \
+--set s3.endpoint=s3.amazonaws.com \
+--set s3.bucket=<your_bucket_here> \
+--set s3.region=<your_region_here> \
+--set s3.accessKeyID=<your_access_key_here> \
+--set s3.secretAccessKey=<your_secret_access_key_here> \
 ```
 
 If the bucket doesn't exist, Epinio will try to create it when it first tries

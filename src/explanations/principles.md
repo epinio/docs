@@ -8,10 +8,10 @@ Epinio's development is governed by the following principles:
   - Has to fit in less than 4GB of RAM
 - **Easy Installation** 
   - Has to install in less than 5 minutes when images are warm
-  - Has to completely uninstall and leave the cluster in its previous state with a one-line command
+  - Has to completely uninstall and leave the cluster in its previous state with an one-line command
 - **Minimum Complexity**
   - Scale from desktop/local to data center environment
-  - Has to install with a one-line command and zero config
+  - Has to install with an one-line command and zero config
 - **API Driven Architecture**
 - **Security Focused**
 
