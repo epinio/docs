@@ -1,8 +1,8 @@
 # Push with gitjob
 
-In some platforms there is an interesting feature that allows you to set up a deployment that rebuilds and republishes when your code stored in Git is changed.
+In some other "application deployment" solutions, they have a feature that allows you to set up a deployment that rebuilds and republishes when your code stored in Git is changed.
 
-We can recreate this functionality in Epinio using the GitJob CRD that's a part of [Rancher Fleet](https://fleet.rancher.io/).
+We can recreate this functionality in Epinio using the GitJob CRD from [Rancher Fleet](https://fleet.rancher.io/).
 
 NOTE: [We will improve this experience in the future](https://github.com/epinio/epinio/issues/1269)!
 

@@ -17,26 +17,27 @@
     - [Traefik and Linkerd](#traefik-and-linkerd)
     - [Example](#example)
 
-## Epinio prerequisites
+## Prerequisites
 
 There are some components that need to be installed on a Kubernetes cluster before
 Epinio is installed. Epinio helm chart doesn't deploy these components.
 
 ### Ingress controller
 
-On a kubernetes cluster there may be more than one services running that need to be accessible
-from outside the cluster. In the case of Epinio, there is Epinio API server itself and there
-are the various applications deployed with Epinio.
+On a kubernetes cluster, some services need to be accessible from outside.
+For Epinio, the `API server` is one of them., and the various applications 
+deployed with Epinio might need to be also reachable from outside.
 
 One way to expose services to the world is by creating [Ingress resources](https://kubernetes.io/docs/concepts/services-networking/ingress/).
-Epinio creates Ingress resources for the Epinio API server and for the various applications users deploy on the cluster.
 Ingress resources on their own, have no effect. They are just descriptions of what kind of routing is desired. The actual implementation of this
 wiring is handled by what is called, an Ingress controller.
 
-Most clusters will have an Ingress controller deployed by default. If that's not the case, [Traefik](https://doc.traefik.io/traefik/providers/kubernetes-ingress/) can be installed.
-Other Ingress controllers should work too but Traefik is what is used in Epinio CI to test it.
+> NOTE: Most clusters will have an Ingress controller deployed by default. If that's not the case, [Traefik](https://doc.traefik.io/traefik/providers/kubernetes-ingress/) can be installed.
+> Other Ingress controllers should work too but Traefik is what is used in Epinio CI to test it.
+>
+> Read the installation documentation on how to install Traefik: [Install ingress controller](../installation/installation.html#ingress-controller)
 
-Read the installation documentation on how to install Traefik: [Install ingress controller](../installation/installation.html#ingress-controller)
+An Ingress resource will be created for the Epinio API server and for each application deployed by Epinio.
 
 ### Cert Manager
 
@@ -52,8 +53,8 @@ You can read more about certificate issuers here: [certificate issuers documenta
 
 ## Epinio installed components
 
-The official way to install Epinio is the [Epinio helm chart](https://artifacthub.io/packages/helm/epinio/epinio).
-This helm chart installs Epinio and some additional components that are needed for Epinio to work.
+The official way to install Epinio is with the [Epinio helm chart](https://artifacthub.io/packages/helm/epinio/epinio).
+This helm chart installs Epinio and additional components, listed below, that are needed for Epinio to work.
 
 ### Epinio API server
 
@@ -106,7 +107,7 @@ Ideally all consumers will communicate with the registry over TLS to keep the co
 Epinio controls the staging job and ensures that whatever CA is used to sign the registry certificate is trusted by it. Achieving the same for Kubernetes however requires configuration that cannot happen from within the cluster, therefore Epinio has no way to ensure that. Theoretically there are 3 options:
 
 1. Let the Epinio user manually configure Kubernetes to trust the CA
-2. Use a well-known trusted CA, so that no configuration is needed
+2. Use a well-known trusted CA, so there's no configuration needed
 3. Don't encrypt the communication at all
 
 Currently Epinio doesn't support the first 2 options. If `containerregistry.enabled` is `true` during installation (default), Epinio will make Kubernetes pull the images unencrypted (option #3 above).

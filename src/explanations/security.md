@@ -13,7 +13,9 @@ settings to allow verification.
 For a production-oriented deployment on the other hand, with a proper
 domain specified (`--set global.domain=...` when installing the chart),
 the certificate can be obtained from [Let's Encrypt](https://letsencrypt.org/). Nothing is stored in the
-settings in that case, as Let's Encrypt is a known CA. Read more on how to use Let's Encrypt here: [Certificate Issuers](../howtos/certificate_issuers.md).
+settings in that case, as Let's Encrypt is a known CA. 
+
+> NOTE: Read more on how to use Let's Encrypt here: [Certificate Issuers](../howtos/certificate_issuers.md).
 
 How Kubernetes accesses the Epinio registry (TLS or not) is handled a bit differently depending on installation flags.
 More details here: [Epinio Registry](../explanations/advanced.md#container-registry).

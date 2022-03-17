@@ -10,7 +10,7 @@ The issuer will be used for both, the Epinio API endpoint and workloads (i.e. pu
 
 ## Choosing a Different Issuer
 
-When [installing Epinio with helm](../installation/installation.html#install-epinio), one can choose between those issuers by using the `global.tlsIssuer` helm variable.
+When [installing Epinio with helm](../installation/installation.html#install-epinio), you can choose between those issuers by using the `global.tlsIssuer` helm variable.
 
 It's also possible to create a cert-manager cluster issuer in the cluster, before installing Epinio and referencing it by name when installing.
 
@@ -64,7 +64,7 @@ openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
   -keyout example.key -out example.crt -subj "/CN=*.yourdomainhere.org"
 ```
 
-(make sure the `CN` field matches the domain you are planning to use with Epinio)
+> IMPORTANT: make sure the `CN` field matches the domain you are planning to use with Epinio
 
 Create a Kubernetes secret from the CA, in the cert-manager namespace.
 

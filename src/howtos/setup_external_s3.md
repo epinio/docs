@@ -18,7 +18,7 @@ The Epinio Helm chart has the following optional parameters:
 | `s3.certificateSecret`  | An existing TLS secret to be trusted (if self signed) | no | "minio-tls" if Minio is enabled |
 
 To configure Epinio to store application sources to an external S3 compatible storage, at least the mandatory options should be set.
-(Some implementations don't need the location (e.g. Minio) and `s3-use-ssl` has a default value of "true")
+> NOTE: Some implementations don't need the location (e.g. Minio) and `s3.useSSL` has a default value of "true".
 
 For instance, add the following options to your Helm command to make Epinio pointing to AWS:
 
