@@ -1,18 +1,15 @@
 # Custom Routes
 
 Epinio has the concept of a "system domain". This domain is set when installing
-Epinio (with the `domain` helm value). It must be a [wildcard domain](https://en.wikipedia.org/wiki/Wildcard_DNS_record) and is used in 3 different cases:
+Epinio (with the `global.domain` helm value). It must be a [wildcard domain](https://en.wikipedia.org/wiki/Wildcard_DNS_record) and is used in 2 different cases:
 
 - To create a URL for the Epinio API server
-- To create a URL for the Epinio registry, when it's running inside the cluster (Optional)
 - To create URLs for the applications deployed with Epinio (also known as "Routes")
 
-For example, if Epinio was deployed with `domain` set to `myawesomedomain.org`:
+For example, if Epinio was deployed with `global.domain` set to `myawesomedomain.org`:
 
 - The Epinio API would be accessible at `https://epinio.myawesomedomain.org`
-- The Epinio registry would be accessible at `https://epinio-registry.myawesomedomain.org`
-
-and an application named "myapp" would be accessible at: `myapp.myawesomedomain.org`
+- An application named "myapp" would be accessible at: `https://myapp.myawesomedomain.org`
 
 This requires zero setup for each application. However, sometimes it is needed or desired to add
 a custom domain, dedicated to the application. Let's assume that the application
