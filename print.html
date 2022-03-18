@@ -864,6 +864,7 @@ More details here: <a href="explanations/../explanations/advanced.html#container
 <li><a href="howtos/setup_external_s3.html">Setup external S3 storage</a></li>
 <li><a href="howtos/setup_external_registry.html">Setup external container registry</a></li>
 <li><a href="howtos/port_forwarding.html">Port Forwarding</a></li>
+<li><a href="howtos/debug.html">Debug</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="using-a-certificate-issuer"><a class="header" href="#using-a-certificate-issuer">Using a Certificate Issuer</a></h1>
 <p>Epinio comes with multiple <a href="https://cert-manager.io/docs/configuration/">cert-manager cluster issuers</a> for creating certificates:</p>
@@ -1189,15 +1190,11 @@ will also delete the previous version of the sources from S3. This way, Epinio d
 <p>Using <a href="https://hub.docker.com/">dockerhub</a> as an example, the user would have to set the value of <code>$REGISTRY_URL</code> to <code>registry.hub.docker.com</code>, <code>$REGISTRY_USER</code> and <code>$REGISTRY_PASSWORD</code> would be set to the dockerhub credentials, and <code>$REGISTRY_NAMESPACE</code> would be either an organization or the username.</p>
 <p>When the above arguments are set, Epinio doesn't deploy a registry on the cluster.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="how-to-use-port-forwarding"><a class="header" href="#how-to-use-port-forwarding">How to use Port Forwarding</a></h2>
-<p>This how-to demonstrates how to use port forwarding to access or debug a running application.</p>
-<p>To prepare the application for debugging the flag <a href="https://paketo.io/docs/howto/java/#enable-remote-debugging"><code>BPL_DEBUG_ENABLED</code></a> has to be set to <code>true</code>.<br />
-With the epinio cli this is done by setting the environment variable for the application:</p>
-<pre><code>epinio app env set samplejava BPL_DEBUG_ENABLED true
+<p>This how-to demonstrates how to use port forwarding to access a running application.</p>
+<p>Port forwarding can be started with the <code>port-forward</code> command:</p>
+<pre><code>epinio app port-forward samplejava 34506:8080
 </code></pre>
-<p>After the application has restarted (to integrate the change of the environment) port forwarding can be started with the <code>port-forward</code> command:</p>
-<pre><code>epinio app port-forward samplejava 34505:8000 34506:8080
-</code></pre>
-<p>This will forward the traffic coming from <code>localhost:34505</code> to the remote <code>:8000</code> and the <code>localhost:34506</code> to the remote <code>:8080</code>.
+<p>This will forward the traffic coming from <code>localhost:34506</code> to the remote <code>:8080</code>.
 <strong>Note</strong> that specification of the local port is optional. When none is provided a random port will be selected.</p>
 <h3 id="point-to-a-specific-instance"><a class="header" href="#point-to-a-specific-instance">Point to a specific instance</a></h3>
 <p>Port forwarding can be directed to a specific instance of your app. To do this list all the instances of the application, pick the desired ID, and then use the <code>--instance</code> flag to direct the port forwarding to that instance:</p>

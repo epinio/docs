@@ -151,15 +151,11 @@ ga('send', 'pageview');
                 <div id="content" class="content">
                     <main>
                         <h2 id="how-to-use-port-forwarding"><a class="header" href="#how-to-use-port-forwarding">How to use Port Forwarding</a></h2>
-<p>This how-to demonstrates how to use port forwarding to access or debug a running application.</p>
-<p>To prepare the application for debugging the flag <a href="https://paketo.io/docs/howto/java/#enable-remote-debugging"><code>BPL_DEBUG_ENABLED</code></a> has to be set to <code>true</code>.<br />
-With the epinio cli this is done by setting the environment variable for the application:</p>
-<pre><code>epinio app env set samplejava BPL_DEBUG_ENABLED true
+<p>This how-to demonstrates how to use port forwarding to access a running application.</p>
+<p>Port forwarding can be started with the <code>port-forward</code> command:</p>
+<pre><code>epinio app port-forward samplejava 34506:8080
 </code></pre>
-<p>After the application has restarted (to integrate the change of the environment) port forwarding can be started with the <code>port-forward</code> command:</p>
-<pre><code>epinio app port-forward samplejava 34505:8000 34506:8080
-</code></pre>
-<p>This will forward the traffic coming from <code>localhost:34505</code> to the remote <code>:8000</code> and the <code>localhost:34506</code> to the remote <code>:8080</code>.
+<p>This will forward the traffic coming from <code>localhost:34506</code> to the remote <code>:8080</code>.
 <strong>Note</strong> that specification of the local port is optional. When none is provided a random port will be selected.</p>
 <h3 id="point-to-a-specific-instance"><a class="header" href="#point-to-a-specific-instance">Point to a specific instance</a></h3>
 <p>Port forwarding can be directed to a specific instance of your app. To do this list all the instances of the application, pick the desired ID, and then use the <code>--instance</code> flag to direct the port forwarding to that instance:</p>
