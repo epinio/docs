@@ -4,7 +4,7 @@ This how-to demonstrates how to debug a running application.
 
 ### Java
 
-To debug a Java application you need to set the [`BPL_DEBUG_ENABLED`](https://paketo.io/docs/howto/java/#enable-remote-debugging) environment variable to `true`.  
+To debug a Java application you have to set the [`BPL_DEBUG_ENABLED`](https://paketo.io/docs/howto/java/#enable-remote-debugging) environment variable to `true`.  
 This is done with the epinio cli `app env set` command:
 
 ```
