@@ -21,7 +21,7 @@ This will forward the traffic coming from `localhost:8000` to the remote `:8000`
 
 ### Node
 
-To debug a Node application you will need to start the application with the `--inspect` flag, so your `package.json will be:
+To debug a Node application you will have to start the application with the `--inspect` flag. Your `package.json` has to be similar to:
 
 ```json
 {
