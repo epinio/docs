@@ -8,3 +8,4 @@ Documentation solving specific, sometimes advanced, problems in a practical mann
 - [Setup external S3 storage](setup_external_s3.md)
 - [Setup external container registry](setup_external_registry.md)
 - [Port Forwarding](port_forwarding.md)
+- [Debug](debug.md)
