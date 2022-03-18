@@ -33,7 +33,7 @@ To debug a Node application you will need to start the application with the `--i
 }
 ```
 
-After the application has been deployed you can use [port forwarding](port_forwarding.md) to attach the debugger that will run by default on the port `9229`:
+After the application has been deployed use [port forwarding](port_forwarding.md) to attach the debugger. It runs by default on the port `9229`:
 
 ```
 epinio app port-forward sample 9229:9229
