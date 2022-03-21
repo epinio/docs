@@ -1,12 +1,17 @@
 # Creating a K3s Kubernetes Cluster
 
-Note: this documentation was tested with Epinio v0.1.3 and k3s v1.21.5+k3s2 on openSUSE Leap 15.3.
+This page was written using the following versions:
+* [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
+* k3s version v1.23.4+k3s1 and v1.22.7+k3s1 
+* openSUSE Leap 15.3 and Tumbleweed
 
 ## Get K3s Kubernetes Cluster
 
 ### Install K3s
 
 Follow the [instructions](https://k3s.io/) to install k3s on your system.
+
+Default options given by the k3s versions mentioned just above were used.
 
 ### Install Epinio on the Cluster
 
@@ -22,6 +27,8 @@ Follow ["magic" DNS setup](../installation/magicDNS_setup.md) to install Epinio 
 ```
 $ kubectl get svc -n kube-system traefik -o jsonpath="{.status.loadBalancer.ingress[0]}"
 ```
+
+Then, continue with the [Epinio installation process](../installation/installation.md).
 
 ### Troubleshooting
 
