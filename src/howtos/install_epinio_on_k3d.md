@@ -1,5 +1,8 @@
 # Creating a K3d Kubernetes Cluster
 
+This page was written using the following versions:
+* [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
+* k3d version v5.3.0
 ## Get K3d Kubernetes Cluster
 
 ### Install K3d
@@ -25,17 +28,14 @@ After the command returns, `kubectl` should already be talking to your new clust
 ```bash
 $ kubectl get nodes
 NAME                  STATUS   ROLES                  AGE   VERSION
-k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
+k3d-epinio-server-0   Ready    control-plane,master   38s   v1.22.6+k3s1
 ```
 
 ### Install Epinio on the Cluster
 
-Follow ["magic" DNS setup](../installation/magicDNS_setup.md) to install Epinio in your test environment.
+Follow ["magic" DNS setup](../installation/magicDNS_setup.md) to define the system domain you will use for Epinio.
 
-`<IP>` can be found by running:
-```bash
-ifconfig | grep "inet.*broadcast"
-```
+Then, continue with the [Epinio installation process](../installation/installation.md).
 
 ### Troubleshooting
 
