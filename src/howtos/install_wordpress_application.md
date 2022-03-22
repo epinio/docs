@@ -24,7 +24,7 @@ rm -rf latest.tar.gz
 cat << EOF > buildpack.yml
 ---
 php:
-  version: 7.3.x
+  version: 8.0.x
   script: index.php
   webserver: nginx
   webdirectory: htdocs
