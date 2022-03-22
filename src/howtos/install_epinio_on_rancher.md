@@ -4,7 +4,7 @@ Before installing Epinio, you need a running Rancher instance.
 
 If you do not have such, please use the Rancher's [installation guides](https://rancher.com/docs) to set one up.
 
-This page was written using the following versions:
+This how-to was written using the following versions:
 * [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
 * Rancher 2.6.3
 
@@ -24,13 +24,13 @@ Go to `Global settings` > `Advanced settings`  and update the following settings
 | `ui-dashboard-index`  | `https://releases.rancher.com/dashboard/epinio-v0.6.0/index.html` |
 | `ui-offline-preferred`  | `Remote` |
 
-*Please, keep in mind that `ui-dashboard-index` value will change over the time until it is merged in stable Rancher version.
+> NOTE: Please keep in mind that `ui-dashboard-index` value will change over time until it's merged in stable Rancher version.
 
 ## Epinio Prerequisites
 
 ### Install an Ingress controller
 
-If there is no Ingress controller running yet on the cluster, install Traefik.
+If there's no Ingress controller running yet on the cluster, you need to install one. In the example below, Traefik will be installed.
 
 > NOTE: If you are in the rancher dashboard in the browser, most likely you already have an Ingress controller
 > running.
@@ -44,7 +44,7 @@ See also the [Install Epinio](../installation/installation.html#ingress-controll
 
 ### Install cert-manager
 
-If cert manager is not installed yet you can install it by adding the relevant repository
+If cert manager is not installed yet, you can install it by adding the relevant repository
 in `Apps & Marketplace` >  `Repositories` > `Create`
 
 Give a name to the repo and use `https://charts.jetstack.io` as the index URL.
@@ -62,7 +62,9 @@ Give a name to the repo and use `https://epinio.github.io/helm-charts` as index 
 
 Once done, go to the "Charts" menu and install the `epinio` chart.
 
-While you can select the version you want most of the time you should choose the latest one (default). This page was written with version `0.7.1`. Then click install in the top right corner.
+> NOTE: While you can select the version you want, it's strongly advised you choose the latest one (default). This how-to was written with version `0.7.1`. 
+
+Click install in the top right corner.
 
 On the next screen, you can select a namespace where the deployment will happen. You also have to set a name for the deployment.
 
@@ -76,11 +78,11 @@ After that follow the instructions given by the Helm install command output.
 
 ## Access the Epinio menu
 
-Click on the "burger" menu icon at the top left and then the Epinio icon under **GLOBAL APPS**.
+Click on the "burger" menu icon (☰) at the top left and then the Epinio icon under **GLOBAL APPS**.
 
 You should see your fresh Epinio instance there.
 
-__Attention__. If you use an untrusted certificate, you have to click on the URL, accept the security exception and use the refresh button shown below the page title, i.e. __Epinio instances__.</br>
+> ATTENTION: If you use an untrusted certificate, you have to click on the URL, accept the security exception and use the refresh button shown below the page title, i.e. __Epinio instances__.
 Now the state should be available and you can access the instance by clicking on its name.
 
 Once you are in your Epinio instance, you can either deploy or delete things like applications, namespaces or configurations.

@@ -1,6 +1,6 @@
 # Rancher Desktop configuration
 
-This page was written using the following versions:
+This how-to was written using the following versions:
 * [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
 * Rancher desktop 1.1.1
 ## Rancher Desktop Prerequisites
@@ -13,7 +13,7 @@ Install the [latest version](https://github.com/rancher-sandbox/rancher-desktop/
 
 ## Setup Kubernetes
 
-When running Rancher Desktop for the first time wait until the initialization is completed.
+When running Rancher Desktop for the first time, wait until the initialization is completed.
 
 Make sure that a supported Kubernetes version is selected under `Kubernetes Settings` (Epinio has been tested on **v1.22.7**, **v1.21.10** and **v1.20.15**).
 
@@ -38,9 +38,9 @@ If you don't want to use the default "magic" DNS, please follow [DNS setup](dns_
 The Epinio installation is pretty much identical on Linux, MacOS and Windows:
 1. Start a terminal, use `cmd` or `powershell` on Windows (latest one is preferred) and your preferred one on Linux/MacOS.
 
-2. Download the [latest version](https://github.com/epinio/epinio/releases) of Epinio binary and copy it on your client. It is recommended to add it to the `PATH` variable (`export PATH=<epinio-binary-path>:$PATH` on Linux/MacOS with Bash and on Windows please follow [Kevin Berg's article](https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53)).
+2. Install the [Epinio CLI](../installation/install_epinio_cli.md).
 
 3. Follow the [Epinio installation process](../installation/installation.md).
 
-**NOTE:** *there is currently a [blocking issue](https://github.com/rancher-sandbox/rancher-desktop/issues/576) on Linux which prevent Epinio to push application!*
-*However, you will find a workaround at the end of the issue.*
+> NOTE: there is currently a [blocking issue](https://github.com/rancher-sandbox/rancher-desktop/issues/576) on Linux which prevent Epinio to push application!
+> However, you will find a workaround at the end of the issue.

@@ -1,6 +1,6 @@
 # Creating a K3s Kubernetes Cluster
 
-This page was written using the following versions:
+This how-to was written using the following versions:
 * [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
 * k3s version v1.23.4+k3s1 and v1.22.7+k3s1 
 * openSUSE Leap 15.3 and Tumbleweed
@@ -9,9 +9,9 @@ This page was written using the following versions:
 
 ### Install K3s
 
-Follow the [instructions](https://k3s.io/) to install k3s on your system.
+Follow the [instructions](https://k3s.io/) to install K3s on your system.
 
-Default options given by the k3s versions mentioned just above were used.
+The K3s versions used in this how-to are the ones mentioned just above, with all the options set by default.
 
 ### Install Epinio on the Cluster
 

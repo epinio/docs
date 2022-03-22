@@ -43,7 +43,7 @@ If you do not have an existing cluster, follow the [quickstart](https://docs.aws
 If you do not have an existing cluster, follow the [quickstart](https://cloud.google.com/kubernetes-engine/docs/quickstart) to create a GKE cluster.
 </details>
 
-## Installation on Public Clouds using Custom Domain
+## Install Epinio
 
 Follow the [Epinio installation process](../installation/installation.md).
 
