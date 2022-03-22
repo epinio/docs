@@ -9,7 +9,7 @@ Epinio can be installed on any Kubernetes distribution, including the Public Clo
 
 ### AKS prerequisites
 
-* Epinio has been tested with AKS version **v1.20.9** and **v1.21.7**
+* Epinio has been tested with AKS version **v1.21.9**
 * To just try out Epinio, e.g. 2 **Standard_D2_v2** nodes are sufficient
 
 ### Create an AKS cluster
@@ -22,7 +22,7 @@ If you do not have an existing cluster, follow the [quickstart](https://docs.mic
 
 ### EKS prerequisites
 
-* Epinio has been tested with EKS version **v1.20.7** and **v1.21.2**
+* Epinio has been tested with EKS version **v1.21**
 * To just try out Epinio, e.g. 2 **t3a.large** nodes are sufficient
 
 ### Create an EKS cluster
@@ -35,7 +35,7 @@ If you do not have an existing cluster, follow the [quickstart](https://docs.aws
 
 ### GKE prerequisites
 
-* Epinio has been tested with GKE version **v1.20.7**, **v1.21.2** and **v1.21.5**
+* Epinio has been tested with GKE version **v1.21.9**
 * To just try out Epinio, e.g. 1 **n2-standard-4** node is sufficient
 
 ### Create a GKE cluster
@@ -45,7 +45,7 @@ If you do not have an existing cluster, follow the [quickstart](https://cloud.go
 
 ## Installation on Public Clouds using Custom Domain
 
-For test and production environments, you will define a system domain, e.g. **test.example.com** and you have to follow [DNS setup](./dns_setup.md) documentation.
+Follow the [Epinio installation process](../installation/installation.md).
 
 ## Troubleshooting
 
