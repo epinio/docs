@@ -40,7 +40,17 @@ Go to `Apps & Marketplace` >  `Repositories` > `Create`.
 Give a name to the repo and use `https://helm.traefik.io/traefik` as the index URL.
 
 Once done, go to the "Charts" menu and install the `traefik` chart.
-See also the [Install Epinio](../installation/installation.html#ingress-controller) page for some helm values you can set.
+
+You'll see a screen where you can edit the traefik helm yaml file, make sure to set the following settings:
+
+```
+ingressClass.enabled: true
+ingressClass.isDefaultClass: true
+ports.web.redirectTo: websecure
+service.spec.loadBalancerIP: # Set this to the IP of your load balancer if you know that
+```
+
+See also the [Install Epinio](../installation/installation.html#ingress-controller) page for more details.
 
 ### Install cert-manager
 
@@ -50,7 +60,16 @@ in `Apps & Marketplace` >  `Repositories` > `Create`
 Give a name to the repo and use `https://charts.jetstack.io` as the index URL.
 
 Once done, go to the "Charts" menu and install the `cert-manager` chart.
-See also the [Install Epinio](../installation/installation.html#cert-manager) page for some helm values you can set.
+
+You'll see a screen where you can edit the cert-manager helm yaml file, make sure to set the following settings:
+
+```
+installCRDs: true
+extraArgs:
+- '--enable-certificate-owner-ref=true'
+```
+
+See also the [Install Epinio](../installation/installation.html#cert-manager) page for more details.
 
 ## Install Epinio
 
