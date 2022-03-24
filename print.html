@@ -1256,13 +1256,12 @@ resolve to the cluster's Ingress IP. Read more about the issuers here: <a href="
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rancher-configuration"><a class="header" href="#rancher-configuration">Rancher configuration</a></h1>
 <p>Before installing Epinio, you need a running Rancher instance.</p>
 <p>If you do not have such, please use the Rancher's <a href="https://rancher.com/docs">installation guides</a> to set one up.</p>
-<p>When I wrote this documentation, I used the following versions:</p>
+<p>This how-to was written using the following versions:</p>
 <ul>
-<li>epinio-installer (Helm chart) 0.3.5 </li>
+<li><a href="https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1">epinio helm chart 0.7.1</a></li>
 <li>Rancher 2.6.3</li>
 </ul>
-<h2 id="epinio-prerequisites"><a class="header" href="#epinio-prerequisites">Epinio Prerequisites</a></h2>
-<h3 id="kubernetes-cluster"><a class="header" href="#kubernetes-cluster">Kubernetes cluster</a></h3>
+<h2 id="kubernetes-cluster"><a class="header" href="#kubernetes-cluster">Kubernetes cluster</a></h2>
 <p>The two supported methods are to either deploy a new cluster or to import an existing one into Rancher. The steps to take for either method are detailed in the Rancher documentation (See <code>Cluster Provisioning</code>).</br>
 <em>While it is possible (for development) to deploy Epinio on the same node where Rancher is installed, this requires more steps and is not supported by Rancher either.</em></p>
 <h3 id="rancher-settings"><a class="header" href="#rancher-settings">Rancher settings</a></h3>
@@ -1270,37 +1269,67 @@ resolve to the cluster's Ingress IP. Read more about the issuers here: <a href="
 This means that you have to update two settings in your Rancher dashboard.</br>
 Go to <code>Global settings</code> &gt; <code>Advanced settings</code>  and update the following settings:</br></p>
 <table><thead><tr><th></th><th></th></tr></thead><tbody>
-<tr><td><code>ui-dashboard-index</code></td><td><code>https://releases.rancher.com/dashboard/epinio-v0.3.0/index.html</code></td></tr>
+<tr><td><code>ui-dashboard-index</code></td><td><code>https://releases.rancher.com/dashboard/epinio-v0.6.0/index.html</code></td></tr>
 <tr><td><code>ui-offline-preferred</code></td><td><code>Remote</code></td></tr>
 </tbody></table>
-<p><em>Please, keep in mind that <code>ui-dashboard-index</code> value will change over the time until it is not merged in stable Rancher version.</em></p>
+<blockquote>
+<p>NOTE: Please keep in mind that <code>ui-dashboard-index</code> value will change over time until it's merged in stable Rancher version.</p>
+</blockquote>
+<h2 id="epinio-prerequisites"><a class="header" href="#epinio-prerequisites">Epinio Prerequisites</a></h2>
+<h3 id="install-an-ingress-controller"><a class="header" href="#install-an-ingress-controller">Install an Ingress controller</a></h3>
+<p>If there's no Ingress controller running yet on the cluster, you need to install one. In the example below, Traefik will be installed.</p>
+<blockquote>
+<p>NOTE: If you are in the rancher dashboard in the browser, most likely you already have an Ingress controller
+running.</p>
+</blockquote>
+<p>Go to <code>Apps &amp; Marketplace</code> &gt;  <code>Repositories</code> &gt; <code>Create</code>.</p>
+<p>Give a name to the repo and use <code>https://helm.traefik.io/traefik</code> as the index URL.</p>
+<p>Once done, go to the &quot;Charts&quot; menu and install the <code>traefik</code> chart.
+See also the <a href="howtos/../installation/installation.html#ingress-controller">Install Epinio</a> page for some helm values you can set.</p>
+<h3 id="install-cert-manager"><a class="header" href="#install-cert-manager">Install cert-manager</a></h3>
+<p>If cert manager is not installed yet, you can install it by adding the relevant repository
+in <code>Apps &amp; Marketplace</code> &gt;  <code>Repositories</code> &gt; <code>Create</code></p>
+<p>Give a name to the repo and use <code>https://charts.jetstack.io</code> as the index URL.</p>
+<p>Once done, go to the &quot;Charts&quot; menu and install the <code>cert-manager</code> chart.
+See also the <a href="howtos/../installation/installation.html#cert-manager">Install Epinio</a> page for some helm values you can set.</p>
 <h2 id="install-epinio-3"><a class="header" href="#install-epinio-3">Install Epinio</a></h2>
 <p>In the Rancher Dashboard, go to the cluster on where you want to install Epinio.</p>
 <p>Add the Epinio Helm repo in <code>Apps &amp; Marketplace</code> &gt;  <code>Repositories</code> &gt; <code>Create</code></p>
 <p>Give a name to the repo and use <code>https://epinio.github.io/helm-charts</code> as index URL.</p>
-<p>Once done, go to the Chart menu and install the <code>epinio-installer</code> chart.</p>
-<p>While you can select the version you want most of the time you should choose the latest one (default). Then click install in the top right corner.</p>
+<p>Once done, go to the &quot;Charts&quot; menu and install the <code>epinio</code> chart.</p>
+<blockquote>
+<p>NOTE: While you can select the version you want, it's strongly advised you choose the latest one (default). This how-to was written with version <code>0.7.1</code>. </p>
+</blockquote>
+<p>Click install in the top right corner.</p>
 <p>On the next screen, you can select a namespace where the deployment will happen. You also have to set a name for the deployment.</p>
 <p>The following screen is where you can configure Epinio according to your needs.</br>
-The most important setting here is <code>Access control allow origin</code>. It is mandatory to insert your Rancher dashboard URL into this field.</br>
-It basically allows Rancher to talk with the Epinio API.</p>
+The 2 most important settings here are:</p>
+<ul>
+<li><code>Domain</code>: <a href="howtos/../installation/dns_setup.html">Explained here</a></li>
+<li><code>Access control allow origin</code>:  It is mandatory to insert your Rancher dashboard URL into this field. It basically allows Rancher to talk with the Epinio API.</li>
+</ul>
 <p>Once everything is configured, click on the install button and then wait a few minutes for the installation to complete.</br>
 After that follow the instructions given by the Helm install command output.</p>
 <h2 id="access-the-epinio-menu"><a class="header" href="#access-the-epinio-menu">Access the Epinio menu</a></h2>
-<p>Click on the Epinio icon in the main side menu (under <strong>GLOBAL APPS</strong>).</p>
+<p>Click on the &quot;burger&quot; menu icon (☰) at the top left and then the Epinio icon under <strong>GLOBAL APPS</strong>.</p>
 <p>You should see your fresh Epinio instance there.</p>
-<p><strong>Attention</strong>. If you use an untrusted certificate, you have to click on the URL, accept the security exception and use the refresh button shown below the page title, i.e. <strong>Epinio instances</strong>.</br>
-Now the state should be available and you can access the instance by clicking on its name.*</p>
-<p>Once you are in your Epinio instance, you can either deploy or delete things like applications, namespace or services.</p>
+<blockquote>
+<p>ATTENTION: If you use an untrusted certificate, you have to click on the URL, accept the security exception and use the refresh button shown below the page title, i.e. <strong>Epinio instances</strong>.
+Now the state should be available and you can access the instance by clicking on its name.</p>
+</blockquote>
+<p>Once you are in your Epinio instance, you can either deploy or delete things like applications, namespaces or configurations.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rancher-rke2-configuration"><a class="header" href="#rancher-rke2-configuration">Rancher RKE2 configuration</a></h1>
+<p>This page was written using the following versions:</p>
+<ul>
+<li><a href="https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1">epinio helm chart 0.7.1</a></li>
+<li>RKE2 version v1.22.7+rke2r2</li>
+</ul>
 <h2 id="create-an-rke2-cluster"><a class="header" href="#create-an-rke2-cluster">Create an RKE2 cluster</a></h2>
 <p>If you don't have an existing cluster, follow the <a href="https://docs.rke2.io/install/quickstart/">quickstart</a> to create an RKE2 cluster.</p>
 <h2 id="rke2-prerequisites"><a class="header" href="#rke2-prerequisites">RKE2 Prerequisites</a></h2>
 <ul>
 <li>A load-balancer is mandatory for Epinio to work on RKE2. Here <a href="https://metallb.universe.tf">MetalLB</a> was used as load-balancer.
 See <a href="howtos/../howtos/provision_external_ip_for_local_kubernetes.html">Provision of External IP for LoadBalancer service type in Kubernetes</a> for more information.</li>
-<li>Epinio Rancher RKE2 version v1.21.4+rke2r3 and v1.22.5+rke2r1</li>
-<li>Epinio installation passed on a 3 node cluster (1 server, 2 agents) with Longhorn v1.1.1 storage class</li>
 </ul>
 <h2 id="installation-2"><a class="header" href="#installation-2">Installation</a></h2>
 <p>Beside advanced installation options, there are two ways of installing Epinio:</p>
@@ -1316,11 +1345,18 @@ See <a href="howtos/../howtos/provision_external_ip_for_local_kubernetes.html">P
 <ul>
 <li>For test and production environments. You will define a system domain, e.g. <strong>test.example.com</strong>.</li>
 </ul>
+<p>Then, continue with the <a href="howtos/../installation/installation.html">Epinio installation process</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-k3s-kubernetes-cluster"><a class="header" href="#creating-a-k3s-kubernetes-cluster">Creating a K3s Kubernetes Cluster</a></h1>
-<p>Note: this documentation was tested with Epinio v0.1.3 and k3s v1.21.5+k3s2 on openSUSE Leap 15.3.</p>
+<p>This how-to was written using the following versions:</p>
+<ul>
+<li><a href="https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1">epinio helm chart 0.7.1</a></li>
+<li>k3s version v1.23.4+k3s1 and v1.22.7+k3s1 </li>
+<li>openSUSE Leap 15.3 and Tumbleweed</li>
+</ul>
 <h2 id="get-k3s-kubernetes-cluster"><a class="header" href="#get-k3s-kubernetes-cluster">Get K3s Kubernetes Cluster</a></h2>
 <h3 id="install-k3s"><a class="header" href="#install-k3s">Install K3s</a></h3>
-<p>Follow the <a href="https://k3s.io/">instructions</a> to install k3s on your system.</p>
+<p>Follow the <a href="https://k3s.io/">instructions</a> to install K3s on your system.</p>
+<p>The K3s versions used in this how-to are the ones mentioned just above, with all the options set by default.</p>
 <h3 id="install-epinio-on-the-cluster"><a class="header" href="#install-epinio-on-the-cluster">Install Epinio on the Cluster</a></h3>
 <p>Export the k3s cluster configration first:</p>
 <pre><code class="language-bash">export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
@@ -1329,6 +1365,7 @@ See <a href="howtos/../howtos/provision_external_ip_for_local_kubernetes.html">P
 <p><code>&lt;IP&gt;</code> can be found by running:</p>
 <pre><code>$ kubectl get svc -n kube-system traefik -o jsonpath=&quot;{.status.loadBalancer.ingress[0]}&quot;
 </code></pre>
+<p>Then, continue with the <a href="howtos/../installation/installation.html">Epinio installation process</a>.</p>
 <h3 id="troubleshooting-1"><a class="header" href="#troubleshooting-1">Troubleshooting</a></h3>
 <h4 id="dns-issues"><a class="header" href="#dns-issues">DNS Issues</a></h4>
 <p>In case of trouble with DNS resolution, for example if you have something like this in your logs:</p>
@@ -1345,6 +1382,11 @@ See <a href="howtos/../howtos/provision_external_ip_for_local_kubernetes.html">P
 <p>In case of trouble with Epinio's Traefik component or Ingress controllers, the <a href="howtos/../explanations/advanced.html#traefik">Traefik</a> section in the
 <a href="howtos/../explanations/advanced.html">Advanced Topics</a> document shall be your friend.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rancher-desktop-configuration"><a class="header" href="#rancher-desktop-configuration">Rancher Desktop configuration</a></h1>
+<p>This how-to was written using the following versions:</p>
+<ul>
+<li><a href="https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1">epinio helm chart 0.7.1</a></li>
+<li>Rancher desktop 1.1.1</li>
+</ul>
 <h2 id="rancher-desktop-prerequisites"><a class="header" href="#rancher-desktop-prerequisites">Rancher Desktop Prerequisites</a></h2>
 <ul>
 <li>Running on Windows requires Windows Subsystem for Linux (WSL) which is automatically installed by Rancher Desktop.</li>
@@ -1352,14 +1394,14 @@ See <a href="howtos/../howtos/provision_external_ip_for_local_kubernetes.html">P
 <h3 id="install-rancher-desktop"><a class="header" href="#install-rancher-desktop">Install Rancher Desktop</a></h3>
 <p>Install the <a href="https://github.com/rancher-sandbox/rancher-desktop/releases">latest version</a> of Rancher Desktop for your operating system.</p>
 <h2 id="setup-kubernetes"><a class="header" href="#setup-kubernetes">Setup Kubernetes</a></h2>
-<p>When running Rancher Desktop for the first time wait until the initialization is completed.</p>
-<p>Make sure that a supported Kubernetes version is selected under <code>Kubernetes Settings</code> (Epinio has been tested on <strong>v1.21.8</strong>, <strong>v1.22.5</strong> and <strong>v1.23.1</strong>).</p>
+<p>When running Rancher Desktop for the first time, wait until the initialization is completed.</p>
+<p>Make sure that a supported Kubernetes version is selected under <code>Kubernetes Settings</code> (Epinio has been tested on <strong>v1.22.7</strong>, <strong>v1.21.10</strong> and <strong>v1.20.15</strong>).</p>
 <h2 id="install-epinio-4"><a class="header" href="#install-epinio-4">Install epinio</a></h2>
 <p>Make sure Rancher Desktop is running.</p>
 <p>Rancher Desktop can report Kubernetes as running while some pods are actually not yet ready.
 Manual verification is possible by executing the command <code>kubectl get pods -A</code> in a terminal and checking that all pods report either <code>Running</code> or <code>Completed</code> as their status.</p>
 <p>For now, Rancher Desktop configures his own loadbalancer (Traefik through K3s) and you have to set Epinio system domain according to the provided IP, for example:</p>
-<pre><code>LB_IP=$(kubectl describe svc traefik --namespace traefik \
+<pre><code>LB_IP=$(kubectl describe svc traefik --namespace kube-system \
         | awk '/Ingress/ { print $3 }')
 
 export EPINIO_SYSTEM_DOMAIN=${LB_IP}.omg.howdoi.website
@@ -1372,14 +1414,22 @@ export EPINIO_SYSTEM_DOMAIN=${LB_IP}.omg.howdoi.website
 <p>Start a terminal, use <code>cmd</code> or <code>powershell</code> on Windows (latest one is preferred) and your preferred one on Linux/MacOS.</p>
 </li>
 <li>
-<p>Download the <a href="https://github.com/epinio/epinio/releases">latest version</a> of Epinio binary and copy it on your client. It is recommended to add it to the <code>PATH</code> variable (<code>export PATH=&lt;epinio-binary-path&gt;:$PATH</code> on Linux/MacOS with Bash and on Windows please follow <a href="https://medium.com/@kevinmarkvi/how-to-add-executables-to-your-path-in-windows-5ffa4ce61a53">Kevin Berg's article</a>).</p>
+<p>Install the <a href="howtos/../installation/install_epinio_cli.html">Epinio CLI</a>.</p>
 </li>
 <li>
-<p>Use <code>helm</code> to install Epinio by following either the <a href="howtos/install_epinio_auto.html">Method 1</a> (recommended for most cases) or the <a href="howtos/install_epinio_manual.html">Method 2</a> (useful for advanced configuration or if you already have some components in your environment). As <strong>Traefik</strong> is already installed, just bypass this step (by adding option <code>--set skipTraefik=true</code> for Method 1).</p>
+<p>Follow the <a href="howtos/../installation/installation.html">Epinio installation process</a>.</p>
 </li>
 </ol>
-<p><strong>NOTE:</strong> <em>there is currently a <a href="https://github.com/rancher-sandbox/rancher-desktop/issues/576">blocking issue</a> on Linux which prevent Epinio to push application!</em></p>
+<blockquote>
+<p>NOTE: there is currently a <a href="https://github.com/rancher-sandbox/rancher-desktop/issues/576">blocking issue</a> on Linux which prevent Epinio to push application!
+However, you will find a workaround at the end of the issue.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-k3d-kubernetes-cluster"><a class="header" href="#creating-a-k3d-kubernetes-cluster">Creating a K3d Kubernetes Cluster</a></h1>
+<p>This how-to was written using the following versions:</p>
+<ul>
+<li><a href="https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1">epinio helm chart 0.7.1</a></li>
+<li>k3d version v5.3.0</li>
+</ul>
 <h2 id="get-k3d-kubernetes-cluster"><a class="header" href="#get-k3d-kubernetes-cluster">Get K3d Kubernetes Cluster</a></h2>
 <h3 id="install-k3d"><a class="header" href="#install-k3d">Install K3d</a></h3>
 <p>Follow the <a href="https://k3d.io/">instructions</a> to install k3d on your system.</p>
@@ -1394,13 +1444,11 @@ export EPINIO_SYSTEM_DOMAIN=${LB_IP}.omg.howdoi.website
 <p>After the command returns, <code>kubectl</code> should already be talking to your new cluster:</p>
 <pre><code class="language-bash">$ kubectl get nodes
 NAME                  STATUS   ROLES                  AGE   VERSION
-k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
+k3d-epinio-server-0   Ready    control-plane,master   38s   v1.22.6+k3s1
 </code></pre>
 <h3 id="install-epinio-on-the-cluster-1"><a class="header" href="#install-epinio-on-the-cluster-1">Install Epinio on the Cluster</a></h3>
-<p>Follow <a href="howtos/../installation/magicDNS_setup.html">&quot;magic&quot; DNS setup</a> to install Epinio in your test environment.</p>
-<p><code>&lt;IP&gt;</code> can be found by running:</p>
-<pre><code class="language-bash">ifconfig | grep &quot;inet.*broadcast&quot;
-</code></pre>
+<p>Follow <a href="howtos/../installation/magicDNS_setup.html">&quot;magic&quot; DNS setup</a> to define the domain name you will use for Epinio.</p>
+<p>Then, continue with the <a href="howtos/../installation/installation.html">Epinio installation process</a>.</p>
 <h3 id="troubleshooting-2"><a class="header" href="#troubleshooting-2">Troubleshooting</a></h3>
 <h4 id="kubeconfig"><a class="header" href="#kubeconfig">Kubeconfig</a></h4>
 <p>To get the kube config to access the cluster:</p>
@@ -1410,6 +1458,11 @@ k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
 <p>In case of trouble with Epinio's Traefik component or Ingress controllers, the <a href="howtos/../explanations/advanced.html#traefik">Traefik</a> section in the
 <a href="howtos/../explanations/advanced.html">Advanced Topics</a> document shall be your friend.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-minikube-kubernetes-cluster"><a class="header" href="#creating-a-minikube-kubernetes-cluster">Creating a Minikube Kubernetes Cluster</a></h1>
+<p>This how-to was written using the following versions:</p>
+<ul>
+<li><a href="https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1">epinio helm chart 0.7.1</a></li>
+<li>minikube version v1.25.2</li>
+</ul>
 <h2 id="get-minikube-kubernetes-cluster"><a class="header" href="#get-minikube-kubernetes-cluster">Get Minikube Kubernetes Cluster</a></h2>
 <h3 id="install-minikube"><a class="header" href="#install-minikube">Install Minikube</a></h3>
 <p>Follow the <a href="https://minikube.sigs.k8s.io/docs/start/">instructions</a> to install Minikube on your system.</p>
@@ -1437,7 +1490,8 @@ Configure the addon with those values.</p>
 </code></pre>
 <p>Now you can install Epinio on the Cluster.</p>
 <h3 id="install-epinio-on-the-cluster-2"><a class="header" href="#install-epinio-on-the-cluster-2">Install Epinio on the Cluster</a></h3>
-<p>Follow <a href="howtos/../installation/magicDNS_setup.html">&quot;magic&quot; DNS setup</a> to install Epinio in your test environment.</p>
+<p>With Minikube, you'll need to deploy Traefik and cert-manager.
+All is explained in the <a href="howtos/../installation/installation.html">Epinio installation process</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="install-epinio-on-public-clouds"><a class="header" href="#install-epinio-on-public-clouds">Install Epinio on Public Clouds</a></h1>
 <p>Epinio can be installed on any Kubernetes distribution, including the Public Cloud ones.</p>
 <h2 id="public-clouds-configuration"><a class="header" href="#public-clouds-configuration">Public Clouds configuration</a></h2>
@@ -1445,7 +1499,7 @@ Configure the addon with those values.</p>
 <summary>Microsoft AKS configuration</summary>
 <h3 id="aks-prerequisites"><a class="header" href="#aks-prerequisites">AKS prerequisites</a></h3>
 <ul>
-<li>Epinio has been tested with AKS version <strong>v1.20.9</strong> and <strong>v1.21.7</strong></li>
+<li>Epinio has been tested with AKS version <strong>v1.21.9</strong></li>
 <li>To just try out Epinio, e.g. 2 <strong>Standard_D2_v2</strong> nodes are sufficient</li>
 </ul>
 <h3 id="create-an-aks-cluster"><a class="header" href="#create-an-aks-cluster">Create an AKS cluster</a></h3>
@@ -1455,7 +1509,7 @@ Configure the addon with those values.</p>
 <summary>Amazon EKS configuration</summary>
 <h3 id="eks-prerequisites"><a class="header" href="#eks-prerequisites">EKS prerequisites</a></h3>
 <ul>
-<li>Epinio has been tested with EKS version <strong>v1.20.7</strong> and <strong>v1.21.2</strong></li>
+<li>Epinio has been tested with EKS version <strong>v1.21</strong></li>
 <li>To just try out Epinio, e.g. 2 <strong>t3a.large</strong> nodes are sufficient</li>
 </ul>
 <h3 id="create-an-eks-cluster"><a class="header" href="#create-an-eks-cluster">Create an EKS cluster</a></h3>
@@ -1465,14 +1519,14 @@ Configure the addon with those values.</p>
 <summary>Google GKE configuration</summary>
 <h3 id="gke-prerequisites"><a class="header" href="#gke-prerequisites">GKE prerequisites</a></h3>
 <ul>
-<li>Epinio has been tested with GKE version <strong>v1.20.7</strong>, <strong>v1.21.2</strong> and <strong>v1.21.5</strong></li>
+<li>Epinio has been tested with GKE version <strong>v1.21.9</strong></li>
 <li>To just try out Epinio, e.g. 1 <strong>n2-standard-4</strong> node is sufficient</li>
 </ul>
 <h3 id="create-a-gke-cluster"><a class="header" href="#create-a-gke-cluster">Create a GKE cluster</a></h3>
 <p>If you do not have an existing cluster, follow the <a href="https://cloud.google.com/kubernetes-engine/docs/quickstart">quickstart</a> to create a GKE cluster.</p>
 </details>
-<h2 id="installation-on-public-clouds-using-custom-domain"><a class="header" href="#installation-on-public-clouds-using-custom-domain">Installation on Public Clouds using Custom Domain</a></h2>
-<p>For test and production environments, you will define a system domain, e.g. <strong>test.example.com</strong> and you have to follow <a href="howtos/./dns_setup.html">DNS setup</a> documentation.</p>
+<h2 id="install-epinio-5"><a class="header" href="#install-epinio-5">Install Epinio</a></h2>
+<p>Follow the <a href="howtos/../installation/installation.html">Epinio installation process</a>.</p>
 <h2 id="troubleshooting-3"><a class="header" href="#troubleshooting-3">Troubleshooting</a></h2>
 <p>In case of trouble with Epinio's Traefik component or Ingress controllers, the <a href="howtos/../explanations/advanced.html#traefik">Traefik</a> section in the <a href="howtos/../explanations/advanced.html">Advanced Topics</a> document shall be your friend.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installing-wordpress-with-epinio"><a class="header" href="#installing-wordpress-with-epinio">Installing Wordpress with Epinio</a></h1>
@@ -1491,7 +1545,7 @@ rm -rf latest.tar.gz
 <pre><code class="language-bash">cat &lt;&lt; EOF &gt; buildpack.yml
 ---
 php:
-  version: 7.3.x
+  version: 8.0.x
   script: index.php
   webserver: nginx
   webdirectory: htdocs
@@ -1585,15 +1639,17 @@ instructions:</p>
 <li><a href="https://github.com/helm/helm/releases">Helm Releases</a></li>
 <li><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/">Kubectl Instructions</a></li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><table><thead><tr><th></th><th>Server</th><th>Admin</th><th>User</th><th></th></tr></thead><tbody>
-<tr><td><em>component</em></td><td><strong>API</strong></td><td><strong>Installation</strong></td><td><strong>CLI</strong></td><td></td></tr>
-<tr><td><em>needs</em></td><td><em>(kubeconfig)</em></td><td><em>kubeconfig</em></td><td><em>kubeconfig</em></td><td><em>settings file</em></td></tr>
-<tr><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td><em>commands</em></td><td>server</td><td>install</td><td>settings update</td><td>info</td></tr>
-<tr><td></td><td></td><td>install-traefik</td><td></td><td>namespace</td></tr>
-<tr><td></td><td></td><td>install-cert-manager</td><td></td><td>target</td></tr>
-<tr><td></td><td></td><td>enable</td><td></td><td>push</td></tr>
-<tr><td></td><td></td><td>disable</td><td></td><td>settings show|colors</td></tr>
+<div style="break-before: page; page-break-before: always;"></div><table><thead><tr><th></th><th>Server</th><th>User</th><th></th></tr></thead><tbody>
+<tr><td><em>component</em></td><td><strong>API</strong></td><td><strong>CLI</strong></td><td></td></tr>
+<tr><td><em>needs</em></td><td><em>(kubeconfig)</em></td><td><em>kubeconfig</em></td><td><em>settings file</em></td></tr>
+<tr><td></td><td></td><td></td><td></td></tr>
+<tr><td><em>commands</em></td><td>server</td><td>settings update</td><td>info</td></tr>
+<tr><td></td><td></td><td></td><td>namespace</td></tr>
+<tr><td></td><td></td><td></td><td>configuration</td></tr>
+<tr><td></td><td></td><td></td><td>app</td></tr>
+<tr><td></td><td></td><td></td><td>target</td></tr>
+<tr><td></td><td></td><td></td><td>push</td></tr>
+<tr><td></td><td></td><td></td><td>settings show|colors</td></tr>
 </tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="command-reference"><a class="header" href="#command-reference">Command reference</a></h1>
 <ul>
@@ -1647,15 +1703,6 @@ instructions:</p>
 <p><a href="references/cli/epinio_info.html">epinio info</a></p>
 </li>
 <li>
-<p><a href="references/cli/epinio_install-cert-manager.html">epinio install-cert-manager</a></p>
-</li>
-<li>
-<p><a href="references/cli/epinio_install-ingress.html">epinio install-ingress</a></p>
-</li>
-<li>
-<p><a href="references/cli/epinio_install.html">epinio install</a></p>
-</li>
-<li>
 <p><a href="references/cli/epinio_namespace.html">epinio namespace</a></p>
 <ul>
 <li><a href="references/cli/epinio_namespace_create.html">epinio namespace create</a></li>
@@ -1683,9 +1730,6 @@ instructions:</p>
 </li>
 <li>
 <p><a href="references/cli/epinio_target.html">epinio target</a></p>
-</li>
-<li>
-<p><a href="references/cli/epinio_uninstall.html">epinio uninstall</a></p>
 </li>
 <li>
 <p><a href="references/cli/epinio_version.html">epinio version</a></p>
@@ -2547,7 +2591,7 @@ the namespace to use with all other commands.</p>
 <li>
 <p><code>epinio settings show</code></p>
 <p>This command shows the details of the currently stored
-settings settings. An exception is made for the certificate
+settings. An exception is made for the certificate
 field, due to its expected size. The command's output only notes
 if certificate data is present or not.</p>
 </li>
@@ -2555,7 +2599,7 @@ if certificate data is present or not.</p>
 <p><code>epinio settings update</code></p>
 <p>Epinio allows users to switch between multiple installations (on
 different clusters) by simply re-targeting the cluster to talk to
-via changes to the  environment variable <code>KUBECONFIG</code>.</p>
+via changes to the environment variable <code>KUBECONFIG</code>.</p>
 <p>When such is done the credentials, cert data, and urls stored in
 the settings will not match the newly targeted cluster,
 except by coincidence.</p>
@@ -2584,7 +2628,7 @@ Each buildpack may support more configuration options, so you may have to read t
 <p>E.g. <a href="https://github.com/paketo-buildpacks/php-web#configuring-custom-ini-files">Instructions on how to add custom php.ini files for php-web buildpack</a></p>
 <h2 id="detailed-push-process"><a class="header" href="#detailed-push-process">Detailed push process</a></h2>
 <p>The above image is a simplified explanation of the <code>epinio push</code> process. If you don't want to know all the details on how that works, the above diagram should
-be all the information you need. If you are curious about the details, then read here: <a href="references/explanations/detailed-push-process.html">Detailed push docs</a></p>
+be all the information you need. If you are curious about the details, then read here: <a href="references/../explanations/detailed-push-process.html">Detailed push docs</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="application-manifests"><a class="header" href="#application-manifests">Application Manifests</a></h1>
 <h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
 <p>An application manifest is a YAML file containing the entire configuration of an

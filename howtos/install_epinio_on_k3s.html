@@ -151,10 +151,16 @@ ga('send', 'pageview');
                 <div id="content" class="content">
                     <main>
                         <h1 id="creating-a-k3s-kubernetes-cluster"><a class="header" href="#creating-a-k3s-kubernetes-cluster">Creating a K3s Kubernetes Cluster</a></h1>
-<p>Note: this documentation was tested with Epinio v0.1.3 and k3s v1.21.5+k3s2 on openSUSE Leap 15.3.</p>
+<p>This how-to was written using the following versions:</p>
+<ul>
+<li><a href="https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1">epinio helm chart 0.7.1</a></li>
+<li>k3s version v1.23.4+k3s1 and v1.22.7+k3s1 </li>
+<li>openSUSE Leap 15.3 and Tumbleweed</li>
+</ul>
 <h2 id="get-k3s-kubernetes-cluster"><a class="header" href="#get-k3s-kubernetes-cluster">Get K3s Kubernetes Cluster</a></h2>
 <h3 id="install-k3s"><a class="header" href="#install-k3s">Install K3s</a></h3>
-<p>Follow the <a href="https://k3s.io/">instructions</a> to install k3s on your system.</p>
+<p>Follow the <a href="https://k3s.io/">instructions</a> to install K3s on your system.</p>
+<p>The K3s versions used in this how-to are the ones mentioned just above, with all the options set by default.</p>
 <h3 id="install-epinio-on-the-cluster"><a class="header" href="#install-epinio-on-the-cluster">Install Epinio on the Cluster</a></h3>
 <p>Export the k3s cluster configration first:</p>
 <pre><code class="language-bash">export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
@@ -163,6 +169,7 @@ ga('send', 'pageview');
 <p><code>&lt;IP&gt;</code> can be found by running:</p>
 <pre><code>$ kubectl get svc -n kube-system traefik -o jsonpath=&quot;{.status.loadBalancer.ingress[0]}&quot;
 </code></pre>
+<p>Then, continue with the <a href="../installation/installation.html">Epinio installation process</a>.</p>
 <h3 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h3>
 <h4 id="dns-issues"><a class="header" href="#dns-issues">DNS Issues</a></h4>
 <p>In case of trouble with DNS resolution, for example if you have something like this in your logs:</p>

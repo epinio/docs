@@ -151,6 +151,11 @@ ga('send', 'pageview');
                 <div id="content" class="content">
                     <main>
                         <h1 id="creating-a-k3d-kubernetes-cluster"><a class="header" href="#creating-a-k3d-kubernetes-cluster">Creating a K3d Kubernetes Cluster</a></h1>
+<p>This how-to was written using the following versions:</p>
+<ul>
+<li><a href="https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1">epinio helm chart 0.7.1</a></li>
+<li>k3d version v5.3.0</li>
+</ul>
 <h2 id="get-k3d-kubernetes-cluster"><a class="header" href="#get-k3d-kubernetes-cluster">Get K3d Kubernetes Cluster</a></h2>
 <h3 id="install-k3d"><a class="header" href="#install-k3d">Install K3d</a></h3>
 <p>Follow the <a href="https://k3d.io/">instructions</a> to install k3d on your system.</p>
@@ -165,13 +170,11 @@ ga('send', 'pageview');
 <p>After the command returns, <code>kubectl</code> should already be talking to your new cluster:</p>
 <pre><code class="language-bash">$ kubectl get nodes
 NAME                  STATUS   ROLES                  AGE   VERSION
-k3d-epinio-server-0   Ready    control-plane,master   38s   v1.20.0+k3s2
+k3d-epinio-server-0   Ready    control-plane,master   38s   v1.22.6+k3s1
 </code></pre>
 <h3 id="install-epinio-on-the-cluster"><a class="header" href="#install-epinio-on-the-cluster">Install Epinio on the Cluster</a></h3>
-<p>Follow <a href="../installation/magicDNS_setup.html">&quot;magic&quot; DNS setup</a> to install Epinio in your test environment.</p>
-<p><code>&lt;IP&gt;</code> can be found by running:</p>
-<pre><code class="language-bash">ifconfig | grep &quot;inet.*broadcast&quot;
-</code></pre>
+<p>Follow <a href="../installation/magicDNS_setup.html">&quot;magic&quot; DNS setup</a> to define the domain name you will use for Epinio.</p>
+<p>Then, continue with the <a href="../installation/installation.html">Epinio installation process</a>.</p>
 <h3 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h3>
 <h4 id="kubeconfig"><a class="header" href="#kubeconfig">Kubeconfig</a></h4>
 <p>To get the kube config to access the cluster:</p>
