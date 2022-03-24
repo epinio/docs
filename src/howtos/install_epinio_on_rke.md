@@ -1,5 +1,9 @@
 # Rancher RKE2 configuration
 
+This page was written using the following versions:
+* [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
+* RKE2 version v1.22.7+rke2r2
+
 ## Create an RKE2 cluster
 
 If you don't have an existing cluster, follow the [quickstart](https://docs.rke2.io/install/quickstart/) to create an RKE2 cluster.
@@ -8,8 +12,6 @@ If you don't have an existing cluster, follow the [quickstart](https://docs.rke2
 
 * A load-balancer is mandatory for Epinio to work on RKE2. Here [MetalLB](https://metallb.universe.tf) was used as load-balancer.
   See [Provision of External IP for LoadBalancer service type in Kubernetes](../howtos/provision_external_ip_for_local_kubernetes.md) for more information.
-* Epinio Rancher RKE2 version v1.21.4+rke2r3 and v1.22.5+rke2r1
-* Epinio installation passed on a 3 node cluster (1 server, 2 agents) with Longhorn v1.1.1 storage class
 
 ## Installation
 
@@ -22,3 +24,6 @@ Beside advanced installation options, there are two ways of installing Epinio:
 2. [DNS setup](../installation/dns_setup.md)
 
 - For test and production environments. You will define a system domain, e.g. **test.example.com**.
+
+
+Then, continue with the [Epinio installation process](../installation/installation.md).

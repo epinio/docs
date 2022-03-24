@@ -58,7 +58,7 @@ explicitly targeting the settings. These are:
   2. `epinio settings show`
 
      This command shows the details of the currently stored
-     settings settings. An exception is made for the certificate
+     settings. An exception is made for the certificate
      field, due to its expected size. The command's output only notes
      if certificate data is present or not.
 
@@ -66,7 +66,7 @@ explicitly targeting the settings. These are:
 
      Epinio allows users to switch between multiple installations (on
      different clusters) by simply re-targeting the cluster to talk to
-     via changes to the  environment variable `KUBECONFIG`.
+     via changes to the environment variable `KUBECONFIG`.
 
      When such is done the credentials, cert data, and urls stored in
      the settings will not match the newly targeted cluster,

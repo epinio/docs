@@ -26,9 +26,6 @@
       - [epinio settings update](cli/epinio_settings_update.md)
 
     - [epinio info](cli/epinio_info.md)
-    - [epinio install-cert-manager](cli/epinio_install-cert-manager.md)
-    - [epinio install-ingress](cli/epinio_install-ingress.md)
-    - [epinio install](cli/epinio_install.md)
     - [epinio namespace](cli/epinio_namespace.md)
 
       - [epinio namespace create](cli/epinio_namespace_create.md)
@@ -48,5 +45,4 @@
       - [epinio configuration unbind](cli/epinio_configuration_unbind.md)
 
     - [epinio target](cli/epinio_target.md)
-    - [epinio uninstall](cli/epinio_uninstall.md)
     - [epinio version](cli/epinio_version.md)
