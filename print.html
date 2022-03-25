@@ -1450,7 +1450,7 @@ However, you will find a workaround at the end of the issue.</p>
 <h4 id="create-a-k3d-kubernetes-cluster-when-it-is-inside-a-vm"><a class="header" href="#create-a-k3d-kubernetes-cluster-when-it-is-inside-a-vm">Create a K3d kubernetes cluster when it is inside a VM</a></h4>
 <p>Epinio has to connect to pods inside the cluster. The default installation uses the internal docker IP for this. If docker is running in a VM, e.g. with Docker Desktop for Mac, that IP will not be reachable.</p>
 <p>As a workaround the IP of the host can be used instead, together with port-forwardings:</p>
-<pre><code class="language-bash">k3d cluster create epinio -p '80:80@server[0]' -p '443:443@server[0]'
+<pre><code class="language-bash">k3d cluster create epinio -p '80:80@loadbalancer' -p '443:443@loadbalancer'
 </code></pre>
 <p>After the command returns, <code>kubectl</code> should already be talking to your new cluster:</p>
 <pre><code class="language-bash">$ kubectl get nodes
