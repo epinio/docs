@@ -453,7 +453,11 @@ Ingress controller.</p>
 Application developers shouldn't need to access the cluster directly. Requests to
 the Epinio API server are authenticated with Basic Auth. No direct access to the cluster
 is required (e.g. through kubectl).</p>
-<h2 id="download-the-binary"><a class="header" href="#download-the-binary">Download the Binary</a></h2>
+<h2 id="from-homebrew-linux-and-mac"><a class="header" href="#from-homebrew-linux-and-mac">From Homebrew (Linux and Mac)</a></h2>
+<p>Epinio has its own formula available in the homebrew/core tap.</p>
+<pre><code class="language-bash">brew install epinio
+</code></pre>
+<h2 id="from-the-binary-releases"><a class="header" href="#from-the-binary-releases">From the Binary Releases</a></h2>
 <p>Find the latest version at <a href="https://github.com/epinio/epinio/releases">Releases</a>.
 Run one of the commands below, and replace &lt;epinio-version&gt; with the version of your choice, e.g. &quot;v0.6.0&quot;.</p>
 <h3 id="linux"><a class="header" href="#linux">Linux</a></h3>
@@ -466,13 +470,13 @@ Run one of the commands below, and replace &lt;epinio-version&gt; with the versi
 <pre><code class="language-bash"> curl -LO https://github.com/epinio/epinio/releases/download/&lt;epinio-version&gt;/epinio-windows-x86_64.zip
 </code></pre>
 <p>Extract the zip archive and put the binary in a directory that is in your <code>PATH</code> environment variable. Instructions on how to add directories to the <code>PATH</code> vary depending on your version of Windows.</p>
-<h2 id="make-the-binary-executable-linux-and-mac"><a class="header" href="#make-the-binary-executable-linux-and-mac">Make the Binary Executable (Linux and Mac)</a></h2>
+<h3 id="make-the-binary-executable-linux-and-mac"><a class="header" href="#make-the-binary-executable-linux-and-mac">Make the Binary Executable (Linux and Mac)</a></h3>
 <pre><code class="language-bash">chmod +x epinio
 </code></pre>
 <p>Move the binary to your PATH</p>
 <pre><code class="language-bash">sudo mv ./epinio /usr/local/bin/epinio
 </code></pre>
-<h2 id="verify-the-installation"><a class="header" href="#verify-the-installation">Verify the Installation</a></h2>
+<h1 id="verify-the-installation"><a class="header" href="#verify-the-installation">Verify the Installation</a></h1>
 <p>Run e.g. <code>epinio version</code> to test the successful installation.</p>
 <pre><code class="language-bash">&gt; epinio version
 Epinio Version: v0.6.0
