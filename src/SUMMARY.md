@@ -21,6 +21,7 @@
 - [HowTos](howtos/howtos.md)
 
   - [Certificate Issuers](howtos/certificate_issuers.md)
+  - [Debug application](howtos/debug.md)
   - [Provision external IP address for local Kubernetes](howtos/provision_external_ip_for_local_kubernetes.md)
   - [Push with gitjob](howtos/gitjob_push.md)
   - [Setup external S3 storage](howtos/setup_external_s3.md)
