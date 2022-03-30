@@ -25,7 +25,7 @@ Once the cluster is ready, you need to install the metallb addon:
 $ minikube addons enable metallb
 ```
 
-Then, you have to configure metallb by giving it an IP address range.</br>
+Then, you have to configure metallb by giving it an IP address range.<br />
 For instance check your minikube IP with `minikube ip` and choose how many IP addresses you need.
 
 ```bash
@@ -33,7 +33,7 @@ $ minikube ip
 192.168.49.2
 ```
 
-As an example, we choose the range `192.168.49.100-192.168.49.120`.</br>
+As an example, we choose the range `192.168.49.100-192.168.49.120`.<br />
 Configure the addon with those values.
 
 ```bash

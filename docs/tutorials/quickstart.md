@@ -1,3 +1,8 @@
+---
+sidebar_position: 2
+sidebar_label: "Quick Start"
+---
+
 # QuickStart 
 
 If you have not already installed `epinio` follow these links

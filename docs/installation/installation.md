@@ -1,3 +1,8 @@
+---
+sidebar_label: "Install Epinio"
+sidebar_position: 1
+---
+
 # Installation of Epinio
 
 ## Introduction

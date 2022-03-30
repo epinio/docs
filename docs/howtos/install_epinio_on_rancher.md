@@ -10,14 +10,14 @@ This how-to was written using the following versions:
 
 ## Kubernetes cluster
 
-The two supported methods are to either deploy a new cluster or to import an existing one into Rancher. The steps to take for either method are detailed in the Rancher documentation (See `Cluster Provisioning`).</br>
+The two supported methods are to either deploy a new cluster or to import an existing one into Rancher. The steps to take for either method are detailed in the Rancher documentation (See `Cluster Provisioning`).<br />
 *While it is possible (for development) to deploy Epinio on the same node where Rancher is installed, this requires more steps and is not supported by Rancher either.*
 
 ### Rancher settings
 
-At the time of writing, Epinio is not included in the latest stable Rancher version.</br>
-This means that you have to update two settings in your Rancher dashboard.</br>
-Go to `Global settings` > `Advanced settings`  and update the following settings:</br>
+At the time of writing, Epinio is not included in the latest stable Rancher version.<br />
+This means that you have to update two settings in your Rancher dashboard.<br />
+Go to `Global settings` > `Advanced settings`  and update the following settings:<br />
 
 | | |
 |--|--|
@@ -87,12 +87,12 @@ Click install in the top right corner.
 
 On the next screen, you can select a namespace where the deployment will happen. You also have to set a name for the deployment.
 
-The following screen is where you can configure Epinio according to your needs.</br>
+The following screen is where you can configure Epinio according to your needs.<br />
 The 2 most important settings here are:
 - `Domain`: [Explained here](../installation/dns_setup.md)
 - `Access control allow origin`:  It is mandatory to insert your Rancher dashboard URL into this field. It basically allows Rancher to talk with the Epinio API.
 
-Once everything is configured, click on the install button and then wait a few minutes for the installation to complete.</br>
+Once everything is configured, click on the install button and then wait a few minutes for the installation to complete.<br />
 After that follow the instructions given by the Helm install command output.
 
 ## Access the Epinio menu
