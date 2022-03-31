@@ -16,7 +16,6 @@ brew install epinio
 ## From the Binary Releases
 
 Find the latest version at [Releases](https://github.com/epinio/epinio/releases).
-Run one of the commands below, and replace \<epinio-version\> with the version of your choice, e.g. "v0.6.0".
 
 ### Linux
 
