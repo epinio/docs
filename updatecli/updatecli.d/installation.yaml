@@ -13,7 +13,7 @@ scms:
       branch: main
 
 sources:
-  updatecli:
+  epinio:
     name: Get latest Epinio version
     kind: githubRelease
     spec:
@@ -29,16 +29,16 @@ targets:
     spec:
       file: src/installation/install_epinio_cli.md
       matchPattern: 'https://github.com/epinio/epinio/releases/download/(.*)/'
-      replacePattern: 'https://github.com/epinio/epinio/releases/download/{{ source "updatecli" }}/'
+      replacePattern: 'https://github.com/epinio/epinio/releases/download/{{ source "epinio" }}/'
     scmID: default
 
   epinio-version:
-    name: 'Update Epinio Installation URL'
+    name: 'Update Epinio Version Information'
     kind: file
     spec:
       file: src/installation/install_epinio_cli.md
       matchPattern: 'Epinio Version: (.*)'
-      replacePattern: 'Epinio Version: {{ source "updatecli" }}'
+      replacePattern: 'Epinio Version: {{ source "epinio" }}'
     scmID: default
 
 pullrequests:
