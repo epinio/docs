@@ -1,3 +1,7 @@
+---
+sidebar_label: "Install Epinio on k3d (local)"
+---
+
 # Creating a K3d Kubernetes Cluster
 
 This how-to was written using the following versions:

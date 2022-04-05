@@ -1,3 +1,7 @@
+---
+sidebar_label: "Install Epinio on Rancher"
+---
+
 # Rancher configuration
 
 Before installing Epinio, you need a running Rancher instance.

@@ -1,3 +1,7 @@
+---
+sidebar_label: "Install Epinio on Public Clouds"
+---
+
 # Install Epinio on Public Clouds
 
 Epinio can be installed on any Kubernetes distribution, including the Public Cloud ones.

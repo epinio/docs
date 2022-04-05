@@ -60,7 +60,7 @@ const config = {
           },
           {to: '/blog', label: 'Blog', position: 'right'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/epinio/epinio',
             label: 'GitHub',
             position: 'right',
           },

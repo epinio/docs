@@ -1,3 +1,7 @@
+---
+sidebar_label: "Certificate Issuers"
+---
+
 # Using a Certificate Issuer
 
 Epinio comes with multiple [cert-manager cluster issuers](https://cert-manager.io/docs/configuration/) for creating certificates:

@@ -1,3 +1,7 @@
+---
+sidebar_label: "DNS setup"
+---
+
 #  DNS setup
 
 During [Epinio installation](installation.md), a "system" domain must be specified specified (`global.domain` helm value).

@@ -1,3 +1,7 @@
+---
+sidebar_label: "\"magic\" DNS setup"
+---
+
 # "Magic" DNS setup
 
 A working system domain is needed for Epinio to work, as explained in the ["DNS setup" page](./dns_setup.md).

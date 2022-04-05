@@ -1,3 +1,7 @@
+---
+sidebar_label: "Push with gitjob"
+---
+
 # Push with gitjob
 
 In some other "application deployment" solutions, they have a feature that allows you to set up a deployment that rebuilds and republishes when your code stored in Git is changed.

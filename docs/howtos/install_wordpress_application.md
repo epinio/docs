@@ -1,3 +1,7 @@
+---
+sidebar_label: "Install Wordpress with Epinio"
+---
+
 # Installing Wordpress with Epinio
 
 ## Create a directory for your application:

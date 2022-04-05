@@ -1,3 +1,7 @@
+---
+sidebar_label: "Port Forwarding"
+---
+
 ## How to use Port Forwarding
 
 This how-to demonstrates how to use port forwarding to access a running application.

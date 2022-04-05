@@ -1,3 +1,7 @@
+---
+sidebar_label: "Uninstall Epinio"
+---
+
 ### Uninstall
 
 NOTE: The command below will delete all the components Epinio originally installed.

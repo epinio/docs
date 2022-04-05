@@ -1,3 +1,7 @@
+---
+sidebar_label: "Install Epinio CLI"
+---
+
 #  Installation of the Epinio CLI
 
 The `epinio` cli can be used to interact with a cluster that has Epinio installed on it.

@@ -1,3 +1,7 @@
+---
+sidebar_label: "Custom Routes"
+---
+
 # Custom Routes
 
 Epinio has the concept of a "system domain". This domain is set when installing

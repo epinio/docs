@@ -1,3 +1,7 @@
+---
+sidebar_label: "Install Epinio on RKE2 (Rancher)"
+---
+
 # Rancher RKE2 configuration
 
 This page was written using the following versions:

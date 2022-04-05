@@ -1,3 +1,7 @@
+---
+sidebar_label: "Advanced topics"
+---
+
 # Advanced Topics
 
 ## Contents

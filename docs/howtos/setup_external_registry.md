@@ -1,3 +1,7 @@
+---
+sidebar_label: "Setup external container registry"
+---
+
 ## How to setup external Epinio registry
 
 Epinio allows the use of an external registry for the storage of application images.  This can be achieved by setting the following variables during the `helm install`:

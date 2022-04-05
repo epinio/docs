@@ -1,3 +1,7 @@
+---
+sidebar_label: "Install Epinio on Minikube (local)"
+---
+
 # Creating a Minikube Kubernetes Cluster
 
 This how-to was written using the following versions:

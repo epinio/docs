@@ -1,3 +1,7 @@
+---
+sidebar_label: "Principles"
+---
+
 ## Design Principles
 
 Epinio's development is governed by the following principles:

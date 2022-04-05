@@ -1,3 +1,7 @@
+---
+sidebar_label: "CLI Settings"
+---
+
 # Epinio, CLI settings
 
 The Epinio command line client uses a settings file to store

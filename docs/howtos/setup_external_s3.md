@@ -1,3 +1,7 @@
+---
+sidebar_label: "Setup external S3 storage"
+---
+
 ## How to setup external S3 storage
 
 One of the steps involved in running `epinio push` is storing the requested version of the code

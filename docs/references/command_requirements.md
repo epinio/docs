@@ -1,3 +1,7 @@
+---
+sidebar_label: "Command Requirements"
+---
+
 |           | Server |  User          | | 
 | --------- | ------ |  ------------- | --- |
 | *component* | **API** | **CLI**   |  |

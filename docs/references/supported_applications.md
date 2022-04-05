@@ -1,3 +1,7 @@
+---
+sidebar_label: "Supported Applications"
+---
+
 # Epinio supported applications
 
 This section describes what kind of application you can expect to work with Epinio.

@@ -1,3 +1,7 @@
+---
+sidebar_label: "Windows"
+---
+
 # Epinio On Windows
 
 Epinio relies on a number of command line tools which are normally

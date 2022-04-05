@@ -1,3 +1,7 @@
+---
+sidebar_label: "Debug application"
+---
+
 ## How to debug an app
 
 This how-to demonstrates how to debug a running application.

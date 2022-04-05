@@ -1,3 +1,7 @@
+---
+sidebar_label: "Detailed Push Process"
+---
+
 # Epinio Push in Detail
 
 Epinio strives to make use of well supported, well known, and loved projects instead of re-inventing the wheel ([link](principles.md#guidelines-soft-principles)).
