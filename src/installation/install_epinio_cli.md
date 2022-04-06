@@ -13,9 +13,9 @@ Epinio has its own formula available in the homebrew/core tap.
 brew install epinio
 ```
 
-Alternatively, if you want to get the latest Epinio CLI faster, there is a custom tap you can use::
+Alternatively, if you want to get the latest Epinio CLI faster, there is a custom tap you can use:
 ```bash
-brew tap epinio/homebrew-tap https://github.com/epinio/homebrew-tap
+brew tap epinio/tap
 brew install epinio/tap/epinio
 ```
 
