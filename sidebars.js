@@ -25,7 +25,6 @@ const sidebars = {
       type: 'category',
       label: 'Installation',
       items: [
-        'installation/installation',
         'installation/install_epinio_cli',
         'installation/dns_setup',
         'installation/magicDNS_setup',

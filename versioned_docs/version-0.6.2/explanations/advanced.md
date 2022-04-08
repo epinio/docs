@@ -8,18 +8,15 @@ sidebar_label: "Advanced topics"
 
 - [Epinio, Advanced Topics](#epinio-advanced-topics)
   - [Contents](#contents)
-  - [Epinio prerequisites](#epinio-prerequisites)
+  - [Epinio prerequisites](#prerequisites)
     - [Ingress Controller](#ingress-controller)
     - [Cert Manager](#cert-manager)
   - [Epinio installed components](#epinio-installed-components)
     - [Kubed](#kubed)
     - [Minio](#minio)
     - [Container Registry](#container-registry)
-    - [Epinio](#epinio)
   - [Other Advanced Topics](#other-advanced-topics)
     - [Git Pushing](#git-pushing)
-    - [Traefik and Linkerd](#traefik-and-linkerd)
-    - [Example](#example)
 
 ## Prerequisites
 
@@ -39,7 +36,7 @@ wiring is handled by what is called, an Ingress controller.
 > NOTE: Most clusters will have an Ingress controller deployed by default. If that's not the case, [Traefik](https://doc.traefik.io/traefik/providers/kubernetes-ingress/) can be installed.
 > Other Ingress controllers should work too but Traefik is what is used in Epinio CI to test it.
 >
-> Read the installation documentation on how to install Traefik: [Install ingress controller](../installation/installation.html#ingress-controller)
+> Read the installation documentation on how to install Traefik: [Install ingress controller](../installation/installation.md#ingress-controller)
 
 An Ingress resource will be created for the Epinio API server and for each application deployed by Epinio.
 

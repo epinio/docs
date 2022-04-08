@@ -27,5 +27,5 @@ epinio app exec NAME [flags]
 
 ### SEE ALSO
 
-* [epinio app](epinio_app.md)	 - Epinio application features
+* [epinio app](./epinio_app.md)	 - Epinio application features
 

@@ -26,18 +26,18 @@ Manage epinio application
 
 ### SEE ALSO
 
-* [epinio](epinio.md)	 - Epinio cli
-* [epinio app create](epinio_app_create.md)	 - Create just the app, without creating a workload
-* [epinio app delete](epinio_app_delete.md)	 - Deletes an application
-* [epinio app env](epinio_app_env.md)	 - Epinio application configuration
-* [epinio app exec](epinio_app_exec.md)	 - creates a shell to the application
-* [epinio app list](epinio_app_list.md)	 - Lists applications
-* [epinio app logs](epinio_app_logs.md)	 - Streams the logs of the application
-* [epinio app manifest](epinio_app_manifest.md)	 - Save state of the named application as a manifest
-* [epinio app port-forward](epinio_app_port-forward.md)	 - forward one or more local ports to a pod
-* [epinio app push](epinio_app_push.md)	 - Push an application declared in the specified manifest
-* [epinio app restage](epinio_app_restage.md)	 - Restage the application
-* [epinio app restart](epinio_app_restart.md)	 - Restart the application
-* [epinio app show](epinio_app_show.md)	 - Describe the named application
-* [epinio app update](epinio_app_update.md)	 - Update the named application
+* [epinio](./epinio.md)	 - Epinio cli
+* [epinio app create](./epinio_app_create.md)	 - Create just the app, without creating a workload
+* [epinio app delete](./epinio_app_delete.md)	 - Deletes an application
+* [epinio app env](./epinio_app_env.md)	 - Epinio application configuration
+* [epinio app exec](./epinio_app_exec.md)	 - creates a shell to the application
+* [epinio app list](./epinio_app_list.md)	 - Lists applications
+* [epinio app logs](./epinio_app_logs.md)	 - Streams the logs of the application
+* [epinio app manifest](./epinio_app_manifest.md)	 - Save state of the named application as a manifest
+* [epinio app port-forward](./epinio_app_port-forward.md)	 - forward one or more local ports to a pod
+* [epinio app push](./epinio_push.md)	 - Push an application declared in the specified manifest
+* [epinio app restage](./epinio_app_restage.md)	 - Restage the application
+* [epinio app restart](./epinio_app_restart.md)	 - Restart the application
+* [epinio app show](./epinio_app_show.md)	 - Describe the named application
+* [epinio app update](./epinio_app_update.md)	 - Update the named application
 

@@ -12,7 +12,7 @@ Some local kubernetes platforms do not have the ability to provide external IP a
 
 ### Minikube
 
-See [Install Epinio on Minikube](/installation/install_epinio_on_minikube.md) on how to
+See [Install Epinio on Minikube](install_epinio_on_minikube.md) on how to
 configure minikube.
 
 ### Kind 

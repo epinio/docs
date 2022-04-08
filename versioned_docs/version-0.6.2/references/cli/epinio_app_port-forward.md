@@ -28,5 +28,5 @@ epinio app port-forward NAME [LOCAL_PORT:]REMOTE_PORT [...[LOCAL_PORT_N:]REMOTE_
 
 ### SEE ALSO
 
-* [epinio app](epinio_app.md)	 - Epinio application features
+* [epinio app](./epinio_app.md)	 - Epinio application features
 

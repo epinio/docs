@@ -25,7 +25,7 @@ Export the k3s cluster configration first:
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ```
 
-Follow ["magic" DNS setup](../installation/magicDNS_setup.md) to install Epinio in your test environment.
+Follow ["magic" DNS setup](../installation/magicDNS_setup) to install Epinio in your test environment.
 
 `<IP>` can be found by running:
 ```

@@ -15,7 +15,7 @@ If you don't have an existing cluster, follow the [quickstart](https://docs.rke2
 ## RKE2 Prerequisites
 
 * A load-balancer is mandatory for Epinio to work on RKE2. Here [MetalLB](https://metallb.universe.tf) was used as load-balancer.
-  See [Provision of External IP for LoadBalancer service type in Kubernetes](../howtos/provision_external_ip_for_local_kubernetes.md) for more information.
+  See [Provision of External IP for LoadBalancer service type in Kubernetes](../howtos/provision_external_ip_for_local_kubernetes) for more information.
 
 ## Installation
 

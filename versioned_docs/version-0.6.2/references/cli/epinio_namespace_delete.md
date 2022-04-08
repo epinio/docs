@@ -27,5 +27,5 @@ epinio namespace delete NAME [flags]
 
 ### SEE ALSO
 
-* [epinio namespace](epinio_namespace.md)	 - Epinio-controlled namespaces
+* [epinio namespace](./epinio_namespace.md)	 - Epinio-controlled namespaces
 

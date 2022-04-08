@@ -30,5 +30,5 @@ epinio configuration show NAME [flags]
 
 ### SEE ALSO
 
-* [epinio configuration](epinio_configuration.md)	 - Epinio configuration features
+* [epinio configuration](./epinio_configuration.md)	 - Epinio configuration features
 

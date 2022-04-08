@@ -21,14 +21,14 @@ epinio cli is the official command line interface for Epinio PaaS
 
 ### SEE ALSO
 
-* [epinio app](epinio_app.md)	 - Epinio application features
-* [epinio completion](epinio_completion.md)	 - Generate completion script for a shell
-* [epinio configuration](epinio_configuration.md)	 - Epinio configuration features
-* [epinio info](epinio_info.md)	 - Shows information about the Epinio environment
-* [epinio namespace](epinio_namespace.md)	 - Epinio-controlled namespaces
-* [epinio push](epinio_push.md)	 - Push an application declared in the specified manifest
-* [epinio server](epinio_server.md)	 - Starts the Epinio server.
-* [epinio settings](epinio_settings.md)	 - Epinio settings management
-* [epinio target](epinio_target.md)	 - Targets an epinio-controlled namespace.
-* [epinio version](epinio_version.md)	 - Print the version number
+* [epinio app](./epinio_app.md)	 - Epinio application features
+* [epinio completion](./epinio_completion.md)	 - Generate completion script for a shell
+* [epinio configuration](./epinio_configuration.md)	 - Epinio configuration features
+* [epinio info](./epinio_info.md)	 - Shows information about the Epinio environment
+* [epinio namespace](./epinio_namespace.md)	 - Epinio-controlled namespaces
+* [epinio push](./epinio_push.md)	 - Push an application declared in the specified manifest
+* [epinio server](./epinio_server.md)	 - Starts the Epinio server.
+* [epinio settings](./epinio_settings.md)	 - Epinio settings management
+* [epinio target](./epinio_target.md)	 - Targets an epinio-controlled namespace.
+* [epinio version](./epinio_version.md)	 - Print the version number
 

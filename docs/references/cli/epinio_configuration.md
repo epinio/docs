@@ -30,12 +30,12 @@ epinio configuration [flags]
 
 ### SEE ALSO
 
-* [epinio](epinio.md)	 - Epinio cli
-* [epinio configuration bind](epinio_configuration_bind.md)	 - Bind a configuration to an application
-* [epinio configuration create](epinio_configuration_create.md)	 - Create a configuration
-* [epinio configuration delete](epinio_configuration_delete.md)	 - Delete a configuration
-* [epinio configuration list](epinio_configuration_list.md)	 - Lists configurations
-* [epinio configuration show](epinio_configuration_show.md)	 - Configuration information
-* [epinio configuration unbind](epinio_configuration_unbind.md)	 - Unbind configuration from an application
-* [epinio configuration update](epinio_configuration_update.md)	 - Update a configuration
+* [epinio](./epinio.md)	 - Epinio cli
+* [epinio configuration bind](./epinio_configuration_bind.md)	 - Bind a configuration to an application
+* [epinio configuration create](./epinio_configuration_create.md)	 - Create a configuration
+* [epinio configuration delete](./epinio_configuration_delete.md)	 - Delete a configuration
+* [epinio configuration list](./epinio_configuration_list.md)	 - Lists configurations
+* [epinio configuration show](./epinio_configuration_show.md)	 - Configuration information
+* [epinio configuration unbind](./epinio_configuration_unbind.md)	 - Unbind configuration from an application
+* [epinio configuration update](./epinio_configuration_update.md)	 - Update a configuration
 

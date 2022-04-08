@@ -35,5 +35,5 @@ epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
 
 ### SEE ALSO
 
-* [epinio](epinio.md)	 - Epinio cli
+* [epinio](./epinio.md)	 - Epinio cli
 

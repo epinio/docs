@@ -6,4 +6,3 @@ Documentation providing background information on key concepts.
 - [Detailed Push Process](detailed-push-process.md)
 - [Principles](principles.md)
 - [Security](security.md)
-- [Windows](windows.md)

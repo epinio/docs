@@ -31,5 +31,5 @@ epinio settings update [flags]
 
 ### SEE ALSO
 
-* [epinio settings](epinio_settings.md)	 - Epinio settings management
+* [epinio settings](./epinio_settings.md)	 - Epinio settings management
 

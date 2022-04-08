@@ -49,7 +49,7 @@ epinio push --name sample --path sample-app
 ***
 
 If you want to know what applications are supported in Epinio, please read the
-[notes about supported applications](../references/supported-apps.md).
+[notes about supported applications](../references/supported_applications.md).
 
 We also provide information about the more advanced [git model](../explanations/advanced.md#git-pushing).
 

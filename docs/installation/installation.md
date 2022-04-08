@@ -13,7 +13,7 @@ You can disable the installation of `Kubed`, `MinIO` and the `container registry
 
 ## Prerequisites
 
-See [system requirements](/references/system_requirements.md) for a detailed list of external components your
+See [system requirements](../references/system_requirements.md) for a detailed list of external components your
 Kubernetes cluster needs to have before you install Epinio.
 
 > **IMPORTANT:** Some of the namespaces of the components are hardcoded in the Epinio
@@ -111,12 +111,12 @@ Installing Epinio is a standard process as explained above, however you might ne
 
 To help you, see the following HowTos for various well-known Kubernetes clusters:
 
-- [Install on Rancher](/howtos/install_epinio_on_rancher.md) - Install Epinio on Rancher
-- [Install on Public Cloud](/howtos/install_epinio_on_public_cloud.md) - Install Epinio on Public Cloud cluster
-- [Install on RKE2](/howtos/install_epinio_on_rke.md) - Install Epinio on Rancher RKE2 cluster
-- [Install on K3d](/howtos/install_epinio_on_k3d.md) - Install Epinio on K3d cluster
-- [Install on K3s](/howtos/install_epinio_on_k3s.md) - Install Epinio on K3s cluster
-- [Install on Rancher Desktop](/howtos/install_epinio_on_rancher_desktop.md) - Install Epinio on Rancher Desktop
-- [Install on Minikube](/howtos/install_epinio_on_minikube.md) - Install Epinio on Minikube cluster
+- [Install on Rancher](../howtos/install_epinio_on_rancher.md) - Install Epinio on Rancher
+- [Install on Public Cloud](../howtos/install_epinio_on_public_cloud.md) - Install Epinio on Public Cloud cluster
+- [Install on RKE2](../howtos/install_epinio_on_rke.md) - Install Epinio on Rancher RKE2 cluster
+- [Install on K3d](../howtos/install_epinio_on_k3d.md) - Install Epinio on K3d cluster
+- [Install on K3s](../howtos/install_epinio_on_k3s.md) - Install Epinio on K3s cluster
+- [Install on Rancher Desktop](../howtos/install_epinio_on_rancher_desktop.md) - Install Epinio on Rancher Desktop
+- [Install on Minikube](../howtos/install_epinio_on_minikube.md) - Install Epinio on Minikube cluster
 
 > *NOTE*: The Public Cloud howto lists the three major Cloud providers but Epinio can run on any Kubernetes cluster.
