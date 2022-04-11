@@ -40,6 +40,14 @@ $ helm install traefik --namespace traefik "https://helm.traefik.io/traefik/trae
 		--set-string service.spec.loadBalancerIP=$LOAD_BALANCER_IP
 ```
 
+It's also possible to use Nginx instead of Traefik following the official [documentation](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start).
+
+Do not forget to use the option `--set controller.setAsDefaultIngress=true` when you install Nginx.<br />
+Otherwise, if you do not want defining Nginx as the default ingress, feel free to use `--set ingress.ingressClassName=nginx`when you deploy Epinio.
+
+> **WARNING**: Sometimes, when Epinio uploads your app, you might see `error pushing app to server: can't upload archive: server status code: Request Entity Too Large`.<br />
+> In this case, you need to increase the `max body size` by adding an annotation to your ingress as described in [nginx.ingress.kubernetes.io/proxy-body-size](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size)
+
 ### Cert Manager
 
 Epinio needs [cert-manager](https://cert-manager.io/) in order to create TLS
@@ -101,9 +109,9 @@ The only value that is mandatory is the `.Values.global.domain` which
 should be a wildcard domain, pointing to the IP address of your running
 Ingress controller.
 
-Read more on how to setup DNS here: [DNS setup](dns_setup.md)
+Read more on how to setup DNS here: [DNS setup](./dns_setup.md)
 
-> *NOTE*: If you're deploying Epinio in a "localhost" environment, you can use a "[magic domain name](magicDNS_setup.md)".
+> *NOTE*: If you're deploying Epinio in a "localhost" environment, you can use a "[magic domain name](./magicDNS_setup.md)".
 
 ## Installation on Specific Kubernetes Offerings
 
