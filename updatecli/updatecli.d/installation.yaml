@@ -1,0 +1,57 @@
+title: Bump Epinio version in installation documentation
+
+scms:
+  default:
+    kind: github
+    spec:
+      user: epinio-bot
+      email: bot@epinio.io
+      owner: epinio
+      repository: docs
+      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+      branch: main
+
+sources:
+  epinio:
+    name: Get latest Epinio version
+    kind: githubRelease
+    spec:
+      owner: epinio
+      repository: epinio
+      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+
+targets:
+  download-url:
+    name: 'Update Epinio Installation URL'
+    kind: file
+    spec:
+      file: src/installation/install_epinio_cli.md
+      matchPattern: 'https://github.com/epinio/epinio/releases/download/(.*)/'
+      replacePattern: 'https://github.com/epinio/epinio/releases/download/{{ source "epinio" }}/'
+    scmID: default
+
+  epinio-version:
+    name: 'Update Epinio Version Information'
+    kind: file
+    spec:
+      file: src/installation/install_epinio_cli.md
+      matchPattern: 'Epinio Version: (.*)'
+      replacePattern: 'Epinio Version: {{ source "epinio" }}'
+    scmID: default
+
+pullrequests:
+  default:
+    title: '[updatecli] Bump Epinio version used within installation documentation to {{ source "epinio" }}'
+    kind: github
+    scmID: default
+    targets:
+      - download-url
+      - epinio-version
+    spec:
+      automerge: true
+      mergemethod: squash
+      labels:
+        - chore
+
