@@ -25,7 +25,7 @@ Epinio has to connect to pods inside the cluster. The default installation uses 
 
 As a workaround the IP of the host can be used instead, together with port-forwardings:
 ```bash
-k3d cluster create epinio -p '80:80@server[0]' -p '443:443@server[0]'
+k3d cluster create epinio -p '80:80@loadbalancer' -p '443:443@loadbalancer'
 ```
 
 After the command returns, `kubectl` should already be talking to your new cluster:
