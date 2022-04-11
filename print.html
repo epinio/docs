@@ -296,6 +296,13 @@ $ helm install traefik --namespace traefik &quot;https://helm.traefik.io/traefik
 		--set-string ingressClass.isDefaultClass=true \
 		--set-string service.spec.loadBalancerIP=$LOAD_BALANCER_IP
 </code></pre>
+<p>It's also possible to use Nginx instead of Traefik following the official <a href="https://kubernetes.github.io/ingress-nginx/deploy/#quick-start">documentation</a>.</p>
+<p>Do not forget to use the option <code>--set controller.setAsDefaultIngress=true</code> when you install Nginx.<br />
+Otherwise, if you do not want defining Nginx as the default ingress, feel free to use <code>--set ingress.ingressClassName=nginx</code>when you deploy Epinio.</p>
+<blockquote>
+<p><strong>WARNING</strong>: Sometimes, when Epinio uploads your app, you might see <code>error pushing app to server: can't upload archive: server status code: Request Entity Too Large</code>.<br />
+In this case, you need to increase the <code>max body size</code> by adding an annotation to your ingress as described in <a href="https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size">nginx.ingress.kubernetes.io/proxy-body-size</a></p>
+</blockquote>
 <h3 id="cert-manager"><a class="header" href="#cert-manager">Cert Manager</a></h3>
 <p>Epinio needs <a href="https://cert-manager.io/">cert-manager</a> in order to create TLS
 certificates for the various Ingresses (see &quot;Ingress controller&quot; above).</p>
@@ -386,6 +393,13 @@ $ helm install traefik --namespace traefik &quot;https://helm.traefik.io/traefik
 		--set-string ingressClass.isDefaultClass=true \
 		--set-string service.spec.loadBalancerIP=$LOAD_BALANCER_IP
 </code></pre>
+<p>It's also possible to use Nginx instead of Traefik following the official <a href="https://kubernetes.github.io/ingress-nginx/deploy/#quick-start">documentation</a>.</p>
+<p>Do not forget to use the option <code>--set controller.setAsDefaultIngress=true</code> when you install Nginx.<br />
+Otherwise, if you do not want defining Nginx as the default ingress, feel free to use <code>--set ingress.ingressClassName=nginx</code>when you deploy Epinio.</p>
+<blockquote>
+<p><strong>WARNING</strong>: Sometimes, when Epinio uploads your app, you might see <code>error pushing app to server: can't upload archive: server status code: Request Entity Too Large</code>.<br />
+In this case, you need to increase the <code>max body size</code> by adding an annotation to your ingress as described in <a href="https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size">nginx.ingress.kubernetes.io/proxy-body-size</a></p>
+</blockquote>
 <h3 id="cert-manager-1"><a class="header" href="#cert-manager-1">Cert Manager</a></h3>
 <p>Epinio needs <a href="https://cert-manager.io/">cert-manager</a> in order to create TLS
 certificates for the various Ingresses (see &quot;Ingress controller&quot; above).</p>
