@@ -1,24 +1,41 @@
-## Goal
+# Website
 
-This repo contains the source of the Epinio documentation.
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-The rendered manual can be found [here](https://docs.epinio.io).
+### Installation
 
-The directory and document structure is inpired by
-https://documentation.divio.com/structure.
+```
+$ yarn
+```
 
-As a quick recap the four quadrants:
+### Local Development
 
-|		|Studying	|Use/Work	|
-|---		|---		|---		|
-|Practical	|Tutorial	|How To Guide	|
-|		|Learning	|Problem	|
-|		|		|		|
-|Theoretical	|Explanation	|Reference	|
-|		|Understanding	|Information	|
+```
+$ yarn start
+```
 
-## How to locally compile the docs?
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-You need to install [mdBook](https://github.com/rust-lang/mdBook/releases)
+### Build
 
-Once installed use `mdbook serve`, the documentation will be accessible through http://localhost:3000.
+```
+$ yarn build
+```
+
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+### Deployment
+
+Using SSH:
+
+```
+$ USE_SSH=true yarn deploy
+```
+
+Not using SSH:
+
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
