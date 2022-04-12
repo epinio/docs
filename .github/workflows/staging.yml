@@ -25,7 +25,7 @@ jobs:
           node-version: 16.x
           cache: yarn
       # Run yarn install and build on our code
-      name: Staging build
+      - name: Staging build
         run: | 
           yarn install --frozen-lockfile
           yarn build
