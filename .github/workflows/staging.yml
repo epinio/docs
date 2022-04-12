@@ -9,32 +9,21 @@ on:
 
 # Jobs to carry out
 jobs:
-  deploy:
-    # Operating system to run job on
-    runs-on: ubuntu-latest
-
-    # Steps in job
+  build:
+    runs-on: ubuntu-18.04
     steps:
-      # Get code from repo
-      - name: Checkout code
-        uses: actions/checkout@v2
-      # Install NodeJS
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v2
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.2
         with:
-          node-version: 16.x
-          cache: yarn
-      # Run yarn install and build on our code
-      - name: Staging build
-        run: | 
-          yarn install --frozen-lockfile
-          yarn build
-      # Deploy to Netlify using our dev secrets
-      - name: Deploy to netlify
-        uses: netlify/actions/cli@master
+          publish-dir: './build'
+          production-branch: staging
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.DEV_NETLIFY_SITE_ID }}
-        with:
-          args: deploy --dir=build --prod
-          secrets: '["DEV_NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 2
