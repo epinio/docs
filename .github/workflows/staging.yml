@@ -38,3 +38,4 @@ jobs:
         with:
           args: deploy --dir=build --prod
           secrets: '["DEV_NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+          
