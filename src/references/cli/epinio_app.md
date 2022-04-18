@@ -31,6 +31,7 @@ Manage epinio application
 * [epinio app delete](epinio_app_delete.md)	 - Deletes an application
 * [epinio app env](epinio_app_env.md)	 - Epinio application configuration
 * [epinio app exec](epinio_app_exec.md)	 - creates a shell to the application
+* [epinio app export](epinio_app_export.md)	 - Export the named application into the directory
 * [epinio app list](epinio_app_list.md)	 - Lists applications
 * [epinio app logs](epinio_app_logs.md)	 - Streams the logs of the application
 * [epinio app manifest](epinio_app_manifest.md)	 - Save state of the named application as a manifest
