@@ -19,7 +19,6 @@
   - [Security](explanations/security.md)
 
 - [HowTos](howtos/howtos.md)
-
   - [Certificate Issuers](howtos/certificate_issuers.md)
   - [Debug application](howtos/debug.md)
   - [Provision external IP address for local Kubernetes](howtos/provision_external_ip_for_local_kubernetes.md)
@@ -28,6 +27,7 @@
   - [Setup external container registry](howtos/setup_external_registry.md)
   - [Port Forwarding](howtos/port_forwarding.md)
   - [Custom Routes](howtos/custom_routes.md)
+  - [Create a custom Service](howtos/create_custom_service.md)
   - [Install Epinio on Rancher](howtos/install_epinio_on_rancher.md)
   - [Install Epinio on RKE2 (Rancher)](howtos/install_epinio_on_rke.md)
   - [Install Epinio on K3s (local)](howtos/install_epinio_on_k3s.md)
@@ -93,5 +93,6 @@
   - [CLI Settings](references/settings.md)
   - [Supported Applications](references/supported-apps.md)
   - [Application Manifests](references/manifests.md)
+  - [Services](references/services.md)
   - [Configurations](references/configurations.md)
   - [API](references/api.md)
