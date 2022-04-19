@@ -63,6 +63,15 @@
         - [epinio_app_show](references/cli/epinio_app_show.md)
         - [epinio_app_update](references/cli/epinio_app_update.md)
 
+      - [epinio_service](references/cli/epinio_service.md)
+
+        - [epinio_service_catalog](references/cli/epinio_service_catalog.md)
+        - [epinio_service_create](references/cli/epinio_service_create.md)
+        - [epinio_service_show](references/cli/epinio_service_show.md)
+        - [epinio_service_delete](references/cli/epinio_service_delete.md)
+        - [epinio_service_list](references/cli/epinio_service_list.md)
+        - [epinio_service_bind](references/cli/epinio_service_bind.md)
+
       - [epinio_settings](references/cli/epinio_settings.md)
 
         - [epinio_settings_colors](references/cli/epinio_settings_colors.md)
