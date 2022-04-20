@@ -1,6 +1,6 @@
 ## epinio app export
 
-Export the named application into the directory
+Export the named application into the directory.
 
 ```
 epinio app export NAME DIRECTORY [flags]

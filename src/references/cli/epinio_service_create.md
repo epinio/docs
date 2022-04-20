@@ -1,6 +1,6 @@
 ## epinio service create
 
-Create an instance SERVICENAME of an Epinio service CATALOGSERVICENAME
+Create an instance SERVICENAME of an Epinio service CATALOGSERVICENAME.
 
 ```
 epinio service create CATALOGSERVICENAME SERVICENAME [flags]

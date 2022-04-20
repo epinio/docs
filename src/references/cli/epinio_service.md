@@ -1,10 +1,10 @@
 ## epinio service
 
-Epinio service management
+Epinio service management.
 
 ### Synopsis
 
-Manage the epinio services
+Manage the epinio services.
 
 ### Options
 

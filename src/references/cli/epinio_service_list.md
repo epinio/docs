@@ -1,6 +1,6 @@
 ## epinio service list
 
-List all the services in the targeted namespace
+List all the services in the targeted namespace.
 
 ```
 epinio service list [flags]

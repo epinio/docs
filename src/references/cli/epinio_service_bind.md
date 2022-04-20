@@ -1,6 +1,6 @@
 ## epinio service bind
 
-Bind a service SERVICENAME to an Epinio app APPNAME
+Bind a service SERVICENAME to an Epinio app APPNAME.
 
 ```
 epinio service bind SERVICENAME APPNAME [flags]
