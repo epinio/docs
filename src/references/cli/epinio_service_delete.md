@@ -1,6 +1,6 @@
 ## epinio service delete
 
-Delete service instance SERVICENAME
+Delete service instance SERVICENAME.
 
 ```
 epinio service delete SERVICENAME [flags]

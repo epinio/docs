@@ -2,13 +2,13 @@
 
 As described [in the Service reference page](../references/services.md), Epinio services are nothing but descriptions of Helm charts. An operator may add more services by simply creating a Custom Resource in the namespace where Epinio is installed.
 
-As a starting point, the services that come out of the box with Epinio can be used:
+As a starting point, you can check the services installed by default for Epinio:
 
 ```
 $ kubectl get services.application.epinio.io -A
 ```
 
-If Epinio is installed in a namespace called `epinio`, the following command should give you a yaml to work on:
+If Epinio is installed in a namespace called `epinio`, the following command outputs the Service definition in `yaml` format:
 
 ```
 $ kubectl get services.application.epinio.io -n epinio mysql-dev -o yaml > service.yaml
@@ -25,7 +25,7 @@ Change the fields to point to the desired helm chart and apply the yaml with a c
 $ kubeclt apply -f service.yaml
 ```
 
-If everything worked correctly, the new service should appear when this command is run:
+If everything worked correctly, you can see your Service in the Epinio `service-catalog`:
 
 ```
 $ epinio service catalog
