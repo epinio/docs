@@ -159,24 +159,19 @@ ga('send', 'pageview');
 <h2 id="rancher-desktop-prerequisites"><a class="header" href="#rancher-desktop-prerequisites">Rancher Desktop Prerequisites</a></h2>
 <ul>
 <li>Running on Windows requires Windows Subsystem for Linux (WSL) which is automatically installed by Rancher Desktop.</li>
+<li>Epinio currently only supports x86 and will not work with Rancher Desktop for Mac on the M1 chip.</li>
 </ul>
 <h3 id="install-rancher-desktop"><a class="header" href="#install-rancher-desktop">Install Rancher Desktop</a></h3>
 <p>Install the <a href="https://github.com/rancher-sandbox/rancher-desktop/releases">latest version</a> of Rancher Desktop for your operating system.</p>
 <h2 id="setup-kubernetes"><a class="header" href="#setup-kubernetes">Setup Kubernetes</a></h2>
 <p>When running Rancher Desktop for the first time, wait until the initialization is completed.</p>
-<p>Make sure that a supported Kubernetes version is selected under <code>Kubernetes Settings</code> (Epinio has been tested on <strong>v1.22.7</strong>, <strong>v1.21.10</strong> and <strong>v1.20.15</strong>).</p>
+<p>Make sure that Kubernetes is enabled and a supported version is selected under <code>Kubernetes Settings</code> (Epinio has been tested on <strong>v1.22.7</strong>, <strong>v1.21.10</strong> and <strong>v1.20.15</strong>).</p>
+<p>Make sure that Traefik is enabled or you have otherwise installed a Ingress controller. </p>
 <h2 id="install-epinio"><a class="header" href="#install-epinio">Install epinio</a></h2>
 <p>Make sure Rancher Desktop is running.</p>
 <p>Rancher Desktop can report Kubernetes as running while some pods are actually not yet ready.
 Manual verification is possible by executing the command <code>kubectl get pods -A</code> in a terminal and checking that all pods report either <code>Running</code> or <code>Completed</code> as their status.</p>
-<p>For now, Rancher Desktop configures his own loadbalancer (Traefik through K3s) and you have to set Epinio system domain according to the provided IP, for example:</p>
-<pre><code>LB_IP=$(kubectl describe svc traefik --namespace kube-system \
-        | awk '/Ingress/ { print $3 }')
-
-export EPINIO_SYSTEM_DOMAIN=${LB_IP}.omg.howdoi.website
-</code></pre>
-<p>Previous commands are for Bash, but can be easily adapted for Windows shell.</p>
-<p>If you don't want to use the default &quot;magic&quot; DNS, please follow <a href="dns_setup.html">DNS setup</a>.</p>
+<p>Rancher Desktop configures it's own loadbalancer to expose Traefik on <code>127.0.0.1</code>. We can use this with a wildcard DNS to get a system domain of <code>127.0.0.1.sslip.io</code></p>
 <p>The Epinio installation is pretty much identical on Linux, MacOS and Windows:</p>
 <ol>
 <li>
@@ -186,9 +181,18 @@ export EPINIO_SYSTEM_DOMAIN=${LB_IP}.omg.howdoi.website
 <p>Install the <a href="../installation/install_epinio_cli.html">Epinio CLI</a>.</p>
 </li>
 <li>
-<p>Follow the <a href="../installation/installation.html">Epinio installation process</a>.</p>
+<p>Follow the <a href="../installation/installation.html">Epinio installation process</a>. Copied here:</p>
 </li>
 </ol>
+<pre><code>$ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.yaml  
+
+# Wait for cert-manager to stabilize
+
+$ helm repo add epinio https://epinio.github.io/helm-charts
+$ helm install epinio -n epinio --create-namespace epinio/epinio --values epinio-values.yaml --set global.domain=127.0.0.1.sslip.io
+
+$ epinio settings update
+</code></pre>
 <blockquote>
 <p>NOTE: there is currently a <a href="https://github.com/rancher-sandbox/rancher-desktop/issues/576">blocking issue</a> on Linux which prevent Epinio to push application!
 However, you will find a workaround at the end of the issue.</p>
