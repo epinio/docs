@@ -13,8 +13,9 @@ const config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.png',
-  organizationName: 'SUSE Rancher', // Usually your GitHub org/user name.
-  projectName: 'epinio.github.io', // Usually your repo name.
+  organizationName: 'epinio', // Usually your GitHub org/user name.
+  projectName: 'docs', // Usually your repo name.
+  trailingSlash: false,
 
   presets: [
     [
