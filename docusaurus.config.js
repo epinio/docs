@@ -8,8 +8,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Epinio docs',
   tagline: 'Epinio - the application development engine for Kubernetes',
-  url: 'https://docs.epinio.io',
-  baseUrl: '/docs/',
+  url: 'https://epinio.github.io',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.png',
