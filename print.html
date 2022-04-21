@@ -1301,10 +1301,10 @@ DNS may have to work before the domain can be used. In other words, the domain m
 resolve to the cluster's Ingress IP. Read more about the issuers here: <a href="howtos/./certificate_issuers.html">Certificate Issuers</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-custom-service"><a class="header" href="#create-a-custom-service">Create a custom service</a></h1>
 <p>As described <a href="howtos/../references/services.html">in the Service reference page</a>, Epinio services are nothing but descriptions of Helm charts. An operator may add more services by simply creating a Custom Resource in the namespace where Epinio is installed.</p>
-<p>As a starting point, the services that come out of the box with Epinio can be used:</p>
+<p>As a starting point, you can check the services installed by default for Epinio:</p>
 <pre><code>$ kubectl get services.application.epinio.io -A
 </code></pre>
-<p>If Epinio is installed in a namespace called <code>epinio</code>, the following command should give you a yaml to work on:</p>
+<p>If Epinio is installed in a namespace called <code>epinio</code>, the following command outputs the Service definition in <code>yaml</code> format:</p>
 <pre><code>$ kubectl get services.application.epinio.io -n epinio mysql-dev -o yaml &gt; service.yaml
 </code></pre>
 <p>or you can find the definition of the catalog services <a href="https://github.com/epinio/helm-charts/blob/3a12bac7aee5ac36c6d43416f2e83ac10090c62a/chart/epinio/templates/service-catalog.yaml">here</a>.</p>
@@ -1312,7 +1312,7 @@ resolve to the cluster's Ingress IP. Read more about the issuers here: <a href="
 <p>Change the fields to point to the desired helm chart and apply the yaml with a command like:</p>
 <pre><code>$ kubeclt apply -f service.yaml
 </code></pre>
-<p>If everything worked correctly, the new service should appear when this command is run:</p>
+<p>If everything worked correctly, you can see your Service in the Epinio <code>service-catalog</code>:</p>
 <pre><code>$ epinio service catalog
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rancher-configuration"><a class="header" href="#rancher-configuration">Rancher configuration</a></h1>
@@ -2142,9 +2142,9 @@ instructions:</p>
 <li><a href="references/cli/epinio_app.html">epinio app</a>	 - Epinio application features</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="epinio-service"><a class="header" href="#epinio-service">epinio service</a></h2>
-<p>Epinio service management</p>
+<p>Epinio service management.</p>
 <h3 id="synopsis-8"><a class="header" href="#synopsis-8">Synopsis</a></h3>
-<p>Manage the epinio services</p>
+<p>Manage the epinio services.</p>
 <h3 id="options-14"><a class="header" href="#options-14">Options</a></h3>
 <pre><code>  -h, --help   help for service
 </code></pre>
@@ -2168,7 +2168,7 @@ instructions:</p>
 <li><a href="references/cli/epinio_service_show.html">epinio service show</a>	 - Show details of a service instance SERVICENAME</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="epinio-service-catalog"><a class="header" href="#epinio-service-catalog">epinio service catalog</a></h2>
-<p>Lists all available Epinio services, or show the details of the specified one</p>
+<p>Lists all available Epinio services, or show the details of the specified one.</p>
 <pre><code>epinio service catalog [NAME] [flags]
 </code></pre>
 <h3 id="options-15"><a class="header" href="#options-15">Options</a></h3>
@@ -2188,7 +2188,7 @@ instructions:</p>
 <li><a href="references/cli/epinio_service.html">epinio service</a>	 - Epinio service management</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="epinio-service-create"><a class="header" href="#epinio-service-create">epinio service create</a></h2>
-<p>Create an instance SERVICENAME of an Epinio service CATALOGSERVICENAME</p>
+<p>Create an instance SERVICENAME of an Epinio service CATALOGSERVICENAME.</p>
 <pre><code>epinio service create CATALOGSERVICENAME SERVICENAME [flags]
 </code></pre>
 <h3 id="options-16"><a class="header" href="#options-16">Options</a></h3>
@@ -2208,7 +2208,7 @@ instructions:</p>
 <li><a href="references/cli/epinio_service.html">epinio service</a>	 - Epinio service management</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="epinio-service-show"><a class="header" href="#epinio-service-show">epinio service show</a></h2>
-<p>Show details of a service instance SERVICENAME</p>
+<p>Show details of a service instance SERVICENAME.</p>
 <pre><code>epinio service show SERVICENAME [flags]
 </code></pre>
 <h3 id="options-17"><a class="header" href="#options-17">Options</a></h3>
@@ -2228,7 +2228,7 @@ instructions:</p>
 <li><a href="references/cli/epinio_service.html">epinio service</a>	 - Epinio service management</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="epinio-service-delete"><a class="header" href="#epinio-service-delete">epinio service delete</a></h2>
-<p>Delete service instance SERVICENAME</p>
+<p>Delete service instance SERVICENAME.</p>
 <pre><code>epinio service delete SERVICENAME [flags]
 </code></pre>
 <h3 id="options-18"><a class="header" href="#options-18">Options</a></h3>
@@ -2248,7 +2248,7 @@ instructions:</p>
 <li><a href="references/cli/epinio_service.html">epinio service</a>	 - Epinio service management</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="epinio-service-list"><a class="header" href="#epinio-service-list">epinio service list</a></h2>
-<p>List all the services in the targeted namespace</p>
+<p>List all the services in the targeted namespace.</p>
 <pre><code>epinio service list [flags]
 </code></pre>
 <h3 id="options-19"><a class="header" href="#options-19">Options</a></h3>
@@ -2268,7 +2268,7 @@ instructions:</p>
 <li><a href="references/cli/epinio_service.html">epinio service</a>	 - Epinio service management</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="epinio-service-bind"><a class="header" href="#epinio-service-bind">epinio service bind</a></h2>
-<p>Bind a service SERVICENAME to an Epinio app APPNAME</p>
+<p>Bind a service SERVICENAME to an Epinio app APPNAME.</p>
 <pre><code>epinio service bind SERVICENAME APPNAME [flags]
 </code></pre>
 <h3 id="options-20"><a class="header" href="#options-20">Options</a></h3>
@@ -3033,45 +3033,43 @@ origin:
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="services"><a class="header" href="#services">Services</a></h1>
 <p>Most real world applications work together with other services to store data, logs, to exchange messages with other systems etc.
-The most common example is probably a database. There are at least 2 ways to connect an Epinio application to a service.
-The first one is to provision the service manually and <a href="references/configurations.html">create an Epinio Configuration</a> to make the service connection details
-available to the application.</p>
-<p>The second one lets Epinio provision the service which you can later bind to your application with the <code>epinio service bind</code> command. This page explains how this works.</p>
-<p>Services in Epinio are managed by the <a href="references/cli/epinio_service.html">epinio service</a> commands.</p>
+The most common example is probably a database. There are at least 2 ways to connect an Epinio application to a Service.
+The first way is to provision the service manually and <a href="references/./configurations.html">create an Epinio Configuration</a> to define the Service connection details available to the application.</p>
+<p>The second way lets Epinio provision the Service, and afterwards create a binding to your application with the <code>epinio service bind</code> command. For additional information, please refer to the <a href="references/cli/epinio_service.html">epinio service</a> page.</p>
 <h2 id="how-does-it-work"><a class="header" href="#how-does-it-work">How does it work?</a></h2>
-<p>Epinio is very flexible on how a service is provisioned. Many public cloud providers maintain their own operators (e.g. <a href="https://github.com/Azure/azure-service-operator">Azure</a>). There are also projects like <a href="https://crossplane.io/">Crossplane</a> that allow you to provision services in various public cloud providers. All these solutions work by creating custom resources on a cluster which a running controller will pick up and create the desired service.
-This shared method allows Epinio to stay agnostic of the provisioning method. The human operator only needs to create a Helm chart with the needed resources and <a href="references/../howtos/create_custom_service.html">describe to Epinio how to install it</a>.
-The same method can be used with &quot;in-cluster&quot; services (e.g. a MySQL database running on the same cluster as Epinio). Actually, Epinio comes with such services available out of the box. They are based on off-the-shelf Helm charts from Bitnami and their names are suffixed with <code>-dev</code> because in the provided default configuration they might not be suitable for production usage.</p>
+<p>Epinio is very flexible on how a service is provisioned. Many public cloud providers maintain their own operators (e.g. <a href="https://github.com/Azure/azure-service-operator">Azure</a>). There are also projects like <a href="https://crossplane.io/">Crossplane</a> that allow services provisioning for various public cloud providers. All these solutions work by creating custom resources on a cluster, and a controller will create the desired service.
+This shared method allows Epinio to stay agnostic of the provisioning method. You only need to create a Helm chart with the needed resources and <a href="references/../howtos/create_custom_service.html">describe how to install the Service with Epinio</a>.
+The same method can be used with &quot;in-cluster&quot; services (e.g. a MySQL database running on the same cluster as Epinio). Actually, the Epinio services available by default are based on off-the-shelf Helm charts from Bitnami and their names are suffixed with <code>-dev</code> because in the provided default configuration they might not be suitable for production usage.</p>
 <h2 id="provision-a-database"><a class="header" href="#provision-a-database">Provision a database</a></h2>
-<p>Here is an example on how to provision a database and make it available to some running application.</p>
+<p>Here is an example on how to provision a database and make it available to some running application:</p>
 <ul>
 <li>
-<p>Push a sample app:</p>
+<p>Push a sample app</p>
 <pre><code>$ epinio app push -n sample --container-image-url splatform/sample-app
 </code></pre>
 </li>
 <li>
-<p>[Optional] List catalog services:</p>
+<p>[Optional] List catalog services</p>
 <pre><code>$ epinio service catalog
 </code></pre>
 </li>
 <li>
-<p>Provision an in-cluster database:</p>
+<p>Provision an in-cluster database</p>
 <pre><code>$ epinio service create mysql-dev mydb
 </code></pre>
 </li>
 <li>
-<p>Wait until it's ready (status should be &quot;deployed&quot;):</p>
+<p>Wait until it's ready (status should be &quot;deployed&quot;)</p>
 <pre><code>$ epinio service show mydb
 </code></pre>
 </li>
 <li>
-<p>Bind the database secrets to the application:</p>
+<p>Bind the database secrets to the application</p>
 <pre><code>$ epinio service bind mydb sample
 </code></pre>
 </li>
 <li>
-<p>Check that the database secrets are available to the application:</p>
+<p>Check that the database secrets are available to the application</p>
 <pre><code>$ epinio app exec sample
 
 🚢  Executing a shell
@@ -3083,9 +3081,9 @@ cnb@sample-7bc756989-tjvt9:/$ exit
 </code></pre>
 </li>
 </ul>
-<p>At this point, it's up to the application to make use of that secret. The helm chart that is used for this example, doesn't write the hostname of the database in the generated secret. That's because the Helm chart wasn't created specifically for Epinio. To figure out the hostname in this case, requires some knowledge on <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">how Kubernetes DNS works</a>.</p>
-<p>In this case it is: <code>workspace-mydb-mysql.workspace.svc.cluster.local</code>.</p>
-<p>When you are done with this example you can delete all generated resources:</p>
+<p>At this point, it's up to the application to make use of that secret. The helm chart used for this example doesn't write the hostname of the database in the generated secret. That's because the Helm chart wasn't created specifically for Epinio. To figure out the hostname, you might need to <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">know how Kubernetes DNS works</a>.</p>
+<p>For the example above, the hostname is: <code>workspace-mydb-mysql.workspace.svc.cluster.local</code>.</p>
+<p>When you are done with this example, you can delete all generated resources with the following commands:</p>
 <pre><code>$ epinio service delete mydb
 $ epinio app delete sample
 </code></pre>

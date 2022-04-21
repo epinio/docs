@@ -152,45 +152,43 @@ ga('send', 'pageview');
                     <main>
                         <h1 id="services"><a class="header" href="#services">Services</a></h1>
 <p>Most real world applications work together with other services to store data, logs, to exchange messages with other systems etc.
-The most common example is probably a database. There are at least 2 ways to connect an Epinio application to a service.
-The first one is to provision the service manually and <a href="configurations.html">create an Epinio Configuration</a> to make the service connection details
-available to the application.</p>
-<p>The second one lets Epinio provision the service which you can later bind to your application with the <code>epinio service bind</code> command. This page explains how this works.</p>
-<p>Services in Epinio are managed by the <a href="cli/epinio_service.html">epinio service</a> commands.</p>
+The most common example is probably a database. There are at least 2 ways to connect an Epinio application to a Service.
+The first way is to provision the service manually and <a href="./configurations.html">create an Epinio Configuration</a> to define the Service connection details available to the application.</p>
+<p>The second way lets Epinio provision the Service, and afterwards create a binding to your application with the <code>epinio service bind</code> command. For additional information, please refer to the <a href="cli/epinio_service.html">epinio service</a> page.</p>
 <h2 id="how-does-it-work"><a class="header" href="#how-does-it-work">How does it work?</a></h2>
-<p>Epinio is very flexible on how a service is provisioned. Many public cloud providers maintain their own operators (e.g. <a href="https://github.com/Azure/azure-service-operator">Azure</a>). There are also projects like <a href="https://crossplane.io/">Crossplane</a> that allow you to provision services in various public cloud providers. All these solutions work by creating custom resources on a cluster which a running controller will pick up and create the desired service.
-This shared method allows Epinio to stay agnostic of the provisioning method. The human operator only needs to create a Helm chart with the needed resources and <a href="../howtos/create_custom_service.html">describe to Epinio how to install it</a>.
-The same method can be used with &quot;in-cluster&quot; services (e.g. a MySQL database running on the same cluster as Epinio). Actually, Epinio comes with such services available out of the box. They are based on off-the-shelf Helm charts from Bitnami and their names are suffixed with <code>-dev</code> because in the provided default configuration they might not be suitable for production usage.</p>
+<p>Epinio is very flexible on how a service is provisioned. Many public cloud providers maintain their own operators (e.g. <a href="https://github.com/Azure/azure-service-operator">Azure</a>). There are also projects like <a href="https://crossplane.io/">Crossplane</a> that allow services provisioning for various public cloud providers. All these solutions work by creating custom resources on a cluster, and a controller will create the desired service.
+This shared method allows Epinio to stay agnostic of the provisioning method. You only need to create a Helm chart with the needed resources and <a href="../howtos/create_custom_service.html">describe how to install the Service with Epinio</a>.
+The same method can be used with &quot;in-cluster&quot; services (e.g. a MySQL database running on the same cluster as Epinio). Actually, the Epinio services available by default are based on off-the-shelf Helm charts from Bitnami and their names are suffixed with <code>-dev</code> because in the provided default configuration they might not be suitable for production usage.</p>
 <h2 id="provision-a-database"><a class="header" href="#provision-a-database">Provision a database</a></h2>
-<p>Here is an example on how to provision a database and make it available to some running application.</p>
+<p>Here is an example on how to provision a database and make it available to some running application:</p>
 <ul>
 <li>
-<p>Push a sample app:</p>
+<p>Push a sample app</p>
 <pre><code>$ epinio app push -n sample --container-image-url splatform/sample-app
 </code></pre>
 </li>
 <li>
-<p>[Optional] List catalog services:</p>
+<p>[Optional] List catalog services</p>
 <pre><code>$ epinio service catalog
 </code></pre>
 </li>
 <li>
-<p>Provision an in-cluster database:</p>
+<p>Provision an in-cluster database</p>
 <pre><code>$ epinio service create mysql-dev mydb
 </code></pre>
 </li>
 <li>
-<p>Wait until it's ready (status should be &quot;deployed&quot;):</p>
+<p>Wait until it's ready (status should be &quot;deployed&quot;)</p>
 <pre><code>$ epinio service show mydb
 </code></pre>
 </li>
 <li>
-<p>Bind the database secrets to the application:</p>
+<p>Bind the database secrets to the application</p>
 <pre><code>$ epinio service bind mydb sample
 </code></pre>
 </li>
 <li>
-<p>Check that the database secrets are available to the application:</p>
+<p>Check that the database secrets are available to the application</p>
 <pre><code>$ epinio app exec sample
 
 🚢  Executing a shell
@@ -202,9 +200,9 @@ cnb@sample-7bc756989-tjvt9:/$ exit
 </code></pre>
 </li>
 </ul>
-<p>At this point, it's up to the application to make use of that secret. The helm chart that is used for this example, doesn't write the hostname of the database in the generated secret. That's because the Helm chart wasn't created specifically for Epinio. To figure out the hostname in this case, requires some knowledge on <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">how Kubernetes DNS works</a>.</p>
-<p>In this case it is: <code>workspace-mydb-mysql.workspace.svc.cluster.local</code>.</p>
-<p>When you are done with this example you can delete all generated resources:</p>
+<p>At this point, it's up to the application to make use of that secret. The helm chart used for this example doesn't write the hostname of the database in the generated secret. That's because the Helm chart wasn't created specifically for Epinio. To figure out the hostname, you might need to <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">know how Kubernetes DNS works</a>.</p>
+<p>For the example above, the hostname is: <code>workspace-mydb-mysql.workspace.svc.cluster.local</code>.</p>
+<p>When you are done with this example, you can delete all generated resources with the following commands:</p>
 <pre><code>$ epinio service delete mydb
 $ epinio app delete sample
 </code></pre>
