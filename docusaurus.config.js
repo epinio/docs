@@ -70,7 +70,7 @@ const config = {
             position: 'right',
             label: 'Docs',
           },
-          {to: '/blog', label: 'Blog', position: 'right'},
+          //{to: '/blog', label: 'Blog', position: 'right'},
           {
             href: 'https://github.com/epinio/epinio',
             label: 'GitHub',
