@@ -30,6 +30,7 @@ Further defaults:
   - One replica/instance.
   - Standard paketo builder image (`paketobuildpacks/builder:full`).
   - Current directory for the application sources.
+  - No application liveness/readiness probes
 
 ## Syntax `epinio (apps) push`
 
@@ -68,8 +69,8 @@ Options do not extend any manifest values.
 
     Binds the named configuration to the application. Multiple uses of the option accumulate.
 
-__Side note__: The three preceding options are supported by the `apps create` and `apps
-update` commands as well. The following options are not.
+__Side note__: All preceding options are supported by the `apps create` and `apps update`
+commands as well. The following options are not.
 
   - `--name`, `-n` `NAME`
 
@@ -127,6 +128,24 @@ The keys of this mapping specify the various elements of an application's config
       - `configurations`. See `--bind`. Optional. Defaults to empty. The value of this keys is a
         sequence of names, for the configurations to bind.
 
+      - `health`. Optional. Defaults to empty. The value of this keys is a mapping with
+        keys `live` and `ready`. The structure of the values for these keys is the same:
+
+	  - A mapping with a single key `http` whose value is a mapping with keys
+            `scheme`, `path`, and `port`. Scheme and path have string values, port is an
+            integer. These keys and their values are directly use for kubernetes http
+            probes, without any kind of translation.
+
+	Defaults:
+
+	  - If `health.live.http` is not present no liveness probe is specified.
+
+	  - If `health.ready.http` is not present no readiness probe is specified.
+
+	  - If `health.live.http` or `health.ready.http` are present at least one of the
+            subordinate keys (i.e. scheme, path, and port) has to be specified. For
+            missing keys the fallbacks are `HTTP`, `/`, and `80` (scheme, path, and port).
+
   - `staging`. Optional. The value of this key is a mapping whose keys specify information
     controlling the application's staging.
 
@@ -169,9 +188,19 @@ configuration:
   - snafu
   environment:
     DOGMA: "no"
+  health:
+    live:
+      http:
+        scheme: HTTP
+        port: 8888
+        path: "/live"
+    ready:
+      http:
+        scheme: HTTPS
+        port: 9999
+        path: "/ping"
 staging:
   builder: "paketobuildpacks/builder:tiny"
 origin:
   path: /somewhere/over/there
-
 ```
