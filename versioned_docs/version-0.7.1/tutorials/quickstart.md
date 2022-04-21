@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Quick Start"
+title: ""
 ---
 
 # QuickStart 

@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Windows"
+title: ""
 ---
 
 # Epinio On Windows

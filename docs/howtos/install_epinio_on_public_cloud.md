@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Install Epinio on Public Clouds"
+title: ""
 ---
 
 # Install Epinio on Public Clouds

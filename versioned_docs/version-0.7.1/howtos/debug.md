@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Debug application"
+title: ""
 ---
 
 ## How to debug an app

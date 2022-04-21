@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Advanced topics"
+title: ""
 ---
 
 # Advanced Topics

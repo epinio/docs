@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Setup external S3 storage"
+title: ""
 ---
 
 ## How to setup external S3 storage

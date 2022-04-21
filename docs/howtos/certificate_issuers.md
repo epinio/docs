@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Certificate Issuers"
+title: ""
 ---
 
 # Using a Certificate Issuer

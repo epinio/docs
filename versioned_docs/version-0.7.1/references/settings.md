@@ -1,5 +1,6 @@
 ---
 sidebar_label: "CLI Settings"
+title: ""
 ---
 
 # Epinio, CLI settings

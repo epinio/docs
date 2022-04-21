@@ -1,3 +1,7 @@
+---
+title: ""
+---
+
 ## epinio configuration delete
 
 Delete a configuration

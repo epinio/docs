@@ -1,3 +1,7 @@
+---
+title: ""
+---
+
 ## epinio service bind
 
 Bind a service SERVICENAME to an Epinio app APPNAME.

@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Install Epinio on Rancher Desktop (local)"
+title: ""
 ---
 
 # Rancher Desktop configuration

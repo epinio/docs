@@ -1,3 +1,7 @@
+---
+title: ""
+---
+
 ## epinio namespace show
 
 Shows the details of an epinio-controlled namespace

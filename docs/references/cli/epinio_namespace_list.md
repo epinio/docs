@@ -1,3 +1,7 @@
+---
+title: ""
+---
+
 ## epinio namespace list
 
 Lists all epinio-controlled namespaces

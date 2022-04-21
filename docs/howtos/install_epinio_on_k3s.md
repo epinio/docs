@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Install Epinio on K3s (local)"
+title: ""
 ---
 
 # Creating a K3s Kubernetes Cluster

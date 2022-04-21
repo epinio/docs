@@ -1,5 +1,6 @@
 ---
 sidebar_label: "API"
+title: ""
 ---
 
 # API reference

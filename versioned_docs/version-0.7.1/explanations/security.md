@@ -1,8 +1,9 @@
 ---
 sidebar_label: "Security"
+title: ""
 ---
 
-#### A Quick Note On Security
+## A Quick Note On Security
 
 Epinio secures access to its API with TLS and basic authentication.
 

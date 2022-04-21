@@ -1,3 +1,7 @@
+---
+title: ""
+---
+
 ## epinio namespace delete
 
 Deletes an epinio-controlled namespace

@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Setup external container registry"
+title: ""
 ---
 
 ## How to setup external Epinio registry

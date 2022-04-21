@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Provision external IP address for local Kubernetes"
+title: ""
 ---
 
 ## Provision of External IP for LoadBalancer service type in Kubernetes

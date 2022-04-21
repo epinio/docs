@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Install Wordpress with Epinio"
+title: ""
 ---
 
 # Installing Wordpress with Epinio

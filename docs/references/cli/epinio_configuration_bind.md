@@ -1,3 +1,7 @@
+---
+title: ""
+---
+
 ## epinio configuration bind
 
 Bind a configuration to an application

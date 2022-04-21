@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Install Epinio CLI"
+title: ""
 ---
 
 # Installation of the Epinio CLI

@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Application Manifests"
+title: ""
 ---
 
 # Application Manifests

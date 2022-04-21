@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Detailed Push Process"
+title: ""
 ---
 
 # Epinio Push in Detail

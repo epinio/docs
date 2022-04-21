@@ -1,3 +1,7 @@
+---
+title: ""
+---
+
 ## epinio namespace create
 
 Creates an epinio-controlled namespace

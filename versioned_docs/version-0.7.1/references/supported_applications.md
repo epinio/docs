@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Supported Applications"
+title: ""
 ---
 
 # Epinio supported applications

@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Install Epinio on Rancher"
+title: ""
 ---
 
 # Rancher configuration

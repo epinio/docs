@@ -1,3 +1,7 @@
+---
+title: ""
+---
+
 ## epinio app manifest
 
 Save state of the named application as a manifest

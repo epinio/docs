@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Create a custom Service"
+title: ""
 ---
 
 # Create a custom service

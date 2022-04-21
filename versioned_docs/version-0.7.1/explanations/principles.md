@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Principles"
+title: ""
 ---
 
 ## Design Principles

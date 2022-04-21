@@ -1,5 +1,6 @@
 ---
-sidebar_label: "\"magic\" DNS setup"
+sidebar_label: "Magic DNS setup"
+title: ""
 ---
 
 # "Magic" DNS setup

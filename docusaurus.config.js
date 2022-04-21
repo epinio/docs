@@ -14,7 +14,7 @@ const config = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.png',
   organizationName: 'SUSE Rancher', // Usually your GitHub org/user name.
-  projectName: 'epinio-docs', // Usually your repo name.
+  projectName: 'docs', // Usually your repo name.
 
   presets: [
     [
