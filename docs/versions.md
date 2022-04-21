@@ -15,5 +15,5 @@ Here you can find the documentation for work-in-process unreleased version.
 ### Past versions (Not maintained anymore)
 Here you can find documentation for previous versions of Docusaurus.
 
-| v0.6.2 | [Documentation](./0.6.2) | [Release Notes](https://github.com/epinio/epinio/releases/tag/v0.6.2) |
+| v0.6.2 | [Documentation](/0.6.2) | [Release Notes](https://github.com/epinio/epinio/releases/tag/v0.6.2) |
 | ------ | ------------------- | --------------------------------------------------------------------- |
