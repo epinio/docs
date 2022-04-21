@@ -33,6 +33,7 @@ Manual verification is possible by executing the command `kubectl get pods -A` i
 
 Rancher Desktop configures it's own loadbalancer to expose Traefik on `127.0.0.1`. We can use this with a wildcard DNS to get a system domain of `127.0.0.1.sslip.io`
 
+```
 export EPINIO_SYSTEM_DOMAIN=${LB_IP}.omg.howdoi.website
 ```
 Previous commands are for Bash, but can be easily adapted for Windows shell.
