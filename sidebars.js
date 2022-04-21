@@ -63,6 +63,7 @@ const sidebars = {
         'howtos/setup_external_registry',
         'howtos/port_forwarding',
         'howtos/custom_routes',
+        'howtos/create_custom_service',
         'howtos/install_epinio_on_rancher',
         'howtos/install_epinio_on_rke',
         'howtos/install_epinio_on_k3s',
@@ -134,6 +135,22 @@ const sidebars = {
                 },
                 {
                   type: 'category',
+                  label: 'epinio_service',
+                  items: [
+                    'references/cli/epinio_service_catalog',
+                    'references/cli/epinio_service_create',
+                    'references/cli/epinio_service_show',
+                    'references/cli/epinio_service_delete',
+                    'references/cli/epinio_service_list',
+                    'references/cli/epinio_service_bind',
+                  ],
+                  link: {
+                    type: 'doc',
+                    id: 'references/cli/epinio_service',
+                  },
+                },
+                {
+                  type: 'category',
                   label: "epinio_settings",
                   items: [
                     'references/cli/epinio_settings_colors',
@@ -195,6 +212,7 @@ const sidebars = {
         'references/settings',
         'references/supported_applications',
         'references/manifests',
+        'references/services',
         'references/configurations',
         'references/api'
       ],

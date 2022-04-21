@@ -27,7 +27,7 @@ targets:
     name: 'Update Epinio Installation URL'
     kind: file
     spec:
-      file: src/installation/install_epinio_cli.md
+      file: docs/installation/install_epinio_cli.md
       matchPattern: 'https://github.com/epinio/epinio/releases/download/(.*)/'
       replacePattern: 'https://github.com/epinio/epinio/releases/download/{{ source "epinio" }}/'
     scmID: default
@@ -36,7 +36,7 @@ targets:
     name: 'Update Epinio Version Information'
     kind: file
     spec:
-      file: src/installation/install_epinio_cli.md
+      file: docs/installation/install_epinio_cli.md
       matchPattern: 'Epinio Version: (.*)'
       replacePattern: 'Epinio Version: {{ source "epinio" }}'
     scmID: default

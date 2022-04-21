@@ -28,6 +28,11 @@ const config = {
           routeBasePath: '/',
           sidebarCollapsible: true,
           sidebarCollapsed: true,
+          versions: {
+            current: {
+              label: 'Next 🚧',
+            },
+          },
         },
         blog: {
           showReadingTime: true,

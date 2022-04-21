@@ -19,7 +19,6 @@
   - [Security](explanations/security.md)
 
 - [HowTos](howtos/howtos.md)
-
   - [Certificate Issuers](howtos/certificate_issuers.md)
   - [Debug application](howtos/debug.md)
   - [Provision external IP address for local Kubernetes](howtos/provision_external_ip_for_local_kubernetes.md)
@@ -28,6 +27,7 @@
   - [Setup external container registry](howtos/setup_external_registry.md)
   - [Port Forwarding](howtos/port_forwarding.md)
   - [Custom Routes](howtos/custom_routes.md)
+  - [Create a custom Service](howtos/create_custom_service.md)
   - [Install Epinio on Rancher](howtos/install_epinio_on_rancher.md)
   - [Install Epinio on RKE2 (Rancher)](howtos/install_epinio_on_rke.md)
   - [Install Epinio on K3s (local)](howtos/install_epinio_on_k3s.md)
@@ -63,6 +63,15 @@
         - [epinio_app_show](references/cli/epinio_app_show.md)
         - [epinio_app_update](references/cli/epinio_app_update.md)
 
+      - [epinio_service](references/cli/epinio_service.md)
+
+        - [epinio_service_catalog](references/cli/epinio_service_catalog.md)
+        - [epinio_service_create](references/cli/epinio_service_create.md)
+        - [epinio_service_show](references/cli/epinio_service_show.md)
+        - [epinio_service_delete](references/cli/epinio_service_delete.md)
+        - [epinio_service_list](references/cli/epinio_service_list.md)
+        - [epinio_service_bind](references/cli/epinio_service_bind.md)
+
       - [epinio_settings](references/cli/epinio_settings.md)
 
         - [epinio_settings_colors](references/cli/epinio_settings_colors.md)
@@ -93,5 +102,6 @@
   - [CLI Settings](references/settings.md)
   - [Supported Applications](references/supported-apps.md)
   - [Application Manifests](references/manifests.md)
+  - [Services](references/services.md)
   - [Configurations](references/configurations.md)
   - [API](references/api.md)
