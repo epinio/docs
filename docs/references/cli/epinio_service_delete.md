@@ -4,7 +4,7 @@ title: ""
 
 ## epinio service delete
 
-Delete service instance SERVICENAME.
+Delete service instance SERVICENAME
 
 ```
 epinio service delete SERVICENAME [flags]
@@ -31,3 +31,4 @@ epinio service delete SERVICENAME [flags]
 ### SEE ALSO
 
 * [epinio service](./epinio_service.md)	 - Epinio service management
+

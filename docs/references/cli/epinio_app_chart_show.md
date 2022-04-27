@@ -2,18 +2,18 @@
 title: ""
 ---
 
-## epinio service create
+## epinio app chart show
 
-Create an instance SERVICENAME of an Epinio service CATALOGSERVICENAME
+Describe application chart
 
 ```
-epinio service create CATALOGSERVICENAME SERVICENAME [flags]
+epinio app chart show CHARTNAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for create
+  -h, --help   help for show
 ```
 
 ### Options inherited from parent commands
@@ -30,5 +30,5 @@ epinio service create CATALOGSERVICENAME SERVICENAME [flags]
 
 ### SEE ALSO
 
-* [epinio service](./epinio_service.md)	 - Epinio service management
+* [epinio app chart](./epinio_app_chart.md)	 - Epinio application chart management
 

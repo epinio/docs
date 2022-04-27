@@ -13,6 +13,7 @@ epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
 ### Options
 
 ```
+      --app-chart string             App chart to use for deployment
   -b, --bind strings                 configurations to bind immediately
       --builder-image string         Paketo builder image to use for staging
       --container-image-url string   Container image url for the app workload image

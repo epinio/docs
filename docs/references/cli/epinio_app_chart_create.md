@@ -2,18 +2,25 @@
 title: ""
 ---
 
-## epinio service create
+## epinio app chart create
 
-Create an instance SERVICENAME of an Epinio service CATALOGSERVICENAME
+Extend set of application charts
+
+### Synopsis
+
+Make new application chart known to epinio
 
 ```
-epinio service create CATALOGSERVICENAME SERVICENAME [flags]
+epinio app chart create [OPTIONS] NAME CHARTREF [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for create
+  -d, --desc string        Long description of the new chart
+  -r, --helm-repo string   Helm repository needed to resolve the chart ref
+  -h, --help               help for create
+  -s, --short string       Short description of the new chart
 ```
 
 ### Options inherited from parent commands
@@ -30,5 +37,5 @@ epinio service create CATALOGSERVICENAME SERVICENAME [flags]
 
 ### SEE ALSO
 
-* [epinio service](./epinio_service.md)	 - Epinio service management
+* [epinio app chart](./epinio_app_chart.md)	 - Epinio application chart management
 

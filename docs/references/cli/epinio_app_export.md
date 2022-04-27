@@ -4,7 +4,7 @@ title: ""
 
 ## epinio app export
 
-Export the named application into the directory.
+Export the named application into the directory
 
 ```
 epinio app export NAME DIRECTORY [flags]
@@ -30,4 +30,5 @@ epinio app export NAME DIRECTORY [flags]
 
 ### SEE ALSO
 
-* [epinio app](epinio_app.md)	 - Epinio application features
+* [epinio app](./epinio_app.md)	 - Epinio application features
+

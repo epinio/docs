@@ -2,18 +2,22 @@
 title: ""
 ---
 
-## epinio service create
+## epinio app chart delete
 
-Create an instance SERVICENAME of an Epinio service CATALOGSERVICENAME
+Remove application chart from epinio
+
+### Synopsis
+
+Remove application chart from epinio
 
 ```
-epinio service create CATALOGSERVICENAME SERVICENAME [flags]
+epinio app chart delete CHARTNAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for create
+  -h, --help   help for delete
 ```
 
 ### Options inherited from parent commands
@@ -30,5 +34,5 @@ epinio service create CATALOGSERVICENAME SERVICENAME [flags]
 
 ### SEE ALSO
 
-* [epinio service](./epinio_service.md)	 - Epinio service management
+* [epinio app chart](./epinio_app_chart.md)	 - Epinio application chart management
 
