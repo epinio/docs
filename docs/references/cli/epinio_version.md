@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio version"
 ---
-
 ## epinio version
 
 Print the version number

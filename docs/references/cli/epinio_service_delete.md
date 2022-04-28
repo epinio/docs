@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio service delete"
 ---
-
 ## epinio service delete
 
 Delete service instance SERVICENAME

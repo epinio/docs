@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio push"
 ---
-
 ## epinio push
 
 Push an application declared in the specified manifest

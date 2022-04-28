@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio completion"
 ---
-
 ## epinio completion
 
 Generate completion script for a shell

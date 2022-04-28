@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio namespace"
 ---
-
 ## epinio namespace
 
 Epinio-controlled namespaces

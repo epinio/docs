@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app logs"
 ---
-
 ## epinio app logs
 
 Streams the logs of the application

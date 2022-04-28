@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio configuration list"
 ---
-
 ## epinio configuration list
 
 Lists configurations

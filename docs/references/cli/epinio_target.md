@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio target"
 ---
-
 ## epinio target
 
 Targets an epinio-controlled namespace.

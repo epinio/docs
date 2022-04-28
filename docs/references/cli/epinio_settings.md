@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio settings"
 ---
-
 ## epinio settings
 
 Epinio settings management

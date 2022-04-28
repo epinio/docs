@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app env list"
 ---
-
 ## epinio app env list
 
 Lists application environment

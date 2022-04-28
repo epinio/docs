@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio configuration show"
 ---
-
 ## epinio configuration show
 
 Configuration information

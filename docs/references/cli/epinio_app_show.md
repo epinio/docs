@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app show"
 ---
-
 ## epinio app show
 
 Describe the named application

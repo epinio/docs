@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app chart"
 ---
-
 ## epinio app chart
 
 Epinio application chart management

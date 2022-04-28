@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio namespace show"
 ---
-
 ## epinio namespace show
 
 Shows the details of an epinio-controlled namespace

@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio namespace create"
 ---
-
 ## epinio namespace create
 
 Creates an epinio-controlled namespace

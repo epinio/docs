@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app delete"
 ---
-
 ## epinio app delete
 
 Deletes an application

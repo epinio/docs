@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio service show"
 ---
-
 ## epinio service show
 
 Show details of a service instance SERVICENAME

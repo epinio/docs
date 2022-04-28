@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio settings show"
 ---
-
 ## epinio settings show
 
 Show the current settings

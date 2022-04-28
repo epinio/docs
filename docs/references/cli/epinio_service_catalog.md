@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio service catalog"
 ---
-
 ## epinio service catalog
 
 Lists all available Epinio services, or show the details of the specified one

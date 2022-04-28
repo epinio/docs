@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app restart"
 ---
-
 ## epinio app restart
 
 Restart the application

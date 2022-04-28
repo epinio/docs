@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app update"
 ---
-
 ## epinio app update
 
 Update the named application

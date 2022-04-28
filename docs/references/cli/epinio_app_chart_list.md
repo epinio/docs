@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app chart list"
 ---
-
 ## epinio app chart list
 
 List application charts

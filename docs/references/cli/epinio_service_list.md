@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio service list"
 ---
-
 ## epinio service list
 
 List all the services in the targeted namespace

@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio configuration delete"
 ---
-
 ## epinio configuration delete
 
 Delete a configuration

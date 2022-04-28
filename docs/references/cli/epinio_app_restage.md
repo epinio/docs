@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app restage"
 ---
-
 ## epinio app restage
 
 Restage the application

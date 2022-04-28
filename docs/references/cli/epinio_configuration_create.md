@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio configuration create"
 ---
-
 ## epinio configuration create
 
 Create a configuration

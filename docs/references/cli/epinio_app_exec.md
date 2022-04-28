@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app exec"
 ---
-
 ## epinio app exec
 
 creates a shell to the application
