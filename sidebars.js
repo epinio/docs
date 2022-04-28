@@ -64,6 +64,8 @@ const sidebars = {
         'howtos/port_forwarding',
         'howtos/custom_routes',
         'howtos/create_custom_service',
+        'howtos/create_custom_appcharts',
+        'howtos/using_custom_appcharts',
         'howtos/install_epinio_on_rancher',
         'howtos/install_epinio_on_rke',
         'howtos/install_epinio_on_k3s',
@@ -107,6 +109,19 @@ const sidebars = {
                   label: 'epinio_app',
                   items: [
                     'references/cli/epinio_app_create',
+                    {
+                      type: 'category',
+                      label: 'epinio_app_chart',
+                      items: [
+                        'references/cli/epinio_app_chart_default',
+                        'references/cli/epinio_app_chart_list',
+                        'references/cli/epinio_app_chart_show',
+                      ],
+                      link: {
+                        type: 'doc',
+                        id: 'references/cli/epinio_app_chart',
+                      }
+                    },
                     'references/cli/epinio_app_delete',
                     {
                       type: 'category',
