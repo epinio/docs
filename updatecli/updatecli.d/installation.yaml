@@ -41,6 +41,16 @@ targets:
       replacePattern: 'Epinio Version: {{ source "epinio" }}'
     scmID: default
 
+  # Required yarn to be installed
+  docusaurus:
+    kind: shell
+    name: "Set latest docusaurus version"
+    scmid: default
+    sourceid: epinio
+    spec:
+      # epinio source value is automatically added to the command as a parameter
+      command: ./updatecli/scripts/docusaurus.sh
+
 pullrequests:
   default:
     title: '[updatecli] Bump Epinio version used within installation documentation to {{ source "epinio" }}'
@@ -49,6 +59,7 @@ pullrequests:
     targets:
       - download-url
       - epinio-version
+      - docusaurus
     spec:
       automerge: true
       mergemethod: squash
