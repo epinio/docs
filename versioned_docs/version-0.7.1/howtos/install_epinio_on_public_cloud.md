@@ -20,6 +20,12 @@ Epinio can be installed on any Kubernetes distribution, including the Public Clo
 ### Create an AKS cluster
 
 If you do not have an existing cluster, follow the [quickstart](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough) to create an AKS cluster.
+
+:::caution
+
+In AKS, Epinio must be installed with an external registry because due to a [change](https://github.com/epinio/epinio/issues/1373#issuecomment-1105231113) in Azure, we cannot use internal registry anymore.
+
+:::
 </details>
 
 <details>
