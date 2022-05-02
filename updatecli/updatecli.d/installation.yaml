@@ -15,7 +15,7 @@ scms:
 sources:
   epinio:
     name: Get latest Epinio version
-    kind: githubRelease
+    kind: githubrelease
     spec:
       owner: epinio
       repository: epinio
@@ -28,18 +28,18 @@ targets:
     kind: file
     spec:
       file: docs/installation/install_epinio_cli.md
-      matchPattern: 'https://github.com/epinio/epinio/releases/download/(.*)/'
-      replacePattern: 'https://github.com/epinio/epinio/releases/download/{{ source "epinio" }}/'
-    scmID: default
+      matchpattern: 'https://github.com/epinio/epinio/releases/download/(.*)/'
+      replacepattern: 'https://github.com/epinio/epinio/releases/download/{{ source "epinio" }}/'
+    scmid: default
 
   epinio-version:
     name: 'Update Epinio Version Information'
     kind: file
     spec:
       file: docs/installation/install_epinio_cli.md
-      matchPattern: 'Epinio Version: (.*)'
-      replacePattern: 'Epinio Version: {{ source "epinio" }}'
-    scmID: default
+      matchpattern: 'Epinio Version: (.*)'
+      replacepattern: 'Epinio Version: {{ source "epinio" }}'
+    scmid: default
 
   # Required yarn to be installed
   docusaurus:
@@ -55,7 +55,7 @@ pullrequests:
   default:
     title: '[updatecli] Bump Epinio version used within installation documentation to {{ source "epinio" }}'
     kind: github
-    scmID: default
+    scmid: default
     targets:
       - download-url
       - epinio-version
