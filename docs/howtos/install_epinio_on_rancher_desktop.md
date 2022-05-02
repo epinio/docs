@@ -48,7 +48,7 @@ $ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/downloa
 # Wait for cert-manager to stabilize
 
 $ helm repo add epinio https://epinio.github.io/helm-charts
-$ helm install epinio -n epinio --create-namespace epinio/epinio --values epinio-values.yaml --set global.domain=127.0.0.1.sslip.io
+$ helm install epinio -n epinio --create-namespace epinio/epinio --set global.domain=127.0.0.1.sslip.io
 
 $ epinio settings update
 ```
