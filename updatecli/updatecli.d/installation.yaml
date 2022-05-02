@@ -86,3 +86,4 @@ pullrequests:
       mergemethod: squash
       labels:
         - chore
+
