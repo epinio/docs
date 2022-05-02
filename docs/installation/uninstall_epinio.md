@@ -6,7 +6,7 @@ title: ""
 ## Uninstall
 
 NOTE: The command below will delete all the components Epinio originally installed.
-**This includes all the deployed applications.**
+**This includes all the deployed applications in the default "workspace" namespace, resources deployed in your own namespace will survive.**
 
 If after installing Epinio, you deployed other things on the same cluster
 that depended on those Epinio deployed components (e.g. Kubed, Minio etc),
