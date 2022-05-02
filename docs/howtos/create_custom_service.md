@@ -22,8 +22,6 @@ $ kubectl get services.application.epinio.io -n epinio mysql-dev -o yaml > servi
 or you can find the definition of the catalog services [here](https://github.com/epinio/helm-charts/blob/3a12bac7aee5ac36c6d43416f2e83ac10090c62a/chart/epinio/templates/service-catalog.yaml
 ).
 
-https://github.com/epinio/helm-charts/blob/3a12bac7aee5ac36c6d43416f2e83ac10090c62a/chart/epinio/templates/service-catalog.yaml
-
 Change the fields to point to the desired helm chart and apply the yaml with a command like:
 
 ```
