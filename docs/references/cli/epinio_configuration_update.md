@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio configuration update"
 ---
-
 ## epinio configuration update
 
 Update a configuration

@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio settings colors"
 ---
-
 ## epinio settings colors
 
 Manage colored output

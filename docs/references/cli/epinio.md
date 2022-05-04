@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio"
 ---
-
 ## epinio
 
 Epinio cli

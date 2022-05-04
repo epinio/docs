@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app update"
 ---
-
 ## epinio app update
 
 Update the named application
@@ -17,11 +16,12 @@ epinio app update NAME [flags]
 ### Options
 
 ```
-  -b, --bind strings      configurations to bind immediately
-  -e, --env strings       environment variables to be used
-  -h, --help              help for update
-  -i, --instances int32   The number of instances the application should have (default 1)
-  -r, --route strings     Custom route to use for the application (a subdomain of the default domain will be used if this is not set). Can be set multiple times to use multiple routes with the same application.
+      --app-chart string   App chart to use for deployment
+  -b, --bind strings       configurations to bind immediately
+  -e, --env strings        environment variables to be used
+  -h, --help               help for update
+  -i, --instances int32    The number of instances the application should have (default 1)
+  -r, --route strings      Custom route to use for the application (a subdomain of the default domain will be used if this is not set). Can be set multiple times to use multiple routes with the same application.
 ```
 
 ### Options inherited from parent commands

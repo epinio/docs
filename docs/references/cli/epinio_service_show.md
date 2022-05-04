@@ -1,10 +1,9 @@
 ---
-title: ""
+title: "epinio service show"
 ---
-
 ## epinio service show
 
-Show details of a service instance SERVICENAME.
+Show details of a service instance SERVICENAME
 
 ```
 epinio service show SERVICENAME [flags]
@@ -31,3 +30,4 @@ epinio service show SERVICENAME [flags]
 ### SEE ALSO
 
 * [epinio service](./epinio_service.md)	 - Epinio service management
+

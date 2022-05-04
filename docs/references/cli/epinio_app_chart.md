@@ -1,22 +1,18 @@
 ---
-title: "epinio app env unset"
+title: "epinio app chart"
 ---
-## epinio app env unset
+## epinio app chart
 
-Shrink application environment
+Epinio application chart management
 
 ### Synopsis
 
-Remove environment variable from named application
-
-```
-epinio app env unset APPNAME NAME [flags]
-```
+Manage epinio application charts
 
 ### Options
 
 ```
-  -h, --help   help for unset
+  -h, --help   help for chart
 ```
 
 ### Options inherited from parent commands
@@ -33,5 +29,8 @@ epinio app env unset APPNAME NAME [flags]
 
 ### SEE ALSO
 
-* [epinio app env](./epinio_app_env.md)	 - Epinio application configuration
+* [epinio app](./epinio_app.md)	 - Epinio application features
+* [epinio app chart default](./epinio_app_chart_default.md)	 - Set or show app chart default
+* [epinio app chart list](./epinio_app_chart_list.md)	 - List application charts
+* [epinio app chart show](./epinio_app_chart_show.md)	 - Describe application chart
 

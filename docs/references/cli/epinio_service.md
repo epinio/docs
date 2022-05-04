@@ -1,14 +1,13 @@
 ---
-title: ""
+title: "epinio service"
 ---
-
 ## epinio service
 
-Epinio service management.
+Epinio service management
 
 ### Synopsis
 
-Manage the epinio services.
+Manage the epinio services
 
 ### Options
 
@@ -37,3 +36,4 @@ Manage the epinio services.
 * [epinio service delete](./epinio_service_delete.md)	 - Delete service instance SERVICENAME
 * [epinio service list](./epinio_service_list.md)	 - List all the services in the targeted namespace
 * [epinio service show](./epinio_service_show.md)	 - Show details of a service instance SERVICENAME
+

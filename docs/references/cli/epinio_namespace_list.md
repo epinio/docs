@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio namespace list"
 ---
-
 ## epinio namespace list
 
 Lists all epinio-controlled namespaces

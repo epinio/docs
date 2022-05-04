@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app env"
 ---
-
 ## epinio app env
 
 Epinio application configuration

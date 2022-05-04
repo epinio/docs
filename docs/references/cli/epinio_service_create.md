@@ -1,10 +1,9 @@
 ---
-title: ""
+title: "epinio service create"
 ---
-
 ## epinio service create
 
-Create an instance SERVICENAME of an Epinio service CATALOGSERVICENAME.
+Create an instance SERVICENAME of an Epinio service CATALOGSERVICENAME
 
 ```
 epinio service create CATALOGSERVICENAME SERVICENAME [flags]
@@ -31,3 +30,4 @@ epinio service create CATALOGSERVICENAME SERVICENAME [flags]
 ### SEE ALSO
 
 * [epinio service](./epinio_service.md)	 - Epinio service management
+

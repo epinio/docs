@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio settings update"
 ---
-
 ## epinio settings update
 
 Update the api location & stored credentials

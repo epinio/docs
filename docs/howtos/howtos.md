@@ -13,3 +13,5 @@ Documentation solving specific, sometimes advanced, problems in a practical mann
 - [Setup external container registry](setup_external_registry.md)
 - [Port Forwarding](port_forwarding.md)
 - [Debug](debug.md)
+- [Creating custom application Helm charts](create_custom_appcharts.md)
+- [Using custom application Helm charts](using_custom_appcharts.md)

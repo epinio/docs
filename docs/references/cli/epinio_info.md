@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio info"
 ---
-
 ## epinio info
 
 Shows information about the Epinio environment

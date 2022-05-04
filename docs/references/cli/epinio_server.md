@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio server"
 ---
-
 ## epinio server
 
 Starts the Epinio server.

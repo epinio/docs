@@ -1,10 +1,9 @@
 ---
-title: ""
+title: "epinio service list"
 ---
-
 ## epinio service list
 
-List all the services in the targeted namespace.
+List all the services in the targeted namespace
 
 ```
 epinio service list [flags]
@@ -31,3 +30,4 @@ epinio service list [flags]
 ### SEE ALSO
 
 * [epinio service](./epinio_service.md)	 - Epinio service management
+

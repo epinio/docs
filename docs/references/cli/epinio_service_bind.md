@@ -1,10 +1,9 @@
 ---
-title: ""
+title: "epinio service bind"
 ---
-
 ## epinio service bind
 
-Bind a service SERVICENAME to an Epinio app APPNAME.
+Bind a service SERVICENAME to an Epinio app APPNAME
 
 ```
 epinio service bind SERVICENAME APPNAME [flags]
@@ -31,3 +30,4 @@ epinio service bind SERVICENAME APPNAME [flags]
 ### SEE ALSO
 
 * [epinio service](./epinio_service.md)	 - Epinio service management
+

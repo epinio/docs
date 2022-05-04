@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio app"
 ---
-
 ## epinio app
 
 Epinio application features
@@ -31,6 +30,7 @@ Manage epinio application
 ### SEE ALSO
 
 * [epinio](./epinio.md)	 - Epinio cli
+* [epinio app chart](./epinio_app_chart.md)	 - Epinio application chart management
 * [epinio app create](./epinio_app_create.md)	 - Create just the app, without creating a workload
 * [epinio app delete](./epinio_app_delete.md)	 - Deletes an application
 * [epinio app env](./epinio_app_env.md)	 - Epinio application configuration

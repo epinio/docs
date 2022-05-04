@@ -1,7 +1,6 @@
 ---
-title: ""
+title: "epinio configuration"
 ---
-
 ## epinio configuration
 
 Epinio configuration features
