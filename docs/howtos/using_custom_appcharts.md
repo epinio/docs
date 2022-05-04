@@ -10,7 +10,7 @@ Epinio deploys applications on Kubernetes as [Helm charts](https://helm.sh/).
 By default, a standard Helm chart is provided when Epinio is installed.
 However, operators may wish to [create and register custom charts](create_custom_appcharts.md) specific to their environment.
 
-Once the custom charts registered in Epinio, the developers can use them when deploying their
+Once the custom charts are registered in Epinio, the developers can use them when deploying their
 applications as described in this How-To.
 
 
@@ -37,7 +37,7 @@ The output will only list the ` standard` Helm chart, which Epinio installs by d
 Use the option `--app-chart` to specify the name of the custom Helm chart to use when
 creating, updating, or deploying an application.
 
-For a detailed information on the `--app-chart` setting, see the following CLI commands pages:
+For detailed information on the `--app-chart` setting, see the following CLI commands pages:
 
   - [epinio app create](../references/cli/epinio_app_create.md)
   - [epinio app update](../references/cli/epinio_app_update.md)
@@ -48,7 +48,7 @@ For a detailed information on the `--app-chart` setting, see the following CLI c
 Changing the chart to use is __not possible__ if the application has an
 active workload.
 
-To switch a deployed application to a different Helm chart, you'll have to
+To switch a deployed application to a different Helm chart, you will have to
 delete and re-deploy the application.
 :::
 
@@ -75,7 +75,7 @@ $ epinio app chart default FOO
 ```
 
 Now, all future invocations of `epinio push` will use the custom Helm chart set as default.
-You'll be able to override it with the `--app-chart` option, as described above.
+You will be able to override it with the `--app-chart` option, as described above.
 
 :::note
 The `default` chart is a __local__ setting. It affects only the developer who made
