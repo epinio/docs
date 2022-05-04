@@ -19,6 +19,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Setup Docusaurus
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: yarn
+
       - name: Apply
         uses: updatecli/updatecli-action@v1.28.0
         with:

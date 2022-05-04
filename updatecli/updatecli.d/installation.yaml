@@ -15,12 +15,31 @@ scms:
 sources:
   epinio:
     name: Get latest Epinio version
-    kind: githubRelease
+    kind: githubrelease
     spec:
       owner: epinio
       repository: epinio
       token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
       username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+
+  epinioSubVersion:
+    name: Get latest Epinio version
+    kind: githubrelease
+    spec:
+      owner: epinio
+      repository: epinio
+      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+    transformers:
+        - trimPrefix: "v"
+        - findSubMatch:
+            # Remove once if we decide to only keep major and minor version such as 0.7
+            # pattern: '^(\d*).(\d*)'
+            pattern: '^(\d*).(\d*).(\d*)'
+            captureindex: 0
+        # Uncomment if we decide to only version based on minor version
+        # so we could have 0.7.x
+        #- addSuffix: ".x"
 
 targets:
   download-url:
@@ -28,27 +47,40 @@ targets:
     kind: file
     spec:
       file: docs/installation/install_epinio_cli.md
-      matchPattern: 'https://github.com/epinio/epinio/releases/download/(.*)/'
-      replacePattern: 'https://github.com/epinio/epinio/releases/download/{{ source "epinio" }}/'
-    scmID: default
+      matchpattern: 'https://github.com/epinio/epinio/releases/download/(.*)/'
+      replacepattern: 'https://github.com/epinio/epinio/releases/download/{{ source "epinio" }}/'
+    scmid: default
+    sourceid: epinio
 
   epinio-version:
     name: 'Update Epinio Version Information'
     kind: file
+    sourceid: epinio
     spec:
       file: docs/installation/install_epinio_cli.md
-      matchPattern: 'Epinio Version: (.*)'
-      replacePattern: 'Epinio Version: {{ source "epinio" }}'
-    scmID: default
+      matchpattern: 'Epinio Version: (.*)'
+      replacepattern: 'Epinio Version: {{ source "epinio" }}'
+    scmid: default
+
+  # Required yarn to be installed
+  docusaurus:
+    kind: shell
+    name: "Set latest docusaurus version"
+    scmid: default
+    sourceid: epinioSubVersion
+    spec:
+      # epinio source value is automatically added to the command as a parameter
+      command: "./updatecli/scripts/docusaurus.sh"
 
 pullrequests:
   default:
     title: '[updatecli] Bump Epinio version used within installation documentation to {{ source "epinio" }}'
     kind: github
-    scmID: default
+    scmid: default
     targets:
       - download-url
       - epinio-version
+      - docusaurus
     spec:
       automerge: true
       mergemethod: squash
