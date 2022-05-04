@@ -7,23 +7,22 @@ title: ""
 
 Epinio deploys applications on Kubernetes as [Helm charts](https://helm.sh/).
 
-While a standard Helm chart is provided for this purpose when Epinio is installed more can
-be [created and added by the operators](create_custom_appcharts.md).
+By default, a standard Helm chart is provided when Epinio is installed.
+However, operators may wish to [create and register custom charts](create_custom_appcharts.md) specific to their environment.
 
-How developers can use the Helm charts created by the operators when deploying their
-applications is described here.
+Once the custom charts registered in Epinio, the developers can use them when deploying their
+applications as described in this How-To.
 
 
 # Listing the available Helm charts
 
-See the set of available Helm charts by invoking
+You can list the available Helm charts by running the following command:
 
 ```
 $ epinio app chart list
 ```
 
-For an unmodified Epinio installation the output will show only the standard chart Epinio
-comes with:
+As an example, here is the output of an unmodified Epinio installation:
 
 ```
 | DEFAULT |   NAME   |        DESCRIPTION         |
@@ -31,79 +30,87 @@ comes with:
 |         | standard | Epinio standard deployment |
 ```
 
+The output will only list the ` standard` Helm chart, which Epinio installs by default.
 
 # Deploying applications with a custom Helm chart
 
 Use the option `--app-chart` to specify the name of the custom Helm chart to use when
-created, updating, or deploying an application.
+creating, updating, or deploying an application.
 
-As implied by the previous paragraph, `--app-chart` is accepted by the cli commands
+For a detailed information on the `--app-chart` setting, see the following CLI commands pages:
 
   - [epinio app create](../references/cli/epinio_app_create.md)
   - [epinio app update](../references/cli/epinio_app_update.md)
   - [epinio push](../references/cli/epinio_push.md)
 
-The argument of the option is the name of custom Helm chart to use, as shown when listing
-the available charts.
 
-__Beware__ that changing the chart to use is __not possible__ if the application has an
+:::caution
+Changing the chart to use is __not possible__ if the application has an
 active workload.
 
-To switch a deployed application from one Helm chart to a different chart it is necessary
-to delete it, and then re-deploy.
+To switch a deployed application to a different Helm chart, you'll have to
+delete and re-deploy the application.
+:::
 
+
+:::info
 Scaling the application to zero instances is __not sufficient__. While that effectively
 stops the application it does not remove the deployed workload, just the underlying active
 elements.
+:::
 
 
 # Setting a default Helm chart
 
-Using the `--app-chart` option as described in the previous section is mostly sensible for
+The `--app-chart` option described in the previous section is more suitable for
 single or few deployments requiring a custom Helm chart.
 
-If the majority of applications use a specific custom chart `FOO` it makes more sense to
-set `FOO` as the default chart.
+However, if the majority of applications use a specific custom chart, for example `FOO`, it makes more sense to
+change the default chart.
 
-Instead of using `--appchart FOO` on every deployment invoke
+You can set a custom chart as the default by running the following command:
 
 ```
 $ epinio app chart default FOO
 ```
 
-Now all future invokations of `epinio push` will use `FOO` as the Helm chart.
-If not overridden again by a `--app-chart` option.
+Now, all future invocations of `epinio push` will use the custom Helm chart set as default.
+You'll be able to override it with the `--app-chart` option, as described above.
 
-__Note__ that this default is a __local__ setting. It affects only the developer who made
+:::note
+The `default` chart is a __local__ setting. It affects only the developer who made
  the change.
+ :::
 
 
 # Querying the default Helm chart
 
-To query if there is a currently active default, and what it is set to invoke the command
+You can check which chart is set as `default` by running the following command:
 
 ```
 $ epinio app chart default
 ```
 
-Note that the configured default is also made visible when listing the available charts.
-In the example output below the chart `foo` is marked as the currently active default.
+You can also check which chart is set as `default` when listing the available charts.
+As an example, the output below shows the chart `FOO` as the current default:
 
 ```
 | DEFAULT |   NAME   |        DESCRIPTION         |
 |---------|----------|----------------------------|
-| *       | foo      | Foofy deployment           |
+| *       | FOO      | Foofy deployment           |
 |         | standard | Epinio standard deployment |
 ```
 
 
 # Unsetting the default Helm chart
 
-To restore the use of the system default (`standard`) invoke the command
+You can set the system chart `standard` back as the default, by running the following command:
 
 ```
 $ epinio app chart default ''
 ```
 
-Note the __empty string__ used in place of the chart name. This is the signal to unset the
-current setting.
+:::note
+The __empty string__ used in place of the chart name is mandatory. If you do not add it,
+the command will only list the charts available.
+:::
