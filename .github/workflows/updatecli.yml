@@ -24,7 +24,12 @@ jobs:
         with:
           node-version: 16.x
           cache: yarn
-
+      
+      - name: Test yarn website
+        run: |
+          which yarn
+          which npm
+      
       - name: Apply
         uses: updatecli/updatecli-action@v1.33.0
         with:
