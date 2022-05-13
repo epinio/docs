@@ -27,13 +27,6 @@ jobs:
       - name: Setup yarn
         run: npm install -g yarn
 
-      # https://github.com/actions/setup-node/issues/182#issuecomment-966885975
-      - name: Setup Node with yarn caching
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-          cache: yarn
-
       - name: Apply
         uses: updatecli/updatecli-action@v1.33.0
         with:
