@@ -5,7 +5,7 @@ title: ""
 
 # Authorization
 
-Since version **0.8.0** Epinio is shipped with an authorization layer, with two basic roles: **admin** and **user**.
+Since version **0.8.0** Epinio is shipped with an authorization layer recognizing two basic roles: **admin** and **user**.
 A user with the admin role will have access to every resource, while a standard user will have access only to the resources created on its namespaces.
 When a user creates a namespace, it will have automatically permission for it.
 
@@ -36,7 +36,7 @@ wss: wss://epinio.mydomain.com
 
 ## List the Epinio users
 
-In Epinio a User is a BasicAuth Kubernetes Secret, with two reserved labels:
+An Epinio user is a BasicAuth Kubernetes Secret, with two reserved labels:
 
 - `epinio.suse.org/api-user-credentials`
 - `epinio.suse.org/role` used to get the assigned role
@@ -96,8 +96,8 @@ EOF
 
 ## Assign namespaces
 
-The authorized user's namespaces are an additional `namespaces` field in the Secret data, separated by a newline `\n`.
-If you want to edit you can just edit that field:
+The authorized user's namespaces are an additional `namespaces` field in the Secret data, separated by a newline `\n`.  
+To modify them edit just that field:
 
 ```
 cat <<EOF | kubectl apply -f -
