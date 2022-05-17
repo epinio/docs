@@ -229,6 +229,7 @@ const sidebars = {
         'references/manifests',
         'references/services',
         'references/configurations',
+        'references/authorization',
         'references/api'
       ],
       link: {

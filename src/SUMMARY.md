@@ -104,4 +104,5 @@
   - [Application Manifests](references/manifests.md)
   - [Services](references/services.md)
   - [Configurations](references/configurations.md)
+  - [Authorization](references/authorization.md)
   - [API](references/api.md)
