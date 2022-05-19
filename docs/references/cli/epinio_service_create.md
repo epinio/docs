@@ -3,7 +3,7 @@ title: "epinio service create"
 ---
 ## epinio service create
 
-Create an instance SERVICENAME of an Epinio service CATALOGSERVICENAME
+Create a service SERVICENAME of an Epinio catalog service CATALOGSERVICENAME
 
 ```
 epinio service create CATALOGSERVICENAME SERVICENAME [flags]
