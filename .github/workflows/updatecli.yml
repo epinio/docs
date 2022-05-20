@@ -17,24 +17,34 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: yarn
+          #cache: yarn
       
-      - name: Test yarn website
-        run: |
-          which yarn
-          which npm
-      
-      - name: Apply
-        uses: updatecli/updatecli-action@v1.33.0
+      #  https://github.com/actions/setup-node/issues/490
+      - name: Repair NPM  # Update to latest npm and yarn
+        run: "npm install -g npm yarn"
+
+      - name: Install Dependencies
+        run: "yarn install --frozen-lockfile"
+
+      - name: Install Updatecli Binary
+        uses: updatecli/updatecli-action@v2
         with:
-          command: apply
-          flags: "--config ./updatecli/updatecli.d"
+          install-only: true
+
+      - name: Run Updatecli in DryRun
+        run: "updatecli diff --config ./updatecli/updatecli.d"
+        env:
+          UPDATECLI_GITHUB_ACTOR: ${{ github.actor }}
+          UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Updatecli Diff
+        run: "updatecli apply --config ./updatecli/updatecli.d"
         env:
           UPDATECLI_GITHUB_ACTOR: ${{ github.actor }}
           UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
