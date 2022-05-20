@@ -1,19 +1,18 @@
 ---
-title: "epinio service delete"
+title: "epinio service unbind"
 ---
-## epinio service delete
+## epinio service unbind
 
-Delete service SERVICENAME
+Unbinds a service SERVICENAME from an Epinio app APPNAME
 
 ```
-epinio service delete SERVICENAME [flags]
+epinio service unbind SERVICENAME APPNAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help     help for delete
-      --unbind   Unbind from applications before deleting
+  -h, --help   help for unbind
 ```
 
 ### Options inherited from parent commands

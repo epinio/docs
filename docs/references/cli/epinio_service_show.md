@@ -3,7 +3,7 @@ title: "epinio service show"
 ---
 ## epinio service show
 
-Show details of a service instance SERVICENAME
+Show details of a service SERVICENAME
 
 ```
 epinio service show SERVICENAME [flags]

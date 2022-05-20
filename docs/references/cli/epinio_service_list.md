@@ -12,6 +12,7 @@ epinio service list [flags]
 ### Options
 
 ```
+      --all    list all services
   -h, --help   help for list
 ```
 
