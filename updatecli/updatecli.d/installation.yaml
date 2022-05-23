@@ -31,8 +31,8 @@ sources:
       token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
       username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
     transformers:
-        - trimPrefix: "v"
-        - findSubMatch:
+        - trimprefix: "v"
+        - findsubmatch:
             # Remove once if we decide to only keep major and minor version such as 0.7
             # pattern: '^(\d*).(\d*)'
             pattern: '^(\d*).(\d*).(\d*)'
