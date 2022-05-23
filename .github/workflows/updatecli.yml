@@ -34,8 +34,6 @@ jobs:
 
       - name: Install Updatecli Binary
         uses: updatecli/updatecli-action@v2
-        with:
-          install-only: true
 
       - name: Run Updatecli in DryRun
         run: "updatecli diff --config ./updatecli/updatecli.d"
