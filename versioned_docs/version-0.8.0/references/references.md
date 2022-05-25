@@ -11,4 +11,5 @@ For example all CLI commands and their arguments.
 - [Supported Applications](./supported_applications.md)
 - [Application Manifests](./manifests.md)
 - [Configurations](./configurations.md)
+- [Authorization](./authorization.md)
 - [API](./api.md)
