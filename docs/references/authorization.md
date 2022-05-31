@@ -38,8 +38,8 @@ wss: wss://epinio.mydomain.com
 
 An Epinio user is a BasicAuth Kubernetes Secret, with two reserved labels:
 
-- `epinio.suse.org/api-user-credentials`
-- `epinio.suse.org/role` used to get the assigned role
+- `epinio.io/api-user-credentials`
+- `epinio.io/role` used to get the assigned role
 
 ```yaml
 apiVersion: v1
@@ -47,8 +47,8 @@ kind: Secret
 type: BasicAuth
 metadata:
   labels:
-    epinio.suse.org/api-user-credentials: "true"
-    epinio.suse.org/role: "admin"
+    epinio.io/api-user-credentials: "true"
+    epinio.io/role: "admin"
   name: my-epinio-user
   namespace: epinio
 stringData:
@@ -60,7 +60,7 @@ To list the available users you can get the secrets from your cluster with `kube
 
 ```bash
 # list all the users
-kubectl get secrets -n epinio -l 'epinio.suse.org/api-user-credentials'
+kubectl get secrets -n epinio -l 'epinio.io/api-user-credentials'
 NAME                  TYPE        DATA   AGE
 default-epinio-user   BasicAuth   3      5m10s
 admin-epinio-user     BasicAuth   2      5m10s
@@ -68,7 +68,7 @@ admin-epinio-user     BasicAuth   2      5m10s
 
 ```bash
 # list all the admins
-kubectl get secrets -n epinio -l 'epinio.suse.org/api-user-credentials,epinio.suse.org/role=admin'
+kubectl get secrets -n epinio -l 'epinio.io/api-user-credentials,epinio.io/role=admin'
 NAME                TYPE        DATA   AGE
 admin-epinio-user   BasicAuth   2      5m24s
 ```
@@ -84,8 +84,8 @@ kind: Secret
 type: BasicAuth
 metadata:
   labels:
-    epinio.suse.org/api-user-credentials: "true"
-    epinio.suse.org/role: "user"
+    epinio.io/api-user-credentials: "true"
+    epinio.io/role: "user"
   name: my-epinio-user
   namespace: epinio
 stringData:
@@ -106,8 +106,8 @@ kind: Secret
 type: BasicAuth
 metadata:
   labels:
-    epinio.suse.org/api-user-credentials: "true"
-    epinio.suse.org/role: "user"
+    epinio.io/api-user-credentials: "true"
+    epinio.io/role: "user"
   name: my-epinio-user
   namespace: epinio
 stringData:
