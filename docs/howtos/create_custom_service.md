@@ -33,3 +33,18 @@ If everything worked correctly, you can see your Service in the Epinio `service-
 ```
 $ epinio service catalog
 ```
+
+## Adding an Image to the service
+
+The various consumers of the API (e.g. the web UI of Epinio) can show an icon when
+listing the various available services. If you want to assign an image to your
+custom service, make sure you add the `serviceIcon` field in the Custom Resource
+yaml.
+
+Generally, helm charts have an icon field defined which already provides such an
+image. You can find the icon field with the `helm show` command. E.g. for the
+bitnami rabbitmq helm chart:
+
+```
+helm show chart https://charts.bitnami.com/bitnami/rabbitmq-9.0.5.tgz | yq .icon
+```
