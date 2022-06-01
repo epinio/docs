@@ -1,5 +1,5 @@
 ---
-title: "epinio service catalog"
+title: ""
 ---
 ## epinio service catalog
 

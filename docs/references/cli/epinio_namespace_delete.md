@@ -1,5 +1,5 @@
 ---
-title: "epinio namespace delete"
+title: ""
 ---
 ## epinio namespace delete
 

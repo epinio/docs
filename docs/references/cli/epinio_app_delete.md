@@ -1,5 +1,5 @@
 ---
-title: "epinio app delete"
+title: ""
 ---
 ## epinio app delete
 

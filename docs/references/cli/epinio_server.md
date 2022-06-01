@@ -1,5 +1,5 @@
 ---
-title: "epinio server"
+title: ""
 ---
 ## epinio server
 

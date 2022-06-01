@@ -1,5 +1,5 @@
 ---
-title: "epinio configuration"
+title: ""
 ---
 ## epinio configuration
 

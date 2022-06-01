@@ -1,5 +1,5 @@
 ---
-title: "epinio configuration bind"
+title: ""
 ---
 ## epinio configuration bind
 

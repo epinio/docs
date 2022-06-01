@@ -1,5 +1,5 @@
 ---
-title: "epinio namespace"
+title: ""
 ---
 ## epinio namespace
 

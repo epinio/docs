@@ -1,5 +1,5 @@
 ---
-title: "epinio app chart default"
+title: ""
 ---
 ## epinio app chart default
 

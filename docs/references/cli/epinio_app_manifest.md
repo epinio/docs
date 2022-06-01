@@ -1,5 +1,5 @@
 ---
-title: "epinio app manifest"
+title: ""
 ---
 ## epinio app manifest
 

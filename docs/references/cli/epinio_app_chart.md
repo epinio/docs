@@ -1,5 +1,5 @@
 ---
-title: "epinio app chart"
+title: ""
 ---
 ## epinio app chart
 

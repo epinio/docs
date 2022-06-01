@@ -1,5 +1,5 @@
 ---
-title: "epinio login"
+title: ""
 ---
 ## epinio login
 
@@ -7,7 +7,7 @@ Epinio login to the server
 
 ### Synopsis
 
-The login command will setup the settings file with the provided credentials
+The login command will setup the settings file with the provided credentials for the specified Epinio cluster
 
 ```
 epinio login [URL] [flags]
@@ -17,8 +17,8 @@ epinio login [URL] [flags]
 
 ```
   -h, --help              help for login
-  -p, --password string   password of the user
-      --trust-ca          trust the unknown CA
+  -p, --password string   password that will be used to login
+      --trust-ca          set this flag to automatically trust the unknown CA
   -u, --user string       username that will be used to login
 ```
 

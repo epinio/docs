@@ -1,5 +1,5 @@
 ---
-title: "epinio version"
+title: ""
 ---
 ## epinio version
 

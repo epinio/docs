@@ -1,5 +1,5 @@
 ---
-title: "epinio app logs"
+title: ""
 ---
 ## epinio app logs
 
