@@ -1,5 +1,6 @@
 ---
 title: ""
+sidebar_label: "epinio namespace delete"
 ---
 ## epinio namespace delete
 

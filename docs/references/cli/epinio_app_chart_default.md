@@ -1,5 +1,6 @@
 ---
 title: ""
+sidebar_label: "epinio app chart default"
 ---
 ## epinio app chart default
 

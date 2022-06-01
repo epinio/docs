@@ -1,5 +1,6 @@
 ---
 title: ""
+sidebar_label: "epinio app show"
 ---
 ## epinio app show
 

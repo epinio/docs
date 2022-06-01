@@ -1,5 +1,6 @@
 ---
 title: ""
+sidebar_label: "epinio service show"
 ---
 ## epinio service show
 
