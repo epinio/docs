@@ -104,6 +104,7 @@ const sidebars = {
               type: 'category',
               label: 'epinio',
               items: [
+                'references/cli/epinio_login',
                 {
                   type: 'category',
                   label: 'epinio_app',

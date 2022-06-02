@@ -1,5 +1,6 @@
 ---
-title: "epinio namespace show"
+title: ""
+sidebar_label: "epinio namespace show"
 ---
 ## epinio namespace show
 

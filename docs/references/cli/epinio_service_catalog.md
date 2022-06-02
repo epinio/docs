@@ -1,5 +1,6 @@
 ---
-title: "epinio service catalog"
+title: ""
+sidebar_label: "epinio service catalog"
 ---
 ## epinio service catalog
 

@@ -1,5 +1,6 @@
 ---
-title: "epinio service create"
+title: ""
+sidebar_label: "epinio service create"
 ---
 ## epinio service create
 

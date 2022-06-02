@@ -1,5 +1,6 @@
 ---
-title: "epinio server"
+title: ""
+sidebar_label: "epinio server"
 ---
 ## epinio server
 

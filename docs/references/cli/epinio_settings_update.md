@@ -1,5 +1,6 @@
 ---
-title: "epinio settings update"
+title: ""
+sidebar_label: "epinio settings update"
 ---
 ## epinio settings update
 

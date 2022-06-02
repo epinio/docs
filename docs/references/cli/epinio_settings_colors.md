@@ -1,5 +1,6 @@
 ---
-title: "epinio settings colors"
+title: ""
+sidebar_label: "epinio settings colors"
 ---
 ## epinio settings colors
 

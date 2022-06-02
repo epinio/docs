@@ -1,5 +1,6 @@
 ---
-title: "epinio app delete"
+title: ""
+sidebar_label: "epinio app delete"
 ---
 ## epinio app delete
 

@@ -1,5 +1,6 @@
 ---
-title: "epinio app restage"
+title: ""
+sidebar_label: "epinio app restage"
 ---
 ## epinio app restage
 

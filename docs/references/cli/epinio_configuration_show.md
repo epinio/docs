@@ -1,5 +1,6 @@
 ---
-title: "epinio configuration show"
+title: ""
+sidebar_label: "epinio configuration show"
 ---
 ## epinio configuration show
 

@@ -1,5 +1,6 @@
 ---
-title: "epinio app create"
+title: ""
+sidebar_label: "epinio app create"
 ---
 ## epinio app create
 

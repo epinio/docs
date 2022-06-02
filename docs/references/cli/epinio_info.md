@@ -1,5 +1,6 @@
 ---
-title: "epinio info"
+title: ""
+sidebar_label: "epinio info"
 ---
 ## epinio info
 

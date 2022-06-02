@@ -1,5 +1,6 @@
 ---
-title: "epinio app env list"
+title: ""
+sidebar_label: "epinio app env list"
 ---
 ## epinio app env list
 

@@ -1,5 +1,6 @@
 ---
-title: "epinio configuration create"
+title: ""
+sidebar_label: "epinio configuration create"
 ---
 ## epinio configuration create
 

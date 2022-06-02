@@ -1,5 +1,6 @@
 ---
-title: "epinio namespace create"
+title: ""
+sidebar_label: "epinio namespace create"
 ---
 ## epinio namespace create
 

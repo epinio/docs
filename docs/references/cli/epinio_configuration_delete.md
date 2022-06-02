@@ -1,5 +1,6 @@
 ---
-title: "epinio configuration delete"
+title: ""
+sidebar_label: "epinio configuration delete"
 ---
 ## epinio configuration delete
 

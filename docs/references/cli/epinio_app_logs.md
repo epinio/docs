@@ -1,5 +1,6 @@
 ---
-title: "epinio app logs"
+title: ""
+sidebar_label: "epinio app logs"
 ---
 ## epinio app logs
 

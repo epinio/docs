@@ -1,5 +1,6 @@
 ---
-title: "epinio app chart list"
+title: ""
+sidebar_label: "epinio app chart list"
 ---
 ## epinio app chart list
 

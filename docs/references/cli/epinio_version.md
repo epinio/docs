@@ -1,5 +1,6 @@
 ---
-title: "epinio version"
+title: ""
+sidebar_label: "epinio version"
 ---
 ## epinio version
 

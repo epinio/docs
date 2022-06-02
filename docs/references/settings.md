@@ -38,17 +38,18 @@ Epinio's settings contains
 The namespace can be changed by running `epinio target` with the
 name of the desired namespace as its single argument.
 
-User name and password are used by the client to authenticate itself
-when talking to Epinio's API server. The `epinio settings update` command
-saves the initial information to the settings.
+Username and password are used by the client to authenticate itself
+when talking to Epinio's API server. The `epinio login [URL]` command asks
+for your username and password, checks the validity of the
+credentials, and saves the information to the settings.
 
-The installation uses a the wildcard domain `omg.howdoi.website` and the
+The installation uses the wildcard domain `omg.howdoi.website` and the
 `epinio-ca` issuer by default.
 
-`epinio settings update` saves the associated CA
-certificate to the settings so that future invocations of the
-client are able to verify the actual certificate when talking to
-Epinio's API server.
+The `epinio login [URL]` checks if the associated certificate is signed by an
+unknown CA and it asks you if you want to trust it and save it
+to the settings so that future invocations of the client are able 
+to verify the actual certificate when talking to Epinio's API server.
 
 ## Commands
 
@@ -67,17 +68,15 @@ explicitly targeting the settings. These are:
      field, due to its expected size. The command's output only notes
      if certificate data is present or not.
 
-  3. `epinio settings update`
+  3. `epinio login [URL]`
 
      Epinio allows users to switch between multiple installations (on
-     different clusters) by simply re-targeting the cluster to talk to
-     via changes to the environment variable `KUBECONFIG`.
+     different clusters) by simply using a different settings file.
 
-     When such is done the credentials, cert data, and urls stored in
+     When such is done the credentials, cert data, and URLs stored in
      the settings will not match the newly targeted cluster,
      except by coincidence.
 
-     To be actually able to talk to the newly targeted installation it
-     is necessary to run this command to refresh the stored
-     credentials, cert data, and urls with information retrieved from
-     the new cluster.
+     Logging in and pointing to the newly targeted installation will create 
+     new settings file storing credentials, cert data, and URLs with
+     information retrieved from the new cluster.

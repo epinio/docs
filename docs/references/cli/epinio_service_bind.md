@@ -1,5 +1,6 @@
 ---
-title: "epinio service bind"
+title: ""
+sidebar_label: "epinio service bind"
 ---
 ## epinio service bind
 

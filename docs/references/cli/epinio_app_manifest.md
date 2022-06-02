@@ -1,5 +1,6 @@
 ---
-title: "epinio app manifest"
+title: ""
+sidebar_label: "epinio app manifest"
 ---
 ## epinio app manifest
 

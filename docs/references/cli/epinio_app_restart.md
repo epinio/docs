@@ -1,5 +1,6 @@
 ---
-title: "epinio app restart"
+title: ""
+sidebar_label: "epinio app restart"
 ---
 ## epinio app restart
 

@@ -1,23 +1,26 @@
 ---
 title: ""
-sidebar_label: "epinio configuration"
+sidebar_label: "epinio login"
 ---
-## epinio configuration
+## epinio login
 
-Epinio configuration features
+Epinio login to the server
 
 ### Synopsis
 
-Handle configuration features with Epinio
+The login command will setup the settings file with the provided credentials for the specified Epinio cluster
 
 ```
-epinio configuration [flags]
+epinio login [URL] [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for configuration
+  -h, --help              help for login
+  -p, --password string   password that will be used to login
+      --trust-ca          set this flag to automatically trust the unknown CA
+  -u, --user string       username that will be used to login
 ```
 
 ### Options inherited from parent commands
@@ -35,11 +38,4 @@ epinio configuration [flags]
 ### SEE ALSO
 
 * [epinio](./epinio.md)	 - Epinio cli
-* [epinio configuration bind](./epinio_configuration_bind.md)	 - Bind a configuration to an application
-* [epinio configuration create](./epinio_configuration_create.md)	 - Create a configuration
-* [epinio configuration delete](./epinio_configuration_delete.md)	 - Delete a configuration
-* [epinio configuration list](./epinio_configuration_list.md)	 - Lists configurations
-* [epinio configuration show](./epinio_configuration_show.md)	 - Configuration information
-* [epinio configuration unbind](./epinio_configuration_unbind.md)	 - Unbind configuration from an application
-* [epinio configuration update](./epinio_configuration_update.md)	 - Update a configuration
 

@@ -1,5 +1,6 @@
 ---
-title: "epinio"
+title: ""
+sidebar_label: "epinio"
 ---
 ## epinio
 
@@ -28,6 +29,7 @@ epinio cli is the official command line interface for Epinio PaaS
 * [epinio completion](./epinio_completion.md)	 - Generate completion script for a shell
 * [epinio configuration](./epinio_configuration.md)	 - Epinio configuration features
 * [epinio info](./epinio_info.md)	 - Shows information about the Epinio environment
+* [epinio login](./epinio_login.md)	 - Epinio login to the server
 * [epinio namespace](./epinio_namespace.md)	 - Epinio-controlled namespaces
 * [epinio push](./epinio_push.md)	 - Push an application declared in the specified manifest
 * [epinio server](./epinio_server.md)	 - Starts the Epinio server.

@@ -1,5 +1,6 @@
 ---
-title: "epinio app exec"
+title: ""
+sidebar_label: "epinio app exec"
 ---
 ## epinio app exec
 

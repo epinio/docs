@@ -1,5 +1,6 @@
 ---
-title: "epinio configuration bind"
+title: ""
+sidebar_label: "epinio configuration bind"
 ---
 ## epinio configuration bind
 

@@ -1,5 +1,6 @@
 ---
-title: "epinio target"
+title: ""
+sidebar_label: "epinio target"
 ---
 ## epinio target
 

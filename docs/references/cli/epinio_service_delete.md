@@ -1,5 +1,6 @@
 ---
-title: "epinio service delete"
+title: ""
+sidebar_label: "epinio service delete"
 ---
 ## epinio service delete
 
