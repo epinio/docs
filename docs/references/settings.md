@@ -31,7 +31,7 @@ Epinio's settings contains
 
   - The name of the namespace currently targeted.
   - Epinio API user name
-  - Epinio API password
+  - Epinio API password (base64 encoded)
   - Epinio API urls (regular and websocket)
   - Epinio API certificate
 
