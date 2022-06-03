@@ -55,7 +55,7 @@ $ epinio settings update
 
 :::caution
 
-For RancherDesktop on Linux, in order to be able to open the port `443` and access the URL set in `global.domain` (i.e. 127.0.0.1.sslip.io), you need to add the port to the `unprivileged` list:
+For RancherDesktop on Linux, in order to be able to open ports from `443` (and above), in order to access the URL set in `global.domain` (i.e. 127.0.0.1.sslip.io), you need to set the start port of the `unprivileged` list to a lower number:
 
 ```
 # [Optional] Check the current unprivileged port start
