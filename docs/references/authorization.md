@@ -14,7 +14,9 @@ After the installation two users are available: `admin` and `epinio`, both with 
 
 ## Switch user
 
-To switch users you need to set the `user` and `pass` keys of the Epinio settings file, located at `~/.config/epinio/settings.yaml`
+To switch users you need to set the `user` and `pass` keys of the Epinio settings file, located at `~/.config/epinio/settings.yaml`.
+The password has to be base64 encoded. Below, `cGFzc3dvcmQ=` is the base64 encoded version of `password`.
+
 
 ```yaml
 api: https://epinio.mydomain.com
@@ -29,7 +31,7 @@ certs: |
   -----END CERTIFICATE-----
 colors: true
 namespace: workspace
-pass: password
+pass: cGFzc3dvcmQ=
 user: epinio
 wss: wss://epinio.mydomain.com
 ```
