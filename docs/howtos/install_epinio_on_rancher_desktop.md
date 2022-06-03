@@ -53,5 +53,24 @@ $ helm install epinio -n epinio --create-namespace epinio/epinio --set global.do
 $ epinio settings update
 ```
 
-> NOTE: there is currently a [blocking issue](https://github.com/rancher-sandbox/rancher-desktop/issues/576) on Linux which prevent Epinio to push application!
-> However, you will find a workaround at the end of the issue.
+:::caution
+
+For RancherDesktop on Linux, in order to be able to open ports from `443` (and above), in order to access the URL set in `global.domain` (i.e. 127.0.0.1.sslip.io), you need to set the start port of the `unprivileged` list to a lower number:
+
+```
+# [Optional] Check the current unprivileged port start
+sysctl -n net.ipv4.ip_unprivileged_port_start
+
+# Temporary modification of the unprivileged port start
+sudo sysctl -w net.ipv4.ip_unprivileged_port_start=443
+
+# Permanent modification of the unprivileged port start
+sudo sh -c 'echo "net.ipv4.ip_unprivileged_port_start=443" >> /etc/sysctl.d/50-unprivileged-ports.conf'
+
+# [Optional] Check the current unprivileged port start
+sysctl -n net.ipv4.ip_unprivileged_port_start
+```
+
+You can find more information in this [issue](https://github.com/rancher-sandbox/rancher-desktop/issues/576).
+
+:::
