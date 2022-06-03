@@ -1,23 +1,23 @@
 ---
 title: ""
-sidebar_label: "epinio settings update"
+sidebar_label: "epinio settings update-ca"
 ---
-## epinio settings update
+## epinio settings update-ca
 
-Update the api location & stored credentials
+Update the api location and CA certificate
 
 ### Synopsis
 
-Update the api location and stored credentials from the current cluster
+Update the api location and CA certificate from the current cluster
 
 ```
-epinio settings update [flags]
+epinio settings update-ca [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help               help for update
+  -h, --help               help for update-ca
   -n, --namespace string   (NAMESPACE) The namespace to use (default "epinio")
 ```
 

@@ -7,7 +7,7 @@ title: ""
 
 Epinio secures access to its API with TLS and basic authentication.
 
-Use the `epinio settings update` command after installation to extract and save the necessary credentials
+Use the `epinio login [URL]` command after installation to save the necessary credentials
 (user, password) and certificates. The information is stored in Epinio's settings,
 for pickup by other Epinio commands.
 

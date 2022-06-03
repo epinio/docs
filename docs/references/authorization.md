@@ -17,6 +17,8 @@ After the installation two users are available: `admin` and `epinio`, both with 
 To switch users you need to set the `user` and `pass` keys of the Epinio settings file, located at `~/.config/epinio/settings.yaml`.
 The password has to be base64 encoded. Below, `cGFzc3dvcmQ=` is the base64 encoded version of `password`.
 
+You can also login again with the `epinio login [URL]` command.
+
 
 ```yaml
 api: https://epinio.mydomain.com
@@ -55,7 +57,8 @@ metadata:
   namespace: epinio
 stringData:
   username: myuser
-  password: mypassword
+  # password is hashed with the Bcrypt algorithm
+  password: "$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS" # value is 'password'
 ```
 
 To list the available users you can get the secrets from your cluster with `kubectl`, filtering them with the proper labels:
@@ -92,7 +95,7 @@ metadata:
   namespace: epinio
 stringData:
   username: myuser
-  password: mypassword
+  password: "$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS"
 EOF
 ```
 
@@ -114,7 +117,7 @@ metadata:
   namespace: epinio
 stringData:
   username: myuser
-  password: mypassword
+  password: "$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS"
   namespaces: |
     workspace
     workspace2

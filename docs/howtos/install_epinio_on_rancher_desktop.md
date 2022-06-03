@@ -50,7 +50,7 @@ $ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/downloa
 $ helm repo add epinio https://epinio.github.io/helm-charts
 $ helm install epinio -n epinio --create-namespace epinio/epinio --set global.domain=127.0.0.1.sslip.io
 
-$ epinio settings update
+$ epinio login [URL]
 ```
 
 > NOTE: there is currently a [blocking issue](https://github.com/rancher-sandbox/rancher-desktop/issues/576) on Linux which prevent Epinio to push application!

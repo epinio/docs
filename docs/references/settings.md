@@ -51,6 +51,8 @@ unknown CA and it asks you if you want to trust it and save it
 to the settings so that future invocations of the client are able 
 to verify the actual certificate when talking to Epinio's API server.
 
+The `epinio settings update-ca` updates the API url and the certificate.
+
 ## Commands
 
 The Epinio command line client currently provides 3 commands
