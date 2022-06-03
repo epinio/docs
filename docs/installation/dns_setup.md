@@ -5,7 +5,7 @@ title: ""
 
 #  DNS setup
 
-During [Epinio installation](installation.md), a "system" domain must be specified specified (`global.domain` helm value).
+During [Epinio installation](install_epinio.md), a "system" domain must be specified specified (`global.domain` helm value).
 This is used to access Epinio API server and to create default routes for the deployed applications. This page describes
 how to prepare the domain.
 

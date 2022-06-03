@@ -10,16 +10,13 @@
       "type": "category",
       "label": "Installation",
       "items": [
+        "installation/install_epinio",
         "installation/install_epinio_cli",
         "installation/dns_setup",
         "installation/magicDNS_setup",
         "installation/uninstall_epinio"
       ],
-      "collapsed": false,
-      "link": {
-        "type": "doc",
-        "id": "installation/installation"
-      }
+      "collapsed": false
     },
     {
       "type": "category",

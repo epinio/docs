@@ -7,7 +7,7 @@ title: ""
 
 If you have not already installed `epinio` follow these links
 
-- [Installation Section](../installation/installation.md)
+- [Installation Section](../installation/install_epinio.md)
 
 In this tutorial, you will learn how to create a namespace and how to push, list and delete an application in it.
 

@@ -56,7 +56,7 @@ If you do not have an existing cluster, follow the [quickstart](https://cloud.go
 
 ## Install Epinio
 
-Follow the [Epinio installation process](../installation/installation.md).
+Follow the [Epinio installation process](../installation/install_epinio.md).
 
 ## Troubleshooting
 

@@ -33,7 +33,7 @@ Follow ["magic" DNS setup](../installation/magicDNS_setup) to install Epinio in 
 $ kubectl get svc -n kube-system traefik -o jsonpath="{.status.loadBalancer.ingress[0]}"
 ```
 
-Then, continue with the [Epinio installation process](../installation/installation.md).
+Then, continue with the [Epinio installation process](../installation/install_epinio.md).
 
 ### Troubleshooting
 

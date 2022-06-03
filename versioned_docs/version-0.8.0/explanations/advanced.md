@@ -37,7 +37,7 @@ wiring is handled by what is called, an Ingress controller.
 > NOTE: Most clusters will have an Ingress controller deployed by default. If that's not the case, [Traefik](https://doc.traefik.io/traefik/providers/kubernetes-ingress/) can be installed.
 > Other Ingress controllers should work too but Traefik is what is used in Epinio CI to test it.
 >
-> Read the installation documentation on how to install Traefik: [Install ingress controller](../installation/installation.md#ingress-controller)
+> Read the installation documentation on how to install Traefik: [Install ingress controller](../installation/install_epinio.md#ingress-controller)
 
 An Ingress resource will be created for the Epinio API server and for each application deployed by Epinio.
 
