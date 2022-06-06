@@ -37,5 +37,5 @@ epinio settings [flags]
 * [epinio](./epinio.md)	 - Epinio cli
 * [epinio settings colors](./epinio_settings_colors.md)	 - Manage colored output
 * [epinio settings show](./epinio_settings_show.md)	 - Show the current settings
-* [epinio settings update](./epinio_settings_update.md)	 - Update the api location & stored credentials
+* [epinio settings update-ca](./epinio_settings_update-ca.md)	 - Update the api location and CA certificate
 

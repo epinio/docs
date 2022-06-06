@@ -8,7 +8,7 @@ title: ""
 | *component* | **API** | **CLI**   |  |
 | *needs*   |   *(kubeconfig)*     | *kubeconfig*    | *settings file* |
 |           |        |               |  |
-| *commands*  | server | settings update | info |
+| *commands*  | server | settings update-ca | info |
 |           |        |                | namespace |
 |           |        |                | configuration |
 |           |        |                | app |

@@ -168,7 +168,7 @@ const sidebars = {
                   items: [
                     'references/cli/epinio_settings_colors',
                     'references/cli/epinio_settings_show',
-                    'references/cli/epinio_settings_update',
+                    'references/cli/epinio_settings_update-ca',
                   ],
                   link: {
                     type: 'doc',

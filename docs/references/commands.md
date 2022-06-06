@@ -6,6 +6,8 @@ title: ""
 
   - [epinio](cli/epinio.md)
 
+    - [epinio login](cli/epinio_login.md)
+
     - [epinio app](cli/epinio_app.md)
 
       - [epinio app create](cli/epinio_app_create.md)
@@ -27,7 +29,7 @@ title: ""
 
       - [epinio settings colors](cli/epinio_settings_colors.md)
       - [epinio settings show](cli/epinio_settings_show.md)
-      - [epinio settings update](cli/epinio_settings_update.md)
+      - [epinio settings update-ca](cli/epinio_settings_update-ca.md)
 
     - [epinio info](cli/epinio_info.md)
     - [epinio namespace](cli/epinio_namespace.md)
