@@ -31,4 +31,4 @@ Beside advanced installation options, there are two ways of installing Epinio:
 - For test and production environments. You will define a system domain, e.g. **test.example.com**.
 
 
-Then, continue with the [Epinio installation process](../installation/installation.md).
+Then, continue with the [Epinio installation process](../installation/install_epinio.md).

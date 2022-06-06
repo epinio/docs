@@ -56,4 +56,4 @@ Now you can install Epinio on the Cluster.
 ### Install Epinio on the Cluster
 
 With Minikube, you'll need to deploy Traefik and cert-manager.
-All is explained in the [Epinio installation process](../installation/installation.md).
+All is explained in the [Epinio installation process](../installation/install_epinio.md).

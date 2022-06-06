@@ -40,7 +40,7 @@ The Epinio installation is pretty much identical on Linux, MacOS and Windows:
 
 2. Install the [Epinio CLI](../installation/install_epinio_cli.md).
 
-3. Follow the [Epinio installation process](../installation/installation.md). Copied here:
+3. Follow the [Epinio installation process](../installation/install_epinio.md). Copied here:
 
 ```
 $ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.yaml  

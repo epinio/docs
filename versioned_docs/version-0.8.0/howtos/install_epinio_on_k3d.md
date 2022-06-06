@@ -40,7 +40,7 @@ k3d-epinio-server-0   Ready    control-plane,master   38s   v1.22.6+k3s1
 
 Follow ["magic" DNS setup](../installation/magicDNS_setup.md) to define the domain name you will use for Epinio.
 
-Then, continue with the [Epinio installation process](../installation/installation.md).
+Then, continue with the [Epinio installation process](../installation/install_epinio.md).
 
 ### Troubleshooting
 
