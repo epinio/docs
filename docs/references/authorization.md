@@ -9,8 +9,8 @@ Since version **0.8.0** Epinio is shipped with an authorization layer recognizin
 A user with the admin role will have access to every resource, while a standard user will have access only to the resources created on its namespaces.
 When a user creates a namespace, it will have automatically permission for it.
 
-After the installation two users are available: `admin` and `epinio`, both with the password `password`.
-
+By default, after the installation two users are available: `admin` and `epinio`, both with the password `password`. The operator can control the creation of those users through the `api.users` key in [values.yaml](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml).
+In a production setup, the default `api.users` value needs to be overridden.
 
 ## Switch user
 
