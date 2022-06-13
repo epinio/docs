@@ -1,5 +1,6 @@
 ---
 title: ""
+sidebar_label: "Image Storage"
 ---
 
 # Customization point: Image Storage
