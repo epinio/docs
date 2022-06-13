@@ -106,3 +106,11 @@
   - [Configurations](references/configurations.md)
   - [Authorization](references/authorization.md)
   - [API](references/api.md)
+  - [Customization Points](references/customization.md)
+
+      - [Load Balancers](references/customization/lb.md)
+      - [Source Code Storage](references/customization/sources.md)
+      - [Image Storage](references/customization/images.md)
+      - [Buildpacks](references/customization/staging.md)
+      - [Application Charts](references/customization/appcharts.md)
+      - [Service Catalog](references/customization/catalog.md)

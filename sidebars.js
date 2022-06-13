@@ -228,7 +228,23 @@ const sidebars = {
         'references/services',
         'references/configurations',
         'references/authorization',
-        'references/api'
+        'references/api',
+	{
+          type: 'category',
+          label: 'Customization points',
+          items: [
+            'references/customization/lb',
+            'references/customization/sources',
+            'references/customization/images',
+            'references/customization/staging',
+            'references/customization/appcharts',
+            'references/customization/catalog',
+          ],
+          link: {
+            type: 'doc',
+            id: 'references/customization'
+          }
+	}
       ],
       link: {
         type: 'doc',
