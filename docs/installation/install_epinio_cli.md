@@ -66,6 +66,6 @@ Run e.g. `epinio version` to test the successful installation.
 
 ```bash
 > epinio version
-Epinio Version: v0.8.0
+Epinio Version: v0.9.0
 Go Version: go1.18
 ```
