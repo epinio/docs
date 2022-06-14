@@ -82,7 +82,7 @@ pullrequests:
       - epinio-version
       - docusaurus
     spec:
-      automerge: true
+      automerge: false
       mergemethod: squash
       labels:
         - chore
