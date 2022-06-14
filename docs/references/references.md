@@ -13,3 +13,4 @@ For example all CLI commands and their arguments.
 - [Configurations](./configurations.md)
 - [Authorization](./authorization.md)
 - [API](./api.md)
+- [Customization Points](./customization.md)
