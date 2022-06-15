@@ -1,5 +1,6 @@
 ---
 title: ""
+sidebar_label: "References"
 ---
 
 # Reference documentation

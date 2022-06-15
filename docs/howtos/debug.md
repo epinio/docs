@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Debug application"
+sidebar_position: 2
 title: ""
 ---
 

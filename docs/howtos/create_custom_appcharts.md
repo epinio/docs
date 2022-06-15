@@ -1,5 +1,6 @@
 ---
 sidebar_label: "How To create custom application Helm charts"
+sidebar_position: 10
 title: ""
 ---
 

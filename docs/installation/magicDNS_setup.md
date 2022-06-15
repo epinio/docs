@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Magic DNS setup"
+sidebar_position: 4
 title: ""
 ---
 

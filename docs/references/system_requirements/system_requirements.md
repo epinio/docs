@@ -1,5 +1,5 @@
 ---
-sidebar_label: "Supported Applications"
+sidebar_label: "System Requirements"
 title: ""
 ---
 
