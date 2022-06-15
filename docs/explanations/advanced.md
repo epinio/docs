@@ -89,14 +89,14 @@ Warning: this doesn't mean things will still work if you re-generate a secret ma
 
 Minio is a storage solution that implements the same API as [Amazon S3](https://aws.amazon.com/s3/).
 
-When the user pushes an application using a source code directory (with the [`epinio push`](../references/cli/epinio_push.md) command), the first step taken by the cli is to put the source code into a tarball and upload that to the Epinio API server. The server copies that to the configured S3 storage to be used later during the staging of the application.
+When the user pushes an application using a source code directory (with the [`epinio push`](../references/commands/cli/epinio_push.md) command), the first step taken by the cli is to put the source code into a tarball and upload that to the Epinio API server. The server copies that to the configured S3 storage to be used later during the staging of the application.
 
 When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install Minio on the cluster ([See here how](../howtos/setup_external_s3.md)).
 
 ### Container Registry
 
 The result of Epinio's application staging is a container image. This image is used to create a Kubernetes deployment to run the application code.
-The staging Job requires that image to be written to some container registry (See also [Detailed push process](../explanations/detailed-push-process.md)). 
+The staging Job requires that image to be written to some container registry (See also [Detailed push process](detailed-push-process.md)). 
 
 By default the Epinio installation deploys a container registry inside the Kubernetes cluster to make the process easy and fast.
 
@@ -132,7 +132,7 @@ copying from that storage to a PersistentVolumeClaim to be used in the job for s
 i.e. compilation and creation of the docker image to be used by the underlying kubernetes cluster.
 
 The process is a bit different when using the Epinio client's "git mode". In
-this mode [`epinio push`](../references/cli/epinio_push.md) does not take a local directory of sources, but the
+this mode [`epinio push`](../references/commands/cli/epinio_push.md) does not take a local directory of sources, but the
 location of a git repository holding the sources, and the id of the revision to
 use. The client then asks the Epinio server to pull those sources and store them to the
 S3 storage. The rest of the process is the same.

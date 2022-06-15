@@ -30,7 +30,7 @@ Manage epinio application
 
 ### SEE ALSO
 
-* [epinio](./epinio.md)	 - Epinio cli
+* [epinio](../epinio.md)	 - Epinio cli
 * [epinio app chart](./epinio_app_chart.md)	 - Epinio application chart management
 * [epinio app create](./epinio_app_create.md)	 - Create just the app, without creating a workload
 * [epinio app delete](./epinio_app_delete.md)	 - Deletes an application
@@ -41,7 +41,7 @@ Manage epinio application
 * [epinio app logs](./epinio_app_logs.md)	 - Streams the logs of the application
 * [epinio app manifest](./epinio_app_manifest.md)	 - Save state of the named application as a manifest
 * [epinio app port-forward](./epinio_app_port-forward.md)	 - forward one or more local ports to a pod
-* [epinio app push](./epinio_push.md)	 - Push an application declared in the specified manifest
+* [epinio app push](../epinio_push.md)	 - Push an application declared in the specified manifest
 * [epinio app restage](./epinio_app_restage.md)	 - Restage the application
 * [epinio app restart](./epinio_app_restart.md)	 - Restart the application
 * [epinio app show](./epinio_app_show.md)	 - Describe the named application

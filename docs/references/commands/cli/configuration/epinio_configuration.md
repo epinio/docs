@@ -34,7 +34,7 @@ epinio configuration [flags]
 
 ### SEE ALSO
 
-* [epinio](./epinio.md)	 - Epinio cli
+* [epinio](../epinio.md)	 - Epinio cli
 * [epinio configuration bind](./epinio_configuration_bind.md)	 - Bind a configuration to an application
 * [epinio configuration create](./epinio_configuration_create.md)	 - Create a configuration
 * [epinio configuration delete](./epinio_configuration_delete.md)	 - Delete a configuration
