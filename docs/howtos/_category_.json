@@ -1,8 +1,5 @@
 {
+  "label": "HowTos",
   "position": 6,
-  "collapsed": true,
-  "link": {
-    "type": "doc",
-    "id": "howtos"
-  }
+  "collapsed": true
 }

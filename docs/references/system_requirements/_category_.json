@@ -1,8 +1,5 @@
 {
+  "label": "System Requirements",
   "position": 1,
-  "collapsed": true,
-  "link": {
-    "type": "doc",
-    "id": "system_requirements"
-  }
+  "collapsed": true
 }

@@ -1,8 +1,5 @@
 {
+  "label": "Explanations",
   "position": 4,
-  "collapsed": false,
-  "link": {
-    "type": "doc",
-    "id": "explanations"
-  }
+  "collapsed": false
 }

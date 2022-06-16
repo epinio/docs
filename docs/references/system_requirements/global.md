@@ -1,5 +1,5 @@
 ---
-sidebar_label: "System Requirements"
+sidebar_label: "Global System Requirements"
 title: ""
 ---
 

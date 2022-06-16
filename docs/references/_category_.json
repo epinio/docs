@@ -1,9 +1,5 @@
 {
-  "position": 7,
   "label": "Reference documentation",
-  "collapsed": true,
-  "link": {
-    "type": "doc",
-    "id": "references"
-  }
+  "position": 7,
+  "collapsed": true
 }

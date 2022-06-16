@@ -1,8 +1,5 @@
 {
+  "label": "Customization Points",
   "position": 11,
-  "collapsed": true,
-  "link": {
-    "type": "doc",
-    "id": "customization"
-  }
+  "collapsed": true
 }

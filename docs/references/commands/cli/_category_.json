@@ -1,8 +1,5 @@
 {
+  "label": "epinio",
   "position": 1,
-  "collapsed": true,
-  "link": {
-    "type": "doc",
-    "id": "epinio"
-  }
+  "collapsed": true
 }

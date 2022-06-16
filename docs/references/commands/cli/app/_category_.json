@@ -1,7 +1,4 @@
 {
-  "collapsed": true,
-  "link": {
-    "type": "doc",
-    "id": "epinio_app"
-  }
+  "label": "app",
+  "collapsed": true
 }

@@ -1,8 +1,5 @@
 {
+  "label": "Commands reference",
   "position": 3,
-  "collapsed": true,
-  "link": {
-    "type": "doc",
-    "id": "commands"
-  }
+  "collapsed": true
 }
