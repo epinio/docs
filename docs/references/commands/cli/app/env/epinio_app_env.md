@@ -1,19 +1,19 @@
 ---
 title: ""
-sidebar_label: "epinio app chart"
+sidebar_label: "epinio app env"
 ---
-## epinio app chart
+## epinio app env
 
-Epinio application chart management
+Epinio application configuration
 
 ### Synopsis
 
-Manage epinio application charts
+Manage epinio application environment variables
 
 ### Options
 
 ```
-  -h, --help   help for chart
+  -h, --help   help for env
 ```
 
 ### Options inherited from parent commands
@@ -30,8 +30,9 @@ Manage epinio application charts
 
 ### SEE ALSO
 
-* [epinio app](./epinio_app.md)	 - Epinio application features
-* [epinio app chart default](./epinio_app_chart_default.md)	 - Set or show app chart default
-* [epinio app chart list](./epinio_app_chart_list.md)	 - List application charts
-* [epinio app chart show](./epinio_app_chart_show.md)	 - Describe application chart
+* [epinio app](../epinio_app.md)	 - Epinio application features
+* [epinio app env list](./epinio_app_env_list.md)	 - Lists application environment
+* [epinio app env set](./epinio_app_env_set.md)	 - Extend application environment
+* [epinio app env show](./epinio_app_env_show.md)	 - Describe application's environment variable
+* [epinio app env unset](./epinio_app_env_unset.md)	 - Shrink application environment
 
