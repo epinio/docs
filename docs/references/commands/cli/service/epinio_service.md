@@ -30,7 +30,7 @@ Manage the epinio services
 
 ### SEE ALSO
 
-* [epinio](./epinio.md)	 - Epinio cli
+* [epinio](../epinio.md)	 - Epinio cli
 * [epinio service bind](./epinio_service_bind.md)	 - Bind a service SERVICENAME to an Epinio app APPNAME
 * [epinio service catalog](./epinio_service_catalog.md)	 - Lists all available Epinio catalog services, or show the details of the specified one
 * [epinio service create](./epinio_service_create.md)	 - Create a service SERVICENAME of an Epinio catalog service CATALOGSERVICENAME

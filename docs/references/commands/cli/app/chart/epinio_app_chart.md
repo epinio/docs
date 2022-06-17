@@ -30,7 +30,7 @@ Manage epinio application charts
 
 ### SEE ALSO
 
-* [epinio app](./epinio_app.md)	 - Epinio application features
+* [epinio app](../epinio_app.md)	 - Epinio application features
 * [epinio app chart default](./epinio_app_chart_default.md)	 - Set or show app chart default
 * [epinio app chart list](./epinio_app_chart_list.md)	 - List application charts
 * [epinio app chart show](./epinio_app_chart_show.md)	 - Describe application chart

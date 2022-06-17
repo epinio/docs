@@ -1,19 +1,23 @@
 ---
 title: ""
-sidebar_label: "epinio app env"
+sidebar_label: "epinio namespace"
 ---
-## epinio app env
+## epinio namespace
 
-Epinio application configuration
+Epinio-controlled namespaces
 
 ### Synopsis
 
-Manage epinio application environment variables
+Manage epinio-controlled namespaces
+
+```
+epinio namespace [flags]
+```
 
 ### Options
 
 ```
-  -h, --help   help for env
+  -h, --help   help for namespace
 ```
 
 ### Options inherited from parent commands
@@ -30,9 +34,9 @@ Manage epinio application environment variables
 
 ### SEE ALSO
 
-* [epinio app](./epinio_app.md)	 - Epinio application features
-* [epinio app env list](./epinio_app_env_list.md)	 - Lists application environment
-* [epinio app env set](./epinio_app_env_set.md)	 - Extend application environment
-* [epinio app env show](./epinio_app_env_show.md)	 - Describe application's environment variable
-* [epinio app env unset](./epinio_app_env_unset.md)	 - Shrink application environment
+* [epinio](../epinio.md)	 - Epinio cli
+* [epinio namespace create](./epinio_namespace_create.md)	 - Creates an epinio-controlled namespace
+* [epinio namespace delete](./epinio_namespace_delete.md)	 - Deletes an epinio-controlled namespace
+* [epinio namespace list](./epinio_namespace_list.md)	 - Lists all epinio-controlled namespaces
+* [epinio namespace show](./epinio_namespace_show.md)	 - Shows the details of an epinio-controlled namespace
 

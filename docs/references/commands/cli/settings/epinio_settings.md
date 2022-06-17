@@ -1,23 +1,23 @@
 ---
 title: ""
-sidebar_label: "epinio namespace"
+sidebar_label: "epinio settings"
 ---
-## epinio namespace
+## epinio settings
 
-Epinio-controlled namespaces
+Epinio settings management
 
 ### Synopsis
 
-Manage epinio-controlled namespaces
+Manage the epinio cli settings
 
 ```
-epinio namespace [flags]
+epinio settings [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for namespace
+  -h, --help   help for settings
 ```
 
 ### Options inherited from parent commands
@@ -34,9 +34,8 @@ epinio namespace [flags]
 
 ### SEE ALSO
 
-* [epinio](./epinio.md)	 - Epinio cli
-* [epinio namespace create](./epinio_namespace_create.md)	 - Creates an epinio-controlled namespace
-* [epinio namespace delete](./epinio_namespace_delete.md)	 - Deletes an epinio-controlled namespace
-* [epinio namespace list](./epinio_namespace_list.md)	 - Lists all epinio-controlled namespaces
-* [epinio namespace show](./epinio_namespace_show.md)	 - Shows the details of an epinio-controlled namespace
+* [epinio](../epinio.md)	 - Epinio cli
+* [epinio settings colors](./epinio_settings_colors.md)	 - Manage colored output
+* [epinio settings show](./epinio_settings_show.md)	 - Show the current settings
+* [epinio settings update-ca](./epinio_settings_update-ca.md)	 - Update the api location and CA certificate
 

@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Install Epinio"
+sidebar_position: 1
 title: ""
 ---
 
@@ -14,7 +15,7 @@ You can disable the installation of `Kubed`, `MinIO` and the `container registry
 
 ## Prerequisites
 
-See [system requirements](../references/system_requirements.md) for a detailed list of external components your
+See [system requirements](../references/system_requirements/global.md) for a detailed list of external components your
 Kubernetes cluster needs to have before you install Epinio.
 
 > **IMPORTANT:** Some of the namespaces of the components are hardcoded in the Epinio

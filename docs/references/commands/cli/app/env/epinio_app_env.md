@@ -1,23 +1,19 @@
 ---
 title: ""
-sidebar_label: "epinio settings"
+sidebar_label: "epinio app env"
 ---
-## epinio settings
+## epinio app env
 
-Epinio settings management
+Epinio application configuration
 
 ### Synopsis
 
-Manage the epinio cli settings
-
-```
-epinio settings [flags]
-```
+Manage epinio application environment variables
 
 ### Options
 
 ```
-  -h, --help   help for settings
+  -h, --help   help for env
 ```
 
 ### Options inherited from parent commands
@@ -34,8 +30,9 @@ epinio settings [flags]
 
 ### SEE ALSO
 
-* [epinio](./epinio.md)	 - Epinio cli
-* [epinio settings colors](./epinio_settings_colors.md)	 - Manage colored output
-* [epinio settings show](./epinio_settings_show.md)	 - Show the current settings
-* [epinio settings update-ca](./epinio_settings_update-ca.md)	 - Update the api location and CA certificate
+* [epinio app](../epinio_app.md)	 - Epinio application features
+* [epinio app env list](./epinio_app_env_list.md)	 - Lists application environment
+* [epinio app env set](./epinio_app_env_set.md)	 - Extend application environment
+* [epinio app env show](./epinio_app_env_show.md)	 - Describe application's environment variable
+* [epinio app env unset](./epinio_app_env_unset.md)	 - Shrink application environment
 

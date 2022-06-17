@@ -43,11 +43,11 @@ application itself.
 
 ## Management
 
-Configurations in Epinio are managed by the [epinio configuration](cli/epinio_configuration.md)
+Configurations in Epinio are managed by the [epinio configuration](./commands/cli/configuration/epinio_configuration.md)
 command hierarchy.
 
 The connections between configurations and applications specifically are managed by the
-[bind](cli/epinio_configuration_bind.md) and [unbind](cli/epinio_configuration_unbind.md) commands.
+[bind](./commands/cli/configuration/epinio_configuration_bind.md) and [unbind](./commands/cli/configuration/epinio_configuration_unbind.md) commands.
 
 ## Application Interface
 

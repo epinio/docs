@@ -1,5 +1,6 @@
 ---
 sidebar_label: "DNS setup"
+sidebar_position: 3
 title: ""
 ---
 
