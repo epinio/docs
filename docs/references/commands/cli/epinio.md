@@ -1,6 +1,6 @@
 ---
 title: ""
-sidebar_label: "epinio_cli"
+sidebar_label: "epinio"
 ---
 ## epinio
 
