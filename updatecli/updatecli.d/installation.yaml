@@ -21,6 +21,13 @@ sources:
       repository: epinio
       token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
       username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+      versionfilter:
+        kind: semver
+        # We want to ignore pre-release version
+        # According the library documentation used by updatecli
+        # https://github.com/Masterminds/semver#working-with-prerelease-versions
+        # the following rule, should do the trick
+        pattern: ">0.1"
 
   epinioSubVersion:
     name: Get latest Epinio version
@@ -30,8 +37,14 @@ sources:
       repository: epinio
       token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
       username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+      versionfilter:
+        kind: semver
+        # We want to ignore pre-release version
+        # According the library documentation used by updatecli
+        # https://github.com/Masterminds/semver#working-with-prerelease-versions
+        # the following rule, should do the trick
+        pattern: ">0.1"
     transformers:
-        - trimprefix: "v"
         - findsubmatch:
             # Remove once if we decide to only keep major and minor version such as 0.7
             # pattern: '^(\d*).(\d*)'
@@ -48,7 +61,7 @@ targets:
     spec:
       file: docs/installation/install_epinio_cli.md
       matchpattern: 'https://github.com/epinio/epinio/releases/download/(.*)/'
-      replacepattern: 'https://github.com/epinio/epinio/releases/download/{{ source "epinio" }}/'
+      replacepattern: 'https://github.com/epinio/epinio/releases/download/v{{ source "epinio" }}/'
     scmid: default
     sourceid: epinio
 
@@ -59,7 +72,7 @@ targets:
     spec:
       file: docs/installation/install_epinio_cli.md
       matchpattern: 'Epinio Version: (.*)'
-      replacepattern: 'Epinio Version: {{ source "epinio" }}'
+      replacepattern: 'Epinio Version: v{{ source "epinio" }}'
     scmid: default
 
   # Required yarn to be installed
