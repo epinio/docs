@@ -4,22 +4,24 @@ sidebar_position: 19
 title: ""
 ---
 
-# Why Install A Metrics Server ?
+# What is the need for a Metrics Server ?
 
-If no metrics server is running on a cluster, the application "instances" (aka Pods) will
-report errors when trying to show metrics (RAM, CPU etc) via
+If no Metrics Server is running on a Kubernetes cluster, the application "instances" (aka
+Pods) will report errors when it will try to show metrics (RAM, CPU etc) with the command
 [epinio app show](../references/commands/cli/app/epinio_app_show.md)
 
-# Install A Metrics Server
+# Install a Metrics Server
 
 Please read and follow the
-[instructions](https://github.com/kubernetes-sigs/metrics-server) for installing a metrics
-server. They provide information about requirements, the various possible methods (plain
-yaml, helm chart, etc), and issues like configuration for high availability and security,
-etc.
+[instructions](https://github.com/kubernetes-sigs/metrics-server) for installing a Metrics
+Server. You will get the information about the requirements, the various installation
+methods (plain yaml, helm chart, etc), and guidance for additional configurations such as
+high availability and security.
 
-The most simple form of installation, execution of
+As an example, here is the command to install a Metrics Server:
 
 > kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 
-should be used only for simple environments.
+:::note
+This installation method should be used only for simple environments.
+:::
