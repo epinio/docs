@@ -2,6 +2,9 @@
 
 set -eux
 
+# Testing that we can run yarn command from the GitHub Runner
+yarn --help > /dev/null
+
 VERSION="$1"
 if [ -z "$VERSION" ]
 then
