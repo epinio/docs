@@ -1,6 +1,7 @@
 ---
 slug: /
 sidebar_label: "Introduction"
+sidebar_position: 1
 title: ""
 ---
 
@@ -56,8 +57,8 @@ to use Kubernetes as a [PaaS (Platform as a Service)](https://en.wikipedia.org/w
 If you want to try Epinio, we suggest you to have a look at
 our [quickstart](./tutorials/quickstart.md) tutorial to get started with Epinio.
 
-For a more detailed information, you can check the [Explanations](./explanations/explanations.md) section,
+For a more detailed information, you can check the **Explanations** section,
 where different topics such as "Principles" or "Security" are explained.
 
-Finally, if you want to test Epinio directly, our [HowTos](./howtos/howtos.md) section
+Finally, if you want to test Epinio directly, our **HowTos** section
 will show concrete examples on how to use Epinio for different use-cases.

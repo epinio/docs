@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Provision external IP address for local Kubernetes"
+sidebar_position: 3
 title: ""
 ---
 

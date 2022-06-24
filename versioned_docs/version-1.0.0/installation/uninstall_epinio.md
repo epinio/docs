@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Uninstall Epinio"
+sidebar_position: 5
 title: ""
 ---
 
