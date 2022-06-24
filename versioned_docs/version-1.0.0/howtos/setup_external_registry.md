@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Setup external container registry"
+sidebar_position: 6
 title: ""
 ---
 

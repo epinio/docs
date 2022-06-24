@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Push with gitjob"
+sidebar_position: 4
 title: ""
 ---
 
