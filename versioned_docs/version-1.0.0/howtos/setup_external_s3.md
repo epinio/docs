@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Setup external S3 storage"
+sidebar_position: 5
 title: ""
 ---
 

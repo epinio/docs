@@ -1,5 +1,6 @@
 ---
 sidebar_label: "How To use custom application Helm charts"
+sidebar_position: 11
 title: ""
 ---
 
@@ -39,9 +40,9 @@ creating, updating, or deploying an application.
 
 For detailed information on the `--app-chart` setting, see the following CLI commands pages:
 
-  - [epinio app create](../references/cli/epinio_app_create.md)
-  - [epinio app update](../references/cli/epinio_app_update.md)
-  - [epinio push](../references/cli/epinio_push.md)
+  - [epinio app create](../references/commands/cli/app/epinio_app_create.md)
+  - [epinio app update](../references/commands/cli/app/epinio_app_update.md)
+  - [epinio push](../references/commands/cli/epinio_push.md)
 
 
 :::caution

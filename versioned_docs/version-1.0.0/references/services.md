@@ -9,7 +9,7 @@ Most real world applications work together with other services to store data, lo
 The most common example is probably a database. There are at least 2 ways to connect an Epinio application to a Service.
 The first way is to provision the service manually and [create an Epinio Configuration](./configurations.md) to define the Service connection details available to the application.
 
-The second way lets Epinio provision the Service, and afterwards create a binding to your application with the `epinio service bind` command. For additional information, please refer to the [epinio service](cli/epinio_service.md) page.
+The second way lets Epinio provision the Service, and afterwards create a binding to your application with the `epinio service bind` command. For additional information, please refer to the [epinio service](commands/cli/service/epinio_service.md) page.
 
 ## How does it work?
 
