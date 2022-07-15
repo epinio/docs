@@ -19,7 +19,7 @@ As a single dev, you might be using a local Kubernetes cluster such as [Rancher 
 :::note
 
 This tutorial will not explain how to install a local Kubernetes cluster and assumes you know how to do it.
-However, depending on your choice, there's already some examples in **Epinio howtos** section which contains links to the respective clusters' installation docs.
+However, depending on your choice, there's already some examples in the **Epinio Howtos** section which contains links to the respective clusters' installation docs.
 
 :::
 
