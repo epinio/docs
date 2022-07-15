@@ -10,11 +10,10 @@ title: ""
 [x] Logs in as epinio user
 [x] Writes code
 [x] Pushes 
-[] Repeats while using logging, port-forwarding, and tracing to debug 
+[x] Repeats while using logging, port-forwarding, and tracing to debug 
 When happy, 
 [] Exports application chart and commits/pushes to git
 [] Exports container and pushes to registry
-[] Then, Fleet or other CD application takes and deploys using exported helm and container1
 -->
 
 ## Introduction
@@ -37,7 +36,7 @@ However, depending on your choice, there's already some examples in **Epinio how
 
 :::
 
-In this tutorial, we'll use [Rancher Desktop](../howtos/install_epinio_on_rancher_desktop.md) as our local Kubernetes cluster. However you should be able to follow the whole tutorial with the local Kubernetes cluster of your choice.
+In this tutorial, we'll use [Rancher Desktop](../howtos/install_epinio_on_rancher_desktop.md) as our local Kubernetes cluster. However you should be able to follow this tutorial with the local Kubernetes cluster of your choice.
 
 If not already done, you can install the [latest version](https://github.com/rancher-sandbox/rancher-desktop/releases) of Rancher Desktop for your operating system.
 
@@ -103,6 +102,8 @@ Now that the "operational" tasks are done, it's time to concentrate on the most 
 
 As [explained here](../explanations/detailed-push-process.md#7-stage), Epinio uses [Paketo buildpacks](https://paketo.io/) to create a container image for your application. This image is then used to create a container with your application, which will run on your local Kubernetes cluster.
 
+Epinio will also create a new `ingress route`, which will allow you to easily access your application once it's deployed.
+
 The whole process is handled by Epinio, which enables you to concentrate on your application rather than knowing how you'll be able to deploy it.
 
 Let's see first how to deploy a simple application:
@@ -154,6 +155,9 @@ You can access the logs by running the command:
 ```shell
 # Get the installation logs
 epinio app logs --staging mysimpleapp
+
+# Get the application logs
+epinio app logs --follow mysimpleapp
 ```
 
 ### View application logs
@@ -168,4 +172,48 @@ epinio app logs mysimpleapp
 
 # Display logs dynamically
 epinio app logs --follow mysimpleapp
+```
+
+### Create a new port-forward
+
+As described above, Epinio creates a new `ingress route` for your application. The route is bound by default to the port `443`.
+
+However, you might need to test parts of your application using a different port. For these specific cases, you can run the following command:
+
+```shell
+epinio app port-forward 8080:8080 mysimpleapp
+```
+
+:::tip
+
+You can specify only one port number. In that case, Epinio will open the port of both `local` and `remote` targets.
+
+For more information, you can see the [Port Fowarding page](../howtos/port_forwarding.md).
+
+:::
+
+### Scale your application
+
+Another common task with Cloud Native applications, is to add (and remove) several instances of your application. This feature, called scaling, can be achieved with Epinio with the following command:
+
+```shell
+epinio app update mysimpleapp --instances 3
+```
+
+After you scaled your application up or down, you can check the status with the command:
+
+```shell
+epinio app show mysimpleapp
+```
+
+## Uninstall your application
+
+Once your application is no more needed on your local Kubernetes cluster, and you want to free resources, you can uninstall it with Epinio as follow:
+
+```shell
+# Delete the application
+epinio app delete mysimpleapp
+
+# List all the applications, the application should not be shown
+epinio app list
 ```
