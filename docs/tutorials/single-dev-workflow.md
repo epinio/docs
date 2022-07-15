@@ -6,7 +6,7 @@ title: ""
 ## Introduction
 
 While the [quickstart](./quickstart.md) is great to get started, as a Developer, you might want to see end-to-end solutions and how Epinio can help you.
-That's exactly the aim of the "Epinio Journeys", where you'll be to follow, according to your needs, different use-cases.
+That's exactly the aim of the "Epinio Journeys", where you'll be able to follow different use-cases, according to your needs.
 
 In this particular tutorial, we focus on the single dev workflow and go through a full example from Epinio installation to your first app deployment.
 
