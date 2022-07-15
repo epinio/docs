@@ -3,19 +3,6 @@ sidebar_label: "Epinio Journey: Single Dev Workflow"
 title: ""
 ---
 
-<!--
-[x] Downloads and runs Rancher Desktop
-[x] Runs helm install of Epinio
-[x] Downloads CLI
-[x] Logs in as epinio user
-[x] Writes code
-[x] Pushes 
-[x] Repeats while using logging, port-forwarding, and tracing to debug 
-When happy, 
-[] Exports application chart and commits/pushes to git
-[] Exports container and pushes to registry
--->
-
 ## Introduction
 
 While the [quickstart](./quickstart.md) is great to get started, as a Developer, you might want to see end-to-end solutions and how Epinio can help you.
