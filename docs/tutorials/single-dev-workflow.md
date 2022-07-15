@@ -123,7 +123,7 @@ Routes:
 
 If you're working on many applications, it can be really useful to see when was the last time they were deployed and which URL you should use to check them.
 
-You can get the applications information with the following two commands:
+You can get the application's information with the following two commands:
 
 ```shell
 # List all deployed applications
