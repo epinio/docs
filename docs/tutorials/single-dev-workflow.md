@@ -149,7 +149,7 @@ epinio app logs --follow mysimpleapp
 
 ### View application logs
 
-Another type of logs that you can have access is the application logs. And specially with web applications, you might want to have realtime logs displaying so you spot bugs faster.
+Another type of logs that you can access is the application logs. And specially with web applications, you might want to have realtime logs displaying so you spot bugs faster.
 
 Epinio can display the logs both statically or dynamically as follow:
 
