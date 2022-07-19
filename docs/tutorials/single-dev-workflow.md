@@ -14,7 +14,7 @@ In this particular tutorial, we focus on the single dev workflow and go through 
 
 Before you can use Epinio, you need to have a Kubernetes cluster running.
 
-As a single dev, you might be using a local Kubernetes cluster such as [Rancher Desktop](https://rancherdesktop.io/), [Minikube](https://minikube.sigs.k8s.io/docs/) or [k3d](https://k3d.io/), just to name a few.
+As a solo developer, you might be using a local Kubernetes cluster such as [Rancher Desktop](https://rancherdesktop.io/), [Minikube](https://minikube.sigs.k8s.io/docs/) or [k3d](https://k3d.io/), just to name a few.
 
 :::note
 
