@@ -193,7 +193,7 @@ After you scaled your application up or down, you can check the status with the 
 epinio app show mysimpleapp
 ```
 
-## Uninstall your application
+## Remove your application
 
 Once your application is no more needed on your local Kubernetes cluster, and you want to free resources, you can uninstall it with Epinio as follow:
 
