@@ -149,7 +149,7 @@ epinio app show mysimpleapp
 
 ### View installation logs
 
-If your application couldn't be deployed, you might want to check your staging logs or, even better, save them into a file for a better screening with text editor.
+If your application couldn't be deployed, you might want to check your staging logs or, even better, save them into a file for a better screening with a text editor.
 
 You can access the installation logs by running the command:
 
