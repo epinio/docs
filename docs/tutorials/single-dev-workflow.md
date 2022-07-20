@@ -8,7 +8,13 @@ title: ""
 While the [quickstart](./quickstart.md) is great to get started, as a Developer, you might want to see end-to-end solutions and how Epinio can help you.
 That's exactly the aim of the "Epinio Journeys", where you'll be able to follow different use-cases, according to your needs.
 
-In this particular tutorial, we focus on the single dev workflow and go through a full example from Epinio installation to your first app deployment.
+In this particular tutorial, we focus on the workflow for a solo developer with an example from a bare Kubernetes deployment to your first app.
+
+:::note
+
+This tutorial covers primarily a *solo and local development* process. While it still can help developers in teams, future journeys will address it more specifically.
+
+:::
 
 ## Prerequisites
 
@@ -37,6 +43,8 @@ Two additional binaries need to be installed in your system:
 
 Depending on the local Kubernetes cluster you installed (i.e. Rancher Desktop), these two binaries might be already installed.
 
+These two binaries will be used for the [Installation](#installation) only. The development workflow will use the [Epinio CLI](#cli) alone.
+
 ## Installation
 
 Once you have your local Kubernetes cluster installed and running, you can [install Epinio](../installation/install_epinio.md).
@@ -46,7 +54,7 @@ Here are the steps for Rancher Desktop:
 ```shell
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.yaml
 
-# Wait for cert-manager to stabilize
+# Wait for cert-manager to stabilize. This should take approximately 30 seconds depending on your Internet connection.
 
 helm repo add epinio https://epinio.github.io/helm-charts
 
@@ -54,6 +62,12 @@ helm repo update
 
 helm install epinio -n epinio --create-namespace epinio/epinio --set global.domain=127.0.0.1.sslip.io
 ```
+
+:::tip
+
+You can find the password needed for the [login](#login) at the end of the installation output.
+
+:::
 
 ### CLI
 
@@ -87,7 +101,7 @@ Alternatively, you can also open the Epinio URL, <https://epinio.127.0.0.1.sslip
 
 Now that the "operational" tasks are done, it's time to concentrate on the most important task: use Epinio to deploy your application.
 
-As [explained here](../explanations/detailed-push-process.md#7-stage), Epinio uses [Paketo buildpacks](https://paketo.io/) to create a container image for your application. This image is then used to create a container with your application, which will run on your local Kubernetes cluster.
+Epinio uses [Paketo buildpacks](https://paketo.io/) to create a container image for your application. This image is then used to create a container with your application, which will run on your local Kubernetes cluster. You can find additional information about [the push process explained here](../explanations/detailed-push-process.md#7-stage).
 
 Epinio will also create a new `ingress route`, which will allow you to easily access your application once it's deployed.
 
@@ -137,14 +151,10 @@ epinio app show mysimpleapp
 
 If your application couldn't be deployed, you might want to check your staging logs or, even better, save them into a file for a better screening with text editor.
 
-You can access the logs by running the command:
+You can access the installation logs by running the command:
 
 ```shell
-# Get the installation logs
 epinio app logs --staging mysimpleapp
-
-# Get the application logs
-epinio app logs --follow mysimpleapp
 ```
 
 ### View application logs
