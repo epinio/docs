@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Install Wordpress with Epinio"
-sidebar_position: 20
+sidebar_position: 22
 title: ""
 ---
 
