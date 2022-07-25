@@ -30,7 +30,7 @@ secrets ahead of deploying the applications using them.
 
 ### Creating a routing secret
 
-The steps to create a routing secret suitable for epinio are:
+The steps to create a routing secret suitable for Epinio are:
 
   1. Create a regular `kubernetes.io/tls` Secret by some means, for some domain `D`. This
      can involve Cert manager, of course.
@@ -63,7 +63,7 @@ There are some mitigating factors however:
   1. Routing secrets may hold certificates for __wildcard domains__. The secret will be
      used whenever a requested application route matches the wildcard pattern.
 
-     This reduces the number of Secrets needed to be created.
+     This reduces the number of Secrets needing to be created.
 
   1. Distribution of routing secrets can be automated by using a component like Kubed.
      Kubed can automatically copy secrets between namespaces based on annotations.
@@ -80,7 +80,7 @@ There are some mitigating factors however:
 
        1. kubed will now distribute `RS` to all namespaces which have the label
           `app.kubernetes.io/component=epinio-namespace`. These are all the namespaces
-          under epinio's control.
+          under Epinio's control.
 
 	  For more a limited distribution it is possible to add custom labels to the
 	  desired namespaces and then add matching annotations on the relevant Secrets.
