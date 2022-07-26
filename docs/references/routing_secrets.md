@@ -24,7 +24,7 @@ over a longer one.
 ## Troubleshooting Question Sheet
 
   1. Is the Secret of type `kubernetes.io/tls` ?
-  1. Is the Secret marked with `epinio.io/routing` ?
+  1. Is the Secret labeled with `epinio.io/routing` ?
   1. Is the Secret in the application's namespace ?
   1. Does the application route match the domain covered by the Secret ?
   1. If the application chart is a custom chart, does it support routing secrets ?
