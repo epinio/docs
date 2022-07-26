@@ -156,3 +156,24 @@ $ epinio app chart show fluent
 
 If the new Helm chart is not correctly registered in Epinio, check that the
 `RELEASE_NAMESPACE` was properly set in `fluentd-appchart.yaml`.
+
+## Going further
+
+The standard app chart, as well as the chart created here use a kubernetes `Deployment` as
+the main resource describing the active application.
+
+Up to version 1 of Epinio this was the only kind of resource which was acceptable.
+
+After that it becomes possible to use other kinds of controllers, for example `StatefulSet`.
+
+However, even when changing controllers it is important to keep the `Pod` annotations and
+labels the same as for the standard chart, so that Epinio's server can still locate and
+use them properly.
+
+As examples:
+
+  1. `epinio.io/stage-id` provides the id of the staging Pod which created the application's image.
+
+  1. `epinio.io/app-container` provides the name of the application's main `Container`,
+     for use by `epinio exec`, for example. This label has to match the actual name of the
+     container in the pod spec, of course.
