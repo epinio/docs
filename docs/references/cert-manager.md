@@ -8,8 +8,8 @@ title: ""
 ## Purpose
 
 The [Cert Manager](https://cert-manager.io/) is a component watching for kubernetes
-Certificate resources and generating Secrets holding the requested certificate data.  It
-can be configured with a variety of issuers for fulfilling these requests.  One such
+Certificate resources and generating Secrets holding the requested certificate data. It
+can be configured with a variety of issuers for fulfilling these requests. One such
 issuer is [Let's Encrypt](https://letsencrypt.org/).
 
 Epinio uses it to generate the internal certificates used to secure the communication
