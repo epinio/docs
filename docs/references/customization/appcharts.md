@@ -85,7 +85,7 @@ Routes are maps holding four keys
 
 :::note
 
-The [Routing Secrets](routing_secrets.html) reference explains more about the `secrets` field.
+The [Routing Secrets](routing_secrets.md) reference explains more about the `secrets` field.
 
 :::
 
@@ -122,4 +122,4 @@ Read the contents of the standard application chart.
 
 # Related
 
-  - [Routing Secrets](routing_secrets.html)
+  - [Routing Secrets](routing_secrets.md)
