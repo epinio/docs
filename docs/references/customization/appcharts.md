@@ -58,7 +58,7 @@ knowledge of them, and will not use them.
 
 ## Configuration
 
-All configuration fields below are provied in the `epinio` hierarchy.
+All configuration fields below are provied in the `epinio` hierarchy:
 
 |Name			|Kind			|Meaning							|
 |---			|---			|---								|
@@ -74,7 +74,7 @@ All configuration fields below are provied in the `epinio` hierarchy.
 |`tlsIssuer`    	|string                 |The name of the cert issuer to use for route certs		|
 |`username`     	|string                 |The name of the user deploying the application			|
 
-Routes are maps holding four keys
+Routes are maps composed of four keys:
 
 |Name		|Kind	|Meaning								|
 |---		|---	|---									|
@@ -89,7 +89,7 @@ The [Routing Secrets](routing_secrets.md) reference explains more about the `sec
 
 :::
 
-Environment assigment are maps holding two keys
+Environment assigment are maps composed of two keys:
 
 |Name	|Kind	|Meaning			|
 |---	|---	|---				|
@@ -98,10 +98,14 @@ Environment assigment are maps holding two keys
 
 ## Pods
 
+Epinio adds the following annotations to the `Pods`:
+
 |Annotation			|Meaning							|
 |---				|---								|
 |`app.kubernetes.io/name`	|The application's name.					|
 |`epinio.io/start`		|The time of deployment, in nanoseconds, if provided by Epinio	|
+
+Epinio adds the following labels to the `Pods`:
 
 |Label				|Meaning							|
 |---				|---								|

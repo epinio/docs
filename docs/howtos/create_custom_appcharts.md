@@ -170,7 +170,7 @@ However, even when changing controllers, it is important to keep the `Pod` annot
 labels the same as for the standard chart. This allows Epinio's server to locate the required resources and
 use them properly.
 
-As examples:
+Here's a couple of examples:
 
   1. `epinio.io/stage-id` provides the id of the staging Pod which created the application's image.
 
