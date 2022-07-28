@@ -34,7 +34,7 @@ applications.
 
 :::tip
 
-Read the contents of the standard application chart.
+Read the [contents of the standard application chart](https://github.com/epinio/helm-charts/tree/main/chart/application).
 
 :::
 
@@ -120,7 +120,7 @@ Epinio adds the following labels to the `Pods`:
 
 :::tip
 
-Read the contents of the standard application chart.
+Read the [contents of the standard application chart](https://github.com/epinio/helm-charts/tree/main/chart/application).
 
 :::
 
