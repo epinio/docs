@@ -162,7 +162,7 @@ If the new Helm chart is not correctly registered in Epinio, check that the
 The standard app chart, as well as the chart created here use a kubernetes `Deployment` as
 the main resource describing the active application.
 
-Up to version 1 of Epinio this was the only kind of resource which was acceptable.
+Up to Epinio version 1.0, this was the only kind of resource supported.
 
 After that it becomes possible to use other kinds of controllers, for example `StatefulSet`.
 
