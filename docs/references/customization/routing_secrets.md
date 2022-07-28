@@ -28,3 +28,7 @@ over a longer one.
   1. Is the Secret in the application's namespace ?
   1. Does the application route match the domain covered by the Secret ?
   1. If the application chart is a custom chart, does it support routing secrets ?
+
+## Related
+
+  - [Application Charts](appcharts.md)
