@@ -175,5 +175,5 @@ As examples:
   1. `epinio.io/stage-id` provides the id of the staging Pod which created the application's image.
 
   1. `epinio.io/app-container` provides the name of the application's main `Container`,
-     for use by `epinio exec`, for example. This label has to match the actual name of the
-     container in the pod spec, of course.
+     which is used by `epinio exec`. This label has to match the actual name of the
+     container in the pod spec.
