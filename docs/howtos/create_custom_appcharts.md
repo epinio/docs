@@ -166,8 +166,8 @@ Up to Epinio version 1.0, this was the only kind of resource supported.
 
 Since Epinio version 1.0+, other kinds of controllers, for example `StatefulSet`, are supported.
 
-However, even when changing controllers it is important to keep the `Pod` annotations and
-labels the same as for the standard chart, so that Epinio's server can still locate and
+However, even when changing controllers, it is important to keep the `Pod` annotations and
+labels the same as for the standard chart. This allows Epinio's server to locate the required resources and
 use them properly.
 
 As examples:
