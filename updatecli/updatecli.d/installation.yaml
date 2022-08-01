@@ -84,6 +84,8 @@ targets:
     spec:
       # epinio source value is automatically added to the command as a parameter
       command: "./updatecli/scripts/docusaurus.sh"
+      environments:
+        - name: PATH
 
 pullrequests:
   default:
