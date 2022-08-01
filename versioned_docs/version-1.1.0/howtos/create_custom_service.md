@@ -63,8 +63,8 @@ metadata:
   name: myservice
   namespace: epinio
   annotations:
-    application.epinio.io/catalog-service-secret-types: Opaque,BasicAuth
+    application.epinio.io/catalog-service-secret-types: Opaque,BasicAuth,connection.crossplane.io/v1alpha1
     ...
 ```
 
-With this definition Epinio will get all the Opaque and BasicAuth secrets generated during the creation of this Service.  
+With this definition, Epinio will get all the `Opaque`, `BasicAuth`, and `connection.crossplane.io/v1alpha1` secrets generated during the creation of this Service (any type of secret can be listed).  
