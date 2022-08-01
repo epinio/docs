@@ -49,3 +49,22 @@ bitnami rabbitmq helm chart:
 ```
 helm show chart https://charts.bitnami.com/bitnami/rabbitmq-9.0.5.tgz | yq .icon
 ```
+
+## Multiple Secret types
+
+By default Epinio will look for Opaque secret types to label them as Configurations.  
+Sometimes this is not enough, so you can define different types with the `application.epinio.io/catalog-service-secret-types` annotation:
+
+
+```yaml
+apiVersion: application.epinio.io/v1
+kind: Service
+metadata:
+  name: myservice
+  namespace: epinio
+  annotations:
+    application.epinio.io/catalog-service-secret-types: Opaque,BasicAuth
+    ...
+```
+
+With this definition Epinio will get all the Opaque and BasicAuth secrets generated during the creation of this Service.  
