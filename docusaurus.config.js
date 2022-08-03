@@ -58,7 +58,7 @@ const config = {
       algolia: {
         appId: 'Y6AWXACW2K',
         apiKey: 'c7f1f2eb3086f5d2f2c2631f040263fb',
-        indexName: 'docs.epinio.io',
+        indexName: 'prod_EPINIO',
         contextualSearch: true,
       },
       navbar: {
