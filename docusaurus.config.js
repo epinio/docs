@@ -55,6 +55,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+        appId: 'F9GBZ0DFYI',
+        apiKey: 'b8442abfcf47dbbd23aba2434bf5c879',
+        indexName: 'epinio',
+        contextualSearch: true,
+      },
       navbar: {
         title: 'Epinio',
         logo: {
