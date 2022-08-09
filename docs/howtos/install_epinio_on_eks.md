@@ -2,6 +2,9 @@
 This how-to was written using the following versions:
 * [epinio helm chart - v1.1.0](https://github.com/epinio/helm-charts/releases/tag/epinio-1.1.0)
 * AWS EKS - Kubernetes v1.22
+* [Ingress Nginx- v1.3.0](https://kubernetes.github.io/ingress-nginx/)
+* [Aws Load Balancer Controller - v2.4.2](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/)
+* [Cert Manager - v1.9.1](https://github.com/cert-manager/cert-manager)
 ## Prerequisites
 * [kubectl - v1.22](https://kubernetes.io/docs/tasks/tools/)
 * [aws cli - v2.7.19](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
@@ -16,11 +19,16 @@ eksctl create cluster \
   --node-type <node-size> \
   --nodes <node-qty>
 ```
-## Install [AWS Load Balancer Controller](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/)
+## Install AWS Load Balancer Controller
 The AWS controller is needed to let us interact with AWS ELB service.
 
 Please follow the [Official Installation Guide](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/deploy/installation/) to get it up and running.
-
+## Install Cert Manager
+```
+helm repo add cert-manager https://charts.jetstack.io
+helm repo update
+helm install cert-manager --namespace cert-manager --create-namespace jetstack/cert-manager --set installCRDs=true --set extraArgs[0]=--enable-certificate-owner-ref=true
+```
 ## Install Nginx Ingress Controller
 ### Add Helm repo
 ```
