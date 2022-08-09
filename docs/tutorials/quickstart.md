@@ -29,7 +29,7 @@ cd epinio/assets/
 
 ### Login
 
-The first task to perform after Epinio installation, is to [login](../references/commands/cli/epinio_login.md) with the [`epinio` binary]():
+The first task to perform after Epinio installation, is to [login](../references/commands/cli/epinio_login.md) with the `epinio` binary:
 
 ```shell
 epinio login -u admin 'https://epinio.127.0.0.1.sslip.io'
