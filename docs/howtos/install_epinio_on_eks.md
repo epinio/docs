@@ -35,7 +35,7 @@ helm repo update
 helm upgrade --install nginx ingress-nginx/ingress-nginx --namespace nginx --create-namespace --set controller.service.type=NodePort  --set-string controller.config.use-forwarded-headers="true"
 ```
 ### Create Ingress object for Nginx
-Create a file, copy the content below than run 'kubectl apply -f ....'
+Create a file, copy the content below than execute 'kubectl apply -f ....'
 
 ```
 apiVersion: networking.k8s.io/v1
@@ -66,7 +66,7 @@ spec:
               number: 80
 ```
 
-After run 'kubectl apply', AWS will automatically:
+After execute 'kubectl apply', AWS will automatically:
   - Provision a new Application LB;
   - Create a Target Group pointing to your nginx-controller POD;
   - Associate the Application LB and Target Group.
