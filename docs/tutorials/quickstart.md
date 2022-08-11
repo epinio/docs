@@ -27,6 +27,28 @@ git clone https://github.com/epinio/epinio.git
 cd epinio/assets/
 ```
 
+### Login
+
+The first task to perform after Epinio installation, is to [login](../references/commands/cli/epinio_login.md) with the `epinio` binary:
+
+```shell
+epinio login -u admin 'https://epinio.127.0.0.1.sslip.io'
+
+# Trust the certificate by pressing 'y' and 'enter'
+```
+
+:::tip
+
+If your local Kubernetes cluster restarts, Epinio stays installed and the certificates are still valid, so you don't have to login again.
+
+:::
+
+You can confirm that you're logged in by checking the Epinio settings:
+
+```shell
+epinio settings show
+```
+
 ### Push an app
 
 There are two ways to push an application:
