@@ -39,7 +39,7 @@ epinio login -u admin 'https://epinio.127.0.0.1.sslip.io'
 
 :::tip
 
-If your local Kubernetes cluster restarts, you only need to login again with the command above. Epinio stays installed and the certificates are still valid.
+If your local Kubernetes cluster restarts, Epinio stays installed and the certificates are still valid, so you don't have to login again.
 
 :::
 
