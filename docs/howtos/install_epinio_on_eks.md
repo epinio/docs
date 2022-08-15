@@ -9,6 +9,8 @@ This how-to was written using the following versions:
 * [kubectl - v1.22](https://kubernetes.io/docs/tasks/tools/)
 * [aws cli - v2.7.19](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 * [eksctl - v0.106.0](https://docs.aws.amazon.com/pt_br/eks/latest/userguide/eksctl.html)
+* [AWS Public Cetificate](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html)
+* [AWS WAF - Web ACL](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-creating.html)
 ## Create EKS Kubernetes Cluster
 *Ensure that you ran **[aws configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)** before you proceed with the steps bellow.*
 ```
@@ -43,7 +45,10 @@ helm repo update
 helm upgrade --install nginx ingress-nginx/ingress-nginx --namespace nginx --create-namespace --set controller.service.type=NodePort  --set-string controller.config.use-forwarded-headers="true"
 ```
 ### Create Ingress object for Nginx
-Create a file, copy the content below than execute 'kubectl apply -f ....'
+* Create a file with the content below;
+* Create [AWS Ceriticate Manager](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) and [AWS WAF Web ACL](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-creating.html);
+* Place the resources ARN in the respective annotations section.
+* Execute 'kubectl apply -f ....'
 
 ```
 apiVersion: networking.k8s.io/v1
@@ -57,8 +62,8 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: _put_your_certificate_arn_here_
-    # alb.ingress.kubernetes.io/wafv2-acl-arn: _put_your_waf_arn_here_
+    alb.ingress.kubernetes.io/certificate-arn: <put_your_certificate_arn_here>
+    alb.ingress.kubernetes.io/wafv2-acl-arn: <put_your_waf_arn_here>
 spec:
   ingressClassName: alb
   rules:
@@ -77,7 +82,8 @@ spec:
 After execute 'kubectl apply', AWS will automatically:
   - Provision a new Application LB;
   - Create a Target Group pointing to your nginx-controller POD;
-  - Associate the Application LB and Target Group.
+  - Associate the Application LB and Target Group;
+  - Associate the Application LB with WAF.
 
 Get the ALB DNS name and create a CNAME dns entry pointing to it. 
   - Record name: *.example.com
