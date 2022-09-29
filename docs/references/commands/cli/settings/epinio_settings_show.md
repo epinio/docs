@@ -15,6 +15,7 @@ epinio settings show [flags]
 ```
   -h, --help            help for show
       --show-password   Show hidden password
+      --show-token      Show access token
 ```
 
 ### Options inherited from parent commands

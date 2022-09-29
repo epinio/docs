@@ -4,14 +4,14 @@ sidebar_label: "epinio configuration delete"
 ---
 ## epinio configuration delete
 
-Delete a configuration
+Delete one or more configurations
 
 ### Synopsis
 
-Delete configuration by name.
+Delete configurations by name.
 
 ```
-epinio configuration delete NAME [flags]
+epinio configuration delete NAME1 [NAME2 ...] [flags]
 ```
 
 ### Options

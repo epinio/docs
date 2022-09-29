@@ -16,6 +16,7 @@ epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
       --app-chart string             App chart to use for deployment
   -b, --bind strings                 configurations to bind immediately
       --builder-image string         Paketo builder image to use for staging
+  -v, --chart-value strings          chart customization to be used
       --container-image-url string   Container image url for the app workload image
   -e, --env strings                  environment variables to be used
   -g, --git string                   Git repository and revision of sources separated by comma (e.g. GIT_URL,REVISION)

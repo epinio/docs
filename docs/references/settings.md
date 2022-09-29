@@ -32,6 +32,7 @@ Epinio's settings contains
   - The name of the namespace currently targeted.
   - Epinio API user name
   - Epinio API password (base64 encoded)
+  - Epinio API Token
   - Epinio API urls (regular and websocket)
   - Epinio API certificate
 
@@ -42,6 +43,10 @@ Username and password are used by the client to authenticate itself
 when talking to Epinio's API server. The `epinio login [URL]` command asks
 for your username and password, checks the validity of the
 credentials, and saves the information to the settings.
+
+The token is an object containing the access_token and refresh_token issued when logging in
+with an OIDC provider, with the `epinio login --oidc` command.
+If any token is present this will be used to authenticate, instead of the username and password.
 
 The installation uses the wildcard domain `omg.howdoi.website` and the
 `epinio-ca` issuer by default.

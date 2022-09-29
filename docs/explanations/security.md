@@ -24,3 +24,9 @@ settings in that case, as Let's Encrypt is a known CA.
 
 How Kubernetes accesses the Epinio registry (TLS or not) is handled a bit differently depending on installation flags.
 More details here: [Epinio Registry](../explanations/advanced.md#container-registry).
+
+### OIDC
+
+Since `v1.3.0` Epinio adds [Dex](https://dexidp.io/) as identity provider, adding supports for external OIDC providers.
+
+To authenticate through it you can use the login command with the `--oidc` flag. This will open a web page where you can authenticate with the configured providers.
