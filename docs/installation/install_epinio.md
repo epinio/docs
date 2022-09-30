@@ -128,5 +128,6 @@ To help you, see the following HowTos for various well-known Kubernetes clusters
 - [Install on K3s](../howtos/install_epinio_on_k3s.md) - Install Epinio on K3s cluster
 - [Install on Rancher Desktop](../howtos/install_epinio_on_rancher_desktop.md) - Install Epinio on Rancher Desktop
 - [Install on Minikube](../howtos/install_epinio_on_minikube.md) - Install Epinio on Minikube cluster
+- [Install on EKS](../howtos/install_epinio_on_eks.md) - Install Epinio on AWS EKS cluster
 
 > *NOTE*: The Public Cloud howto lists the three major Cloud providers but Epinio can run on any Kubernetes cluster.
