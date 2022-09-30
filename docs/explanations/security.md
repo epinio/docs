@@ -27,6 +27,6 @@ More details here: [Epinio Registry](../explanations/advanced.md#container-regis
 
 ### OIDC
 
-Since `v1.3.0` Epinio adds [Dex](https://dexidp.io/) as identity provider, adding supports for external OIDC providers.
+Since version **1.3.0**, Epinio has integrated [Dex](https://dexidp.io/) as an identity provider which adds the support for external OIDC providers.
 
-To authenticate through it you can use the login command with the `--oidc` flag. This will open a web page where you can authenticate with the configured providers.
+To authenticate through Dex, you can use the login command with the `--oidc` flag. This will open a web page where you can authenticate with the configured providers.

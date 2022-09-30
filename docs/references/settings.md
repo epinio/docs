@@ -44,9 +44,12 @@ when talking to Epinio's API server. The `epinio login [URL]` command asks
 for your username and password, checks the validity of the
 credentials, and saves the information to the settings.
 
-The token is an object containing the access_token and refresh_token issued when logging in
-with an OIDC provider, with the `epinio login --oidc` command.
-If any token is present this will be used to authenticate, instead of the username and password.
+The `token` is an object generated when you log in
+with an OIDC provider using the `epinio login --oidc` command. 
+
+The `token` combines the `access_token` and `refresh_token`.
+
+If a token is present, it will be used to authenticate and takes precedence over the username and password.
 
 The installation uses the wildcard domain `omg.howdoi.website` and the
 `epinio-ca` issuer by default.

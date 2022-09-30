@@ -1,13 +1,13 @@
 ---
-sidebar_label: "Authentication"
+sidebar_label: "OIDC authentication"
 title: ""
 ---
 
-# Authentication
+# OIDC authentication
 
-Since version **1.3.0** Epinio has integrated [Dex](https://dexidp.io/) as identity provider, adding supports for external OIDC providers.
+Since version **1.3.0**, Epinio has integrated [Dex](https://dexidp.io/) as an identity provider which adds the support for external OIDC providers.
 
-To authenticate through it you can use the login command with the `--oidc` flag. This will open a web page where you can authenticate with the configured providers.
+To authenticate through Dex, you can use the login command with the `--oidc` flag. This will open a web page where you can authenticate with the configured providers.
 
 ```bash
 epinio login --oidc https://epinio.mydomain.com
@@ -19,13 +19,13 @@ If you are using the `epinio` cli without a desktop environment you can provide 
 epinio login --oidc --prompt https://epinio.172.21.0.4.omg.howdoi.website
 ```
 
-By default only the local connector is setup, with a two users (`admin@epinio.io` and `epinio@epinio.io`).
-To add more connectors you can edit the Dex config file, deployed with the `dex-config` secret in the `epinio` namespace.
+By default, only the local connector is setup with two users (`admin@epinio.io` and `epinio@epinio.io`).
+To add more connectors, you can edit the Dex config file deployed with the `dex-config` secret in the `epinio` namespace.
 
-After a successful login a new Epinio user will be created, with the username matching the email used to login, and returned by the provider.
+After a successful login, a new Epinio user will be created with the username matching the email used to login and returned by the provider.
 
 
-If you want to login with the same email through the Epinio UI you should set a password to your user, patching the user secret.
+If you want to login with the same email through the Epinio UI, you should set a password for your user by patching the user secret.
 
 Find the secret name:
 ```
@@ -36,7 +36,7 @@ EPINIO_USERNAME=$(echo -n 'admin@epinio.io' | base64) && \
 ruser-adminepinioio-9341763ee7dcbce070e7c14f246ec8291e9a7278
 ```
 
-and use it to patch the secret with the bcrypted password:
+Patch the secret with the encrypted password:
 ```
 EPINIO_PASSWORD=$(echo -n '$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS' | base64 -w0) && \
   kubectl patch secret -n epinio -p="{\"data\":{\"password\": \"$EPINIO_PASSWORD\"}}" \
@@ -45,5 +45,5 @@ EPINIO_PASSWORD=$(echo -n '$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMpp
 secret/ruser-adminepinioio-9341763ee7dcbce070e7c14f246ec8291e9a7278 patched
 ```
 
-and now you can login with the `admin@epinio.io` and `password` credentials.
+You're now able to login with the credentials in Epinio UI.
 
