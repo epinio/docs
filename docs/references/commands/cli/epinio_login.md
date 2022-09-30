@@ -8,7 +8,7 @@ Epinio login to the server
 
 ### Synopsis
 
-The login command will setup the settings file with the provided credentials for the specified Epinio cluster
+The login command allows you to authenticate against an Epinio instance and updates the settings file with the generated authentication token
 
 ```
 epinio login [URL] [flags]
@@ -18,8 +18,10 @@ epinio login [URL] [flags]
 
 ```
   -h, --help              help for login
+      --oidc              perform OIDC authentication (user and password will be ignored)
   -p, --password string   password that will be used to login
-      --trust-ca          set this flag to automatically trust the unknown CA
+      --prompt            enable the prompt of the authorization code and disable the local server during OIDC authentication
+      --trust-ca          automatically trust the unknown CA
   -u, --user string       username that will be used to login
 ```
 
