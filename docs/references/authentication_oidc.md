@@ -29,18 +29,16 @@ If you want to login with the same email through the Epinio UI, you should set a
 
 Find the secret name:
 ```
-EPINIO_USERNAME=$(echo -n 'admin@epinio.io' | base64) && \
-  kubectl get secret -n epinio -o json -l epinio.io/api-user-credentials | \
-  jq -r ".items[] | select(.data.username==\"$EPINIO_USERNAME\") | .metadata.name"
+export EPINIO_USERNAME=$(echo -n 'admin@epinio.io' | base64)
+kubectl get secret -n epinio -o json -l epinio.io/api-user-credentials | jq -r ".items[] | select(.data.username==\"$EPINIO_USERNAME\") | .metadata.name"
 
 ruser-adminepinioio-9341763ee7dcbce070e7c14f246ec8291e9a7278
 ```
 
 Patch the secret with the encrypted password:
 ```
-EPINIO_PASSWORD=$(echo -n '$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS' | base64 -w0) && \
-  kubectl patch secret -n epinio -p="{\"data\":{\"password\": \"$EPINIO_PASSWORD\"}}" \
-  ruser-adminepinioio-9341763ee7dcbce070e7c14f246ec8291e9a7278
+export EPINIO_PASSWORD=$(echo -n '$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS' | base64 -w0)
+kubectl patch secret -n epinio -p="{\"data\":{\"password\": \"$EPINIO_PASSWORD\"}}" ruser-adminepinioio-9341763ee7dcbce070e7c14f246ec8291e9a7278
 
 secret/ruser-adminepinioio-9341763ee7dcbce070e7c14f246ec8291e9a7278 patched
 ```
