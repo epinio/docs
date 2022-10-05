@@ -37,12 +37,6 @@ jobs:
       - name: Install Updatecli Binary
         uses: updatecli/updatecli-action@v2
 
-      - name: Run Updatecli in DryRun
-        run: "updatecli diff --config ./updatecli/updatecli.d"
-        env:
-          UPDATECLI_GITHUB_ACTOR: ${{ github.actor }}
-          UPDATECLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Run Updatecli in enforce mode
         run: "updatecli apply --config ./updatecli/updatecli.d"
         env:
