@@ -45,6 +45,7 @@ sources:
         # the following rule, should do the trick
         pattern: ">0.1"
     transformers:
+        - trimprefix: v
         - findsubmatch:
             # Remove once if we decide to only keep major and minor version such as 0.7
             # pattern: '^(\d*).(\d*)'
@@ -61,7 +62,7 @@ targets:
     spec:
       file: docs/installation/install_epinio_cli.md
       matchpattern: 'https://github.com/epinio/epinio/releases/download/(.*)/'
-      replacepattern: 'https://github.com/epinio/epinio/releases/download/v{{ source "epinio" }}/'
+      replacepattern: 'https://github.com/epinio/epinio/releases/download/{{ source "epinio" }}/'
     scmid: default
     sourceid: epinio
 
@@ -72,7 +73,7 @@ targets:
     spec:
       file: docs/installation/install_epinio_cli.md
       matchpattern: 'Epinio Version: (.*)'
-      replacepattern: 'Epinio Version: v{{ source "epinio" }}'
+      replacepattern: 'Epinio Version: {{ source "epinio" }}'
     scmid: default
 
   # Required yarn to be installed
