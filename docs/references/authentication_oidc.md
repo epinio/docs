@@ -7,13 +7,19 @@ title: ""
 
 Since version **1.3.0**, Epinio has integrated [Dex](https://dexidp.io/) as an identity provider which adds the support for external OIDC providers.
 
+:::caution
+
+In order to make Dex work the ingress address (set by helm `global.domain` value) must be reachable also from kubernetes pods. Always use either FQDN hostname or a public IP address together with some wildcard DNS service as `nip.io` for epinio ingresses. Using localhost or entries in /etc/hosts is not sufficient.
+
+:::
+
 To authenticate through Dex, you can use the login command with the `--oidc` flag. This will open a web page where you can authenticate with the configured providers.
 
 ```bash
 epinio login --oidc https://epinio.mydomain.com
 ```
 
-If you are using the `epinio` cli without a desktop environment you can provide the `--prompt` flag. This will give you the url where you can authenticate, and it will wait for the authorization code that you will get at the end of the authentication.
+If you are using the `epinio` cli on a machine without a browser you can provide the `--prompt` flag. This will give you the url of a web page where you can authenticate even on different machine. After logging in and pressing `Grant Access` button the page will return the authorization code that you should copy and paste back to the `epinio` cli input to finish the authentication process.
 
 ```bash
 epinio login --oidc --prompt https://epinio.172.21.0.4.omg.howdoi.website
