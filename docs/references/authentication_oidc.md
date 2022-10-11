@@ -9,7 +9,7 @@ Since version **1.3.0**, Epinio has integrated [Dex](https://dexidp.io/) as an i
 
 :::caution
 
-In order to make Dex work the ingress address (set by helm `global.domain` value) must be reachable also from kubernetes pods. Always use either FQDN hostname or a public IP address together with some wildcard DNS service as `nip.io` for epinio ingresses. Using localhost or entries in /etc/hosts is not sufficient.
+In order to make Dex work the ingress address (set by the chart's `global.domain` value) has to be reachable from the kubernetes pods, not just from outside. Always use either a FQDN hostname or a public IP address together with some wildcard DNS service as `xip.io` for epinio ingresses. Using localhost or entries in `/etc/hosts` is __not__ sufficient.
 
 :::
 
