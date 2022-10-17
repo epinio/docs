@@ -7,12 +7,6 @@ title: ""
 
 Since version **1.3.0**, Epinio has integrated [Dex](https://dexidp.io/) as an identity provider which adds the support for external OIDC providers.
 
-:::caution
-
-In order to make Dex work the ingress address (set by the chart's `global.domain` value) has to be reachable from the kubernetes pods, not just from outside. Always use either a FQDN hostname or a public IP address together with some wildcard DNS service as `xip.io` for epinio ingresses. Using localhost or entries in `/etc/hosts` is __not__ sufficient.
-
-:::
-
 To authenticate through Dex, you can use the login command with the `--oidc` flag. This will open a web page where you can authenticate with the configured providers.
 
 ```bash
