@@ -24,13 +24,18 @@ If you are not familiar with how buildpacks work, you should have a look at the 
 
 ## Supported buildpacks
 
-Epinio uses the [full stack paketo builder image](https://github.com/paketo-buildpacks/full-stack-release) which means you can make use of any of the buildpacks
-documented here: https://paketo.io/docs/buildpacks/language-family-buildpacks/
+Epinio uses the [Paketo full builder image](https://github.com/paketo-buildpacks/full-builder) which means you can make use of any of the buildpacks
+documented here: https://paketo.io/docs/concepts/builders/#full
 
 The various buildpacks provide various configuration options. You can read on how to generally configure a buildpack here: https://paketo.io/docs/buildpacks/configuration/
 Each buildpack may support more configuration options, so you may have to read the documentation of the buildpacks you are interested in.
 
-E.g. [Instructions on how to add custom php.ini files for php-web buildpack](https://github.com/paketo-buildpacks/php-web#configuring-custom-ini-files)
+E.g.
+- [Instructions on how to add custom php.ini files for php-web buildpack](https://github.com/paketo-buildpacks/php-web#configuring-custom-ini-files)
+- [Go Buildpack](https://github.com/paketo-buildpacks/go)
+
+Note: if your application needs to explicit a particular command to start, you should probably provide a [Procfile](https://devcenter.heroku.com/articles/procfile) in order to use the [Procfile Buildpack](https://github.com/paketo-buildpacks/procfile).
+
 
 ## Detailed push process
 

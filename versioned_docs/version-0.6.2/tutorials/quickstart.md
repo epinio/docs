@@ -55,8 +55,7 @@ We also provide information about the more advanced [git model](../explanations/
 
 ***
 
-###### Note: If you want to know the details of the `epinio push`
-process, please read the [detailed push docs](../explanations/detailed-push-process.md)
+###### Note: If you want to know the details of the `epinio push` process, please read the [detailed push docs](../explanations/detailed-push-process.md)
 
 ***
 
