@@ -4,10 +4,10 @@ sidebar_label: "epinio app delete"
 ---
 ## epinio app delete
 
-Deletes an application
+Deletes one or more applications
 
 ```
-epinio app delete NAME [flags]
+epinio app delete NAME1 [NAME2 ...] [flags]
 ```
 
 ### Options

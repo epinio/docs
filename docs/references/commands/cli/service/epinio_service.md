@@ -34,7 +34,7 @@ Manage the epinio services
 * [epinio service bind](./epinio_service_bind.md)	 - Bind a service SERVICENAME to an Epinio app APPNAME
 * [epinio service catalog](./epinio_service_catalog.md)	 - Lists all available Epinio catalog services, or show the details of the specified one
 * [epinio service create](./epinio_service_create.md)	 - Create a service SERVICENAME of an Epinio catalog service CATALOGSERVICENAME
-* [epinio service delete](./epinio_service_delete.md)	 - Delete service SERVICENAME
+* [epinio service delete](./epinio_service_delete.md)	 - Delete one or more services
 * [epinio service list](./epinio_service_list.md)	 - List all the services in the targeted namespace
 * [epinio service show](./epinio_service_show.md)	 - Show details of a service SERVICENAME
 * [epinio service unbind](./epinio_service_unbind.md)	 - Unbinds a service SERVICENAME from an Epinio app APPNAME

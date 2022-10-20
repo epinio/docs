@@ -4,10 +4,10 @@ sidebar_label: "epinio service delete"
 ---
 ## epinio service delete
 
-Delete service SERVICENAME
+Delete one or more services
 
 ```
-epinio service delete SERVICENAME [flags]
+epinio service delete SERVICENAME1 [SERVICENAME2 ...] [flags]
 ```
 
 ### Options
