@@ -32,19 +32,19 @@ Find the latest version at [Releases](https://github.com/epinio/epinio/releases)
 ### Linux
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.4.0/epinio-linux-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.3.0/epinio-linux-x86_64
 ```
 
 ### MacOS
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.4.0/epinio-darwin-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.3.0/epinio-darwin-x86_64
 ```
 
 ### Windows
 
 ```bash
- curl -LO https://github.com/epinio/epinio/releases/download/v1.4.0/epinio-windows-x86_64.zip
+ curl -LO https://github.com/epinio/epinio/releases/download/v1.3.0/epinio-windows-x86_64.zip
 ```
 
 Extract the zip archive and put the binary in a directory that is in your `PATH` environment variable. Instructions on how to add directories to the `PATH` vary depending on your version of Windows.
@@ -67,6 +67,6 @@ Run e.g. `epinio version` to test the successful installation.
 
 ```bash
 > epinio version
-Epinio Version: v1.4.0
+Epinio Version: v1.3.0
 Go Version: go1.18
 ```
