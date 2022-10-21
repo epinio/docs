@@ -33,7 +33,7 @@ Manage epinio application
 * [epinio](../epinio.md)	 - Epinio cli
 * [epinio app chart](./chart/epinio_app_chart.md)	 - Epinio application chart management
 * [epinio app create](./epinio_app_create.md)	 - Create just the app, without creating a workload
-* [epinio app delete](./epinio_app_delete.md)	 - Deletes an application
+* [epinio app delete](./epinio_app_delete.md)	 - Deletes one or more applications
 * [epinio app env](./env/epinio_app_env.md)	 - Epinio application configuration
 * [epinio app exec](./epinio_app_exec.md)	 - creates a shell to the application
 * [epinio app export](./epinio_app_export.md)	 - Export the named application into the directory
