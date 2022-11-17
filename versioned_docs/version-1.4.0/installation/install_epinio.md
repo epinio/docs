@@ -115,6 +115,8 @@ Read more on how to setup DNS here: [DNS setup](./dns_setup.md)
 
 > *NOTE*: If you're deploying Epinio in a "localhost" environment, you can use a "[magic domain name](./magicDNS_setup.md)".
 
+> *NOTE II*: in case the installation fails due to an expired certificate (for instance if you have previously initialized the epinio cli on a machine for a different cluster) please consider executing epinio `epinio settings update-ca`.  More info at: [epinio-settings-update-ca](https://docs.epinio.io/references/commands/cli/settings/epinio_settings_update-ca#epinio-settings-update-ca)
+
 ## Installation on Specific Kubernetes Offerings
 
 Installing Epinio is a standard process as explained above, however you might need to configure it for a specific Kubernetes cluster.
