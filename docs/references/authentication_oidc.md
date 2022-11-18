@@ -20,7 +20,7 @@ epinio login --oidc --prompt https://epinio.172.21.0.4.omg.howdoi.website
 ```
 
 By default, only the local connector is setup with two users (`admin@epinio.io` and `epinio@epinio.io`).
-To add more connectors, you can edit the Dex config file deployed with the `dex-config` secret in the `epinio` namespace.
+To add more connectors you can edit the Dex configuration file (key `config.yaml`), stored in the `dex-config` secret in the `epinio` namespace.
 
 After a successful login, a new Epinio user will be created with the username matching the email used to login and returned by the provider.
 
@@ -45,3 +45,32 @@ secret/ruser-adminepinioio-9341763ee7dcbce070e7c14f246ec8291e9a7278 patched
 
 You're now able to login with the credentials in Epinio UI.
 
+## Groups and Roles mapping
+
+The external identity providers may provide additional information about the user, for example the groups that he's member of.  
+
+These groups can be used to associate a specific role to the user. To do so you need to add a `rolesMapping` key to the `dex-config` secret. The value of the key is a yaml string that will be used to map the groups of a provider to a specific role:
+
+```
+rolesMapping: |-
+  - connectorId: github
+    groups:
+    - id: Org1:Admins
+      role: admin
+    - id: Org1:TeamBlue
+      role: user
+
+config.yaml: |-
+  connectors:
+  - type: github
+    id: github
+    name: GitHub
+    config:
+      loadAllGroups: true
+      orgs:
+      - name: Org1
+```
+
+The groups will be evaluated in order. In the previous example if the user is a member of both `Org1:Admins` and `Org1:TeamBlue` then that user will get the `admin` role.
+
+Please note that the role is bound when the user is created. Any modification of the groups will not propagate to already existing users.
