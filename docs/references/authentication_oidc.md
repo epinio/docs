@@ -20,7 +20,7 @@ epinio login --oidc --prompt https://epinio.172.21.0.4.omg.howdoi.website
 ```
 
 By default, only the local connector is setup with two users (`admin@epinio.io` and `epinio@epinio.io`).
-To add more connectors, you can edit the Dex config file deployed with the `dex-config` secret in the `epinio` namespace.
+To add more connectors you can edit the Dex configuration file (key `config.yaml`), stored in the `dex-config` secret in the `epinio` namespace.
 
 After a successful login, a new Epinio user will be created with the username matching the email used to login and returned by the provider.
 
