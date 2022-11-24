@@ -18,6 +18,7 @@ epinio server [flags]
 
 ```
       --access-control-allow-origin string   (ACCESS_CONTROL_ALLOW_ORIGIN) Domains allowed to use the API
+      --app-image-exporter string            (APP_IMAGE_EXPORTER) Name of the container image used to download the application image from the 'export' API.
   -h, --help                                 help for server
       --ingress-class-name string            (INGRESS_CLASS_NAME) Name of the ingress class to use for apps. Leave empty to add no ingressClassName to the ingress.
   -n, --namespace string                     (NAMESPACE) The namespace to use (default "epinio")

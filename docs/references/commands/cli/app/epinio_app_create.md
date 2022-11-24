@@ -16,6 +16,7 @@ epinio app create NAME [flags]
       --app-chart string      App chart to use for deployment
   -b, --bind strings          configurations to bind immediately
   -v, --chart-value strings   chart customization to be used
+  -z, --clear-routes          clear routes / no routes
   -e, --env strings           environment variables to be used
   -h, --help                  help for create
   -i, --instances int32       The number of instances the application should have (default 1)
