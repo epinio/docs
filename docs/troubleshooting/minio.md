@@ -15,7 +15,7 @@ For security reasons, make sure that you deleted the exposed services immediatel
 
 ## Expose Minio console web interface
 
-Simplest way to access internal Minio service is by using a web browser. Copy the block below and paste it to the terminal with configured access to your kubernetes cluster.
+The simplest way to access Epinio's internal Minio service is by using a web browser. Copy the block below and paste it to a terminal which is configured to have access to your kubernetes cluster.
 
 ```bash
 kubectl expose pod minio-0 -n epinio --name epinio-console-np --port=9001 --type=NodePort
