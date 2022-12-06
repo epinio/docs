@@ -40,7 +40,7 @@ kubectl delete service epinio-console-np -n epinio
 ```
 
 ## Access Epinio's Minio through the AWS CLI
-Another method is to use AWS CLI to communicate with internal S3-compatible Minio API endpoint. If you choose this method just simply copy the block below and paste it to the terminal with configured access to your kubernetes cluster.
+Another method is using the AWS CLI to communicate with the internal S3-compatible Minio API endpoint. If you choose this method copy the block below and paste it to a terminal which is configured to have access to your kubernetes cluster.
 
 ```bash
 kubectl expose pod minio-0 -n epinio --name epinio-api-np --port=9000 --type=NodePort
