@@ -39,7 +39,7 @@ At the end of your debugging session delete the created service by running:
 kubectl delete service epinio-console-np -n epinio
 ```
 
-## Access Minio by using AWS CLI
+## Access Epinio's Minio through the AWS CLI
 Another method is to use AWS CLI to communicate with internal S3-compatible Minio API endpoint. If you choose this method just simply copy the block below and paste it to the terminal with configured access to your kubernetes cluster.
 
 ```bash
