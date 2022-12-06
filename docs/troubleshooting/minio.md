@@ -9,7 +9,7 @@ There are several ways to make Epinio's internal S3-compatible MinIO service ava
 
 :::caution
 
-For security reasons, make sure that you've deleted the exposed services immediately at the end of your debugging session.
+For security reasons, make sure that you deleted the exposed services immediately at the end of your debugging session.
 
 :::
 
