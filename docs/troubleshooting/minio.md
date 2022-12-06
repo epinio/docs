@@ -1,5 +1,5 @@
 ---
-sidebar_label: "Accessing internal Minio service"
+sidebar_label: "Accessing Epinio's Internal Minio Service"
 title: ""
 ---
 
