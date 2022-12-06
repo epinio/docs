@@ -59,7 +59,7 @@ aws configure set default.region us-east-1
 echo  "Usage: aws --no-verify-ssl --endpoint-url https://$NODE:$PORT s3 ls"
 ```
 
-For information about using AWS CLI with S3, see the official [documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and also documentation from [MinIO](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html).
+For more information about using AWS CLI with S3, see Amazon's [Getting Started Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and also the documentation from [MinIO](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html) on this topic.
 
 
 At the end of your debugging session delete the created service by running:
