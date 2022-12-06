@@ -50,7 +50,7 @@ MINIO_KEY=$(kubectl get secrets/minio-creds -n epinio -o=go-template='{{index .d
 MINIO_SECRET=$(kubectl get secrets/minio-creds -n epinio -o=go-template='{{index .data "secretkey" | base64decode}}')
 ```
 
-Install AWS CLI according to this [document](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and configure it to access internal Minio/S3 service as follows:
+Install AWS CLI according to Amazon's [Getting Started Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and configure it to access the internal Minio/S3 service as follows:
 
 ```bash
 aws configure set aws_access_key_id $MINIO_KEY
