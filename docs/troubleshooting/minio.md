@@ -3,7 +3,7 @@ sidebar_label: "Accessing Epinio's Internal Minio Service"
 title: ""
 ---
 
-# Accessing internal MinIO service
+# Accessing Epinio's Internal MinIO Service
 
 There are several ways to make an internal S3-compatible MinIO service available for debugging purposes. In this document, we will cover only two of them, exposing the Minio-console web interface and accessing the Minio service through the AWS CLI. In both cases we will expose the internal service by using `NodePort` service type.
 
