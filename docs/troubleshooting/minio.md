@@ -26,7 +26,7 @@ MINIO_PASS=$(kubectl get secrets/minio-creds -n epinio -o=go-template='{{index .
 echo "Minio Console https://$NODE:$PORT, Username: $MINIO_USER Password: $MINIO_PASS"
 ```
 
-Output of the last line will be similar to this one:
+The output from the command on the last line will be similar to:
 ```
 Minio Console https://10.0.0.12:31689, Username: 20bDikQsszYpcrBc Password: kDRHftasmW0CyRjy
 ```
