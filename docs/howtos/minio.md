@@ -57,7 +57,7 @@ Install AWS CLI according to Amazon's [Getting Started Guide](https://docs.aws.a
 aws configure set aws_access_key_id $MINIO_KEY
 aws configure set aws_secret_access_key $MINIO_SECRET
 aws configure set default.region us-east-1
-echo  "Usage: aws --no-verify-ssl --endpoint-url https://$NODE:$PORT s3 ls"
+echo "Usage: aws --no-verify-ssl --endpoint-url https://$NODE:$PORT s3 ls"
 ```
 
 For more information about using AWS CLI with S3, see Amazon's [Getting Started Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and also the documentation from [MinIO](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html) on this topic.
