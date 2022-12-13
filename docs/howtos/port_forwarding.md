@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Port Forwarding"
-sidebar_position: 8
+sidebar_label: "Setting Up And Using Port Forwarding"
+sidebar_position: 9
 title: ""
 ---
 

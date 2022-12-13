@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Setting up routing secrets"
-sidebar_position: 7
+sidebar_label: "Setting Up Routing Secrets"
+sidebar_position: 8
 title: ""
 ---
 

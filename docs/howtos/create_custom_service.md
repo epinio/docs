@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Create a custom Service"
-sidebar_position: 10
+sidebar_label: "Creating A Custom Service"
+sidebar_position: 11
 title: ""
 ---
 

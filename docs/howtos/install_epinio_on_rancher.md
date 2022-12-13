@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Install Epinio on Rancher"
-sidebar_position: 14
+sidebar_label: "Installing Epinio On Rancher"
+sidebar_position: 15
 title: ""
 ---
 

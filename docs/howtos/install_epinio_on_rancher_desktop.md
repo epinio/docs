@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Install Epinio on Rancher Desktop (local)"
-sidebar_position: 17
+sidebar_label: "Installing Epinio On Rancher Desktop (local)"
+sidebar_position: 18
 title: ""
 ---
 

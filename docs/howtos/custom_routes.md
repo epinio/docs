@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Custom Routes"
-sidebar_position: 9
+sidebar_label: "Setting Up Custom Routes"
+sidebar_position: 10
 title: ""
 ---
 

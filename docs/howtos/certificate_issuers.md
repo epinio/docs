@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Certificate Issuers"
-sidebar_position: 1
+sidebar_label: "Setting Up And Using Certificate Issuers"
+sidebar_position: 2
 title: ""
 ---
 

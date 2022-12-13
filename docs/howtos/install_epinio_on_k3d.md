@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Install Epinio on k3d (local)"
-sidebar_position: 18
+sidebar_label: "Installing Epinio On K3d (local)"
+sidebar_position: 19
 title: ""
 ---
 
