@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Accessing Epinio's Internal Minio Service"
-sidebar_position: 24
+sidebar_position: 25
 title: ""
 ---
 

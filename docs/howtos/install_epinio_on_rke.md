@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Install Epinio on RKE2 (Rancher)"
-sidebar_position: 15
+sidebar_label: "Installing Epinio On RKE2 (Rancher)"
+sidebar_position: 16
 title: ""
 ---
 
