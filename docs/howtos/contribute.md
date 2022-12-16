@@ -79,6 +79,16 @@ commit automatically with `git commit -s`.
 If your git config information is set properly then viewing the `git log`
 information for your commit will look something like this:
 
+```
+Author: John Smith <john.smith@example.com>
+Date:   Thu Feb 2 11:41:15 2018 -0800
+    Update README
+    Signed-off-by: John Smith <john.smith@example.com>
+```
+Notice how the `Author` and `Signed-off-by` lines match. If they don't your PR will
+be rejected by the automated DCO check.
+
+:::
 
 ## Pull Requests
 
