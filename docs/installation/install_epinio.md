@@ -33,13 +33,14 @@ If you don't have an Ingress controller already running, you can install Traefik
 
 ```
 $ kubectl create namespace traefik
-$ export LOAD_BALANCER_IP=$(LOAD_BALANCER_IP:-) # Set this to the IP of your load balancer if you know that
-$ helm install traefik --namespace traefik "https://helm.traefik.io/traefik/traefik-10.3.4.tgz" \
-		--set globalArguments='' \
-		--set-string ports.web.redirectTo=websecure \
-		--set-string ingressClass.enabled=true \
-		--set-string ingressClass.isDefaultClass=true \
-		--set-string service.spec.loadBalancerIP=$LOAD_BALANCER_IP
+$ helm repo add traefik https://traefik.github.io/charts
+$ helm repo update
+$ export LOAD_BALANCER_IP=${LOAD_BALANCER_IP:-} # Set this to the IP of your load balancer if you know that
+$ helm install traefik --namespace traefik traefik/traefik \
+		--set ports.web.redirectTo=websecure \
+		--set ingressClass.enabled=true \
+		--set ingressClass.isDefaultClass=true \
+		--set service.spec.loadBalancerIP=$LOAD_BALANCER_IP
 ```
 
 It's also possible to use Nginx instead of Traefik following the official [documentation](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start).
