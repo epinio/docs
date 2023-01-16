@@ -17,8 +17,8 @@ The Epinio Helm chart has the following optional parameters:
 | `minio.enabled`  | Whether to install Minio or not | yes | "true" |
 | `s3.bucket`  | S3 bucket where you want to store your apps | yes | `epinio` |
 | `s3.endpoint`  | S3 endpoint | yes | `minio.epinio.svc.cluster.local` |
-| `s3.accessKeyID`  | S3 access key id to authenticate to the endpoint | yes | random value when Minio is enabled |
-| `s3.secretAccessKey`  | S3 secret access key id to authenticate to the endpoint| yes | random value when Minio is enabled |
+| `s3.accessKeyID`  | S3 access key id to authenticate to the endpoint | no | random value when Minio is enabled |
+| `s3.secretAccessKey`  | S3 secret access key id to authenticate to the endpoint| no | random value when Minio is enabled |
 | `s3.useSSL`  | Use SSL for encryption | no | `true` |
 | `s3.region`  | S3 region where your bucket is | no | "" |
 | `s3.certificateSecret`  | An existing TLS secret to be trusted (if self signed) | no | "minio-tls" if Minio is enabled |
@@ -43,3 +43,56 @@ to create a bucket and then write to it.
 
 When you successfully push a new version of your application, Epinio will remove the resources of the previous staging process from the Kubernetes cluster and
 will also delete the previous version of the sources from S3. This way, Epinio doesn't store more than it needs on the S3 storage and the user doesn't need to manually cleanup.
+
+## Authentication through an IAM profile
+
+When using AWS S3 Epinio further supports authentication by AWS IAM profile, instead of through regular credentials.
+
+Epinio activates this mode when the credential keys are left empty. I.e. `s3.accessKeyID=""`, and `s3.secretAccessKey=""`.
+
+In AWS the kubernetes cluster in question has to have an IAM policy attached to it which provides the permissions for access to S3.
+
+### Example
+
+Create a policy with
+
+```
+aws iam create-policy \
+    --policy-name EpinioECEKSClusterPolicy \
+    --policy-document \
+'{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets",
+                "s3:CreateBucket",
+                "s3:DeleteObject",
+                "sts:AssumeRole"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}'
+```
+
+Attach that policy ot the instance role with
+
+```
+aws iam attach-role-policy \
+    --role-name "<your instance role here>" \
+    --policy-arn "<your policy arn here>"
+```
+
+The instance role can be determined with:
+
+```
+kubectl -n kube-system describe configmap aws-auth | grep rolearn | cut -d':' -f7 | cut -d'/' -f2
+```
