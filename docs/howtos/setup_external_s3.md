@@ -43,3 +43,54 @@ to create a bucket and then write to it.
 
 When you successfully push a new version of your application, Epinio will remove the resources of the previous staging process from the Kubernetes cluster and
 will also delete the previous version of the sources from S3. This way, Epinio doesn't store more than it needs on the S3 storage and the user doesn't need to manually cleanup.
+
+## Authentication through an IAM profile
+
+When using AWS S3 it is also possible to authenticate access via an AWS IAM profile, instead of through regular credentials.
+
+On the Epinio side this is done by simply leaving the credential keys empty, i.e. `s3.accessKeyID=""`, and `s3.secretAccessKey=""`.
+
+On the AWS side the kubernetes cluster in question has to have an IAM policy attached to it which provides the permissions for access to S3.
+
+As an example a policy can be created with
+
+```
+aws iam create-policy \
+    --policy-name EpinioECEKSClusterPolicy \
+    --policy-document \
+'{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets",
+                "s3:CreateBucket",
+                "s3:DeleteObject",
+                "sts:AssumeRole"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}'
+```
+
+and then attached to the instance role via
+
+```
+aws iam attach-role-policy \
+    --role-name <your instance role here> \
+    --policy-arn 'arn:aws:iam::0123456789:policy/EpinioECEKSClusterPolicy'
+```
+
+The instance role can be determined through
+
+```
+kubectl -n kube-system describe configmap aws-auth | grep rolearn | cut -d':' -f7 | cut -d'/' -f2
+```
