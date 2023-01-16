@@ -46,13 +46,15 @@ will also delete the previous version of the sources from S3. This way, Epinio d
 
 ## Authentication through an IAM profile
 
-When using AWS S3 it is also possible to authenticate access via an AWS IAM profile, instead of through regular credentials.
+When using AWS S3 Epinio further supports authentication by AWS IAM profile, instead of through regular credentials.
 
-On the Epinio side this is done by simply leaving the credential keys empty, i.e. `s3.accessKeyID=""`, and `s3.secretAccessKey=""`.
+Epinio goes into this mode when the credential keys are left empty. I.e. `s3.accessKeyID=""`, and `s3.secretAccessKey=""`.
 
-On the AWS side the kubernetes cluster in question has to have an IAM policy attached to it which provides the permissions for access to S3.
+In AWS the kubernetes cluster in question has to have an IAM policy attached to it which provides the permissions for access to S3.
 
-As an example a policy can be created with
+### Example
+
+Create a policy with
 
 ```
 aws iam create-policy \
@@ -81,15 +83,15 @@ aws iam create-policy \
 }'
 ```
 
-and then attached to the instance role via
+Attach that policy ot the instance role with
 
 ```
 aws iam attach-role-policy \
-    --role-name <your instance role here> \
-    --policy-arn 'arn:aws:iam::0123456789:policy/EpinioECEKSClusterPolicy'
+    --role-name "<your instance role here>" \
+    --policy-arn "<your policy arn here>"
 ```
 
-The instance role can be determined through
+The instance role can be determined with:
 
 ```
 kubectl -n kube-system describe configmap aws-auth | grep rolearn | cut -d':' -f7 | cut -d'/' -f2
