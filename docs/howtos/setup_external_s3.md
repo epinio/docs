@@ -48,7 +48,7 @@ will also delete the previous version of the sources from S3. This way, Epinio d
 
 When using AWS S3 Epinio further supports authentication by AWS IAM profile, instead of through regular credentials.
 
-Epinio goes into this mode when the credential keys are left empty. I.e. `s3.accessKeyID=""`, and `s3.secretAccessKey=""`.
+Epinio activates this mode when the credential keys are left empty. I.e. `s3.accessKeyID=""`, and `s3.secretAccessKey=""`.
 
 In AWS the kubernetes cluster in question has to have an IAM policy attached to it which provides the permissions for access to S3.
 
