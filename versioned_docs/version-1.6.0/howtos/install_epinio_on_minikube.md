@@ -50,6 +50,10 @@ $ minikube addons configure metallb
      Using image metallb/controller:v0.9.6
   metallb was successfully configured
 ```
+It is recommended enable a metric server pod to get information about metric errors:
+```bash
+$ minikube addons enable metrics-server
+```
 
 Now you can install Epinio on the Cluster.
 
