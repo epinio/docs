@@ -51,7 +51,8 @@ $ minikube addons configure metallb
   metallb was successfully configured
 ```
 
-It is recommended to enable a metric-server addon to get information about the status of the applications:
+We recommend enabling the metrics-server addon to collect various statistics about resources:
+
 ```bash
 $ minikube addons enable metrics-server
 ```
