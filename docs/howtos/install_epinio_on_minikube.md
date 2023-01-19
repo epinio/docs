@@ -51,6 +51,12 @@ $ minikube addons configure metallb
   metallb was successfully configured
 ```
 
+We recommend enabling the metrics-server addon to collect various statistics about resources:
+
+```bash
+$ minikube addons enable metrics-server
+```
+
 Now you can install Epinio on the Cluster.
 
 
