@@ -50,7 +50,7 @@ $ minikube addons configure metallb
      Using image metallb/controller:v0.9.6
   metallb was successfully configured
 ```
-It is recommended enable a metric server pod to get information about metric errors:
+It is recommended to enable a metric server to get information about metric errors:
 ```bash
 $ minikube addons enable metrics-server
 ```
