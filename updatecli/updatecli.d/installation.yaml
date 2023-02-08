@@ -1,4 +1,15 @@
-title: Bump Epinio version in installation documentation
+name: Bump Epinio version in installation documentation
+
+actions:
+  default:
+    title: '[updatecli] Bump Epinio version used within installation documentation to {{ source "epinio" }}'
+    kind: github/pullrequest
+    scmid: default
+    spec:
+      automerge: false
+      mergemethod: squash
+      labels:
+        - chore
 
 scms:
   default:
@@ -87,19 +98,3 @@ targets:
       command: "./updatecli/scripts/docusaurus.sh"
       environments:
         - name: PATH
-
-pullrequests:
-  default:
-    title: '[updatecli] Bump Epinio version used within installation documentation to {{ source "epinio" }}'
-    kind: github
-    scmid: default
-    targets:
-      - download-url
-      - epinio-version
-      - docusaurus
-    spec:
-      automerge: false
-      mergemethod: squash
-      labels:
-        - chore
-
