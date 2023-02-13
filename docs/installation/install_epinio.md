@@ -84,7 +84,7 @@ true (default).
 
 In addition to Minio, Epinio offers [s3gw](https://s3gw.io/) as another internal S3 compatible storage. It can be installed when `.Values.minio.enabled` is `false` and `.Values.s3gw.enabled` is `true`.
 
-Both internal S3 compatible storage can be configured to use a user-defined storageClass. If no StorageClass is defined, the default storageClass is used. The custom storageClass can be set for Minio as `.Values.persistance.storageClass` value or as `.Values.s3gw.storageClass.name` value for s3gw.
+Both choices for internal S3 compatible storage can be configured to use a user-defined storageClass. If no StorageClass is defined, the default storageClass is used. For Minio the custom storageClass is set via the value of `.Values.persistance.storageClass`. For s3gw the  custom storageClass is set via the value of `.Values.s3gw.storageClass.name`.
 
 Any external S3 compatible solution can be used instead by setting `Values.minio.enabled` value to `false` (`Values.s3gw.enabled` is `false` by default) and using [the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44) to point to the desired S3 server.
 
