@@ -80,9 +80,13 @@ the helm value "kubed.enabled" to "false".
 
 Epinio is using an S3 compatible storage to store the application source code.
 This chart will install [Minio](https://min.io/) when `.Values.minio.enabled` is
-true (default). Any S3 compatible solution can be used instead by setting this
-value to `false` and using [the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44)
-to point to the desired S3 server.
+true (default).
+
+In addition to Minio, Epinio offers [s3gw](https://s3gw.io/) as another internal S3 compatible storage. It can be installed when `.Values.minio.enabled` is `false` and `.Values.s3gw.enabled` is `true`.
+
+Both internal S3 compatible storage can be configured to use a user-defined storageClass. If no StorageClass is defined, the default storageClass is used. The custom storageClass can be set for Minio as `.Values.persistance.storageClass` value or as `.Values.s3gw.storageClass.name` value for s3gw.
+
+Any external S3 compatible solution can be used instead by setting `Values.minio.enabled` value to `false` (`Values.s3gw.enabled` is `false` by default) and using [the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44) to point to the desired S3 server.
 
 ### Container Registry
 
