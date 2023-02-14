@@ -92,7 +92,7 @@ Minio is a storage solution that implements the same API as [Amazon S3](https://
 
 When the user pushes an application using a source code directory (with the [`epinio push`](../references/commands/cli/epinio_push.md) command), the first step taken by the cli is to put the source code into a tarball and upload that to the Epinio API server. The server copies that to the configured S3 storage to be used later during the staging of the application.
 
-When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install Minio on the cluster ([See here how](../howtos/setup_external_s3.md)).
+When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install either Minio or s3gw on the cluster ([See here how](../howtos/setup_external_s3.md)).
 
 ### s3gw
 
