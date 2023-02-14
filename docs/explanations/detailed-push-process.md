@@ -20,7 +20,7 @@ When the request lands on the server, the user is authenticated using BasicAuth,
 
 ## 2. Copying the code to S3
 
-One of the components Epinio installs on your cluster is [Minio](https://min.io/) (unless you [configured external S3](../howtos/setup_external_s3.md)). Minio is an S3 compatible storage solution. Epinio uses it to store the application's source code. It will later be used by the staging job.
+The Epinio helm-chart can install either [Minio](https://min.io/) (default) or [s3gw](https://s3gw.io/) on your cluster (unless you [configured external S3](../howtos/setup_external_s3.md)). Both Minio and s3gw are S3-compatible storage solutions which Epinio uses to store the application's source code. The chosen S3 storage solution will later be used by the staging job.
 
 After successful authentication (previous step), the API server uploads the tarball to the S3 endpoint and responds with a blobUID that can be later used to reference the uploaded tarball.
 
