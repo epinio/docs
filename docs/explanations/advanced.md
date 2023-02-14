@@ -98,7 +98,7 @@ When installing Epinio, the user can choose to use an external S3 compatible sto
 
 [Upstream project link](https://github.com/aquarist-labs/s3gw)
 
-S3gw is another S3-compatible solution incorporated into Epinio helm-chart which can be used instead of default Minio.
+S3gw is a lightweight S3-compatible solution available in Epinio helm-chart as an alternative to Minio or external S3 provider.
 
 ### Container Registry
 
