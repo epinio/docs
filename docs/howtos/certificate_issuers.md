@@ -20,6 +20,10 @@ When [installing Epinio with helm](../installation/install_epinio.md#install-epi
 
 It's also possible to create a cert-manager cluster issuer in the cluster, before installing Epinio and referencing it by name when installing.
 
+When using the `letsencrypt-production` issuer further use the `global.tlsIssuerEmail` helm variable
+to set an email address for the reception of the certificate notification emails sent by that
+issuer. __Note__, the default address is `epinio@suse.com`.
+
 ### Cluster Issuer for ACME DNS Challenge
 
 For example to use Letsencrypt with a DNS challenge, which supports wildcards and private IPs, create this cluster issuer after installing cert-manager:
