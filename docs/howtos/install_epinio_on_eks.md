@@ -1,5 +1,5 @@
 ---
-sidebar_label: "Installing Epinio On EKS"
+sidebar_label: "Installing Epinio on EKS"
 sidebar_position: 24
 title: ""
 ---
@@ -8,19 +8,37 @@ title: ""
 
 This how-to was written using the following versions:
 
-* [epinio helm chart - v1.1.0](https://github.com/epinio/helm-charts/releases/tag/epinio-1.1.0)
-* AWS EKS - Kubernetes v1.22
-* [Ingress Nginx- v1.3.0](https://kubernetes.github.io/ingress-nginx/)
-* [Aws Load Balancer Controller - v2.4.2](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/)
-* [Cert Manager - v1.9.1](https://github.com/cert-manager/cert-manager)
+* [epinio helm chart - v1.6.2](https://github.com/epinio/helm-charts/releases/tag/epinio-1.6.2)
+* AWS EKS - Kubernetes v1.22, v1.23***** or v1.24*****
+* [Ingress Nginx - v1.6.4](https://kubernetes.github.io/ingress-nginx/)
+* [Cert Manager - v1.11.0](https://github.com/cert-manager/cert-manager)
+
+:::caution *) Additional requirements for EKS v1.23 and v1.24
+
+
+* From EKS v1.23 there is a need to configure and install an out-of-tree AWS EBS CSI driver as a addon into your EKS cluster. Please refer to this [EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) for more details.
+* Since EKS v1.24, when the `dockershim` CRI support has been dropped and replaced by `containerd` (supports only trusted HTTPS registries by default), there is a need to allow pulling epinio's app container images from Internal Epinio HTTP Registry. The following configuration must be done on all EKS nodes prior deploying an Epinio app:
+
+    ```shell
+    mkdir -p /etc/containerd/certs.d/127.0.0.1:30500
+    cat > /etc/containerd/certs.d/127.0.0.1:30500/hosts.toml <<EOF
+    server = "http://127.0.0.1:30500"
+
+    [host."http://127.0.0.1:30500"]
+      capabilities = ["pull"]
+    EOF
+    ```
+
+    Eventually you may modify the node count and apply [this manifest](https://raw.githubusercontent.com/epinio/epinio/main/scripts/eks-cri-allow-http-registries.yaml) which will do the nodes configuration for you.
+
+:::
 
 ## Prerequisites
 
 * [kubectl - v1.22](https://kubernetes.io/docs/tasks/tools/)
-* [aws cli - v2.7.19](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-* [eksctl - v0.106.0](https://docs.aws.amazon.com/pt_br/eks/latest/userguide/eksctl.html)
-* [AWS Public Cetificate](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html)
-* [AWS WAF - Web ACL](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-creating.html)
+* [helm - v3.11.0](https://helm.sh/docs/helm/helm_get/)
+* [aws cli - v2.9.14](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+* [eksctl - v0.115.0](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 
 ## Create EKS Kubernetes Cluster
 
@@ -28,18 +46,19 @@ This how-to was written using the following versions:
 
 ```shell
 eksctl create cluster \
-  --name <cluster-name> \
-  --version 1.22 \
-  --nodegroup-name <node-group-name> \
-  --node-type <node-size> \
-  --nodes <node-qty>
+  --name=<cluster-name> \
+  --region=us-west-1 \
+  --nodes=2 \
+  --node-type=t3.xlarge \
+  --node-volume-size=40 \
+  --managed \
+  --kubeconfig=kubeconfig-eks
 ```
-
-## Install AWS Load Balancer Controller
-
-The AWS controller is needed to let us interact with AWS ELB service.
-
-Please follow the [Official Installation Guide](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/deploy/installation/) to get it up and running.
+Once EKS cluster is deployed try to access the cluster:
+```shell
+export KUBECONFIG=$PWD/kubeconfig-eks
+kubectl get nodes
+```
 
 ## Install Cert Manager
 
@@ -60,63 +79,25 @@ helm repo update
 
 ### Install
 
-**Important:**
-
-* *controller.service.type*: must be 'NodePort' to be able to create AWS Application LoadBalancer.
-* *controller.config.use-forwarded-headers*: must be set TRUE, if not, you are not be able to run 'epinio app exec' command.
-
 ```shell
-helm upgrade --install nginx ingress-nginx/ingress-nginx --namespace nginx --create-namespace --set controller.service.type=NodePort  --set-string controller.config.use-forwarded-headers="true"
+helm upgrade --install nginx ingress-nginx/ingress-nginx --namespace nginx --create-namespace --set controller.ingressClassResource.default=true
 ```
 
-### Create Ingress object for Nginx
+### Create a CNAME DNS entry pointing to ELB endpoint
 
-* Create a file with the content below;
-* Create [AWS Ceriticate Manager](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html) and [AWS WAF Web ACL](https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-creating.html);
-* Place the resources ARN in the respective annotations section.
-* Execute 'kubectl apply -f ....'
-
+The ELB endpoint is automatically assigned after installing ingress-nginx-controller. For getting the assigned ELB endpoint in your cluster run this command:
 ```shell
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: nginx-ingress
-  namespace: nginx
-  annotations:
-    alb.ingress.kubernetes.io/healthcheck-path: /healthz
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: <put_your_certificate_arn_here>
-    alb.ingress.kubernetes.io/wafv2-acl-arn: <put_your_waf_arn_here>
-spec:
-  ingressClassName: alb
-  rules:
-  - host: '*.example.com' #Change it to you domain
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: nginx-ingress-nginx-controller
-            port:
-              number: 80
+kubectl get svc -n nginx nginx-ingress-nginx-controller -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+>a113b33f6500241a77dcacc1b62c54eb-1234567890.us-west-1.elb.amazonaws.com
 ```
 
-After execute 'kubectl apply', AWS will automatically:
+Use that ELB endpoint value when creating the CNAME record for your DNS zone (for eg. in AWS Route53 service):
 
-* Provision a new Application LB;
-* Create a Target Group pointing to your nginx-controller POD;
-* Associate the Application LB and Target Group;
-* Associate the Application LB with WAF.
-
-Get the ALB DNS name and create a CNAME dns entry pointing to it:
-
-* Record name: *.example.com
-* Type: CNAME
-* Value: ALB DNS name
+```
+Record name: *.example.com
+Type: CNAME
+Value: a113b33f6500241a77dcacc1b62c54eb-1234567890.us-west-1.elb.amazonaws.com
+```
 
 Test it:
 
@@ -124,10 +105,10 @@ Test it:
 nslookup test.example.com
 ```
 
-You should get the ALB dns name as an answer
+You should get the ELB endpoint value as an answer.
 
 ## Install Epinio on the Cluster
 
 ```shell
-helm install epinio -n epinio --create-namespace epinio/epinio --set global.domain=example.com --set global.tlsIssuer=letsencrypt-epinio --set ingress.ingressClassName=nginx
+helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespace --set global.domain=example.com --set global.tlsIssuer=letsencrypt-production --set global.tlsIssuerEmail=email@example.com
 ```
