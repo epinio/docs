@@ -29,7 +29,7 @@ This how-to was written using the following versions:
     EOF
     ```
 
-    Eventually you may modify the node count and apply [this manifest](https://raw.githubusercontent.com/epinio/epinio/main/scripts/eks-cri-allow-http-registries.yaml) which will do the nodes configuration for you.
+    Instead of doing this manually it should be easier to simply apply [this manifest](https://raw.githubusercontent.com/epinio/epinio/main/scripts/eks-cri-allow-http-registries.yaml) which will do the nodes configuration for you, after editing it to use the correct node count.
 
 :::
 
