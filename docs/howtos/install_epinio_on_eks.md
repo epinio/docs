@@ -17,7 +17,7 @@ This how-to was written using the following versions:
 
 
 * Since EKS v1.23 it is necessary to configure and install an out-of-tree AWS EBS CSI driver as an addon into your EKS cluster. Please refer to this [EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) for more details.
-* Since EKS v1.24, when the `dockershim` CRI support has been dropped and replaced by `containerd` (supports only trusted HTTPS registries by default), there is a need to allow pulling epinio's app container images from Internal Epinio HTTP Registry. The following configuration must be done on all EKS nodes prior deploying an Epinio app:
+* Since EKS v1.24 it is necessary to explicitly allow the pulling of Epinio's app container images from its internal HTTP registry, due to the removal of `dockershim` CRI support and its replacement by `containerd`, which supports only trusted HTTPS registries by default. The following configuration must be done on all EKS nodes prior deploying an Epinio app:
 
     ```shell
     mkdir -p /etc/containerd/certs.d/127.0.0.1:30500
