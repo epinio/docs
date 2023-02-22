@@ -42,7 +42,7 @@ This how-to was written using the following versions:
 
 ## Create EKS Kubernetes Cluster
 
-*Ensure that you ran **[aws configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)** before you proceed with the steps bellow.*
+*Ensure that you ran **[aws configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)** before you proceed with the steps below.*
 
 ```shell
 eksctl create cluster \
