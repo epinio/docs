@@ -34,12 +34,15 @@ In AKS, Epinio must be installed with an external registry because due to a [cha
 
 ### EKS prerequisites
 
-* Epinio has been tested with EKS version **v1.21**
+* Epinio has been tested with EKS version **v1.22**, **v1.23** and **v1.24**
 * To just try out Epinio, e.g. 2 **t3a.large** nodes are sufficient
 
 ### Create an EKS cluster
 
 If you do not have an existing cluster, follow the [quickstart](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) to create an EKS cluster.
+
+Details can be found in the dedicated [EKS documentation](./install_epinio_on_eks.md).
+
 </details>
 
 <details>
