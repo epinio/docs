@@ -59,7 +59,7 @@ kubectl -n kube-system describe configmap aws-auth | grep rolearn | cut -d':' -f
 
 ## Authentication with AWS EKS Service Account
 
-For an increased security the policy can be attached to just the Epinio pod ServiceAccount. You will also need to create a specific ServiceAccount that will be bound to the staging job with the `server.stagingServiceAccountName` value.
+For increased security the policy can be attached to just the Epinio pod ServiceAccount. You will also need to create a specific ServiceAccount that will be bound to the staging job with the `server.stagingServiceAccountName` value.
 
 To use AWS IAM roles for service accounts, an IAM OIDC provider must exist for your cluster's OIDC issuer URL.  
 
@@ -70,7 +70,7 @@ oidc_id=$(aws eks describe-cluster --name ${CLUSTER_NAME} --query "cluster.ident
 aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
 ```
 
-If output is returned, then you already have an IAM OIDC provider for your cluster and you can skip the next step. If no output is returned, then you must create an IAM OIDC provider for your cluster. Check the AWS guide [here](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
+If output is returned, then you already have an IAM OIDC provider for your cluster and you can skip the next step. If no output is returned, then you must create an IAM OIDC provider for your cluster. Check the [AWS guide](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) for this task.
 
 
 ### Epinio Server Role
