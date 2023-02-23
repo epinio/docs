@@ -17,18 +17,19 @@ epinio server [flags]
 ### Options
 
 ```
-      --access-control-allow-origin string   (ACCESS_CONTROL_ALLOW_ORIGIN) Domains allowed to use the API
-      --app-image-exporter string            (APP_IMAGE_EXPORTER) Name of the container image used to download the application image from the 'export' API.
-      --disable-tracking                     (DISABLE_TRACKING) Disable tracking of the running Epinio and Kubernetes versions
-  -h, --help                                 help for server
-      --ingress-class-name string            (INGRESS_CLASS_NAME) Name of the ingress class to use for apps. Leave empty to add no ingressClassName to the ingress.
-  -n, --namespace string                     (NAMESPACE) The namespace to use (default "epinio")
-      --port int                             (PORT) The port to listen on. Leave empty to auto-assign a random port
-      --registry-certificate-secret string   (REGISTRY_CERTIFICATE_SECRET) Secret for the registry's TLS certificate
-      --s3-certificate-secret string         (S3_CERTIFICATE_SECRET) Secret for the S3 endpoint TLS certificate. Can be left empty if S3 is served with a trusted certificate.
-      --tls-issuer string                    (TLS_ISSUER) The cluster issuer to use for workload certificates
-      --trace-output string                  (TRACE_OUTPUT) logs output format [text,json] (default "text")
-      --upgrade-responder-address string     (UPGRADE_RESPONDER_ADDRESS) Disable tracking of the running Epinio and Kubernetes versions (default "https://epinio.version.rancher.io/v1/checkupgrade")
+      --access-control-allow-origin string    (ACCESS_CONTROL_ALLOW_ORIGIN) Domains allowed to use the API
+      --app-image-exporter string             (APP_IMAGE_EXPORTER) Name of the container image used to download the application image from the 'export' API.
+      --disable-tracking                      (DISABLE_TRACKING) Disable tracking of the running Epinio and Kubernetes versions
+  -h, --help                                  help for server
+      --ingress-class-name string             (INGRESS_CLASS_NAME) Name of the ingress class to use for apps. Leave empty to add no ingressClassName to the ingress.
+  -n, --namespace string                      (NAMESPACE) The namespace to use (default "epinio")
+      --port int                              (PORT) The port to listen on. Leave empty to auto-assign a random port
+      --registry-certificate-secret string    (REGISTRY_CERTIFICATE_SECRET) Secret for the registry's TLS certificate
+      --s3-certificate-secret string          (S3_CERTIFICATE_SECRET) Secret for the S3 endpoint TLS certificate. Can be left empty if S3 is served with a trusted certificate.
+      --staging-service-account-name string   (STAGING_SERVICE_ACCOUNT_NAME)
+      --tls-issuer string                     (TLS_ISSUER) The cluster issuer to use for workload certificates
+      --trace-output string                   (TRACE_OUTPUT) logs output format [text,json] (default "text")
+      --upgrade-responder-address string      (UPGRADE_RESPONDER_ADDRESS) Disable tracking of the running Epinio and Kubernetes versions (default "https://epinio.version.rancher.io/v1/checkupgrade")
 ```
 
 ### Options inherited from parent commands
