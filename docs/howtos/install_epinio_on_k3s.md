@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Installing Epinio On K3s (local)"
-sidebar_position: 17
+sidebar_position: 18
 title: ""
 ---
 
