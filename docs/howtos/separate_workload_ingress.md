@@ -21,4 +21,4 @@ helm install \
 
 ## References
 
-  - [Load Balancers](../references/customizations/lb.md)
+  - [Load Balancers](../references/customization/lb.md)
