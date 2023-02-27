@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Installing Epinio On Minikube (local)"
-sidebar_position: 20
+sidebar_position: 21
 title: ""
 ---
 

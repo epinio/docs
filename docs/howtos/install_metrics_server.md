@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Installing A Metrics Server"
-sidebar_position: 22
+sidebar_position: 23
 title: ""
 ---
 
