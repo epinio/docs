@@ -178,7 +178,7 @@ As described above, Epinio creates a new `ingress route` for your application. T
 However, you might need to test parts of your application using a different port. For these specific cases, you can run the following command:
 
 ```shell
-epinio app port-forward 8080:8080 mysimpleapp
+epinio app port-forward mysimpleapp 8080:8080
 ```
 
 :::tip
