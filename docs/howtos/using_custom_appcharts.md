@@ -94,10 +94,8 @@ Now, all future invocations of `epinio push` will use the custom Helm chart set 
 You will be able to override it with the `--app-chart` option, as described above.
 
 :::note
-The `default` chart is a __local__ setting. It affects only the developer who made
- the change.
- :::
-
+The `default` chart is a __local__ setting. It affects only the developer who made the change.
+:::
 
 # Querying the default Helm chart
 
