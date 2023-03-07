@@ -21,6 +21,10 @@ To add a custom Helm chart to the system, there are two mandatory steps:
 
 The following two sections explain these steps in detail.
 
+An advanced feature of custom appliction charts is the ability to expose user-settable configuration
+values to the user. As doing so crosses both chart creation and registration this feature is
+described in a separate section to keep the necessary information together.
+
 ## Creating the Helm chart
 
 Instead of starting from scratch, you can use the standard chart provided by Epinio as a
@@ -31,7 +35,7 @@ or, you can clone the [Epinio Helm chart repo](https://github.com/epinio/helm-ch
 The chart is located in `helm-charts/chart/application`.
 
 ```
-$ git clone https://github.com/epinio/helm-charts.git
+git clone https://github.com/epinio/helm-charts.git
 ```
 
 In this How-To, we will create a variant of the chart by adding an annotation to every
@@ -84,7 +88,7 @@ Once you modified the chart to your needs, use the following command to package 
 changed chart into a tarball:
 
 ```
-$ helm package helm-charts/chart/application
+helm package helm-charts/chart/application
 ```
 
 The tarball is placed into the current working directory and the filename should be
@@ -137,20 +141,81 @@ The necessary Kubernetes CRD is provided by the Epinio installation.
 Apply this resource to the Epinio cluster:
 
 ```
-$ kubectl apply -f fluentd-appchart.yaml
+kubectl apply -f fluentd-appchart.yaml
 ```
 
 Verify that the new chart is now registered in Epinio:
 
 ```
-$ epinio app chart list
+epinio app chart list
 ```
 
 You can also see the details of the chart in Epinio:
 
 ```
-$ epinio app chart show fluent
+epinio app chart show fluent
 ```
+
+## User-settable configuration values
+
+To expose some user-settable configuration value `foo` the created application chart has to look for
+this variable in the `.Values.userConfig` map, i.e. it has to use the helm variable
+`.Values.userConfig.foo`.
+
+:::caution
+The chart is expected to use a sensible default value when this helm variable is not set.
+:::
+
+With the application chart exposing `foo` as described above Epinio has to be made aware of the
+configuration value by adding a specification to the `AppChart` resource describing it.
+
+This is done by adding an entry `foo` to the `spec.settings` map of the AppChart resource.  This
+entry is itself a map, with a mandatory `type` field, and type-dependent __optional__ restrictions
+on the valid values of `foo`.
+
+Example:
+
+```
+kind: AppChart
+metadata:
+  [...]
+spec:
+  [...]
+  settings:
+    foo:
+      type: integer
+      minimum: '42'
+    bar:
+      type: number
+      maximum: '122'
+    flag:
+       type: bool
+    mode:
+      type: string
+      enum:
+        - "sequential"
+        - "out of order"
+        - "randomized"
+```
+
+The valid types and their possible restrictions are:
+
+|Type      |Restriction |Semantics                   |
+|---       |---         |---                         |
+|`integer` |`minimum`   |Minimum valid integer value |
+|          |`maximum`   |Maximum valid integer value |
+|`number`  |`minimum`   |s.a., floating point        |
+|          |`maximum`   |s.a., floating point        |
+|`string`  |`enum`      |Sequence of valid values    |
+|`bool`    |n/a         |                            |
+
+Restrictions set on a type not supporting them, for example a `minimum` on a `string`-type
+configuration value, are ignored.
+
+:::caution
+The restriction values have to be YAML __strings__, regardless the type of the configuration value.
+Note how in the example above the `maximum` and `minimum` values are quoted to make them strings.
+:::
 
 ## Troubleshooting
 

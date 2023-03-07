@@ -20,7 +20,7 @@ applications as described in this How-To.
 You can list the available Helm charts by running the following command:
 
 ```
-$ epinio app chart list
+epinio app chart list
 ```
 
 As an example, here is the output of an unmodified Epinio installation:
@@ -44,7 +44,6 @@ For detailed information on the `--app-chart` setting, see the following CLI com
   - [epinio app update](../references/commands/cli/app/epinio_app_update.md)
   - [epinio push](../references/commands/cli/epinio_push.md)
 
-
 :::caution
 Changing the chart to use is __not possible__ if the application has an
 active workload.
@@ -53,13 +52,29 @@ To switch a deployed application to a different Helm chart, you will have to
 delete and re-deploy the application.
 :::
 
-
 :::info
 Scaling the application to zero instances is __not sufficient__. While that effectively
 stops the application it does not remove the deployed workload, just the underlying active
 elements.
 :::
 
+# Deploying applications with a custom Helm chart which has user-settable configuration values
+
+The general mechanism is the same as described in the previous section.
+
+However, further use the option `--chart-value` to specify name and value of a single user-settable
+configuration value. Use the option multiple times to set all the desired configuration values.
+
+:::note
+User-settable configuration values are generally __optional__. The application chart is expected to
+contain and use sensible defaults for all configuration values not set by the user.
+:::
+
+Example:
+
+```
+epinio push --app-chart CHARTNAME --chart-value CVNAME=VALUE
+```
 
 # Setting a default Helm chart
 
@@ -72,7 +87,7 @@ change the default chart.
 You can set a custom chart as the default by running the following command:
 
 ```
-$ epinio app chart default FOO
+epinio app chart default FOO
 ```
 
 Now, all future invocations of `epinio push` will use the custom Helm chart set as default.
@@ -89,7 +104,7 @@ The `default` chart is a __local__ setting. It affects only the developer who ma
 You can check which chart is set as `default` by running the following command:
 
 ```
-$ epinio app chart default
+epinio app chart default
 ```
 
 You can also check which chart is set as `default` when listing the available charts.
@@ -108,7 +123,7 @@ As an example, the output below shows the chart `FOO` as the current default:
 You can set the system chart `standard` back as the default, by running the following command:
 
 ```
-$ epinio app chart default ''
+epinio app chart default ''
 ```
 
 :::note
