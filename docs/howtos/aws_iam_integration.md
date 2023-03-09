@@ -57,6 +57,22 @@ The instance role can be determined with:
 kubectl -n kube-system describe configmap aws-auth | grep rolearn | cut -d':' -f7 | cut -d'/' -f2
 ```
 
+To clean up once finished, remove Epinio, detach and delete policies with:
+
+```
+helm delete --wait epinio -n epinio 
+kubectl delete --wait ns epinio workspace 
+ 
+aws iam detach-role-policy \
+  --role-name "<your instance role here>" \
+  --policy-arn "<your policy arn here>"
+ 
+# If created ad-hoc policy
+aws iam list-policies #  find and copy EpinioECEKSClusterPolicy ARN used in next step
+aws iam delete-policy --policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/EpinioECEKSClusterPolicy
+
+```
+
 ## Authentication with AWS EKS Service Account
 
 For increased security the policy can be attached to just the Epinio pod ServiceAccount. You will also need to create a specific ServiceAccount that will be bound to the staging job with the `server.stagingServiceAccountName` value.
@@ -74,6 +90,8 @@ If output is returned, then you already have an IAM OIDC provider for your clust
 
 
 ### Epinio Server Role
+
+Ensure Epinio has been deployed first. It will be needed later to use some annotations.
 
 You will need to create a IAM Role
 
@@ -145,7 +163,7 @@ eksctl create iamserviceaccount \
     --approve
 ```
 
-and you can update your Helm deployment specifying this new service account:
+and you can update your Helm deployment specifying this new service account adding the flag `--set server.stagingServiceAccountName=epinio-staging-service-account` when upgrading Epinio:
 
 ```
 helm upgrade epinio epinio/epinio \
@@ -153,4 +171,29 @@ helm upgrade epinio epinio/epinio \
     --set global.domain=<MY_DOMAIN> \
     --set server.stagingServiceAccountName=epinio-staging-service-account \
     --wait
+```
+
+Once finished, to remove everyhing remember to remove Epinio, delete service account, detach and delete policies:
+
+```
+
+helm delete --wait epinio -n epinio
+kubectl delete --wait ns epinio workspace
+ 
+eksctl delete iamserviceaccount \
+--cluster $CLUSTER_NAME \
+--name epinio-staging-service-account \
+--namespace epinio
+ 
+aws iam detach-role-policy \
+--role-name epinio-server-role \
+--policy-arn "arn:aws:iam::${AWS_ACCOUNT_ID}:policy/EpinioECEKSClusterPolicy"
+
+aws iam delete-role \
+--role-name epinio-server-role
+
+aws iam list-policies #  find and copy EpinioECEKSClusterPolicy ARN used in next step
+aws iam delete-policy \
+--policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/EpinioECEKSClusterPolicy
+
 ```
