@@ -93,7 +93,7 @@ Note how the templating uses the `.Values.epinio.appName` field to insert the ap
 name into the annotation.
 
 The full set of values Epinio sets when deploying an application through the chart is explained in
-the configuration section of the [Application Chart Reference](../../references/customization/appcharts.md),
+the [Application Chart Reference](../references/customization/appcharts.md#configuration),
 or locally in the comments at the top of file `helm-charts/chart/application/values.yaml`.
 
 Once you have modified the chart to your needs, use the following command to package the changed
