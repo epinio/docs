@@ -21,7 +21,7 @@ To add a custom Helm chart to the system, there are two mandatory steps:
 
 The following two sections explain these steps in detail.
 
-An advanced feature of custom appliction charts is the ability to expose user-settable configuration
+An advanced feature of custom application charts is the ability to expose user-settable configuration
 values to the user. As doing so crosses both chart creation and registration this feature is
 described in a separate section to keep the necessary information together.
 
