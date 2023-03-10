@@ -58,65 +58,75 @@ knowledge of them, and will not use them.
 
 ## Configuration
 
-All configuration fields below are provied in the `epinio` hierarchy:
+All configuration fields below are provided in the `epinio` hierarchy:
 
-|Name			|Kind			|Meaning							|
-|---			|---			|---								|
-|`appName`      	|string                 |The application's name						|
-|`configurations`	|sequence (string)      |The names of the configurations to import into the application	|
-|`env`          	|sequence (assignment)  |The application's environment variables and their values 	|
-|`imageURL`     	|string                 |A reference to the app image in Epinio's registry		|
-|`ingress`      	|string                 |The ingress class name to use, if any				|
-|`replicaCount` 	|integer                |The desired number of instances (pods) to deploy		|
-|`routes`       	|sequence (route)       |The routes (= domain+path+id) the app has to be reachable at	|
-|`stageID`      	|string                 |Id of the stage run which generated the app image		|
-|`start`        	|integer                |Optional. The time of deployment, in nanoseconds    		|
-|`tlsIssuer`    	|string                 |The name of the cert issuer to use for route certs		|
-|`username`     	|string                 |The name of the user deploying the application			|
+|Name                   |Kind                   |Meaning                                                        |
+|---                    |---                    |---                                                            |
+|`appName`              |string                 |The application's name                                         |
+|`configurations`       |sequence (string)      |The names of the configurations to import into the application |
+|`env`                  |sequence (assignment)  |The application's environment variables and their values       |
+|`imageURL`             |string                 |A reference to the app image in Epinio's registry              |
+|`ingress`              |string                 |The ingress class name to use, if any                          |
+|`replicaCount`         |integer                |The desired number of instances (pods) to deploy               |
+|`routes`               |sequence (route)       |The routes (= domain+path+id) the app has to be reachable at   |
+|`stageID`              |string                 |Id of the stage run which generated the app image              |
+|`start`                |integer                |Optional. The time of deployment, in nanoseconds               |
+|`tlsIssuer`            |string                 |The name of the cert issuer to use for route certs             |
+|`username`             |string                 |The name of the user deploying the application                 |
+|`userConfig`           |map (string -> any)    |The names and values of all chart values set by the user       |
 
 Routes are maps composed of four keys:
 
-|Name		|Kind	|Meaning								|
-|---		|---	|---									|
-|`domain`	|string	|The domain of the route						|
-|`id`		|string	|A unique id to name route `Ingress` and `Certificate` resources with	|
-|`path`		|string	|The sub-path of the route, if any					|
-|`secret`	|string	|Optional. Name of a `Secret` to directly use in securing the `Ingress`	|
+|Name           |Kind   |Meaning                                                                |
+|---            |---    |---                                                                    |
+|`domain`       |string |The domain of the route                                                |
+|`id`           |string |A unique id to name route `Ingress` and `Certificate` resources with   |
+|`path`         |string |The sub-path of the route, if any                                      |
+|`secret`       |string |Optional. Name of a `Secret` to directly use in securing the `Ingress` |
 
 :::note
-
 The [Routing Secrets](routing_secrets.md) reference explains more about the `secrets` field.
-
 :::
 
 Environment assigment are maps composed of two keys:
 
-|Name	|Kind	|Meaning			|
-|---	|---	|---				|
-|`name`	|string	|The name of the variable	|
-|`value`|string	|The value of the variable	|
+|Name   |Kind   |Meaning                   |
+|---    |---    |---                       |
+|`name` |string |The name of the variable  |
+|`value`|string |The value of the variable |
+
+The user configuration map is keyed by the names of chart values set by the user, referencing the
+set values.
+
+:::note
+Please read [How To create custom application Helm charts](../../howtos/create_custom_appcharts.md)
+for more information about defining user-settable chart values when creating a custom app chart.
+
+Please read [How To use custom application Helm charts](../../howtos/using_custom_appcharts.md) for
+more information about using user-settable chart values when deploying an application.
+:::
 
 ## Pods
 
 Epinio adds the following annotations to the `Pods`:
 
-|Annotation			|Meaning							|
-|---				|---								|
-|`app.kubernetes.io/name`	|The application's name.					|
-|`epinio.io/start`		|The time of deployment, in nanoseconds, if provided by Epinio	|
+|Annotation                     |Meaning                                                        |
+|---                            |---                                                            |
+|`app.kubernetes.io/name`       |The application's name.                                        |
+|`epinio.io/start`              |The time of deployment, in nanoseconds, if provided by Epinio  |
 
 Epinio adds the following labels to the `Pods`:
 
-|Label				|Meaning							|
-|---				|---								|
-|`app.kubernetes.io/component`	|Fixed: `application`						|
-|`app.kubernetes.io/created-by`	|The name of the user deploying the application			|
-|`app.kubernetes.io/managed-by`	|Fixed: `epinio`      	  	     	     	     		|
-|`app.kubernetes.io/name`	|The application's name.					|
-|`app.kubernetes.io/part-of`	|The application's namespace	    				|
-|`epinio.io/app-container`	|The name of the main Pod container, running the app image	|
-|`epinio.io/stage-id`		|Id of the stage run which generated the app image		|
-|`helm.sh/chart`		|Chart name and version used to deploy the application		|
+|Label                          |Meaning                                                        |
+|---                            |---                                                            |
+|`app.kubernetes.io/component`  |Fixed: `application`                                           |
+|`app.kubernetes.io/created-by` |The name of the user deploying the application                 |
+|`app.kubernetes.io/managed-by` |Fixed: `epinio`                                                |
+|`app.kubernetes.io/name`       |The application's name.                                        |
+|`app.kubernetes.io/part-of`    |The application's namespace                                    |
+|`epinio.io/app-container`      |The name of the main Pod container, running the app image      |
+|`epinio.io/stage-id`           |Id of the stage run which generated the app image              |
+|`helm.sh/chart`                |Chart name and version used to deploy the application          |
 
 :::tip
 

@@ -97,7 +97,7 @@ allowed. Mixing forms causes push to report an error.
 
   - `--git`, `-g` `REPO?,REV?`
 
-    The url of the git repository holding the appliction's sources, and the revision to
+    The url of the git repository holding the application's sources, and the revision to
     use. If the revision is not specified the head of the main branch is assumed.
     When used more than once the last use wins.
 
