@@ -73,7 +73,7 @@ contain and use sensible defaults for all configuration values not set by the us
 Example:
 
 ```
-epinio push --app-chart CHARTNAME --chart-value CVNAME=VALUE
+epinio push --name APPNAME --path APPSOURCEPATH --app-chart CHARTNAME --chart-value CVNAME=VALUE ...
 ```
 
 # Setting a default Helm chart

@@ -28,24 +28,35 @@ described in a separate section to keep the necessary information together.
 ## Creating the Helm chart
 
 Instead of starting from scratch, you can use the standard chart provided by Epinio as a
-template.
+template for the modifications.
 
-You can download the chart directly from [here](https://github.com/epinio/helm-charts/tree/main/chart/application)
-or, you can clone the [Epinio Helm chart repo](https://github.com/epinio/helm-charts.git).
-The chart is located in `helm-charts/chart/application`.
+To do so it is possible to download the chart directly from
+[here](https://github.com/epinio/helm-charts/tree/main/chart/application) into a directory `D` of
+your choice, or, you can clone the [Epinio Helm chart
+repo](https://github.com/epinio/helm-charts.git), again into a directory `D` of your choice.
 
 ```
 git clone https://github.com/epinio/helm-charts.git
 ```
 
+Regardless of method, the chart will be located in the sub directory
+`helm-charts/chart/application`.
+
+:::note
+The coming steps, especially the commands given, assume that the reader uses the chosen directory
+`D` as their working directory.
+:::
+
 In this How-To, we will create a variant of the chart by adding an annotation to every
 application `Deployment`. The annotation will enable the filtering of Epinio applications
 in [fluentd](https://www.fluentd.org/).
 
-> Note: explanations about setting up and using `fluentd` are out of scope for this How-To.
+:::note
+Explanations about setting up and using `fluentd` are out of scope for this How-To.
+:::
 
 Open the file `helm-charts/chart/application/templates/deployment.yaml` in your editor of
-choice.  This file is the template for the application's Deployment resource.
+choice.  This file is the template for the application's `Deployment` resource.
 
 First, locate the section `annotations`:
 
@@ -81,35 +92,46 @@ The result should look like:
 Note how the templating uses the `.Values.epinio.appName` field to insert the application
 name into the annotation.
 
-The file `helm-charts/chart/application/values.yaml` in the chart explains the full set of
-values Epinio sets when deploying an application through the chart.
+The full set of values Epinio sets when deploying an application through the chart is explained in
+[Application Chart Reference](../../references/customization/appcharts.md#configuration), or locally
+in the comments at the top of the file `helm-charts/chart/application/values.yaml`.
 
-Once you modified the chart to your needs, use the following command to package the
-changed chart into a tarball:
+Once you have modified the chart to your needs, use the following command to package the changed
+chart into a tarball:
 
 ```
 helm package helm-charts/chart/application
 ```
 
 The tarball is placed into the current working directory and the filename should be
-`application-VERSION.tar.gz` where `VERSION` is the chart version.
+`application-VERSION.tgz` where `VERSION` is the chart version.
 
-> Note: We didn't change the chart version. Versioned chart development is out of scope
-> for this How-To.
-
+:::note
+We didn't change the chart version. Versioned chart development is out of scope for this How-To.
+:::
 
 ## Making the helm Chart known to Epinio
 
-Once the new chart created, as decribed in the previous section, you have to place the
-generated tarball on an accessible web server (i.e. public cloud, company's hosted web
-server, etc).
+:::caution
+Once the new chart is created as decribed in the previous section, it is necessary to place the
+generated tarball on an accessible web server. Possible options are
+
+  - A server in the public cloud accessible to you
+  - The company's host web server, if accessible, and permitted by company policies
+  - A personal web server
+  - A local web webserver, like an nginx in a docker container
+  - etc. 
 
 Given the plethora of possible options, this How-To simply assumes that the tarball is
-available at the example URL:
+available at the example URL
 
 ```
-https://mydomain.org/epinio-application-0.1.15-fluentd.tgz
+https://mydomain.org/epinio-application-fluentd.tgz
 ```
+
+and puts the burden on you, the reader, to change this url to match the actually chosen location,
+including the name of the tar file.
+:::
 
 Copy the following text, change the `RELEASE_NAMESPACE` value to the namespace where
 Epinio was installed into (by default it is `epinio`) and add it to a file of your choice:
@@ -122,8 +144,8 @@ metadata:
   name: fluentd
 spec:
   shortDescription: Fluentd filterable standard deployment
-  description: Epinio standard support chart extended for fluent filtering
-  helmChart: https://mydomain.org/epinio-application-0.1.15-fluentd.tgz
+  description: Epinio standard support chart extended for fluentd filtering
+  helmChart: https://mydomain.org/epinio-application-fluentd.tgz
 ```
 
 This How-To now simply assumes that the chosen file is named:
@@ -132,9 +154,10 @@ This How-To now simply assumes that the chosen file is named:
 fluentd-appchart.yaml
 ```
 
-> Information: this is a Kubernetes custom resource, which will describe the new Helm
-> chart to Epinio.  In this example, it provides the information about the name, the
-> source and descriptions.
+:::info
+This is a Kubernetes custom resource, which will describe the new Helm chart to Epinio.  In this
+example, it provides the information about the name, the source and descriptions.
+:::
 
 The necessary Kubernetes CRD is provided by the Epinio installation.
 
