@@ -176,7 +176,7 @@ epinio app chart list
 You can also see the details of the chart in Epinio:
 
 ```
-epinio app chart show fluent
+epinio app chart show fluentd
 ```
 
 ## User-settable configuration values
