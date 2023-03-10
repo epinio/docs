@@ -91,7 +91,7 @@ If output is returned, then you already have an IAM OIDC provider for your clust
 
 ### Epinio Server Role
 
-Ensure Epinio has been deployed first. It will be needed later to use some annotations.
+Ensure Epinio has been deployed first. Later you will assign a new AWS Service Account to an existing Epinio installation via `helm upgrade` command.
 
 You will need to create a IAM Role
 
