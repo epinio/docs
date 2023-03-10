@@ -173,10 +173,9 @@ helm upgrade epinio epinio/epinio \
     --wait
 ```
 
-Once finished, to remove everyhing remember to remove Epinio, delete service account, detach and delete policies:
+Once finished, to remove everything remember to remove Epinio, delete service account, detach and delete policies:
 
 ```
-
 helm delete --wait epinio -n epinio
 kubectl delete --wait ns epinio workspace
  
@@ -195,5 +194,4 @@ aws iam delete-role \
 aws iam list-policies #  find and copy EpinioECEKSClusterPolicy ARN used in next step
 aws iam delete-policy \
 --policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/EpinioECEKSClusterPolicy
-
 ```
