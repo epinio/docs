@@ -1,6 +1,6 @@
 ---
 sidebar_label: "How To Use Custom Application Helm Charts"
-sidebar_position: 15
+sidebar_position: 16
 title: ""
 ---
 

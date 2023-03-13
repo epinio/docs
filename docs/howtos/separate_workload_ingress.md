@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Separating Application Ingress From Epinio API Server Ingress"
-sidebar_position: 8
+sidebar_position: 9
 title: ""
 ---
 
