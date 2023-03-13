@@ -10,7 +10,7 @@ Like Kubernetes, Epinio has the concept of namespaces, and means of working with
 
 Working with multiple of them however is different to Kubernetes.
 
-In Kubernetes the `kubectl` client accepts an `--namespace` for all its commands,
+In Kubernetes the `kubectl` client accepts an option `--namespace` for all its commands,
 which provide the name of the namespace to work with.
 
 Epinio on the other hand maintains a __current namespace__ in its local state, often
