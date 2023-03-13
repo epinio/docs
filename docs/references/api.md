@@ -12,7 +12,7 @@ E.g.
 - Use curl to make a request:
 
 ```
-$ curl -u your-username-here:password-here https://epinio.your-system-domain/api/v1/info
+curl -u your-username-here:password-here https://epinio.your-system-domain/api/v1/info
 ```
 
 The responses are all JSON objects, except for some cases where you get an error before the request reaches the Epinio server (e.g. because of bad cluster configuration).
