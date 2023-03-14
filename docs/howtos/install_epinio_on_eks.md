@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Installing Epinio on EKS"
-sidebar_position: 25
+sidebar_position: 26
 title: ""
 ---
 

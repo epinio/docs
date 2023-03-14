@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Pushing With A Git Job"
-sidebar_position: 5
+sidebar_position: 6
 title: ""
 ---
 
