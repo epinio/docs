@@ -18,3 +18,6 @@ have one command to set and query the current namespace, and all other commands
 of the client use that namespace in their operation.
 
 The relevant command is [epinio target](commands/cli/epinio_target.md).
+
+All other namespace management (creation, inspection, deletion) is done through
+the [epinio namespace](commands/cli/namespace/epinio_namespace.md) ensemble.

@@ -16,7 +16,8 @@ which provide the name of the namespace to work with.
 Epinio on the other hand maintains a __current namespace__ in its local state, often
 also called the __targeted namespace__.
 
-To work with the applications, configurations, etc. in a namespace `foo` invoke
+To work with the applications, configurations, etc. in an existing namespace `foo`
+invoke
 
 ```
 epinio target foo
@@ -25,8 +26,8 @@ epinio target foo
 to set `foo` as the current namespace. All other commands of epinio needing
 a namespace will from that point on use `foo` in their operation.
 
-To start working with a different namespace `bar` simply invoke `epinio target`
-again, i.e. run
+To start working with a different existing namespace `bar` simply invoke
+`epinio target` again, i.e. run
 
 ```
 epinio target bar
@@ -54,6 +55,14 @@ The removed namespace stays targeted.
 
 However all commands using a namespace will report it as not existing
 and fail to work.
+:::
+
+:::caution
+While installation of Epinio creates a pre-defined namespace `workspace` the helm chart
+is __not able__ to automatically target this namespace. This has to be done by the user.
+
+This, and the previous caution also means that whatever namespace was targeted last in
+a preceding installation of Epinio will still be targeted in a new installation.
 :::
 
 ## References
