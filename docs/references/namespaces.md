@@ -22,14 +22,16 @@ The relevant command is [epinio target](commands/cli/epinio_target.md).
 All other namespace management (creation, inspection, deletion) is done through
 the [epinio namespace](commands/cli/namespace/epinio_namespace.md) ensemble. Following next, there is an example of these commands in action.
 
-## Showcase example with namespaces
+## Command usage examples
 
-Once `Epinio` is deployed, we can check the pre-configured namespace `workspace` using
-`epinio namespace list` :
+Once `Epinio` is deployed, check the existence of the pre-configured namespace `workspace` with:
 
 ```
-➜  epinio git:(main) epinio namespace list
+epinio namespace list
+```
+Output:
 
+```
 🚢  Listing namespaces
 
 ✔️  Epinio Namespaces:
@@ -38,22 +40,25 @@ Once `Epinio` is deployed, we can check the pre-configured namespace `workspace`
 | workspace | 2023-03-14 09:48:11 +0100 CET |              |                |
 ```
 
-We can create a new namespace using `epinio namespace create NAME`:
-
+Create new namespaces with: 
 ```
-➜  epinio git:(main) epinio namespace create newnamespace
-
+epinio namespace create newnamespace
+```
+Output:
+```
 🚢  Creating namespace...
 Name: newnamespace
 
 ✔️  Namespace created.
 ```
 
-Also, we can see details of a given namespace like **creation date**, **applications** and **configurations** within using `epinio namespace show NAME`:
-
+Inspect the details of a given namespace like **creation date**, **applications** and **configurations** with:
 ```
-➜  epinio git:(main) epinio namespace show newnamespace 
+epinio namespace show newnamespace
+```
 
+Output:
+```
 🚢  Showing namespace...
 Name: newnamespace
 
@@ -74,25 +79,32 @@ By default, `Epinio` brings the namespace `workspace` as default. To see this us
 Currently targeted namespace: workspace
 ```
 
-Given that we have created earlier a new namespace named `newnamespace` let's target it to operate within:
+Target the namespace `newnamespace` created earlier to operate on its contents:
 
 ```
-➜  epinio git:(main) epinio target newnamespace
+epinio target newnamespace
+```
 
+Output:
+```
 🚢  Targeting namespace...
 Name: newnamespace
 
 ✔️  Namespace targeted.
 ```
 
-Finally, let's delete the namespace `workspace` by using `epinio namespace delete NAME`:
+At last delete the namespace `newnamespace` again:
 
 ```
-➜  epinio git:(main) epinio namespace delete workspace   
+epinio namespace delete newnamespace  
+```
+
+Output:
+```
 You are about to delete namespace workspace and everything it includes, i.e. applications, configurations, etc. Are you sure? (y/n): y
 
 🚢  Deleting namespace...
-Name: workspace
+Name: newnamespace
 
 ✔️  Namespace deleted.
 ```
