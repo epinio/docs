@@ -94,3 +94,12 @@ Name: newnamespace
 
 ✔️  Namespace deleted.
 ```
+---
+### SEE ALSO
+
+* [epinio namespace create](references/commands/cli/namespace/epinio_namespace_create.md)    - Creates an epinio-controlled namespace
+* [epinio namespace delete](references/commands/cli/namespace/epinio_namespace_delete.md)    - Deletes an epinio-controlled namespace
+* [epinio namespace list](references/commands/cli/namespace/epinio_namespace_list.md)    - Lists all epinio-controlled namespaces
+* [epinio namespace show](references/commands/cli/namespace/epinio_namespace_show.md)    - Shows the details of an epinio-controlled namespace
+* [epinio target](references/commands/cli/epinio_target.md)  - Targets an epinio-controlled namespace.
+
