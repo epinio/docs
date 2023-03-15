@@ -22,4 +22,4 @@ The relevant command is [epinio target](commands/cli/epinio_target.md).
 All other namespace management (creation, inspection, deletion) is done through
 the [epinio namespace](commands/cli/namespace/epinio_namespace.md) ensemble. 
 
-A full workflow of namespace can be found in the following [namespace tutorial](docs/tutorials/namespace-tutorial.md).
+The [namespace tutorial](docs/tutorials/namespace-tutorial.md) contains a full set of examples for working with namespaces.

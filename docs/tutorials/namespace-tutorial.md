@@ -1,7 +1,8 @@
-# Namespaces workflow
-
+# Namespaces
 ## Introduction
 The following workflow will help to get familiar when working with namespaces. It assumes Epinio has been previously installed. Should not be the case. please visit [Install Epinio](docs/installation/install_epinio.md) to achieve it.
+
+This document explains the basics of working with namespaces. It assumes that Epinio is installed. If this is not the case please visit [Install Epinio](docs/installation/install_epinio.md) first.
 
 ---
 ## Workflow
@@ -52,10 +53,14 @@ Name: newnamespace
 | Configurations |                               |
 ```
 
-By default, `Epinio` brings the namespace `workspace` as default. To see this use `epinio target`
+By default, `Epinio` creates the namespace `workspace` during installation. If no previous local state existed the `epinio login` command used to get access to the installation also set this namespace as the current namespace. To see this use:
 
 ```
-➜  epinio git:(main) epinio target   
+epinio target
+```
+
+Output:
+``` 
 ✔️  
 Currently targeted namespace: workspace
 ```
