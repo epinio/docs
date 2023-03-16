@@ -1,10 +1,8 @@
 # Namespaces
 ## Introduction
-The following workflow will help to get familiar when working with namespaces. It assumes Epinio has been previously installed. Should not be the case. please visit [Install Epinio](docs/installation/install_epinio.md) to achieve it.
-
 This document explains the basics of working with namespaces. It assumes that Epinio is installed. If this is not the case please visit [Install Epinio](docs/installation/install_epinio.md) first.
 
----
+
 ## Workflow
 Once `Epinio` is deployed, check the existence of the pre-configured namespace `workspace` with:
 
