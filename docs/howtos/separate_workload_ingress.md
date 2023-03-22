@@ -19,6 +19,15 @@ helm install \
   epinio epinio/epinio
 ```
 
-## References
+In order to use this application ingress together with a domain other than the one from the helm
+template variable `global.domain`, the user can use `--route` flag when pushing an application
+through the Epinio cli or similarly by setting a `Route` value via the Epinio Web UI.
+The route value must contain the entire domain used by the application.
 
+```
+epinio app push -n sample -p . --route sample.myawesomedomain.org
+```
+
+## References
   - [Load Balancers](../references/customization/lb.md)
+  - [Custom Routes](../howtos/custom_routes.md)
