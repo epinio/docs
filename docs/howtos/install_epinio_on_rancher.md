@@ -46,25 +46,6 @@ service.spec.loadBalancerIP: # Set this to the IP of your load balancer if you k
 
 See also the [Install Epinio](../installation/install_epinio.md#ingress-controller) page for more details.
 
-### Install cert-manager
-
-If cert manager is not installed yet, you can install it by adding the relevant repository
-in `Apps` > `Repositories` > `Create`
-
-Give a name to the repo and use `https://charts.jetstack.io` as the index URL.
-
-Once done, go to the "Charts" menu and install the `cert-manager` chart.
-
-You'll see a screen where you can edit the cert-manager helm yaml file, make sure to set the following settings:
-
-```
-installCRDs: true
-extraArgs:
-- '--enable-certificate-owner-ref=true'
-```
-
-See also the [Install Epinio](../installation/install_epinio.md#cert-manager) page for more details.
-
 ## Install Epinio
 
 In the Rancher Dashboard, go to the cluster on where you want to install Epinio.
