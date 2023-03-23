@@ -63,7 +63,7 @@ extraArgs:
 - '--enable-certificate-owner-ref=true'
 ```
 
-See also the [Install Epinio](../installation/installation.md#cert-manager) page for more details.
+See also the [Install Epinio](../installation/install_epinio.md#cert-manager) page for more details.
 
 ## Install Epinio
 
