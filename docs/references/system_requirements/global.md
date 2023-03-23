@@ -11,7 +11,6 @@ For the Epinio server, and related deployments we recommend to consider the foll
 - Supported operating systems
   - Linux
     - K3s, K3d
-    - minikube
   - Windows
     - [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md)
   - MacOS

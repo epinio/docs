@@ -6,16 +6,14 @@ title: ""
 
 ## Provision of External IP for LoadBalancer service type in Kubernetes
 
-Some local kubernetes platforms do not have the ability to provide external IP address when you create a kubernetes service with `LoadBalancer` service type. The following steps will enable this ability for different local kubernetes platforms. Follow these steps before installing epinio.
+Some platforms for deploying local Kubernetes clusters do not have the ability
+to provide external IP addresses when creating Kubernetes services with service
+type `LoadBalancer`. The following steps will enable this ability for various
+platforms. Follow these steps before installing Epinio.
 
 ### K3s/K3d
 
-* Provision of LoadBalancer IP is enabled by default in K3s/K3d.
-
-### Minikube
-
-See [Install Epinio on Minikube](install_epinio_on_minikube.md) on how to
-configure minikube.
+* Provision of LoadBalancer IP is enabled by default.
 
 ### Kind 
 
@@ -68,5 +66,5 @@ timed out waiting for LoadBalancer IP on traefik service
 Ensure your kubernetes platform has the ability to provision a LoadBalancer IP address.
 ```
 
-In this case you need to configure RKE/RKE2 with an external cloud
-provider as [this one](https://github.com/digitalocean/digitalocean-cloud-controller-manager).
+In this case it is necessary to configure RKE/RKE2 with an external cloud
+provider such as the [Digital Ocean CC Manager](https://github.com/digitalocean/digitalocean-cloud-controller-manager).

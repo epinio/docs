@@ -33,7 +33,6 @@
   - [Install Epinio on K3s (local)](howtos/install_epinio_on_k3s.md)
   - [Install Epinio on Rancher Desktop (local)](howtos/install_epinio_on_rancher_desktop.md)
   - [Install Epinio on K3d (local)](howtos/install_epinio_on_k3d.md)
-  - [Install Epinio on Minikube (local)](howtos/install_epinio_on_minikube.md)
   - [Install Epinio on Public Clouds](howtos/install_epinio_on_public_cloud.md)
   - [Install Wordpress on Epinio](howtos/install_wordpress_application.md)
 
