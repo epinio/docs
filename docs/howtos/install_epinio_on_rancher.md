@@ -44,7 +44,7 @@ ports.web.redirectTo: websecure
 service.spec.loadBalancerIP: # Set this to the IP of your load balancer if you know that
 ```
 
-See also the [Install Epinio](../installation/installation.md#ingress-controller) page for more details.
+See also the [Install Epinio](../installation/install_epinio.md#ingress-controller) page for more details.
 
 ### Install cert-manager
 
