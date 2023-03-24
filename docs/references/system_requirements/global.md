@@ -10,11 +10,14 @@ For the Epinio server, and related deployments we recommend to consider the foll
 - x86_64, ARM32, or ARM64 architecture
 - Supported operating systems
   - Linux
-    - K3s, K3d
-    - minikube
+    - [K3s](../../howtos/install_epinio_on_k3s.md)
+    - [K3d](../../howtos/install_epinio_on_k3d.md)
+    - [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md)
+    - [RKE2](../../howtos/install_epinio_on_rke.md)
   - Windows
     - [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md)
   - MacOS
+    - [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md)
 - Kubernetes versions 1.20 .. 1.23
 - 2-4 VCPUs
 - 8GB RAM (system memory + 4GB)
