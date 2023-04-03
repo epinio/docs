@@ -83,6 +83,11 @@ You can then push your application to Epinio and use your image with the `--buil
 epinio push -n myapp -p app_directory --builder-image myorg/epicustombuilder:latest
 ```
 
+## More examples
+
+You can find a more complete example on how to build and deploy a custom builder here:
+- [Deploy Gitea with a custom builder image](./custom_builder_go.md)
+
 ## Reference
 
 * Project descriptor: https://github.com/buildpacks/spec/blob/main/extensions/project-descriptor.md#projectlicenses

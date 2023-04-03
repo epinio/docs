@@ -1,10 +1,10 @@
 ---
-sidebar_label: "Custom Builders"
+sidebar_label: "Deploy Gitea with a custom builder image"
 sidebar_position: 14
 title: ""
 ---
 
-# Deploy Gitea with a custom Builder image
+# Deploy Gitea with a custom builder image
 
 This How To will show you how to deploy Gitea with Epinio and a custom builder.
 
@@ -21,7 +21,7 @@ The code used during this guide is available in the [example-builder-gitea](http
 
 Before starting it's useful to know some basic concepts around Buildpacks, and have some tools already installed.
 
-You can find in the Buildpack documentation what [stacks](https://buildpacks.io/docs/concepts/components/stack/), [builders](https://buildpacks.io/docs/concepts/components/builder/), and [buildpacks](https://buildpacks.io/docs/concepts/components/buildpack/) are. You should also have `pack` installed, along with `docker` and `skopeo` (to manage OCI artifacts).
+You can find in the Buildpack documentation what [stacks](https://buildpacks.io/docs/concepts/components/stack/), [builders](https://buildpacks.io/docs/concepts/components/builder/), and [buildpacks](https://buildpacks.io/docs/concepts/components/buildpack/) are. You should also have [`pack`](https://buildpacks.io/docs/tools/pack/) installed, along with `docker` and `skopeo` (to manage OCI artifacts).
 
 
 ## Create the stack
