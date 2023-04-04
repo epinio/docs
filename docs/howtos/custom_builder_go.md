@@ -16,6 +16,12 @@ This builder will just check the needed Go and Node dependencies, and execute th
 
 The code used during this guide is available in the [example-builder-gitea](https://github.com/epinio/example-builder-gitea) repository.
 
+```
+git clone https://github.com/epinio/example-builder-gitea
+git submodule update --init --recursive
+cd example-builder-gitea
+```
+
 
 ## Basic Concepts and prerequisites
 
@@ -172,3 +178,103 @@ and push it to a public registry
 ```
 docker push ghcr.io/enrichman/gitea-builder:0.1.0
 ```
+
+## Deploy Gitea
+
+To deploy Gitea we can download the code from the reposotory, or refer directly to it.
+
+We would like to deploy a stable release, so let's find the commit of the `v1.19.0` with a couple of curls:
+
+```bash
+export GITEA_VERSION=v1.19.0
+export GITEA_TAG_OBJECT_URL=$(curl -s https://api.github.com/repos/go-gitea/gitea/git/refs/tags/$GITEA_VERSION | jq -r '.object.url')
+export GITEA_TAG_COMMIT_SHA=$(curl -s $GITEA_TAG_OBJECT_URL | jq -r '.object.sha')
+```
+
+We can now deply Gitea with a simple `epinio push`:
+
+
+```
+epinio push --name gitea \
+    --git https://github.com/go-gitea/gitea,$GITEA_TAG_COMMIT_SHA \
+    --builder-image ghcr.io/enrichman/gitea-builder:0.1.0
+```
+
+and then it should be available on your cluster (i.e. https://gitea.<SYSTEM_DOMAIN>)!
+
+### Create and bind the database
+
+We can go a step further, creating and binding the `mysql` database to our application:
+
+```
+epinio service create mysql-dev mydb
+```
+
+We can check the status of the service
+
+```
+-> % epinio service show mydb            
+
+🚢  Showing Service...
+
+
+✔️  Details:
+|       KEY       |                                     VALUE                                      |
+|-----------------|--------------------------------------------------------------------------------|
+| Name            | mydb                                                                           |
+| Created         | 2023-04-04 15:56:20 +0200 CEST                                                 |
+| Catalog Service | mysql-dev                                                                      |
+| Version         | 8.0.31                                                                         |
+| Status          | deployed                                                                       |
+| Used-By         |                                                                                |
+| Internal Routes | xcca9aa0f19a036fb6389474a7be0-mysql-headless.workspace.svc.cluster.local:3306, |
+|                 | xcca9aa0f19a036fb6389474a7be0-mysql.workspace.svc.cluster.local:3306           |
+```
+
+We can use the internal route `xcca9aa0f19a036fb6389474a7be0-mysql.workspace.svc.cluster.local:3306` to reach our DB.
+
+Let's bind it to the Gitea application with `epinio service bind mydb gitea`.
+
+And we can now check the username and passwords in the configuration:
+
+
+```
+-> % epinio configuration list
+
+🚢  Listing configurations
+Namespace: workspace
+
+
+✔️  Epinio Configurations:
+|                NAME                 |            CREATED             |  TYPE   | ORIGIN |          APPLICATIONS          |
+|-------------------------------------|--------------------------------|---------|--------|--------------------------------|
+| xcca9aa0f19a036fb6389474a7be0-mysql | 2023-04-04 15:56:22 +0200 CEST | service | mydb   | gitea (migrate to new access   |
+|                                     |                                |         |        | paths)                         |
+```
+```
+-> % epinio configuration show xcca9aa0f19a036fb6389474a7be0-mysql 
+
+🚢  Configuration Details
+Name: xcca9aa0f19a036fb6389474a7be0-mysql
+Namespace: workspace
+
+🚢  
+Created: 2023-04-04 15:56:22 +0200 CEST
+User: 
+Type: service
+Origin: mydb
+Used-By: gitea
+Siblings: 
+
+⚠️  Attention: Migrate bound apps to new access paths
+✔️  
+|      PARAMETER      |   VALUE    |               ACCESS PATH                |
+|---------------------|------------|------------------------------------------|
+| mysql-password      | 6oUDWVHVcv | /configurations/mydb/mysql-password      |
+| mysql-root-password | eG83csnOLe | /configurations/mydb/mysql-root-password |
+
+⚠️  Beware, the shown access paths are only available in the application's container
+```
+
+We can use these credential to access the database.
+Access the first time Gitea configuration from your browser and fill the database fields with the host, username and password. The database name is `my_database`, that is the default value for the Bitnami charts that Epinio is using for its sample services.
