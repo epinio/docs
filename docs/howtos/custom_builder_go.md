@@ -8,7 +8,7 @@ title: ""
 
 This How To will show you how to deploy Gitea with Epinio and a custom builder.
 
-[Gitea](https://github.com/go-gitea/gitea) is a self-hosted Git service. It's written in Go and Node.js.
+[Gitea](https://github.com/go-gitea/gitea) is a self-hosted Git service. It is written in Go and Node.js.
 
 At the time of writing the Paketo Go buildpack doesn't support Node.js asset compilation (see [issue #671](https://github.com/paketo-buildpacks/go/issues/671)), so we need to create a custom builder.
 
@@ -19,7 +19,7 @@ The code used during this guide is available in the [example-builder-gitea](http
 
 ## Basic Concepts and prerequisites
 
-Before starting it's useful to know some basic concepts around Buildpacks, and have some tools already installed.
+Before starting it is useful to know some basic concepts around Buildpacks, and have some tools already installed.
 
 You can find in the Buildpack documentation what [stacks](https://buildpacks.io/docs/concepts/components/stack/), [builders](https://buildpacks.io/docs/concepts/components/builder/), and [buildpacks](https://buildpacks.io/docs/concepts/components/buildpack/) are. You should also have [`pack`](https://buildpacks.io/docs/tools/pack/) installed, along with `docker` and `skopeo` (to manage OCI artifacts).
 
