@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Epinio Journey: Deploy complex applications with a custom builder image"
+sidebar_position: 4
 title: ""
 ---
 

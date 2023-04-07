@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Epinio Journey: Single Dev Workflow"
+sidebar_position: 3
 title: ""
 ---
 
