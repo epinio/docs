@@ -1,3 +1,8 @@
+---
+sidebar_position: 2
+title: ""
+---
+
 # Namespaces
 ## Introduction
 This document explains the basics of working with namespaces. It assumes that Epinio is installed. If this is not the case please visit [Install Epinio](docs/installation/install_epinio.md) first.

@@ -1,12 +1,12 @@
 ---
-sidebar_label: "Deploy Gitea with a custom builder image"
-sidebar_position: 14
+sidebar_label: "Epinio Journey: Deploy complex applications with a custom builder image"
+sidebar_position: 4
 title: ""
 ---
 
 # Deploy Gitea with a custom builder image
 
-This How To will show you how to deploy Gitea with Epinio and a custom builder.
+While you likely won't use Epinio to build and deploy Gitea, we are using it to show how to build a more complex application with Epinio.
 
 [Gitea](https://github.com/go-gitea/gitea) is a self-hosted Git service. It is written in Go and Node.js.
 
