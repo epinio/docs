@@ -1,16 +1,47 @@
 ---
-sidebar_label: "Quick Start"
+sidebar_label: "Quickstart"
 sidebar_position: 1
 title: ""
 ---
 
-# QuickStart 
+# Quickstart
+This guide will help you deploy and use Epinio with default options suitable for evaluation or testing purposes on existing Kubernetes cluster. For advanced Epinio deployment scenarios look into [Installation Section](../installation/install_epinio.md).
 
-If you have not already installed `epinio` follow these links
+## Installation
+Make sure your Kubernetes environment fulfills [Epinio Requirements](../references/system_requirements/global.md). A **default StorageClass**  as well as a **default IngressClass** are required. If you do not have a suitable Kubernetes cluster yet, you can follow the [RKE2 Installation](../howtos/install_epinio_on_rke.md) section.
 
-- [Installation Section](../installation/install_epinio.md)
+### Deploy Epinio
+Get the `INTERNAL-IP` value of the first Kubernetes node with `kubectl get nodes -o wide` command. Later you will use this value along with a wildcard DNS service domain (for eg. sslip.io) as helm `global.domain` value for installing Epinio.
 
-In this tutorial, you will learn how to create a namespace and how to push, list and delete an application in it.
+:::tip
+If you use Local Kubernetes Cluster, the value should be `127.0.0.1` regardless of the output from the command above. Please refer to your Local Kubernetes Cluster documentation for the IP address details of the Ingress endpoint.
+:::
+
+#### Install cert-manager
+```bash
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm upgrade --install cert-manager jetstack/cert-manager \
+    --namespace cert-manager --create-namespace \
+    --set installCRDs=true
+```
+
+#### Install Epinio
+The Epinio can be deployed by using `helm` as follows, replace the `<INTERNAL-IP>` placeholder:
+
+```bash
+helm repo add epinio https://epinio.github.io/helm-charts
+helm repo update
+helm upgrade --install epinio epinio/epinio \
+    --namespace epinio --create-namespace \
+    --set global.domain=<INTERNAL-IP>.sslip.io
+```
+
+You can point your browser and/or epinio CLI to `https://epinio.<INTERNAL-IP>.sslip.io` address then.
+
+#### Download the Epinio CLI binary
+
+Download the Epinio CLI for the desired version and architecture from the Assets section of https://github.com/epinio/epinio/releases/.
 
 ## Push an application
 

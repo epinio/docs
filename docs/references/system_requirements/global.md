@@ -3,40 +3,34 @@ sidebar_label: "Global System Requirements"
 title: ""
 ---
 
-## Kubernetes Cluster Requirements
+## System Requirements
 
-For the Epinio server, and related deployments we recommend to consider the following resources:
+Please consider the following system requirements to be minimal, additional resources may be required for additional workload (apps).
 
-- x86_64, ARM32, or ARM64 architecture
-- Supported operating systems
-  - Linux
-    - [K3s](../../howtos/install_epinio_on_k3s.md)
-    - [K3d](../../howtos/install_epinio_on_k3d.md)
-    - [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md)
-    - [RKE2](../../howtos/install_epinio_on_rke.md)
-  - Windows
-    - [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md)
-  - MacOS
-    - [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md)
-- Kubernetes versions 1.20 .. 1.23
-- 2-4 VCPUs
-- 8GB RAM (system memory + 4GB)
-- 10GB Disk space (system disk + 5GB)
+| Component | Description |
+| --- | --- |
+| OS / Kubernetes *) | Linux: [RKE2](../../howtos/install_epinio_on_rke.md), [K3s](../../howtos/install_epinio_on_k3s.md),   [K3d](../../howtos/install_epinio_on_k3d.md), [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md)<br/>Windows, MacOS: [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md) |
+| CPU | 2-4 vCPUs |
+| Memory | 8GB RAM (system memory + 4GB) |
+| Storage | 10GB Disk space (system disk + 5GB) |
 
-In addition, extensive requirements for your workload (apps) would add to that.
+*) Linux: x86_64, arm64 and s390x; MacOS: x86_64, arm64 (epinio CLI only); Windows: x86_64
 
-### Storage Class
+### Kubernetes Requirements
+:::info
+* Kubernetes cluster v1.20-v1.25 with access via configured [kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#the-kubeconfig-environment-variable) file
+* Installed [Helm](https://helm.sh/docs/intro/install/) CLI tool
+* Deployed [cert-manager](https://cert-manager.io/docs/installation/helm/) resources
+* Deployed [metrics-server](https://github.com/kubernetes-sigs/metrics-server#installation) resources
+* Deployed Ingress Controller as [traefik](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart) or [nginx-ingress](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/) with `default` IngressClass set
+* Deployed Persistent Volume Provisioner as [Longhorn](https://longhorn.io) or [local-path](https://github.com/rancher/local-path-provisioner) providing a `default` StorageClass. Access mode `ReadWriteMany` (RWX) is prefered.
+* [Optional] An external load-balancer solution in conjunction with an Ingress controller is needed for exposing Epinio HTTP(S) workload on Internet. More information [here](../../howtos/provision_external_ip_for_local_kubernetes). <!--REVISIT the link-->
+:::
 
-A default storage class (with annotation `storageclass.kubernetes.io/is-default-class: "true"`) is needed.
+### Default IngressClass
 
-### Load Balancer
+Although there are some ingress controllers that can work without the definition of a `default` IngressClass, it is recommended to use the default IngressClass (with the annotation `ingressclass.kubernetes.io/is-default-class: "true"`).
 
-Epinio (Traefik) requires a load-balancer. Depending on your target infrastructure, you can use embedded ones (like on Public Cloud, K3d, aso.) or configure your own.
-Also see [Provision of External IP for LoadBalancer service type in Kubernetes](../../howtos/provision_external_ip_for_local_kubernetes.md) for more information.
+### Default StorageClass
 
-### Troubleshooting
-
-While Kubernetes **v1.22** is supported there is an issue when the container runtime is `containerd > 1.5.6`: the [pack cli](https://github.com/buildpacks/pack) is placing too much information into the
-image layers ([relevant issue](https://github.com/paketo-buildpacks/full-builder/issues/415)).
-
-This was fixed in version **v1.5.8** of `containerd`, and the updated runtime is available from Kubernetes **v1.22.4** onwward, so if you have a lower version please update.
+A default StorageClass (with annotation `storageclass.kubernetes.io/is-default-class: "true"`) is needed.

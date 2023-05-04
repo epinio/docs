@@ -1,14 +1,13 @@
 ---
-sidebar_label: "Magic DNS setup"
+sidebar_label: "Wildcard DNS setup"
 sidebar_position: 4
 title: ""
 ---
 
-# "Magic" DNS setup
+# Wildcard DNS setup
 
 A working system domain is needed for Epinio to work, as explained in the ["DNS setup" page](dns_setup.md).
-This is a step that takes some time and needs you to own a domain which you can use. If you are just trying out
-Epinio, you can use a "magic" domain to get running faster.
+This is a step that takes some time and needs you to own a domain which you can use. If you are just trying out Epinio, you can use a "magic" wildcard domain to get running faster.
 
 By "magic" we mean a domain that will always resolve to the IP address that is part of the domain itself. There are various free
 services online that do that:

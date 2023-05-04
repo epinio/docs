@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Installing Epinio On K3s (local)"
-sidebar_position: 19
+sidebar_position: 20
 title: ""
 ---
 
@@ -27,7 +27,7 @@ Export the k3s cluster configration first:
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ```
 
-Follow ["magic" DNS setup](../installation/magicDNS_setup) to install Epinio in your test environment.
+Follow [wildcard DNS setup](../installation/wildcardDNS_setup) to install Epinio in your test environment.
 
 `<IP>` can be found by running:
 ```

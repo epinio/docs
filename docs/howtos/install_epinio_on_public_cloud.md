@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Installing Epinio On Public Clouds"
-sidebar_position: 23
+sidebar_position: 22
 title: ""
 ---
 

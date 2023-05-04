@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Installing Epinio on EKS"
-sidebar_position: 26
+sidebar_label: "Installing Epinio On EKS"
+sidebar_position: 23
 title: ""
 ---
 

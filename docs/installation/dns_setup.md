@@ -27,7 +27,7 @@ to point your desired domain to the IP address of your Ingress controller. There
 1. Find the IP address of the ingress controller
 2. Setup your DNS
 
-> **NOTE:** For development or demo environments, [an easy magic DNS setup can be used](magicDNS_setup.md) instead.
+> **NOTE:** For development or demo environments, [an easy wildcard DNS setup can be used](wildcardDNS_setup.md) instead.
 
 ## Ingress controller IP address
 
