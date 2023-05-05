@@ -168,7 +168,7 @@ When Epinio builds a container image for an application from source, it needs
 to store that image to a container registry. Epinio installs a container registry
 on the cluster when `.Values.containerregistry.enabled` is `true` (default).
 
-Any container registry that supports basic auth authentication (e.g. gcr, dockerhub etc) can be used
+Any container registry that supports basic auth authentication (e.g. gcr, dockerhub, etc) can be used
 instead, by setting this value to `false` and using
 [the relevant global values](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L107-L111)
 to point to the desired container registry.
