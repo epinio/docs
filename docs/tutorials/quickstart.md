@@ -27,7 +27,7 @@ helm upgrade --install cert-manager jetstack/cert-manager \
 ```
 
 #### Install Epinio
-The Epinio can be deployed by using `helm` as follows, replace the `<INTERNAL-IP>` placeholder:
+Then Epinio can be deployed by using `helm` as shown below. Replace the `<INTERNAL-IP>` placeholder with the correct IP address:
 
 ```bash
 helm repo add epinio https://epinio.github.io/helm-charts
