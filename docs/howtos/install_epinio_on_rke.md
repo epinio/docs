@@ -31,7 +31,7 @@ export KUBECONFIG=/etc/rancher/rke2/rke2.yaml
 Make sure you may communicate with your new RKE2 cluster by running `kubectl get pods --all`.
 
 ## RKE2 cluster prerequisities
-Perform following steps on your RKE2 node before installing Epinio:
+Perform the following steps on your RKE2 node before installing Epinio:
 
 #### 1. Install helm CLI
 ```bash
