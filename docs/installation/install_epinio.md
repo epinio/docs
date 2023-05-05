@@ -59,7 +59,7 @@ It is also possible to use Traefik instead of Nginx following the official [docu
 
 :::info Epinio helm values related to ingress
 * Use a non-default IngressClass by `--set ingress.ingressClassName=<className>`
-* Resolve `Entity Too Large` error when [uploading](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size) app source code into Epinio by: <br/>`--set 'ingress.annotations.nginx\.ingress\.kubernetes\.io/proxy-body-size=1000m'`
+* Resolve `Entity Too Large` errors occuring when [uploading](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size) application source code into Epinio by setting: <br/>`--set 'ingress.annotations.nginx\.ingress\.kubernetes\.io/proxy-body-size=1000m'`
 :::
 
 ### Cert Manager
