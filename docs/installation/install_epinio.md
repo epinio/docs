@@ -140,15 +140,15 @@ To help you, see the following HowTos for various well-known Kubernetes clusters
 ## Internal Epinio components
 ### Kubed
 
-Kubed is installed as a subchart when `.Values.kubed.enabled` is true (default).
+Kubed is installed as a subchart when `.Values.kubed.enabled` is `true` (default).
 If you already have kubed running, you can skip the installation by setting
-the helm value "kubed.enabled" to "false".
+the helm value `.Values.kubed.enabled` to `false`.
 
 ### S3 storage
 
 Epinio is using an S3 compatible storage to store the application source code.
 This chart will install [Minio](https://min.io/) when `.Values.minio.enabled` is
-true (default).
+`true` (default).
 
 In addition to Minio, Epinio offers [s3gw](https://s3gw.io/) as another internal S3 compatible storage. It is installed when `.Values.minio.enabled` is set to `false` and `.Values.s3gw.enabled` is set to `true`.
 
