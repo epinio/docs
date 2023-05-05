@@ -55,7 +55,7 @@ If you encounter the `<pending>` value in the `EXTERNAL-IP` column you can try o
 Read more about this topic in [NGINX documentation](https://kubernetes.github.io/ingress-nginx/deploy/baremetal).
 :::
 
-It's also possible to use Traefik instead of Nginx following the official [documentation](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart).
+It is also possible to use Traefik instead of Nginx following the official [documentation](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart).
 
 :::info Epinio helm values related to ingress
 * Use a non-default IngressClass by `--set ingress.ingressClassName=<className>`
