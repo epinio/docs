@@ -74,9 +74,7 @@ epinio login -u admin 'https://epinio.127.0.0.1.sslip.io'
 ```
 
 :::tip
-
-If your local Kubernetes cluster restarts, Epinio stays installed and the certificates are still valid, so you don't have to login again.
-
+If you encounter an x509 error due to mismatched certificates after a restart, you can resolve it by reloading the certificates with `epinio settings update-ca` without having to log in again.
 :::
 
 You can confirm that you're logged in by checking the Epinio settings:
