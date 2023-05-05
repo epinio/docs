@@ -14,7 +14,7 @@ Please consider the following system requirements to be minimal, additional reso
 | Memory | 8GB RAM (system memory + 4GB) |
 | Storage | 10GB Disk space (system disk + 5GB) |
 
-*) Linux: x86_64, arm64 and s390x; MacOS: x86_64, arm64 (epinio CLI only); Windows: x86_64
+<sup>1</sup> Linux: x86_64, arm64 and s390x; MacOS: x86_64, arm64 (epinio CLI only); Windows: x86_64
 
 ### Kubernetes Requirements
 :::info
