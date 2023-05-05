@@ -13,7 +13,7 @@ This page was written using the following versions:
 * openSUSE Leap 15.4
 
 ## Install RKE2 Kubernetes cluster {#install-rke2}
-The following steps are performed under `root` user account on a dedicated machine for RKE2 server node.
+The following steps are performed using the `root` account on a dedicated machine for the RKE2 server node.
 
 #### 1. Run the installer, start and enable the rke2-server systemd service
 ```bash
