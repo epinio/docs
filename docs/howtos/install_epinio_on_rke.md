@@ -47,7 +47,7 @@ kubectl patch ingressClass nginx -p '{"metadata": {"annotations":{"ingressclass.
 > Note: You can specify a non-default IngressClass during the installation of Epinio with helm argument `--set ingress.ingressClassName=<className>`.
 
 #### 3. Deploy a dynamic storage provisioner
-On RKE2 there is no storage provisioner installed by default. You may deploy any storage provisioner of your choice which provides `ReadWriteMany` (RWX) Access Mode and a default StorageClass resource for dynamic storage provisioning.
+RKE2 clusters have no storage provisioner installed by default. To support Epinio a storage provisioner is needed. You can use any storage provisioner which provides `ReadWriteMany` (RWX) Access Mode and a default StorageClass resource for dynamic storage provisioning.
 
 :::info
 You may verify that a default StorageClass is available in your cluster in `kubectl get storageclass` output. The default StorageClass is marked by `(default)` string next to its name in the output.
