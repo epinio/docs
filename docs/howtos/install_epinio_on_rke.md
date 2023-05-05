@@ -39,7 +39,7 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 ```
 
 #### 2. Configure rke2-ingress-nginx-controller
-On RKE2 cluster the `rke2-ingress-nginx-controller` is preinstalled by default but there is a need to setup IngressClass named `nginx` as the `default` one by command:
+While the `rke2-ingress-nginx-controller` is on RKE2 clusters preinstalled by default, there is a need to set the IngressClass named `nginx` up as the `default` class. This is done by running the command:
 ```bash
 kubectl patch ingressClass nginx -p '{"metadata": {"annotations":{"ingressclass.kubernetes.io/is-default-class": "true"}}}'
 ```
