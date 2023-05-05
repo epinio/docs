@@ -32,7 +32,7 @@ helm upgrade --install nginx-ingress --namespace nginx-ingress nginx-stable/ngin
 ```
 
 :::caution
-Depending on your infrastucture and used Kubernetes offering it is recommended to verify if the service of just deployed ingress
+Depending on your infrastructure and used Kubernetes offering it is recommended to verify if the service of the just deployed ingress
 controller has assigned at least one `EXTERNAL-IP` address from external loadbalancer provider (AWS ELB and similar).
 
 ```bash
