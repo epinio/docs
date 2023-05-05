@@ -83,18 +83,18 @@ you have to set `.Values.certManagerNamespace` accordingly, otherwise Epinio ins
 :::
 
 ### Dynamic storage provisionier
-Epinio needs a dynamic storage provisioner with existing **default StorageClass**. You may deploy any storage provisioner
-of your choice, preferably with `ReadWriteMany` (RWX) Access Mode.
+RKE2 clusters have no storage provisioner installed by default. To support Epinio a storage provisioner is needed. You can use any storage provisioner which provides, preferably, `ReadWriteMany` (RWX) Access Mode and a **default StorageClass** resource for dynamic storage provisioning.
 
 :::info
-You may verify that a default StorageClass is available in your cluster in `kubectl get storageclass` output. The default StorageClass is marked by `(default)` string next to its name in the output.
+To verify that your cluster provides a default StorageClass run the command `kubectl get storageclass`. The default StorageClass is marked with the string `(default)` next to its name in the output list.
 :::
 
-For example you may deploy and configure `local-path` dynamic storage provisioner by running:
+As an example, you can deploy and configure `local-path` dynamic storage provisioner by running:
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
+
 ### Install Epinio
 
 If the above dependencies are available or going to be installed by this chart,
