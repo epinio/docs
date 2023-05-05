@@ -28,7 +28,7 @@ export PATH=$PATH:/var/lib/rancher/rke2/bin
 export KUBECONFIG=/etc/rancher/rke2/rke2.yaml
 ```
 
-Make sure you may communicate with your new RKE2 cluster by running `kubectl get pods --all`.
+Make sure that you are able to communicate with your new RKE2 cluster by running `kubectl get pods --all`.
 
 ## RKE2 cluster prerequisities
 Perform the following steps on your RKE2 node before installing Epinio:
