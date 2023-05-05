@@ -44,7 +44,7 @@ kubectl get svc nginx-ingress-controller --namespace nginx-ingress
 If you encounter the `<pending>` value in the `EXTERNAL-IP` column you can try one of the following steps to resolve that:
 - Enable the relevant cloud provider resources for your Kubernetes cluster
 - Install [MetalLB](https://metallb.universe.tf) loadbalancer into your Kubernetes cluster
-- Append `--set "controller.service.externalIPs={<node1-ip>,<node2-ip>}"` to the helm command above or perform `kubectl edit service nginx-ingress-controller -n nginx-ingress` and add:
+- Append `--set "controller.service.externalIPs={<node1-ip>,<node2-ip>}"` to the helm command above, or perform `kubectl edit service nginx-ingress-controller -n nginx-ingress` and add:
   ```yaml
   spec:
     externalIPs:
