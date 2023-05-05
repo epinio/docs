@@ -21,7 +21,7 @@ curl -sfL https://get.rke2.io | sh -
 systemctl enable --now rke2-server.service
 ```
 #### 2. Configure environment variables for operating the RKE2 cluster
-Execute following lines in RKE2 node shell and/or store them in `/root/.bashrc` file (or its equivalent) for a persistence.
+Execute the following commands in the RKE2 node shell and/or store them in the `/root/.bashrc` file (or its equivalent) for persistence.
 
 ```bash
 export PATH=$PATH:/var/lib/rancher/rke2/bin
