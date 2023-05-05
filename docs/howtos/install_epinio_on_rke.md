@@ -60,11 +60,10 @@ kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storagec
 ```
 
 ## Installation
-<!--
 For evaluation purposes of installing Epinio it's recommended to setup Epinio Ingress resources by using a wildcard DNS service as `omg.howdoi.website`, `sslip.io` or `nip.io` that points to the `INTERNAL-IP` address of your kubernetes node.
 
 For advanced and production environments you should configure an external load-balancer solution that listens on a public IP with an associated public FQDN domain. The role of the load-balancer is to perform a redirection of HTTP(S) traffic from the load-balancer endpoint to internal Ingress resource(s) of kubernetes cluster.
--->
+
 Beside advanced installation options, there are two ways of installing Epinio:
 
 1. [Installation using a Wildcard DNS Service](../installation/wildcardDNS_setup.md)
