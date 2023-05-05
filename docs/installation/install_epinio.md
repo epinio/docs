@@ -103,13 +103,20 @@ Epinio can be installed with the following:
 ```bash
 helm repo add epinio https://epinio.github.io/helm-charts
 helm repo update
-helm upgrade --install epinio epinio/epinio --namespace epinio \
-    --set global.domain=myepiniodomain.org \
-    --create-namespace #\
-    # To generate letsencrypt TLS certificate for your global.domain \
-    # --set global.tlsIssuer=letsencrypt-production \
-    # --set global.tlsIssuerEmail=user@company.org
+helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespace \
+    --set global.domain=myepiniodomain.org
 ```
+
+:::tip
+To generate trusted TLS certificates with "Let's Encrypt" for your public domain provide `.Values.global.tlsIssuer` with value `letsencrypt-production` and your e-mail as value for `.Values.global.tlsIssuerEmail` key.
+
+ ```
+ helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespace \
+    --set global.domain=myepiniodomain.org \
+    --set global.tlsIssuer=letsencrypt-production \
+    --set global.tlsIssuerEmail=user@company.org
+```
+:::
 
 The only value that is mandatory is the `.Values.global.domain` which
 should be a wildcard `*.` enabled domain, pointing to the IP address of your running
