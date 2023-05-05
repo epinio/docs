@@ -37,7 +37,7 @@ helm upgrade --install epinio epinio/epinio \
     --set global.domain=<INTERNAL-IP>.sslip.io
 ```
 
-You can point your browser and/or epinio CLI to `https://epinio.<INTERNAL-IP>.sslip.io` address then.
+You can then point your browser and/or epinio CLI to the `https://epinio.<INTERNAL-IP>.sslip.io` url.
 
 #### Download the Epinio CLI binary
 
