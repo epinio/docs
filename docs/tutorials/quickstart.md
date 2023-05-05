@@ -11,7 +11,7 @@ This guide will help you deploy and use Epinio with default options suitable for
 Make sure your Kubernetes environment fulfills the [Epinio Requirements](../references/system_requirements/global.md). A **default StorageClass**  as well as a **default IngressClass** are required. If you do not have a suitable Kubernetes cluster yet, you can follow the [RKE2 Installation](../howtos/install_epinio_on_rke.md) section.
 
 ### Deploy Epinio
-Get the `INTERNAL-IP` value of the first Kubernetes node with `kubectl get nodes -o wide` command. Later you will use this value along with a wildcard DNS service domain (for eg. sslip.io) as helm `global.domain` value for installing Epinio.
+Run the  `kubectl get nodes -o wide` command to get the `INTERNAL-IP` value of the first Kubernetes node. Later you will use this value along with a wildcard DNS service domain (for eg. `sslip.io`) as helm `global.domain` value for installing Epinio.
 
 :::tip
 If you use Local Kubernetes Cluster, the value should be `127.0.0.1` regardless of the output from the command above. Please refer to your Local Kubernetes Cluster documentation for the IP address details of the Ingress endpoint.
