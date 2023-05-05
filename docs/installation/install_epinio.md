@@ -19,7 +19,7 @@ Kubernetes cluster needs to have before you install Epinio.
 ## Installation
 
 ### Ingress Controller
-Epinio during installation via helm automatically creates various Ingress resources for its internal components.
+During installation via helm Epinio automatically creates various Ingress resources for its internal components.
 These components depend on a running ingress controller providing a **default IngressClass**.
 
 You may install `nginx-ingress-controller` using `LoadBalancer` service type:
