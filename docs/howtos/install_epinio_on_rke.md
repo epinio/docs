@@ -24,11 +24,11 @@ systemctl enable --now rke2-server.service
 Execute the following commands in the RKE2 node shell and/or store them in the `/root/.bashrc` file (or its equivalent) for persistence.
 
 ```bash
-export PATH=$PATH:/var/lib/rancher/rke2/bin
+export PATH=$PATH:/var/lib/rancher/rke2/bin:/opt/rke2/bin
 export KUBECONFIG=/etc/rancher/rke2/rke2.yaml
 ```
 
-Make sure that you are able to communicate with your new RKE2 cluster by running `kubectl get pods --all`.
+Make sure that you are able to communicate with your new RKE2 cluster by running `kubectl get pods --all-namespaces`.
 
 ## RKE2 cluster prerequisities
 Perform the following steps on your RKE2 node before installing Epinio:
