@@ -4,7 +4,7 @@ sidebar_position: 1
 title: ""
 ---
 
-# Installation of Epinio
+# Install Epinio
 
 ## Introduction
 Epinio is installed from a single Helm chart and, by default, it also installs [`Kubed`](#kubed), [`MinIO`](#s3-storage),

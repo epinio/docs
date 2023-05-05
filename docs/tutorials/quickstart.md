@@ -41,7 +41,12 @@ You can then point your browser and/or epinio CLI to the `https://epinio.<INTERN
 
 #### Download the Epinio CLI binary
 
-Download the Epinio CLI for the desired version and architecture from the Assets section of https://github.com/epinio/epinio/releases/.
+Install the latest Epinio CLI with `brew`:
+```bash
+brew install epinio
+```
+
+or download the desired version and architecture from the Assets section of https://github.com/epinio/epinio/releases/.
 
 ## Push an application
 
