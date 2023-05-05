@@ -53,7 +53,7 @@ RKE2 clusters have no storage provisioner installed by default. To support Epini
 To verify that your cluster provides a default StorageClass run the command  `kubectl get storageclass`. The default StorageClass is marked with the string `(default)` next to its name in the output list.
 :::
 
-For example you may deploy and configure `local-path` dynamic storage provisioner by running:
+As an example, you can deploy and configure `local-path` dynamic storage provisioner by running:
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
