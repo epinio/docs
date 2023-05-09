@@ -7,11 +7,6 @@ title: ""
 # Creating an RKE2 Kubernetes Cluster
 This guide will help you to deploy a suitable RKE2 Kubernetes cluster for Epinio. More details can be found in RKE2 [quickstart](https://docs.rke2.io/install/quickstart/) guide.
 
-This page was written using the following versions:
-* [epinio helm chart 1.8.0](https://github.com/epinio/helm-charts/releases/tag/epinio-1.8.0)
-* RKE2 version v1.25.9+rke2r1
-* openSUSE Leap 15.4
-
 ## Install RKE2 Kubernetes cluster {#install-rke2}
 The following steps are performed using the `root` account on a dedicated machine for the RKE2 server node.
 
