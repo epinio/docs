@@ -31,9 +31,13 @@ helm upgrade --install nginx-ingress --namespace nginx-ingress nginx-stable/ngin
     --create-namespace
 ```
 
-:::caution
-Depending on your infrastructure and used Kubernetes offering it is recommended to verify if the service of the just deployed ingress
-controller has at least one `EXTERNAL-IP` address from the external loadbalancer provider (AWS ELB and similar) assigned to it.
+It is also possible to use Traefik instead of Nginx following the official [documentation](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart).
+
+<details><summary>Verify external loadbalancer IP assignment</summary>
+
+Depending on your infrastructure and used Kubernetes offering it is recommended to verify if the service
+of the just deployed ingress controller has at least one `EXTERNAL-IP` address from the external
+loadbalancer provider (AWS ELB and similar) assigned to it.
 
 ```bash
 kubectl get svc nginx-ingress-controller --namespace nginx-ingress
@@ -53,14 +57,7 @@ If you encounter the `<pending>` value in the `EXTERNAL-IP` column you can try o
   ```
 
 Read more about this topic in [NGINX documentation](https://kubernetes.github.io/ingress-nginx/deploy/baremetal).
-:::
-
-It is also possible to use Traefik instead of Nginx following the official [documentation](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart).
-
-:::info Epinio helm values related to ingress
-* Use a non-default IngressClass by `--set ingress.ingressClassName=<className>`
-* Resolve `Entity Too Large` errors occuring when [uploading](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size) application source code into Epinio by setting: <br/>`--set 'ingress.annotations.nginx\.ingress\.kubernetes\.io/proxy-body-size=1000m'`
-:::
+</details>
 
 ### Cert Manager
 
@@ -99,28 +96,33 @@ kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storagec
 
 If the above dependencies are available or going to be installed by this chart,
 Epinio can be installed with the following:
-
 ```bash
 helm repo add epinio https://epinio.github.io/helm-charts
 helm repo update
 helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespace \
     --set global.domain=myepiniodomain.org
 ```
+<details><summary>With "Let's Encrypt" certificates</summary>
+<p>To generate trusted TLS certificates with "Let's Encrypt" for your public domain provide
+`.Values.global.tlsIssuer` with value `letsencrypt-production` and your e-mail as value for
+`.Values.global.tlsIssuerEmail` key.</p>
 
-:::tip
-To generate trusted TLS certificates with "Let's Encrypt" for your public domain provide `.Values.global.tlsIssuer` with value `letsencrypt-production` and your e-mail as value for `.Values.global.tlsIssuerEmail` key.
-
- ```
+```bash
  helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespace \
     --set global.domain=myepiniodomain.org \
     --set global.tlsIssuer=letsencrypt-production \
     --set global.tlsIssuerEmail=user@company.org
 ```
-:::
+</details>
 
 The only value that is mandatory is the `.Values.global.domain` which
 should be a wildcard `*.` enabled domain, pointing to the IP address of your running
 Ingress controller.
+
+:::info
+* Use a non-default IngressClass: `--set ingress.ingressClassName=<className>`
+* Set annotations for Epinio related ingresses to resolve errors `Entity Too Large` when [uploading](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size) application source code into Epinio: <br/>`--set 'ingress.annotations.nginx\.ingress\.kubernetes\.io/proxy-body-size=1000m'`
+:::
 
 Read more on how to setup DNS here: [DNS setup](./dns_setup.md)
 
