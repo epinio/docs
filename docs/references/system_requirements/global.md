@@ -16,10 +16,13 @@ Please consider the following system requirements to be minimal, additional reso
 
 <sup>1</sup> Linux: x86_64, arm64 and s390x; MacOS: x86_64, arm64 (epinio CLI only); Windows: x86_64
 
+ #### Installation Requirements:
+ * Installed [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) CLI tool with access to the Kubernetes cluster via configured [kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#the-kubeconfig-environment-variable) file
+ * Installed [Helm](https://helm.sh/docs/intro/install/) CLI tool
+
 ### Kubernetes Requirements
 :::info
-* Kubernetes cluster v1.20-v1.25 with access via configured [kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/#the-kubeconfig-environment-variable) file
-* Installed [Helm](https://helm.sh/docs/intro/install/) CLI tool
+* Kubernetes cluster v1.20-v1.26
 * Deployed [cert-manager](https://cert-manager.io/docs/installation/helm/) resources
 * Deployed [metrics-server](https://github.com/kubernetes-sigs/metrics-server#installation) resources
 * Deployed Ingress Controller as [traefik](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart) or [nginx-ingress](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/) with `default` IngressClass set
