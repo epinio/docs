@@ -26,7 +26,7 @@ Please consider the following system requirements to be minimal, additional reso
 * Deployed [cert-manager](https://cert-manager.io/docs/installation/helm/) resources
 * Deployed [metrics-server](https://github.com/kubernetes-sigs/metrics-server#installation) resources
 * Deployed Ingress Controller as [traefik](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart) or [nginx-ingress](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/) with `default` IngressClass set
-* Deployed Persistent Volume Provisioner as [Longhorn](https://longhorn.io) or [local-path](https://github.com/rancher/local-path-provisioner) providing a `default` StorageClass. Access mode `ReadWriteMany` (RWX) is prefered.
+* Deployed Persistent Volume Provisioner as [Longhorn](https://longhorn.io) or [local-path](https://github.com/rancher/local-path-provisioner) providing a `default` StorageClass. Access mode `ReadWriteMany` (RWX) is preferred.
 * [Optional] An external load-balancer solution in conjunction with an Ingress controller is needed for exposing Epinio HTTP(S) workload on Internet. More information [here](../../howtos/provision_external_ip_for_local_kubernetes). <!--REVISIT the link-->
 :::
 
