@@ -10,7 +10,7 @@ title: ""
 Epinio is installed from a single Helm chart and, by default, it also installs [`Kubed`](#kubed), [`MinIO`](#s3-storage),
 [`Dex`](#dex) and a [container registry](#container-registry) in your Kubernetes cluster.
 
-You can disable the installation of `Kubed`, `MinIO`, `Dex` and the `container registry` by changing the settings as described in the respective sections.
+You can disable the installation of these sub charts by changing the settings as described in the respective sections.
 
 ## Prerequisites
 See [system requirements](../references/system_requirements/global.md) for a detailed list of external components your
@@ -56,7 +56,7 @@ If you encounter the `<pending>` value in the `EXTERNAL-IP` column you can try o
     - <node2-ip>
   ```
 
-Read more about this topic in [NGINX documentation](https://kubernetes.github.io/ingress-nginx/deploy/baremetal).
+Read more about this topic in the [NGINX documentation](https://kubernetes.github.io/ingress-nginx/deploy/baremetal).
 </details>
 
 ### Cert Manager
@@ -103,8 +103,8 @@ helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespac
     --set global.domain=myepiniodomain.org
 ```
 <details><summary>With "Let's Encrypt" certificates</summary>
-<p>To generate trusted TLS certificates with "Let's Encrypt" for your public domain provide
-`.Values.global.tlsIssuer` with value `letsencrypt-production` and your e-mail as value for
+<p>To generate trusted TLS certificates with "Let's Encrypt" for your public domain set
+`.Values.global.tlsIssuer` to `letsencrypt-production` and your e-mail as value for
 `.Values.global.tlsIssuerEmail` key.</p>
 
 ```bash
@@ -169,7 +169,7 @@ Any external S3 compatible solution can be used instead by setting `.Values.mini
 
 [Dex](https://dexidp.io) OpenID Connect Provider is installed as a subchart when `.Values.global.dex.enabled` is set to `true` (default).
 
-In case you don't need to use an identity provider you may set the value to `false` and use only local epinio users. Here you will find more info about [OIDC Authentication](../references/authentication_oidc.md).
+In case you don't need to use an identity provider you may set the value to `false` and use only local epinio users. [OIDC Authentication](../references/authentication_oidc.md) provides more information.
 
 ### Container Registry
 
