@@ -48,20 +48,7 @@ brew install epinio
 
 or download the desired version and architecture from the Assets section of https://github.com/epinio/epinio/releases/.
 
-## Push an application
-
-### Clone the sample app
-
-If you just want an application that works use the one inside the
-[sample-app directory](https://github.com/epinio/epinio/tree/main/assets/sample-app).
-
-You can copy it to your system with
-the following commands:
-
-```bash
-git clone https://github.com/epinio/epinio.git
-cd epinio/assets/
-```
+## Deploy an application with Epinio
 
 ### Login
 
@@ -83,8 +70,22 @@ You can confirm that you're logged in by checking the Epinio settings:
 epinio settings show
 ```
 
-### Push an app
+### Push an application
 
+#### Sample applications
+
+If you just want an application that works use the one inside the
+[sample-app directory](https://github.com/epinio/epinio/tree/main/assets/sample-app).
+
+You can copy it to your system with
+the following commands:
+
+```bash
+git clone https://github.com/epinio/epinio.git
+cd epinio/assets/
+```
+
+#### Push an app
 There are two ways to push an application:
 
 1. You can provide an [Application Manifest](../references/manifests.md) which contains the required configuration for the applications.
