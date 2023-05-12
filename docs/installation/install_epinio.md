@@ -79,7 +79,7 @@ If cert-manager isn't installed in the namespace `cert-manager`,
 you have to set `.Values.certManagerNamespace` accordingly, otherwise Epinio installation will fail.
 :::
 
-### Dynamic storage provisionier
+### Dynamic storage provisioner
 To support Epinio a storage provisioner is needed. You can use any storage provisioner which provides, preferably, `ReadWriteMany` (RWX) Access Mode and a **default StorageClass** resource for dynamic storage provisioning.
 
 :::info
