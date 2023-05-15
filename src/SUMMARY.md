@@ -8,7 +8,7 @@
   - [Install Epinio](installation/installation.md)
   - [Install Epinio cli](installation/install_epinio_cli.md)
   - [DNS setup](installation/dns_setup.md)
-  - ["magic" DNS setup](installation/magicDNS_setup.md)
+  - [Wildcard DNS setup](installation/wildcardDNS_setup.md)
   - [Uninstall Epinio](installation/uninstall_epinio.md)
 
 - [Explanations](explanations/explanations.md)
@@ -34,6 +34,7 @@
   - [Install Epinio on Rancher Desktop (local)](howtos/install_epinio_on_rancher_desktop.md)
   - [Install Epinio on K3d (local)](howtos/install_epinio_on_k3d.md)
   - [Install Epinio on Public Clouds](howtos/install_epinio_on_public_cloud.md)
+  - [Install Epinio on EKS](howtos/install_epinio_on_eks.md)
   - [Install Wordpress on Epinio](howtos/install_wordpress_application.md)
 
 - [Reference documentation](references/references.md)

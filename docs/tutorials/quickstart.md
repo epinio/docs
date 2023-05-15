@@ -1,31 +1,54 @@
 ---
-sidebar_label: "Quick Start"
+sidebar_label: "Quickstart"
 sidebar_position: 1
 title: ""
 ---
 
-# QuickStart 
+# Quickstart
+This guide will help you deploy and use Epinio with default options suitable for evaluation or testing purposes on an existing Kubernetes cluster. For advanced Epinio deployment scenarios look into [Installation Section](../installation/install_epinio.md).
 
-If you have not already installed `epinio` follow these links
+## Installation
+Make sure your Kubernetes environment fulfills the [Epinio Requirements](../references/system_requirements/global.md). A **default StorageClass**  as well as a **default IngressClass** are required. If you do not have a suitable Kubernetes cluster yet, you can follow the [RKE2 Installation](../howtos/install_epinio_on_rke.md) section.
 
-- [Installation Section](../installation/install_epinio.md)
+### Deploy Epinio
+Run the  `kubectl get nodes -o wide` command to get the `INTERNAL-IP` value of the first Kubernetes node. Later you will use this value along with a wildcard DNS service domain (for eg. `sslip.io`) as helm `global.domain` value for installing Epinio.
 
-In this tutorial, you will learn how to create a namespace and how to push, list and delete an application in it.
+:::tip
+If you use Local Kubernetes Cluster, the value should be `127.0.0.1` regardless of the output from the command above. Please refer to your Local Kubernetes Cluster documentation for the IP address details of the Ingress endpoint.
+:::
 
-## Push an application
+#### Install cert-manager
+```bash
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm upgrade --install cert-manager jetstack/cert-manager \
+    --namespace cert-manager --create-namespace \
+    --set installCRDs=true
+```
 
-### Clone the sample app
-
-If you just want an application that works use the one inside the
-[sample-app directory](https://github.com/epinio/epinio/tree/main/assets/sample-app).
-
-You can copy it to your system with
-the following commands:
+#### Install Epinio
+Then Epinio can be deployed by using `helm` as shown below. Replace the `<INTERNAL-IP>` placeholder with the correct IP address:
 
 ```bash
-git clone https://github.com/epinio/epinio.git
-cd epinio/assets/
+helm repo add epinio https://epinio.github.io/helm-charts
+helm repo update
+helm upgrade --install epinio epinio/epinio \
+    --namespace epinio --create-namespace \
+    --set global.domain=<INTERNAL-IP>.sslip.io
 ```
+
+You can then point your browser and/or epinio CLI to the `https://epinio.<INTERNAL-IP>.sslip.io` url.
+
+#### Download the Epinio CLI binary
+
+Install the latest Epinio CLI with `brew`:
+```bash
+brew install epinio
+```
+
+or download the desired version and architecture from the Assets section of https://github.com/epinio/epinio/releases/.
+
+## Deploy an application with Epinio
 
 ### Login
 
@@ -38,9 +61,7 @@ epinio login -u admin 'https://epinio.127.0.0.1.sslip.io'
 ```
 
 :::tip
-
-If your local Kubernetes cluster restarts, Epinio stays installed and the certificates are still valid, so you don't have to login again.
-
+If you encounter an x509 error due to mismatched certificates after a restart, you can resolve it by reloading the certificates with `epinio settings update-ca` without having to log in again.
 :::
 
 You can confirm that you're logged in by checking the Epinio settings:
@@ -49,8 +70,22 @@ You can confirm that you're logged in by checking the Epinio settings:
 epinio settings show
 ```
 
-### Push an app
+### Push an application
 
+#### Sample applications
+
+If you just want an application that works use the one inside the
+[sample-app directory](https://github.com/epinio/epinio/tree/main/assets/sample-app).
+
+You can copy it to your system with
+the following commands:
+
+```bash
+git clone https://github.com/epinio/epinio.git
+cd epinio/assets/
+```
+
+#### Push an app
 There are two ways to push an application:
 
 1. You can provide an [Application Manifest](../references/manifests.md) which contains the required configuration for the applications.
