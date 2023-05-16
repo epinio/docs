@@ -14,10 +14,10 @@ and services it may need / be bound to in the origin cluster.
 
 ## Export
 
-Exporting an application `A` is trivially done by running the command
+Exporting an application `APP` is trivially done by running the command
 
 ```
-epinio app export A /path/to/a/directory/of/your/choice/
+epinio app export APP /path/to/a/directory/of/your/choice/
 ```
 
 After the command has run the chosen directory contains the 3 parts of the application needed to run
@@ -34,7 +34,7 @@ it elsewhere, namely:
 
 ## Import
 
-To import `A` into a new cluster
+To import `APP` into a new cluster
 
   1. Run `docker load app-image.tar` to import the image and its layers into the local docker
      setup. The output will contain a line referencing the `Loaded image ID`. This is the hash of
@@ -57,8 +57,8 @@ To import `A` into a new cluster
      valid only for the origin cluster, with `REGISTRY/ORG/NAME:TAG`.
 
   5. Edit the `domain`/`id` information of the `routes` section of `values.yaml` to prevent clashes
-     with the instance of `A` running on the origin cluster. This will of course not be necessary if
-     `A` was not kept running on the origin cluster.
+     with the instance of `APP` running on the origin cluster. This will of course not be necessary
+     if `APP` was not kept running on the origin cluster.
 
   6. Possibly edit the `appName` field in `values.yaml`.
 
