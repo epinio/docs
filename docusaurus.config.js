@@ -81,6 +81,11 @@ const config = {
             label: 'GitHub',
             position: 'right',
           },
+          {
+            href: 'https://www.rancher.com',
+            label: 'Rancher Home',
+            position: 'right',
+          },
         ],
       },
       footer: {
