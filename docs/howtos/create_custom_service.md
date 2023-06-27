@@ -26,7 +26,7 @@ or you can find the definition of the catalog services [here](https://github.com
 Change the fields to point to the desired helm chart and apply the yaml with a command like:
 
 ```
-$ kubeclt apply -f service.yaml
+$ kubectl apply -f service.yaml
 ```
 
 If everything worked correctly, you can see your Service in the Epinio `service-catalog`:
@@ -68,3 +68,73 @@ metadata:
 ```
 
 With this definition, Epinio will get all the `Opaque`, `BasicAuth`, and `connection.crossplane.io/v1alpha1` secrets generated during the creation of this Service (any type of secret can be listed).  
+
+## Customization
+
+Services can be customized in two possible ways. The first, system settings, is for operators to
+configure the referenced chart so that it will actually work within the epinio environment. The
+second, user settings, declares the settings of the chart the user is allowed to tweak when
+deploying the service from the catalog.
+
+Given that system settings are considered to be needed they have priority over user settings.  In
+other words, declaring a field used by the system settings as user-settable will in the end be a `no
+operation`. While the user can see that setting, and provide values, these values will be ignored in
+favor of the system values.
+
+### System settings
+
+The system settings are entered through the `spec.values` field of the service declaration.
+
+```yaml
+apiVersion: application.epinio.io/v1
+kind: Service
+metadata:
+  name: myservice
+  ...
+spec:
+  values: |-
+    ... text ...
+```
+
+The value of this field is text, albeit YAML formatted text.
+
+As an example, the predefined development services coming with an Epinio installation use this to
+set the `extraDeploy` field of the bitnami charts to inject supporting service accounts, roles,
+bindings, and PVCs for the service to use.
+
+### User-settable configuration values
+
+The user settings are declared through the `spec.settings` field of the service declaration.
+
+```yaml
+apiVersion: application.epinio.io/v1
+kind: Service
+metadata:
+  name: myservice
+  ...
+spec:
+  settings:
+    "ingress.enabled":
+      type: "bool"
+    "ingress.hostname":
+      type: "string"
+```
+
+The example settings shown above are taking from the nginx service used in the epinio testsuite.
+
+:::note
+The syntax of the `settings` map is the same as the `settings` map used to customize app chart resources.
+See section `User-settable configuration values` in the how to for
+[Creating Custom Application Helm Charts](create_custom_appcharts.md)
+
+Because of this the full specification is __not__ repeated here.
+:::
+
+:::note
+There are semantic differences between the app chart and service declarations.
+
+For app charts the keys are simple strings for the `userConfig` map. They do not allow nesting.
+
+For service charts the keys are proper paths into the set of fields exposed by the chart through its
+`values.yaml` file. Nesting is expressed using dots (`.`). As example see `ingress.enabled` above.
+:::
