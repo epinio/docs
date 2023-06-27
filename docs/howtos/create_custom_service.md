@@ -26,7 +26,7 @@ or you can find the definition of the catalog services [here](https://github.com
 Change the fields to point to the desired helm chart and apply the yaml with a command like:
 
 ```
-$ kubeclt apply -f service.yaml
+$ kubectl apply -f service.yaml
 ```
 
 If everything worked correctly, you can see your Service in the Epinio `service-catalog`:
