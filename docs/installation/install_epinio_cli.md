@@ -63,6 +63,9 @@ sudo mv ./epinio /usr/local/bin/epinio
 
 ## Verify Downloaded Files
 
+This is done using the `cosign` tool.
+The following commands were tested using cosign version 2.1.1.
+
 ### Verify File Checksum Signature
 
 Instead of signing all release assets, Epinio signs a checksums file containing the different
@@ -77,16 +80,17 @@ curl -LO https://github.com/epinio/epinio/releases/download/v1.8.1/epinio_1.8.1_
 Once you have the three files locally, you can execute the following command
 
 ```
-COSIGN_EXPERIMENTAL=1 cosign verify-blob \
-		      --cert      epinio_1.8.1_checksums.txt.pem \
-		      --signature epinio_1.8.1_checksums.txt.sig \
-		      epinio_1.8.1_checksums.txt
+cosign verify-blob \
+	--certificate-identity-regexp "https://github.com/epinio/epinio" \
+	--certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+	--cert      epinio_1.8.1_checksums.txt.pem \
+	--signature epinio_1.8.1_checksums.txt.sig \
+	epinio_1.8.1_checksums.txt
 ```
 
 A successful output looks like
 
 ```
-tlog entry verified with uuid: 73f57e4c16b830ccb615e00814a3481a33365bf48f9bba1c1588886b3344d0ec index: 9085154
 Verified OK
 ```
 
