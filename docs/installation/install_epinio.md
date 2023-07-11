@@ -130,6 +130,24 @@ Read more on how to setup DNS here: [DNS setup](./dns_setup.md)
 
 > *NOTE II*: in case the installation fails due to an expired certificate (for instance if you have previously initialized the epinio cli on a machine for a different cluster) please consider executing epinio `epinio settings update-ca`.  More info at: [epinio-settings-update-ca](https://docs.epinio.io/references/commands/cli/settings/epinio_settings_update-ca#epinio-settings-update-ca)
 
+### Verify Helm Chart Images
+
+This is done using the `cosign` tool.
+The following commands were tested using cosign version 2.1.1.
+
+The three core Epinio images are `epinio-server`, `epinio-unpacker`, and `epinio-ui`.
+The general command to verify any of them is
+
+```
+cosign verify \
+       --certificate-identity-regexp "https://github.com/epinio/epinio" \
+       --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+       ghcr.io/epinio/(IMAGE):v1.8.1
+```
+
+where `(IMAGE)` is the name of the image to verify.
+
+
 ## Installation on Specific Kubernetes Offerings
 
 Installing Epinio is a standard process as explained above, however you might need to configure it for a specific Kubernetes cluster.
