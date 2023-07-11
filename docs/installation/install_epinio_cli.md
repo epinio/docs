@@ -74,7 +74,8 @@ release assets checksums. You can download/copy the three files 'epinio_1.8.1_ch
 
 ```
 curl -LO https://github.com/epinio/epinio/releases/download/v1.8.1/epinio_1.8.1_checksums.txt.pem
-...
+curl -LO https://github.com/epinio/epinio/releases/download/v1.8.1/epinio_1.8.1_checksums.txt.sig
+curl -LO https://github.com/epinio/epinio/releases/download/v1.8.1/epinio_1.8.1_checksums.txt
 ```
 
 Once you have the three files locally, you can execute the following command
