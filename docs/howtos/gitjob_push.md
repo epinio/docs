@@ -25,7 +25,16 @@ Then we need to setup the Service Account to run our Jobs with (since we don't n
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: epinio-push
+  name: epinio-gitjob
+```
+
+### Ensure Epinio is installed
+If you are using Rancher, you may want to install Epinio directly from there. For more information check out the [Rancher configuration](install_epinio_on_rancher.md) with Epinio.
+
+Once Epinio is deployed, log in as admin and ensure there is a namespace `workspace` created and that it is targeted. If not, you may achive this by running:
+```
+epinio namespace create workspace 
+epinio target workspace 
 ```
 
 ### Upload Epinio Settings
@@ -64,19 +73,23 @@ spec:
         restartPolicy: "Never"
         containers:
         # This version should match your epinio deployment
-        - image: "splatform/epinio-server:v0.6.0"
+        - image: "ghcr.io/epinio/epinio-server:v1.8.1"
           name: epinio-push
           volumeMounts:
           - name: settings
             mountPath: "/settings/"
-            readOnly: true
+            readOnly: true  
+          - name: tmp
+            mountPath: /tmp
+            readOnly: false
           env:
-          - name: EPINIO_CONFIG
+          - name: EPINIO_SETTINGS
             value: "/settings/settings.yaml"
           command:
           - /epinio 
           args:
-          - push 
+          - push
+          - "--name"
           # This is the name of the app to push
           - test12factor
           workingDir: /workspace/source
@@ -84,6 +97,8 @@ spec:
         - name: settings
           secret:
             secretName: epinio-creds
+        - name: tmp
+          emptyDir: {}
 ```
 
 
