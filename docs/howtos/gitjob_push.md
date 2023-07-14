@@ -31,7 +31,7 @@ metadata:
 ### Ensure Epinio is installed
 If you are using Rancher, you can install Epinio directly from there. For more information check out the [Rancher configuration](install_epinio_on_rancher.md) with Epinio.
 
-Once Epinio is deployed, log in as admin and ensure there is a namespace `workspace` created and that it is targeted. If not, you may achive this by running:
+Once Epinio is deployed, log in as admin and verify that the namespace `workspace` exists and is targeted. If this is not the case, you may achieve this by running:
 ```
 epinio namespace create workspace 
 epinio target workspace 
