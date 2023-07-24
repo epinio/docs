@@ -32,19 +32,19 @@ Find the latest version at [Releases](https://github.com/epinio/epinio/releases)
 ### Linux
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.8.1/epinio-linux-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.9.0/epinio-linux-x86_64
 ```
 
 ### MacOS
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.8.1/epinio-darwin-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.9.0/epinio-darwin-x86_64
 ```
 
 ### Windows
 
 ```bash
- curl -LO https://github.com/epinio/epinio/releases/download/v1.8.1/epinio-windows-x86_64.zip
+ curl -LO https://github.com/epinio/epinio/releases/download/v1.9.0/epinio-windows-x86_64.zip
 ```
 
 Extract the zip archive and put the binary in a directory that is in your `PATH` environment variable. Instructions on how to add directories to the `PATH` vary depending on your version of Windows.
@@ -73,9 +73,9 @@ release assets checksums. You can download/copy the three files 'epinio_1.8.1_ch
 'epinio_1.8.1_checksums.txt.sig', 'epinio_1.8.1_checksums.txt' from the latest release.
 
 ```
-curl -LO https://github.com/epinio/epinio/releases/download/v1.8.1/epinio_1.8.1_checksums.txt.pem
-curl -LO https://github.com/epinio/epinio/releases/download/v1.8.1/epinio_1.8.1_checksums.txt.sig
-curl -LO https://github.com/epinio/epinio/releases/download/v1.8.1/epinio_1.8.1_checksums.txt
+curl -LO https://github.com/epinio/epinio/releases/download/v1.9.0/epinio_1.8.1_checksums.txt.pem
+curl -LO https://github.com/epinio/epinio/releases/download/v1.9.0/epinio_1.8.1_checksums.txt.sig
+curl -LO https://github.com/epinio/epinio/releases/download/v1.9.0/epinio_1.8.1_checksums.txt
 ```
 
 Once you have the three files locally, you can execute the following command
