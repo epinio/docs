@@ -73,7 +73,7 @@ spec:
         restartPolicy: "Never"
         containers:
         # This version should match your epinio deployment
-        - image: "ghcr.io/epinio/epinio-server:v1.8.1"
+        - image: "ghcr.io/epinio/epinio-server:v1.9.0"
           name: epinio-push
           volumeMounts:
           - name: settings
