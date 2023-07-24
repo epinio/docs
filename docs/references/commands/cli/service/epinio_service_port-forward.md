@@ -1,19 +1,20 @@
 ---
 title: ""
-sidebar_label: "epinio app show"
+sidebar_label: "epinio service port-forward"
 ---
-## epinio app show
+## epinio service port-forward
 
-Describe the named application
+forward one or more local ports to a service SERVICENAME
 
 ```
-epinio app show NAME [flags]
+epinio service port-forward SERVICENAME [LOCAL_PORT] [...[LOCAL_PORT_N]] [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for show
+      --address strings   Addresses to listen on (comma separated). Only accepts IP addresses or localhost as a value. When localhost is supplied, kubectl will try to bind on both 127.0.0.1 and ::1 and will fail if neither of these addresses are available to bind. (default [localhost])
+  -h, --help              help for port-forward
 ```
 
 ### Options inherited from parent commands
@@ -31,5 +32,5 @@ epinio app show NAME [flags]
 
 ### SEE ALSO
 
-* [epinio app](./epinio_app.md)	 - Epinio application features
+* [epinio service](./epinio_service.md)	 - Epinio service management
 

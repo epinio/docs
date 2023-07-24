@@ -13,6 +13,7 @@ epinio cli is the official command line interface for Epinio PaaS
 ### Options
 
 ```
+  -H, --header stringArray       Add custom header to every request executed
   -h, --help                     help for epinio
   -c, --kubeconfig string        (KUBECONFIG) path to a kubeconfig, not required in-cluster
       --no-colors                Suppress colorized output
@@ -31,6 +32,7 @@ epinio cli is the official command line interface for Epinio PaaS
 * [epinio configuration](./configuration/epinio_configuration.md)	 - Epinio configuration features
 * [epinio info](./epinio_info.md)	 - Shows information about the Epinio environment
 * [epinio login](./epinio_login.md)	 - Epinio login to the server
+* [epinio logout](./epinio_logout.md)	 - Epinio logout from server
 * [epinio namespace](./namespace/epinio_namespace.md)	 - Epinio-controlled namespaces
 * [epinio push](./epinio_push.md)	 - Push an application declared in the specified manifest
 * [epinio server](./epinio_server.md)	 - Starts the Epinio server.

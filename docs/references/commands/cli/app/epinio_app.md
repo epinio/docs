@@ -19,6 +19,7 @@ Manage epinio application
 ### Options inherited from parent commands
 
 ```
+  -H, --header stringArray       Add custom header to every request executed
   -c, --kubeconfig string        (KUBECONFIG) path to a kubeconfig, not required in-cluster
       --no-colors                Suppress colorized output
       --settings-file string     (EPINIO_SETTINGS) set path of settings file (default "~/.config/epinio/settings.yaml")
@@ -42,7 +43,7 @@ Manage epinio application
 * [epinio app manifest](./epinio_app_manifest.md)	 - Save state of the named application as a manifest
 * [epinio app port-forward](./epinio_app_port-forward.md)	 - forward one or more local ports to a pod
 * [epinio app push](../epinio_push.md)	 - Push an application declared in the specified manifest
-* [epinio app restage](./epinio_app_restage.md)	 - Restage the application
+* [epinio app restage](./epinio_app_restage.md)	 - Restage the application, then restart, if running and not suppressed
 * [epinio app restart](./epinio_app_restart.md)	 - Restart the application
 * [epinio app show](./epinio_app_show.md)	 - Describe the named application
 * [epinio app update](./epinio_app_update.md)	 - Update the named application

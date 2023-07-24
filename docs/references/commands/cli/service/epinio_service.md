@@ -19,6 +19,7 @@ Manage the epinio services
 ### Options inherited from parent commands
 
 ```
+  -H, --header stringArray       Add custom header to every request executed
   -c, --kubeconfig string        (KUBECONFIG) path to a kubeconfig, not required in-cluster
       --no-colors                Suppress colorized output
       --settings-file string     (EPINIO_SETTINGS) set path of settings file (default "~/.config/epinio/settings.yaml")
@@ -36,6 +37,7 @@ Manage the epinio services
 * [epinio service create](./epinio_service_create.md)	 - Create a service SERVICENAME of an Epinio catalog service CATALOGSERVICENAME
 * [epinio service delete](./epinio_service_delete.md)	 - Delete one or more services
 * [epinio service list](./epinio_service_list.md)	 - List all the services in the targeted namespace
+* [epinio service port-forward](./epinio_service_port-forward.md)	 - forward one or more local ports to a service SERVICENAME
 * [epinio service show](./epinio_service_show.md)	 - Show details of a service SERVICENAME
 * [epinio service unbind](./epinio_service_unbind.md)	 - Unbinds a service SERVICENAME from an Epinio app APPNAME
 

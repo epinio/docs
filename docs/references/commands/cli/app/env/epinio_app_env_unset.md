@@ -23,6 +23,7 @@ epinio app env unset APPNAME NAME [flags]
 ### Options inherited from parent commands
 
 ```
+  -H, --header stringArray       Add custom header to every request executed
   -c, --kubeconfig string        (KUBECONFIG) path to a kubeconfig, not required in-cluster
       --no-colors                Suppress colorized output
       --settings-file string     (EPINIO_SETTINGS) set path of settings file (default "~/.config/epinio/settings.yaml")
