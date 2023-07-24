@@ -1,19 +1,23 @@
 ---
 title: ""
-sidebar_label: "epinio app show"
+sidebar_label: "epinio logout"
 ---
-## epinio app show
+## epinio logout
 
-Describe the named application
+Epinio logout from server
+
+### Synopsis
+
+The logout command removs all authentication information from the local state, i.e. settings file
 
 ```
-epinio app show NAME [flags]
+epinio logout [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for show
+  -h, --help   help for logout
 ```
 
 ### Options inherited from parent commands
@@ -31,5 +35,5 @@ epinio app show NAME [flags]
 
 ### SEE ALSO
 
-* [epinio app](./epinio_app.md)	 - Epinio application features
+* [epinio](./epinio.md)	 - Epinio cli
 

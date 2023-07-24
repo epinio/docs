@@ -22,10 +22,14 @@ epinio server [flags]
       --disable-tracking                      (DISABLE_TRACKING) Disable tracking of the running Epinio and Kubernetes versions
   -h, --help                                  help for server
       --ingress-class-name string             (INGRESS_CLASS_NAME) Name of the ingress class to use for apps. Leave empty to add no ingressClassName to the ingress.
+      --kube-api-burst int                    (KUBE_API_BURST) Maximum burst for throttle of the Kubernetes client. (default 10)
+      --kube-api-qps float32                  (KUBE_API_QPS) The QPS indicates the maximum QPS of the Kubernetes client. (default 5)
   -n, --namespace string                      (NAMESPACE) The namespace to use (default "epinio")
       --port int                              (PORT) The port to listen on. Leave empty to auto-assign a random port
       --registry-certificate-secret string    (REGISTRY_CERTIFICATE_SECRET) Secret for the registry's TLS certificate
       --s3-certificate-secret string          (S3_CERTIFICATE_SECRET) Secret for the S3 endpoint TLS certificate. Can be left empty if S3 is served with a trusted certificate.
+      --staging-resource-cpu string           (STAGING_RESOURCE_CPU)
+      --staging-resource-memory string        (STAGING_RESOURCE_MEMORY)
       --staging-service-account-name string   (STAGING_SERVICE_ACCOUNT_NAME)
       --tls-issuer string                     (TLS_ISSUER) The cluster issuer to use for workload certificates
       --trace-output string                   (TRACE_OUTPUT) logs output format [text,json] (default "text")
@@ -35,6 +39,7 @@ epinio server [flags]
 ### Options inherited from parent commands
 
 ```
+  -H, --header stringArray       Add custom header to every request executed
   -c, --kubeconfig string        (KUBECONFIG) path to a kubeconfig, not required in-cluster
       --no-colors                Suppress colorized output
       --settings-file string     (EPINIO_SETTINGS) set path of settings file (default "~/.config/epinio/settings.yaml")
