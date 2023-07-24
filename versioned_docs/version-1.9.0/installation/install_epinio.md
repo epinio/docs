@@ -142,7 +142,7 @@ The general command to verify any of them is
 cosign verify \
        --certificate-identity-regexp "https://github.com/epinio/epinio" \
        --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
-       ghcr.io/epinio/(IMAGE):v1.8.1
+       ghcr.io/epinio/(IMAGE):v1.9.0
 ```
 
 where `(IMAGE)` is the name of the image to verify.
