@@ -1,10 +1,10 @@
 ---
 sidebar_label: "Installing Epinio On Rancher Desktop (local)"
-sidebar_position: 18
+sidebar_position: 1
 title: ""
 ---
 
-## Rancher Desktop configuration
+# Installing Epinio On Rancher Desktop (local)
 
 This how-to was written using the following versions:
 
@@ -14,7 +14,7 @@ This how-to was written using the following versions:
 ## Rancher Desktop Prerequisites
 
 * Running on Windows requires Windows Subsystem for Linux (WSL) which is automatically installed by Rancher Desktop.
-* Epinio currently only supports x86 and will not work with Rancher Desktop for Mac on the M1 chip.
+* Epinio currently only supports x86 hence will not work with Rancher Desktop for Mac on the M1 chip.
 
 ### Install Rancher Desktop
 
@@ -22,7 +22,7 @@ Install the [latest version](https://github.com/rancher-sandbox/rancher-desktop/
 
 ## Setup Kubernetes
 
-When running Rancher Desktop for the first time, wait until the initialization is completed.
+When running Rancher Desktop for the first time, wait until the initialization is complete.
 
 Make sure that Kubernetes is enabled and a supported version is selected under `Kubernetes Settings` (Epinio has been tested on **v1.22.7**, **v1.21.10** and **v1.20.15**).
 
@@ -35,19 +35,19 @@ Make sure Rancher Desktop is running.
 Rancher Desktop can report Kubernetes as running while some pods are actually not yet ready.
 Manual verification is possible by executing the command `kubectl get pods -A` in a terminal and checking that all pods report either `Running` or `Completed` as their status.
 
-Rancher Desktop configures it's own load-balancer to expose Traefik on `127.0.0.1`. We can use this with a wildcard DNS to get a system domain of `127.0.0.1.sslip.io`
+Rancher Desktop configures its own load-balancer to expose Traefik on `127.0.0.1`. We can use this with a wildcard DNS to get a system domain of `127.0.0.1.sslip.io`
 
-The Epinio installation is pretty much identical on Linux, MacOS and Windows:
+The Epinio installation is similar on Linux, MacOS and Windows:
 
 1. Start a shell, use `cmd` or `powershell` on Windows (latest one is preferred) and your preferred one on Linux/MacOS.
 
-2. Install the [Epinio CLI](../installation/install_epinio_cli.md).
+2. Install the [Epinio CLI](../../installation/install_epinio_cli.md).
 
-3. Follow the [Epinio installation process](../installation/install_epinio.md). Copied here:
+3. Follow the [Epinio installation process](../../installation/install_epinio.md). Copied here:
 
 ```shell
 
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.yaml  
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.yaml
 
 # Wait for cert-manager to stabilize
 

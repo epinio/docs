@@ -150,17 +150,17 @@ where `(IMAGE)` is the name of the image to verify.
 
 ## Installation on Specific Kubernetes Offerings
 
-Installing Epinio is a standard process as explained above, however you might need to configure it for a specific Kubernetes cluster.
+Installing Epinio is a standard process as explained above, however you might need to configure it in a specific Kubernetes cluster.
 
-To help you, see the following HowTos for various well-known Kubernetes clusters:
+To help you, see the following documents for some well-known Kubernetes clusters:
 
-- [Install on Rancher](../howtos/install_epinio_on_rancher.md) - Install Epinio on Rancher
-- [Install on Public Cloud](../howtos/install_epinio_on_public_cloud.md) - Install Epinio on Public Cloud cluster
-- [Install on RKE2](../howtos/install_epinio_on_rke.md) - Install Epinio on Rancher RKE2 cluster
-- [Install on K3d](../howtos/install_epinio_on_k3d.md) - Install Epinio on K3d cluster
-- [Install on K3s](../howtos/install_epinio_on_k3s.md) - Install Epinio on K3s cluster
-- [Install on Rancher Desktop](../howtos/install_epinio_on_rancher_desktop.md) - Install Epinio on Rancher Desktop
-- [Install on EKS](../howtos/install_epinio_on_eks.md) - Install Epinio on AWS EKS cluster
+- [Install on Rancher](other_inst_scenarios/install_epinio_on_rancher.md) - Install Epinio on Rancher
+- [Install on Public Cloud](other_inst_scenarios/install_epinio_on_public_cloud.md) - Install Epinio on Public Cloud cluster
+- [Install on RKE2](other_inst_scenarios/install_epinio_on_rke.md) - Install Epinio on Rancher RKE2 cluster
+- [Install on K3d](other_inst_scenarios/install_epinio_on_k3d.md) - Install Epinio on K3d cluster
+- [Install on K3s](other_inst_scenarios/install_epinio_on_k3s.md) - Install Epinio on K3s cluster
+- [Install on Rancher Desktop](other_inst_scenarios/install_epinio_on_rancher_desktop.md) - Install Epinio on Rancher Desktop
+- [Install on EKS](other_inst_scenarios/install_epinio_on_eks.md) - Install Epinio on AWS EKS cluster
 
 > *NOTE*: The Public Cloud howto lists the three major Cloud providers but Epinio can run on any Kubernetes cluster.
 
