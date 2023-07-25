@@ -27,19 +27,20 @@ specifically.
 Before you can use Epinio, you need to have a Kubernetes cluster running.
 
 As a solo developer, you might be using a local Kubernetes cluster such as
-[Rancher Desktop](https://rancherdesktop.io/) or [k3d](https://k3d.io/).
+[Rancher Desktop](https://rancherdesktop.io/), or [k3d](https://k3d.io/), just
+to name a few.
 
 :::note
 
-This tutorial does not explain how to install a local Kubernetes cluster and
-assumes you have one available. There are
-some examples in the **Epinio Installation** section which contains links to
-installation documentation for a variety of common scenarios.
+This tutorial will not explain how to install a local Kubernetes cluster and
+assumes you know how to do it.  However, depending on your choice, there are
+already some examples in the **Epinio Howtos** section which contains links to
+the respective clusters' installation docs.
 
 :::
 
 In this tutorial, we'll use
-[Rancher Desktop](../installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md)
+[Rancher Desktop](../howtos/install_epinio_on_rancher_desktop.md)
 as our local Kubernetes cluster. However you should be able to follow this
 tutorial with the local Kubernetes cluster of your choice.
 
