@@ -86,7 +86,7 @@ epinio push -n myapp -p app_directory --builder-image myorg/epicustombuilder:lat
 ## More examples
 
 You can find a more complete example on how to build and deploy a custom builder here:
-- [Deploy Gitea with a custom builder image](../tutorials/custom_builder_go.md)
+- [Deploy Gitea with a custom builder image](../../tutorials/custom_builder_go.md)
 
 ## Reference
 

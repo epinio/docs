@@ -29,7 +29,7 @@ metadata:
 ```
 
 ### Ensure Epinio is installed
-If you are using Rancher, you can install Epinio directly from there. For more information check out the [Rancher configuration](../installation/other_inst_scenarios/install_epinio_on_rancher.md) with Epinio.
+If you are using Rancher, you can install Epinio directly from there. For more information check out the [Rancher configuration](../../installation/other_inst_scenarios/install_epinio_on_rancher.md) with Epinio.
 
 Once Epinio is deployed, log in as admin and verify that the namespace `workspace` exists and is targeted. If this is not the case, you may achieve this by running:
 ```

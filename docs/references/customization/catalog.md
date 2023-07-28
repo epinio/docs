@@ -18,4 +18,4 @@ An installation of Epinio provides five standard service classes, one each for
 
 If custom service classes adapted to the local environment are desired or needed please
 follow instructions on
-[How To create a custom service](../../howtos/create_custom_service.md)
+[How To create a custom service](../../howtos/customization/create_custom_service.md)

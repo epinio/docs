@@ -226,7 +226,7 @@ epinio app port-forward mysimpleapp 8080:8080
 
 You can specify only one port number. In that case, Epinio will open the port of both `local` and `remote` targets.
 
-For more information, you can see the [Port Fowarding page](../howtos/port_forwarding.md).
+For more information, you can see the [Port Fowarding page](../howtos/other/port_forwarding.md).
 
 :::
 

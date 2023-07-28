@@ -16,7 +16,7 @@ The issuer will be used for both, the Epinio API endpoint and workloads (i.e. pu
 
 ## Choosing a Different Issuer
 
-When [installing Epinio with helm](../installation/install_epinio.md#install-epinio), you can choose between those issuers by using the `global.tlsIssuer` helm variable.
+When [installing Epinio with helm](../../installation/install_epinio.md#install-epinio), you can choose between those issuers by using the `global.tlsIssuer` helm variable.
 
 It's also possible to create a cert-manager cluster issuer in the cluster, before installing Epinio and referencing it by name when installing.
 

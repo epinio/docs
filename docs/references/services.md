@@ -14,7 +14,7 @@ The second way lets Epinio provision the Service, and afterwards create a bindin
 ## How does it work?
 
 Epinio is very flexible on how a service is provisioned. Many public cloud providers maintain their own operators (e.g. [Azure](https://github.com/Azure/azure-service-operator)). There are also projects like [Crossplane](https://crossplane.io/) that allow services provisioning for various public cloud providers. All these solutions work by creating custom resources on a cluster, and a controller will create the desired service.
-This shared method allows Epinio to stay agnostic of the provisioning method. You only need to create a Helm chart with the needed resources and [describe how to install the Service with Epinio](../howtos/create_custom_service.md).
+This shared method allows Epinio to stay agnostic of the provisioning method. You only need to create a Helm chart with the needed resources and [describe how to install the Service with Epinio](../howtos/customization/create_custom_service.md).
 The same method can be used with "in-cluster" services (e.g. a MySQL database running on the same cluster as Epinio). Actually, the Epinio services available by default are based on off-the-shelf Helm charts from Bitnami and their names are suffixed with `-dev` because in the provided default configuration they might not be suitable for production usage.
 
 ## Provision a database

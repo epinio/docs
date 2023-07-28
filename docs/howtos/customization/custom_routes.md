@@ -42,4 +42,4 @@ epinio app push -n sample -p . --route myapp.myawesomedomain.org
 Epinio will try to create a TLS certificate for any defined route, like it does
 for the wildcard system domain ones. Depending on the issuer that is being used,
 DNS may have to work before the domain can be used. In other words, the domain must
-resolve to the cluster's Ingress IP. Read more about the issuers here: [Certificate Issuers](../howtos/certificate_issuers.md)
+resolve to the cluster's Ingress IP. Read more about the issuers here: [Certificate Issuers](../other/certificate_issuers.md)

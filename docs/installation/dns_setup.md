@@ -16,7 +16,7 @@ same IP address as the domain itself. That IP address, should target your cluste
 ***
 Epinio will install successfully even if your DNS setup is not complete. There is an exception to this,
 when letsencrypt issuer is used. Cert-Manager will fail to create certificates until the domain is accessible, due to
-the challenges that must be solved (read more about issuers [here](../howtos/certificate_issuers.md)). Even in that
+the challenges that must be solved (read more about issuers [here](../howtos/other/certificate_issuers.md)). Even in that
 case though, after you finish your DNS setup, the challenges will be solved and Epinio should become functional but
 it may take a while before things balance out.
 ***

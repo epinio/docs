@@ -67,4 +67,4 @@ a preceding installation of Epinio will still be targeted in a new installation.
 
 ## References
 
-  - [Namespaces](../references/namespaces.md)
+  - [Namespaces](../../references/namespaces.md)
