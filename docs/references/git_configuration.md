@@ -56,4 +56,4 @@ stringData:
     -----END CERTIFICATE-----
 ```
 
-If you are looking for some examples you can the [How-To](../howtos/create_git_configuration.md).
+If you are looking for some examples you can check the [How-To](../howtos/create_git_configuration.md).
