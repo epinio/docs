@@ -5,9 +5,9 @@ title: ""
 
 # Git Configuration
 
-Since version **1.10.0**, Epinio supports Git configuration.
+Starting with version **1.10.0**, Epinio supports Git configurations.
 
-You can provide for each git host particular settings, to clone private repositories, skip the SSL verification, or provide your own certificate bundle.
+Configurations provide information enabling the cloning of private repositories, disabling of SSL verification, or extending verification through a custom bundle of certificates. All on a per git host (+user/org, +repository) basis.
 
 A Git configuration is a Kubernetes secret with the `epinio.io/api-git-credentials: "true"` label.
 
@@ -23,8 +23,8 @@ The available fields are:
 - **certificate:** the CA bundle to load for the SSL verification with self-signed certificates
 
 
-When importing a git repository Epinio will try to look for the existance of the most specific configuration. For example trying to clone the `https://github.com/myusername/myrepo` Epinio will first look for a configuration having the `https://github.com` *URL*, a `myusername` *userOrg* and a `myrepo` *repo*.
-If not found it will look for a configuration having the `https://github.com` *URL* and a `myusername` *userOrg*. And finally if not found Epinio will look for a configuration for the `https://github.com` *URL*.
+When importing from a git repository Epinio will look for the the most specific matching configuration, if any. For example when trying to clone `https://github.com/myusername/myrepo` Epinio will first look for a configuration having the `https://github.com` *URL*, a `myusername` *userOrg* and a `myrepo` *repo*.
+If not found it will look for a configuration having the `https://github.com` *URL* and a `myusername` *userOrg*. And finally it will look for a configuration having just the `https://github.com` *URL*.
 
 All the fields, except for the URL, are optional.
 

@@ -6,9 +6,9 @@ title: ""
 
 # Create a Git Configuration
 
-As described [in the Git Configuration reference page](../references/git_configuration.md), Epinio Git Configurations are Kubernetes secret with a particular label.
+As described [in the Git Configuration reference page](../references/git_configuration.md), Epinio Git Configurations are Kubernetes secrets with a particular label.
 
-To create one you can apply a Secret resource to your Kubernetes cluster:
+To create one you apply a Secret resource to your Kubernetes cluster:
 
 ```yaml
 apiVersion: v1 
