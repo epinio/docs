@@ -24,7 +24,8 @@ The available fields are:
 
 
 When importing from a git repository Epinio will look for the the most specific matching configuration, if any. For example when trying to clone `https://github.com/myusername/myrepo` Epinio will first look for a configuration having the `https://github.com` *URL*, a `myusername` *userOrg* and a `myrepo` *repo*.
-If not found it will look for a configuration having the `https://github.com` *URL* and a `myusername` *userOrg*. And finally it will look for a configuration having just the `https://github.com` *URL*.
+If not found it will look for a configuration having the `https://github.com` *URL* and a `myusername` *userOrg*. And finally it will look for a configuration having just the `https://github.com` *URL*. If no configuration is found the clone from the Git repository will run without any customization.
+
 
 All the fields, except for the URL, are optional.
 
