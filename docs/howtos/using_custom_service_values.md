@@ -82,6 +82,7 @@ Note how the name of the field in the spec does not mention the nature of `bar` 
 name is essentially the spine to reach the field, regardless of intercalated arrays.  This may not
 be fully understood here, however the next example should make it clearer.
 
+<pre>
 <table>
 <tr>
 <th><code>values.yaml</code></th>
@@ -117,6 +118,7 @@ be fully understood here, however the next example should make it clearer.
 </td>
 </tr>
 </table>
+</pre>
 
 ## Mixed map and array, simple values
 
