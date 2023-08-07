@@ -17,7 +17,7 @@ Users are taught how to set values for the user settings of a service.
 
 # General information
 
-For operators, see [Creating A Custom Service](using_custom_appcharts.md) for the general syntax of
+For operators, see [Creating A Custom Service](create_custom_service.md) for the general syntax of
 user settings.
 
 For users, the relevant option is `--chart-value` (short: `-v`) of the `epinio service create`
