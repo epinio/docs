@@ -49,18 +49,26 @@ This example assumes that the field value is of a simple type `T`, i.e. `string`
 <th>Use</th>
 </tr>
 <tr valign='top'>
-<td><pre>
-foo:{'\n'}
-{'  '}bar: value
-</pre></td>
-<td><pre>
-settings:{'\n'}
-{'  '}"foo.bar":{'\n'}
-{'    '}type: "T"
-</pre></td>
-<td><pre>
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`foo:
+  bar: value
+`}
+</CodeBlock>
+</td>
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`settings:
+  "foo.bar":
+    type: "T"
+`}
+</CodeBlock>
+</td>
+<td>
+<CodeBlock language="yaml" showLineNumbers>
 -v "foo.bar=value"
-</pre></td>
+</CodeBlock>
+</td>
 </tr>
 </table>
 </pre>
@@ -81,23 +89,32 @@ be fully understood here, however the next example should make it clearer.
 <th>Use</th>
 </tr>
 <tr valign='top'>
-<td><pre>
-foo:{'\n'}
-{'  '}bar:{'\n'}
-{'    '}- value1{'\n'}
-{'    '}- value2{'\n'}
-{'    '}- ...
-</pre></td>
-<td><pre>
-settings:{'\n'}
-{'  '}"foo.bar":{'\n'}
-{'    '}type: "T"{'\n'}
-</pre></td>
-<td><pre>
--v "foo.bar[0]=value1"{'\n'}
--v "foo.bar[1]=value2"{'\n'}
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`foo:
+  bar:
+    - value1
+    - value2
+    - ...
+`}
+</CodeBlock>
+</td>
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`settings:
+  "foo.bar":
+    type: "T"
+`}
+</CodeBlock>
+</td>
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`-v "foo.bar[0]=value1"
+-v "foo.bar[1]=value2"
 ...
-</pre></td>
+`}
+</CodeBlock>
+</td>
 </tr>
 </table>
 
@@ -120,28 +137,37 @@ to the fields of interest are used to name them in the settings.
 <th>Use</th>
 </tr>
 <tr valign='top'>
-<td><pre>
-foo:{'\n'}
-{'  '}- name: name1{'\n'}
-{'    '}value: value1{'\n'}
-{'  '}- name: name2{'\n'}
-{'    '}value: value2{'\n'}
-{'  '}- ...
-</pre></td>
-<td><pre>
-settings:{'\n'}
-{'  '}"foo.name":{'\n'}
-{'    '}type: "string"{'\n'}
-{'  '}"foo.value":{'\n'}
-{'    '}type: "T"{'\n'}
-</pre></td>
-<td><pre>
--v "foo[0].name=name1"{'\n'}
--v "foo[0].value=value1"{'\n'}
--v "foo[1].name=name2"{'\n'}
--v "foo[1].value=value2"{'\n'}
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`foo:
+  - name: name1
+    value: value1
+  - name: name2
+    value: value2
+  - ...
+`}
+</CodeBlock>
+</td>
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`settings:
+  "foo.name":
+    type: "string"
+  "foo.value":
+    type: "T"
+`}
+</CodeBlock>
+</td>
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`-v "foo[0].name=name1"
+-v "foo[0].value=value1"
+-v "foo[1].name=name2"
+-v "foo[1].value=value2"
 ...
-</pre></td>
+`}
+</CodeBlock>
+</td>
 </tr>
 </table>
 </pre>
@@ -160,23 +186,32 @@ services enabling the user to set custom annotations on the various groups of po
 <th>Use</th>
 </tr>
 <tr valign='top'>
-<td><pre>
-foo:{'\n'}
-{'  '}bar:{'\n'}
-{'  '}{'  '}key1: value1{'\n'}
-{'  '}{'  '}key2: value2{'\n'}
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`foo:
+  bar:
+    key1: value1
+    key2: value2
     ...
-</pre></td>
-<td><pre>
-settings:{'\n'}
-{'  '}"foo.bar":{'\n'}
-{'    '}type: "map"{'\n'}
-</pre></td>
-<td><pre>
--v "foo.bar.key1=value1"{'\n'}
--v "foo.bar.key2=value2"{'\n'}
+`}
+</CodeBlock>
+</td>
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`settings:
+  "foo.bar":
+    type: "map"
+`}
+</CodeBlock>
+</td>
+<td>
+<CodeBlock language="yaml" showLineNumbers>
+{`-v "foo.bar.key1=value1
+-v "foo.bar.key2=value2
 ...
-</pre></td>
+`}
+</CodeBlock>
+</td>
 </tr>
 </table>
 </pre>
