@@ -47,7 +47,7 @@ The Epinio installation is pretty much identical on Linux, MacOS and Windows:
 
 ```shell
 
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.yaml  
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.3/cert-manager.yaml  
 
 # Wait for cert-manager to stabilize
 
