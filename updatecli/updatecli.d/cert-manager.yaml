@@ -1,0 +1,50 @@
+name: Bump Cert-manager version in installation documentation
+
+sources:
+  cert-manager:
+    name: Get latest Cert manager version
+    kind: githubrelease
+    spec:
+      owner: cert-manager
+      repository: cert-manager
+      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+      typefilter:
+        latest: true
+
+targets:
+  download-url:
+    name: 'Update Epinio Installation URL'
+    kind: file
+    spec:
+      files: 
+        - docs/tutorials/single-dev-workflow.md
+        - docs/howtos/install_epinio_on_rancher_desktop.md
+      matchpattern: 'https://github.com/cert-manager/cert-manager/releases/download/(.*)/'
+      replacepattern: 'https://github.com/cert-manager/cert-manager/releases/download/{{ source "cert-manager" }}/'
+    scmid: default
+    disablesourceinput: true
+
+actions:
+  default:
+    title: 'Bump cert-manager version used within installation documentation to {{ source "cert-manager" }}'
+    kind: github/pullrequest
+    scmid: default
+    spec:
+      automerge: false
+      mergemethod: squash
+      labels:
+        - chore
+
+scms:
+  default:
+    kind: github
+    spec:
+      user: epinio-bot
+      email: bot@epinio.io
+      owner: epinio
+      repository: docs
+      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+      branch: main
+
