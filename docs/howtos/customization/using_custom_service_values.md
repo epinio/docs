@@ -6,7 +6,7 @@ title: "How to specify custom values for service Helm charts"
 
 ## Audience
 
-This documentation is for operators specifying custom services for users, and users creating instances of those custom services needing to customize them.
+This documentation is for operators specifying custom services for users, and users creating instances of those custom services who need to customize them.
 
 Operators are shown how to specify user settings based on the form of the field in the `values.yaml` file of the underlying service Helm chart.
 
@@ -25,13 +25,11 @@ values are specified in the custom services and then used via `--chart-value`.
 
 ## Examples
 
-All the examples have the same basic structure. A table shows
+All the examples have the same basic structure. The tables shows, side by side,
 
  - how the field looks like in the `values.yaml` of the underlying service,
  - how the field is specified in the custom service, and
  - how it is addressed by the user via `--chart-value`.
-
-side by side.
 
 ### Basic map, simple value
 
@@ -43,7 +41,7 @@ This example assumes that the field value is of a simple type `T`, i.e. `string`
 <tr>
 <th><code>values.yaml</code></th>
 <th>Service spec</th>
-<th>Use</th>
+<th>CLI usage</th>
 </tr>
 <tr valign='top'>
 <td>
@@ -75,16 +73,15 @@ This example assumes that the field value is of a simple type `T`, i.e. `string`
 This example assumes that the field value is of a simple type `T`, i.e. `string`, `integer`,
 `number`, or `bool`.
 
-Note how the name of the field in the spec does not mention the nature of `bar` as an array.  The
-name is essentially the spine to reach the field, regardless of intercalated arrays.  This may not
-be fully understood here, however the next example should make it clearer.
+Note how the field name in the service spec does not mention that `bar` is an array.
+Here the name `foo.bar`, in the service spec, describes the path to the field.
 
 <pre>
 <table>
 <tr>
 <th><code>values.yaml</code></th>
 <th>Service spec</th>
-<th>Use</th>
+<th>CLI usage</th>
 </tr>
 <tr valign='top'>
 <td>
@@ -125,15 +122,14 @@ This example assumes that the value field is a simple type `T`, i.e. `string`, `
 Here `foo` is the array, having maps as elements, of which the keys `name` and `value` are of
 interest.
 
-Note how the names of the field do not mention the nature of `foo` as an array, and how the spines
-to the fields of interest are used to name them in the settings.
+Again, note how the names of the field do not mention the nature of `foo` as an array, and how the paths to fields of interest are used to name them in the CLI settings.
 
 <pre>
 <table>
 <tr>
 <th><code>values.yaml</code></th>
 <th>Service spec</th>
-<th>Use</th>
+<th>CLI usage</th>
 </tr>
 <tr valign='top'>
 <td>
@@ -173,16 +169,15 @@ to the fields of interest are used to name them in the settings.
 
 ### Map-valued map
 
-This example assumes that the field value is a map itself, with arbitrary keys, and
-values. A more concrete example would be the various annotation fields provided by various bitnami
-services enabling the user to set custom annotations on the various groups of pods of the service.
+This example assumes that the field value is a map itself, with arbitrary keys, and values.
+A concrete example would be the various annotation fields provided by bitnami services that enable the user to set custom annotations on the various groups of pods of the service.
 
 <pre>
 <table>
 <tr>
 <th><code>values.yaml</code></th>
 <th>Service spec</th>
-<th>Use</th>
+<th>CLI usage</th>
 </tr>
 <tr valign='top'>
 <td>
