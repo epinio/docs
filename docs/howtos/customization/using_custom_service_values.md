@@ -25,7 +25,7 @@ values are specified in the custom services and then used via `--chart-value`.
 
 ## Examples
 
-All the examples have the same basic structure. The tables shows, side by side,
+All the examples have the same basic structure. The tables show, side by side,
 
  - how the field looks like in the `values.yaml` of the underlying service,
  - how the field is specified in the custom service, and
