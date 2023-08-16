@@ -10,7 +10,7 @@ Epinio deploys applications on Kubernetes as [Helm charts](https://helm.sh/).
 
 By default, a standard Helm chart is provided when Epinio is installed.
 However, operators may wish to create custom charts specific to their environment, and
-register them in Epinio, so [their developers can use them](using_custom_appcharts.md).
+register them in Epinio, so [their developers can use them](../other/using_custom_appcharts.md).
 
 # Setting up a custom Helm chart
 
@@ -93,7 +93,7 @@ Note how the templating uses the `.Values.epinio.appName` field to insert the ap
 name into the annotation.
 
 The full set of values Epinio sets when deploying an application through the chart is explained in
-the [Application Chart Reference](../references/customization/appcharts.md#configuration),
+the [Application Chart Reference](../../references/customization/appcharts.md#configuration),
 or locally in the comments at the top of file `helm-charts/chart/application/values.yaml`.
 
 Once you have modified the chart to your needs, use the following command to package the changed

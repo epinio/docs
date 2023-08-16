@@ -51,7 +51,7 @@ epinio push --name wordpress
 Wordpress needs a database to work. After visiting the route of your deployed
 application you will have to set the connection details to the database.
 
-You can use the [Service](../references/services.md) feature to deploy your database with Epinio.
+You can use the [Service](../../references/services.md) feature to deploy your database with Epinio.
 Of course, deploying a database manually is still possible.
 
 Check [the README of our example app](https://github.com/epinio/example-wordpress#step-4---create-a-database-for-wordpress),

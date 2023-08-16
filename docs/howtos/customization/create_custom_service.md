@@ -6,7 +6,7 @@ title: ""
 
 # Create a custom service
 
-As described [in the Service reference page](../references/services.md), Epinio services are nothing but descriptions of Helm charts. An operator may add more services by simply creating a Custom Resource in the namespace where Epinio is installed.
+As described [in the Service reference page](../../references/services.md), Epinio services are nothing but descriptions of Helm charts. An operator may add more services by simply creating a Custom Resource in the namespace where Epinio is installed.
 
 As a starting point, you can check the services installed by default for Epinio:
 

@@ -8,7 +8,7 @@ title: ""
 
 If no Metrics Server is running on a Kubernetes cluster, the application "instances" (aka
 Pods) will report errors when it will try to show metrics (RAM, CPU etc) with the command
-[epinio app show](../references/commands/cli/app/epinio_app_show.md)
+[epinio app show](../../references/commands/cli/app/epinio_app_show.md)
 
 # Install a Metrics Server
 

@@ -52,7 +52,7 @@ serve the various accessible endpoints over TLS (e.g. the Epinio API server).
 Epinio supports various options when it comes to certificate issuers (let's encrypt, private CA, bring your own CA, self signed certs).
 Cert Manager simplifies the way we handle the various different certificate issuers within Epinio.
 
-You can read more about certificate issuers here: [certificate issuers documentation](../howtos/certificate_issuers.md)
+You can read more about certificate issuers here: [certificate issuers documentation](../howtos/other/certificate_issuers.md)
 
 ## Epinio installed components
 
@@ -92,7 +92,7 @@ Minio is a storage solution that implements the same API as [Amazon S3](https://
 
 When the user pushes an application using a source code directory (with the [`epinio push`](../references/commands/cli/epinio_push.md) command), the first step taken by the cli is to put the source code into a tarball and upload that to the Epinio API server. The server copies that to the configured S3 storage to be used later during the staging of the application.
 
-When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install either Minio or s3gw on the cluster ([See here how](../howtos/setup_external_s3.md)).
+When installing Epinio, the user can choose to use an external S3 compatible storage or let Epinio install either Minio or s3gw on the cluster ([See here how](../howtos/customization/setup_external_s3.md)).
 
 ### s3gw
 
@@ -120,7 +120,7 @@ Epinio controls the staging job and ensures that whatever CA is used to sign the
 3. Don't encrypt the communication at all
 
 Currently Epinio doesn't support the first 2 options. If `containerregistry.enabled` is `true` during installation (default), Epinio will make Kubernetes pull the images unencrypted (option #3 above).
-If encryption is desired, the container registry should be installed manually and configured as an ["external" registry](../howtos/setup_external_registry.md) during Epinio installation.
+If encryption is desired, the container registry should be installed manually and configured as an ["external" registry](../howtos/customization/setup_external_registry.md) during Epinio installation.
 
 > NOTE: Communication between the staging Job and the container registry is encrypted with TLS even when the built-in container registry is used.
 

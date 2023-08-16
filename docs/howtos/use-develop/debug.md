@@ -17,7 +17,7 @@ This is done with the epinio cli `app env set` command:
 epinio app env set samplejava BPL_DEBUG_ENABLED true
 ```
 
-After the application has restarted (to integrate the change of the environment) use [port forwarding](port_forwarding.md) to attach the debugger. It runs by default on the port `8000`:
+After the application has restarted (to integrate the change of the environment) use [port forwarding](../other/port_forwarding.md) to attach the debugger. It runs by default on the port `8000`:
 
 ```
 epinio app port-forward sample 8000:8000
@@ -39,7 +39,7 @@ To debug a Node application you will have to start the application with the `--i
 }
 ```
 
-After the application has been deployed use [port forwarding](port_forwarding.md) to attach the debugger. It runs by default on the port `9229`:
+After the application has been deployed use [port forwarding](../other/port_forwarding.md) to attach the debugger. It runs by default on the port `9229`:
 
 ```
 epinio app port-forward sample 9229:9229

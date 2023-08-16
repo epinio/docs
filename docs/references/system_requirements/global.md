@@ -9,7 +9,7 @@ Please consider the following system requirements to be minimal, additional reso
 
 | Component | Description |
 | --- | --- |
-| OS / Kubernetes <sup>1</sup> | Linux: [RKE2](../../howtos/install_epinio_on_rke.md), [K3s](../../howtos/install_epinio_on_k3s.md),   [K3d](../../howtos/install_epinio_on_k3d.md), [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md)<br/>Windows, MacOS: [Rancher Desktop](../../howtos/install_epinio_on_rancher_desktop.md) |
+| OS / Kubernetes <sup>1</sup> | Linux: [RKE2](../../installation/other_inst_scenarios/install_epinio_on_rke.md), [K3s](../../installation/other_inst_scenarios/install_epinio_on_k3s.md),   [K3d](../../installation/other_inst_scenarios/install_epinio_on_k3d.md), [Rancher Desktop](../../installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md)<br/>Windows, MacOS: [Rancher Desktop](../../installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md) |
 | CPU | 2-4 vCPUs |
 | Memory | 8GB RAM (system memory + 4GB) |
 | Storage | 10GB Disk space (system disk + 5GB) |
@@ -27,7 +27,7 @@ Please consider the following system requirements to be minimal, additional reso
 * Deployed [metrics-server](https://github.com/kubernetes-sigs/metrics-server#installation) resources
 * Deployed Ingress Controller as [traefik](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart) or [nginx-ingress](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/) with `default` IngressClass set
 * Deployed Persistent Volume Provisioner as [Longhorn](https://longhorn.io) or [local-path](https://github.com/rancher/local-path-provisioner) providing a `default` StorageClass. Access mode `ReadWriteMany` (RWX) is preferred.
-* [Optional] An external load-balancer solution in conjunction with an Ingress controller is needed for exposing Epinio HTTP(S) workload on Internet. More information [here](../../howtos/provision_external_ip_for_local_kubernetes). <!--REVISIT the link-->
+* [Optional] An external load-balancer solution in conjunction with an Ingress controller is needed for exposing Epinio HTTP(S) workload on Internet. More information [here](../../howtos/customization/provision_external_ip_for_local_kubernetes). <!--REVISIT the link-->
 :::
 
 ### Default IngressClass

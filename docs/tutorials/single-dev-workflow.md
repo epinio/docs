@@ -27,20 +27,19 @@ specifically.
 Before you can use Epinio, you need to have a Kubernetes cluster running.
 
 As a solo developer, you might be using a local Kubernetes cluster such as
-[Rancher Desktop](https://rancherdesktop.io/), or [k3d](https://k3d.io/), just
-to name a few.
+[Rancher Desktop](https://rancherdesktop.io/) or [k3d](https://k3d.io/).
 
 :::note
 
-This tutorial will not explain how to install a local Kubernetes cluster and
-assumes you know how to do it.  However, depending on your choice, there are
-already some examples in the **Epinio Howtos** section which contains links to
-the respective clusters' installation docs.
+This tutorial does not explain how to install a local Kubernetes cluster and
+assumes you have one available. There are
+some examples in the **Epinio Installation** section which contains links to
+installation documentation for a variety of common scenarios.
 
 :::
 
 In this tutorial, we'll use
-[Rancher Desktop](../howtos/install_epinio_on_rancher_desktop.md)
+[Rancher Desktop](../installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md)
 as our local Kubernetes cluster. However you should be able to follow this
 tutorial with the local Kubernetes cluster of your choice.
 
@@ -227,7 +226,7 @@ epinio app port-forward mysimpleapp 8080:8080
 
 You can specify only one port number. In that case, Epinio will open the port of both `local` and `remote` targets.
 
-For more information, you can see the [Port Fowarding page](../howtos/port_forwarding.md).
+For more information, you can see the [Port Fowarding page](../howtos/other/port_forwarding.md).
 
 :::
 
