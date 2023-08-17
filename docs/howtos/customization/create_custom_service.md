@@ -124,7 +124,7 @@ The example settings shown above are taking from the nginx service used in the e
 
 :::note
 The syntax of the `settings` map is the same as the `settings` map used to customize app chart resources.
-See section `User-settable configuration values` in the how to for
+See section `User-settable configuration values` in the How-to for
 [Creating Custom Application Helm Charts](create_custom_appcharts.md)
 
 Because of this the full specification is __not__ repeated here.

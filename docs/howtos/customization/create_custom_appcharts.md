@@ -47,12 +47,12 @@ The coming steps, especially the commands given, assume that the reader uses the
 `D` as their working directory.
 :::
 
-In this How-To, we will create a variant of the chart by adding an annotation to every
+In this How-to, we will create a variant of the chart by adding an annotation to every
 application `Deployment`. The annotation will enable the filtering of Epinio applications
 in [fluentd](https://www.fluentd.org/).
 
 :::note
-Explanations about setting up and using `fluentd` are out of scope for this How-To.
+Explanations about setting up and using `fluentd` are out of scope for this How-to.
 :::
 
 Open the file `helm-charts/chart/application/templates/deployment.yaml` in your editor of
@@ -107,7 +107,7 @@ The tarball is placed into the current working directory and the filename should
 `application-VERSION.tgz` where `VERSION` is the chart version.
 
 :::note
-We didn't change the chart version. Versioned chart development is out of scope for this How-To.
+We didn't change the chart version. Versioned chart development is out of scope for this How-to.
 :::
 
 ## Making the helm Chart known to Epinio
@@ -122,7 +122,7 @@ generated tarball on an accessible web server. Possible options are
   - A local web webserver, like an nginx in a docker container
   - etc. 
 
-Given the plethora of possible options, this How-To simply assumes that the tarball is
+Given the plethora of possible options, this How-to simply assumes that the tarball is
 available at the example URL
 
 ```
@@ -148,7 +148,7 @@ spec:
   helmChart: https://mydomain.org/epinio-application-fluentd.tgz
 ```
 
-This How-To now simply assumes that the chosen file is named:
+This How-to now simply assumes that the chosen file is named:
 
 ```
 fluentd-appchart.yaml

@@ -6,7 +6,7 @@ title: ""
 
 ## How to debug an app
 
-This how-to demonstrates how to debug a running application.
+This How-to demonstrates how to debug a running application.
 
 ### Java
 

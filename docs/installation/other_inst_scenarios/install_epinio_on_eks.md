@@ -6,7 +6,7 @@ title: ""
 
 # Installing Epinio On EKS
 
-To install an Elastic Kubernetes Service (EKS) this how-to uses the following versions:
+To install an Elastic Kubernetes Service (EKS) this How-to uses the following versions:
 
 * [epinio helm chart - v1.6.2](https://github.com/epinio/helm-charts/releases/tag/epinio-1.6.2)
 * AWS EKS - Kubernetes v1.22, v1.23***** or v1.24*****

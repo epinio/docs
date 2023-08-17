@@ -6,7 +6,7 @@ title: ""
 
 # Installing Epinio On K3s (local)
 
-This how-to was written using the following versions:
+This How-to was written using the following versions:
 * [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
 * [k3s](https://k3s.io/) version v1.23.4+k3s1 and v1.22.7+k3s1
 * openSUSE Leap 15.3 and Tumbleweed
@@ -17,7 +17,7 @@ This how-to was written using the following versions:
 
 Follow the [instructions](https://k3s.io/) to install K3s on your system.
 
-The K3s version used in this how-to is mentioned above, with all options set to default.
+The K3s version used in this How-to is mentioned above, with all options set to default.
 
 ### Install Epinio on the Cluster
 

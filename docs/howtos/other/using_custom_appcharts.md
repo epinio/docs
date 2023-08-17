@@ -1,5 +1,5 @@
 ---
-sidebar_label: "How To Use Custom Application Helm Charts"
+sidebar_label: "How to use custom application Helm charts"
 sidebar_position: 16
 title: ""
 ---
@@ -12,7 +12,7 @@ By default, a standard Helm chart is provided when Epinio is installed.
 However, operators may wish to [create and register custom charts](../customization/create_custom_appcharts.md) specific to their environment.
 
 Once the custom charts are registered in Epinio, the developers can use them when deploying their
-applications as described in this How-To.
+applications as described in this How-to.
 
 
 # Listing the available Helm charts

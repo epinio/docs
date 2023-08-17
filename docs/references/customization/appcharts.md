@@ -12,9 +12,9 @@ An installation of Epinio provides a single standard application chart.
 
 If custom application charts adapted to the local environment are desired or needed please
 follow the instructions on
-[How To create custom application Helm charts](../../howtos/customization/create_custom_appcharts.md)
+[How to create custom application Helm charts](../../howtos/customization/create_custom_appcharts.md)
 and
-[How To use custom application Helm charts](../../howtos/other/using_custom_appcharts.md).
+[How to use custom application Helm charts](../../howtos/other/using_custom_appcharts.md).
 
 Application charts are expected to create the following resources:
 
@@ -99,10 +99,10 @@ The user configuration map is keyed by the names of chart values set by the user
 set values.
 
 :::note
-Please read [How To create custom application Helm charts](../../howtos/customization/create_custom_appcharts.md)
+Please read [How to create custom application Helm charts](../../howtos/customization/create_custom_appcharts.md)
 for more information about defining user-settable chart values when creating a custom app chart.
 
-Please read [How To use custom application Helm charts](../../howtos/other/using_custom_appcharts.md) for
+Please read [How to use custom application Helm charts](../../howtos/other/using_custom_appcharts.md) for
 more information about using user-settable chart values when deploying an application.
 :::
 

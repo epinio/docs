@@ -6,7 +6,7 @@ title: ""
 
 ## How to use Port Forwarding
 
-This how-to demonstrates how to use port forwarding to access a running application.
+This How-to demonstrates how to use port forwarding to access a running application.
 
 Port forwarding can be started with the `port-forward` command:
 
