@@ -33,7 +33,6 @@ epinio server [flags]
       --staging-resource-memory string        (STAGING_RESOURCE_MEMORY)
       --staging-service-account-name string   (STAGING_SERVICE_ACCOUNT_NAME)
       --tls-issuer string                     (TLS_ISSUER) The cluster issuer to use for workload certificates
-      --trace-output string                   (TRACE_OUTPUT) logs output format [text,json] (default "text")
       --upgrade-responder-address string      (UPGRADE_RESPONDER_ADDRESS) Disable tracking of the running Epinio and Kubernetes versions (default "https://epinio.version.rancher.io/v1/checkupgrade")
 ```
 
@@ -46,7 +45,9 @@ epinio server [flags]
       --settings-file string     (EPINIO_SETTINGS) set path of settings file (default "~/.config/epinio/settings.yaml")
       --skip-ssl-verification    (SKIP_SSL_VERIFICATION) Skip the verification of TLS certificates
       --timeout-multiplier int   (EPINIO_TIMEOUT_MULTIPLIER) Multiply timeouts by this factor (default 1)
+      --trace-file string        (TRACE_FILE) Print trace messages to the specified file
       --trace-level int          (TRACE_LEVEL) Only print trace messages at or above this level (0 to 255, default 0, print nothing)
+      --trace-output string      (TRACE_OUTPUT) Sets trace output format [text,json] (default "text")
       --verbosity int            (VERBOSITY) Only print progress messages at or above this level (0 or 1, default 0)
 ```
 
