@@ -18,8 +18,8 @@ targets:
     kind: file
     spec:
       files: 
-        - docs/tutorials/single-dev-workflow.md
-        - docs/howtos/install_epinio_on_rancher_desktop.md
+        - installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md
+        - tutorials/single-dev-workflow.md
       matchpattern: 'https://github.com/cert-manager/cert-manager/releases/download/(.*)/'
       replacepattern: 'https://github.com/cert-manager/cert-manager/releases/download/{{ source "cert-manager" }}/'
     scmid: default
