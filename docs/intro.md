@@ -43,11 +43,12 @@ Epinio adds the needed abstractions and tools to allow developers to use Kuberne
 - **Epinio Clients**
   - Epinio provides both a web UI and a CLI to support interactive work and automation.
 - **Apps**
-  - CRUD operations of your app. (An app can be a tarball or in a github repo)
-  - [Cloud Native Buildpacks](https://buildpacks.io/) provide the runtime environment for your apps
+  - Using the UI or CLI you can create, inspect, modify and delete apps.
+  - You can use [Cloud Native Buildpacks](https://buildpacks.io/) provide the runtime environment for your apps
 - **Configurations**
-  - CRUD operations of your configuration. A configuration can be connection details for a database, SaaS etc.
-  - Bind configurations to apps.
+  - Apps can have configurations associated with them (configuration binding).
+  - Using the UI or CLI you can create, inspect and delete these application bindings
+  - The configurations describe database connections, SaaS configurations, etc.
 
 ## Next steps
 
