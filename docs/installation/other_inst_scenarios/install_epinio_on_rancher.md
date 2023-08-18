@@ -10,7 +10,7 @@ Before installing Epinio, you need a running Rancher instance.
 
 If you do not have one, please use the Rancher's [installation guides](https://rancher.com/docs) to set one up.
 
-This how-to was written using the following versions:
+This How-to was written using the following versions:
 * [epinio helm chart 1.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-1.7.1)
 * Rancher 2.7.1
 

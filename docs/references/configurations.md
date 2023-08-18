@@ -19,7 +19,7 @@ Examples of configurations are
 
 In Epinio configurations are identified by a name and the namespace they are defined in. Beyond
 that they consist of a collection of arbitrarily named attributes and values, which when
-consumed by an application, tell that aplication how to connect to and interact with that
+consumed by an application, tell that application how to connect to and interact with that
 configuration.
 
 Note that while there are guidelines what kind of attributes are required for the above, and

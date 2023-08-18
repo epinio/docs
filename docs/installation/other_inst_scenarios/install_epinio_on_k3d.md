@@ -6,7 +6,7 @@ title: ""
 
 # Installing Epinio On K3d (local)
 
-This how-to was written using the following versions:
+This How-to was written using the following versions:
 * [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
 * [k3d](https://k3d.io/) version v5.3.0
 ## Get K3d Kubernetes Cluster

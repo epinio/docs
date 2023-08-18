@@ -6,7 +6,7 @@ title: ""
 
 ## How to set up routing secrets for use by applications
 
-This is a how-to for operators.
+This is a How-to for operators.
 
 ### Introduction and Background
 

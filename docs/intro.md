@@ -60,5 +60,5 @@ our [quickstart](./tutorials/quickstart.md) tutorial to get started with Epinio.
 For a more detailed information, you can check the **Explanations** section,
 where different topics such as "Principles" or "Security" are explained.
 
-Finally, if you want to test Epinio directly, our **HowTos** section
+Finally, if you want to test Epinio directly, our **How-tos** section
 will show concrete examples on how to use Epinio for different use-cases.

@@ -6,7 +6,7 @@ title: ""
 
 # Installing Epinio On Rancher Desktop (local)
 
-This how-to was written using the following versions:
+This How-to was written using the following versions:
 
 * [epinio helm chart 1.0.0](https://github.com/epinio/helm-charts/releases/tag/epinio-1.0.0)
 * Rancher desktop 1.4.1

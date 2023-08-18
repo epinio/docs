@@ -162,7 +162,7 @@ To help you, see the following documents for some well-known Kubernetes clusters
 - [Install on Rancher Desktop](other_inst_scenarios/install_epinio_on_rancher_desktop.md) - Install Epinio on Rancher Desktop
 - [Install on EKS](other_inst_scenarios/install_epinio_on_eks.md) - Install Epinio on AWS EKS cluster
 
-> *NOTE*: The Public Cloud howto lists the three major Cloud providers but Epinio can run on any Kubernetes cluster.
+> *NOTE*: The Public Cloud How-to lists the three major Cloud providers but Epinio can run on any Kubernetes cluster.
 
 ## Internal Epinio components
 ### Kubed
