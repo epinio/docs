@@ -215,7 +215,7 @@ If you don't need to use an identity provider, set the value to `false` and use 
 ### Container Registry
 
 When Epinio builds a container image for an application from source, it needs
-to store that image in container registry. Epinio installs a container registry
+to store that image in a container registry. Epinio installs a container registry
 on the cluster when `.Values.containerregistry.enabled` is `true` (default).
 
 <!--TODO: Not sure about using a hashed blob, is that OK? Presumably to guarantee a line number reference?-->
