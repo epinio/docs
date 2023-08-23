@@ -119,7 +119,7 @@ helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespac
 
 <summary>Installation with "Let's Encrypt" certificates</summary>
 
-To generate trusted TLS certificates with "Let's Encrypt" for your public domain set `.Values.global.tlsIssuer` to `letsencrypt-production` and your e-mail to the value for the `.Values.global.tlsIssuerEmail` key.
+To generate trusted TLS certificates with "Let's Encrypt" for your public domain set `.Values.global.tlsIssuer` to `letsencrypt-production` and the value for the `.Values.global.tlsIssuerEmail` key to your e-mail.
 
 ```bash
  helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespace \
