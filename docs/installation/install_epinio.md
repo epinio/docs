@@ -186,7 +186,7 @@ The Public Cloud How-to describes the three major cloud providers but Epinio can
 ### Kubed
 
 Kubed is installed as a subchart when `.Values.kubed.enabled` is `true` (default).
-If you already have kubed, you can skip installation by setting
+If you already have `kubed`, you can skip installation by setting
 the helm value `.Values.kubed.enabled` to `false`.
 
 ### S3 storage
