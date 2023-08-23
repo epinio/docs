@@ -178,7 +178,7 @@ To help you, see the following documents for some well-known clusters:
 - [Install on EKS](other_inst_scenarios/install_epinio_on_eks.md) — Install Epinio on AWS EKS cluster
 
 :::note
-The Public Cloud How-to describes the three major cloud providers but Epinio can run on any Kubernetes cluster.
+The Public Cloud [installation](other_inst_scenarios/install_epinio_on_public_cloud.md) describes the three major cloud providers but Epinio can run on any Kubernetes cluster.
 :::
 
 ## Internal Epinio components
@@ -200,10 +200,9 @@ It is installed when `.Values.minio.enabled` is set to `false` and `.Values.s3gw
 
 Both choices for internal S3 compatible storage can be configured to use a user-defined storageClass.
 If no StorageClass is defined, the default storageClass is used.
-Using Minio set the custom storageClass by the value of `.Values.persistance.storageClass`.
-When using s3gw set the custom storageClass as the value of `.Values.s3gw.storageClass.name`.
+When using Minio set the custom storageClass to the value of `.Values.persistance.storageClass`.
+When using s3gw set the custom storageClass to the value of `.Values.s3gw.storageClass.name`.
 
-<!--TODO: Not sure about using a hashed blob, is that OK? Presumably to guarantee a line number reference?-->
 Use any external S3 compatible solution by setting `.Values.minio.enabled` to `false` (`.Values.s3gw.enabled` is `false` by default) and using [the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44) to point to the required S3 server.
 
 ### Dex
@@ -218,7 +217,6 @@ When Epinio builds a container image for an application from source, it needs
 to store that image in a container registry. Epinio installs a container registry
 on the cluster when `.Values.containerregistry.enabled` is `true` (default).
 
-<!--TODO: Not sure about using a hashed blob, is that OK? Presumably to guarantee a line number reference?-->
 Any container registry that supports basic auth authentication (e.g. gcr, dockerhub, etc) can be used
 instead, by setting this value to `false` and using
 [the relevant global values](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L107-L111)
