@@ -201,7 +201,7 @@ It is installed when `.Values.minio.enabled` is set to `false` and `.Values.s3gw
 Both choices for internal S3 compatible storage can be configured to use a user-defined storageClass.
 If no StorageClass is defined, the default storageClass is used.
 Using Minio set the custom storageClass by the value of `.Values.persistance.storageClass`.
-Using s3gw set the custom storageClass by the value of `.Values.s3gw.storageClass.name`.
+When using s3gw set the custom storageClass as the value of `.Values.s3gw.storageClass.name`.
 
 <!--TODO: Not sure about using a hashed blob, is that OK? Presumably to guarantee a line number reference?-->
 Use any external S3 compatible solution by setting `.Values.minio.enabled` to `false` (`.Values.s3gw.enabled` is `false` by default) and using [the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44) to point to the required S3 server.
