@@ -135,7 +135,7 @@ It should point to the IP address of your running Ingress controller.
 
 - To use a non-default IngressClass you need to specify it using `--set ingress.ingressClassName=<className>`
 
-- If you receive `Entity Too Large` errors when [uploading](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size) application source code into Epinio, you need to increase `proxy-body-size` with `--set 'ingress.annotations.nginx\.ingress\.kubernetes\.io/proxy-body-size=1000m'`
+- If you receive `Entity Too Large` errors when [uploading](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size) application source code into Epinio, you need to increase the `proxy-body-size` with `--set 'ingress.annotations.nginx\.ingress\.kubernetes\.io/proxy-body-size=1000m'`
 
 :::
 
