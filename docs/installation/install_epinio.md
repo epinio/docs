@@ -35,12 +35,15 @@ helm upgrade --install nginx-ingress --namespace nginx-ingress nginx-stable/ngin
 
 You can use Traefik instead of Nginx by following the official [documentation](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart).
 
+
+:::tip
+
+You should verify if the service of the ingress controller you have just deployed has at least one `EXTERNAL-IP` address assigned from the external load-balancer provider (such as AWS ELB or similar).
+
 <details>
 
-<summary>Verify external loadbalancer IP assignment</summary>
+<summary>How to verify your `EXTERNAL-IP` address</summary>
 
-You should verify if the service of the ingress controller you have just deployed has at least one `EXTERNAL-IP` address assigned from the external
-load-balancer provider (such as AWS ELB or similar).
 
 ```bash
 kubectl get svc nginx-ingress-controller --namespace nginx-ingress
@@ -63,6 +66,8 @@ If you have the `<pending>` value in the `EXTERNAL-IP` column you can try one of
 There is more about this in the [NGINX documentation](https://kubernetes.github.io/ingress-nginx/deploy/baremetal).
 
 </details>
+
+:::
 
 ### Cert Manager
 
@@ -91,9 +96,7 @@ Epinio installation will fail without this as it will not know how to use `cert-
 To support Epinio a storage provisioner is needed.
 You can use any storage provisioner which provides `ReadWriteMany` (RWX) Access Mode and a **default StorageClass** resource for dynamic storage provisioning.
 
-:::info
 To verify that your cluster provides a default StorageClass run the command `kubectl get storageclass`. The default StorageClass is marked with the string `(default)` next to its name in the output list.
-:::
 
 For example, you can deploy and configure the `local-path` dynamic storage provisioner by:
 ```bash
@@ -102,8 +105,6 @@ kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storagec
 ```
 
 ### Install Epinio
-
-<!--TODO: I'm not sure about the structure/ordering of this section, down to "Verify Helm.....". Needs some thought-->
 
 If the above dependencies are available or going to be installed by this chart,
 Epinio can be installed with the following:
@@ -114,36 +115,38 @@ helm repo update
 helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespace \
     --set global.domain=myepiniodomain.org
 ```
+Or you can install using "Let's Encrypt" certificates.
 
-<details>
-
-<summary>Installation with "Let's Encrypt" certificates</summary>
-
-To generate trusted TLS certificates with "Let's Encrypt" for your public domain set `.Values.global.tlsIssuer` to `letsencrypt-production` and the value for the `.Values.global.tlsIssuerEmail` key to your e-mail.
+To generate trusted TLS certificates with "Let's Encrypt" for your public domain set `.Values.global.tlsIssuer` to `letsencrypt-production` and the value for the `.Values.global.tlsIssuerEmail` key to your e-mail address. Then:
 
 ```bash
+helm repo add epinio https://epinio.github.io/helm-charts
+helm repo update
  helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespace \
     --set global.domain=myepiniodomain.org \
     --set global.tlsIssuer=letsencrypt-production \
     --set global.tlsIssuerEmail=user@company.org
 ```
 
-</details>
-
-The only mandatory value is the `.Values.global.domain` which should be a wildcard `*.` enabled domain.
+The only mandatory field is the `.Values.global.domain` which should have the value of a wildcard `*.` enabled domain.
 It should point to the IP address of your running Ingress controller.
 
-:::info
-* Use a non-default IngressClass: `--set ingress.ingressClassName=<className>`
-* Set annotations for Epinio related ingresses to resolve errors `Entity Too Large` when [uploading](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size) application source code into Epinio: <br/>`--set 'ingress.annotations.nginx\.ingress\.kubernetes\.io/proxy-body-size=1000m'`
+:::tip
+
+- To use a non-default IngressClass you need to specify it using `--set ingress.ingressClassName=<className>`
+
+- If you receive `Entity Too Large` errors when [uploading](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size) application source code into Epinio, you need to increase `proxy-body-size` with `--set 'ingress.annotations.nginx\.ingress\.kubernetes\.io/proxy-body-size=1000m'`
+
 :::
 
-Read more on how to setup DNS here: [DNS setup](./dns_setup.md)
-
 :::note
-- If you're deploying Epinio in a "localhost" environment, you can use a [wildcard DNS service](./wildcardDNS_setup.md).
+
+- Read more on how to setup DNS here: [DNS setup](./dns_setup.md)
+
+- If you're deploying Epinio in a "localhost" environment, you can use a [wildcard DNS service](./wildcardDNS_setup.md) to ease setup.
 
 - If installation fails due to an expired certificate then run `epinio settings update-ca`.  There is more information [here](https://docs.epinio.io/references/commands/cli/settings/epinio_settings_update-ca#epinio-settings-update-ca).
+
 :::
 
 ### Verify Helm Chart Images
@@ -177,9 +180,7 @@ To help you, see the following documents for some well-known clusters:
 - [Install on Rancher Desktop](other_inst_scenarios/install_epinio_on_rancher_desktop.md) — Install Epinio on Rancher Desktop
 - [Install on EKS](other_inst_scenarios/install_epinio_on_eks.md) — Install Epinio on AWS EKS cluster
 
-:::note
 The Public Cloud [installation](other_inst_scenarios/install_epinio_on_public_cloud.md) describes the three major cloud providers but Epinio can run on any Kubernetes cluster.
-:::
 
 ## Internal Epinio components
 
