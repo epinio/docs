@@ -64,7 +64,7 @@ The following commands were tested using cosign version 2.1.1.
 
 ### Verify File Checksum Signature
 
-Instead of signing all release assets, Epinio signs a checksums file containing checksums for the release assets.
+Instead of signing all release assets, Epinio signs a file containing checksums for the release assets.
 You can download/copy the three files 'epinio_1.9.0_checksums.txt.pem',
 'epinio_1.9.0_checksums.txt.sig', 'epinio_1.9.0_checksums.txt' from the latest release.
 
