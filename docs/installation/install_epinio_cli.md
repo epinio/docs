@@ -2,7 +2,7 @@
 sidebar_label: "Install the Epinio CLI"
 sidebar_position: 2
 title: "Install the Epinio CLI"
-description: How to install the Epinio CLI on Windows, Linux ad Mac
+description: How to install the Epinio CLI on Windows, Linux and Mac
 keywords: [epinio, install, cli, windows, mac, linux, homebrew]
 ---
 
