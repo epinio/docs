@@ -20,7 +20,7 @@ If Epinio is installed in a namespace called `epinio`, the following command out
 $ kubectl get services.application.epinio.io -n epinio mysql-dev -o yaml > service.yaml
 ```
 
-or you can find the definition of the catalog services [here](https://github.com/epinio/helm-charts/blob/3a12bac7aee5ac36c6d43416f2e83ac10090c62a/chart/epinio/templates/service-catalog.yaml
+or you can find the definition of the catalog services [here](https://github.com/epinio/helm-charts/blob/main/chart/epinio/templates/service-catalog.yaml
 ).
 
 Change the fields to point to the desired helm chart and apply the yaml with a command like:
@@ -138,3 +138,29 @@ For app charts the keys are simple strings for the `userConfig` map. They do not
 For service charts the keys are proper paths into the set of fields exposed by the chart through its
 `values.yaml` file. Nesting is expressed using dots (`.`). As example see `ingress.enabled` above.
 :::
+
+### Private repositories and registries
+
+To use charts stored in private repositories or OCI registries that requires authentication you can specify a secret where the credentials are stored.
+
+```yaml
+apiVersion: application.epinio.io/v1
+kind: Service
+metadata:
+  name: myservice
+  ...
+spec:
+  helmRepo:
+    name: myregistry
+    url: oci://ghcr.io/myregistry
+    secret: oci-secret
+```
+
+Epinio will look for the `oci-secret` in the namespace where Epinio is installed. This secret should contain a `username` and `password` fields that will be used to login into the registry or authenticate to the private repository:
+
+
+```
+kubectl create secret generic -n epinio oci-secret --from-literal=username=myusername --from-literal=password=mypassword
+```
+
+For example, to use the Github Container Registry a PAT with the `package:read/write` scopes is needed, and it can be used as the username and password.
