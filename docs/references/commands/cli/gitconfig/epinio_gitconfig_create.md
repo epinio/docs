@@ -1,23 +1,26 @@
 ---
 title: ""
-sidebar_label: "epinio app env set"
+sidebar_label: "epinio gitconfig create"
 ---
-## epinio app env set
+## epinio gitconfig create
 
-Extend application environment
-
-### Synopsis
-
-Add or change environment variable of named application
+Creates a git configuration
 
 ```
-epinio app env set APPNAME NAME VALUE [flags]
+epinio gitconfig create ID URL [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for set
+      --cert-file string      path to file holding supporting certificates
+      --git-provider string   Git provider code (default 'git')
+  -h, --help                  help for create
+      --password string       password for logging into the host
+      --repository string     specific repository
+      --skip-ssl              skip ssl
+      --user-org string       user/org holding repository
+      --username string       user name for logging into the host
 ```
 
 ### Options inherited from parent commands
@@ -37,5 +40,5 @@ epinio app env set APPNAME NAME VALUE [flags]
 
 ### SEE ALSO
 
-* [epinio app env](./epinio_app_env.md)	 - Epinio application configuration
+* [epinio gitconfig](./epinio_gitconfig.md)	 - Epinio git configuration management
 

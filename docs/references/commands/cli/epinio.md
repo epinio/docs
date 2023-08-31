@@ -24,7 +24,6 @@ epinio cli is the official command line interface for Epinio PaaS
       --trace-level int          (TRACE_LEVEL) Only print trace messages at or above this level (0 to 255, default 0, print nothing)
       --trace-output string      (TRACE_OUTPUT) Sets trace output format [text,json] (default "text")
       --verbosity int            (VERBOSITY) Only print progress messages at or above this level (0 or 1, default 0)
-  -v, --version                  version for epinio
 ```
 
 ### SEE ALSO
@@ -33,6 +32,7 @@ epinio cli is the official command line interface for Epinio PaaS
 * [epinio client-sync](./epinio_client-sync.md)	 - Downloads a client binary matching the currently logged server
 * [epinio completion](./epinio_completion.md)	 - Generate completion script for a shell
 * [epinio configuration](./configuration/epinio_configuration.md)	 - Epinio configuration features
+* [epinio gitconfig](./gitconfig/epinio_gitconfig.md)	 - Epinio git configuration management
 * [epinio info](./epinio_info.md)	 - Shows information about the Epinio environment
 * [epinio login](./epinio_login.md)	 - Epinio login to the server
 * [epinio logout](./epinio_logout.md)	 - Epinio logout from server
