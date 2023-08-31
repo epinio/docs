@@ -184,7 +184,7 @@ If an Epinio ingress installation has provided you with the following hostname:
 Traefik Ingress info: [{"ip":"10.0.0.1"}]
 ```
 
-You need to add two A records, for the subdomain and widlcard, so "test" to have `test.example.com`, and `*.test.example.com` to `/var/lib/named/master/forward/example.com`.
+You need to add two A records, for the subdomain and wildcard, so "test" to have `test.example.com`, and `*.test.example.com` to `/var/lib/named/master/forward/example.com`.
 This path will differ depending on distribution.
 Replace `10.0.0.1` with the IP address from "Traefik Ingress info", and `test.example.com` with your custom domain.
 
