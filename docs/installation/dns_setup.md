@@ -13,7 +13,7 @@ You use this field for access to:
 - an Epinio API server
 - an Epinio WebUI
 - a dex (OpenID Connect Provider)
-- to create default routes for the deployed applications.
+- create default routes for the deployed applications.
 
 The `global.domain` field must be a wildcard domain.
 So, any subdomain should resolve to the same IP address as the domain itself.
