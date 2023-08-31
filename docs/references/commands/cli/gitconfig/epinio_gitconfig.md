@@ -1,23 +1,23 @@
 ---
 title: ""
-sidebar_label: "epinio app env set"
+sidebar_label: "epinio gitconfig"
 ---
-## epinio app env set
+## epinio gitconfig
 
-Extend application environment
+Epinio git configuration management
 
 ### Synopsis
 
-Add or change environment variable of named application
+Manage git configurations
 
 ```
-epinio app env set APPNAME NAME VALUE [flags]
+epinio gitconfig [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for set
+  -h, --help   help for gitconfig
 ```
 
 ### Options inherited from parent commands
@@ -37,5 +37,9 @@ epinio app env set APPNAME NAME VALUE [flags]
 
 ### SEE ALSO
 
-* [epinio app env](./epinio_app_env.md)	 - Epinio application configuration
+* [epinio](../epinio.md)	 - Epinio cli
+* [epinio gitconfig create](./epinio_gitconfig_create.md)	 - Creates a git configuration
+* [epinio gitconfig delete](./epinio_gitconfig_delete.md)	 - Delete git configurations
+* [epinio gitconfig list](./epinio_gitconfig_list.md)	 - Lists all git configurations
+* [epinio gitconfig show](./epinio_gitconfig_show.md)	 - Shows the details of a git configuration
 
