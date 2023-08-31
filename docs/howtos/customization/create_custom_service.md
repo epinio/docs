@@ -156,11 +156,11 @@ spec:
     secret: oci-secret
 ```
 
-Epinio will look for the `oci-secret` in the namespace where Epinio is installed. This secret should contain a `username` and `password` fields that will be used to login into the registry or authenticate to the private repository:
+Epinio will look for the `oci-secret` in the namespace where Epinio is installed. This secret has to contain `username` and `password` fields. Their values will be used to log into the registry or authenticate to the private repository:
 
 
 ```
 kubectl create secret generic -n epinio oci-secret --from-literal=username=myusername --from-literal=password=mypassword
 ```
 
-For example, to use the Github Container Registry a PAT with the `package:read/write` scopes is needed, and it can be used as the username and password.
+For example, to use the Github Container Registry a personal access token (`PAT`) with the `package:read/write` scopes is needed, and has to be used as both username and password.
