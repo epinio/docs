@@ -156,7 +156,8 @@ spec:
     secret: oci-secret
 ```
 
-Epinio will look for the `oci-secret` in the namespace where Epinio is installed. This secret has to contain `username` and `password` fields. Their values will be used to log into the registry or authenticate to the private repository:
+Epinio looks for the `oci-secret` in the namespace where it is installed. 
+This secret has to contain registry, or repository, login `username` and `password` fields:
 
 
 ```
