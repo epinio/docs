@@ -1,118 +1,152 @@
 ---
 sidebar_label: "DNS setup"
 sidebar_position: 3
-title: ""
+title: "DNS setup"
+description: How to setup DNS for Epinio and associated issues.
+keywords: [epinio, kubernetes, k8s, DNS]
 ---
 
-#  DNS setup
+During an [Epinio installation](install_epinio.md),
+you need to specify a "system" domain in the `global.domain` helm field.
+You use this field for access to:
 
-During [Epinio installation](install_epinio.md), a "system" domain must be specified specified (`global.domain` helm value).
-This is used to access Epinio API server and to create default routes for the deployed applications. This page describes
-how to prepare the domain.
+- an Epinio API server
+- an Epinio WebUI
+- a dex (OpenID Connect Provider)
+- create default routes for the deployed applications.
 
-This domain must be a wildcard domain, meaning any subdomain should resolve to the
-same IP address as the domain itself. That IP address, should target your cluster's Ingress controller (e.g. Traefik)
+The `global.domain` field must be a wildcard domain.
+So, any subdomain should resolve to the same IP address as the domain itself.
+That domain IP address, should target your cluster's Ingress controller (for example, Traefik)
 
-***
-Epinio will install successfully even if your DNS setup is not complete. There is an exception to this,
-when letsencrypt issuer is used. Cert-Manager will fail to create certificates until the domain is accessible, due to
-the challenges that must be solved (read more about issuers [here](../howtos/other/certificate_issuers.md)). Even in that
-case though, after you finish your DNS setup, the challenges will be solved and Epinio should become functional but
-it may take a while before things balance out.
-***
+:::note
 
-To keep things simple, it is preferable that you finish your DNS setup before you install Epinio. To do so, you need
-to point your desired domain to the IP address of your Ingress controller. There are two steps in this process:
+Epinio will install successfully even if your DNS setup is not complete.
+An exception is when the Lets Encrypt certificate issuer is used.
+In this case, `cert-manager` will fail to create certificates. When the domain becomes accessible certificates can be created.
+You can read more about certificate issuers [here](../howtos/other/certificate_issuers.md).
+Epinio will work after the DNS setup is correct and the domain becomes available.
 
-1. Find the IP address of the ingress controller
-2. Setup your DNS
+:::
 
-> **NOTE:** For development or demo environments, [an easy wildcard DNS setup can be used](wildcardDNS_setup.md) instead.
+For simplicity finish your DNS setup before installing Epinio.
+You need to point your desired domain to the IP address of your Ingress controller.
+The two steps in the process are described in these sections:
 
-## Ingress controller IP address
+1. [Find](#find-ip-for-ic) the IP address of the ingress controller
+1. [Configure](#config-dns) your DNS
 
-Most Kubernetes clusters are running a "load balancer" service which is responsible of assigning
-IP addresses to load balanced services created on the cluster. Ingress controllers
-are such services (e.g. Traefik) and they should have an externally accessible IP address.
-This is needed for any Ingress resource to work. You can find the load balancer IP
-address of any service using `kubectl`. E.g.
+:::note
 
-```
+For development or demo environments, an easy [wildcard](wildcardDNS_setup.md) DNS setup can be used.
+
+:::
+
+## Find the IP address of the ingress controller {#find-ip-for-ic}
+
+Most Kubernetes clusters run a "load balancer" service.
+It assigns IP addresses to load balanced services created on the cluster.
+Ingress controllers are such services (for example, Traefik). They work only if they have an external accessible IP address.
+
+You can find the load balancer IP address of any service using `kubectl`. For example:
+
+```shell
 kubectl get svc -n kube-system traefik -o jsonpath={@.status.loadBalancer.ingress}
 ```
 
-Depending on the load balancer, the result of this command may have different fields populated, most usually `ip`.
-Keep this information available for the next step where you will configure your DNS.
+will return output containing:
 
-## Configure your DNS
+```shell
+[map[ip:172.18.0.4]]
+```
 
-Given you own the domain **"example.com"**, you would configure a subdomain e.g. **"test.example.com"** for Epinio.
-Now you will have to configure your DNS in a way, that any request towards "test.example.com" will resolve to the address found in the previous step.
+You use the IP field in the next step to configure your DNS.
 
-- test.example.com => "INGRESS-IP"
-- \*.test.example.com => "INGRESS-IP"
+## Configure your DNS {#config-dns}
 
-***
+If you own the domain `example.com`, you configure a subdomain, for example, `test.example.com` for Epinio.
+You can now configure your DNS so that any request for `test.example.com` resolves to the address you got in the previous section.
 
-###### The "wildcard" entry is what makes the automatic routes for applications to work in Epinio. Don't skip it.
+- `test.example.com => "INGRESS-IP"`
+- `*.test.example.com => "INGRESS-IP"`
 
-***
+:::tip
 
-Find [DNS Configuration Examples](#dns-configuration-examples) below.
+The setup of a wildcard entry is important. It allows automatic routing for applications to work in Epinio.
 
-## DNS Configuration Examples
+:::
 
-### AWS EKS and Route53
+We have some DNS configuration examples in the next section
 
-As an example we will use the [AWS Service Route53](https://aws.amazon.com/route53/) to create a wildcard domain within one of your existing "Hosted zones", e.g. **example.com**.
+## DNS configuration examples
 
-Given Epinio ingress installation provided you with the following hostname:
+### Amazon Route53 & AWS EKS
+
+We will use the [Amazon Route53](https://aws.amazon.com/route53/) to create a wildcard domain within an existing "Hosted zone", like `example.com`.
+
+If an Epinio ingress installation has provided you with the following hostname:
 
 ```bash
 Traefik Ingress info: [{"hostname":"abcdefg12345671234567abcdefg1234-1234567890.eu-west-1.elb.amazonaws.com"}]
 ```
 
-Now you will have to add two CNAME records, for the subdomain, e.g. "test" to have "test.example.com", resp. "\*.test.example.com".
-Replace "abcdefg12345671234567abcdefg1234-1234567890.eu-west-1.elb.amazonaws.com" with the your EKS FQDN, and "test.example.com" with your custom domain.
+That hostname is in a AWS format.
+Below, for brevity, we will use the hostname `abcd.aws.com`.
 
-##### test.example.com
+You need to add two `CNAME` records, for the subdomain and the wildcard. So, "test" for `test.example.com`, and `*.test.example.com` for the wildcard.
+
+Use `abcd.aws.com` with your EKS FQDN, and `test.example.com` with your custom domain.
+
+##### `test.example.com`
 
 ```bash
 Record name: test
 Record type: CNAME - Routes traffic to another domain name and some AWS resources
-Value: abcdefg12345671234567abcdefg1234-1234567890.eu-west-1.elb.amazonaws.com
+Value: abcd.aws.com
 ```
 
-##### \*.test.example.com
+##### `*.test.example.com`
 
 ```bash
 Record name: *.test
 Record type: CNAME - Routes traffic to another domain name and some AWS resources
-Value: abcdefg12345671234567abcdefg1234-1234567890.eu-west-1.elb.amazonaws.com
+Value: abcd.aws.com
 ```
 
-Finally, running 
+Now, the commands:
 
-`> host test.example.com`, or even
 
-`> host epinio.test.example.com`
+```bash
+host test.example.com
+```
 
-should resolve to e.g. "abcdefg12345671234567abcdefg1234-1234567890.eu-west-1.elb.amazonaws.com".
+or
+
+```bash
+> host epinio.test.example.com
+```
+
+should resolve to something like:
+
+```bash
+abcd.aws.com
+```
 
 ### Azure AKS and "example-domain"
 
-As an example we will use the Azure resource group "example-domain", with the zone "example.com".
+For this example we use the Azure resource group `example-domain`, with the zone `example.com`.
 
-Given Epinio ingress installation provided you with the following hostname:
+If the Epinio Ingress installation provides you with the following hostname:
 
 ```bash
 Traefik Ingress info: [{"ip":"10.0.0.1"}]
 ```
 
-Now you will have to add two A records, for the subdomain, e.g. "test" to have "test.example.com", resp. "\*.test.example.com" to the DNS zone "example.com".
+You need to add two A records, for the subdomain and wildcard.
+So, "test" to have `test.example.com` and `*.test.example.com` added to the DNS zone `example.com`.
 Replace "10.0.0.1" with the IP from "Traefik Ingress info", and "test.example.com" with your custom domain.
 
-##### test.example.com
+##### `test.example.com`
 
 ```bash
 Record name: test.example.com
@@ -120,7 +154,7 @@ Record type: A
 IP address: 10.0.0.1
 ```
 
-##### \*.test.example.com
+##### `*.test.example.com`
 
 ```bash
 Record name: *.test.example.com
@@ -128,30 +162,46 @@ Record type: A
 IP address: 10.0.0.1
 ```
 
-Finally, running
+Now, running:
 
-`> host test.example.com`, or even
+```bash
+host test.example.com
+```
 
-`> host epinio.test.example.com`
+or
 
-should resolve to e.g. "10.0.0.1".
+```bash
+host epinio.test.example.com
+```
+
+should resolve to `10.0.0.1`.
 
 ### Bind DNS
 
-Given Epinio ingress installation provided you with the following hostname:
+If an Epinio ingress installation has provided you with the following hostname:
 
 ```bash
 Traefik Ingress info: [{"ip":"10.0.0.1"}]
 ```
 
-Now you will have to add two A records, for the subdomain, e.g. "test" to have "test.example.com", resp. "\*.test.example.com" to e.g. "/var/lib/named/master/forward/example.com".
-Replace "10.0.0.1" with the IP from "Traefik Ingress info", and "test.example.com" with your custom domain.
+You need to add two A records, for the subdomain and wildcard, so "test" to have `test.example.com`, and `*.test.example.com` to `/var/lib/named/master/forward/example.com`.
+This path will differ depending on distribution.
+Replace `10.0.0.1` with the IP address from "Traefik Ingress info", and `test.example.com` with your custom domain.
 
 ```bash
 $ORIGIN example.com.
-test			A	10.0.0.1
+test		A	10.0.0.1
 $ORIGIN test.example.com.
 *			A	10.0.0.1
 ```
 
-Restart bind and verify that e.g. `> host test.example.com` or `> host epinio.test.example.com` will resolve to "10.0.0.1".
+Restart bind and verify that these commands resolve to `10.0.0.1`:
+
+```bash
+host test.example.com
+```
+or
+
+```shell
+host epinio.test.example.com
+```
