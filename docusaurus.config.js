@@ -86,6 +86,11 @@ const config = {
             label: 'Rancher Home',
             position: 'right',
           },
+          {
+            href: 'https://www.suse.com',
+            label: 'SUSE Home',
+            position: 'right',
+          },
         ],
       },
       footer: {
