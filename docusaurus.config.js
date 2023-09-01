@@ -129,6 +129,14 @@ const config = {
                 label: 'GitHub',
                 href: 'https://github.com/epinio/epinio',
               },
+              {
+                label: 'Rancher',
+                href: 'https://rancher.com',
+              },
+              {
+                label: 'SUSE',
+                href: 'https://suse.com',
+              },
             ],
           },
         ],
