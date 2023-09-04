@@ -141,7 +141,7 @@ For service charts the keys are proper paths into the set of fields exposed by t
 
 ### Private repositories and registries
 
-To use charts stored in private repositories or OCI registries that requires authentication you can specify a secret where the credentials are stored.
+You can use charts stored in private repositories or OCI registries. You will need to use a secret that provides credentials.
 
 ```yaml
 apiVersion: application.epinio.io/v1
