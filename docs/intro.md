@@ -7,9 +7,11 @@ description: An introduction to Epinio and its benefits
 keywords: [epinio, kubernetes, developer, operator, deployment]
 ---
 
-From application sources to URL in one step.
+Epinio allows developers to go from application sources to URL in one step.
 
 Epinio is an Application Platform. It deploys on Kubernetes and allows application developers and operators to work together without conflicts between their work.
+
+Epinio is a [SUSE](https://suse.com) project.
 
 **Developers**:
 

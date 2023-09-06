@@ -83,7 +83,12 @@ const config = {
           },
           {
             href: 'https://www.rancher.com',
-            label: 'Rancher Home',
+            label: 'Rancher',
+            position: 'right',
+          },
+          {
+            href: 'https://www.suse.com',
+            label: 'SUSE',
             position: 'right',
           },
         ],
@@ -123,6 +128,14 @@ const config = {
               {
                 label: 'GitHub',
                 href: 'https://github.com/epinio/epinio',
+              },
+              {
+                label: 'Rancher',
+                href: 'https://rancher.com',
+              },
+              {
+                label: 'SUSE',
+                href: 'https://suse.com',
               },
             ],
           },
