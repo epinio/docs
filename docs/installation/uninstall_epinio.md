@@ -11,7 +11,7 @@ You should understand the implications of uninstalling Epinio. Uninstallation ma
 Epinio uninstallation removes:
 
 - Epinio and all the components that it installed at installation
-- any resources installed in the Epinio **default** workspace
+- Any resources installed in the Epinio **default** workspace
 
 If there are resources in the cluster that depend on Epinio, they will stop working.
 Clearly, this will prevent your cluster workload from operating correctly.
