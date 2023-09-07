@@ -64,5 +64,5 @@ If the desired registry requires additional TLS certificates to talk it is neces
  - create a kubernetes secret with key `tls.crt` whose value is the set of additional certifcates in
    PEM-encoded form.
 
- - extend the authentication secret with a key `certs` whose value is the name of the secret created
-   in the preceding step.
+ - extend the authentication secret with a key `certs` (sibling to key `.dockerconfigjson`) whose
+   value is the name of the secret created in the preceding step.
