@@ -1,21 +1,22 @@
 ---
 sidebar_label: "Uninstall Epinio"
 sidebar_position: 5
-title: ""
+title: "Uninstall Epinio"
+description: Uninstalling Epinio and the implications of doing so.
+keywords: [epinio, uninstallation]
 ---
 
-## Uninstall
+You should understand the implications of uninstalling Epinio. Uninstallation may affect your cluster's operation.
 
-NOTE: The command below will delete all the components Epinio originally installed.
-**This includes all the deployed applications in the default "workspace" namespace, resources deployed in your own namespace will survive.**
+Epinio uninstallation removes:
 
-If after installing Epinio, you deployed other things on the same cluster
-that depended on those Epinio deployed components (e.g. Kubed, Minio etc),
-then removing Epinio will remove those components and this may break your other
-workloads that depended on these. Make sure you understand the implications of
-uninstalling Epinio before you proceed.
+- Epinio and all the components that it installed at installation
+- Any resources installed in the Epinio **default** workspace
 
-Assuming you installed Epinio in a namespace `epinio`, uninstall with the command:
+If there are resources in the cluster that depend on Epinio, they will stop working.
+Clearly, this will prevent your cluster workload from operating correctly.
+
+If you installed Epinio in a namespace `epinio`, you uninstall with the command:
 
 ```bash
 $ helm uninstall -n epinio epinio
