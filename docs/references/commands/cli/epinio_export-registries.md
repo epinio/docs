@@ -1,24 +1,23 @@
 ---
 title: ""
-sidebar_label: "epinio app export"
+sidebar_label: "epinio export-registries"
 ---
-## epinio app export
+## epinio export-registries
 
-Export the named application into the directory or flag-specified registry
+List export registries
+
+### Synopsis
+
+List export registries
 
 ```
-epinio app export [FLAGS] NAME [DIRECTORY] [flags]
+epinio export-registries [flags]
 ```
 
 ### Options
 
 ```
-      --chart-name string      User chosen name for the chart file
-      --chart-version string   User chosen version for the chart file
-  -h, --help                   help for export
-      --image-name string      User chosen name for the image file
-      --image-tag string       User chosen tag for the image file
-  -r, --registry string        The name of the registry to export to
+  -h, --help   help for export-registries
 ```
 
 ### Options inherited from parent commands
@@ -38,5 +37,5 @@ epinio app export [FLAGS] NAME [DIRECTORY] [flags]
 
 ### SEE ALSO
 
-* [epinio app](./epinio_app.md)	 - Epinio application features
+* [epinio](./epinio.md)	 - Epinio cli
 

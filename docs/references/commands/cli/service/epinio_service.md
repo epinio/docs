@@ -42,4 +42,5 @@ Manage the epinio services
 * [epinio service port-forward](./epinio_service_port-forward.md)	 - forward one or more local ports to a service SERVICENAME
 * [epinio service show](./epinio_service_show.md)	 - Show details of a service SERVICENAME
 * [epinio service unbind](./epinio_service_unbind.md)	 - Unbinds a service SERVICENAME from an Epinio app APPNAME
+* [epinio service update](./epinio_service_update.md)	 - Update a service
 

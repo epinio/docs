@@ -17,8 +17,7 @@ epinio settings update-ca [flags]
 ### Options
 
 ```
-  -h, --help               help for update-ca
-  -n, --namespace string   (NAMESPACE) The namespace to use (default "epinio")
+  -h, --help   help for update-ca
 ```
 
 ### Options inherited from parent commands

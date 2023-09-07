@@ -13,7 +13,8 @@ epinio namespace show NAME [flags]
 ### Options
 
 ```
-  -h, --help   help for show
+  -h, --help            help for show
+  -o, --output string   sets output format [text|json] (default "text")
 ```
 
 ### Options inherited from parent commands

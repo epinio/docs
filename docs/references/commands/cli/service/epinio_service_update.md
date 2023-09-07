@@ -1,24 +1,26 @@
 ---
 title: ""
-sidebar_label: "epinio app export"
+sidebar_label: "epinio service update"
 ---
-## epinio app export
+## epinio service update
 
-Export the named application into the directory or flag-specified registry
+Update a service
+
+### Synopsis
+
+Update service by name and change instructions through flags.
 
 ```
-epinio app export [FLAGS] NAME [DIRECTORY] [flags]
+epinio service update NAME [flags]
 ```
 
 ### Options
 
 ```
-      --chart-name string      User chosen name for the chart file
-      --chart-version string   User chosen version for the chart file
-  -h, --help                   help for export
-      --image-name string      User chosen name for the image file
-      --image-tag string       User chosen tag for the image file
-  -r, --registry string        The name of the registry to export to
+  -h, --help            help for update
+  -s, --set strings     configuration key/value assignments to add/modify
+  -u, --unset strings   configuration keys to remove
+      --wait            Wait for deployment to complete
 ```
 
 ### Options inherited from parent commands
@@ -38,5 +40,5 @@ epinio app export [FLAGS] NAME [DIRECTORY] [flags]
 
 ### SEE ALSO
 
-* [epinio app](./epinio_app.md)	 - Epinio application features
+* [epinio service](./epinio_service.md)	 - Epinio service management
 
