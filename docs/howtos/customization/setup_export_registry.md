@@ -50,7 +50,7 @@ EOF
 ```
 
 Do not forget that the `auth` element is the base64 encoding of
-`placeholder-user:placeholder-apssword` and thus requires replacement as well.
+`placeholder-user:placeholder-password` and thus requires replacement as well.
 
 This creates the authentication secret for the destination.
 
