@@ -1,0 +1,80 @@
+---
+title: ""
+sidebar_label: "Export Destination Registries"
+---
+
+# Customization point: Export Destination Registries
+
+Epinio uses `Export Destination Registries` (short: `EDR`) as targets for the `app export
+--registry` command. With this command a users is able to export an active application to one of the
+available registries, as a pair of helm chart and linked container image.
+
+An installation of Epinio does not provide any kind of standard destinations.
+
+If EDR's are desired or needed please follow the instructions on
+[How to create export destination registries](../../howtos/customization/setup_export_registry.md)
+and
+[How to export applications to an OCI registry](../../howtos/customization/export_to_oci_registries.md)
+
+The remainder of this document contains the definition of EDRs.
+
+## Definition
+
+An EDR is defined by one or two kubernetes secrets, to be placed into the kubernestes cluster by the
+Epinio __operator__.
+
+The `authentication secret` is labeled with `epinio.io/api-export-registry: "true"` and has to
+contain a stringData key `.dockerconfigjson`. The value for this key is a string in JSON format:
+
+```
+stringData:
+  .dockerconfigjson: |-
+    {
+      "auths": {
+        "(set registry host here)": {
+          "auth":"(set base64 encoded string of (user:password) here)",
+          "username":"(set the user name here)",
+          "password":"(set the password here)"
+        }
+      }
+    }
+```
+
+The name of the authentication secret is the symbolic name of the destination. It will be listed by
+`epinio exportregistries` and becomes a suitable value for the `--registry` flag of `epinio app
+export`.
+
+The `epinio.io/registry-namespace` annotation provides Epinio with the name of the
+namespace/organization in the registry to place uploaded charts and images into.
+
+If the authentication secret contains the optional key `certs` then the value of that key is the
+name of the certificate secret. This secret has to contain a key `tls.crt` whose value is a
+PEM-formatted string containing the set of additional secrets required to securely talk to the
+destination registry.
+
+## Example authentication secret, without certificate secret 
+
+```
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/dockerconfigjson
+metadata:
+  annotations:
+    epinio.io/registry-namespace: "placeholder-user"
+  labels:
+    epinio.io/api-export-registry: "true"
+  name: a99k-at-docker
+  namespace: epinio
+stringData:
+  .dockerconfigjson: |-
+    {
+      "auths": {
+        "registry.hub.docker.com": {
+          "auth":"cGxhY2Vob2xkZXItdXNlcjpwbGFjZWhvbGRlci1wYXNzd29yZAo=",
+          "username":"placeholder-user",
+          "password":"placeholder-password"
+        }
+      }
+    }
+```
