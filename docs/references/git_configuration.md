@@ -38,14 +38,14 @@ over a plain combination of user and password.
 When using a PAT it has to be set as the password, and the user can be set to anything except empty.
 
 :::tip
-It is useful to set it to the username used to generate the token.
+For reference, it is useful to set it to the username used to generate the token.
 :::
 
 ## Detailed specification
 
 :::note
-Regular users have no need to know the information in this section.
-It is useful to operators though, helping in debugging and inspection.
+This section contains information useful to operators for debugging and inspection. 
+Regular users should not normally need to consult this section.
 :::
 
 A Git configuration is a Kubernetes secret with the `epinio.io/api-git-credentials: "true"` label.
