@@ -1,12 +1,15 @@
 ---
-sidebar_label: "Installing Epinio On Rancher Desktop (local)"
+sidebar_label: "Installing Epinio on Rancher Desktop"
 sidebar_position: 1
-title: ""
+title: "Installing Epinio on Rancher Desktop"
+description: iHow o install Epinio using a local Rancher Desktop installation.
+keywords: [epinio, kubernetes, rancher, rancher desktop]
 ---
 
-# Installing Epinio On Rancher Desktop (local)
-
 This How-to was written using the following versions:
+
+<!--TODO:Work on version needed here. RD is now at 1.9.1. Technical talk through required,
+K8s upto 1.27.5 stable.-->
 
 * [epinio helm chart 1.0.0](https://github.com/epinio/helm-charts/releases/tag/epinio-1.0.0)
 * Rancher desktop 1.4.1
@@ -39,6 +42,7 @@ Rancher Desktop configures its own load-balancer to expose Traefik on `127.0.0.1
 
 The Epinio installation is similar on Linux, MacOS and Windows:
 
+<!--TODO: Any particular reason why the Windows sheel prefers the latest?-->
 1. Start a shell, use `cmd` or `powershell` on Windows (latest one is preferred) and your preferred one on Linux/MacOS.
 
 2. Install the [Epinio CLI](../../installation/install_epinio_cli.md).
@@ -62,6 +66,13 @@ epinio login -u admin https://epinio.127.0.0.1.sslip.io
 
 For RancherDesktop on Linux, in order to be able to open ports from `443` (and above), in order to access the URL set in `global.domain` (i.e. 127.0.0.1.sslip.io), you need to set the start port of the `unprivileged` list to a lower number:
 
+<!--
+TODO:Does this need to be 80 as per the RD installation docs?
+https://docs.rancherdesktop.io/getting-started/installation/#traefik-port-binding-access
+Or do the RD docs need changing to 443?
+Or confusingly, 443 needed for global.domain and 80 needed for RD,
+so sort of encapsulating the global domain requirement
+-->
 ```bash
 
 # [Optional] Check the current unprivileged port start
