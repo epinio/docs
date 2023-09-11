@@ -5,33 +5,89 @@ title: ""
 
 # Git Configuration
 
+## Overview
+
 Starting with version **1.10.0**, Epinio supports Git configurations.
 
-Configurations provide information enabling the cloning of private repositories, disabling of SSL verification, or extending verification through a custom bundle of certificates. All on a per git host (+user/org, +repository) basis.
+Configurations enable cloning of private repositories, disabling of SSL verification, and/or
+extending verification through a custom bundle of certificates.
+
+This is done on a per git host (+user/org, +repository) basis.
+
+Management, including creation, is done through the
+[epinio gitconfig](commands/cli/gitconfig/epinio_gitconfig.md)
+command ensemble.
+
+## Matching process
+
+When importing from a git repository Epinio will use the most specific matching configuration, if
+there is any.
+
+This means that a matching configuration specifying url, user/organization, and repository has
+priority over matching configurations specifying only url and user/organization, or even just the
+url.
+
+If no configuration is found then the cloning from the Git repository will run without any
+customization.
+
+## Github/Gitlab specialities
+
+The public Github and Gitlab mega repositories support the use of a `PAT` (Personal Access Token)
+over a plain combination of user and password.
+
+When using a PAT it has to be set as the password, and the user can be set to anything except empty.
+
+:::tip
+For reference, it is useful to set it to the username used to generate the token.
+:::
+
+## Detailed specification
+
+:::note
+This section contains information useful to operators for debugging and inspection. 
+Regular users should not normally need to consult this section.
+:::
 
 A Git configuration is a Kubernetes secret with the `epinio.io/api-git-credentials: "true"` label.
 
-The available fields are:
+The fields are:
 
-- **url (required):** the host of the git instance
-- **provider:** one of `github`, `gitlab`, `git`, `github_enterprise`, `gitlab_enterprise`
-- **username:** used during the Basic Authentication 
-- **password:** used during the Basic Authentication
-- **userOrg:** used to restrict the configuration to a specific organization/project 
-- **repo:** used to restrict the configuration to a specific repository 
-- **skipSSL:** used to skip the SSL verification 
-- **certificate:** the CA bundle to load for the SSL verification with self-signed certificates
-
-
-When importing from a git repository Epinio will look for the the most specific matching configuration, if any. For example when trying to clone `https://github.com/myusername/myrepo` Epinio will first look for a configuration having the `https://github.com` *URL*, a `myusername` *userOrg* and a `myrepo` *repo*.
-If not found it will look for a configuration having the `https://github.com` *URL* and a `myusername` *userOrg*. And finally it will look for a configuration having just the `https://github.com` *URL*. If no configuration is found the clone from the Git repository will run without any customization.
-
+|Field		|Required|Meaning									|
+|---		|---	|---										|
+|`url`		|yes	| the host of the git instance							|
+|`provider`	|	| one of `github`, `gitlab`, `git`, `github_enterprise`, `gitlab_enterprise`	|
+|`username`	|	| used during the Basic Authentication						|
+|`password`	|	| used during the Basic Authentication						|
+|`userOrg`	|	| used to restrict the configuration to a specific organization/project		|
+|`repo`		|	| used to restrict the configuration to a specific repository			|
+|`skipSSL`	|	| used to skip the SSL verification						|
+|`certificate`	|	| the CA bundle to load for the SSL verification with self-signed certificates	|
 
 All the fields, except for the URL, are optional.
 
-For Github and Gitlab you can create a PAT (Personal Access Token) and use it in the `password` field. You will need to provide a `username` as well, but it can be anything. As a suggestion it's useful to use the username used to generate the token.
+## Example:
 
-This is an example of a complete Git Configuration secret:
+Invoking the commands
+
+```bash
+cat > certfile <<EOF
+-----BEGIN CERTIFICATE-----
+MIIBaTCCAQ+gAwIBAgIRAN4tvwEOKogvOzT/KccL8t8wCgYIKoZIzj0EAwIwFDES
+***************
+-----END CERTIFICATE-----
+EOF
+
+epinio gitconfig create github-epinio-example-go-configuration https://github.com \
+    --git-provider github	\
+    --user-org 	   epinio	\
+    --repository   example-go	\
+    --skip-ssl	   		\
+    --username 	   myuser	\
+    --password 	   abcde12345	\
+    --cert-file	   certfile
+```
+
+will generate the secret
 
 ```yaml
 apiVersion: v1 
@@ -57,4 +113,4 @@ stringData:
     -----END CERTIFICATE-----
 ```
 
-If you are looking for some examples you can check the [How-to](../howtos/customization/create_git_configuration.md).
+For more examples check the [How-to](../howtos/customization/create_git_configuration.md).

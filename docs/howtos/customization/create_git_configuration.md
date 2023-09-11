@@ -6,53 +6,31 @@ title: ""
 
 # Create a Git Configuration
 
-As described [in the Git Configuration reference page](../../references/git_configuration.md), Epinio Git Configurations are Kubernetes secrets with a particular label.
+As described [in the Git Configuration reference page](../../references/git_configuration.md),
+Epinio Git Configurations are Kubernetes secrets with a particular label.
 
-To create one you apply a Secret resource to your Kubernetes cluster:
+Creation is done with the
+[epinio gitconfig create](../../references/commands/cli/gitconfig/epinio_gitconfig_create.md)
+command.
 
-```yaml
-apiVersion: v1 
-kind: Secret 
-type: Opaque 
-metadata: 
-  labels: 
-    epinio.io/api-git-credentials: "true"
-  name: github-epinio-example-go-configuration 
-  namespace: epinio 
-stringData:
-  url: https://github.com
-  provider: github
-  username: "myuser" 
-  password: "abcde12345" 
-  userOrg: epinio 
-  repo: example-go 
-  skipSSL: true 
-  certificate: |
-    -----BEGIN CERTIFICATE-----
-    MIIBaTCCAQ+gAwIBAgIRAN4tvwEOKogvOzT/KccL8t8wCgYIKoZIzj0EAwIwFDES
-    ***************
-    -----END CERTIFICATE-----
-```
-
-The only required field is the `url`, so if you want for example to just skip the SSL verification for a particular provider you can create a simpler secret, and label it:
+For example:
 
 ```bash
-kubectl create secret generic mygit-config -n epinio --from-literal=url=https://gitlab.mydomain.com --from-literal=skipSSL=true
-kubectl label secret mygit-config -n epinio "epinio.io/api-git-credentials=true"
+epinio gitconfig create github-epinio-example-go-configuration https://github.com \
+    --git-provider github	\
+    --user-org 	   epinio	\
+    --repository   example-go	\
+    --skip-ssl	   		\
+    --username 	   myuser	\
+    --password 	   abcde12345	\
+    --cert-file	   /path/to/some/certfile
 ```
 
-or apply this resource:
+The only required arguments are the name of the git configuration, and the repository url.
+Everything else is optional, and specified through flags.
 
-```yaml
-apiVersion: v1 
-kind: Secret 
-type: Opaque 
-metadata: 
-  labels: 
-    epinio.io/api-git-credentials: "true"
-  name: mygit-config 
-  namespace: epinio 
-stringData:
-  url: https://gitlab.mydomain.com
-  skipSSL: true 
+If, for example, we only have to skip the SSL configuration for a particular provider just use:
+
+```bash
+epinio gitconfig create mygit-config https://gitlab.mydomain.com --skip-ssl
 ```
