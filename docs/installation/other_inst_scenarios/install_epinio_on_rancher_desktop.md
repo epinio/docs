@@ -2,7 +2,7 @@
 sidebar_label: "Installing Epinio on Rancher Desktop"
 sidebar_position: 1
 title: "Installing Epinio on Rancher Desktop"
-description: iHow o install Epinio using a local Rancher Desktop installation.
+description: How to install Epinio using a local Rancher Desktop installation.
 keywords: [epinio, kubernetes, rancher, rancher desktop]
 ---
 
