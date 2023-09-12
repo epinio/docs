@@ -2,6 +2,8 @@
 sidebar_label: "Installing Epinio on RKE2"
 sidebar_position: 19
 title: "Installing Epinio on RKE2"
+description: Installing Epinio with RKE2. The needed environment and prerequisites.
+keywords: [epinio, k8s, kubernetes, rke2, installation]
 ---
 
 This guide will help you to deploy a suitable RKE2 Kubernetes cluster for Epinio.
@@ -99,11 +101,11 @@ There are two ways of installing Epinio:
 
     For test environments.
     This should work on any kubernetes distribution.
-    Epinio will try to create a magic wildcard DNS domain, e.g. **10.0.0.1.omg.howdoi.website**.
+    Epinio will try to create a magic wildcard DNS domain, for example, **10.0.0.1.omg.howdoi.website**.
 
 1. [DNS setup](../../installation/dns_setup.md)
 
     For test and production environments.
-    You will define a system domain, e.g. **test.example.com**.
+    You will define a system domain, for example, **test.example.com**.
 
     Then, continue with the [Epinio installation process](../../installation/install_epinio.md).
