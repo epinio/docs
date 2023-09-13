@@ -7,7 +7,7 @@ sidebar_label: "epinio app export"
 Export the named application into the directory or flag-specified registry
 
 ```
-epinio app export [FLAGS] NAME [DIRECTORY] [flags]
+epinio app export NAME [DIRECTORY] [flags]
 ```
 
 ### Options
