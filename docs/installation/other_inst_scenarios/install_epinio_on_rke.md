@@ -77,16 +77,6 @@ Perform the following steps on your RKE2 node before installing Epinio:
     kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
     ```
 
-Putting all these installation prerequisites together in a terminal session should look similar to this:
-
-<details>
-
-<summary>Installing the RKE2 prerequisites for Epinio</summary>
-
-![](/img/rke2.gif)
-
-</details>
-
 ## Installation
 
 For evaluation environments we recommend that you setup Epinio Ingress resources with a wildcard DNS service such as `omg.howdoi.website`, `sslip.io`, or `nip.io` that points to the `INTERNAL-IP` address of your kubernetes node.
@@ -95,7 +85,7 @@ For production environments you should configure an external load-balancer solut
 It should listen on a public IP with an associated public FQDN domain.
 The load-balancer's role is to redirect HTTP(S) traffic, from the load-balancer endpoint to the internal Ingress resources of the kubernetes cluster.
 
-There are two ways of installing Epinio:
+There are two ways of installing DNS for Epinio:
 
 1. [Wildcard DNS Service](../../installation/wildcardDNS_setup.md)
 
@@ -106,6 +96,6 @@ There are two ways of installing Epinio:
 1. [DNS setup](../../installation/dns_setup.md)
 
     For test and production environments.
-    You will define a system domain, for example, **test.example.com**.
+    You'll define a system domain, for example, **test.example.com**.
 
-    Then, continue with the [Epinio installation process](../../installation/install_epinio.md).
+Then continue with the [Epinio installation process](../../installation/install_epinio.md).
