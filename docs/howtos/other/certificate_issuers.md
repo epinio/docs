@@ -24,7 +24,7 @@ It's also possible to create a cert-manager cluster issuer in the cluster, befor
 
 When using either of `letsencrypt-staging` or `letsencrypt-production` further use the `global.tlsIssuerEmail` helm variable
 to set an email address for the reception of the certificate notification emails sent by that
-issuer. __Note__, the default address is `epinio@suse.com`.
+issuer.
 
 ### Cluster Issuer for ACME DNS Challenge
 
