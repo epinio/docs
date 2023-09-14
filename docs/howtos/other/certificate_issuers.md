@@ -6,14 +6,15 @@ title: ""
 
 # Using a Certificate Issuer
 
-Epinio comes with multiple [cert-manager ClusterIssuer](https://cert-manager.io/docs/configuration/) for creating certificates.  
-By default it installs the `epinio-ca` and the `selfsigned-issuer`. If specified it will install also the `letsencrypt-staging` or `letsencrypt-production` issuer, to create certificates issued from [Let's Encrypt](https://letsencrypt.org/).
+Epinio comes with multiple [cert-manager ClusterIssuers](https://cert-manager.io/docs/configuration/) for creating certificates.  
+By default it installs the issuers `epinio-ca` and `selfsigned-issuer`.
+If specified it will also install either `letsencrypt-staging` or `letsencrypt-production` , to create certificates issued from [Let's Encrypt](https://letsencrypt.org/).
 
 * epinio-ca (default)
 * selfsigned-issuer (internal)
 * letsencrypt-[staging|production] (optional)
 
-The specified issuer will be used for both, the Epinio API endpoint and workloads (i.e. pushed applications).
+The specified issuer will be used for both Epinio API endpoint and workloads (i.e. pushed applications).
 
 ## Choosing a Different Issuer
 
@@ -21,7 +22,7 @@ When [installing Epinio with helm](../../installation/install_epinio.md#install-
 
 It's also possible to create a cert-manager cluster issuer in the cluster, before installing Epinio and referencing it by name when installing, using the `global.customTlsIssuer`.
 
-When using the `letsencrypt-staging` or `letsencrypt-production` issuer further use the `global.tlsIssuerEmail` helm variable
+When using either of `letsencrypt-staging` or `letsencrypt-production` further use the `global.tlsIssuerEmail` helm variable
 to set an email address for the reception of the certificate notification emails sent by that
 issuer. __Note__, the default address is `epinio@suse.com`.
 
