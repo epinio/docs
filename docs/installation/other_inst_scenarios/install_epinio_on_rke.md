@@ -70,7 +70,7 @@ Perform the following steps on your RKE2 node before installing Epinio:
 
     :::
 
-    As an example, you can deploy and configure `local-path` dynamic storage provisioner by running:
+    As an example, you can deploy and configure a `local-path` dynamic storage provisioner by running:
 
     ```bash
     kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
