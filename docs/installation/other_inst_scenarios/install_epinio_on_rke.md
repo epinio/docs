@@ -7,7 +7,7 @@ keywords: [epinio, k8s, kubernetes, rke2, installation]
 ---
 
 This guide will help you to deploy a suitable RKE2 Kubernetes cluster for Epinio.
-More details for installing RKE2, can be found in the RKE2 [quickstart](https://docs.rke2.io/install/quickstart/) guide.
+More details for installing RKE2 can be found in the RKE2 [quickstart](https://docs.rke2.io/install/quickstart/) guide.
 
 ## Install RKE2 Kubernetes cluster {#install-rke2}
 
