@@ -20,42 +20,45 @@ and as export target.
 
 ## How to set up a basic export destination registry
 
-As an operator, replace the placeholders in the command below, and then invoke it
+As an operator, replace the bracketed (`<...>`) placeholders in the command below, and then invoke it
 
 ```bash
 kubectl apply -f - <<EOF
 ---
 apiVersion: v1
 kind: Secret
-type: kubernetes.io/opaque
+type: Opaque
 metadata:
   annotations:
-    epinio.io/registry-namespace: "placeholder-user"
+    epinio.io/registry-namespace: "<registry-org>"
   labels:
     epinio.io/api-export-registry: "true"
-  name: (placeholder-name)
+  name: "<destination-name>"
   namespace: epinio
 stringData:
   .dockerconfigjson: |-
     {
       "auths": {
         "registry.hub.docker.com": {
-          "auth":"cGxhY2Vob2xkZXItdXNlcjpwbGFjZWhvbGRlci1wYXNzd29yZAo=",
-          "username":"placeholder-user",
-          "password":"placeholder-password"
+          "auth":"PHVzZXI+OjxwYXNzd29yZD4=",
+          "username":"<user>",
+          "password":"<password>"
         }
       }
     }
 EOF
 ```
 
-Do not forget that the `auth` element is the base64 encoding of
-`placeholder-user:placeholder-password` and thus requires replacement as well.
+Note that the `auth` element is derived from username and password.
+It has to be replaced as well.
+Its value is the base64 encoding of `<user>:<password>`.
 
 This creates the authentication secret for the destination.
 
 Epinio now knows the specified account at the docker hub as an export destination for use with
 `epinio app export --registry`.
+
+For other registries change the `registry.hub.docker.com` reference as well.
 
 ## Certificate secrets
 

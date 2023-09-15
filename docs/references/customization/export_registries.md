@@ -41,7 +41,7 @@ stringData:
 ```
 
 The name of the authentication secret is the symbolic name of the destination. It will be listed by
-`epinio exportregistries` and becomes a suitable value for the `--registry` flag of `epinio app
+`epinio export-registries` and becomes a suitable value for the `--registry` flag of `epinio app
 export`.
 
 The `epinio.io/registry-namespace` annotation provides Epinio with the name of the
@@ -54,31 +54,33 @@ securely talk to the destination registry.
 
 :::note
 The type of the authentication secret does not matter to Epinio.
-The examples use the generic type `kubernetes.io/opaque`.
+The examples use the generic type `Opaque`.
 :::
 
 ## Example authentication secret, without certificate secret 
+
+Note the placeholders in brackets (`<...>`). `auth` is derived from the placeholders.
 
 ```
 ---
 apiVersion: v1
 kind: Secret
-type: kubernetes.io/opaque
+type: Opaque
 metadata:
   annotations:
-    epinio.io/registry-namespace: "placeholder-user"
+    epinio.io/registry-namespace: "<registry-org>"
   labels:
     epinio.io/api-export-registry: "true"
-  name: placeholder-user-at-docker-hub
+  name: "<destination-name>"
   namespace: epinio
 stringData:
   .dockerconfigjson: |-
     {
       "auths": {
         "registry.hub.docker.com": {
-          "auth":"cGxhY2Vob2xkZXItdXNlcjpwbGFjZWhvbGRlci1wYXNzd29yZAo=",
-          "username":"placeholder-user",
-          "password":"placeholder-password"
+          "auth":"PHVzZXI+OjxwYXNzd29yZD4=",
+          "username":"<user>",
+          "password":"<password>"
         }
       }
     }

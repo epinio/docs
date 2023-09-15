@@ -23,7 +23,7 @@ and as export target.
 Invoke
 
 ```bash
-epinio exportregistries
+epinio export-registries
 ```
 
 to see the list of valid destinations.
