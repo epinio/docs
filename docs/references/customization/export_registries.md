@@ -47,10 +47,15 @@ export`.
 The `epinio.io/registry-namespace` annotation provides Epinio with the name of the
 namespace/organization in the registry to place uploaded charts and images into.
 
-If the authentication secret contains the optional key `certs` then the value of that key is the
-name of the certificate secret. This secret has to contain a key `tls.crt` whose value is a
-PEM-formatted string containing the set of additional secrets required to securely talk to the
-destination registry.
+If the authentication secret contains the optional key `certs` (as sibling to `.dockerconfigjson`)
+then the value of that key is the name of the `certificate secret`. This secret has to contain a key
+`tls.crt` whose value is a PEM-formatted string containing the set of additional secrets required to
+securely talk to the destination registry.
+
+:::note
+The type of the authentication secret does not matter to Epinio.
+The examples use the generic type `kubernetes.io/opaque`.
+:::
 
 ## Example authentication secret, without certificate secret 
 
@@ -58,13 +63,13 @@ destination registry.
 ---
 apiVersion: v1
 kind: Secret
-type: kubernetes.io/dockerconfigjson
+type: kubernetes.io/opaque
 metadata:
   annotations:
     epinio.io/registry-namespace: "placeholder-user"
   labels:
     epinio.io/api-export-registry: "true"
-  name: a99k-at-docker
+  name: placeholder-user-at-docker-hub
   namespace: epinio
 stringData:
   .dockerconfigjson: |-

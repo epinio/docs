@@ -7,11 +7,11 @@ title: ""
 :::note
 
 Do not confuse this topic with external Epinio registries.
-These are where Epinio stashes the images of staged applications for its own use.
+These are where Epinio saves the images of staged applications for its own use.
 See [Setting Up An External Container Registry](setup_external_registry.md) for more information.
 
-Export destination registries on the other hand are where a user saves active applications to for
-pickup by and use with `helm` and other kubernetes tools.
+Export destination registries on the other hand are where a user saves active applications to,
+for pickup by and use with `helm` and other kubernetes tools.
 
 It does not help that it is perfectly ok to configure the same registry both as external registry
 and as export target.
@@ -27,7 +27,7 @@ kubectl apply -f - <<EOF
 ---
 apiVersion: v1
 kind: Secret
-type: kubernetes.io/dockerconfigjson
+type: kubernetes.io/opaque
 metadata:
   annotations:
     epinio.io/registry-namespace: "placeholder-user"
