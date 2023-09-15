@@ -48,7 +48,7 @@ container image. These are:
 
 |Component	|Default Name			|Default Version/Tag	|
 |---		|---				|---			|
-|Helm chart	| (namespace)-(appname)-chart	| 0 			|
+|Helm chart	| (namespace)-(appname)-chart	| 0.0.0			|
 |Container image| (namespace)-(appname)-image	| (stageID)		|
 
 All parts can be changed with the command flags
