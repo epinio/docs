@@ -53,7 +53,8 @@ Note that the `auth` element is derived from username and password.
 It has to be replaced as well.
 Its value is the base64 encoding of `<user>:<password>`.
 
-This creates the authentication secret for the destination.
+This creates the authentication secret for the destination, in the `epinio` namespace.
+Change it, if `epinio` is not Epinio's system namespace, i.e. when Epinio was installed differently.
 
 Epinio now knows the specified account at the docker hub as an export destination for use with
 `epinio app export --registry`.
@@ -64,8 +65,20 @@ For other registries change the `registry.hub.docker.com` reference as well.
 
 If the desired registry requires additional TLS certificates to talk it is necessary to
 
- - create a kubernetes secret with key `tls.crt` whose value is the set of additional certifcates in
+ - Create a kubernetes secret with key `tls.crt` whose value is the set of additional certifcates in
    PEM-encoded form.
 
- - extend the authentication secret with a key `certs` (sibling to key `.dockerconfigjson`) whose
+   This secret has to reside in the same namespace as the authentication secret, i.e. Epinio's
+   system namespace. That namspace usually is `epinio`.
+
+   For example:
+
+   ```
+   kubectl create secret generic \
+       --namespace epinio \
+       --from-file=tls.crt=tls-registry.pem \
+       export-registry
+   ```
+
+ - Extend the authentication secret with a key `certs` (sibling to key `.dockerconfigjson`) whose
    value is the name of the secret created in the preceding step.

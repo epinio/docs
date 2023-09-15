@@ -23,6 +23,9 @@ The remainder of this document contains the definition of EDRs.
 An EDR is defined by one or two kubernetes secrets, to be placed into the kubernestes cluster by the
 Epinio __operator__.
 
+All secrets have to be placed into Epinio's system namespace.
+This namespace is usually named `epinio`.
+
 The `authentication secret` is labeled with `epinio.io/api-export-registry: "true"` and has to
 contain a stringData key `.dockerconfigjson`. The value for this key is a string in JSON format:
 
