@@ -36,6 +36,7 @@ metadata:
   name: "<destination-name>"
   namespace: epinio
 stringData:
+  # certs: "<name of cert secret>"
   .dockerconfigjson: |-
     {
       "auths": {
@@ -69,7 +70,7 @@ If the desired registry requires additional TLS certificates to talk it is neces
    PEM-encoded form.
 
    This secret has to reside in the same namespace as the authentication secret, i.e. Epinio's
-   system namespace. That namspace usually is `epinio`.
+   system namespace. That namespace usually is `epinio`.
 
    For example:
 

@@ -51,6 +51,8 @@ container image. These are:
 |Helm chart	| (namespace)-(appname)-chart	| 0.0.0			|
 |Container image| (namespace)-(appname)-image	| (stageID)		|
 
+Use the command `epinio app show (the-app-name)` to see the stageID of the application.
+
 All parts can be changed with the command flags
 
  - `--chart-name`
