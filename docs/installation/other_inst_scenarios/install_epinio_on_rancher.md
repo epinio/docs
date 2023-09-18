@@ -7,45 +7,44 @@ keywords: [epinio, kubernetes, rancher]
 ---
 
 Before installing Epinio you need a running Rancher instance.
-If necessary use the Rancher [installation guides](https://rancher.com/docs) to set one up.
+You can follow the Rancher [installation guides](https://rancher.com/docs) to set one up.
 
-<!--TODO:Confirm versions?-->
-This How-to was written using:
+This How-to uses:
 
 - [epinio helm chart 1.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-1.7.1)
 - Rancher 2.7.1
 
 ## Kubernetes cluster
 
-The two supported methods are: to deploy a new cluster or to import an existing one into Rancher.
-<!--TODO:A direct link would be better if possible. But I can't seee an obvious one.-->
+You can deploy a new cluster or import an existing one into Rancher.
 The steps for either method are in the Rancher documentation (See `Cluster Provisioning`).
 
 :::note
 For development it's possible to deploy Epinio on the same node as Rancher.
-However, this needs more steps and isn't supported by Rancher.
+It is not a supported configuration, so there may be issues.
 :::
 
 ## Epinio Prerequisites
 
 ### Install an Ingress controller
 
-If there's no Ingress controller running yet on the cluster, you need to install one. For the example below, we use Traefik.
+If there's no Ingress controller running yet on the cluster, you need to install one.
+We use Traefik in the example below.
 
 :::note
 
-If using the Rancher dashboard in a browser, it's likely you already have an Ingress controller running.
+If using the Rancher dashboard you will already have an Ingress controller running. This will be due to the installation process for Rancher.
 
 :::
 
-<!--TODO: This is for when in the Rancher dashboard, right?-->
 Go to `Apps` > `Repositories` > `Create` in the Rancher dashboard.
 
 Give a name to the repo and use `https://helm.traefik.io/traefik` as the index URL.
 
 Then go to the `Charts` menu and install the `traefik` chart.
 
-You'll see a screen where you can edit the Traefik Helm YAML file. Now make sure to set the following settings:
+You'll see a screen where you can edit the Traefik Helm YAML file.
+Now make sure to set the following settings:
 
 ```
 ingressClass.enabled: true
@@ -54,7 +53,7 @@ ports.web.redirectTo: websecure
 service.spec.loadBalancerIP: # Set this to the IP of your load balancer if you know that
 ```
 
-See also the [Install Epinio](../../installation/install_epinio.md#ingress-controller) page for more details.
+The [Install Epinio](../../installation/install_epinio.md#ingress-controller) page has more details.
 
 ## Install Epinio
 
@@ -68,27 +67,28 @@ Once done, go to the "Charts" menu and install the `epinio` chart.
 
 :::note
 
-While you can select any version, it's strongly advised you choose the latest one.
+While you can select any version, it's best to use the latest one.
 
 :::
 
 Click install in the top right corner.
 
 On the next screen, you can select a namespace for the deployment.
-You also have to set a name for it.
+You also have to set a name for the deployment.
 
-The following screen is where you can configure Epinio according to your needs.
+The following screen is to configure Epinio as needed.
 
-The most important setting is `Domain` which is explained [here](../../installation/dns_setup.md).
+The most important setting is `Domain`, explained [here](../../installation/dns_setup.md) in DNS setup.
 
-When everything is configured, click on the install button and then wait until the installation is complete.
-Then follow the instructions given by the Helm install command output.
+When everything is configured, click on the install button.
+Wait until the installation is complete.
+Follow the instructions given by the Helm install command output.
 
 ## Access the Epinio menu
 
 There are several ways to access Epinio from the Rancher dashboard menu.
 
-The easiest is going to `Networking` > `Ingresses` and select the target URL preceding `epinio-ui`.
+The first is going to `Networking` > `Ingresses` and select the target URL preceding `epinio-ui`.
 
 You also access Epinio by clicking on `Workloads` > `Deployments`.
 On the right panel displayed click on `epinio-server:installed_version`.
@@ -96,12 +96,13 @@ Now select the tab `Ingreses` and then the target URL preceding `epinio-ui`.
 
 :::note
 
-If you use an untrusted certificate, you have to click on the URL. Accept the security exception and then use the refresh button below the page title.
-Now the state will be available and you access the instance by clicking on its name.
+If you use an untrusted certificate, when selecting the URL, you need to accept the security exception.
+Then use the refresh button below the page title.
+Now the state is available and you access the instance by clicking on its name.
 
 :::
 
-Once in your Epinio instance, you can deploy and delete:
+Once using your Epinio instance, you can deploy and delete:
 - applications
 - namespaces
 - configurations.
