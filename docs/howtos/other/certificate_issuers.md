@@ -6,23 +6,25 @@ title: ""
 
 # Using a Certificate Issuer
 
-Epinio comes with multiple [cert-manager cluster issuers](https://cert-manager.io/docs/configuration/) for creating certificates:
+Epinio comes with multiple [cert-manager ClusterIssuers](https://cert-manager.io/docs/configuration/) for creating certificates.  
+By default it installs the issuers `epinio-ca` and `selfsigned-issuer`.
+If specified it will also install either `letsencrypt-staging` or `letsencrypt-production`, to create certificates issued from [Let's Encrypt](https://letsencrypt.org/).
 
 * epinio-ca (default)
-* letsencrypt-production
-* selfsigned-issuer
+* selfsigned-issuer (internal)
+* letsencrypt-[staging|production] (optional)
 
-The issuer will be used for both, the Epinio API endpoint and workloads (i.e. pushed applications).
+The specified issuer will be used for both Epinio API endpoint and workloads (that is, the pushed applications).
 
 ## Choosing a Different Issuer
 
 When [installing Epinio with helm](../../installation/install_epinio.md#install-epinio), you can choose between those issuers by using the `global.tlsIssuer` helm variable.
 
-It's also possible to create a cert-manager cluster issuer in the cluster, before installing Epinio and referencing it by name when installing.
+It's also possible to create a cert-manager cluster issuer in the cluster, before installing Epinio, and referencing it by name when installing, using `global.customTlsIssuer`.
 
-When using the `letsencrypt-production` issuer further use the `global.tlsIssuerEmail` helm variable
+When using either `letsencrypt-staging` or `letsencrypt-production` then use the `global.tlsIssuerEmail` helm variable
 to set an email address for the reception of the certificate notification emails sent by that
-issuer. __Note__, the default address is `epinio@suse.com`.
+issuer.
 
 ### Cluster Issuer for ACME DNS Challenge
 
