@@ -50,7 +50,7 @@ Now make sure to set the following settings:
 ingressClass.enabled: true
 ingressClass.isDefaultClass: true
 ports.web.redirectTo: websecure
-service.spec.loadBalancerIP: # Set this to the IP of your load balancer if you know that
+service.spec.loadBalancerIP: # Set this to the IP of your load balancer
 ```
 
 The [Install Epinio](../../installation/install_epinio.md#ingress-controller) page has more details.
