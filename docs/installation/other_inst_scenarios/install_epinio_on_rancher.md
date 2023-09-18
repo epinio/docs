@@ -17,7 +17,7 @@ This How-to uses:
 ## Kubernetes cluster
 
 You can deploy a new cluster or import an existing one into Rancher.
-The steps for either method are in the Rancher documentation (See `Cluster Provisioning`).
+The steps for either method are in the Rancher [documentation](https://ranchermanager.docs.rancher.com/pages-for-subheaders/kubernetes-clusters-in-rancher-setup).
 
 :::note
 For development it's possible to deploy Epinio on the same node as Rancher.
@@ -33,7 +33,7 @@ We use Traefik in the example below.
 
 :::note
 
-If using the Rancher dashboard you will already have an Ingress controller running. This will be due to the installation process for Rancher.
+If using the Rancher dashboard there already will be an Ingress controller installed. This will be due to the installation process for Rancher.
 
 :::
 
