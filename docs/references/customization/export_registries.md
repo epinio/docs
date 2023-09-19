@@ -31,6 +31,7 @@ contain a stringData key `.dockerconfigjson`. The value for this key is a string
 
 ```
 stringData:
+  # certs: "<name of cert secret here>"
   .dockerconfigjson: |-
     {
       "auths": {
@@ -77,6 +78,7 @@ metadata:
   name: "<destination-name>"
   namespace: epinio
 stringData:
+  # certs: "<name of cert secret here>"
   .dockerconfigjson: |-
     {
       "auths": {

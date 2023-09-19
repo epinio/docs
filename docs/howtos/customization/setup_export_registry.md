@@ -54,6 +54,17 @@ Note that the `auth` element is derived from username and password.
 It has to be replaced as well.
 Its value is the base64 encoding of `<user>:<password>`.
 
+:::tip
+An easy way to create the desired value is:
+
+```
+echo -n "<user>:<password>" | base64 -
+```
+
+Note the `-n` flag of `echo`.
+Without it a trailing newline will be added, creating a bogus result.
+:::
+
 This creates the authentication secret for the destination, in the `epinio` namespace.
 Change it, if `epinio` is not Epinio's system namespace, i.e. when Epinio was installed differently.
 
