@@ -13,7 +13,8 @@ epinio namespace list [flags]
 ### Options
 
 ```
-  -h, --help   help for list
+  -h, --help            help for list
+  -o, --output string   sets output format [text|json] (default "text")
 ```
 
 ### Options inherited from parent commands

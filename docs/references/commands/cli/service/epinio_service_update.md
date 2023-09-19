@@ -1,20 +1,26 @@
 ---
 title: ""
-sidebar_label: "epinio namespace show"
+sidebar_label: "epinio service update"
 ---
-## epinio namespace show
+## epinio service update
 
-Shows the details of an epinio-controlled namespace
+Update a service
+
+### Synopsis
+
+Update service by name and change instructions through flags.
 
 ```
-epinio namespace show NAME [flags]
+epinio service update NAME [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help            help for show
-  -o, --output string   sets output format [text|json] (default "text")
+  -h, --help            help for update
+  -s, --set strings     configuration key/value assignments to add/modify
+  -u, --unset strings   configuration keys to remove
+      --wait            Wait for deployment to complete
 ```
 
 ### Options inherited from parent commands
@@ -34,5 +40,5 @@ epinio namespace show NAME [flags]
 
 ### SEE ALSO
 
-* [epinio namespace](./epinio_namespace.md)	 - Epinio-controlled namespaces
+* [epinio service](./epinio_service.md)	 - Epinio service management
 
