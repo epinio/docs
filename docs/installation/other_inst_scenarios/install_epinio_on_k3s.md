@@ -16,13 +16,11 @@ This How-to was written with these versions:
 
 ## Install a K3s cluster
 
-Follow the [instructions](https://k3s.io/) at to install K3s.
-
-The K3s version used in this How-to is mentioned above, with all options set to default.
+Follow the [instructions at](https://k3s.io/) to install K3s.
 
 ## Install Epinio on the K3s cluster
 
-Export the K3s cluster configuration file in the KUBECONFIG environment variable:
+Export the K3s cluster configuration file in the `KUBECONFIG` environment variable:
 
 ```bash
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
@@ -30,7 +28,7 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 Follow the [wildcard DNS setup](../../installation/wildcardDNS_setup) to install DNS for Epinio in your environment.
 
-The `<IP>` address can be found by running:
+You find the `<IP>` address with:
 
 ```
 $ kubectl get svc -n kube-system traefik -o jsonpath="{.status.loadBalancer.ingress[0]}"
@@ -42,7 +40,7 @@ Then, continue with the [Epinio installation process](../../installation/install
 
 ### DNS Issues
 
-If you experience issues with DNS resolution, if for example, you have something like this in your logs:
+If you experience issues with DNS resolution, if, for example, you have something like this in your logs:
 ```
 dial tcp: lookup epinio-registry.192.168.1.10.omg.howdoi.website on 10.43.0.10:53: no such host
 ```
