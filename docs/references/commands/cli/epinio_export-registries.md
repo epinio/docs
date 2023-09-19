@@ -1,20 +1,23 @@
 ---
 title: ""
-sidebar_label: "epinio namespace show"
+sidebar_label: "epinio export-registries"
 ---
-## epinio namespace show
+## epinio export-registries
 
-Shows the details of an epinio-controlled namespace
+List export registries
+
+### Synopsis
+
+List export registries
 
 ```
-epinio namespace show NAME [flags]
+epinio export-registries [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help            help for show
-  -o, --output string   sets output format [text|json] (default "text")
+  -h, --help   help for export-registries
 ```
 
 ### Options inherited from parent commands
@@ -34,5 +37,5 @@ epinio namespace show NAME [flags]
 
 ### SEE ALSO
 
-* [epinio namespace](./epinio_namespace.md)	 - Epinio-controlled namespaces
+* [epinio](./epinio.md)	 - Epinio cli
 

@@ -4,16 +4,21 @@ sidebar_label: "epinio app export"
 ---
 ## epinio app export
 
-Export the named application into the directory
+Export the named application into the directory or flag-specified registry
 
 ```
-epinio app export NAME DIRECTORY [flags]
+epinio app export NAME [DIRECTORY] [flags]
 ```
 
 ### Options
 
 ```
-  -h, --help   help for export
+      --chart-name string      User chosen name for the chart file
+      --chart-version string   User chosen version for the chart file
+  -h, --help                   help for export
+      --image-name string      User chosen name for the image file
+      --image-tag string       User chosen tag for the image file
+  -r, --registry string        The name of the registry to export to
 ```
 
 ### Options inherited from parent commands

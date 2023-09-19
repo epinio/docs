@@ -17,9 +17,9 @@ epinio configuration update NAME [flags]
 ### Options
 
 ```
-  -h, --help             help for update
-  -r, --remove strings   configuration keys to remove
-  -s, --set strings      configuration key/value assignments to add/modify
+  -h, --help            help for update
+  -s, --set strings     configuration key/value assignments to add/modify
+  -u, --unset strings   configuration keys to remove
 ```
 
 ### Options inherited from parent commands

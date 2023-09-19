@@ -32,6 +32,7 @@ epinio cli is the official command line interface for Epinio PaaS
 * [epinio client-sync](./epinio_client-sync.md)	 - Downloads a client binary matching the currently logged server
 * [epinio completion](./epinio_completion.md)	 - Generate completion script for a shell
 * [epinio configuration](./configuration/epinio_configuration.md)	 - Epinio configuration features
+* [epinio export-registries](./epinio_export-registries.md)	 - List export registries
 * [epinio gitconfig](./gitconfig/epinio_gitconfig.md)	 - Epinio git configuration management
 * [epinio info](./epinio_info.md)	 - Shows information about the Epinio environment
 * [epinio login](./epinio_login.md)	 - Epinio login to the server
