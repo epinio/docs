@@ -1,46 +1,47 @@
 ---
-sidebar_label: "Installing Epinio On K3s (local)"
+sidebar_label: "Installing Epinio on a local K3s"
 sidebar_position: 20
-title: ""
+title: "Installing Epinio on a local K3s"
+description: Information about installing Epinio on a local K3s cluster.
+keywords: [kubernetes, epinio, k3s]
 ---
 
-# Installing Epinio On K3s (local)
-
-This How-to was written using the following versions:
+This How-to was written with these versions:
 * [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
 * [k3s](https://k3s.io/) version v1.23.4+k3s1 and v1.22.7+k3s1
 * openSUSE Leap 15.3 and Tumbleweed
 
-## Get K3s Kubernetes Cluster
 
-### Install K3s
+## Install a K3s cluster
 
-Follow the [instructions](https://k3s.io/) to install K3s on your system.
+Follow the [K3s instructions](https://k3s.io/) to install K3s.
 
-The K3s version used in this How-to is mentioned above, with all options set to default.
+## Install Epinio on the K3s cluster
 
-### Install Epinio on the Cluster
-
-Export the k3s cluster configration first:
+Export the K3s cluster configuration file in the `KUBECONFIG` environment variable:
 
 ```bash
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ```
 
-Follow [wildcard DNS setup](../../installation/wildcardDNS_setup) to install Epinio in your test environment.
+Follow the [wildcard DNS setup](../../installation/wildcardDNS_setup) to install DNS for Epinio in your environment.
 
-`<IP>` can be found by running:
-```
-$ kubectl get svc -n kube-system traefik -o jsonpath="{.status.loadBalancer.ingress[0]}"
+You find the `<IP>` address with the next command. Example output is shown:
+
+```console
+$ kubectl get svc -n kube-system traefik -o jsonpath="{.status.loadBalancer.ingress[0]}" | jq .
+{
+  "ip": "192.168.5.15"
+}
 ```
 
 Then, continue with the [Epinio installation process](../../installation/install_epinio.md).
 
-### Troubleshooting
+## Troubleshooting
 
-#### DNS Issues
+### DNS Issues
 
-In case of trouble with DNS resolution, for example if you have something like this in your logs:
+If you experience issues with DNS resolution, if, for example, you have something like this in your logs:
 ```
 dial tcp: lookup epinio-registry.192.168.1.10.omg.howdoi.website on 10.43.0.10:53: no such host
 ```
@@ -55,9 +56,8 @@ With `/etc/my-good-resolv.conf` containing:
 nameserver 1.1.1.1
 ```
 
-This kind of issue could happen, for example, when you have multiple DNS servers and some of them are not able to resolve some domain names.
+This issue may happen with multiple DNS servers and some can't resolve some domain names.
 
-#### Traefik
+### Traefik
 
-In case of trouble with Epinio's Traefik component or Ingress controllers, refer to the [Traefik](../../explanations/advanced.md#traefik) section in the
-[Advanced Topics](../../explanations/advanced.md) document.
+In case of trouble with Epinio's Traefik component refer to the [Traefik](../../explanations/advanced.md#traefik) section in the [Advanced Topics](../../explanations/advanced.md) document.
