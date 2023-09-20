@@ -2,7 +2,7 @@
 sidebar_label: "Installing Epinio on a local K3s"
 sidebar_position: 20
 title: "Installing Epinio on a local K3s"
-description: Information about installing L3s on a local K3s cluster.
+description: Information about installing Epinio on a local K3s cluster.
 keywords: [kubernetes, epinio, k3s]
 ---
 
