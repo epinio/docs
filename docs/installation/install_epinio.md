@@ -199,12 +199,22 @@ This chart will install [Minio](https://min.io/) when `.Values.minio.enabled` is
 In addition to Minio, Epinio offers [s3gw](https://s3gw.io/) as another S3 compatible store.
 It is installed when `.Values.minio.enabled` is set to `false` and `.Values.s3gw.enabled` is set to `true`.
 
+:::caution
+The s3gw support is __experimental__.
+The s3gw chart is configured to use a `host path` volume for storage.
+This setup is risky, and not HA.
+If there is an outage of the node where s3gw's pod is currently deployed, k8s will fail trying to assign the volume on another node.
+:::
+
 Both choices for internal S3 compatible storage can be configured to use a user-defined storageClass.
 If no StorageClass is defined, the default storageClass is used.
 When using Minio set the custom storageClass to the value of `.Values.persistance.storageClass`.
 When using s3gw set the custom storageClass to the value of `.Values.s3gw.storageClass.name`.
 
-Use any external S3 compatible solution by setting `.Values.minio.enabled` to `false` (`.Values.s3gw.enabled` is `false` by default) and using [the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44) to point to the required S3 server.
+Use any external S3 compatible solution by setting `.Values.minio.enabled` to `false`
+(`.Values.s3gw.enabled` is `false` by default) and using
+[the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44)
+to point to the required S3 server.
 
 ### Dex
 
