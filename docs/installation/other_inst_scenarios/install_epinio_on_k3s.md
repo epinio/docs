@@ -6,8 +6,6 @@ description: Information about installing L3s on a local K3s cluster.
 keywords: [kubernetes, epinio, k3s]
 ---
 
-# Installing Epinio On K3s (local)
-
 This How-to was written with these versions:
 * [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
 * [k3s](https://k3s.io/) version v1.23.4+k3s1 and v1.22.7+k3s1
@@ -16,7 +14,7 @@ This How-to was written with these versions:
 
 ## Install a K3s cluster
 
-Follow the [instructions at](https://k3s.io/) to install K3s.
+Follow the [K3s instructions](https://k3s.io/) to install K3s.
 
 ## Install Epinio on the K3s cluster
 
@@ -28,10 +26,13 @@ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 Follow the [wildcard DNS setup](../../installation/wildcardDNS_setup) to install DNS for Epinio in your environment.
 
-You find the `<IP>` address with:
+You find the `<IP>` address with the next command. Example output is shown:
 
-```
-$ kubectl get svc -n kube-system traefik -o jsonpath="{.status.loadBalancer.ingress[0]}"
+```console
+$ kubectl get svc -n kube-system traefik -o jsonpath="{.status.loadBalancer.ingress[0]}" | jq .
+{
+  "ip": "192.168.5.15"
+}
 ```
 
 Then, continue with the [Epinio installation process](../../installation/install_epinio.md).
@@ -55,7 +56,7 @@ With `/etc/my-good-resolv.conf` containing:
 nameserver 1.1.1.1
 ```
 
-This issue could happen when you have multiple DNS servers, and some of those can't resolve some domain names.
+This issue may happen with multiple DNS servers and some can't resolve some domain names.
 
 ### Traefik
 
