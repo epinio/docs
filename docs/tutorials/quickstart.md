@@ -1,23 +1,32 @@
 ---
 sidebar_label: "Quickstart"
 sidebar_position: 1
-title: ""
+title: "Quickstart"
+description: Get started quickly with Epinio.
+keywords: [epinio, kubernetes, quickstart, installation]
 ---
 
-# Quickstart
-This guide will help you deploy and use Epinio with default options suitable for evaluation or testing purposes on an existing Kubernetes cluster. For advanced Epinio deployment scenarios look into [Installation Section](../installation/install_epinio.md).
+This guide will help you deploy and use Epinio with default options suitable for evaluation or testing purposes on an existing Kubernetes cluster.
+For advanced Epinio deployment scenarios look into [Installation Section](../installation/install_epinio.md).
 
 ## Installation
-Make sure your Kubernetes environment fulfills the [Epinio Requirements](../references/system_requirements/global.md). A **default StorageClass**  as well as a **default IngressClass** are required. If you do not have a suitable Kubernetes cluster yet, you can follow the [RKE2 Installation](../installation/other_inst_scenarios/install_epinio_on_rke.md) section.
+Make sure your Kubernetes environment fulfills the [Epinio Requirements](../references/system_requirements/global.md).
+A **default StorageClass** as well as a **default IngressClass** are required.
+If you do not have a suitable Kubernetes cluster yet, you can follow the [RKE2 Installation](../installation/other_inst_scenarios/install_epinio_on_rke.md) section.
 
 ### Deploy Epinio
-Run the  `kubectl get nodes -o wide` command to get the `INTERNAL-IP` value of the first Kubernetes node. Later you will use this value along with a wildcard DNS service domain (for eg. `sslip.io`) as helm `global.domain` value for installing Epinio.
+Run the  `kubectl get nodes -o wide` command to get the `INTERNAL-IP` value of the first Kubernetes node.
+Later you will use this value along with a wildcard DNS service domain (for eg. `sslip.io`) as helm `global.domain` value for installing Epinio.
 
 :::tip
-If you use Local Kubernetes Cluster, the value should be `127.0.0.1` regardless of the output from the command above. Please refer to your Local Kubernetes Cluster documentation for the IP address details of the Ingress endpoint.
+
+If you use Local Kubernetes Cluster, the value should be `127.0.0.1` regardless of the output from the command above.
+Please refer to your Local Kubernetes Cluster documentation for the IP address details of the Ingress endpoint.
+
 :::
 
 #### Install cert-manager
+
 ```bash
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
@@ -27,6 +36,7 @@ helm upgrade --install cert-manager jetstack/cert-manager \
 ```
 
 #### Install Epinio
+
 Then Epinio can be deployed by using `helm` as shown below. Replace the `<INTERNAL-IP>` placeholder with the correct IP address:
 
 ```bash
@@ -46,7 +56,7 @@ Install the latest Epinio CLI with `brew`:
 brew install epinio
 ```
 
-or download the desired version and architecture from the Assets section of https://github.com/epinio/epinio/releases/.
+Or download the desired version and architecture from the Assets section of https://github.com/epinio/epinio/releases/.
 
 ## Deploy an application with Epinio
 
@@ -61,7 +71,9 @@ epinio login -u admin 'https://epinio.127.0.0.1.sslip.io'
 ```
 
 :::tip
+
 If you encounter an x509 error due to mismatched certificates after a restart, you can resolve it by reloading the certificates with `epinio settings update-ca` without having to log in again.
+
 :::
 
 You can confirm that you're logged in by checking the Epinio settings:
@@ -94,18 +106,19 @@ There are two ways to push an application:
 epinio push manifest.yaml
 ```
 
-2. You can provide the configuration as parameters in which case the parameter `--name` is mandatory.
+1. You can provide the configuration as parameters in which case the parameter `--name` is mandatory.
 Because of the default route the name has to be unique across all namespaces.
 
 ```bash
 epinio push --name sample --path sample-app
 ```
 
-***
+:::note
 
-###### Note that the `--path` parameter is optional. If not specified the current working directory will be used. Always ensure that the chosen directory contains a supported application.
+The `--path` parameter is optional. If not specified the current working directory will be used.
+Always ensure that the chosen directory contains a supported application.
 
-***
+:::
 
 If you want to know what applications are supported in Epinio, please read the
 [notes about supported applications](../references/supported_applications.md).
@@ -120,7 +133,8 @@ We also provide information about the more advanced [git model](../explanations/
 
 #### Check that your application is working
 
-After the application has been pushed, a unique URL is printed which you can use to access your application. If you don't have this URL available anymore you can find it again by running:
+After the application has been pushed, a unique URL is printed which you can use to access your application.
+If you don't have this URL available anymore you can find it again by running:
 
 ```bash
 epinio app show sample
@@ -148,7 +162,8 @@ epinio delete sample
 
 ### Create a separate namespace
 
-If you want to keep your various application separated, you can use the concept of namespaces. Create a new namespace with this command:
+If you want to keep your various application separated, you can use the concept of namespaces.
+Create a new namespace with this command:
 
 ```bash
 epinio namespace create newspace
@@ -161,4 +176,5 @@ To start deploying application to this new namespace you have to "target" it:
 epinio target newspace
 ```
 
-After this and until you target another namespace, whenever you run `epinio push` you will be deploying to this new namespace.
+After this and until you target another namespace,
+whenever you run `epinio push` you will be deploying to this new namespace.
