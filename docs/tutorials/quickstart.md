@@ -20,16 +20,14 @@ If you don't yet have a suitable Kubernetes cluster, you can follow the [RKE2 In
 
 ### Deploy Epinio
 
-Run the `kubectl get nodes -o wide` command to get the `INTERNAL-IP` value of the first Kubernetes node.
+Run the `kubectl get nodes -o wide` command to get the `INTERNAL-IP` value of the first Kubernetes node in your cluser.
 You'll use this value along with a wildcard DNS service domain
 (for eg. `sslip.io`)
 as the helm `global.domain` value for installing Epinio.
 
 :::tip
 
-<!--TODO: Not sure here. Both sentences are about a local cluster? First sentence says always home IP addr. Second sentence says get it from somwhere. Needs some clarification. Is the second sentence referring to a local cluser or the local cluster docs? Which might make more sense. -->
-If you use a local Kubernetes cluster, the value should be `127.0.0.1` no matter the output from the `kubectk get nodes` command above.
-Please refer to your local Kubernetes cluster documentation for the IP address details of the Ingress endpoint.
+If you use a local Kubernetes cluster, the value should be `127.0.0.1` no matter the output from the `kubectl get nodes` command above.
 
 :::
 
