@@ -41,7 +41,7 @@ Name: newnamespace
 ✔️  Namespace created.
 ```
 
-You can inspect the detail of a namespace:
+You can inspect the details of a namespace:
 
 - creation date
 - applications
