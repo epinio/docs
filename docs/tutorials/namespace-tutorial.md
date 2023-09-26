@@ -67,7 +67,7 @@ Name: newnamespace
 | Configurations |                               |
 ```
 
-Epinio creates the default namespace `workspace` at installation.
+Epinio creates the default namespace `workspace` at installation time.
 The `epinio login` command sets the default namespace as the current namespace.
 
 To see this use:
