@@ -1,14 +1,18 @@
 ---
 sidebar_position: 2
 title: "Namespaces"
+description: Tutorial about Epinio namespaces.
+keywords: [tutorial, epinio, namespaces]
 ---
 
-# Namespaces
-## Introduction
-This document explains the basics of working with namespaces. It assumes that Epinio is installed. If this is not the case please visit [Install Epinio](docs/installation/install_epinio.md) first.
+This guide explores working with namespaces.
+It assumes that Epinio is installed.
+If you need to install, please visit
+[install Epinio](docs/installation/install_epinio.md).
 
 
 ## Workflow
+
 Once `Epinio` is deployed, check the existence of the pre-configured namespace `workspace` with:
 
 ```
@@ -37,7 +41,14 @@ Name: newnamespace
 ✔️  Namespace created.
 ```
 
-Inspect the details of a given namespace like **creation date**, **applications** and **configurations** with:
+You can inspect the details of a namespace:
+
+- creation date
+- applications
+- configurations
+
+Use the command:
+
 ```
 epinio namespace show newnamespace
 ```
@@ -56,7 +67,10 @@ Name: newnamespace
 | Configurations |                               |
 ```
 
-By default, `Epinio` creates the namespace `workspace` during installation. If no previous local state existed the `epinio login` command used to get access to the installation also set this namespace as the current namespace. To see this use:
+Epinio creates the default namespace `workspace` at installation time.
+The `epinio login` command sets the default namespace as the current namespace.
+
+To see this use:
 
 ```
 epinio target
@@ -68,7 +82,7 @@ Output:
 Currently targeted namespace: workspace
 ```
 
-Target the namespace `newnamespace` created earlier to operate on its contents:
+To target the namespace `newnamespace`, created earlier, for future Epinio command operation:
 
 ```
 epinio target newnamespace
@@ -82,7 +96,7 @@ Name: newnamespace
 ✔️  Namespace targeted.
 ```
 
-At last delete the namespace `newnamespace` again:
+Finally, delete the namespace `newnamespace`:
 
 ```
 epinio namespace delete newnamespace  
@@ -97,8 +111,9 @@ Name: newnamespace
 
 ✔️  Namespace deleted.
 ```
+
 ---
-### SEE ALSO
+### See also
 
 * [epinio namespace create](references/commands/cli/namespace/epinio_namespace_create.md)    - Creates an epinio-controlled namespace
 * [epinio namespace delete](references/commands/cli/namespace/epinio_namespace_delete.md)    - Deletes an epinio-controlled namespace
