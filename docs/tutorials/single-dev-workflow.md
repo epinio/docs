@@ -1,72 +1,75 @@
 ---
-sidebar_label: "Epinio Journey: Single Dev Workflow"
+sidebar_label: "Epinio journey: Single developer"
 sidebar_position: 3
-title: ""
+title: "The Epinio single developer journey"
+description: How the single developer works with Epinio
+keywords: [epinio, developer, development, kubernetes]
 ---
 
 ## Introduction
 
-While the [Quickstart](./quickstart.md) is great to get started, as a Developer,
-you might want to see end-to-end solutions and how Epinio can help you.  That's
-exactly the aim of the "Epinio Journeys", where you'll be able to follow
-different use-cases, according to your needs.
+The [Quickstart](./quickstart.md) gets you started, but,
+as a developer, you'll want to see end-to-end workflow solutions for Epinio.
+That's the aim of these "Epinio journeys",
+where you'll be able to follow different use cases.
 
-In this particular tutorial, we focus on the workflow for a solo developer with
-an example from a bare Kubernetes deployment to your first app.
+In this tutorial, you focus on the workflow for a solo developer.
+An example takes you from a bare Kubernetes deployment to a first application deployment.
 
 :::note
 
-This tutorial covers primarily a *solo and local development* process. While it
-still can help developers in teams, future journeys will address it more
-specifically.
+This tutorial describes a process for an *individual developer, working on a local machine*.
+A future tutorial will discuss team working processes.
 
 :::
 
 ## Prerequisites
 
-Before you can use Epinio, you need to have a Kubernetes cluster running.
+Before you can use Epinio, you need a working Kubernetes cluster.
 
-As a solo developer, you might be using a local Kubernetes cluster such as
-[Rancher Desktop](https://rancherdesktop.io/) or [k3d](https://k3d.io/).
+As an individual developer,
+you might be using a local Kubernetes cluster such as
+[Rancher Desktop](https://rancherdesktop.io/)
+or [k3d](https://k3d.io/).
 
 :::note
 
-This tutorial does not explain how to install a local Kubernetes cluster and
-assumes you have one available. There are
-some examples in the **Epinio Installation** section which contains links to
-installation documentation for a variety of common scenarios.
+There are common installation scenarios examples in the
+[installation documents](../installation/install_epinio.md).
 
 :::
 
 In this tutorial, we'll use
 [Rancher Desktop](../installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md)
-as our local Kubernetes cluster. However you should be able to follow this
-tutorial with the local Kubernetes cluster of your choice.
+as our local Kubernetes cluster.
 
-If not already done, you can install the
+If you don't have a Kubernetes installation you can install the
 [latest version](https://github.com/rancher-sandbox/rancher-desktop/releases)
-of Rancher Desktop for your operating system.
+of Rancher Desktop for your operating system to get started.
 
-### [Optional] Additional binaries
+### Additional tools
 
-Two additional binaries need to be installed in your system:
+You should install two useful tools in your system:
 
-- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) for communicating with the Kubernetes cluster
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+for communicating with the Kubernetes cluster
 
-- [helm](https://helm.sh/docs/intro/install/) for deploying the Epinio Helm Charts
+- [helm](https://helm.sh/docs/intro/install/)
+for deploying Epinio Helm Charts
 
-Depending on the local Kubernetes cluster you installed (i.e. Rancher Desktop),
+Depending on the local Kubernetes cluster you installed,
 these two binaries might be already installed.
+For example, they're installed as part of Rancher Desktop.
 
-These two binaries will be used for the [Installation](#installation) only. The
-development workflow will use the [Epinio CLI](#cli) alone.
+These two binaries are used for [Installation](#installation) only.
+The development workflow uses only the [Epinio CLI](#cli).
 
 ## Installation
 
 Once you have your local Kubernetes cluster installed and running, you can
 [install Epinio](../installation/install_epinio.md).
 
-Here are the steps for Rancher Desktop:
+These are the steps for Rancher Desktop:
 
 ```shell
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.1/cert-manager.yaml
@@ -89,10 +92,9 @@ You can find the password needed for the [login](#login) at the end of the insta
 
 ### CLI
 
-To interact with your Epinio installation, you've to download the [Epinio CLI
+To use a CLI with your Epinio installation, download the [Epinio CLI
 binary](https://github.com/epinio/epinio/releases/latest). The binary is
-available for the three main Operating Systems (OS), so pick the one suited for
-your own OS.
+available for Linux, Windows and macOS.
 
 ### Login
 
@@ -108,8 +110,8 @@ epinio login -u admin 'https://epinio.127.0.0.1.sslip.io'
 
 :::tip
 
-If your local Kubernetes cluster restarts, you only need to login again with the
-command above. Epinio stays installed and the certificates are still valid.
+If your local Kubernetes cluster restarts, you need to login again with the
+command `epinio login`. Epinio stays installed and the certificates are still valid.
 
 :::
 
@@ -119,40 +121,44 @@ You can confirm that you're logged in by checking the Epinio settings:
 epinio settings show
 ```
 
-Alternatively, you can also open the Epinio URL,
-<https://epinio.127.0.0.1.sslip.io>, in your preferred browser and use the web
+You can also open the Epinio URL,
+<https://epinio.127.0.0.1.sslip.io>, in your browser and use the web
 UI.
 
 ## Deploy your application with Epinio
 
-Now that the "operational" tasks are done, it's time to concentrate on the most
-important task: use Epinio to deploy your application.
+Now that you have completed the installation and setup tasks,
+you can use Epinio to deploy your application.
 
-Epinio uses [Paketo buildpacks](https://paketo.io/) to create a container image
-for your application. This image is then used to create a container with your
-application, which will run on your local Kubernetes cluster. You can find
-additional information about
-[the push process explained here](../explanations/detailed-push-process.md#7-stage).
+Epinio uses [Paketo buildpacks](https://paketo.io/)
+to create a container image for your application.
+Then Epinio uses the image to create a container
+with your application container image,
+which runs on your Kubernetes cluster.
+You can find more information about this in the
+[detailed push process](../explanations/detailed-push-process.md#7-stage)
+documentation.
 
-Epinio will also create a new `ingress route`, which will allow you to easily
-access your application once it's deployed.
+Epinio also creates a new `ingress route`,
+which allows you to access your application when it's deployed.
 
-The whole process is handled by Epinio, which enables you to concentrate on your
-application rather than knowing how you'll be able to deploy it.
+Epinio handles the whole process,
+which enables you to concentrate on your application
+rather than its deployment details.
 
-Let's see first how to deploy a simple application:
+As an example, we deploy a simple application:
 
 ```shell
 # Example code: https://github.com/epinio/example-12factor
 
-# Move to the source code directory. Here is an example:
+# Move to the source code directory.
 cd /github/example-12factor
 
 # Deploy your application
 epinio push -n mysimpleapp
 ```
 
-At the end of the deployment output, you have the URL to be used for checking
+At the end of the deployment output, you get the URL to use for
 your application:
 
 ```shell
@@ -169,8 +175,8 @@ Routes:
 
 ### List the applications deployed
 
-If you're working on many applications, it can be really useful to see when was
-the last time they were deployed and which URL you should use to check them.
+If you're working on many applications, it's useful to see
+their last deployment times and which URLs you use to check them.
 
 You can get the application's information with the following two commands:
 
@@ -184,9 +190,7 @@ epinio app show mysimpleapp
 
 ### View installation logs
 
-If your application couldn't be deployed, you might want to check your staging
-logs or, even better, save them into a file for a better screening with a text
-editor.
+For errors you can check your staging logs.
 
 You can access the installation logs by running the command:
 
@@ -196,11 +200,10 @@ epinio app logs --staging mysimpleapp
 
 ### View application logs
 
-Another type of logs that you can access is the application logs. And specially
-with web applications, you might want to have realtime logs displaying so you
-spot bugs faster.
+You can access the application logs.
+You might want to have realtime logs displayed to aid problem solving.
 
-Epinio can display the logs both statically or dynamically as follows:
+Epinio can display the logs either statically or dynamically as follows:
 
 ```shell
 # Display logs statically
@@ -212,11 +215,11 @@ epinio app logs --follow mysimpleapp
 
 ### Create a new port-forward
 
-As described above, Epinio creates a new `ingress route` for your
-application. The route is bound by default to the port `443`.
+As mentioned, Epinio creates a new `ingress route` for your application.
+Epinio binds the route to port `443` by default.
 
-However, you might need to test parts of your application using a different
-port. For these specific cases, you can run the following command:
+However, you might need to test parts of your application using different
+ports. For these cases, run the following command, for example:
 
 ```shell
 epinio app port-forward mysimpleapp 8080:8080
@@ -224,23 +227,30 @@ epinio app port-forward mysimpleapp 8080:8080
 
 :::tip
 
-You can specify only one port number. In that case, Epinio will open the port of both `local` and `remote` targets.
+<!--TODO:I need some help here. One port number? You can only use one app
+port-forward command? Is that correct? Or is it referring to epinio app
+port-forward mysimpleapp 8080 where the local port number is selected at
+random?, according to the doc.-->
 
-For more information, you can see the [Port Fowarding page](../howtos/other/port_forwarding.md).
+You can specify only one port number.
+In that case, Epinio will open the port of both `local` and `remote` targets.
+
+For more information, see the
+[port fowarding](../howtos/other/port_forwarding.md) page.
 
 :::
 
 ### Scale your application
 
-Another common task with Cloud Native applications, is to add (and remove)
-several instances of your application. This feature, called scaling, can be
-achieved with Epinio with the following command:
+You can add (and remove) instances of your application.
+To use Epinio scaling use the following command:
 
 ```shell
 epinio app update mysimpleapp --instances 3
 ```
 
-After you scaled your application up or down, you can check the status with the command:
+After you scale your application, up or down,
+you can check the status with the command:
 
 ```shell
 epinio app show mysimpleapp
@@ -248,13 +258,13 @@ epinio app show mysimpleapp
 
 ## Remove your application
 
-Once your application is no more needed on your local Kubernetes cluster, and
-you want to free resources, you can uninstall it with Epinio as follow:
+Once your application is no longer needed on your Kubernetes cluster, to
+free resources, you can uninstall it as follows:
 
 ```shell
 # Delete the application
 epinio app delete mysimpleapp
 
-# List all the applications, the application should not be shown
+# List the applications to verify mysimpleap has been deleted
 epinio app list
 ```
