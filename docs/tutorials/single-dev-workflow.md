@@ -19,7 +19,7 @@ An example takes you from a bare Kubernetes deployment to a first application de
 :::note
 
 This tutorial describes a process for an *individual developer, working on a local machine*.
-A future tutorial will discuss team working processes.
+The Epinio team plans a future tutorial to discuss team working processes.
 
 :::
 
@@ -39,15 +39,15 @@ There are common installation scenarios examples in the
 
 :::
 
-In this tutorial, we'll use
+This tutorial uses
 [Rancher Desktop](../installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md)
-as our local Kubernetes cluster.
+as a local Kubernetes cluster.
 
 If you don't have a Kubernetes installation you can install the
 [latest version](https://github.com/rancher-sandbox/rancher-desktop/releases)
 of Rancher Desktop for your operating system to get started.
 
-### Additional tools
+### More tools
 
 You should install two useful tools in your system:
 
@@ -61,8 +61,8 @@ Depending on the local Kubernetes cluster you installed,
 these two binaries might be already installed.
 For example, they're installed as part of Rancher Desktop.
 
-These two binaries are used for [Installation](#installation) only.
-The development workflow uses only the [Epinio CLI](#cli).
+You use these two binaries for [Installation](#installation) only.
+The development workflow only uses the [Epinio CLI](#cli).
 
 ## Installation
 
@@ -90,16 +90,16 @@ You can find the password needed for the [login](#login) at the end of the insta
 
 :::
 
-### CLI
+### Command line interface {#cli}
 
 To use a CLI with your Epinio installation, download the [Epinio CLI
 binary](https://github.com/epinio/epinio/releases/latest). The binary is
-available for Linux, Windows and macOS.
+available for Linux, Windows, and macOS.
 
 ### Login
 
 The first task to perform after Epinio installation, is to
-[login](../references/commands/cli/epinio_login.md) with the binary you
+[log in](../references/commands/cli/epinio_login.md) with the binary you
 downloaded:
 
 ```shell
@@ -110,7 +110,7 @@ epinio login -u admin 'https://epinio.127.0.0.1.sslip.io'
 
 :::tip
 
-If your local Kubernetes cluster restarts, you need to login again with the
+If your local Kubernetes cluster restarts, you need to log in again with the
 command `epinio login`. Epinio stays installed and the certificates are still valid.
 
 :::
@@ -140,13 +140,13 @@ You can find more information about this in the
 documentation.
 
 Epinio also creates a new `ingress route`,
-which allows you to access your application when it's deployed.
+which you use access your application when it's deployed.
 
 Epinio handles the whole process,
 which enables you to concentrate on your application
 rather than its deployment details.
 
-As an example, we deploy a simple application:
+As an example, this deploys a simple application:
 
 ```shell
 # Example code: https://github.com/epinio/example-12factor
@@ -176,7 +176,7 @@ Routes:
 ### List the applications deployed
 
 If you're working on many applications, it's useful to see
-their last deployment times and which URLs you use to check them.
+their last deployment times and which URLs you use to access them.
 
 You can get the application's information with the following two commands:
 
@@ -190,7 +190,7 @@ epinio app show mysimpleapp
 
 ### View installation logs
 
-For errors you can check your staging logs.
+For errors, you can check your staging logs.
 
 You can access the installation logs by running the command:
 
@@ -201,7 +201,7 @@ epinio app logs --staging mysimpleapp
 ### View application logs
 
 You can access the application logs.
-You might want to have realtime logs displayed to aid problem solving.
+You might want to have real-time logs displayed to aid problem solving.
 
 Epinio can display the logs either statically or dynamically as follows:
 
@@ -213,7 +213,7 @@ epinio app logs mysimpleapp
 epinio app logs --follow mysimpleapp
 ```
 
-### Create a new port-forward
+### Create a new `port-forward`
 
 As mentioned, Epinio creates a new `ingress route` for your application.
 Epinio binds the route to port `443` by default.
@@ -227,16 +227,16 @@ epinio app port-forward mysimpleapp 8080:8080
 
 :::tip
 
-<!--TODO:I need some help here. One port number? You can only use one app
+<!--TODO:I need some help with this. One port number? You can only use one app
 port-forward command? Is that correct? Or is it referring to epinio app
 port-forward mysimpleapp 8080 where the local port number is selected at
 random?, according to the doc.-->
 
 You can specify only one port number.
-In that case, Epinio will open the port of both `local` and `remote` targets.
+In that case, Epinio opens the port of both `local` and `remote` targets.
 
 For more information, see the
-[port fowarding](../howtos/other/port_forwarding.md) page.
+[port forwarding](../howtos/other/port_forwarding.md) page.
 
 :::
 
@@ -265,6 +265,6 @@ free resources, you can uninstall it as follows:
 # Delete the application
 epinio app delete mysimpleapp
 
-# List the applications to verify mysimpleap has been deleted
+# List the applications to verify mysimpleapp has been deleted
 epinio app list
 ```
