@@ -230,7 +230,7 @@ epinio app port-forward mysimpleapp 8080:8080
 <!--TODO:I need some help with this. One port number? You can only use one app
 port-forward command? Is that correct? Or is it referring to epinio app
 port-forward mysimpleapp 8080 where the local port number is selected at
-random?, according to the doc.-->
+random?, according to the port-forwarding doc.-->
 
 You can specify only one port number.
 In that case, Epinio opens the port of both `local` and `remote` targets.
