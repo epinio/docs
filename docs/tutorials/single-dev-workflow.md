@@ -2,7 +2,7 @@
 sidebar_label: "Epinio journey: Single developer"
 sidebar_position: 3
 title: "The Epinio single developer journey"
-description: How the single developer works with Epinio
+description: How a single developer works with Epinio
 keywords: [epinio, developer, development, kubernetes]
 ---
 
