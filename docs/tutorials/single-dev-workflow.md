@@ -20,7 +20,7 @@ An example takes you from a bare Kubernetes deployment to a first application de
 
 This tutorial describes a process for an
 *individual developer, working on a local machine*.
-The Epinio team plans a future tutorial to discuss team working processes.
+The Epinio team plans a future tutorial discussing team working processes.
 
 :::
 
