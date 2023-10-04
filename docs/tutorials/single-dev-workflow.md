@@ -141,7 +141,7 @@ You can find more information about this in the
 documentation.
 
 Epinio also creates a new `ingress route`,
-which you use access your application when it's deployed.
+which you use to access your application when it's deployed.
 
 Epinio handles the whole process,
 which enables you to concentrate on your application
