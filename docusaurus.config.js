@@ -107,6 +107,10 @@ const config = {
                 label: 'SUSE'
               },
               {
+                href: 'https://epinio.io',
+                label: 'Epinio'
+              },
+              {
                 href: 'https://rancher.com',
                 label: 'Rancher'
               },
