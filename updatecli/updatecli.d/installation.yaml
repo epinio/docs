@@ -93,7 +93,7 @@ targets:
     spec:
       file: docs/installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md
       matchpattern: '\(https://github.com/epinio/helm-charts/releases/tag/epinio-(.*)\)'
-      replacepattern: '\(https://github.com/epinio/helm-charts/releases/tag/epinio={{ source "epinio" }}\)'
+      replacepattern: '\(https://github.com/epinio/helm-charts/releases/tag/epinio-{{ source "epinio" }}\)'
     scmid: default
     sourceid: epinio
 
