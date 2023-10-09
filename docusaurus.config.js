@@ -50,6 +50,12 @@ const config = {
   themeConfig:
     /* @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
+      },
       algolia: {
         appId: 'F9GBZ0DFYI',
         apiKey: 'b8442abfcf47dbbd23aba2434bf5c879',
@@ -103,16 +109,12 @@ const config = {
             position: 'right',
             items: [
               {
-                href: 'https://www.suse.com',
-                label: 'SUSE'
+                href: 'https://rancher.com',
+                label: 'Rancher'
               },
               {
                 href: 'https://epinio.io',
                 label: 'Epinio'
-              },
-              {
-                href: 'https://rancher.com',
-                label: 'Rancher'
               },
               {
                 href: 'https://harvesterhci.io',
