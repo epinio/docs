@@ -232,7 +232,7 @@ You have three options for specifying ports when creating a `port-forward`:
 - `3456:8080` use specific ports
 - `:8080` use a random port as the local port (the same as `<random>:8080`)
 
-In this example, 37677 is the local port.
+In this example, the `epinio` command assigns 37677 as the random local port.
 
 ```console
 $ epinio app port-forward sample :8080
