@@ -226,20 +226,28 @@ ports. For these cases, run the following command, for example:
 epinio app port-forward mysimpleapp 8080:8080
 ```
 
-:::tip
+You have three options for specifying ports when creating a `port-forward`:
 
-<!--TODO:I need some help with this. One port number? You can only use one app
-port-forward command? Is that correct? Or is it referring to epinio app
-port-forward mysimpleapp 8080 where the local port number is selected at
-random?, according to the port-forwarding doc.-->
+- `8080` use the same port number for both local and remote (the same as `8080:8080`)
+- `3456:8080` use specific ports
+- `:8080` use a random port as the local port (the same as `<random>:8080`)
 
-You can specify only one port number.
-In that case, Epinio opens the port of both `local` and `remote` targets.
+In this example, 37677 is the local port.
+
+```console
+$ epinio app port-forward sample :8080
+
+🚢  Executing port forwarding
+Namespace: workspace
+Application: sample
+
+Forwarding from 127.0.0.1:37677 -> 8080
+Forwarding from [::1]:37677 -> 8080
+Handling connection for 37677
+```
 
 For more information, see the
 [port forwarding](../howtos/other/port_forwarding.md) page.
-
-:::
 
 ### Scale your application
 
