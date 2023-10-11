@@ -94,7 +94,7 @@ const config = {
                 href: 'https://rancher-users.slack.com',
               },
               {
-                label: 'Twitter',
+                label: 'X/Twitter',
                 href: 'https://twitter.com/Rancher_Labs/',
               },
               {
