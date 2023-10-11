@@ -1,87 +1,105 @@
 ---
 sidebar_label: "Epinio Journey: Deploy complex applications with a custom builder image"
 sidebar_position: 4
-title: ""
+title: "Deploying a complex application"
+description: A walk-through for a more complex application deployment with Epinio.
+keywords: [Epinio, kubernetes, application development, application deployment, complex application]
 ---
 
-# Deploy Gitea with a custom builder image
+In this tutorial you use [Gitea](https://github.com/go-gitea/gitea)
+to work through a more complex application with Epinio.
 
-While you likely won't use Epinio to build and deploy Gitea, we are using it to show how to build a more complex application with Epinio.
+Gitea is a self-hosted Git service, written in Go and Node.js.
 
-[Gitea](https://github.com/go-gitea/gitea) is a self-hosted Git service. It is written in Go and Node.js.
+At the time of writing the Paketo Go buildpack doesn't support Node.js asset compilation,
+(see [issue #671](https://github.com/paketo-buildpacks/go/issues/671)),
+so you need to create a custom builder.
 
-At the time of writing the Paketo Go buildpack doesn't support Node.js asset compilation (see [issue #671](https://github.com/paketo-buildpacks/go/issues/671)), so we need to create a custom builder.
+The builder checks the needed Go and Node dependencies,
+and executes the `make` command to build both the front end and the back end.
 
-This builder will just check the needed Go and Node dependencies, and execute the `make` command to build both the frontend and the backend.
+The example code used during this tutorial is available in the
+[example-builder-gitea](https://github.com/epinio/example-builder-gitea) repository.
 
-The code used during this guide is available in the [example-builder-gitea](https://github.com/epinio/example-builder-gitea) repository.
-
-```
+```console
 git clone https://github.com/epinio/example-builder-gitea
 git submodule update --init --recursive
 cd example-builder-gitea
 ```
 
+## Basic concepts and prerequisites
 
-## Basic Concepts and prerequisites
+Before starting, it's useful to understand the buildpacks concepts and have a few tools already installed.
 
-Before starting it is useful to know some basic concepts around Buildpacks, and have some tools already installed.
+The buildpack documentation describes:
 
-You can find in the Buildpack documentation what [stacks](https://buildpacks.io/docs/concepts/components/stack/), [builders](https://buildpacks.io/docs/concepts/components/builder/), and [buildpacks](https://buildpacks.io/docs/concepts/components/buildpack/) are. You should also have [`pack`](https://buildpacks.io/docs/tools/pack/) installed, along with `docker` and `skopeo` (to manage OCI artifacts).
+- [stacks](https://buildpacks.io/docs/concepts/components/stack/)
+- [builders](https://buildpacks.io/docs/concepts/components/builder/)
+- [buildpacks](https://buildpacks.io/docs/concepts/components/buildpack/).
 
+You should also have [`pack`](https://buildpacks.io/docs/tools/pack/) installed,
+along with `docker` and `skopeo` (to manage Open Container Initiative (OCI) artifacts).
 
 ## Create the stack
 
-Unfortunately we were not able to reuse the [Paketo Full Stack](https://github.com/paketo-buildpacks/bionic-full-stack) because of a missing dependency in the `run` image. To make it simpler we just [forked](https://github.com/epinio/bionic-full-stack) this stack and added `git` to the run packages (see [408e949](https://github.com/epinio/bionic-full-stack/commit/408e949558a437c99858ac7bb99a8b78e78935e8)).
+It's impossible to reuse the [Paketo Full Stack](https://github.com/paketo-buildpacks/bionic-full-stack)
+because of a missing dependency in the `run` image.
+To make it easy there is a [forked](https://github.com/epinio/bionic-full-stack)
+stack and added `git` to the run packages
+(see [408e949](https://github.com/epinio/bionic-full-stack/commit/408e949558a437c99858ac7bb99a8b78e78935e8)).
 
-> Note:  
-> We had to fork and/or reuse the same stack ID in order to reuse some Paketo buildpacks, that are going to work only with these stacks (see https://github.com/paketo-buildpacks/node-engine/blob/main/buildpack.toml#L29).
+:::note
+
+We had to fork and reuse the same stack ID so that it's possible to reuse certain Paketo buildpacks.
+They would work only with these stacks
+(see [buildpack.toml#L29](https://github.com/paketo-buildpacks/node-engine/blob/main/buildpack.toml#L29)).
+
+:::
 
 ### Build the stack and publish the image
 
 To build the stack:
 
-```
+```console
 ./stacks/bionic-full-stack/scripts/create.sh
 ```
 
-This will create two OCI images in the `stacks/bionic-full-stack/build` folder:
+This creates two Open Container Initiative (OCI) images in the `stacks/bionic-full-stack/build` folder:
 
 - build.oci
 - run.oci
 
+From this folder you can un-tar the OCI artifacts:
 
-From this folder we can untar the OCI artifacts
-
-```
+```console
 cd stacks/bionic-full-stack/build
 mkdir build && tar -xf build.oci -C build
 mkdir run   && tar -xf run.oci   -C run
 ```
 
-use `skopeo` to copy the artifacts into our local Docker registry
+Use `skopeo` to copy the artifacts into our local Docker registry:
 
-```
+```console
 skopeo -v copy oci:build docker-daemon:ghcr.io/enrichman/bionic-full-stack-build:0.1.0
 skopeo -v copy oci:run   docker-daemon:ghcr.io/enrichman/bionic-full-stack-run:0.1.0
 ```
 
-and push them to a public registry
+Push them to a public registry:
 
-```
+```console
 docker push ghcr.io/enrichman/bionic-full-stack-build:0.1.0
 docker push ghcr.io/enrichman/bionic-full-stack-run:0.1.0
 ```
 
-## Create the `make` buildpack
+## Creating the `make` buildpack
 
 To build the Gitea application we created a `make` buildpack.
 
 ### `bin/detect`
 
-During the `detect` phase the `bin/detect` script it will check the needed dependencies. 
+During the `detect` phase of the `bin/detect` script it checks the needed dependencies.
 
-It will check for the existance of the Makefile
+It checks for the existence of the Makefile:
 
 ```bash
 if [[ ! -f Makefile ]]; then
@@ -90,9 +108,9 @@ if [[ ! -f Makefile ]]; then
 fi
 ```
 
-and it will write to the plan.toml file that this buildpack requires Go and Node.js
+It writes to the plan.toml file that this buildpack requires Go and Node.js:
 
-```bash
+```console
 cat >> "${plan_path}" <<EOL
 [[requires]]
 name = "node"
@@ -111,23 +129,22 @@ EOL
 
 ### `bin/build`
 
-During the `build` phase the buildpack will run the proper `make` command to build the application
+During the `build` phase the buildpack runs `make` to build the application:
 
-```bash
+```console
 TAGS="bindata" make build
 ```
 
-setup the app configuration changing the listening port in the `app.ini` file
+Set up the app configuration changing the listening port in the `app.ini` file:
 
-
-```bash
+```console
 cp custom/conf/app.example.ini custom/conf/app.ini
 sed -i "s/;HTTP_PORT = 3000/HTTP_PORT = 8080/" custom/conf/app.ini
 ```
 
-and defining the launch process in the `launch.toml` file
+Define the launch process in the `launch.toml` file:
 
-```bash
+```console
 cat >> "${layers_dir}/launch.toml" <<EOL
 [[processes]]
 type = "web"
@@ -138,9 +155,9 @@ EOL
 
 ## Create and publish the builder
 
-The `builder.toml` file contains the buildpacks references and their execution order/groups.
+The `builder.toml` file has the buildpack references and their execution order/groups.
 
-We are referencing our `make` buildpack locally
+You reference the `make` buildpack locally:
 
 ```toml
 [[buildpacks]]
@@ -149,7 +166,7 @@ version = "0.0.1"
 uri = "../../buildpacks/make"
 ```
 
-and we are also using the Paketo `node-engine` and `go-dist` buildpacks
+Also, you use the Paketo `node-engine` and `go-dist` Buildpacks:
 
 ```toml
 [[buildpacks]]
@@ -161,59 +178,57 @@ uri = "docker://gcr.io/paketo-buildpacks/go-dist:2.3.0"
 version = "2.3.0"
 ```
 
-These buildpacks will provide the Node.js and Go dependencies
+These buildpacks contain the Node.js and Go dependencies:
 
-- https://github.com/paketo-buildpacks/node-engine
-- https://github.com/paketo-buildpacks/go-dist
+- [node-engine buildpack](https://github.com/paketo-buildpacks/node-engine)
+- [go-dist buildpack](https://github.com/paketo-buildpacks/go-dist)
 
+Finally, create the builder image with `pack`:
 
-We can finally create the builder image with `pack`
-
-```
+```console
 pack builder create ghcr.io/enrichman/gitea-builder:0.1.0 --config builders/gitea-builder/builder.toml
 ```
 
-and push it to a public registry
+Push it to a public registry:
 
-```
+```console
 docker push ghcr.io/enrichman/gitea-builder:0.1.0
 ```
 
 ## Deploy Gitea
 
-To deploy Gitea we can download the code from the reposotory, or refer directly to it.
+To deploy Gitea you can download the code from the repository, or directly refer to it.
 
-We would like to deploy a stable release, so let's find the commit of the `v1.19.0` with a couple of curls:
+You need to deploy a stable release, so find the commit of the `v1.19.0` with a couple of curls:
 
-```bash
+```console
 export GITEA_VERSION=v1.19.0
 export GITEA_TAG_OBJECT_URL=$(curl -s https://api.github.com/repos/go-gitea/gitea/git/refs/tags/$GITEA_VERSION | jq -r '.object.url')
 export GITEA_TAG_COMMIT_SHA=$(curl -s $GITEA_TAG_OBJECT_URL | jq -r '.object.sha')
 ```
 
-We can now deply Gitea with a simple `epinio push`:
+You can now deploy Gitea with a simple `epinio push`:
 
-
-```
+```console
 epinio push --name gitea \
     --git https://github.com/go-gitea/gitea,$GITEA_TAG_COMMIT_SHA \
     --builder-image ghcr.io/enrichman/gitea-builder:0.1.0
 ```
 
-and then it should be available on your cluster (i.e. https://gitea.<SYSTEM_DOMAIN>)!
+It should be available on your cluster (that is, https://gitea.<SYSTEM_DOMAIN>).
 
 ### Create and bind the database
 
-We can go a step further, creating and binding the `mysql` database to our application:
+You can go a step further, creating and binding the `mysql` database to your application:
 
-```
+```console
 epinio service create mysql-dev mydb
 ```
 
-We can check the status of the service
+Check the status of the service:
 
-```
--> % epinio service show mydb            
+```console
+-> % epinio service show mydb
 
 🚢  Showing Service...
 
@@ -231,14 +246,13 @@ We can check the status of the service
 |                 | xcca9aa0f19a036fb6389474a7be0-mysql.workspace.svc.cluster.local:3306           |
 ```
 
-We can use the internal route `xcca9aa0f19a036fb6389474a7be0-mysql.workspace.svc.cluster.local:3306` to reach our DB.
+You can use the internal route `xcca9aa0f19a036fb6389474a7be0-mysql.workspace.svc.cluster.local:3306` to reach your DB.
 
-Let's bind it to the Gitea application with `epinio service bind mydb gitea`.
+Bind it to the Gitea application with `epinio service bind mydb gitea`.
 
-And we can now check the username and passwords in the configuration:
+Now you check the username and passwords in the configuration:
 
-
-```
+```console
 -> % epinio configuration list
 
 🚢  Listing configurations
@@ -251,23 +265,26 @@ Namespace: workspace
 | xcca9aa0f19a036fb6389474a7be0-mysql | 2023-04-04 15:56:22 +0200 CEST | service | mydb   | gitea (migrate to new access   |
 |                                     |                                |         |        | paths)                         |
 ```
-```
--> % epinio configuration show xcca9aa0f19a036fb6389474a7be0-mysql 
+
+And:
+
+```console
+-> % epinio configuration show xcca9aa0f19a036fb6389474a7be0-mysql
 
 🚢  Configuration Details
 Name: xcca9aa0f19a036fb6389474a7be0-mysql
 Namespace: workspace
 
-🚢  
+🚢
 Created: 2023-04-04 15:56:22 +0200 CEST
-User: 
+User:
 Type: service
 Origin: mydb
 Used-By: gitea
-Siblings: 
+Siblings:
 
 ⚠️  Attention: Migrate bound apps to new access paths
-✔️  
+✔️
 |      PARAMETER      |   VALUE    |               ACCESS PATH                |
 |---------------------|------------|------------------------------------------|
 | mysql-password      | 6oUDWVHVcv | /configurations/mydb/mysql-password      |
@@ -276,5 +293,7 @@ Siblings:
 ⚠️  Beware, the shown access paths are only available in the application's container
 ```
 
-We can use these credential to access the database.
-Access the first time Gitea configuration from your browser and fill the database fields with the host, username and password. The database name is `my_database`, that is the default value for the Bitnami charts that Epinio is using for its sample services.
+You can use these credential to access the database.
+Access the first time Gitea configuration from your browser and fill the database fields with the host, username, and password.
+The database name is `my_database`,
+it's the default value for Bitnami charts that Epinio uses for its example services.
