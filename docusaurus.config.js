@@ -48,8 +48,14 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    /* @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
+      },
       algolia: {
         appId: 'F9GBZ0DFYI',
         apiKey: 'b8442abfcf47dbbd23aba2434bf5c879',
@@ -65,82 +71,74 @@ const config = {
         items: [
           {
             type: 'docsVersionDropdown',
-            position: 'right',
+            position: 'left',
             dropdownItemsAfter: [{to: '/versions', label: 'All versions'}],
             dropdownActiveClassDisabled: true,
           },
           {
-            type: 'doc',
-            docId: 'intro',
-            position: 'right',
-            label: 'Docs',
+            type: 'search',
+            position: 'left',
           },
-          //{to: '/blog', label: 'Blog', position: 'right'},
           {
             href: 'https://github.com/epinio/epinio',
             label: 'GitHub',
             position: 'right',
           },
           {
-            href: 'https://www.rancher.com',
-            label: 'Rancher',
+            type: 'dropdown',
+            label: 'Community',
             position: 'right',
-          },
-          {
-            href: 'https://www.suse.com',
-            label: 'SUSE',
-            position: 'right',
-          },
-        ],
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Docs',
             items: [
-              {
-                label: 'Introduction',
-                to: '/',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/epinio',
-              },
               {
                 label: 'Slack',
                 href: 'https://rancher-users.slack.com',
               },
               {
-                label: 'Twitter',
+                label: 'X/Twitter',
                 href: 'https://twitter.com/Rancher_Labs/',
+              },
+              {
+                label: 'Stack Overflow',
+                href: 'https://stackoverflow.com/questions/tagged/epinio',
               },
             ],
           },
           {
-            title: 'More',
+            type: 'dropdown',
+            label: 'More from SUSE',
+            position: 'right',
             items: [
               {
-                label: 'GitHub',
-                href: 'https://github.com/epinio/epinio',
-              },
-              {
-                label: 'Rancher',
                 href: 'https://rancher.com',
+                label: 'Rancher'
               },
               {
-                label: 'SUSE',
-                href: 'https://suse.com',
+                href: 'https://epinio.io',
+                label: 'Epinio'
               },
-            ],
+              {
+                href: 'https://harvesterhci.io',
+                label: 'Harvester'
+              },
+              {
+                href: 'https://kubewarden.io',
+                label: 'Kubewarden'
+              },
+              {
+                href: 'https://opni.io',
+                label: 'Opni'
+              },
+              {
+                href: 'https://opensource.suse.com',
+                label: 'More projects'
+              }
+            ]
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} SUSE Rancher. All Rights Reserved.`,
+      },
+      footer: {
+        style: 'dark',
+        copyright: `Copyright © ${new Date().getFullYear()} SUSE. All Rights Reserved.`,
       },
       prism: {
         theme: lightCodeTheme,
