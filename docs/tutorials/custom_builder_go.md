@@ -77,18 +77,18 @@ mkdir build && tar -xf build.oci -C build
 mkdir run   && tar -xf run.oci   -C run
 ```
 
-Use `skopeo` to copy the artifacts into our local Docker registry:
+Use `skopeo` to copy the artifacts into the local Docker registry:
 
 ```console
-skopeo -v copy oci:build docker-daemon:ghcr.io/enrichman/bionic-full-stack-build:0.1.0
-skopeo -v copy oci:run   docker-daemon:ghcr.io/enrichman/bionic-full-stack-run:0.1.0
+skopeo -v copy oci:build docker-daemon:ghcr.io/<username>/bionic-full-stack-build:0.1.0
+skopeo -v copy oci:run   docker-daemon:ghcr.io/<username>/bionic-full-stack-run:0.1.0
 ```
 
 Push them to a public registry:
 
 ```console
-docker push ghcr.io/enrichman/bionic-full-stack-build:0.1.0
-docker push ghcr.io/enrichman/bionic-full-stack-run:0.1.0
+docker push ghcr.io/<username>/bionic-full-stack-build:0.1.0
+docker push ghcr.io/<username>/bionic-full-stack-run:0.1.0
 ```
 
 ## Creating the `make` buildpack
@@ -108,7 +108,7 @@ if [[ ! -f Makefile ]]; then
 fi
 ```
 
-It writes to the plan.toml file that this buildpack requires Go and Node.js:
+It writes to the `plan.toml` file that this buildpack requires Go and Node.js:
 
 ```console
 cat >> "${plan_path}" <<EOL
@@ -186,13 +186,13 @@ These buildpacks contain the Node.js and Go dependencies:
 Finally, create the builder image with `pack`:
 
 ```console
-pack builder create ghcr.io/enrichman/gitea-builder:0.1.0 --config builders/gitea-builder/builder.toml
+pack builder create ghcr.io/<username>/gitea-builder:0.1.0 --config builders/gitea-builder/builder.toml
 ```
 
 Push it to a public registry:
 
 ```console
-docker push ghcr.io/enrichman/gitea-builder:0.1.0
+docker push ghcr.io/<username>/gitea-builder:0.1.0
 ```
 
 ## Deploy Gitea
@@ -212,7 +212,7 @@ You can now deploy Gitea with a simple `epinio push`:
 ```console
 epinio push --name gitea \
     --git https://github.com/go-gitea/gitea,$GITEA_TAG_COMMIT_SHA \
-    --builder-image ghcr.io/enrichman/gitea-builder:0.1.0
+    --builder-image ghcr.io/<username>/gitea-builder:0.1.0
 ```
 
 It should be available on your cluster (that is, https://gitea.<SYSTEM_DOMAIN>).
