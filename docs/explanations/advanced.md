@@ -1,6 +1,8 @@
 ---
 sidebar_label: "Advanced topics"
 title: "Advanced topics"
+description: Advanced topics in Epinio application development environments
+keywords: [epinio, kubernetes, advanced topics]
 ---
 
 ## Prerequisites
@@ -17,7 +19,7 @@ Certain of the applications deployed with Epinio might also need to be reachable
 
 One way to expose services externally is by creating [Ingress resources](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 Ingress resources on their own, have no effect.
-They're just descriptions of what the needed routing.
+They're descriptions of the needed routing.
 An Ingress controller handles the implementation of this routing.
 
 :::note
@@ -39,7 +41,7 @@ Epinio creates an Ingress resource for the Epinio API server and each applicatio
 Cert-manager is a Kubernetes controller that generates and renews certificates.
 You need these certificates  to securely serve the endpoints over TLS (for example, the Epinio API server).
 
-Epinio supports options when it comes to certificate issuers (Let's Encrypt, private your own CA, self signed certs).
+Epinio supports options when it comes to certificate issuers (Let's Encrypt, your own private CA, self signed certs).
 Cert-manager simplifies the handling of certificate issuers within Epinio.
 
 You can read more about certificate issuers at the [certificate issuers documentation](../howtos/other/certificate_issuers.md)
@@ -58,6 +60,7 @@ The server starts with the `epinio server` command within a Kubernetes Pod, conf
 Epinio CLI and web UI functionality are implemented using the endpoints provided by the Epinio API server component.
 For example, when the user asks Epinio to "push" an application,
 the CLI contacts the "Upload", "Stage" and "Deploy" endpoints of the Epinio API to:
+
 - upload the application code
 - create a container image for the application using this code
 - run the application on the cluster.
@@ -118,11 +121,12 @@ Epinio comes with two consumers of this registry:
 1. Staging job - pushing the images
 2. Kubernetes - pulling the images when creating a deployment for the application
 
-<!--TODO:Did I reword this correctly. I think it needs some better explanation. Who can help here?-->
 All consumers should communicate with the registry using TLS to encrypt communication.
-Epinio controls the staging job and it ensures that iit trusts the CA used to sign the registry certificate.
-Achieving the same for Kubernetes requires configuration that is impossible in the cluster,
+Epinio controls the staging job and it ensures that it trusts the CA used to sign the registry certificate.
+Achieving the same for Kubernetes requires configuration that's impossible from within the cluster,
 therefore Epinio has no way to ensure that it trusts the CA.
+Epinio runs in a pod of the cluster and can't have permission to change cluster settings.
+Changes are only possible, from outside, by a cluster administrator.
 
 There are 3 options:
 
@@ -130,7 +134,6 @@ There are 3 options:
 1. Use a well-known trusted CA, so there's no configuration needed
 1. Don't encrypt the communication at all
 
-<!--TODO:Doesn't sound that great to me. What's happening moving forward, is the current situation accurately described.-->
 Currently Epinio doesn't support the first 2 options.
 If `containerregistry.enabled` is `true` during installation (default),
 Epinio will make Kubernetes pull the images unencrypted (option #3 above).
@@ -146,13 +149,13 @@ Communication between the staging job and container registry is TLS encrypted ev
 
 ## Other Advanced Topics
 
-### Git Pushing
+### Git pushing
 
 The quick way of pushing an application, explained in
-[Quickstart: Push an application](../tutorials/quickstart.md#push-an-application),
+[Quickstart: push an application](../tutorials/quickstart.md#push-an-application),
 uses a local directory containing a checkout of the application's sources.
 
-Internally this is a [quite complex](detailed-push-process.md) procedure.
+Internally this is a [complex](detailed-push-process.md) procedure.
 The client creates and uploads an archive (tarball or zip) from the sources to the Epinio server,
 copying into Epinio's internal (or external) S3 storage.
 It's then copied from that storage to a `PersistentVolumeClaim` to use in the job for staging.
