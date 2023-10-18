@@ -72,5 +72,3 @@ config.yaml: |-
 ```
 
 The groups will be evaluated in order. In the previous example if the user is a member of both `Org1:Admins` and `Org1:TeamBlue` then that user will get the `admin` role.
-
-Please note that the role is bound when the user is created. Any modification of the groups will not propagate to already existing users.
