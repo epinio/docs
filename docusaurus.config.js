@@ -117,6 +117,10 @@ const config = {
                 label: 'Epinio'
               },
               {
+                href: 'https://elemental.docs.rancher.com',
+                label: 'Elemental'
+              },
+              {
                 href: 'https://harvesterhci.io',
                 label: 'Harvester'
               },
