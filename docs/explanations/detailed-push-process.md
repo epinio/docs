@@ -1,54 +1,65 @@
 ---
-sidebar_label: "Detailed Push Process"
-title: ""
+sidebar_label: "Epinio push process"
+title: "The Epinio push process in detail"
+description: The Epinio push process in detail
+keywords: [epinio, kubernetes, push process]
 ---
 
-# Epinio Push in Detail
+Epinio makes use of well supported, well known projects.
+There is further discussion about this in the  ([project principles](principles.md#guidelines-soft-principles)) document.
+While doing so, Epinio makes sure those components are correctly deployed and work together seamlessly.
+This detailed description of the Epinio push process lets you understand the components and their relationships.
 
-Epinio strives to make use of well supported, well known, and loved projects instead of re-inventing the wheel ([link](principles.md#guidelines-soft-principles)).
-But while doing so, it makes sure those components are deployed correctly and work together seamlessly. Let's go through the `epinio push` process in detail,
-so you can understand what each component does. You may also want to read the description of every component outside the push process here: [Advanced Topics](advanced.md).
+There is a diagram of the Epinio push process later on this page.
+You may want to refer to it while reading the text to aid understanding.
+The numbers on the paths in the image indicate process ordering.
 
-You can see an image that visualises the process later in this page. Refer to it while reading the text to help you understand the process more.
-The numbers on the various arrows on the image indicate the order of the various steps.
+## Epinio push (step 1)
 
-## 1. Epinio Push
+Epinio exposes an API server, running inside the Kubernetes cluster, for all clients, including the CLI, to communicate with Epinio.
 
-Epinio exposes an API server running inside the kubernetes cluster for all clients including cli to talk to it. When you run the `epinio push` command, the first thing the cli is going to do, is to create an archive with the application's code and hit the relevant api endpoint to upload it to the API server (1a). There is a Traefik ingress which sits in front of the Epinio API server which routes your request to the API server (1b).
+Running the `epinio push` CLI command, creates an archive containing application code.
+Then the archive package is uploaded to the API server (step 1a).
+An Kubernetes Ingress controller (for example, Traefik) routes your request to the API server (1b).
 
-When the request lands on the server, the user is authenticated using BasicAuth, session cookie or (in the case of websockets) a token.
+Request authentication at the API server uses
+BasicAuth, session cookie or, if using WebSockets, a token.
 
-## 2. Copying the code to S3
+## Copying the code to S3 (step 2)
 
-The Epinio helm-chart can install either [Minio](https://min.io/) (default) or [s3gw](https://s3gw.io/) on your cluster (unless you [configured external S3](../howtos/customization/setup_external_s3.md)). Both Minio and s3gw are S3-compatible storage solutions which Epinio uses to store the application's source code. The chosen S3 storage solution will later be used by the staging job.
+The Epinio helm-chart can install either [Minio](https://min.io/) (the default) or [s3gw](https://s3gw.io/) on your cluster.
+You can also [configure external S3](../howtos/customization/setup_external_s3.md). Both Minio and s3gw are S3-compatible storage solutions which Epinio uses to store application source code.
+The chosen S3 storage solution is later used by the staging job.
 
-After successful authentication (previous step), the API server uploads the tarball to the S3 endpoint and responds with a blobUID that can be later used to reference the uploaded tarball.
+After successful authentication (step 1),
+the API server uploads the tarball to the S3 endpoint and
+responds with a `blobUID` that can be later used to reference the uploaded tarball.
 
-## 3. Staging the App
+## Staging the app (step 3)
 
 When the upload request is complete, the cli will send a request to the `stage` endpoint of the Epinio API server. This will instruct the server to start the staging of the uploaded code.
 
-## 4. Trigger the Job
+## Trigger the job (step 4)
 
 When the Epinio API server receives the stage request, it will create a [`Job`](https://kubernetes.io/docs/concepts/workloads/controllers/job/) that will run the staging scripts using the version of the code referenced in the request. This job has 3 steps and each one is a script stored in a ConfigMap called `epinio-stage-scripts` in the namespace where epinio is installed.
 Their role is described in the following 3 sections.
 
-## 5. Fetch the code
+## Fetch the code (step 5)
 
 The first step of staging downloads the code from the S3 storage. This makes the code available to the following steps.
 
-## 6. Unpack the sources
+## Unpack the sources (step 6)
 
 The second step of staging detects the type of the archive and unpacks it.
 Supported formats are: **zip, tar, tgz, tbz, txz**
 
-## 7. Stage
+## Stage (step 7)
 
 The third step of staging uses the [paketo buildpacks](https://paketo.io/) to create a container image for your application.
 The result of a successful staging process is a new image pushed to the Registry component of Epinio.
 Read more about the registry here: [Epinio Registry](../explanations/advanced.md#container-registry).
 
-## 8. Run
+## Run (step 8)
 
 To run a workload on Kubernetes having a container image is not enough. You need at least a Pod running with at least one container running that image.
 
@@ -62,7 +73,7 @@ Because it's a helm release, the deployed applications can also be listed using 
 
 (assuming the applications are deployed in the default namespace "workspace").
 
-## 9. Pull Image
+## Pull image (step 9)
 
 The Deployment uses the image that was pushed as part of the staging step (7). Now, the kubelet will pull the image from the registry for the deployment resource to use it (9).
 
