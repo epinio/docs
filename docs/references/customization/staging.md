@@ -7,7 +7,7 @@ sidebar_label: "Buildpacks"
 
 :::note
 This customization interacts with the
-[customization of staging scripts](../staging-scripts.md).
+[customization of staging scripts](staging-scripts.md).
 :::
 
 By default Epinio's staging process uses the

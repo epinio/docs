@@ -9,7 +9,7 @@ sidebar_label: "Staging Scripts"
 
 :::note
 This customization interacts with the
-[customization of buildpacks](../staging.md).
+[customization of buildpacks](staging.md).
 :::
 
 Staging scripts are what Epinio uses to interface with the
@@ -24,7 +24,7 @@ By default Epinio installs three definitions.
   2. One to support Jammy-based  builder images (`paketo-buildpacks/builder-jammy-*:*`).
   3. And one to serve as fallback for any images not captured by the other two.
 
-It is this last definition which is configured when [customizing buildpacks](../staging.md)
+It is this last definition which is configured when [customizing buildpacks](staging.md)
 with a different image.
 
 By default this fallback is configured for Jammy-based images in general, and the
