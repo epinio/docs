@@ -40,21 +40,32 @@ This ConfigMap is expected to have the following keys:
 
 |Key		|Content   |
 |---		|---	   |
+|`builder`	|Glob-pattern to match the image references supported by this spec.	|
+|`userID`	|User ID to run the `build` script with.				|
+|`groupID`	|Group ID to run the `build` script with.				|
+|||
+|`base`		|Optional redirect to the actual ConfigMap with the scripts.		|
+|||
 |`build`	|Shell script to compile the unpacked sources into an image.		|
 |		|Executed using the chosen builder image      	      			|
-|`builder`	|Glob-pattern to match the image references supported by this spec.	|
 |`downloadImage`|Container image to run the `download` script with.			|
 |`download`	|Shell script to retrieve the app sources from the Epinio's S3 storage.	|
 |		|Executed using the `downloadImage`.      	      			|
-|`groupID`	|Group ID to run the `build` script with.				|
 |`unpackImage`	|Container image to run the `unpack` script with.			|
 |`unpack`	|Shell script to unpack the app sources into a directory tree.		|
 |		|Executed using the `unpackImage`.      	      			|
-|`userID`	|User ID to run the `build` script with.				|
+
+When `base` is specified it refers to a ConfigMap which contains all the keys listed after `base`.
+
+If `base` and any of the keys listed after it are specified in the same resource then `base` has
+priority.
+
+This mechanism allows the sharing of script and image data between specifications differing only in
+the user/group required to run the `build` script.
 
 :::info
 User and group IDs, and general support for multiple staging scripts, was added because
-the Bionic and Jammy-based builders use different user ids for their `cnb` user.
+the Bionic and Jammy-based builders use different numeric ids for their `cnb` user.
 :::
 
 ### Staging script API, Download
@@ -74,10 +85,11 @@ with four environment variables:
 The `unpack` script is executed using the `unpackImage` and further configured
 with a single environment variable:
 
-|Name	  	|Content						|
-|---	  	|---							|
-|`BLOBID`	|blob id / file name of the app source archive to unpack|
-
+|Name	  	|Content							|
+|---	  	|---								|
+|`BLOBID`	|blob id / file name of the app source archive to unpack	|
+|`USERID`	|Numeric id of the `cnb` user used to run the `build` script	|
+|`GROUPID`	|Numeric id of the user group used to run the `build` script	|
 
 ### Staging script API, Build
 
@@ -88,6 +100,8 @@ a two environment variables:
 |---	  	|---						|
 |`PREIMAGE`	|url to the result image from a previous push	|
 |`APPIMAGE`	|url to save the new application image under	|
+|`USERID`	|Numeric id of the `cnb` user used to run the `build` script	|
+|`GROUPID`	|Numeric id of the user group used to run the `build` script	|
 
 When present the `PREIMAGE` is used by `/cnb/lifecycle/creator` as a cache for layers,
 speeding compilation up.
