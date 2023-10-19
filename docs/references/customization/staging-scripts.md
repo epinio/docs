@@ -108,12 +108,13 @@ speeding compilation up.
 
 ## Search
 
-Epinio determines the set of staging scripts to use by glob-matching the
-chosen builder image (name __and__ tag) against the `builder` key of all
-found specifications and selecting the first matching.
+Epinio determines the set of staging scripts to use by glob-matching the chosen builder image (name
+__and__ tag) against the `builder` key of all found specifications and selecting the first matching.
 
-The exception to the above are specifications with `builder == "*"` or `builder == ""`.
-These specifications match everything and the last found is used as the fallback
-if and only if no other specification matched.
+To ensure a deterministic search order the specifications are sorted lexicographically by name.
+
+The exception to the above are specifications with `builder == "*"` or `builder == ""`.  These
+specifications match everything and the last found is used as the fallback if and only if no other
+specification matched.
 
 If no specification matched, and no fallback was found, staging fails.
