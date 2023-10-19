@@ -125,10 +125,6 @@ const config = {
                 label: 'Harvester'
               },
               {
-                href: 'https://kubewarden.io',
-                label: 'Kubewarden'
-              },
-              {
                 href: 'https://opni.io',
                 label: 'Opni'
               },
