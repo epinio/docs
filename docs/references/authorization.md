@@ -193,9 +193,9 @@ These actions will enable operations on the Gitconfig commands and resources.
 
 This action will enable operations on the Export Registries commands and resources. Only read operations are available.
 
-| Action ID           | Description 
-|---------------------|-------------
-| `export_registries` | Read permissions
+| Action ID                 | Description 
+|---------------------------|-------------
+| `export_registries_read`  | Read permissions
 
 
 ## Assign namespaces
