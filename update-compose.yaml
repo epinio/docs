@@ -7,7 +7,7 @@
 
 policies:
   - name: Docusaurus versioning policy
-    policy: ghcr.io/olblak/policies/rancher/docusaurus/epinio:0.0.5
+    policy: ghcr.io/olblak/policies/rancher/docusaurus/epinio:0.0.5@sha256:66b593809fa9f5c365e60c5397b057d09d48971067528020907e66c97a87ef0a
 
   - name: Epinio doc specific policies
     config: 
