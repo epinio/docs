@@ -47,7 +47,7 @@ This ConfigMap is expected to have the following keys:
 |||
 |`base`		|Optional redirect to the actual ConfigMap with the scripts.		|
 |||
-|`build`	|Shell script to compile the unpacked sources into an image.</br>Executed using the chosen builder image	|
+|`build`	|Shell script to compile the unpacked sources into an image.<br/>Executed using the chosen builder image	|
 |`downloadImage`|Container image to run the `download` script with.			|
 |`download`	|Shell script to retrieve the app sources from the Epinio's S3 storage.<br/>Executed using the `downloadImage`	|
 |`unpackImage`	|Container image to run the `unpack` script with.			|
