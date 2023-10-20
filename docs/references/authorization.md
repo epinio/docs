@@ -5,9 +5,10 @@ title: ""
 
 # Authorization
 
-Since version **0.8.0** Epinio is shipped with an authorization layer recognizing two basic roles: **admin** and **user**.
-A user with the admin role will have access to every resource, while a standard user will have access only to the resources created on its namespaces.
-When a user creates a namespace, it will have automatically permission for it.
+Since version **1.11.0** Epinio is shipped with a new authorization layer with two default roles: **admin** and **user**.
+Roles can be "namescoped", and they can be also customized with different permissions.
+
+A user with the admin role will have the permission to perform any operation. A standard user will have only read permissions, but it also has te permissions to create namespaces. When a user creates a namespace, it will have automatically the admin permission for it.
 
 By default, after the installation two users are available: `admin` and `epinio`, both with the password `password`. The operator can control the creation of those users through the `api.users` key in [values.yaml](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml).
 In a production setup, the default `api.users` value needs to be overridden.
@@ -40,10 +41,10 @@ wss: wss://epinio.mydomain.com
 
 ## List the Epinio users
 
-An Epinio user is a BasicAuth Kubernetes Secret, with two reserved labels:
+An Epinio user is a BasicAuth Kubernetes Secret, with the `epinio.io/api-user-credentials` reserved label.
 
-- `epinio.io/api-user-credentials`
-- `epinio.io/role` used to get the assigned role
+The `epinio.io/roles` annotation is used instead to get the list of the assigned roles. It's a comma separated string with the id of the roles.
+If a role is namescoped the namespace where it applies appears after the `::` delimiter (i.e.: `admin::workspace`).
 
 ```yaml
 apiVersion: v1
@@ -52,7 +53,8 @@ type: BasicAuth
 metadata:
   labels:
     epinio.io/api-user-credentials: "true"
-    epinio.io/role: "admin"
+  annotations:
+    epinio.io/roles: "user,admin::workspace"
   name: my-epinio-user
   namespace: epinio
 stringData:
@@ -71,12 +73,6 @@ default-epinio-user   BasicAuth   3      5m10s
 admin-epinio-user     BasicAuth   2      5m10s
 ```
 
-```bash
-# list all the admins
-kubectl get secrets -n epinio -l 'epinio.io/api-user-credentials,epinio.io/role=admin'
-NAME                TYPE        DATA   AGE
-admin-epinio-user   BasicAuth   2      5m24s
-```
 
 ## Add a new user
 
@@ -90,7 +86,7 @@ type: BasicAuth
 metadata:
   labels:
     epinio.io/api-user-credentials: "true"
-    epinio.io/role: "user"
+    epinio.io/roles: "admin"
   name: my-epinio-user
   namespace: epinio
 stringData:
@@ -98,6 +94,109 @@ stringData:
   password: "$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS"
 EOF
 ```
+
+## Roles
+
+An Epinio role is a Kubernetes ConfigMap, with the `epinio.io/role` reserved label.
+
+The following yaml shows you the default `user` role:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    epinio.io/role: "true"
+  name: "epinio-user-role"
+  namespace: {{ $.Release.Namespace }}
+data:
+  id: user
+  name: "Epinio User Role"
+  default: "true"
+  actions: |
+    namespace
+    app_read
+    configuration_read
+    service_read
+    gitconfig_read
+```
+
+### Fields
+
+| Key     | Description 
+|---------|-------------
+| id      | The ID of the Role
+| name    | A friendly name for the Role
+| default | (optional) if set to _true_ the role will be the one selected as default if no other roles were assigned to the user
+| actions | The actions the roles can perform
+
+## Actions
+
+Each Role can perform some actions defined in the __actions__ field (newline separated). These actions are hardcoded in Epinio, and some of them depends on other actions. Enabling an action with a dependency will enable also the dependency automatically.
+
+### Namespace
+
+These actions will enable operations on the Namespace commands and resources.
+
+| Action ID         | Description 
+|-------------------|-------------
+| `namespace_read`    | Read permissions (list, show)
+| `namespace_write`   | Write permissions (create, delete)<br/>Depends on: `namespace_read`
+| `namespace`         | All the above<br/>Depends on: `namespace_read`, `namespace_write`
+
+### App
+
+These actions will enable operations on the App commands and resources. They will also enable commands related to the AppChart (`epinio app chart`) and the application environment variables.
+
+| Action ID       | Description 
+|-----------------|-------------
+| `app_read`        | Read permissions (app list and show, env list and show)
+| `app_logs`        | Read application logs
+| `app_write`       | Write permissions (app create, delete, push, export, stage, env set and unset)<br/>Depends on: `app_read`, `app_logs`
+| `app_exec`        | Perform an exec into a running application
+| `app_portforward` | Open a tunnel with the `port-forward` command
+| `app`             | All the above<br/>Depends on: `app_read`, `app_logs`, `app_write`, `app_exec`, `app_portforward`
+
+### Configuration
+
+These actions will enable operations on the Configuration commands and resources. Be aware that to bind a configuration you will still need the `app_write` permission.
+
+
+| Action ID           | Description 
+|----------------------|-------------
+| `configuration_read`  | Read permissions (list, show)
+| `configuration_write` | Write permissions (create, delete)<br/>Depends on: `configuration_read`
+| `configuration`       | All the above<br/>Depends on: `configuration_read`, `configuration_write`
+
+### Service
+
+These actions will enable operations on the Service commands and resources. 
+
+| Action ID             | Description 
+|-----------------------|-------------
+| `service_read`        | Read permissions (list, show)
+| `service_write`       | Write permissions (create, delete, bind, unbind)<br/>Depends on: `service_read`
+| `service_portforward` | Open a tunnel with the `port-forward` command
+| `service`             | All the above<br/>Depends on: `service_read`, `service_write`, `service_portforward`
+
+### Gitconfig
+
+These actions will enable operations on the Gitconfig commands and resources.
+
+| Action ID         | Description 
+|-------------------|-------------
+| `gitconfig_read`    | Read permissions (list, show)
+| `gitconfig_write`   | Write permissions (create, delete)<br/>Depends on: `gitconfig_read`
+| `gitconfig`         | All the above<br/>Depends on: `gitconfig_read`, `gitconfig_write`
+
+### Export Registries
+
+This action will enable operations on the Export Registries commands and resources. Only read operations are available.
+
+| Action ID           | Description 
+|---------------------|-------------
+| `export_registries` | Read permissions
+
 
 ## Assign namespaces
 
@@ -112,7 +211,7 @@ type: BasicAuth
 metadata:
   labels:
     epinio.io/api-user-credentials: "true"
-    epinio.io/role: "user"
+    epinio.io/roles: "user,admin::foobar"
   name: my-epinio-user
   namespace: epinio
 stringData:
@@ -123,3 +222,5 @@ stringData:
     workspace2
 EOF
 ```
+
+Be aware that if a user has a namescoped role Epinio assumes that he will have permission to perform operations on these namespaces, so the autorized user's namespace list is enriched with them. In the previous example the user's namespaces are `workspace`, `workspace2` and `foobar`.
