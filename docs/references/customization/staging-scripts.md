@@ -1,6 +1,8 @@
 ---
-title: ""
-sidebar_label: "Staging Scripts"
+title: "Customization point: Staging scripts"
+sidebar_label: "Staging scripts"
+description: Using staging scripts with Epinio.
+keywords: [epinio, application development, staging scripts, kubernetes]
 ---
 
 # Customization point: Staging Scripts
@@ -12,8 +14,7 @@ This customization interacts with the
 [customization of buildpacks](staging.md).
 :::
 
-Staging scripts are what Epinio uses to interface with the
-Paketo [Cloud Native Buildpacks](https://buildpacks.io/).
+Epinio uses staging scripts to interact with Paketo [Cloud Native Buildpacks](https://buildpacks.io/).
 
 Epinio automatically selects the set of staging scripts based on the name of the chosen builder
 image, and the images supported by a specific definition.
@@ -21,8 +22,8 @@ image, and the images supported by a specific definition.
 By default Epinio installs three definitions.
 
   1. One to support Bionic-based builder images (`paketo-buildpacks/builder:*`).
-  2. One to support Jammy-based  builder images (`paketo-buildpacks/builder-jammy-*:*`).
-  3. And one to serve as fallback for any images not captured by the other two.
+  1. One to support Jammy-based  builder images (`paketo-buildpacks/builder-jammy-*:*`).
+  1. One to serve as fallback for any images not captured by the other two.
 
 It is this last definition which is configured when [customizing buildpacks](staging.md)
 with a different image.
@@ -104,7 +105,7 @@ a two environment variables:
 |`GROUPID`	|Numeric id of the user group used to run the `build` script	|
 
 When present the `PREIMAGE` is used by `/cnb/lifecycle/creator` as a cache for layers,
-speeding compilation up.
+speeding up compilation.
 
 ## Search
 
