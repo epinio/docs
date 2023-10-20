@@ -78,11 +78,9 @@ so that Kubernetes can pull the built application images from the [Container Reg
 
 Kubed makes sure that if the source secret changes, the copies change too.
 
-<!--TODO: Still the case?-->
 :::warning
-
-This doesn't mean things will work if you re-generate a secret manually.
-Secret rotation will be handled by Epinio in the future.
+<!--TODO:Will not or may not? Does this require further explanation? If may not then under what circumstances?-->
+If a secret is re-generated manually this may not work.
 
 :::
 
