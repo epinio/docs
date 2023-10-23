@@ -1,8 +1,9 @@
-name: Bump Epinio version in installation documentation
+name: 'docs: update Epinio version'
+pipelineid: epinio/latest
 
 actions:
   default:
-    title: '[updatecli] Bump Epinio version used within installation documentation to {{ source "epinio" }}'
+    title: 'docs: update Epinio version to {{ source "epinio" }}'
     kind: github/pullrequest
     scmid: default
     spec:
@@ -19,8 +20,8 @@ scms:
       email: bot@epinio.io
       owner: epinio
       repository: docs
-      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
-      username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GITHUB_ACTOR" }}'
       branch: main
 
 sources:
@@ -30,8 +31,8 @@ sources:
     spec:
       owner: epinio
       repository: epinio
-      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
-      username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GITHUB_ACTOR" }}'
       versionfilter:
         kind: semver
         # We want to ignore pre-release version
@@ -39,36 +40,10 @@ sources:
         # https://github.com/Masterminds/semver#working-with-prerelease-versions
         # the following rule, should do the trick
         pattern: ">0.1"
-
-  epinioSubVersion:
-    name: Get latest Epinio version
-    kind: githubrelease
-    spec:
-      owner: epinio
-      repository: epinio
-      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
-      username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
-      versionfilter:
-        kind: semver
-        # We want to ignore pre-release version
-        # According the library documentation used by updatecli
-        # https://github.com/Masterminds/semver#working-with-prerelease-versions
-        # the following rule, should do the trick
-        pattern: ">0.1"
-    transformers:
-        - trimprefix: v
-        - findsubmatch:
-            # Remove once if we decide to only keep major and minor version such as 0.7
-            # pattern: '^(\d*).(\d*)'
-            pattern: '^(\d*).(\d*).(\d*)'
-            captureindex: 0
-        # Uncomment if we decide to only version based on minor version
-        # so we could have 0.7.x
-        #- addSuffix: ".x"
 
 targets:
   download-url:
-    name: 'Update Epinio Installation URL'
+    name: 'docs: update Epinio Installation URL with version {{ source "epinio" }}'
     kind: file
     spec:
       file: docs/installation/install_epinio_cli.md
@@ -78,7 +53,7 @@ targets:
     sourceid: epinio
 
   epinio-version:
-    name: 'Update Epinio Version Information'
+    name: 'docs: update Epinio Version Information to {{ source "epinio" }}'
     kind: file
     sourceid: epinio
     spec:
@@ -86,15 +61,3 @@ targets:
       matchpattern: 'Epinio Version: (.*)'
       replacepattern: 'Epinio Version: {{ source "epinio" }}'
     scmid: default
-
-  # Required yarn to be installed
-  docusaurus:
-    kind: shell
-    name: "Set latest docusaurus version"
-    scmid: default
-    sourceid: epinioSubVersion
-    spec:
-      # epinio source value is automatically added to the command as a parameter
-      command: "./updatecli/scripts/docusaurus.sh"
-      environments:
-        - name: PATH
