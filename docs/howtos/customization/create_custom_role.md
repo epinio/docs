@@ -1,0 +1,43 @@
+---
+sidebar_label: "Creating A Git Configuration"
+sidebar_position: 13
+title: ""
+---
+
+# Create a custom Role
+
+As described [in the Authorization reference page](../../references/authorization.md),
+Epinio Roles are Kubernetes ConfigMaps with a particular label.
+
+To create a role you can execute the following `kubectl` command:
+
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    epinio.io/role: "true"
+  name: epinio-custom-role
+  namespace: epinio
+data:
+  id: custom-role
+  name: "My Custom Role"
+  actions: |
+    app
+    configuration_read
+    service_read
+EOF
+```
+
+Then to assign the role to a user you can update the user `epinio.io/roles` annotation:
+
+```
+# get the old roles assigned to te user
+OLD_ROLES=$(kubectl get secrets -n epinio MY_USER -o jsonpath='{.metadata.annotations.epinio\.io/roles}')
+
+# append the new role to them
+kubectl annotate secret -n epinio --overwrite MY_USER "epinio.io/roles=$OLD_ROLES,custom-role"
+```
+
+To see which are the available actions that can be assigned to a role you can check the Authorization reference page.
