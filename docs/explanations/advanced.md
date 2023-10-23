@@ -78,12 +78,6 @@ so that Kubernetes can pull the built application images from the [Container Reg
 
 Kubed makes sure that if the source secret changes, the copies change too.
 
-:::warning
-<!--TODO:Will not or may not? Does this require further explanation? If may not then under what circumstances?-->
-If a secret is re-generated manually this may not work.
-
-:::
-
 ### Minio
 
 [Minio project link](https://github.com/minio/minio)
