@@ -36,8 +36,8 @@ Both Minio and s3gw are S3-compatible storage solutions which Epinio uses to sto
 The chosen S3 storage solution is later used by the staging job.
 
 After successful authentication (step 1),
-the API server uploads the tarball to the S3 endpoint and
-responds with a `blobUID` that can be later used to reference the uploaded tarball.
+the API server uploads the package to the S3 endpoint and
+responds with a `blobUID` that can be later used to reference the uploaded package.
 
 ## Staging the app (step 3)
 
