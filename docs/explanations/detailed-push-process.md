@@ -7,7 +7,7 @@ keywords: [epinio, kubernetes, push process]
 
 Epinio makes use of well supported, well known projects.
 There is further discussion about this in the
-([project principles](principles.md#guidelines-soft-principles)) document.
+[project principles](principles.md#guidelines-soft-principles) document.
 While doing so, Epinio makes sure those components are correctly deployed and work together seamlessly.
 This detailed description of the Epinio push process lets you understand the components and their relationships.
 
