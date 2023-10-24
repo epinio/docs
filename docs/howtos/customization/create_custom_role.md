@@ -1,17 +1,18 @@
 ---
-sidebar_label: "Creating A Custom Role"
+sidebar_label: "Creating A custom role"
 sidebar_position: 14
-title: ""
+title: "Creating a custom role"
+description: Creating a custom role in Epinio.
+keywords: [epinio, kubernetes, custom role]
 ---
 
-# Create a custom Role
 
 As described [in the Authorization reference page](../../references/authorization.md),
 Epinio Roles are Kubernetes ConfigMaps with a particular label.
 
 To create a role you can execute the following `kubectl` command:
 
-```
+```console
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: ConfigMap
@@ -30,9 +31,9 @@ data:
 EOF
 ```
 
-Then to assign the role to a user you can update the user `epinio.io/roles` annotation:
+Then, to assign the role to a user, you can update the user `epinio.io/roles` annotation:
 
-```
+```console
 # get the old roles assigned to te user
 OLD_ROLES=$(kubectl get secrets -n epinio MY_USER -o jsonpath='{.metadata.annotations.epinio\.io/roles}')
 

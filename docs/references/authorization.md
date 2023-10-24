@@ -8,7 +8,7 @@ title: ""
 Since version **1.11.0** Epinio is shipped with a new authorization layer with two default roles: **admin** and **user**.
 Roles can be "namescoped", and they can be also customized with different permissions.
 
-A user with the admin role will have the permission to perform any operation. A standard user will have only read permissions, but it also has te permissions to create namespaces. When a user creates a namespace, it will have automatically the admin permission for it.
+A user with the admin role will have the permission to perform any operation. A standard user will have only read permissions, but also has the permissions to create namespaces. When a user creates a namespace, they will automatically have the admin permission for it.
 
 By default, after the installation two users are available: `admin` and `epinio`, both with the password `password`. The operator can control the creation of those users through the `api.users` key in [values.yaml](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml).
 In a production setup, the default `api.users` value needs to be overridden.
@@ -43,8 +43,8 @@ wss: wss://epinio.mydomain.com
 
 An Epinio user is a BasicAuth Kubernetes Secret, with the `epinio.io/api-user-credentials` reserved label.
 
-The `epinio.io/roles` annotation is used instead to get the list of the assigned roles. It's a comma separated string with the id of the roles.
-If a role is namescoped the namespace where it applies appears after the `::` delimiter (i.e.: `admin::workspace`).
+The `epinio.io/roles` annotation is used to declare the list of the assigned roles. It's a comma separated string with the id of the roles.
+If a role is namespace-scoped the namespace where it applies appears after the `::` delimiter (i.e.: `admin::workspace`).
 
 ```yaml
 apiVersion: v1
@@ -132,11 +132,11 @@ data:
 
 ## Actions
 
-Each Role can perform some actions defined in the __actions__ field (newline separated). These actions are hardcoded in Epinio, and some of them depends on other actions. Enabling an action with a dependency will enable also the dependency automatically.
+Each Role can perform some actions defined in the __actions__ field (newline separated). These actions are hardcoded in Epinio, and some of them depend on other actions. Enabling an action with a dependency will automatically enable the dependency as well.
 
 ### Namespace
 
-These actions will enable operations on the Namespace commands and resources.
+These actions enable operations on Namespace commands and resources.
 
 | Action ID         | Description 
 |-------------------|-------------
@@ -146,7 +146,7 @@ These actions will enable operations on the Namespace commands and resources.
 
 ### App
 
-These actions will enable operations on the App commands and resources. They will also enable commands related to the AppChart (`epinio app chart`) and the application environment variables.
+These actions enable operations on App commands and resources. They also enable commands related to  AppCharts (`epinio app chart`) and application environment variables.
 
 | Action ID       | Description 
 |-----------------|-------------
@@ -159,7 +159,7 @@ These actions will enable operations on the App commands and resources. They wil
 
 ### Configuration
 
-These actions will enable operations on the Configuration commands and resources. Be aware that to bind a configuration you will still need the `app_write` permission.
+These actions enable operations on Configuration commands and resources. Be aware that to bind a configuration you still need the `app_write` permission as well.
 
 
 | Action ID           | Description 
@@ -170,7 +170,7 @@ These actions will enable operations on the Configuration commands and resources
 
 ### Service
 
-These actions will enable operations on the Service commands and resources. 
+These actions enable operations on Service commands and resources. 
 
 | Action ID             | Description 
 |-----------------------|-------------
@@ -181,7 +181,7 @@ These actions will enable operations on the Service commands and resources.
 
 ### Gitconfig
 
-These actions will enable operations on the Gitconfig commands and resources.
+These actions enable operations on Gitconfig commands and resources.
 
 | Action ID         | Description 
 |-------------------|-------------
@@ -191,7 +191,7 @@ These actions will enable operations on the Gitconfig commands and resources.
 
 ### Export Registries
 
-This action will enable operations on the Export Registries commands and resources. Only read operations are available.
+This action enable operations on Export Registries commands and resources. Only read operations are available.
 
 | Action ID                 | Description 
 |---------------------------|-------------
@@ -223,4 +223,4 @@ stringData:
 EOF
 ```
 
-Be aware that if a user has a namescoped role Epinio assumes that he will have permission to perform operations on these namespaces, so the autorized user's namespace list is enriched with them. In the previous example the user's namespaces are `workspace`, `workspace2` and `foobar`.
+Be aware that if a user has a namespace-scoped role Epinio assumes that they will have permission to perform operations on these namespaces, so the authorized user's namespace list is enriched with them. In the previous example the user's namespaces are `workspace`, `workspace2` and `foobar`.
