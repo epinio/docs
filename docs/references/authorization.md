@@ -44,7 +44,7 @@ wss: wss://epinio.mydomain.com
 An Epinio user is a BasicAuth Kubernetes Secret, with the `epinio.io/api-user-credentials` reserved label.
 
 The `epinio.io/roles` annotation is used to declare the list of the assigned roles. It's a comma separated string with the id of the roles.
-If a role is namespace-scoped the namespace where it applies appears after the `::` delimiter (i.e.: `admin::workspace`).
+If a role is namespace-scoped the namespace where it applies appears after the `:` delimiter (i.e.: `admin:workspace`).
 
 ```yaml
 apiVersion: v1
@@ -54,7 +54,7 @@ metadata:
   labels:
     epinio.io/api-user-credentials: "true"
   annotations:
-    epinio.io/roles: "user,admin::workspace"
+    epinio.io/roles: "user,admin:workspace"
   name: my-epinio-user
   namespace: epinio
 stringData:
@@ -211,7 +211,7 @@ type: BasicAuth
 metadata:
   labels:
     epinio.io/api-user-credentials: "true"
-    epinio.io/roles: "user,admin::foobar"
+    epinio.io/roles: "user,admin:foobar"
   name: my-epinio-user
   namespace: epinio
 stringData:
