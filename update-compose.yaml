@@ -1,0 +1,15 @@
+# Following policies are designed to work on GitHub action and therefor needs the two following 
+# environment variables
+# * GITHUB_TOKEN
+# * GITHUB_ACTOR
+#
+# Once available you can run the command `updatecli compose diff --experimental` to see what would change.
+
+policies:
+  - name: Docusaurus versioning policy
+    policy: ghcr.io/olblak/policies/rancher/docusaurus/epinio:0.0.5@sha256:66b593809fa9f5c365e60c5397b057d09d48971067528020907e66c97a87ef0a
+
+  - name: Epinio doc specific policies
+    config: 
+      - updatecli/updatecli.d
+
