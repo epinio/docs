@@ -15,7 +15,7 @@ Epinio secures access to its API with TLS and basic authentication.
 Use the `epinio login [URL]` command after installation to save the necessary credentials (user, password) and certificates.
 Epinio stores credentials in its settings for use by other Epinio commands requiring them.
 
-For a trial deployment the underlying cluster generates certificate securing the API.
+For a trial deployment the underlying cluster generates a certificate securing the API.
 It's a self-signed certificate, and its certificate authority certificate is stored in the settings for verification.
 
 For a production deployment,
