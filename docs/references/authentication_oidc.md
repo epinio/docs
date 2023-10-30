@@ -74,4 +74,4 @@ config.yaml: |-
       - name: Org1
 ```
 
-In the previous example if the user is a member of both `Org1:Admins` and `Org1:TeamBlue` then that user will get the `admin`, `user` and `admin:workspace` roles. If no roles are found then the user will get the "default" Epinio role.
+In the previous example if the user is a member of both `Org1:Admins` and `Org1:TeamBlue` then that user will get the `admin`, `user` and `admin:workspace` roles. If no roles are found and a default role is set then the user will get this as its Epinio role.

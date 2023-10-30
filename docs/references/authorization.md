@@ -222,5 +222,3 @@ stringData:
     workspace2
 EOF
 ```
-
-Be aware that if a user has a namespace-scoped role Epinio assumes that they will have permission to perform operations on these namespaces, so the authorized user's namespace list is enriched with them. In the previous example the user's namespaces are `workspace`, `workspace2` and `foobar`.
