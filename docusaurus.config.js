@@ -81,8 +81,9 @@ const config = {
           },
           {
             href: 'https://github.com/epinio/epinio',
-            label: 'GitHub',
             position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
           },
           {
             type: 'dropdown',
@@ -97,10 +98,10 @@ const config = {
                 label: 'X/Twitter',
                 href: 'https://twitter.com/Rancher_Labs/',
               },
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/epinio',
-              },
+              //{
+                //label: 'Stack Overflow',
+                //href: 'https://stackoverflow.com/questions/tagged/epinio',
+              //},
             ],
           },
           {
@@ -109,32 +110,42 @@ const config = {
             position: 'right',
             items: [
               {
-                href: 'https://rancher.com',
-                label: 'Rancher'
+                to: 'https://rancher.com',
+                label: 'Rancher',
+                className: 'navbar__icon navbar__rancher',
               },
               {
-                href: 'https://elemental.docs.rancher.com',
-                label: 'Elemental'
+                type: 'html',
+                value: '<hr style="margin: 0.3rem 0;">',
               },
               {
-                href: 'https://fleet.rancher.io',
-                label: 'Fleet'
+                to: 'https://elemental.docs.rancher.com',
+                label: 'Elemental',
+                className: 'navbar__icon navbar__elemental',
               },
               {
-                href: 'https://harvesterhci.io',
-                label: 'Harvester'
+                to: 'https://fleet.rancher.io',
+                label: 'Fleet',
+                className: 'navbar__icon navbar__fleet',
               },
               {
-                href: 'https://opni.io',
-                label: 'Opni'
+                to: 'https://opni.io',
+                label: 'Opni',
+                className: 'navbar__icon navbar__opni',
               },
               {
-                href: 'https://rancherdesktop.io',
-                label: 'Rancher Desktop'
+                to: 'https://rancherdesktop.io',
+                label: 'Rancher Desktop',
+                className: 'navbar__icon navbar__rd',
               },
               {
-                href: 'https://opensource.suse.com',
-                label: 'More projects'
+                type: 'html',
+                value: '<hr style="margin: 0.3rem 0;">',
+              },
+              {
+                to: 'https://opensource.suse.com',
+                label: 'More projects',
+                className: 'navbar__icon navbar__suse',
               }
             ]
           },
