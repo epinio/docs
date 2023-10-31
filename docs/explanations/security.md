@@ -5,11 +5,6 @@ description: Epinio security, concepts and context
 keywords: [epinio, kubernetes, security, application development]
 ---
 
-<!--TODO:
-Should we be saying anything about source code level security, automated
-with Dependabot, Snyk, whatever?
--->
-
 Epinio secures access to its API with TLS and basic authentication.
 
 Use the `epinio login [URL]` command after installation to save the necessary credentials (user, password) and certificates.
@@ -40,3 +35,9 @@ as an identity provider which adds the support for external OIDC providers.
 
 To authenticate through Dex, you use the login command with the `--oidc` flag.
 This opens a web page where you can authenticate with the configured provider.
+
+### Cosign and Epinio images
+
+We use Cosign to sign the Epinio images, rather than signing all individual release assets.
+Cosign can be used to check the images, following download.
+There is further information in the [installation documentation](https://docs.epinio.io/installation/install_epinio_cli#verify-file-checksum-signature).
