@@ -5,22 +5,6 @@ description: The design principles Epinio is based upon.
 keywords: [epinio, kubernetes, design principles]
 ---
 
-<!--TODO:
-
-I've had a go at revising this.
-
-I think it may need some more bullet points. Surely we can say more about the Epinio development experience. About Epinio and edge computing.
-
-I think it needs further content. Need to say more about API driven architecture.
-
-I've tried to add a few points. Just suggestions, to start the
-conversation. I don't really know what I'm talking about in the Epinio
-context. Add and delete as you see fit.
-
-Any links to references?
-
--->
-
 These principles guide Epinio's development:
 
 - Good developer experience
