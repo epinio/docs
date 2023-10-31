@@ -39,5 +39,5 @@ This opens a web page where you can authenticate with the configured provider.
 ### Cosign and Epinio images
 
 We use Cosign to sign the Epinio images, rather than signing all individual release assets.
-Cosign can be used to check the images, following download.
+You can use Cosign to check the images, following download.
 There is further information in the [installation documentation](https://docs.epinio.io/installation/install_epinio_cli#verify-file-checksum-signature).
