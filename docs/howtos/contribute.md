@@ -1,32 +1,35 @@
 ---
-sidebar_label: "Contributing To Epinio"
+sidebar_label: "Contributing to Epinio"
 sidebar_position: 1
-title: ""
+title: "Contributing to Epinio"
+description: How to go about contributing to Epinio. What you need to know.
+keywords: [epinio, contributing]
+doc-type: [how-to]
+doc-topic: [contribute-to-epinio]
 ---
 
-# Contributing to Epinio
-
+Epinio welcomes your participation in the project.
 Epinio accepts contributions via GitHub issues and pull requests.
-This document outlines the process to get your pull request accepted.
+This document outlines what you need to make a successful contribution to the project.
 
-## Start With An Issue
+## Start with an issue
 
-Prior to creating a pull request it is a good idea to [create an issue].
+Before creating a pull request, [check the issues](https://github.com/epinio/epinio/issues).
+Is the topic already live, are there any linked pull requests?
 This is especially true if the change request is something large.
-The bug, feature request, or other type of issue can be discussed prior to
-creating the pull request. This can reduce rework.
+You can discuss the bug, feature request, or other type of issue with the team and others.
+Lastly, [create an issue](https://github.com/epinio/epinio/issues/new), and perhaps a pull request, if needed.
+This helps define common goals and reduces duplication of effort.
 
-[Create an issue]: https://github.com/epinio/epinio/issues/new
-
-## Sign Your Commits
+## Sign your commits
 
 A sign-off is a line at the end of the explanation for a commit.
-All commits have to be signed. Your signature certifies that you wrote the patch
-or otherwise have the right to contribute the material. When you sign-off you
-agree to the following rules
+You must sign all your commits.
+Your signature certifies that you wrote the patch or otherwise have the right to contribute the material.
+When signing-off you agree to the following rules
 (from [developercertificate.org](https://developercertificate.org/)):
 
-```
+```plain
 Developer Certificate of Origin
 Version 1.1
 
@@ -67,56 +70,59 @@ By making a contribution to this project, I certify that:
 
 Then you add a line to every git commit message:
 
-    Signed-off-by: Joe Smith <joe.smith@example.com>
+```console
+Signed-off-by: Joe Smith <joe.smith@example.com>
+```
 
-Use your real name (no pseudonyms or anonymous contributions).
+You should use your real name (no pseudonyms or anonymous contributions please).
 
-If you set your `user.name` and `user.email` in your local git configuration, you can sign your
-commit automatically with `git commit -s`.
+If you set your `user.name` and `user.email` in your local git configuration,
+you can sign your commit automatically with `git commit -s`.
 
 :::note
 
-If your git config information is set properly then viewing the `git log`
-information for your commit will look something like this:
+If your `git config` information correctly set then viewing the `git log`
+information for your commit looks something like this:
 
-```
+```console
 Author: John Smith <john.smith@example.com>
-Date:   Thu Feb 2 11:41:15 2018 -0800
+Date:   Thu Feb 2 11:41:15 2023 -0800
     Update README
     Signed-off-by: John Smith <john.smith@example.com>
 ```
-Notice how the `Author` and `Signed-off-by` lines match. If they don't your PR will
-be rejected by the automated DCO check.
+
+The `Author` and `Signed-off-by` lines match.
+If not, the Developer Certificate of Origin (DCO) check rejects the pull request.
 
 :::
 
-## Pull Requests
+## Pull requests
 
-Pull requests for a code change should reference the issue they are related to.
-This will enable issues to serve as a central point of reference for a change.
+Pull requests for a code change should reference the issue they're for.
+This enables issues to serve as a central point of reference for a change.
 For example, if a pull request fixes or completes an issue, the commit or
-pull request should include:
+pull request should include something like:
 
-```md
+```markdown
 Closes #123
 ```
 
-In this case "123" is the corresponding issue number.
+This indicates that the PR closes issue #123 when merged.
 
-## Semantic Versioning
+## Semantic versioning
 
 Epinio follows [semantic versioning](https://semver.org/).
 
-This does not cover other tools included in Epinio.
+This doesn't cover other tools included in Epinio.
 Kubernetes has its own [release versioning](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#kubernetes-release-versioning)
-scheme that looks like SemVer but is semantically different.
+scheme that's similar to SemVer but semantically different.
 
-## Coding Style
+## Coding style
 
-Epinio expects its Go code to be formatted with `go fmt`.
+Epinio expects Go code formatted with `go fmt`.
 
-Epinio further follows the style guidelines at
+Epinio further follows the style guidelines at:
 
-  - [Effective Go](https://go.dev/doc/effective_go) and
-  - [Go Wiki Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
-  - [Go Style At Google](https://google.github.io/styleguide/go/guide)
+- [Effective Go](https://go.dev/doc/effective_go) and
+- [Go Wiki Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments)
+- [Go Style At Google](https://google.github.io/styleguide/go/guide)
