@@ -1,27 +1,39 @@
 ---
-sidebar_label: "Installing A Metrics Server"
+sidebar_label: "Installing a metrics server"
 sidebar_position: 24
-title: ""
+title: "Installing a metrics server"
+description: Installing a metrics server for an Epinio environment.
+keywords: [epinio, kubernetes, metrics server, installation]
+doc-type: [how-to]
+doc-topic: [epinio, customize, operations, metrics-server]
 ---
 
-# What is the need for a Metrics Server ?
+If you don't have a metrics server in your Kubernetes cluster,
+the application Pods (instances) report errors when trying to show metrics (RAM, CPU etc).
+You would do this with the command [`epinio app show`](../../references/commands/cli/app/epinio_app_show.md).
 
-If no Metrics Server is running on a Kubernetes cluster, the application "instances" (aka
-Pods) will report errors when it will try to show metrics (RAM, CPU etc) with the command
-[epinio app show](../../references/commands/cli/app/epinio_app_show.md)
+To have this command operating correctly you need a metrics server.
 
-# Install a Metrics Server
+## Installation
 
-Please read and follow the
-[instructions](https://github.com/kubernetes-sigs/metrics-server) for installing a Metrics
-Server. You will get the information about the requirements, the various installation
-methods (plain yaml, helm chart, etc), and guidance for additional configurations such as
-high availability and security.
+Follow the
+[documentation](https://github.com/kubernetes-sigs/metrics-server)
+for installing a metrics server.
+The documentation has requirements, installation methods (plain YAML, helm chart, and others),
+and guidance for more configurations such as high availability and security.
 
-As an example, here is the command to install a Metrics Server:
+As an example, this command installs a metrics server:
 
-> kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```console
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
+
+<!--TODO:
+Some more information please. Why is this for simple environments and what is
+meant by simple environments. What would be a complex environment and how might
+you go about installing a metrics server in one. Should this note be here?
+-->
 
 :::note
-This installation method should be used only for simple environments.
+This installation method is for simple environments.
 :::
