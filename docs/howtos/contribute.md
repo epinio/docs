@@ -81,7 +81,7 @@ you can sign your commit automatically with `git commit -s`.
 
 :::note
 
-If your `git config` information correctly set then viewing the `git log`
+If your `git config` information is correctly set then viewing the `git log`
 information for your commit looks something like this:
 
 ```console
