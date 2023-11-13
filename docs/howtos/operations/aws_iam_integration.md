@@ -1,22 +1,28 @@
 ---
 sidebar_label: "AWS IAM integration"
 sidebar_position: 27
-title: ""
+title: "AWS IAM integration"
+description: How-to use Amazon Web Services (AWS) Identity and Access Management (IAM) with Epinio.
+keywords: [epinio, kubernetes, aws, iam]
+doc-type: [how-to]
+doc-topic: [epinio, customize, operations, aws-iam]
 ---
 
-## Authentication through an IAM profile
+How-to use Amazon Web Services (AWS) Identity and Access Management (IAM) with Epinio.
 
-When using AWS S3 Epinio further supports authentication by AWS IAM profile, instead of through regular credentials.
+## Authentication using an IAM profile
 
-Epinio activates this mode when the credential keys are left empty. I.e. `s3.accessKeyID=""`, and `s3.secretAccessKey=""`.
-
-In AWS the kubernetes cluster in question has to have an IAM policy attached to it which provides the permissions for access to S3.
+When using AWS S3 Epinio supports authentication by AWS IAM profile, instead of using regular credentials.
+Epinio uses this mode when the credential keys are empty.
+That is, `s3.accessKeyID=""`, and `s3.secretAccessKey=""`.
+When using AWS, the Kubernetes cluster has to have an IAM policy attached.
+This provides the permissions for access to S3.
 
 ### Example
 
 Create a policy with
 
-```
+```console
 aws iam create-policy \
     --policy-name EpinioECEKSClusterPolicy \
     --policy-document \
@@ -43,57 +49,66 @@ aws iam create-policy \
 }'
 ```
 
-Attach that policy ot the instance role with
+Attach that policy to the instance role with
 
-```
+```console
 aws iam attach-role-policy \
     --role-name "<your instance role here>" \
     --policy-arn "<your policy arn here>"
 ```
 
-The instance role can be determined with:
+You can find the instance role with:
 
-```
-kubectl -n kube-system describe configmap aws-auth | grep rolearn | cut -d':' -f7 | cut -d'/' -f2
+```console
+kubectl -n kube-system describe configmap aws-auth \
+  | grep rolearn | cut -d':' -f7 | cut -d'/' -f2
 ```
 
 To clean up once finished, remove Epinio, detach and delete policies with:
 
-```
-helm delete --wait epinio -n epinio 
-kubectl delete --wait ns epinio workspace 
- 
+```console
+helm delete --wait epinio -n epinio
+kubectl delete --wait ns epinio workspace
+
 aws iam detach-role-policy \
   --role-name "<your instance role here>" \
   --policy-arn "<your policy arn here>"
- 
+
 # If created ad-hoc policy
 aws iam list-policies #  find and copy EpinioECEKSClusterPolicy ARN used in next step
 aws iam delete-policy --policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/EpinioECEKSClusterPolicy
 
 ```
 
-## Authentication with AWS EKS Service Account
+## Authentication with an AWS EKS service account
 
-For increased security the policy can be attached to just the Epinio pod ServiceAccount. You will also need to create a specific ServiceAccount that will be bound to the staging job with the `server.stagingServiceAccountName` value.
+EKS is the Elastic Kubernetes Service.
 
-To use AWS IAM roles for service accounts, an IAM OIDC provider must exist for your cluster's OIDC issuer URL.  
+For increased security you can attach the policy to the Epinio pod ServiceAccount.
+You also need to create a specific ServiceAccount that you bind to the staging job with the `server.stagingServiceAccountName` value.
 
-Determine whether you have an existing IAM OIDC provider for your cluster with:
+To use AWS IAM roles for service accounts, an IAM OIDC provider must exist for your cluster's OIDC issuer URL.
 
+Find whether you have an existing IAM OIDC provider for your cluster with:
+
+```console
+oidc_id=$(aws eks describe-cluster --name ${CLUSTER_NAME} \
+  --query "cluster.identity.oidc.issuer" \
+  --output text | cut -d '/' -f 5)
+aws iam list-open-id-connect-providers \
+  | grep $oidc_id | cut -d "/" -f4
 ```
-oidc_id=$(aws eks describe-cluster --name ${CLUSTER_NAME} --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
-aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
-```
 
-If output is returned, then you already have an IAM OIDC provider for your cluster and you can skip the next step. If no output is returned, then you must create an IAM OIDC provider for your cluster. Check the [AWS guide](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) for this task.
+If the command returns any output, then you already have an IAM OIDC provider for your cluster so you can skip the next step.
+If there is no output, then you must create an IAM OIDC provider for your cluster.
+Check the [AWS guide](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) for this task.
 
+### Epinio server role
 
-### Epinio Server Role
+Make sure you have correctly deployed Epinio.
+Later, you assign a new AWS Service Account to an existing Epinio installation with the `helm upgrade` command.
 
-Ensure Epinio has been deployed first. Later you will assign a new AWS Service Account to an existing Epinio installation via `helm upgrade` command.
-
-You will need to create a IAM Role
+You need to create a IAM Role:
 
 ```bash
 #!/bin/bash
@@ -133,27 +148,28 @@ aws iam create-role \
 rm ${FILENAME}
 ```
 
-attach it to the policy
+You attach it to the policy:
 
-```
+```console
 aws iam attach-role-policy \
     --role-name epinio-server-role \
     --policy-arn "arn:aws:iam::${AWS_ACCOUNT_ID}:policy/EpinioECEKSClusterPolicy"
 ```
 
-and annotate the Epinio Service Account to bind it to the role
+And annotate the Epinio Service Account to bind it to the role:
 
-```
+```console
 kubectl annotate serviceaccount epinio-server \
     --namespace epinio \
     "eks.amazonaws.com/role-arn=arn:aws:iam::${AWS_ACCOUNT_ID}:role/epinio-server-role"
 ```
 
-### Epinio staging Service Account
+### Epinio staging service account
 
-The staging job needs a dedicated Service Account. You can easily create it with `eksctl` since is a new one, attaching it directly with the existing policy:
+The staging job needs a dedicated service account. You can create it with `eksctl`.
+Since it's a new one, attach it directly to the existing policy:
 
-```
+```console
 eksctl create iamserviceaccount \
     --name epinio-staging-service-account \
     --namespace epinio \
@@ -163,9 +179,11 @@ eksctl create iamserviceaccount \
     --approve
 ```
 
-and you can update your Helm deployment specifying this new service account adding the flag `--set server.stagingServiceAccountName=epinio-staging-service-account` when upgrading Epinio:
+You can update your Helm deployment specifying this new service account by adding the flag<br/>
+`--set server.stagingServiceAccountName=epinio-staging-service-account`<br/>
+when upgrading Epinio:
 
-```
+```console
 helm upgrade epinio epinio/epinio \
     --namespace epinio --create-namespace \
     --set global.domain=<MY_DOMAIN> \
@@ -173,17 +191,17 @@ helm upgrade epinio epinio/epinio \
     --wait
 ```
 
-Once finished, to remove everything remember to remove Epinio, delete service account, detach and delete policies:
+Once finished, to remove everything, remove Epinio, delete the service account, detach and delete the policies:
 
-```
+```console
 helm delete --wait epinio -n epinio
 kubectl delete --wait ns epinio workspace
- 
+
 eksctl delete iamserviceaccount \
 --cluster $CLUSTER_NAME \
 --name epinio-staging-service-account \
 --namespace epinio
- 
+
 aws iam detach-role-policy \
 --role-name epinio-server-role \
 --policy-arn "arn:aws:iam::${AWS_ACCOUNT_ID}:policy/EpinioECEKSClusterPolicy"
