@@ -85,7 +85,7 @@ aws iam delete-policy --policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/EpinioE
 EKS is the Elastic Kubernetes Service.
 
 For increased security you can attach the policy to the Epinio pod ServiceAccount.
-You also need to create a specific ServiceAccount that to bind to the staging job with the `server.stagingServiceAccountName` value.
+You also need to create a specific ServiceAccount that you bind to the staging job with the `server.stagingServiceAccountName` value.
 
 To use AWS IAM roles for service accounts, an IAM OIDC provider must exist for your cluster's OIDC issuer URL.
 

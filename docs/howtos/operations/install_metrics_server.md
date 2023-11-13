@@ -28,12 +28,10 @@ As an example, this command installs a metrics server:
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 
-<!--TODO:
-Some more information please. Why is this for simple environments and what is
-meant by simple environments. What would be a complex environment and how might
-you go about installing a metrics server in one. Should this note be here?
--->
-
 :::note
-This installation method is for simple environments.
+
+This installation method is for simple environments,
+meaning those which aren't high availability setup,
+those that aren't large clusters needing custom scaling setups.
+
 :::
