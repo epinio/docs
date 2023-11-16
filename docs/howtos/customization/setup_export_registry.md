@@ -84,7 +84,7 @@ For other registries change the `registry.hub.docker.com` reference as well (lin
 
 ## Certificate secrets
 
-Should the selected registry requires more TLS certificates to communicate it's necessary to
+Should the selected registry require more TLS certificates to communicate it's necessary to
 
 - Create a Kubernetes secret with key `tls.crt` whose value is the set of extra certificates in PEM-encoded form.
 
