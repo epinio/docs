@@ -18,7 +18,7 @@ The provision of LoadBalancer IP is enabled by default.
 
 ### Kind
 
-- [Install](https://stedolan.github.io/jq/download/) `jq` or use your environments package manager, for example, `zypper/YAST` on SUSE
+- [Install](https://stedolan.github.io/jq/download/) `jq`
 
 - Install and configure MetalLB
 

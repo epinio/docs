@@ -5,7 +5,7 @@ title: Custom values for service Helm charts
 description: How to specify custom values for service Helm charts
 keywords: [epinio, kubernetes, custom service values]
 doc-type: [how-to]
-doc-topic: [epinio, customize, custom-service-values]
+doc-topic: [epinio, how-to, customize, custom-service-values]
 doc-persona: [epinio-operator, epinio-user]
 ---
 

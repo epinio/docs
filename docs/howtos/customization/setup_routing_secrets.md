@@ -5,7 +5,7 @@ title: Setting up routing secrets for use by applications
 description: How to set up routing secrets for use by applications
 keywords: [epinio, kubernetes, setup routing secrets]
 doc-type: [how-to]
-doc-topic: [how-to, custom, setup-routing-secrets]
+doc-topic: [epinio, how-to, custom, setup-routing-secrets]
 doc-persona: [epinio-operator]
 ---
 
@@ -13,7 +13,7 @@ This is a How-to for operators.
 
 ## Introduction
 
-In regular operation Epinio automatically creates the `kubernetes.io/tls` Secrets needed by a new application's Ingress to secure the communication with that application.
+In regular operation Epinio automatically creates the `kubernetes.io/tls` Secrets needed by a new application's Ingress to secure communication with that application.
 
 The application chart used to deploy that application creates both the `Ingress` and a `Certificate` resource for it.
 The `Certificate` resource is then picked up by the Cert manager component, which in turn creates the Secret that holds the certificate data.

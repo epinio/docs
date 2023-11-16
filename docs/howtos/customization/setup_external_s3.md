@@ -33,7 +33,7 @@ Some implementations don't need the location, for example, Minio and `s3.useSSL`
 
 :::
 
-For instance, add the following options to your Helm command to make Epinio pointing to AWS:
+For instance, add the following options to your Helm command to make Epinio point to AWS:
 
 ```console
 --set minio.enabled=false \
@@ -44,8 +44,8 @@ For instance, add the following options to your Helm command to make Epinio poin
 --set s3.secretAccessKey=<your_secret_access_key_here> \
 ```
 
-If the bucket doesn't exist, Epinio will try to create it when it first writes to it.
-Make sure the access key and the access secret have enough permissions to create a bucket and then write to it.
+If the bucket doesn't exist, Epinio tries to create it when it first writes to it.
+Make sure the access key and the access secret have enough permissions to create a bucket before writing to it.
 
 When you successfully push a new version of your application, Epinio removes the resources of the earlier staging process from the Kubernetes cluster.
 It also deletes the earlier version of the sources from S3.

@@ -5,7 +5,7 @@ title: How to set up an external container registry
 description: How to setup an external container registry
 keywords: [epinio, kubernetes, external container registry setup]
 doc-type: [how-to]
-doc-topic: [how-to, custom, setup-external-container-registry]
+doc-topic: [epinio, how-to, custom, setup-external-container-registry]
 ---
 
 You can use an external registry for Epinio to store application images.
@@ -24,7 +24,8 @@ helm install \
 
 Using [Docker Hub](https://hub.docker.com/) as an example, you would have to set
 the value of `$REGISTRY_URL` to `registry.hub.docker.com`, `$REGISTRY_USER` and
-`$REGISTRY_PASSWORD` are set to the Docker Hub credentials, and `$REGISTRY_NAMESPACE`
+`$REGISTRY_PASSWORD` are set to the Docker Hub credentials.
+Lastly, `$REGISTRY_NAMESPACE`
 would be either an organization or username.
 
 With these arguments set, Epinio doesn't deploy a registry on the cluster.

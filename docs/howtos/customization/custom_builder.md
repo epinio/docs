@@ -5,11 +5,11 @@ title: Creating a custom builder
 description: How to create a custom builder
 keywords: [epinio, kubernetes, create a custom builder]
 doc-type: [how-to]
-doc-topic: [epinio, customize, create-custom-builder]
+doc-topic: [epinio, how-to, customize, create-custom-builder]
 doc-persona: [epinio-operator]
 ---
 
-The default builder image used by Epinio (paketobuildpacks/builder:full) may not work for every application.
+The default builder image used by Epinio (`paketobuildpacks/builder:full`) may not work for every application.
 It could happen if using an unsupported programming language,
 or when the application needs staging in a particular way.
 This page explains how to build a custom builder image including one or more buildpacks.
@@ -99,7 +99,7 @@ epinio push -n myapp -p app_directory --builder-image myorg/epicustombuilder:lat
 
 ## More examples
 
-You can find a more complete example on how to build and deploy a custom builder atx
+You can find a more complete example on how to build and deploy a custom builder at
 [Deploy Gitea with a custom builder image](../../tutorials/custom_builder_go.md).
 
 ## Reference

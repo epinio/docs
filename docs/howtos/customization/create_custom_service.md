@@ -5,7 +5,7 @@ title: Creating a custom service
 description: How to create a custom service
 keywords: [epinio, kubernetes, create a custom service]
 doc-type: [how-to]
-doc-topic: [epinio, customize, create-custom-service]
+doc-topic: [epinio, how-to, customize, create-custom-service]
 doc-persona: [epinio-operator]
 ---
 
@@ -25,7 +25,7 @@ With Epinio installed in a namespace called `epinio`, the following command outp
 kubectl get services.application.epinio.io -n epinio mysql-dev -o yaml > service.yaml
 ```
 
-Or you can find the definition of the catalog services
+Or, you can find the definition of the catalog services
 [in the GitHub repository](https://github.com/epinio/helm-charts/blob/main/chart/epinio/templates/service-catalog.yaml).
 
 Change the fields to point to the desired helm chart and apply the YAML with a command like:
@@ -46,7 +46,7 @@ The consumers of the API (that is, the web UI of Epinio) can show an icon when l
 To assign an image to your custom service, make sure you add the `serviceIcon` field in the Custom Resource YAML.
 
 Helm charts have an icon field defined which already provides such an image.
-You can find the icon field with the `helm show` command. For example, for the Bitnami RabbitMQ helm chart:
+You can find the icon field with the `helm show` command. For example, for the Bitnami RabbitMQ Helm chart:
 
 ```console
 helm show chart https://charts.bitnami.com/bitnami/rabbitmq-9.0.5.tgz | yq .icon

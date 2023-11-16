@@ -4,17 +4,20 @@ sidebar_position: 8
 title: "Exporting applications to an OCI registry"
 description: Exporting applications to an OCI registry
 keywords: [epinio, kubernetes, exporting, OCI registry]
+doc-type: [how-to]
+doc-topic: [epinio, customize, export-to-oci-registry]
+doc-persona: [epinio-operator]
 ---
 
 :::note
 
-Don't confuse this topic with **external Epinio registries**.
+This isn't the same topic as **external Epinio registries**.
 These are where Epinio stashes the images of staged applications for its own use.
 See [Setting Up An External Container Registry](setup_external_registry.md) for more information.
 
 **Export destination registries** are where a user saves active applications for pickup by, and use with, `helm` and other Kubernetes tools.
 
-It doesn't help that it's acceptable to configure the same registry both as external registry and as export target.
+It doesn't aid understanding that it's acceptable to configure the same registry both as external registry and as export target.
 
 :::
 

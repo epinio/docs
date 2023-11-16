@@ -6,7 +6,7 @@ description: How to set up custom routes
 keywords: [epinio, kubernetes, customization, custom routes]
 doc-type: [how-to]
 doc-topic: [how-to, customize, custom-routes]
-doc-persona: [default]
+doc-persona: [epinio-operator]
 ---
 
 Epinio has the idea of a "system domain".

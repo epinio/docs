@@ -5,7 +5,7 @@ title: Creating custom application Helm charts
 description: How to create custom application Helm charts
 keywords: [epinio, kubernetes, custom application helm charts]
 doc-type: [how-to]
-doc-topic: [epinio, customize, custom-app-helm-chart]
+doc-topic: [epinio, how-to, customize, custom-app-helm-chart]
 doc-persona: [epinio-operator]
 ---
 
@@ -31,29 +31,26 @@ An advanced feature of custom application charts is the ability to expose user-s
 You can use the standard chart provided by Epinio as a template for the modifications.
 
 You can download the chart from
-[here](https://github.com/epinio/helm-charts/tree/main/chart/application) into a directory `<work-dir>` of
-your choice, or, you can clone the
+[the Epinio repository](https://github.com/epinio/helm-charts/tree/main/chart/application)
+into a directory `<work-dir>` of your choice,
+or, you can clone the
 [Epinio Helm chart repository](https://github.com/epinio/helm-charts.git),
-again, into a directory `<work-dir>` of your choice.
+again, into a `<work-dir>` of your choice.
 
 ```console
 git clone https://github.com/epinio/helm-charts.git
 ```
 
-Regardless of method, the chart is in the subdirectory `helm-charts/chart/application`.
+The chart is in the subdirectory `helm-charts/chart/application`.
 
-:::note
-
-The following steps,
+In the following steps,
 the commands given,
-assume that the reader uses the directory `<work-dir>` as their working directory.
-
-:::
+assume that the directory `<work-dir>` is the working directory.
 
 You create a variant of the chart by adding an annotation to every application `Deployment`.
 The annotation enables the filtering of Epinio applications in [fluentd](https://www.fluentd.org/).
 
-Open the file `helm-charts/chart/application/templates/deployment.yaml` in your editor of choice.
+Open the file `helm-charts/chart/application/templates/deployment.yaml` in your editor.
 This file is the template for the application's `Deployment` resource.
 
 First, locate the section `annotations`:
@@ -93,25 +90,18 @@ An explanation of the values Epinio sets when deploying an application using the
 [Application Chart Reference](../../references/customization/appcharts.md#configuration).
 It's also available locally in the comments at the top of file `helm-charts/chart/application/values.yaml`.
 
-Once you have modified the chart to your needs, use the following command to package the changed
-chart into a tarball:
+Once you have modified the chart, use the following command to package the changed chart into a tarball:
 
 ```console
 helm package helm-charts/chart/application
 ```
 
-Place the tarball into `<work-dir>` and the filename should be `application-VERSION.tgz` where `VERSION` is the chart version.
-
-:::note
+The `helm` command places the tarball into `<work-dir>` and the file name should be `application-VERSION.tgz` where `VERSION` is the chart version.
 
 Don't change the chart version.
 Versioned chart development is out of scope for this How-to.
 
-:::
-
 ### Making the helm Chart known to Epinio
-
-:::caution
 
 Once you have created the new chart,
 it's necessary to place the generated tarball on a web server.
@@ -120,7 +110,7 @@ A few possible options are:
 - A server in the public cloud available to you
 - The company's host web server, if available, and permitted by company policies
 - A personal web server
-- A local web server, perhaps a nginx in a docker container
+- A local web server, perhaps an nginx in a docker container
 
 Given the range of possible options, this How-to assumes that the tarball is available at the example URL.
 
@@ -128,11 +118,9 @@ Given the range of possible options, this How-to assumes that the tarball is ava
 https://mydomain.org/epinio-application-fluentd.tgz
 ```
 
-:::
-
 Copy the following YAML text,
-change the `RELEASE_NAMESPACE` value to the namespace where Epinio was installed
-(by default it's `epinio`) and add it to a file of your choice:
+change the `RELEASE_NAMESPACE` value to the namespace where Epinio was installed,
+by default it's `epinio`, and add it to a file of your choice:
 
 ```yaml
 apiVersion: application.epinio.io/v1
@@ -146,7 +134,7 @@ spec:
   helmChart: https://mydomain.org/epinio-application-fluentd.tgz
 ```
 
-This How-to assumes that the chosen file is named `fluentd-appchart.yaml`.
+This How-to assumes that the name of the chosen file is `fluentd-appchart.yaml`.
 
 :::info
 
@@ -177,8 +165,7 @@ epinio app chart show fluentd
 
 ### User-settable configuration values
 
-To expose user-settable configuration value `foo` the created application chart has to look for
-this variable in the `.Values.userConfig` map.
+To expose the user-settable configuration value `foo` the created application chart has to look for this variable in the `.Values.userConfig` map.
 That is, it has to use the helm variable `.Values.userConfig.foo`.
 
 :::caution
@@ -187,11 +174,10 @@ The chart should use a default value when this helm variable isn't set.
 
 :::
 
-With the application chart exposing `foo` as described Epinio has to know of the configuration value by adding a specification to the `AppChart` resource describing it.
+With the application chart exposing `foo` Epinio has to be aware of the configuration value by adding a specification to the `AppChart` resource describing it.
 
 Do this by adding an entry `foo` to the `spec.settings` map of the AppChart resource.
-This entry is itself a map, with a mandatory `type` field, and type-dependent **optional** restrictions
-on the valid values of `foo`.
+This entry is itself a map, with a mandatory `type` field, and type-dependent **optional** restrictions on the valid values of `foo`.
 
 Example:
 
@@ -249,7 +235,8 @@ The standard app chart, and the chart created here,
 use a Kubernetes `Deployment` as the main resource describing the active application.
 
 Up to Epinio version 1.0, this was the only kind of resource supported.
-Since Epinio version 1.0+, other kinds of controllers, for example. `StatefulSet`, are supported.
+Epinio supports other kinds of controllers,
+for example, `StatefulSet` since versions greater than 1.0.
 
 However, even when changing controllers,
 it's important to keep the `Pod` annotations and labels the same as for the standard chart.
@@ -259,6 +246,5 @@ Here's a couple of examples:
 
 1. The value of `epinio.io/stage-id` is the id of the staging Pod which created the application's image.
 
-1. The value of `epinio.io/app-container` is the name of the application's main `Container`,
-which is used by `epinio exec`.
+1. The value of `epinio.io/app-container` is the name of the application's main `Container`, used by `epinio exec`.
 This label has to match the actual name of the container in the pod spec.

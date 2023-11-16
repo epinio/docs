@@ -5,7 +5,7 @@ title: "Setting up an export destination registry"
 description: How to set up an export destination registry
 keywords: [epinio, kubernetes, export destination registry]
 doc-type: [how-to]
-doc-topic: [how-to, custom, setup-export-destination-registry]
+doc-topic: [epinio, how-to, custom, setup-export-destination-registry]
 ---
 
 :::note
@@ -100,4 +100,4 @@ Should the selected registry requires more TLS certificates to communicate it's 
     export-registry
   ```
 
- - Extend the authentication secret with a key `certs` (sibling to key `.dockerconfigjson`) whose value is the name of the secret created in the preceding step.
+- Extend the authentication secret with a key `certs` (sibling to key `.dockerconfigjson`) whose value is the name of the secret created in the preceding step.
