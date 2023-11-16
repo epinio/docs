@@ -49,16 +49,19 @@ You're now able to login with the credentials in Epinio UI.
 
 The external identity providers may provide additional information about the user, for example the groups that he's member of.  
 
-These groups can be used to associate a specific role to the user. To do so you need to add a `rolesMapping` key to the `dex-config` secret. The value of the key is a yaml string that will be used to map the groups of a provider to a specific role:
+These groups can be used to associate specific roles to the user. To do so you need to add a `rolesMapping` key to the `dex-config` secret. The value of the key is a yaml string that will be used to map the groups of a provider to specific roles:
 
-```
+```yaml
 rolesMapping: |-
   - connectorId: github
     groups:
     - id: Org1:Admins
-      role: admin
+      roles:
+      - admin
     - id: Org1:TeamBlue
-      role: user
+      roles:
+      - user
+      - admin:workspace
 
 config.yaml: |-
   connectors:
@@ -71,4 +74,4 @@ config.yaml: |-
       - name: Org1
 ```
 
-The groups will be evaluated in order. In the previous example if the user is a member of both `Org1:Admins` and `Org1:TeamBlue` then that user will get the `admin` role.
+In the previous example if the user is a member of both `Org1:Admins` and `Org1:TeamBlue` then that user will get the `admin`, `user` and `admin:workspace` roles. If no roles are found and a default role is set then the user will get this as its Epinio role.

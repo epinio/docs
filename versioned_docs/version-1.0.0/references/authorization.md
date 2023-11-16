@@ -95,7 +95,7 @@ metadata:
   namespace: epinio
 stringData:
   username: myuser
-  password: "$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS"
+  password: "\$2a\$10\$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS"
 EOF
 ```
 
@@ -117,7 +117,7 @@ metadata:
   namespace: epinio
 stringData:
   username: myuser
-  password: "$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS"
+  password: "\$2a\$10\$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS"
   namespaces: |
     workspace
     workspace2
