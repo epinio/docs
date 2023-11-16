@@ -5,7 +5,8 @@ title: "Provisioning an external IP address for local Kubernetes"
 description: Provisioning an external IP address for local Kubernetes
 keywords: [epinio, kubernetes, external IP addresses]
 doc-type: [how-to]
-doc-topic: [how-to, customization, external-ip-addresses]
+doc-topic: [epinio, how-to, customization, external-ip-addresses]
+doc-persona: [epinio-operator]
 ---
 
 Some platforms for deploying local Kubernetes clusters don't have the ability to provide external IP addresses when creating Kubernetes services with the service type `LoadBalancer`.

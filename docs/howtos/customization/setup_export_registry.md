@@ -6,6 +6,7 @@ description: How to set up an export destination registry
 keywords: [epinio, kubernetes, export destination registry]
 doc-type: [how-to]
 doc-topic: [epinio, how-to, custom, setup-export-destination-registry]
+doc-persona: [epinio-operator]
 ---
 
 :::note
