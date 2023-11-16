@@ -1,66 +1,61 @@
 ---
-sidebar_label: "Creating Custom Application Helm Charts"
+sidebar_label: Custom application Helm charts
 sidebar_position: 15
-title: ""
+title: Creating custom application Helm charts
+description: How to create custom application Helm charts
+keywords: [epinio, kubernetes, custom application helm charts]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, customize, custom-app-helm-chart]
+doc-persona: [epinio-operator]
 ---
-
-# Introduction
 
 Epinio deploys applications on Kubernetes as [Helm charts](https://helm.sh/).
 
-By default, a standard Helm chart is provided when Epinio is installed.
-However, operators may wish to create custom charts specific to their environment, and
-register them in Epinio, so [their developers can use them](../other/using_custom_appcharts.md).
+By default, Epinio provides a standard Helm chart installation.
+However, operators may wish to create custom charts specific to their environment,
+and register them in Epinio, so [their developers can use them](../other/using_custom_appcharts.md).
 
-# Setting up a custom Helm chart
+## Setting up a custom Helm chart
 
 To add a custom Helm chart to the system, there are two mandatory steps:
 
-  1. Create the chart,
-  2. Make it known to the Epinio installation
+1. Create the chart,
+1. Make it known to the Epinio installation
 
 The following two sections explain these steps in detail.
 
-An advanced feature of custom application charts is the ability to expose user-settable configuration
-values to the user. As doing so crosses both chart creation and registration this feature is
-described in a separate section to keep the necessary information together.
+An advanced feature of custom application charts is the ability to expose user-settable configuration values to the user.
 
-## Creating the Helm chart
+### Creating the Helm chart
 
-Instead of starting from scratch, you can use the standard chart provided by Epinio as a
-template for the modifications.
+You can use the standard chart provided by Epinio as a template for the modifications.
 
-To do so it is possible to download the chart directly from
-[here](https://github.com/epinio/helm-charts/tree/main/chart/application) into a directory `D` of
-your choice, or, you can clone the [Epinio Helm chart
-repo](https://github.com/epinio/helm-charts.git), again into a directory `D` of your choice.
+You can download the chart from
+[the Epinio repository](https://github.com/epinio/helm-charts/tree/main/chart/application)
+into a directory `<work-dir>` of your choice,
+or, you can clone the
+[Epinio Helm chart repository](https://github.com/epinio/helm-charts.git),
+again, into a `<work-dir>` of your choice.
 
-```
+```console
 git clone https://github.com/epinio/helm-charts.git
 ```
 
-Regardless of method, the chart will be located in the sub directory
-`helm-charts/chart/application`.
+The chart is in the subdirectory `helm-charts/chart/application`.
 
-:::note
-The coming steps, especially the commands given, assume that the reader uses the chosen directory
-`D` as their working directory.
-:::
+In the following steps,
+the commands given,
+assume that the directory `<work-dir>` is the working directory.
 
-In this How-to, we will create a variant of the chart by adding an annotation to every
-application `Deployment`. The annotation will enable the filtering of Epinio applications
-in [fluentd](https://www.fluentd.org/).
+You create a variant of the chart by adding an annotation to every application `Deployment`.
+The annotation enables the filtering of Epinio applications in [fluentd](https://www.fluentd.org/).
 
-:::note
-Explanations about setting up and using `fluentd` are out of scope for this How-to.
-:::
-
-Open the file `helm-charts/chart/application/templates/deployment.yaml` in your editor of
-choice.  This file is the template for the application's `Deployment` resource.
+Open the file `helm-charts/chart/application/templates/deployment.yaml` in your editor.
+This file is the template for the application's `Deployment` resource.
 
 First, locate the section `annotations`:
 
-```
+```yaml
 [...]
   template:
     metadata:
@@ -71,14 +66,14 @@ First, locate the section `annotations`:
 
 Add the following annotations:
 
-```
+```yaml
 fluentd-enable: "true"
 fluentd-application-name: {{ .Values.epinio.appName }}
 ```
 
 The result should look like:
 
-```
+```yaml
 [...]
   template:
     metadata:
@@ -89,54 +84,45 @@ The result should look like:
 [...]
 ```
 
-Note how the templating uses the `.Values.epinio.appName` field to insert the application
-name into the annotation.
+The templating uses the `.Values.epinio.appName` field to insert the application name into the annotation.
 
-The full set of values Epinio sets when deploying an application through the chart is explained in
-the [Application Chart Reference](../../references/customization/appcharts.md#configuration),
-or locally in the comments at the top of file `helm-charts/chart/application/values.yaml`.
+An explanation of the values Epinio sets when deploying an application using the chart is in the
+[Application Chart Reference](../../references/customization/appcharts.md#configuration).
+It's also available locally in the comments at the top of file `helm-charts/chart/application/values.yaml`.
 
-Once you have modified the chart to your needs, use the following command to package the changed
-chart into a tarball:
+Once you have modified the chart, use the following command to package the changed chart into a tarball:
 
-```
+```console
 helm package helm-charts/chart/application
 ```
 
-The tarball is placed into the current working directory and the filename should be
-`application-VERSION.tgz` where `VERSION` is the chart version.
+The `helm` command places the tarball into `<work-dir>` and the file name should be `application-VERSION.tgz` where `VERSION` is the chart version.
 
-:::note
-We didn't change the chart version. Versioned chart development is out of scope for this How-to.
-:::
+Don't change the chart version.
+Versioned chart development is out of scope for this How-to.
 
-## Making the helm Chart known to Epinio
+### Making the helm Chart known to Epinio
 
-:::caution
-Once the new chart is created as decribed in the previous section, it is necessary to place the
-generated tarball on an accessible web server. Possible options are
+Once you have created the new chart,
+it's necessary to place the generated tarball on a web server.
+A few possible options are:
 
-  - A server in the public cloud accessible to you
-  - The company's host web server, if accessible, and permitted by company policies
-  - A personal web server
-  - A local web webserver, like an nginx in a docker container
-  - etc. 
+- A server in the public cloud available to you
+- The company's host web server, if available, and permitted by company policies
+- A personal web server
+- A local web server, perhaps an nginx in a docker container
 
-Given the plethora of possible options, this How-to simply assumes that the tarball is
-available at the example URL
+Given the range of possible options, this How-to assumes that the tarball is available at the example URL.
 
-```
+```console
 https://mydomain.org/epinio-application-fluentd.tgz
 ```
 
-and puts the burden on you, the reader, to change this url to match the actually chosen location,
-including the name of the tar file.
-:::
+Copy the following YAML text,
+change the `RELEASE_NAMESPACE` value to the namespace where Epinio was installed,
+by default it's `epinio`, and add it to a file of your choice:
 
-Copy the following text, change the `RELEASE_NAMESPACE` value to the namespace where
-Epinio was installed into (by default it is `epinio`) and add it to a file of your choice:
-
-```
+```yaml
 apiVersion: application.epinio.io/v1
 kind: AppChart
 metadata:
@@ -148,57 +134,54 @@ spec:
   helmChart: https://mydomain.org/epinio-application-fluentd.tgz
 ```
 
-This How-to now simply assumes that the chosen file is named:
-
-```
-fluentd-appchart.yaml
-```
+This How-to assumes that the name of the chosen file is `fluentd-appchart.yaml`.
 
 :::info
-This is a Kubernetes custom resource, which will describe the new Helm chart to Epinio.  In this
-example, it provides the information about the name, the source and descriptions.
+
+This is a Kubernetes custom resource, which describes the new Helm chart to Epinio.
+In this example, it provides the information about the name, the source and descriptions.
+
 :::
 
-The necessary Kubernetes CRD is provided by the Epinio installation.
+The Epinio installation provides the necessary Kubernetes CRD.
 
 Apply this resource to the Epinio cluster:
 
-```
+```console
 kubectl apply -f fluentd-appchart.yaml
 ```
 
 Verify that the new chart is now registered in Epinio:
 
-```
+```console
 epinio app chart list
 ```
 
 You can also see the details of the chart in Epinio:
 
-```
+```console
 epinio app chart show fluentd
 ```
 
-## User-settable configuration values
+### User-settable configuration values
 
-To expose some user-settable configuration value `foo` the created application chart has to look for
-this variable in the `.Values.userConfig` map, i.e. it has to use the helm variable
-`.Values.userConfig.foo`.
+To expose the user-settable configuration value `foo` the created application chart has to look for this variable in the `.Values.userConfig` map.
+That is, it has to use the helm variable `.Values.userConfig.foo`.
 
 :::caution
-The chart is expected to use a sensible default value when this helm variable is not set.
+
+The chart should use a default value when this helm variable isn't set.
+
 :::
 
-With the application chart exposing `foo` as described above Epinio has to be made aware of the
-configuration value by adding a specification to the `AppChart` resource describing it.
+With the application chart exposing `foo` Epinio has to be aware of the configuration value by adding a specification to the `AppChart` resource describing it.
 
-This is done by adding an entry `foo` to the `spec.settings` map of the AppChart resource.  This
-entry is itself a map, with a mandatory `type` field, and type-dependent __optional__ restrictions
-on the valid values of `foo`.
+Do this by adding an entry `foo` to the `spec.settings` map of the AppChart resource.
+This entry is itself a map, with a mandatory `type` field, and type-dependent **optional** restrictions on the valid values of `foo`.
 
 Example:
 
-```
+```yaml
 kind: AppChart
 metadata:
   [...]
@@ -223,45 +206,45 @@ spec:
 
 The valid types and their possible restrictions are:
 
-|Type      |Restriction |Semantics                   |
-|---       |---         |---                         |
-|`integer` |`minimum`   |Minimum valid integer value |
-|          |`maximum`   |Maximum valid integer value |
-|`number`  |`minimum`   |s.a., floating point        |
-|          |`maximum`   |s.a., floating point        |
-|`string`  |`enum`      |Sequence of valid values    |
-|`bool`    |n/a         |                            |
+|Type|Restriction|Semantics|
+|---|---|---|
+|`integer`|`minimum`|Minimum valid integer value|
+| |`maximum`|Maximum valid integer value|
+|`number`|`minimum`|floating-point|
+| |`maximum`|floating-point|
+|`string`|`enum`|Sequence of valid values|
+|`bool`|n/a| |
 
-Restrictions set on a type not supporting them, for example a `minimum` on a `string`-type
-configuration value, are ignored.
+Restrictions set on a type not supporting them, for example, a `minimum` on a `string`-type configuration value, are ignored.
 
 :::caution
-The restriction values have to be YAML __strings__, regardless the type of the configuration value.
-Note how in the example above the `maximum` and `minimum` values are quoted to make them strings.
+
+The restriction values have to be YAML **strings**, regardless the type of the configuration value.
+Note how in the example the `maximum` and `minimum` values are quoted to make them strings.
+
 :::
 
 ## Troubleshooting
 
-If the new Helm chart is not correctly registered in Epinio, check that the
-`RELEASE_NAMESPACE` was properly set in `fluentd-appchart.yaml`.
+If the new Helm chart isn't correctly registered in Epinio,
+check that the `RELEASE_NAMESPACE` is set in `fluentd-appchart.yaml`.
 
 ## Going further
 
-The standard app chart, as well as the chart created here use a kubernetes `Deployment` as
-the main resource describing the active application.
+The standard app chart, and the chart created here,
+use a Kubernetes `Deployment` as the main resource describing the active application.
 
 Up to Epinio version 1.0, this was the only kind of resource supported.
+Epinio supports other kinds of controllers,
+for example, `StatefulSet` since versions greater than 1.0.
 
-Since Epinio version 1.0+, other kinds of controllers, for example `StatefulSet`, are supported.
-
-However, even when changing controllers, it is important to keep the `Pod` annotations and
-labels the same as for the standard chart. This allows Epinio's server to locate the required resources and
-use them properly.
+However, even when changing controllers,
+it's important to keep the `Pod` annotations and labels the same as for the standard chart.
+This lets Epinio's server locate the required resources and use them.
 
 Here's a couple of examples:
 
-  1. `epinio.io/stage-id` provides the id of the staging Pod which created the application's image.
+1. The value of `epinio.io/stage-id` is the id of the staging Pod which created the application's image.
 
-  1. `epinio.io/app-container` provides the name of the application's main `Container`,
-     which is used by `epinio exec`. This label has to match the actual name of the
-     container in the pod spec.
+1. The value of `epinio.io/app-container` is the name of the application's main `Container`, used by `epinio exec`.
+This label has to match the actual name of the container in the pod spec.

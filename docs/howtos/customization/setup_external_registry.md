@@ -1,15 +1,17 @@
 ---
-sidebar_label: "Setting Up An External Container Registry"
+sidebar_label: Setting up an external container registry
 sidebar_position: 8
-title: ""
+title: How to set up an external container registry
+description: How to setup an external container registry
+keywords: [epinio, kubernetes, external container registry setup]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, custom, setup-external-container-registry]
 ---
 
-## How to set up a basic external Epinio registry
+You can use an external registry for Epinio to store application images.
+You can do this by setting the following variables during the `helm install`:
 
-Epinio allows the use of an external registry for the storage of application images.
-This can be achieved by setting the following variables during the `helm install`:
-
-```
+```console
 helm install \
   --set containerregistry.enabled=false \
   --set global.registryURL=$REGISTRY_URL \
@@ -20,41 +22,39 @@ helm install \
   epinio epinio/epinio
 ```
 
-Using [dockerhub](https://hub.docker.com/) as an example, the user would have to set
+Using [Docker Hub](https://hub.docker.com/) as an example, you would have to set
 the value of `$REGISTRY_URL` to `registry.hub.docker.com`, `$REGISTRY_USER` and
-`$REGISTRY_PASSWORD` would be set to the dockerhub credentials, and `$REGISTRY_NAMESPACE`
-would be either an organization or the username.
+`$REGISTRY_PASSWORD` are set to the Docker Hub credentials.
+Lastly, `$REGISTRY_NAMESPACE`
+would be either an organization or username.
 
-When the above arguments are set, Epinio doesn't deploy a registry on the cluster.
+With these arguments set, Epinio doesn't deploy a registry on the cluster.
 
-### Advanced setup for a secure external registry
+## Advanced setup for a secure external registry
 
-When access to the external registry is secured via TLS it becomes necessary to make
-the relevant certificate known to both Epinio and the cluster (i.e. the kubelets).
+When access to the external registry is secured via TLS it's necessary to make the correct certificate known to both Epinio and the cluster (that is, the kubelets).
 
-Assuming that `epinio-external-registry-tls` is the name of the Kubernetes secret
-used to store the certificate then extending the `helm install` command with
+Assuming that `epinio-external-registry-tls` is the name of the Kubernetes secret used to store the certificate then adding to the `helm install` command:
 
-```
+```console
     --set containerregistry.certificateSecret=epinio-external-registry-tls
 ```
 
-is enough to make the certificate known to epinio.
+is enough to make the certificate known to Epinio.
 
 :::note
-The secret is expected to be in the `epinio` namespace.
-The certificate is expected to be under the key `tls.crt` of that secret
-and is expected to be in PEM format.
+
+The secret needs to be in the `epinio` namespace.
+The certificate needs to be under the key `tls.crt` of that secret
+and needs to be in PEM format.
+
 :::
 
-Making the same information known to the cluster itself, i.e. the kubelets, differs
-between the various distributions of Kubernetes.
+Making the same information known to the cluster itself, that is, the kubelets, differs between distributions of Kubernetes.
 
-Assuming a k3s cluster running on an openSUSE or SLE-based host, and further
-assuming that the certificate is stored in a file named `CA.pem` in the current
-working directory the commands would be
+Assuming a k3s cluster running on an openSUSE or SLE-based host, and the certificate is in a file named `CA.pem`, in the current working directory the commands would be:
 
-```bash
+```console
 sudo cp CA.pem /etc/pki/trust/anchors/
 sudo update-ca-certificates
 sudo systemctl restart k3s[-agent].service

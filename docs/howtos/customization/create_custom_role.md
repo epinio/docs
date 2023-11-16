@@ -4,8 +4,10 @@ sidebar_position: 14
 title: "Creating a custom role"
 description: Creating a custom role in Epinio.
 keywords: [epinio, kubernetes, custom role]
+doc-type: [how-to]
+doc-topic: [epinio, customize, create-custom-role]
+doc-persona: [epinio-operator]
 ---
-
 
 As described [in the Authorization reference page](../../references/authorization.md),
 Epinio Roles are Kubernetes ConfigMaps with a particular label.
