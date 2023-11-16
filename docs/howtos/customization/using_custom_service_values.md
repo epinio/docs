@@ -1,40 +1,48 @@
 ---
-sidebar_label: "Custom values for service Helm charts"
+sidebar_label: Custom values for service Helm charts
 sidebar_position: 17
-title: "How to specify custom values for service Helm charts"
+title: Custom values for service Helm charts
+description: How to specify custom values for service Helm charts
+keywords: [epinio, kubernetes, custom service values]
+doc-type: [how-to]
+doc-topic: [epinio, customize, custom-service-values]
+doc-persona: [epinio-operator, epinio-user]
 ---
 
 ## Audience
 
-This documentation is for operators specifying custom services for users, and users creating instances of those custom services who need to customize them.
+This documentation is for Epinio operators specifying custom services for users,
+and users creating instances of those custom services who need to customize them.
 
-Operators are shown how to specify user settings based on the form of the field in the `values.yaml` file of the underlying service Helm chart.
+It shows operators how to specify user settings based on the form of the field in the `values.yaml` file of the underlying service Helm chart.
 
-Users are shown how to set values for the user settings of a service.
+It also shows Epinio users how to set values for the user settings of a service.
 
 ## General information
 
-Operators, see [Creating A Custom Service](create_custom_service.md) for the general syntax of
+Operators, should see
+[Creating A Custom Service](create_custom_service.md)
+for the general syntax of
 user settings.
 
-For users, the relevant option is `--chart-value` (short: `-v`) of the `epinio service create`
-command.
+For users,
+the relevant option is `--chart-value` (short: `-v`)
+of the `epinio service create` command.
 
-Following is a series of examples showing how the various forms of helm chart
-values are specified in the custom services and then used via `--chart-value`.
+Following is a series of examples showing how you specify forms of Helm chart values in the custom services and then using `--chart-value`.
 
 ## Examples
 
-All the examples have the same basic structure. The tables show, side by side,
+All the examples have the same structure. The tables show, side by side,
 
- - how the field looks like in the `values.yaml` of the underlying service,
- - how the field is specified in the custom service, and
- - how it is addressed by the user via `--chart-value`.
+- how the field looks like in the `values.yaml` of the underlying service,
+- how you specify the field in the custom service, and
+- how you address it as a user using `--chart-value`.
 
 ### Basic map, simple value
 
-This example assumes that the field value is of a simple type `T`, i.e. `string`, `integer`,
-`number`, or `bool`.
+This example assumes that the field value is of a simple type `T`,
+that is, `string`, `integer`, `number`, or `bool`.
 
 <pre>
 <table>
@@ -70,11 +78,11 @@ This example assumes that the field value is of a simple type `T`, i.e. `string`
 
 ### Basic array, simple value
 
-This example assumes that the field value is of a simple type `T`, i.e. `string`, `integer`,
-`number`, or `bool`.
+This example assumes that the field value is of a simple type `T`,
+that is, `string`, `integer`, `number`, or `bool`.
 
-Note how the field name in the service spec does not mention that `bar` is an array.
-Here the name `foo.bar`, in the service spec, describes the path to the field.
+The field name in the service spec doesn't mention that `bar` is an array.
+Here, the name `foo.bar`, in the service spec, describes the path to the field.
 
 <pre>
 <table>
@@ -116,13 +124,15 @@ Here the name `foo.bar`, in the service spec, describes the path to the field.
 
 ### Mixed map and array, simple values
 
-This example assumes that the value field is a simple type `T`, i.e. `string`, `integer`,
-`number`, or `bool`.
+This example assumes that the value field is a simple type `T`,
+that is, `string`, `integer`, `number`, or `bool`.
 
-Here `foo` is the array, having maps as elements, of which the keys `name` and `value` are of
-interest.
+Here, `foo` is the array,
+having maps as elements,
+of which the keys `name` and `value` are of interest.
 
-Again, note how the names of the field do not mention the nature of `foo` as an array, and how the paths to fields of interest are used to name them in the CLI settings.
+The names of the field don't mention that `foo` is an array,
+and the paths to fields of interest are used to name them in the CLI settings.
 
 <pre>
 <table>
@@ -169,8 +179,9 @@ Again, note how the names of the field do not mention the nature of `foo` as an 
 
 ### Map-valued map
 
-This example assumes that the field value is a map itself, with arbitrary keys, and values.
-A concrete example would be the various annotation fields provided by bitnami services that enable the user to set custom annotations on the various groups of pods of the service.
+This example assumes that the field value is a map itself,
+with arbitrary keys, and values.
+An example would be the annotation fields provided by Bitnami services enabling the user to set custom annotations on the groups of pods of the service.
 
 <pre>
 <table>
