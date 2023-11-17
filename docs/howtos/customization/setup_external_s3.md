@@ -6,6 +6,7 @@ description: "How to set up external S3 storage"
 keywords: [epinio, kubernetes, external S3 storage]
 doc-type: [how-to]
 doc-topic: [how-to, custom, external-s3-storage]
+doc-persona: [epinio-operator]
 ---
 
 One of the steps involved in running `epinio push` is storing the requested version of the code in the configured Epinio S3 compatible storage.

@@ -5,7 +5,7 @@ title: "Exporting applications to an OCI registry"
 description: Exporting applications to an OCI registry
 keywords: [epinio, kubernetes, exporting, OCI registry]
 doc-type: [how-to]
-doc-topic: [epinio, customize, export-to-oci-registry]
+doc-topic: [epinio, how-to, customize, export-to-oci-registry]
 doc-persona: [epinio-operator]
 ---
 

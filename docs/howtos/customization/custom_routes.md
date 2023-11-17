@@ -5,7 +5,7 @@ title: Setting up custom routes
 description: How to set up custom routes
 keywords: [epinio, kubernetes, customization, custom routes]
 doc-type: [how-to]
-doc-topic: [how-to, customize, custom-routes]
+doc-topic: [epinio, how-to, customize, custom-routes]
 doc-persona: [epinio-operator]
 ---
 

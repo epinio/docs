@@ -6,6 +6,7 @@ description: How to setup an external container registry
 keywords: [epinio, kubernetes, external container registry setup]
 doc-type: [how-to]
 doc-topic: [epinio, how-to, custom, setup-external-container-registry]
+doc-persona: [epinio-operator]
 ---
 
 You can use an external registry for Epinio to store application images.

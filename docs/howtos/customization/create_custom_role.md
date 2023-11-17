@@ -3,9 +3,9 @@ sidebar_label: "Creating A custom role"
 sidebar_position: 14
 title: "Creating a custom role"
 description: Creating a custom role in Epinio.
-keywords: [epinio, kubernetes, custom role]
+keywords: [epinio, kubernetes, create custom role]
 doc-type: [how-to]
-doc-topic: [epinio, customize, create-custom-role]
+doc-topic: [epinio, how-to, customize, create-custom-role]
 doc-persona: [epinio-operator]
 ---
 
