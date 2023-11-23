@@ -132,12 +132,12 @@ helm install --set global.tlsIssuer=private-ca epinio epinio/epinio --global.dom
 
 Cert manager watches for a *certificate* resource and uses the referenced *cluster issuer* to generate a certificate.
 The certificate is stored in a *secret*,
-in the namespace the certificate resources was created in.
+in the namespace the certificate resource was created in.
 An *Ingress* resource can then use that secret to set up TLS.
 
 Example:
 
-1. The Epinio installation creates a certificate resource in Epinio namespace
+1. The Epinio installation creates a certificate resource in the Epinio namespace
 
   ```yaml
   apiVersion: cert-manager.io/v1alpha2

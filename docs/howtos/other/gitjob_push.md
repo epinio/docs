@@ -52,7 +52,7 @@ epinio target workspace
 
 ### Upload Epinio settings
 
-So the GitJob can authenticate and push correctly, you can upload your Epinio settings file to the cluster with:
+For the GitJob to authenticate and push correctly, upload your Epinio settings file to the cluster with:
 
 ```console
 kubectl create secret generic epinio-creds --from-file=$HOME/.config/epinio/settings.yaml
