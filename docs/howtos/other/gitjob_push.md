@@ -1,59 +1,72 @@
 ---
-sidebar_label: "Pushing With A Git Job"
+sidebar_label: Pushing with a Git job
 sidebar_position: 6
-title: ""
+title: Pushing with a Git job
+description: How to do an Epinio push with a Git job.
+keywords: [epinio, kubernetes, epinio push, git job]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, other, gitjob-push]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 
-# Push with gitjob
+## Introduction
 
-In some other "application deployment" solutions, they have a feature that allows you to set up a deployment that rebuilds and republishes when your code stored in Git is changed.
+In certain other "application deployment" solutions,
+there is a feature that lets you set up a deployment that rebuilds and republishes,
+when your code repository in Git changes
 
-We can recreate this functionality in Epinio using the GitJob CRD from [Rancher Fleet](https://fleet.rancher.io/).
-
-NOTE: [We will improve this experience in the future](https://github.com/epinio/epinio/issues/1269)!
+You can have this functionality in Epinio using the GitJob CRD from [Rancher Fleet](https://fleet.rancher.io/).
 
 ## Setup
 
 ### Install GitJob
 
-If you don't have Rancher (or standalone Fleet) installed, we need to install the GitJob operator by following the instructions found at https://github.com/rancher/gitjob#running.
+If you don't have Rancher, or stand-alone Fleet installed, you need to
+[install the GitJob operator](https://github.com/rancher/gitjob#running).
 
+Now you need to setup the Service Account to run your Jobs with.
+You don't need to do anything using the Kube API, so you don't need to add any role bindings to it:
 
-Then we need to setup the Service Account to run our Jobs with (since we don't need to do anything directly with the kube api, we don't need to add any role bindings to it):
-
-```
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: epinio-gitjob
 ```
 
-### Ensure Epinio is installed
-If you are using Rancher, you can install Epinio directly from there. For more information check out the [Rancher configuration](../../installation/other_inst_scenarios/install_epinio_on_rancher.md) with Epinio.
+### Check Epinio installation
 
-Once Epinio is deployed, log in as admin and verify that the namespace `workspace` exists and is targeted. If this is not the case, you may achieve this by running:
-```
+If you are using Rancher, you can install Epinio directly from there.
+For more information check the
+[Rancher configuration](../../installation/other_inst_scenarios/install_epinio_on_rancher.md) with Epinio.
+
+Once you have deployed Epinio,
+log in as admin and verify that the namespace `workspace` exists.
+It also needs to be the current target.
+You can do this, if necessary, by running:
+
+```console
 epinio namespace create workspace 
 epinio target workspace 
 ```
 
-### Upload Epinio Settings
+### Upload Epinio settings
 
-So the GitJob can authenticate and push correctly, we can upload our Epinio settings file to the cluster with:
+For the GitJob to authenticate and push correctly, upload your Epinio settings file to the cluster with:
 
-```
+```console
 kubectl create secret generic epinio-creds --from-file=$HOME/.config/epinio/settings.yaml
 ```
 
-This will create a secret containing the settings.yaml that was created locally when you do `epinio login`
+This creates a secret containing the settings.yaml when you do an `epinio login`
 
-### Setup Sample Project
+### Setup sample project
 
-Next, we can use the 12factor app to show how to write a GitJob.
+Next, as an example, you can use the 12factor app to write a GitJob.
 
-Create a yaml file called `12factor-gitjob.yaml` containing:
+Create a YAML file called `12factor-gitjob.yaml` containing:
 
-``` yaml
+```yaml
 apiVersion: gitjob.cattle.io/v1
 kind: GitJob
 metadata:
@@ -104,24 +117,24 @@ spec:
 
 You can apply this via:
 
-```
+```console
 kubectl apply -f 12factor-gitjob.yaml
 ```
 
 Once applied, you should see a Job and then Pod get created:
 
-```
+```console
 kubectl get job,pod
 ```
 
-You can follow the logs of the pod listed above with:
+You can follow the logs of the pod listed earlier with:
 
-```
+```console
 kubectl logs <pod_name> -f
 ```
 
-
 ### Using Webhooks
 
-If you prefer to use webhooks instead of polling, set up the job in the same way as before but also follow the instructions found at: https://github.com/rancher/gitjob#webhook
-
+If you prefer to use webhooks instead of polling,
+set up the job in the same way as before but also follow the
+[Rancher webhook instructions](https://github.com/rancher/gitjob#webhook).
