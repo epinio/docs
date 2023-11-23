@@ -9,10 +9,10 @@ doc-topic: [epinio, how-to, customize, create-custom-role]
 doc-persona: [epinio-operator]
 ---
 
-As described [in the Authorization reference page](../../references/authorization.md),
+As described in the [Authorization reference](../../references/authorization.md),
 Epinio Roles are Kubernetes ConfigMaps with a particular label.
 
-To create a role you can execute the following `kubectl` command:
+To create a role execute the `kubectl` command:
 
 ```console
 cat <<EOF | kubectl apply -f -
@@ -33,7 +33,14 @@ data:
 EOF
 ```
 
-Then, to assign the role to a user, you can update the user `epinio.io/roles` annotation:
+After that restart the Epinio server pod to force Epinio to reload the extended set of roles.
+This is done by deleting the pod, causing the Epinio deployment to restart it:
+
+```console
+kubectl delete pod -n epinio -l 'app.kubernetes.io/component=epinio-server'
+```
+
+Then, to assign the role to a user, update the user `epinio.io/roles` annotation:
 
 ```console
 # get the old roles assigned to te user
@@ -43,4 +50,5 @@ OLD_ROLES=$(kubectl get secrets -n epinio MY_USER -o jsonpath='{.metadata.annota
 kubectl annotate secret -n epinio --overwrite MY_USER "epinio.io/roles=$OLD_ROLES,custom-role"
 ```
 
-To see which are the available actions that can be assigned to a role you can check the Authorization reference page.
+Check the [Authorization reference](../../references/authorization.md) for the list of actions
+assignable to roles.
