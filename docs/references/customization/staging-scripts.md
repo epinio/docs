@@ -44,6 +44,7 @@ This ConfigMap is expected to have the following keys:
 |`builder`	|Glob-pattern to match the image references supported by this spec.	|
 |`userID`	|User ID to run the `build` script with.				|
 |`groupID`	|Group ID to run the `build` script with.				|
+|`env`		|Standard environment for the scripts, YAML-formatted string, key/value map.	|
 |||
 |`base`		|Optional redirect to the actual ConfigMap with the scripts.		|
 |||
@@ -59,11 +60,14 @@ If `base` and any of the keys listed after it are specified in the same resource
 priority.
 
 This mechanism allows the sharing of script and image data between specifications differing only in
-the user/group required to run the `build` script.
+the user/group/environment required to run the `build` script.
 
 :::info
 User and group IDs, and general support for multiple staging scripts, was added because
 the Bionic and Jammy-based builders use different numeric ids for their `cnb` user.
+
+Env was added as the different builders may require different values for the `CNB_PLATFORM_API`
+environment variable.
 :::
 
 ### Staging script API, Download
