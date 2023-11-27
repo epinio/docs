@@ -79,22 +79,24 @@ The TLS keys/CSRs/certs can be created manually, see the guide below.
 Adjust the `Subj`/`CN`/`SAN` values according to the local requirements.
 
 ### Certificate creation
-Before running the registry or the cluster we will need to create the keys and the certificates.
 
 #### Generate root CA key and certificate
 
-Create and enter directory for your files:
+Create and enter a directory for your files:
+
 ```bash
 mkdir certs
 cd certs
 ```
 
-Create root CA private key:
+Create the root CA private key:
+
 ```bash
 openssl genrsa -out CA.key 2048
 ```
 
-Create root CA certificate:
+Create the root CA certificate:
+
 ```bash
 openssl req -x509 -new -nodes \
     -subj "/C=DE/ST=Germany/L=Nurnberg/O=SUSE/OU=Epinio/CN=SUSE CA cert/emailAddress=epinio@suse.com" \
@@ -104,24 +106,27 @@ openssl req -x509 -new -nodes \
     -out CA.pem
 ```
 
-#### Create private key, CSR and signed certificate for external registry service
+#### Create private key, CSR and signed certificate
 
-Create private key for your registry domain:
+Create the private key for your domain:
+
 ```bash
-openssl genrsa -out registry.key 2048
+openssl genrsa -out domain.key 2048
 ```
 
-Create a CSR request (CN value contains your registry domain):
+Create a CSR request (The `CN` field contains your domain):
+
 ```bash
 openssl req -new \
     -subj "/C=DE/ST=Germany/L=Nurnberg/O=SUSE/OU=Epinio/CN=registry.suse.dev/emailAddress=epinio@suse.com" \
-    -key registry.key \
-    -out registry.csr
+    -key domain.key \
+    -out domain.csr
 ```
 
-Create extra openssl config for with additional SAN entry (contains your registry domain):
+Create an extra openssl configuration for additional `SAN` entries, if any.
+
 ```bash
-cat > registry.ext <<EOF
+cat > domain.ext <<EOF
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:FALSE
 keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
@@ -132,13 +137,15 @@ DNS.1 = registry.suse.dev
 EOF
 ```
 
-Create signed registry certificate by using CSR, your CA and extra config:
+Create the signed registry certificate from CSR, CA and the extra configuration, if present:
+
 ```bash
 openssl x509 -req -in registry.csr -CA CA.pem -CAkey CA.key \
     -CAcreateserial -out registry.pem -days 3650 -sha256 -extfile registry.ext
 ```
 
-Verify registry certificate SAN entry:
+Verify the new certificate's `SAN` field.
+
 ```bash
 openssl x509 -in registry.pem -text | grep -A1 'Subject Alternative Name'
 >             X509v3 Subject Alternative Name: 
