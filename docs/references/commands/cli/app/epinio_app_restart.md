@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app restart"
+sidebar_label: epinio app restart
+description: epinio app restart
+keywords: [epinio, kubernetes, epinio app restart]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-restart]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app restart
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app export"
+sidebar_label: epinio app export
+description: epinio app export
+keywords: [epinio, kubernetes, epinio app export]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-export]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app export
 

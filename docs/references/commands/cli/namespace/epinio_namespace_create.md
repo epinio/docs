@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio namespace create"
+sidebar_label: epinio namespace create
+description: epinio namespace create
+keywords: [epinio, kubernetes, epinio namespace create]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-namespace-create]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio namespace create
 

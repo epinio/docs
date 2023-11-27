@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app chart default"
+sidebar_label: epinio app chart default
+description: epinio app chart default
+keywords: [epinio, kubernetes, epinio app chart default]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-chart-default]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app chart default
 

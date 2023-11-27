@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio service unbind"
+sidebar_label: epinio service unbind
+description: epinio service unbind
+keywords: [epinio, kubernetes, epinio service unbind]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-service-unbind]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio service unbind
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio export-registries"
+sidebar_label: epinio export-registries
+description: epinio export-registries
+keywords: [epinio, kubernetes, epinio export-registries]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-export-registries]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio export-registries
 

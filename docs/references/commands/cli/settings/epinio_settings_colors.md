@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio settings colors"
+sidebar_label: epinio settings colors
+description: epinio settings colors
+keywords: [epinio, kubernetes, epinio settings colors]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-settings-colors]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio settings colors
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app env set"
+sidebar_label: epinio app env set
+description: epinio app env set
+keywords: [epinio, kubernetes, epinio app env set]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-env-set]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app env set
 

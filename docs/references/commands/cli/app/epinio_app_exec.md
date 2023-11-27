@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app exec"
+sidebar_label: epinio app exec
+description: epinio app exec
+keywords: [epinio, kubernetes, epinio app exec]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-exec]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app exec
 

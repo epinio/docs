@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio service port-forward"
+sidebar_label: epinio service port-forward
+description: epinio service port-forward
+keywords: [epinio, kubernetes, epinio service port-forward]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-service-port-forward]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio service port-forward
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio namespace"
+sidebar_label: epinio namespace
+description: epinio namespace
+keywords: [epinio, kubernetes, epinio namespace]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-namespace]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio namespace
 
@@ -9,10 +13,6 @@ Epinio-controlled namespaces
 ### Synopsis
 
 Manage epinio-controlled namespaces
-
-```
-epinio namespace [flags]
-```
 
 ### Options
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app update"
+sidebar_label: epinio app update
+description: epinio app update
+keywords: [epinio, kubernetes, epinio app update]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-update]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app update
 

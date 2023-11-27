@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio settings show"
+sidebar_label: epinio settings show
+description: epinio settings show
+keywords: [epinio, kubernetes, epinio settings show]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-settings-show]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio settings show
 

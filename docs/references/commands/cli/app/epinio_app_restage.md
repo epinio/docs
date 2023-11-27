@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app restage"
+sidebar_label: epinio app restage
+description: epinio app restage
+keywords: [epinio, kubernetes, epinio app restage]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-restage]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app restage
 

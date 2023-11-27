@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app chart show"
+sidebar_label: epinio app chart show
+description: epinio app chart show
+keywords: [epinio, kubernetes, epinio app chart show]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-chart-show]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app chart show
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio configuration"
+sidebar_label: epinio configuration
+description: epinio configuration
+keywords: [epinio, kubernetes, epinio configuration]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-configuration]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio configuration
 

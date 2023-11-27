@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio logout"
+sidebar_label: epinio logout
+description: epinio logout
+keywords: [epinio, kubernetes, epinio logout]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-logout]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio logout
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio service create"
+sidebar_label: epinio service create
+description: epinio service create
+keywords: [epinio, kubernetes, epinio service create]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-service-create]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio service create
 
