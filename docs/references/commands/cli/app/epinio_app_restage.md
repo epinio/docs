@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app restage
+title: ""
 description: epinio app restage
 keywords: [epinio, kubernetes, epinio app restage]
 doc-type: [reference]

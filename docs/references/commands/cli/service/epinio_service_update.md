@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio service update
+title: ""
 description: epinio service update
 keywords: [epinio, kubernetes, epinio service update]
 doc-type: [reference]

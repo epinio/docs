@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio settings colors
+title: ""
 description: epinio settings colors
 keywords: [epinio, kubernetes, epinio settings colors]
 doc-type: [reference]

@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio service catalog
+title: ""
 description: epinio service catalog
 keywords: [epinio, kubernetes, epinio service catalog]
 doc-type: [reference]

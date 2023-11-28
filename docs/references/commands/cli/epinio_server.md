@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio server
+title: ""
 description: epinio server
 keywords: [epinio, kubernetes, epinio server]
 doc-type: [reference]
@@ -23,6 +24,7 @@ epinio server [flags]
 ```
       --access-control-allow-origin string    (ACCESS_CONTROL_ALLOW_ORIGIN) Domains allowed to use the API
       --app-image-exporter string             (APP_IMAGE_EXPORTER) Name of the container image used to download the application image from the 'export' API.
+      --default-builder-image string          (DEFAULT_BUILDER_IMAGE) Name of the container image used to build images from staged sources.
       --disable-tracking                      (DISABLE_TRACKING) Disable tracking of the running Epinio and Kubernetes versions
   -h, --help                                  help for server
       --ingress-class-name string             (INGRESS_CLASS_NAME) Name of the ingress class to use for apps. Leave empty to add no ingressClassName to the ingress.

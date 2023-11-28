@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app delete
+title: ""
 description: epinio app delete
 keywords: [epinio, kubernetes, epinio app delete]
 doc-type: [reference]

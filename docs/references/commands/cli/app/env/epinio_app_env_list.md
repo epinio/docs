@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app env list
+title: ""
 description: epinio app env list
 keywords: [epinio, kubernetes, epinio app env list]
 doc-type: [reference]

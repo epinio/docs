@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio target
+title: ""
 description: epinio target
 keywords: [epinio, kubernetes, epinio target]
 doc-type: [reference]

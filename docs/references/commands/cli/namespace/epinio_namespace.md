@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio namespace
+title: ""
 description: epinio namespace
 keywords: [epinio, kubernetes, epinio namespace]
 doc-type: [reference]

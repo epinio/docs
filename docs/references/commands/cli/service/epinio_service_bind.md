@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio service bind
+title: ""
 description: epinio service bind
 keywords: [epinio, kubernetes, epinio service bind]
 doc-type: [reference]

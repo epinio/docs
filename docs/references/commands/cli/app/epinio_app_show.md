@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app show
+title: ""
 description: epinio app show
 keywords: [epinio, kubernetes, epinio app show]
 doc-type: [reference]
@@ -17,7 +18,8 @@ epinio app show NAME [flags]
 ### Options
 
 ```
-  -h, --help   help for show
+  -h, --help            help for show
+  -o, --output string   sets output format [text|json] (default "text")
 ```
 
 ### Options inherited from parent commands

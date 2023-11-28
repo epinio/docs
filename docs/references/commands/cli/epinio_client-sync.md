@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio client-sync
+title: ""
 description: epinio client-sync
 keywords: [epinio, kubernetes, epinio client-sync]
 doc-type: [reference]

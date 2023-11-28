@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio cli
+title: ""
 description: epinio cli
 keywords: [epinio, kubernetes, epinio cli]
 doc-type: [reference]

@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio service
+title: ""
 description: epinio service
 keywords: [epinio, kubernetes, epinio service]
 doc-type: [reference]
@@ -13,6 +14,10 @@ Epinio service management
 ### Synopsis
 
 Manage the epinio services
+
+```
+epinio service [flags]
+```
 
 ### Options
 

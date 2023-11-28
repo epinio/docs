@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio completion
+title: ""
 description: epinio completion
 keywords: [epinio, kubernetes, epinio completion]
 doc-type: [reference]

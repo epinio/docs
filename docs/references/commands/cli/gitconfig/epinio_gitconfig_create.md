@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio gitconfig create
+title: ""
 description: epinio gitconfig create
 keywords: [epinio, kubernetes, epinio gitconfig create]
 doc-type: [reference]
@@ -18,11 +19,11 @@ epinio gitconfig create ID URL [flags]
 
 ```
       --cert-file string      path to file holding supporting certificates
-      --git-provider string   Git provider code (default 'git')
+      --git-provider string   Git provider code [git|github|github_enterprise|gitlab|gitlab_enterprise] (default "git")
   -h, --help                  help for create
       --password string       password for logging into the host
       --repository string     specific repository
-      --skip-ssl              skip ssl
+      --skip-ssl              skip SSL
       --user-org string       user/org holding repository
       --username string       user name for logging into the host
 ```

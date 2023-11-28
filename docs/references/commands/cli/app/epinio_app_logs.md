@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app logs
+title: ""
 description: epinio app logs
 keywords: [epinio, kubernetes, epinio app logs]
 doc-type: [reference]

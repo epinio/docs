@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app create
+title: ""
 description: epinio app create
 keywords: [epinio, kubernetes, epinio app create]
 doc-type: [reference]
