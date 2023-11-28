@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio namespace show"
+sidebar_label: epinio namespace show
+description: epinio namespace show
+keywords: [epinio, kubernetes, epinio namespace show]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-namespace-show]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio namespace show
 

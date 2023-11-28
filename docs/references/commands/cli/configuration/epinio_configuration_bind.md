@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio configuration bind"
+sidebar_label: epinio configuration bind
+description: epinio configuration bind
+keywords: [epinio, kubernetes, epinio configuration bind]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-configuration-bind]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio configuration bind
 

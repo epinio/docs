@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app delete"
+sidebar_label: epinio app delete
+description: epinio app delete
+keywords: [epinio, kubernetes, epinio app delete]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-delete]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app delete
 

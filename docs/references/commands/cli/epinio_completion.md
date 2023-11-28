@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio completion"
+sidebar_label: epinio completion
+description: epinio completion
+keywords: [epinio, kubernetes, epinio completion]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-completion]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio completion
 

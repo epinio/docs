@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio settings update-ca"
+sidebar_label: epinio settings update-ca
+description: epinio settings update-ca
+keywords: [epinio, kubernetes, epinio settings update-ca]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-settings-update-ca]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio settings update-ca
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app logs"
+sidebar_label: epinio app logs
+description: epinio app logs
+keywords: [epinio, kubernetes, epinio app logs]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-logs]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app logs
 

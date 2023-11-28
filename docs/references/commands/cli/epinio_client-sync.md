@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio client-sync"
+sidebar_label: epinio client-sync
+description: epinio client-sync
+keywords: [epinio, kubernetes, epinio client-sync]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-client-sync]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio client-sync
 

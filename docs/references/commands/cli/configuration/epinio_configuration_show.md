@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio configuration show"
+sidebar_label: epinio configuration show
+description: epinio configuration show
+keywords: [epinio, kubernetes, epinio configuration show]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-configuration-show]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio configuration show
 
@@ -17,7 +21,8 @@ epinio configuration show NAME [flags]
 ### Options
 
 ```
-  -h, --help   help for show
+  -h, --help            help for show
+  -o, --output string   sets output format [text|json] (default "text")
 ```
 
 ### Options inherited from parent commands

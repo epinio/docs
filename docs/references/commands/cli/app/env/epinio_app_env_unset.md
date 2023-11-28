@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app env unset"
+sidebar_label: epinio app env unset
+description: epinio app env unset
+keywords: [epinio, kubernetes, epinio app env unset]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-env-unset]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app env unset
 

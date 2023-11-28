@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio service bind"
+sidebar_label: epinio service bind
+description: epinio service bind
+keywords: [epinio, kubernetes, epinio service bind]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-service-bind]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio service bind
 

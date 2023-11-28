@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio gitconfig create"
+sidebar_label: epinio gitconfig create
+description: epinio gitconfig create
+keywords: [epinio, kubernetes, epinio gitconfig create]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-gitconfig-create]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio gitconfig create
 

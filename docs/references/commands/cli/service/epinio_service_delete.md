@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio service delete"
+sidebar_label: epinio service delete
+description: epinio service delete
+keywords: [epinio, kubernetes, epinio service delete]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-service-delete]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio service delete
 

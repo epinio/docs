@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio gitconfig delete"
+sidebar_label: epinio gitconfig delete
+description: epinio gitconfig delete
+keywords: [epinio, kubernetes, epinio gitconfig delete]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-gitconfig-delete]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio gitconfig delete
 

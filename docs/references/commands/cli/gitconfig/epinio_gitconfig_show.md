@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio gitconfig show"
+sidebar_label: epinio gitconfig show
+description: epinio gitconfig show
+keywords: [epinio, kubernetes, epinio gitconfig show]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-gitconfig-show]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio gitconfig show
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio service update"
+sidebar_label: epinio service update
+description: epinio service update
+keywords: [epinio, kubernetes, epinio service update]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-service-update]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio service update
 

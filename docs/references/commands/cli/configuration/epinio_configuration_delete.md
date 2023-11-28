@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio configuration delete"
+sidebar_label: epinio configuration delete
+description: epinio configuration delete
+keywords: [epinio, kubernetes, epinio configuration delete]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-configuration-delete]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio configuration delete
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio app create"
+sidebar_label: epinio app create
+description: epinio app create
+keywords: [epinio, kubernetes, epinio app create]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-create]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app create
 

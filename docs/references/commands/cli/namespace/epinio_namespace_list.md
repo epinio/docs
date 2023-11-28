@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio namespace list"
+sidebar_label: epinio namespace list
+description: epinio namespace list
+keywords: [epinio, kubernetes, epinio namespace list]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-namespace-list]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio namespace list
 

@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio namespace delete"
+sidebar_label: epinio namespace delete
+description: epinio namespace delete
+keywords: [epinio, kubernetes, epinio namespace delete]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-namespace-delete]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio namespace delete
 

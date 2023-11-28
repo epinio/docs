@@ -1,6 +1,10 @@
 ---
-title: ""
-sidebar_label: "epinio target"
+sidebar_label: epinio target
+description: epinio target
+keywords: [epinio, kubernetes, epinio target]
+doc-type: [reference]
+doc-topic: [epinio, reference, epinio-cli, epinio-target]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio target
 
