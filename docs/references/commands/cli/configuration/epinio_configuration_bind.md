@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio configuration bind
+title: ""
 description: epinio configuration bind
 keywords: [epinio, kubernetes, epinio configuration bind]
 doc-type: [reference]
