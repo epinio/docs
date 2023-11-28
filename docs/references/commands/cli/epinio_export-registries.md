@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio export-registries
+title: ""
 description: epinio export-registries
 keywords: [epinio, kubernetes, epinio export-registries]
 doc-type: [reference]

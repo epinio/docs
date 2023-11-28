@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app manifest
+title: ""
 description: epinio app manifest
 keywords: [epinio, kubernetes, epinio app manifest]
 doc-type: [reference]

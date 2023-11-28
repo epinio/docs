@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app list
+title: ""
 description: epinio app list
 keywords: [epinio, kubernetes, epinio app list]
 doc-type: [reference]
@@ -21,8 +22,9 @@ epinio app list [--all] [flags]
 ### Options
 
 ```
-      --all    list all applications
-  -h, --help   help for list
+      --all             list all applications
+  -h, --help            help for list
+  -o, --output string   sets output format [text|json] (default "text")
 ```
 
 ### Options inherited from parent commands

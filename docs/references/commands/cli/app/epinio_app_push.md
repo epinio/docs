@@ -1,18 +1,18 @@
 ---
-sidebar_label: epinio push
+sidebar_label: epinio app push
 title: ""
-description: epinio push
-keywords: [epinio, kubernetes, epinio push]
+description: epinio app push
+keywords: [epinio, kubernetes, epinio app push]
 doc-type: [reference]
-doc-topic: [epinio, reference, epinio-cli, epinio-push]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-push]
 doc-persona: [epinio-developer, epinio-operator]
 ---
-## epinio push
+## epinio app push
 
 Push an application declared in the specified manifest
 
 ```
-epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
+epinio app push [flags] [PATH_TO_APPLICATION_MANIFEST]
 ```
 
 ### Options
@@ -51,5 +51,5 @@ epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
 
 ### SEE ALSO
 
-* [epinio](./epinio.md)	 - Epinio cli
+* [epinio app](./epinio_app.md)	 - Epinio application features
 

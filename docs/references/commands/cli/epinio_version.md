@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio version
+title: ""
 description: epinio version
 keywords: [epinio, kubernetes, epinio version]
 doc-type: [reference]

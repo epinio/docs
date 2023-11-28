@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app exec
+title: ""
 description: epinio app exec
 keywords: [epinio, kubernetes, epinio app exec]
 doc-type: [reference]

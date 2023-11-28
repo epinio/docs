@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio service list
+title: ""
 description: epinio service list
 keywords: [epinio, kubernetes, epinio service list]
 doc-type: [reference]
@@ -17,8 +18,9 @@ epinio service list [flags]
 ### Options
 
 ```
-      --all    List all services
-  -h, --help   help for list
+      --all             List all services
+  -h, --help            help for list
+  -o, --output string   sets output format [text|json] (default "text")
 ```
 
 ### Options inherited from parent commands

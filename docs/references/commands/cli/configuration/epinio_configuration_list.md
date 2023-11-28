@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio configuration list
+title: ""
 description: epinio configuration list
 keywords: [epinio, kubernetes, epinio configuration list]
 doc-type: [reference]

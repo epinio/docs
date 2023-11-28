@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app
+title: ""
 description: epinio app
 keywords: [epinio, kubernetes, epinio app]
 doc-type: [reference]
@@ -13,6 +14,10 @@ Epinio application features
 ### Synopsis
 
 Manage epinio application
+
+```
+epinio app [flags]
+```
 
 ### Options
 

@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app restart
+title: ""
 description: epinio app restart
 keywords: [epinio, kubernetes, epinio app restart]
 doc-type: [reference]

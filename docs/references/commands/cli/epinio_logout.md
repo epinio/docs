@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio logout
+title: ""
 description: epinio logout
 keywords: [epinio, kubernetes, epinio logout]
 doc-type: [reference]

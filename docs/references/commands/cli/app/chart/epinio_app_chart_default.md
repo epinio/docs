@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio app chart default
+title: ""
 description: epinio app chart default
 keywords: [epinio, kubernetes, epinio app chart default]
 doc-type: [reference]

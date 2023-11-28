@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio namespace delete
+title: ""
 description: epinio namespace delete
 keywords: [epinio, kubernetes, epinio namespace delete]
 doc-type: [reference]

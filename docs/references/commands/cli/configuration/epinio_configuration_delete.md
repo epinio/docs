@@ -1,5 +1,6 @@
 ---
 sidebar_label: epinio configuration delete
+title: ""
 description: epinio configuration delete
 keywords: [epinio, kubernetes, epinio configuration delete]
 doc-type: [reference]
