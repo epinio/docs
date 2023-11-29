@@ -156,4 +156,4 @@ openssl x509 -in registry.pem -text | grep -A1 'Subject Alternative Name'
 ### Applications
 
 Under normal circumstances applications request their ingress certificates from CM.
-Without CM use of [routing secrets](customization/routing_secrets.md) becomes **manadatory**.
+Without CM use of [routing secrets](customization/routing_secrets.md) becomes **mandatory**.
