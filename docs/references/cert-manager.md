@@ -151,3 +151,9 @@ openssl x509 -in registry.pem -text | grep -A1 'Subject Alternative Name'
 >             X509v3 Subject Alternative Name: 
 >                DNS:registry.suse.dev
 ```
+
+
+### Applications
+
+Under normal circumstances applications request their ingress certificates from CM.
+Without CM use of [routing secrets](customization/routing_secrets.md) becomes **mandatory**.

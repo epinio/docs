@@ -13,8 +13,8 @@ Epinio uses 3 Kubernetes CRDs to manage its service catalog entries, app charts,
 
 When deleting a CRD Kubernetes also deletes all associated CRs.
 
-If, during an upgrade of an Epinio installation Epinio's CRDs were deleted, this means that
-that Epinio's service catalog entries, custom app charts, and applications data are **gone**.
+If, during an upgrade of an Epinio installation Epinio's CRDs were deleted, this means that Epinio's
+service catalog entries, custom app charts, and applications data are **gone**.
 
 Regarding the latter note that the active parts of Epinio applications use regular Kubernetes
 resources, and thus keep running during such an operation. Epinio however will lose track of these
