@@ -22,7 +22,8 @@ epinio info [flags]
 ### Options
 
 ```
-  -h, --help   help for info
+  -h, --help            help for info
+  -o, --output string   sets output format [text|json] (default "text")
 ```
 
 ### Options inherited from parent commands
