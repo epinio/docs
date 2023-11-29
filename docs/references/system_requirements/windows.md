@@ -1,32 +1,34 @@
 ---
-sidebar_label: "Windows"
-title: ""
+sidebar_label: Windows
+title: Windows installation requirements for Epinio
+description: Windows installation requirements for the Epinio Kubernetes development environment.
+keywords: [epinio, kubernetes, ]
+doc-type: [one of how-to, explanation, tutorial, reference]
+doc-topic: [root-branch]
+doc-persona: [default]
 ---
 
-# Epinio On Windows
+## Epinio on Windows
 
-Epinio relies on a number of command line tools which are normally
-available on any kind of Unix platform, yet rarely on Windows.
+Epinio uses command line tools which are available on any kind of Unix platform,
+but not normally on Windows.
 
-The general set contains
+You need:
 
-  - sh
-  - sed
-  - git
+- `sh`
+- `sed`
+- `git`
 
-while the specific set consists of
+and also:
 
-  - kubectl
-  - helm
+- `kubectl`
+- `helm`
 
-We are currently recommending to install the
-[Git For Windows](https://gitforwindows.org/) distribution as it
-provides everything needed from the general set, and more.
+The project recommends installing the [Git For Windows](https://gitforwindows.org/) distribution as it
+provides the first three and much more.
 
-For `helm`, `kubectl`, and `epinio` itself the necessary binaries can
-be retrieved from the relevant release pages or per their
-instructions:
+For `helm`, `kubectl`, and `epinio` itself you can get them from the release pages:
 
-  - [Epinio Releases](https://github.com/epinio/epinio/releases)
-  - [Helm Releases](https://github.com/helm/helm/releases)
-  - [Kubectl Instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/)
+- [Epinio releases](https://github.com/epinio/epinio/releases)
+- [Helm releases](https://github.com/helm/helm/releases)
+- [kubectl instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/)
