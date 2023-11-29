@@ -30,7 +30,7 @@ It's almost certain that you'll need more resources for typical development and 
 ## Kubernetes requirements
 
 - A Kubernetes cluster v1.20-v1.28
-- A deployed [cert-manager](https://cert-manager.io/docs/installation/helm/) resources
+- An optional, but recommended, deployed [cert-manager](https://cert-manager.io/docs/installation/helm/) resources
 - A deployed [metrics-server](https://github.com/kubernetes-sigs/metrics-server#installation) resources
 - A deployed Ingress Controller as [Traefik](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart)
 or [nginx-ingress](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/) with `default` IngressClass set
@@ -38,7 +38,7 @@ or [nginx-ingress](https://docs.nginx.com/nginx-ingress-controller/installation/
 or [local-path](https://github.com/rancher/local-path-provisioner) providing a `default` StorageClass.
 For preference, use access mode `ReadWriteMany` (RWX).
 - _Optional_. You need an external load-balancer solution in conjunction with an Ingress controller for exposing Epinio HTTP(S) workload on the Internet.
-More information [here](../../howtos/customization/provision_external_ip_for_local_kubernetes). <!--TODO: What did this revisit the link mean?--><!--REVISIT the link-->
+More information [here](../../howtos/customization/provision_external_ip_for_local_kubernetes).
 
 ### Default IngressClass
 
