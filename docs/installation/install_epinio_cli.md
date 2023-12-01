@@ -32,19 +32,19 @@ Find the latest version at [Releases](https://github.com/epinio/epinio/releases)
 ### Linux
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.10.0/epinio-linux-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.11.0/epinio-linux-x86_64
 ```
 
 ### MacOS
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.10.0/epinio-darwin-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.11.0/epinio-darwin-x86_64
 ```
 
 ### Windows
 
 ```bash
- curl -LO https://github.com/epinio/epinio/releases/download/v1.10.0/epinio-windows-x86_64.zip
+ curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio-windows-x86_64.zip
 ```
 
 Extract the zip archive then make sure that the `PATH` environment variable references the directory where the `epinio` binary is located.
@@ -73,9 +73,9 @@ From the repository you can download the three files:
 
 
 ```
-curl -LO https://github.com/epinio/epinio/releases/download/v1.10.0/epinio_1.10.0_checksums.txt.pem
-curl -LO https://github.com/epinio/epinio/releases/download/v1.10.0/epinio_1.10.0_checksums.txt.sig
-curl -LO https://github.com/epinio/epinio/releases/download/v1.10.0/epinio_1.10.0_checksums.txt
+curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio_1.10.0_checksums.txt.pem
+curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio_1.10.0_checksums.txt.sig
+curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio_1.10.0_checksums.txt
 ```
 
 Once you have the three files locally, you can execute the following command
