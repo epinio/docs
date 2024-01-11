@@ -3,6 +3,10 @@ title: ""
 sidebar_label: "Source Code Storage"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/customization/sources"/>
+</head>
+
 # Customization point: Source Code Storage
 
 Epinio saves the uploaded sources of applications to be deployed to an S3 compatible

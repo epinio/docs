@@ -4,6 +4,10 @@ sidebar_position: 2
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/command_requirements"/>
+</head>
+
 |           | Server |  User          | | 
 | --------- | ------ |  ------------- | --- |
 | *component* | **API** | **CLI**   |  |

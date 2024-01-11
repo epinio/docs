@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, customize, create-custom-role]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/create_custom_role"/>
+</head>
+
 As described in the [Authorization reference](../../references/authorization.md),
 Epinio Roles are Kubernetes ConfigMaps with a particular label.
 

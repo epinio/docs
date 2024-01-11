@@ -4,6 +4,10 @@ sidebar_position: 24
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/operations/install_metrics_server"/>
+</head>
+
 # What is the need for a Metrics Server ?
 
 If no Metrics Server is running on a Kubernetes cluster, the application "instances" (aka

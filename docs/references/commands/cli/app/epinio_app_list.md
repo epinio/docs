@@ -7,6 +7,10 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-app-list]
 doc-persona: [epinio-developer, epinio-operator]
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app_list"/>
+</head>
 ## epinio app list
 
 Lists applications

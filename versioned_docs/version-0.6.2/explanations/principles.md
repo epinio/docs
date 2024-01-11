@@ -2,6 +2,10 @@
 sidebar_label: "Principles"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/explanations/principles"/>
+</head>
+
 ## Design Principles
 
 Epinio's development is governed by the following principles:

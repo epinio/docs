@@ -8,6 +8,10 @@ doc-type: [how-to]
 doc-topic: [epinio, customize, operations, metrics-server]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/operations/install_metrics_server"/>
+</head>
+
 If you don't have a metrics server in your Kubernetes cluster,
 the application Pods (instances) report errors when trying to show metrics (RAM, CPU etc).
 You would do this with the command [`epinio app show`](../../references/commands/cli/app/epinio_app_show.md).

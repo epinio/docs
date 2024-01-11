@@ -4,6 +4,10 @@ sidebar_position: 2
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/certificate_issuers"/>
+</head>
+
 # Using a Certificate Issuer
 
 Epinio comes with multiple [cert-manager ClusterIssuers](https://cert-manager.io/docs/configuration/) for creating certificates.  

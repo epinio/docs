@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app show"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app_show"/>
+</head>
 ## epinio app show
 
 Describe the named application

@@ -7,6 +7,10 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-configuration-unbind]
 doc-persona: [epinio-developer, epinio-operator]
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/configuration/epinio_configuration_unbind"/>
+</head>
 ## epinio configuration unbind
 
 Unbind configuration from an application

@@ -3,6 +3,10 @@ title: ""
 sidebar_label: "Image Storage"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/customization/images"/>
+</head>
+
 # Customization point: Image Storage
 
 Epinio's staging process saves the generated application images to a docker compatible

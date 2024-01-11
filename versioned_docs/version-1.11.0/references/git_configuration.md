@@ -3,6 +3,10 @@ sidebar_label: "Git Configuration"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/git_configuration"/>
+</head>
+
 # Git Configuration
 
 ## Overview

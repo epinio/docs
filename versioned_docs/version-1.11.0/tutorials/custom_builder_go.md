@@ -6,6 +6,10 @@ description: A walk-through for a more complex application deployment with Epini
 keywords: [Epinio, kubernetes, application development, application deployment, complex application]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/tutorials/custom_builder_go"/>
+</head>
+
 In this tutorial you use [Gitea](https://github.com/go-gitea/gitea)
 to work through a more complex application with Epinio.
 

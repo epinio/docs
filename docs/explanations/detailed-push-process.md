@@ -5,6 +5,10 @@ description: The Epinio push process in detail
 keywords: [epinio, kubernetes, push process]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/explanations/detailed-push-process"/>
+</head>
+
 Epinio makes use of well supported, well known projects.
 There is further discussion about this in the
 [project principles](principles.md#guidelines-soft-principles) document.

@@ -3,6 +3,10 @@ sidebar_label: "Windows"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/system_requirements/windows"/>
+</head>
+
 # Epinio On Windows
 
 Epinio relies on a number of command line tools which are normally

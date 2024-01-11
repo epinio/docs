@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio service update"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service_update"/>
+</head>
 ## epinio service update
 
 Update a service

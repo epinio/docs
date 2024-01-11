@@ -7,6 +7,10 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-service-bind]
 doc-persona: [epinio-developer, epinio-operator]
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service_bind"/>
+</head>
 ## epinio service bind
 
 Bind a service SERVICENAME to an Epinio app APPNAME

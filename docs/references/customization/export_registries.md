@@ -3,6 +3,10 @@ title: ""
 sidebar_label: "Export Destination Registries"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/customization/export_registries"/>
+</head>
+
 # Customization point: Export Destination Registries
 
 Epinio uses `Export Destination Registries` (short: `EDR`) as targets for the `app export

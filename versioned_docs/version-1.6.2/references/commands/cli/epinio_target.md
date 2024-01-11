@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio target"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_target"/>
+</head>
 ## epinio target
 
 Targets an epinio-controlled namespace.

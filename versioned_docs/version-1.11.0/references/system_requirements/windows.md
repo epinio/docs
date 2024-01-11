@@ -8,6 +8,10 @@ doc-topic: [root-branch]
 doc-persona: [default]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/system_requirements/windows"/>
+</head>
+
 ## Epinio on Windows
 
 Epinio uses command line tools which are available on any kind of Unix platform,

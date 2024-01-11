@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app delete"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app_delete"/>
+</head>
 ## epinio app delete
 
 Deletes an application

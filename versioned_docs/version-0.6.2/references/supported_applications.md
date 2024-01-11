@@ -2,6 +2,10 @@
 sidebar_label: "Supported Applications"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/supported_applications"/>
+</head>
+
 # Epinio supported applications
 
 This section describes what kind of application you can expect to work with Epinio.

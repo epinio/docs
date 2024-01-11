@@ -7,6 +7,10 @@ description: An introduction to Epinio and how it benefits developers
 keywords: [epinio, kubernetes, developer, operator, deployment]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io"/>
+</head>
+
 Epinio lets developers to go from application sources to URL in a single step.
 
 Epinio is an Application Development Platform.

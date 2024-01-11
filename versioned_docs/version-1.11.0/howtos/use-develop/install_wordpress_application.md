@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, use-develop, install-wordpress]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/use-develop/install_wordpress_application"/>
+</head>
+
 ## Create a directory for your application
 
 ```console

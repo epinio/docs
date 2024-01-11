@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, other, custom-app-chart]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/using_custom_appcharts"/>
+</head>
+
 Epinio deploys applications on Kubernetes as [Helm charts](https://helm.sh/).
 
 By default, a standard Helm chart is provided at Epinio installation time.

@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio version"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_version"/>
+</head>
 ## epinio version
 
 Print the version number

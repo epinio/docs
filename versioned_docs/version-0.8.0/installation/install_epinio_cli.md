@@ -3,6 +3,10 @@ sidebar_label: "Install Epinio CLI"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/install_epinio_cli"/>
+</head>
+
 # Installation of the Epinio CLI
 
 The `epinio` cli can be used to interact with a cluster that has Epinio installed on it.

@@ -4,6 +4,10 @@ sidebar_position: 12
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/custom_routes"/>
+</head>
+
 # Custom Routes
 
 Epinio has the concept of a "system domain". This domain is set when installing

@@ -6,6 +6,10 @@ description: How a single developer works with Epinio
 keywords: [epinio, developer, development, kubernetes]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/tutorials/single-dev-workflow"/>
+</head>
+
 ## Introduction
 
 The [Quickstart](./quickstart.md) gets you started, but,

@@ -4,6 +4,10 @@ sidebar_position: 4
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/wildcardDNS_setup"/>
+</head>
+
 # Wildcard DNS setup
 
 A working system domain is needed for Epinio to work, as explained in the ["DNS setup" page](dns_setup.md).

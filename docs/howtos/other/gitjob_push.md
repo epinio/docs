@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, other, gitjob-push]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/gitjob_push"/>
+</head>
+
 ## Introduction
 
 In certain other "application deployment" solutions,

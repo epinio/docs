@@ -2,6 +2,10 @@
 sidebar_label: "Application Manifests"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/manifests"/>
+</head>
+
 # Application Manifests
 
 ## Overview

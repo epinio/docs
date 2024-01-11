@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio service delete"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service_delete"/>
+</head>
 ## epinio service delete
 
 Delete one or more services

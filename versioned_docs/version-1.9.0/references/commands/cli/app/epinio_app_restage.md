@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app restage"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app_restage"/>
+</head>
 ## epinio app restage
 
 Restage the application, then restart, if running and not suppressed

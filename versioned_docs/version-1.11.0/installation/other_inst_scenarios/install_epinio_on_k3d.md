@@ -6,6 +6,10 @@ description: How to install Epinio on a locally hosted K3d system.
 keywords: [kubernetes, k3d, epinio, installation]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/other_inst_scenarios/install_epinio_on_k3d"/>
+</head>
+
 
 This How-to uses these versions:
 

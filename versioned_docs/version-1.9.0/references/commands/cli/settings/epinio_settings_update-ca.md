@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio settings update-ca"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/settings/epinio_settings_update-ca"/>
+</head>
 ## epinio settings update-ca
 
 Update the api location and CA certificate

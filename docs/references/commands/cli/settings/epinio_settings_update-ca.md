@@ -7,6 +7,10 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-settings-update-ca]
 doc-persona: [epinio-developer, epinio-operator]
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/settings/epinio_settings_update-ca"/>
+</head>
 ## epinio settings update-ca
 
 Update the api location and CA certificate

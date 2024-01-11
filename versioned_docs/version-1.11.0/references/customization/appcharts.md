@@ -3,6 +3,10 @@ title: ""
 sidebar_label: "Application Charts"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/customization/appcharts"/>
+</head>
+
 # Customization point: Application Charts
 
 Epinio uses Application charts as templates for the structure of deployed applications,

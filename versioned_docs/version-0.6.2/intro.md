@@ -2,6 +2,10 @@
 slug: /
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io"/>
+</head>
+
 # Introduction
 
 From application sources to URL in one step.

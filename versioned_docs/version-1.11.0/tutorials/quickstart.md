@@ -6,6 +6,10 @@ description: Get started quickly with Epinio.
 keywords: [epinio, kubernetes, quickstart, installation]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/tutorials/quickstart"/>
+</head>
+
 This guide helps you deploy and use Epinio, with the default options.
 It's a good configuration for evaluation, or testing,
 using an existing Kubernetes cluster.

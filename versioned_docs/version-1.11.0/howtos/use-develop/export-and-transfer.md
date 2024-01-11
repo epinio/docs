@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, use-develop, application-export-transfer]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/use-develop/export-and-transfer"/>
+</head>
+
 Epinio provides the ability to export all parts of a running application and then use these to run
 the application in a different cluster.
 

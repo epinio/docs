@@ -3,6 +3,10 @@ sidebar_label: "Services"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/services"/>
+</head>
+
 # Services
 
 Most real world applications work together with other services to store data, logs, to exchange messages with other systems etc.

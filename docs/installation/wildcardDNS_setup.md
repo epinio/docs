@@ -6,6 +6,10 @@ description: The description
 keywords: [epinio, wildcard dns, dns]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/wildcardDNS_setup"/>
+</head>
+
 You need a working [DNS](dns_setup.md) system domain for Epinio
 Setting this up can be complicated.
 You can use a wildcard domain for development and test environments.

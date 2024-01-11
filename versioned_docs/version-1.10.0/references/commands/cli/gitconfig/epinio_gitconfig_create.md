@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio gitconfig create"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/gitconfig/epinio_gitconfig_create"/>
+</head>
 ## epinio gitconfig create
 
 Creates a git configuration

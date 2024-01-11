@@ -3,6 +3,10 @@ sidebar_label: "OIDC authentication"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/authentication_oidc"/>
+</head>
+
 # OIDC authentication
 
 Since version **1.3.0**, Epinio has integrated [Dex](https://dexidp.io/) as an identity provider which adds the support for external OIDC providers.

@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio logout"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_logout"/>
+</head>
 ## epinio logout
 
 Epinio logout from server

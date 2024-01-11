@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app chart list"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/chart/epinio_app_chart_list"/>
+</head>
 ## epinio app chart list
 
 List application charts

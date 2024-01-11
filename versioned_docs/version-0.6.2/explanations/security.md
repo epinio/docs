@@ -2,6 +2,10 @@
 sidebar_label: "Security"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/explanations/security"/>
+</head>
+
 #### A Quick Note On Security
 
 Epinio secures access to its API with TLS and basic authentication.

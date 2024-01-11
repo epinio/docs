@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, customize, create-custom-service]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/create_custom_service"/>
+</head>
+
 As described [in the Service reference page](../../references/services.md),
 Epinio services are nothing but descriptions of Helm charts.
 An operator may add more services simply by creating a Custom Resource in the namespace where Epinio is installed.

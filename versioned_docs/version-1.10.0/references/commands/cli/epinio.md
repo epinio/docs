@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio cli"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio"/>
+</head>
 ## epinio
 
 Epinio cli

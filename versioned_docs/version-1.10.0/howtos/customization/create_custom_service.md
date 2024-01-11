@@ -4,6 +4,10 @@ sidebar_position: 13
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/create_custom_service"/>
+</head>
+
 # Create a custom service
 
 As described [in the Service reference page](../../references/services.md), Epinio services are nothing but descriptions of Helm charts. An operator may add more services by simply creating a Custom Resource in the namespace where Epinio is installed.

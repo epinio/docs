@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app"/>
+</head>
 ## epinio app
 
 Epinio application features

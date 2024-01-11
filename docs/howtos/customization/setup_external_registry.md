@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, custom, setup-external-container-registry]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/setup_external_registry"/>
+</head>
+
 You can use an external registry for Epinio to store application images.
 You can do this by setting the following variables during the `helm install`:
 

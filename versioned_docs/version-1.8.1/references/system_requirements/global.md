@@ -3,6 +3,10 @@ sidebar_label: "Global System Requirements"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/system_requirements/global"/>
+</head>
+
 ## System Requirements
 
 Please consider the following system requirements to be minimal, additional resources may be required for additional workload (apps).

@@ -4,6 +4,10 @@ sidebar_position: 8
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/setup_external_registry"/>
+</head>
+
 ## How to set up a basic external Epinio registry
 
 Epinio allows the use of an external registry for the storage of application images.

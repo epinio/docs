@@ -3,6 +3,10 @@ title: ""
 sidebar_label: "Load Balancers"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/customization/lb"/>
+</head>
+
 # Customization point: Load Balancers
 
 By default Epinio-created ingress resources for applications are based on the

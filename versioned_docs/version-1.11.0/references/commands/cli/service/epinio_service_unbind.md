@@ -7,6 +7,10 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-service-unbind]
 doc-persona: [epinio-developer, epinio-operator]
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service_unbind"/>
+</head>
 ## epinio service unbind
 
 Unbinds a service SERVICENAME from an Epinio app APPNAME

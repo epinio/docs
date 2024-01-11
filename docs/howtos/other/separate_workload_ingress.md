@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, other, ingress-separation]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/separate_workload_ingress"/>
+</head>
+
 By default, applications deployed through Epinio share their ingress class with Epinio's API server.
 
 For situations where this kind of behavior isn't wanted you achieve separation with a couple of steps.

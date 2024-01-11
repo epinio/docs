@@ -2,6 +2,10 @@
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/versions"/>
+</head>
+
 # Epinio documentation versions
 
 ### Current version (Stable)

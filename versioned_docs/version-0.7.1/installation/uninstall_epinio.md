@@ -3,6 +3,10 @@ sidebar_label: "Uninstall Epinio"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/uninstall_epinio"/>
+</head>
+
 ## Uninstall
 
 NOTE: The command below will delete all the components Epinio originally installed.

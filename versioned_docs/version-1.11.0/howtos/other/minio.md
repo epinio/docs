@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, other, access-minio-service]
 doc-persona: [epinio-developer]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/minio"/>
+</head>
+
 There are several ways to make Epinio's internal S3-compatible MinIO service available to use for debugging.
 Here, two are covered,
 first exposing the MinIO console web interface,

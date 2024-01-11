@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio configuration create"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/configuration/epinio_configuration_create"/>
+</head>
 ## epinio configuration create
 
 Create a configuration

@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio configuration"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/configuration/epinio_configuration"/>
+</head>
 ## epinio configuration
 
 Epinio configuration features

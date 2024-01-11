@@ -4,6 +4,10 @@ sidebar_position: 4
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/use-develop/debug"/>
+</head>
+
 ## How to debug an app
 
 This How-to demonstrates how to debug a running application.

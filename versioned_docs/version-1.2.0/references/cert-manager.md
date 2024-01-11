@@ -3,6 +3,10 @@ sidebar_label: "Cert Manager"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/cert-manager"/>
+</head>
+
 # Cert Manager
 
 ## Purpose

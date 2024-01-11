@@ -4,6 +4,10 @@ sidebar_position: 8
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/export_to_oci_registries"/>
+</head>
+
 :::note
 
 Do not confuse this topic with external Epinio registries.

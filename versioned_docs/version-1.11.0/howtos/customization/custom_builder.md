@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, customize, create-custom-builder]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/custom_builder"/>
+</head>
+
 The default builder image used by Epinio (`paketobuildpacks/builder:full`) may not work for every application.
 It could happen if using an unsupported programming language,
 or when the application needs staging in a particular way.

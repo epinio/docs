@@ -3,6 +3,10 @@ sidebar_label: "DNS setup"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/dns_setup"/>
+</head>
+
 #  DNS setup
 
 During [Epinio installation](install_epinio.md), a "system" domain must be specified specified (`global.domain` helm value).

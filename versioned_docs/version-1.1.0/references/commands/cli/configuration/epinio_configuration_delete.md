@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio configuration delete"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/configuration/epinio_configuration_delete"/>
+</head>
 ## epinio configuration delete
 
 Delete a configuration

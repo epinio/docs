@@ -4,6 +4,10 @@ sidebar_position: 16
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/using_custom_appcharts"/>
+</head>
+
 # Introduction
 
 Epinio deploys applications on Kubernetes as [Helm charts](https://helm.sh/).

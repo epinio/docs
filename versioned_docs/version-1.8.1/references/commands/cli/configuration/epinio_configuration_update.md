@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio configuration update"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/configuration/epinio_configuration_update"/>
+</head>
 ## epinio configuration update
 
 Update a configuration

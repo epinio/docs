@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, customize, export-to-oci-registry]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/export_to_oci_registries"/>
+</head>
+
 :::note
 
 This isn't the same topic as **external Epinio registries**.

@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app export"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app_export"/>
+</head>
 ## epinio app export
 
 Export the named application into the directory or flag-specified registry

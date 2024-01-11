@@ -8,6 +8,10 @@ doc-type: [how-to]
 doc-topic: [epinio, customize, operations, aws-iam]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/operations/aws_iam_integration"/>
+</head>
+
 How-to use Amazon Web Services (AWS) Identity and Access Management (IAM) with Epinio.
 
 ## Authentication using an IAM profile

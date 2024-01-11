@@ -4,6 +4,10 @@ sidebar_position: 1
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/contribute"/>
+</head>
+
 # Contributing to Epinio
 
 Epinio accepts contributions via GitHub issues and pull requests.

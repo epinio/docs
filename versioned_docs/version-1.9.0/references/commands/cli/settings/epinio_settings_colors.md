@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio settings colors"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/settings/epinio_settings_colors"/>
+</head>
 ## epinio settings colors
 
 Manage colored output

@@ -6,6 +6,10 @@ description: Installing Epinio on Kubernetes services provided by public cloud p
 keywords: [kubernetes, amazon, microsoft, google, epinio, AKS, EKS, GKE]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/other_inst_scenarios/install_epinio_on_public_cloud"/>
+</head>
+
 Epinio can be installed on any Kubernetes distribution,
 including those provided by public clouds.
 

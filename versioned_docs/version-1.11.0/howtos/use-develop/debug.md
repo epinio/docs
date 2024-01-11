@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, use-develop, debug]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/use-develop/debug"/>
+</head>
+
 ## Java
 
 To debug a Java application you have to set the

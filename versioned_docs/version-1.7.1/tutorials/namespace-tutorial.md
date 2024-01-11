@@ -93,6 +93,10 @@ Name: newnamespace
 ✔️  Namespace deleted.
 ```
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/tutorials/namespace-tutorial"/>
+</head>
 ### SEE ALSO
 
 * [epinio namespace create](references/commands/cli/namespace/epinio_namespace_create.md)    - Creates an epinio-controlled namespace

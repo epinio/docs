@@ -4,6 +4,10 @@ sidebar_position: 25
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/use-develop/install_wordpress_application"/>
+</head>
+
 # Installing Wordpress with Epinio
 
 ## Create a directory for your application:

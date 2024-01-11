@@ -4,6 +4,10 @@ sidebar_position: 27
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/operations/aws_iam_integration"/>
+</head>
+
 ## Authentication through an IAM profile
 
 When using AWS S3 Epinio further supports authentication by AWS IAM profile, instead of through regular credentials.

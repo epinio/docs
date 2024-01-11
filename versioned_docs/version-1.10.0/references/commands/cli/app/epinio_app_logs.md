@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app logs"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app_logs"/>
+</head>
 ## epinio app logs
 
 Streams the logs of the application
