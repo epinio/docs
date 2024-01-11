@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app port-forward"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app_port-forward"/>
+</head>
 ## epinio app port-forward
 
 forward one or more local ports to a pod

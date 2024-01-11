@@ -5,6 +5,10 @@ description: Advanced topics in Epinio application development environments
 keywords: [epinio, kubernetes, advanced topics]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/explanations/advanced"/>
+</head>
+
 ## Prerequisites
 
 There are some components, such as an Ingress controller and a Certificate Manager,

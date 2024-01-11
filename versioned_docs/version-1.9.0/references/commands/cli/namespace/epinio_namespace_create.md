@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio namespace create"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/namespace/epinio_namespace_create"/>
+</head>
 ## epinio namespace create
 
 Creates an epinio-controlled namespace

@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, customize, custom-routes]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/custom_routes"/>
+</head>
+
 Epinio has the idea of a "system domain".
 You set this domain when installing Epinio (with the `global.domain` helm value).
 It must be a [wildcard domain](https://en.wikipedia.org/wiki/Wildcard_DNS_record) and it's used in 2 different cases:

@@ -3,6 +3,10 @@ sidebar_label: "Detailed Push Process"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/explanations/detailed-push-process"/>
+</head>
+
 # Epinio Push in Detail
 
 Epinio strives to make use of well supported, well known, and loved projects instead of re-inventing the wheel ([link](principles.md#guidelines-soft-principles)).

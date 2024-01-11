@@ -4,6 +4,10 @@ sidebar_position: 11
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/port_forwarding"/>
+</head>
+
 ## How to use Port Forwarding
 
 This How-to demonstrates how to use port forwarding to access a running application.

@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, port-forwarding]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/port_forwarding"/>
+</head>
+
 This How-to shows how to use port forwarding to access a running application.
 
 You start port forwarding with the `port-forward` command:

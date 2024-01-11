@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio configuration bind"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/configuration/epinio_configuration_bind"/>
+</head>
 ## epinio configuration bind
 
 Bind a configuration to an application

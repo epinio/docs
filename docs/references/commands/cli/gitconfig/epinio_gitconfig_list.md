@@ -7,6 +7,10 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-gitconfig-list]
 doc-persona: [epinio-developer, epinio-operator]
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/gitconfig/epinio_gitconfig_list"/>
+</head>
 ## epinio gitconfig list
 
 Lists all git configurations

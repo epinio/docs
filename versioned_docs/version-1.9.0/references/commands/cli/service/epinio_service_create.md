@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio service create"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service_create"/>
+</head>
 ## epinio service create
 
 Create a service SERVICENAME of an Epinio catalog service CATALOGSERVICENAME

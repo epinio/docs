@@ -8,6 +8,10 @@ doc-type: [how-to]
 doc-topic: [contribute-to-epinio]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/contribute"/>
+</head>
+
 Epinio welcomes your participation in the project.
 Epinio accepts contributions via GitHub issues and pull requests.
 This document outlines what you need to make a successful contribution to the project.

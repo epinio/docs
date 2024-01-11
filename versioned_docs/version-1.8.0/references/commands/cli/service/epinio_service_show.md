@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio service show"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service_show"/>
+</head>
 ## epinio service show
 
 Show details of a service SERVICENAME

@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio service port-forward"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service_port-forward"/>
+</head>
 ## epinio service port-forward
 
 forward one or more local ports to a service SERVICENAME

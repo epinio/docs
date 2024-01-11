@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, custom, setup-export-destination-registry]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/setup_export_registry"/>
+</head>
+
 :::note
 
 Don't confuse this topic with **external Epinio registries**.

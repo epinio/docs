@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio service list"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service_list"/>
+</head>
 ## epinio service list
 
 List all the services in the targeted namespace

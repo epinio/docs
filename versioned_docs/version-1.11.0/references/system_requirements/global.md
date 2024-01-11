@@ -8,6 +8,10 @@ doc-topic: [epinio/reference/sys-req]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/system_requirements/global"/>
+</head>
+
 ## General requirements
 
 Consider these system requirements to be minimal.

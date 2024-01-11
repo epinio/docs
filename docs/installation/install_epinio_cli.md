@@ -6,6 +6,10 @@ description: How to install the Epinio CLI on Windows, Linux and Mac
 keywords: [epinio, install, cli, windows, mac, linux, homebrew]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/install_epinio_cli"/>
+</head>
+
 The `epinio` CLI can be used to interact with a cluster with Epinio installed.
 Requests to the Epinio API server are authenticated with Basic Auth.
 No direct access to the cluster is required (e.g. through kubectl).

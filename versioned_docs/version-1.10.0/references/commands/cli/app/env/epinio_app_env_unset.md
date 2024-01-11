@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app env unset"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/env/epinio_app_env_unset"/>
+</head>
 ## epinio app env unset
 
 Shrink application environment

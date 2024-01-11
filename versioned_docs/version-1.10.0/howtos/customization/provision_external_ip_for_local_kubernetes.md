@@ -4,6 +4,10 @@ sidebar_position: 5
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/provision_external_ip_for_local_kubernetes"/>
+</head>
+
 ## Provision of External IP for LoadBalancer service type in Kubernetes
 
 Some platforms for deploying local Kubernetes clusters do not have the ability

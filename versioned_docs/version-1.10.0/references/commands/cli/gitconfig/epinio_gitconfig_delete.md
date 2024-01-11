@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio gitconfig delete"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/gitconfig/epinio_gitconfig_delete"/>
+</head>
 ## epinio gitconfig delete
 
 Delete git configurations

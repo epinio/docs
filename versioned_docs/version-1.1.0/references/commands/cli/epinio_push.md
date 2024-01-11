@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio push"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_push"/>
+</head>
 ## epinio push
 
 Push an application declared in the specified manifest

@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, custom, setup-routing-secrets]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/setup_routing_secrets"/>
+</head>
+
 This is a How-to for operators.
 
 ## Introduction

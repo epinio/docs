@@ -3,6 +3,10 @@ sidebar_label: "Routing Secrets"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/customization/routing_secrets"/>
+</head>
+
 # Routing Secrets
 
 ## Overview

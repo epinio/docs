@@ -5,6 +5,10 @@ description: Tutorial about Epinio namespaces.
 keywords: [tutorial, epinio, namespaces]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/tutorials/namespace-tutorial"/>
+</head>
+
 This guide explores working with namespaces.
 It assumes that Epinio is installed.
 If you need to install, please visit

@@ -4,6 +4,10 @@ sidebar_position: 10
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/setup_routing_secrets"/>
+</head>
+
 ## How to set up routing secrets for use by applications
 
 This is a How-to for operators.

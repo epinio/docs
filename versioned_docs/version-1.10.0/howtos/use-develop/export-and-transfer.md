@@ -4,6 +4,10 @@ sidebar_position: 40
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/use-develop/export-and-transfer"/>
+</head>
+
 # Transfer of an Epinio Application to another cluster
 
 Epinio provides the ability to export all parts of a running application and then use these to run

@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, customize, custom-service-values]
 doc-persona: [epinio-operator, epinio-user]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/using_custom_service_values"/>
+</head>
+
 ## Audience
 
 This documentation is for Epinio operators specifying custom services for users,

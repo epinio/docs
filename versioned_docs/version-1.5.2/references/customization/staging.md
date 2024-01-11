@@ -3,6 +3,10 @@ title: ""
 sidebar_label: "Buildpacks"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/customization/staging"/>
+</head>
+
 # Customization point: Buildpacks
 
 By default Epinio's staging process uses the

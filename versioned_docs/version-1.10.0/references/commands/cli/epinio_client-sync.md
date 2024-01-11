@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio client-sync"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_client-sync"/>
+</head>
 ## epinio client-sync
 
 Downloads a client binary matching the currently logged server

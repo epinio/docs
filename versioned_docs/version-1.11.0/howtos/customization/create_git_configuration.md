@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, customize, create-git-config]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/create_git_configuration"/>
+</head>
+
 
 As described
 [in the Git Configuration reference page](../../references/git_configuration.md),

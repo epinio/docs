@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, customization, external-ip-addresses]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/provision_external_ip_for_local_kubernetes"/>
+</head>
+
 Some platforms for deploying local Kubernetes clusters don't have the ability to provide external IP addresses when creating Kubernetes services with the service type `LoadBalancer`.
 The following steps enable this ability for a few platforms.
 You should follow these steps before installing Epinio.

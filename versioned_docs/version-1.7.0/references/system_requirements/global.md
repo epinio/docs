@@ -3,6 +3,10 @@ sidebar_label: "Global System Requirements"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/system_requirements/global"/>
+</head>
+
 ## Kubernetes Cluster Requirements
 
 For the Epinio server, and related deployments we recommend to consider the following resources:

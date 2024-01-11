@@ -5,6 +5,10 @@ description: The design principles Epinio is based upon.
 keywords: [epinio, kubernetes, design principles]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/explanations/principles"/>
+</head>
+
 These principles guide Epinio's development:
 
 - Good developer experience
