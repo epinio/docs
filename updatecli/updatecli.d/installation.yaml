@@ -7,7 +7,7 @@ actions:
     kind: github/pullrequest
     scmid: default
     spec:
-      automerge: true
+      automerge: false
       mergemethod: squash
       labels:
         - chore
