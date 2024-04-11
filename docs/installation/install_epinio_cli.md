@@ -71,15 +71,15 @@ The following commands were tested using cosign version 2.1.1.
 Instead of signing all release assets, Epinio signs a file containing checksums for the release assets.
 From the repository you can download the three files:
 
-- `epinio_1.10.0_checksums.txt.pem`,
-- `epinio_1.10.0_checksums.txt.sig`,
-- `epinio_1.10.0_checksums.txt`
+- `epinio_1.11.0_checksums.txt.pem`,
+- `epinio_1.11.0_checksums.txt.sig`,
+- `epinio_1.11.0_checksums.txt`
 
 
 ```
-curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio_1.10.0_checksums.txt.pem
-curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio_1.10.0_checksums.txt.sig
-curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio_1.10.0_checksums.txt
+curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio_1.11.0_checksums.txt.pem
+curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio_1.11.0_checksums.txt.sig
+curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio_1.11.0_checksums.txt
 ```
 
 Once you have the three files locally, you can execute the following command
@@ -88,9 +88,9 @@ Once you have the three files locally, you can execute the following command
 cosign verify-blob \
 	--certificate-identity-regexp "https://github.com/epinio/epinio" \
 	--certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
-	--cert      epinio_1.10.0_checksums.txt.pem \
-	--signature epinio_1.10.0_checksums.txt.sig \
-	epinio_1.10.0_checksums.txt
+	--cert      epinio_1.11.0_checksums.txt.pem \
+	--signature epinio_1.11.0_checksums.txt.sig \
+	epinio_1.11.0_checksums.txt
 ```
 
 A successful output looks like
@@ -107,7 +107,7 @@ Before verifying the file integrity, you should first verify the checksum file s
 Once you’ve downloaded both the checksums and your binary, you can verify integrity by running:
 
 ```
-sha256sum --ignore-missing -c epinio_1.10.0_checksums.txt
+sha256sum --ignore-missing -c epinio_1.11.0_checksums.txt
 ```
 
 :::note

@@ -40,15 +40,47 @@ sources:
         # https://github.com/Masterminds/semver#working-with-prerelease-versions
         # the following rule, should do the trick
         pattern: ">0.1"
+    transformers:
+      - trimprefix: v
 
 targets:
+  epinio:
+    name: 'docs: update Epinio Version Information to {{ source "epinio" }}'
+    kind: file
+    sourceid: epinio
+    spec:
+      files:
+        - 'docs/installation/install_epinio_cli.md'
+      matchpattern: '(?m)epinio_(\d*).(\d*).(\d*)'
+      replacepattern: 'epinio_{{ source "epinio" }}'
+    scmid: default
+    transformers:
+      - trimprefix: "v"
+
   download-url:
     name: 'docs: update Epinio Installation URL with version {{ source "epinio" }}'
     kind: file
     spec:
-      file: docs/installation/install_epinio_cli.md
-      matchpattern: 'https://github.com/epinio/epinio/releases/download/(.*)/'
-      replacepattern: 'https://github.com/epinio/epinio/releases/download/{{ source "epinio" }}/'
+      files:
+        - "docs/installation/*.md"
+      matchpattern: '(?m)https://github.com/epinio/epinio/releases/download/v(.*)/epinio_(\d*).(\d*).(\d*)_'
+      replacepattern: 'https://github.com/epinio/epinio/releases/download/v{{ source "epinio" }}/epinio_{{ source "epinio" }}_'
+      searchpattern: true
+    scmid: default
+    dependson:
+      # The epinio target must be executed first so it doesn't affect the current regex
+      - epinio
+    sourceid: epinio
+
+  swagger:
+    name: 'docs: update Epinio Swagger URL with version {{ source "epinio" }}'
+    kind: file
+    spec:
+      files:
+        - "docs/references/*.md"
+      matchpattern: '(?m)https://github.com/epinio/epinio/blob/(.*)/docs/references/api/swagger.json'
+      replacepattern: 'https://github.com/epinio/epinio/blob/v{{ source "epinio" }}/docs/references/api/swagger.json'
+      searchpattern: true
     scmid: default
     sourceid: epinio
 
@@ -57,7 +89,11 @@ targets:
     kind: file
     sourceid: epinio
     spec:
-      file: docs/installation/install_epinio_cli.md
-      matchpattern: 'Epinio Version: (.*)'
-      replacepattern: 'Epinio Version: {{ source "epinio" }}'
+      files:
+        - 'docs/installation/install_epinio_cli.md'
+      matchpattern: '(?m)Epinio Version: (.*)'
+      replacepattern: 'Epinio Version: v{{ source "epinio" }}'
     scmid: default
+    transformers:
+      - trimprefix: "v"
+

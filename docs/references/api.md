@@ -21,7 +21,7 @@ curl -u your-username-here:password-here https://epinio.your-system-domain/api/v
 
 The responses are all JSON objects, except for some cases where you get an error before the request reaches the Epinio server (e.g. because of bad cluster configuration).
 
-The endpoints are documented in the [OpenAPI Spec](https://www.openapis.org/) format. You can find the definition of the API here: https://github.com/epinio/epinio/blob/v0.1.6/docs/references/api/swagger.json
+The endpoints are documented in the [OpenAPI Spec](https://www.openapis.org/) format. You can find the definition of the API here: https://github.com/epinio/epinio/blob/v1.11.0/docs/references/api/swagger.json
 
 __Make sure__ you change to the Epinio release you have deployed.
 
