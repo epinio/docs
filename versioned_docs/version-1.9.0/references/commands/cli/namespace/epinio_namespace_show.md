@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio namespace show"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/namespace/epinio_namespace_show"/>
+</head>
 ## epinio namespace show
 
 Shows the details of an epinio-controlled namespace

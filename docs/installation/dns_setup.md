@@ -6,6 +6,10 @@ description: How to setup DNS for Epinio and associated issues.
 keywords: [epinio, kubernetes, k8s, DNS]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/dns_setup"/>
+</head>
+
 During an [Epinio installation](install_epinio.md),
 you need to specify a "system" domain in the `global.domain` helm field.
 You use this field for access to:

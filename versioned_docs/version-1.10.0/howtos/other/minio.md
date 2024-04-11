@@ -4,6 +4,10 @@ sidebar_position: 28
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/minio"/>
+</head>
+
 # Accessing Epinio's Internal MinIO Service
 
 There are several ways to make Epinio's internal S3-compatible MinIO service available for debugging purposes. In this document, we will cover only two of them, first exposing the Minio-console web interface and then accessing the Minio service through the AWS CLI. In both cases we will expose the internal service through a kubernetes `NodePort` service.

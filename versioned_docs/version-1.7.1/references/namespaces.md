@@ -3,6 +3,10 @@ sidebar_label: "Namespaces"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/namespaces"/>
+</head>
+
 # Namespaces
 
 Epinio has the same concept of namespaces as the underlying Kubernetes, i.e.

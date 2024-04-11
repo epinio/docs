@@ -5,6 +5,10 @@ description: Epinio security, concepts and context
 keywords: [epinio, kubernetes, security, application development]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/explanations/security"/>
+</head>
+
 Epinio secures access to its API with TLS and basic authentication.
 
 Use the `epinio login [URL]` command after installation to save the necessary credentials (user, password) and certificates.

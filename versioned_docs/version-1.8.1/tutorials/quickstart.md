@@ -4,6 +4,10 @@ sidebar_position: 1
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/tutorials/quickstart"/>
+</head>
+
 # Quickstart
 This guide will help you deploy and use Epinio with default options suitable for evaluation or testing purposes on an existing Kubernetes cluster. For advanced Epinio deployment scenarios look into [Installation Section](../installation/install_epinio.md).
 

@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio configuration unbind"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/configuration/epinio_configuration_unbind"/>
+</head>
 ## epinio configuration unbind
 
 Unbind configuration from an application

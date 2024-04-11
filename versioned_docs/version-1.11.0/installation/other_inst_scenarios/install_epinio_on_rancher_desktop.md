@@ -6,6 +6,10 @@ description: How to install Epinio using a local Rancher Desktop installation.
 keywords: [epinio, kubernetes, rancher, rancher desktop]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/other_inst_scenarios/install_epinio_on_rancher_desktop"/>
+</head>
+
 This How-to uses the following versions:
 
 * [epinio helm chart 1.0.0](https://github.com/epinio/helm-charts/releases/tag/epinio-1.0.0)

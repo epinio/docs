@@ -4,6 +4,10 @@ sidebar_position: 7
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/setup_external_s3"/>
+</head>
+
 ## How to setup external S3 storage
 
 One of the steps involved in running `epinio push` is storing the requested version of the code

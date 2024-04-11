@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app create"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app_create"/>
+</head>
 ## epinio app create
 
 Create just the app, without creating a workload

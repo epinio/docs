@@ -4,6 +4,10 @@ sidebar_position: 13
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/create_git_configuration"/>
+</head>
+
 # Create a Git Configuration
 
 As described [in the Git Configuration reference page](../../references/git_configuration.md),

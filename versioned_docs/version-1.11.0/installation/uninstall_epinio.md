@@ -6,6 +6,10 @@ description: Uninstalling Epinio and the implications of doing so.
 keywords: [epinio, uninstallation]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/uninstall_epinio"/>
+</head>
+
 You should understand the implications of uninstalling Epinio. Uninstallation may affect your cluster's operation.
 
 Epinio uninstallation removes:

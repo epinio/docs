@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, recovery]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/use-develop/app_recover"/>
+</head>
+
 Epinio uses 3 Kubernetes CRDs to manage its service catalog entries, app charts, and application data.
 
 When deleting a CRD Kubernetes also deletes all associated CRs.

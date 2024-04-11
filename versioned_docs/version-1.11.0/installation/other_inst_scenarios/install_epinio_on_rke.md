@@ -6,6 +6,10 @@ description: Installing Epinio with RKE2. The needed environment and prerequisit
 keywords: [epinio, k8s, kubernetes, rke2, installation]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/other_inst_scenarios/install_epinio_on_rke"/>
+</head>
+
 This guide will help you to deploy a suitable RKE2 Kubernetes cluster for Epinio.
 More details for installing RKE2 can be found in the RKE2 [quickstart](https://docs.rke2.io/install/quickstart/) guide.
 

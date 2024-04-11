@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio server"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_server"/>
+</head>
 ## epinio server
 
 Starts the Epinio server.

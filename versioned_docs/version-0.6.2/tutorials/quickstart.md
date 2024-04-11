@@ -2,6 +2,10 @@
 sidebar_label: "Quick Start"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/tutorials/quickstart"/>
+</head>
+
 # QuickStart 
 
 If you have not already installed `epinio` follow these links

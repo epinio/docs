@@ -9,6 +9,10 @@ doc-topic: [how-to, custom, external-s3-storage]
 doc-persona: [epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/setup_external_s3"/>
+</head>
+
 One of the steps involved in running `epinio push` is storing the requested version of the code in the configured Epinio S3 compatible storage.
 By default, Epinio installs and configures [Minio](https://github.com/minio/minio) to use.
 This document describes how to configure Epinio to use another S3 compatible storage and skip the Minio installation.

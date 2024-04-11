@@ -4,6 +4,10 @@ sidebar_position: 9
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/separate_workload_ingress"/>
+</head>
+
 # How to separate the application's ingress from the epinio server ingress
 
 By default applications deployed through Epinio share their ingress class with Epinio's API server.

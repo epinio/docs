@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app manifest"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app_manifest"/>
+</head>
 ## epinio app manifest
 
 Save state of the named application as a manifest

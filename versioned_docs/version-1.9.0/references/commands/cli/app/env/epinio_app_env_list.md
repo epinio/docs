@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app env list"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/env/epinio_app_env_list"/>
+</head>
 ## epinio app env list
 
 Lists application environment

@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio login"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_login"/>
+</head>
 ## epinio login
 
 Epinio login to the server

@@ -3,6 +3,10 @@ sidebar_label: "Configurations"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/configurations"/>
+</head>
+
 # Configurations
 
 ## Overview

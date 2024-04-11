@@ -4,6 +4,10 @@ sidebar_position: 14
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/custom_builder"/>
+</head>
+
 # Custom a custom Builder image
 
 The default builder image used by Epinio (paketobuildpacks/builder:full) may not work for every application.
