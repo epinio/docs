@@ -7,6 +7,10 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-service]
 doc-persona: [epinio-developer, epinio-operator]
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service"/>
+</head>
 ## epinio service
 
 Epinio service management

@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app env set"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/env/epinio_app_env_set"/>
+</head>
 ## epinio app env set
 
 Extend application environment

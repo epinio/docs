@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio info"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_info"/>
+</head>
 ## epinio info
 
 Shows information about the Epinio environment

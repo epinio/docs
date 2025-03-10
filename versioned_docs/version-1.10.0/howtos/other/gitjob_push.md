@@ -4,6 +4,10 @@ sidebar_position: 6
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/gitjob_push"/>
+</head>
+
 # Push with gitjob
 
 In some other "application deployment" solutions, they have a feature that allows you to set up a deployment that rebuilds and republishes when your code stored in Git is changed.

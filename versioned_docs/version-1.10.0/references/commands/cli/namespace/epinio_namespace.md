@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio namespace"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/namespace/epinio_namespace"/>
+</head>
 ## epinio namespace
 
 Epinio-controlled namespaces

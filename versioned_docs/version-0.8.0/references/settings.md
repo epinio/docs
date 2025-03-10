@@ -3,6 +3,10 @@ sidebar_label: "CLI Settings"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/settings"/>
+</head>
+
 # Epinio, CLI settings
 
 The Epinio command line client uses a settings file to store

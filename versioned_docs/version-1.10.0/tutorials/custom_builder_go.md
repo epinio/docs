@@ -4,6 +4,10 @@ sidebar_position: 4
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/tutorials/custom_builder_go"/>
+</head>
+
 # Deploy Gitea with a custom builder image
 
 While you likely won't use Epinio to build and deploy Gitea, we are using it to show how to build a more complex application with Epinio.

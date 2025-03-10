@@ -4,6 +4,10 @@ sidebar_position: 3
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/tutorials/single-dev-workflow"/>
+</head>
+
 ## Introduction
 
 While the [Quickstart](./quickstart.md) is great to get started, as a Developer,

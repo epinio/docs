@@ -7,6 +7,10 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-export-registries]
 doc-persona: [epinio-developer, epinio-operator]
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_export-registries"/>
+</head>
 ## epinio export-registries
 
 List export registries

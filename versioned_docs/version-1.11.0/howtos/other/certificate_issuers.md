@@ -9,6 +9,10 @@ doc-topic: [epinio, how-to, certificate-issuer]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/other/certificate_issuers"/>
+</head>
+
 Epinio comes with many
 [cert-manager ClusterIssuers](https://cert-manager.io/docs/configuration/)
 for creating certificates.

@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app chart default"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/chart/epinio_app_chart_default"/>
+</head>
 ## epinio app chart default
 
 Set or show app chart default

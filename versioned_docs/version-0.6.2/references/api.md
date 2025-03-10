@@ -2,6 +2,10 @@
 sidebar_label: "API"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/api"/>
+</head>
+
 # API reference
 
 Most of the Epinio commands communicate with the Epinio server side component over an API. The API is secured with Basic Auth authentication. You can make requests against that API with the credentials from your Epinio config.

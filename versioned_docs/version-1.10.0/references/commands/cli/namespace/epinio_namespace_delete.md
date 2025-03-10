@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio namespace delete"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/namespace/epinio_namespace_delete"/>
+</head>
 ## epinio namespace delete
 
 Deletes an epinio-controlled namespace

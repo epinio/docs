@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio completion"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_completion"/>
+</head>
 ## epinio completion
 
 Generate completion script for a shell

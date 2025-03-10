@@ -4,6 +4,10 @@ sidebar_position: 17
 title: "How to specify custom values for service Helm charts"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/customization/using_custom_service_values"/>
+</head>
+
 ## Audience
 
 This documentation is for operators specifying custom services for users, and users creating instances of those custom services who need to customize them.

@@ -7,6 +7,10 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-service-port-forward]
 doc-persona: [epinio-developer, epinio-operator]
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service_port-forward"/>
+</head>
 ## epinio service port-forward
 
 forward one or more local ports to a service SERVICENAME

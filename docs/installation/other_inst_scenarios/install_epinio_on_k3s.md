@@ -6,6 +6,10 @@ description: Information about installing Epinio on a local K3s cluster.
 keywords: [kubernetes, epinio, k3s]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/other_inst_scenarios/install_epinio_on_k3s"/>
+</head>
+
 This How-to was written with these versions:
 * [epinio helm chart 0.7.1](https://github.com/epinio/helm-charts/releases/tag/epinio-0.7.1)
 * [k3s](https://k3s.io/) version v1.23.4+k3s1 and v1.22.7+k3s1

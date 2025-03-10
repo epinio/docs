@@ -4,6 +4,10 @@ sidebar_position: 3
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/howtos/use-develop/namespaces"/>
+</head>
+
 # How to work with multiple namespaces
 
 Like Kubernetes, Epinio has the concept of namespaces, and means of working with them.

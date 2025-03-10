@@ -6,6 +6,10 @@ description: How to install Epinio on Rancher
 keywords: [epinio, kubernetes, rancher]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/other_inst_scenarios/install_epinio_on_rancher"/>
+</head>
+
 Before installing Epinio you need a running Rancher instance.
 You can follow the Rancher [installation guides](https://rancher.com/docs) to set one up.
 

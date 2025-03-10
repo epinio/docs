@@ -3,6 +3,10 @@ sidebar_label: "Authorization"
 title: ""
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/authorization"/>
+</head>
+
 # Authorization
 
 Since version **0.8.0** Epinio is shipped with an authorization layer recognizing two basic roles: **admin** and **user**.

@@ -3,6 +3,10 @@ title: ""
 sidebar_label: "Service Catalog"
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/customization/catalog"/>
+</head>
+
 # Customization point: Service Catalog
 
 Epinio uses Services classes as templates for service instances, i.e. of the kubernetes

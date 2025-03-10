@@ -5,6 +5,10 @@ description: Using buildpacks in Epinio.
 keywords: [kubernetes, epinio, application development, buildpacks]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/customization/staging"/>
+</head>
+
 :::note
 This customization interacts with the [customization of staging scripts](staging-scripts.md).
 :::

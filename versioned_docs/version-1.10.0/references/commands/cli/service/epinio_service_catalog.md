@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio service catalog"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/service/epinio_service_catalog"/>
+</head>
 ## epinio service catalog
 
 Lists all available Epinio catalog services, or show the details of the specified one

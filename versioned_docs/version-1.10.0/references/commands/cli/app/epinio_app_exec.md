@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio app exec"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/app/epinio_app_exec"/>
+</head>
 ## epinio app exec
 
 creates a shell to the application

@@ -2,6 +2,10 @@
 title: ""
 sidebar_label: "epinio export-registries"
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/epinio_export-registries"/>
+</head>
 ## epinio export-registries
 
 List export registries

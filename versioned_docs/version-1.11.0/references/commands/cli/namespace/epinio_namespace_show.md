@@ -7,6 +7,10 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-namespace-show]
 doc-persona: [epinio-developer, epinio-operator]
 ---
+
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/references/commands/cli/namespace/epinio_namespace_show"/>
+</head>
 ## epinio namespace show
 
 Shows the details of an epinio-controlled namespace

@@ -6,6 +6,10 @@ description: How to install Epinio
 keywords: [epinio, kubernetes, k8s, installation, install]
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.epinio.io/installation/install_epinio"/>
+</head>
+
 ## Introduction
 
 Epinio is installed from a single Helm chart.
