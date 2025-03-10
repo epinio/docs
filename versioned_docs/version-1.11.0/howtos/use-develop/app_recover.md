@@ -66,8 +66,8 @@ spec:
   origin:
     path: /home/work/SUSE/dev/epinio/assets/sample-app
   routes:
-  - fox.172.18.0.4.omg.howdoi.website
-  - foxy.172.18.0.4.omg.howdoi.website
+  - fox.172.18.0.4.sslip.io
+  - foxy.172.18.0.4.sslip.io
   stageid: 1642fcf755ab41e8
 ```
 
@@ -154,8 +154,8 @@ The ingresses for an application `<name>` are named `r<name>-...` and the listed
 ```bash
 % kubectl get ingress -n workspace
 NAME                                                              CLASS     HOSTS                                [...]
-rfox-fox1721804omghowd-5af9c73b3c19f041d061042e158408a5275b015e   traefik   fox.172.18.0.4.omg.howdoi.website    [...]
-rfox-foxy1721804omghow-22ecdc59ff0c5c7b0f328802c6abea7739c2a388   traefik   foxy.172.18.0.4.omg.howdoi.website   [...]
+rfox-fox1721804omghowd-5af9c73b3c19f041d061042e158408a5275b015e   traefik   fox.172.18.0.4.sslip.io    [...]
+rfox-foxy1721804omghow-22ecdc59ff0c5c7b0f328802c6abea7739c2a388   traefik   foxy.172.18.0.4.sslip.io   [...]
 ```
 
 Not recoverable is the `origin` data. It is stored nowhere else in the system.

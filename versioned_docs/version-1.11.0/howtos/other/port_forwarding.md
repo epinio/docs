@@ -47,7 +47,7 @@ Application: samplejava
 | StageId              | cac0d6fec92e0a1f                            |
 | Age                  | 2m50s                                       |
 | Active Routes        |                                             |
-|                      | samplejava.172.19.0.4.omg.howdoi.website    |
+|                      | samplejava.172.19.0.4.sslip.io    |
 | Desired Instances    |                                           1 |
 | Bound Configurations |                                             |
 | Environment          |                                             |

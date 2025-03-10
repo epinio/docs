@@ -15,15 +15,14 @@ By "wildcard" we mean a domain that will always resolve to the IP address that i
 So, it is a record in a DNS zone that will match requests for non-existent sub-domains.
 There are a variety of free services doing this:
 
-- omg.howdoi.website
 - sslip.io
 - nip.io
 
 As examples, all the following domains resolve to `127.0.0.1`:
 
-- `127.0.0.1.omg.howdoi.website`
-- `subdomain.127.0.0.1.omg.howdoi.website`
-- `subsub.subdomain.127.0.0.1.omg.howdoi.website`
+- `127.0.0.1.sslip.io`
+- `subdomain.127.0.0.1.sslip.io`
+- `subsub.subdomain.127.0.0.1.sslip.io`
 
 You can use domains like these as a wildcard system domain for Epinio.
 
@@ -44,7 +43,7 @@ This stops a malicious website from probing the local network for hosts.
 
 This includes anything using [dnsmasq](https://thekelleys.org.uk/dnsmasq/docs/dnsmasq-man.html) with `stop-dns-rebind`. Examples are [pfSense](https://docs.netgate.com/pfsense/en/latest/services/dns/rebinding.html) or NetworkManager.
 
-If you still want to use the default wildcard DNS, you'll have to whitelist `omg.howdoi.website`, or other providers, in your local DNS server.
+If you still want to use the default wildcard DNS, you'll have to whitelist `sslip.io`, or other providers, in your local DNS server.
 
 ### Cluster running in a VM
 

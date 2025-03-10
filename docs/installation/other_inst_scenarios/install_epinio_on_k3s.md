@@ -43,7 +43,7 @@ Then, continue with the [Epinio installation process](../../installation/install
 
 If you experience issues with DNS resolution, if, for example, you have something like this in your logs:
 ```
-dial tcp: lookup epinio-registry.192.168.1.10.omg.howdoi.website on 10.43.0.10:53: no such host
+dial tcp: lookup epinio-registry.192.168.1.10.sslip.io on 10.43.0.10:53: no such host
 ```
 
 You can try to install K3s with this known-to-work DNS server:

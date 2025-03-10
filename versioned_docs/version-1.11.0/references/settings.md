@@ -51,7 +51,7 @@ The `token` combines the `access_token` and `refresh_token`.
 
 If a token is present, it will be used to authenticate and takes precedence over the username and password.
 
-The installation uses the wildcard domain `omg.howdoi.website` and the
+The installation uses the wildcard domain `sslip.io` and the
 `epinio-ca` issuer by default.
 
 The `epinio login [URL]` checks if the associated certificate is signed by an
