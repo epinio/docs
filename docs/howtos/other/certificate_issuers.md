@@ -146,9 +146,9 @@ Example:
     name: epinio
     namespace: epinio
   spec:
-    commonName: epinio.172.27.0.2.omg.howdoi.website
+    commonName: epinio.172.27.0.2.sslip.io
     dnsNames:
-    - epinio.172.27.0.2.omg.howdoi.website
+    - epinio.172.27.0.2.sslip.io
     issuerRef:
       kind: ClusterIssuer
       name: epinio-ca
@@ -163,9 +163,9 @@ Example:
   type: kubernetes.io/tls
   metadata:
     annotations:
-      cert-manager.io/alt-names: epinio.172.27.0.2.omg.howdoi.website
+      cert-manager.io/alt-names: epinio.172.27.0.2.sslip.io
       cert-manager.io/certificate-name: epinio
-      cert-manager.io/common-name: epinio.172.27.0.2.omg.howdoi.website
+      cert-manager.io/common-name: epinio.172.27.0.2.sslip.io
       cert-manager.io/ip-sans: ""
       cert-manager.io/issuer-group: ""
       cert-manager.io/issuer-kind: ClusterIssuer
@@ -196,7 +196,7 @@ Example:
     namespace: epinio
   spec:
     rules:
-    - host: epinio.172.27.0.2.omg.howdoi.website
+    - host: epinio.172.27.0.2.sslip.io
       http:
         paths:
         - backend:
@@ -208,7 +208,7 @@ Example:
           pathType: ImplementationSpecific
     tls:
     - hosts:
-      - epinio.172.27.0.2.omg.howdoi.website
+      - epinio.172.27.0.2.sslip.io
       secretName: epinio-tls
   ```
 

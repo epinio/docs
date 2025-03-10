@@ -79,7 +79,7 @@ Perform the following steps on your RKE2 node before installing Epinio:
 
 ## Installation
 
-For evaluation environments we recommend that you setup Epinio Ingress resources with a wildcard DNS service such as `omg.howdoi.website`, `sslip.io`, or `nip.io` that points to the `INTERNAL-IP` address of your kubernetes node.
+For evaluation environments we recommend that you setup Epinio Ingress resources with a wildcard DNS service such as `sslip.io`, `sslip.io`, or `nip.io` that points to the `INTERNAL-IP` address of your kubernetes node.
 
 For production environments you should configure an external load-balancer solution.
 It should listen on a public IP with an associated public FQDN domain.
@@ -91,7 +91,7 @@ There are two ways of installing DNS for Epinio:
 
     For test environments.
     This should work on any kubernetes distribution.
-    Epinio will try to create a magic wildcard DNS domain, for example, **10.0.0.1.omg.howdoi.website**.
+    Epinio will try to create a magic wildcard DNS domain, for example, **10.0.0.1.sslip.io**.
 
 1. [DNS setup](../../installation/dns_setup.md)
 

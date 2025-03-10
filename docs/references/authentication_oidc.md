@@ -16,7 +16,7 @@ epinio login --oidc https://epinio.mydomain.com
 If you are using the `epinio` cli on a machine without a browser you can provide the `--prompt` flag. This will give you the url of a web page where you can authenticate even on a different machine. After logging in and pressing the `Grant Access` button the page will return the authorization code that you have to copy and paste back to the `epinio` cli input to finish the authentication process.
 
 ```bash
-epinio login --oidc --prompt https://epinio.172.21.0.4.omg.howdoi.website
+epinio login --oidc --prompt https://epinio.172.21.0.4.sslip.io
 ```
 
 By default, only the local connector is setup with two users (`admin@epinio.io` and `epinio@epinio.io`).
