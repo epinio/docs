@@ -70,7 +70,7 @@ If cert-manager is not already installed on the cluster, it can be installed lik
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm upgrade --install cert-manager jetstack/cert-manager --namespace cert-manager  \
-    --set crds.enabled=true \
+    --set installCRDs=true \
     --set extraArgs={--enable-certificate-owner-ref=true} \
     --create-namespace
 ```

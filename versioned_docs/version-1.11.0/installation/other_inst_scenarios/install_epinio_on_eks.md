@@ -70,7 +70,7 @@ kubectl get nodes
 ```shell
 helm repo add cert-manager https://charts.jetstack.io
 helm repo update
-helm install cert-manager --namespace cert-manager --create-namespace jetstack/cert-manager --set crds.enabled=true --set extraArgs={--enable-certificate-owner-ref=true}
+helm install cert-manager --namespace cert-manager --create-namespace jetstack/cert-manager --set installCRDs=true --set extraArgs={--enable-certificate-owner-ref=true}
 ```
 
 ## Install Nginx Ingress Controller

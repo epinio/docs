@@ -46,7 +46,7 @@ Please follow the [Official Installation Guide](https://kubernetes-sigs.github.i
 ```shell
 helm repo add cert-manager https://charts.jetstack.io
 helm repo update
-helm install cert-manager --namespace cert-manager --create-namespace jetstack/cert-manager --set crds.enabled=true --set extraArgs[0]=--enable-certificate-owner-ref=true
+helm install cert-manager --namespace cert-manager --create-namespace jetstack/cert-manager --set installCRDs=true --set extraArgs[0]=--enable-certificate-owner-ref=true
 ```
 
 ## Install Nginx Ingress Controller
