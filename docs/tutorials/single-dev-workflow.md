@@ -73,7 +73,7 @@ Once you have your local Kubernetes cluster installed and running, you can
 These are the steps for Rancher Desktop:
 
 ```shell
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.4/cert-manager.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.17.2/cert-manager.yaml
 
 # Wait for cert-manager to stabilize. This should take approximately
 # 30 seconds depending on your Internet connection.
