@@ -1,4 +1,5 @@
 name: Bump Cert-manager version in installation documentation
+pipelineid: certmanager/latest
 
 sources:
   cert-manager:
@@ -7,14 +8,14 @@ sources:
     spec:
       owner: cert-manager
       repository: cert-manager
-      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
-      username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GITHUB_ACTOR" }}'
       typefilter:
         latest: true
 
 targets:
   download-url:
-    name: 'Update Epinio Installation URL'
+    name: 'docs: update cert-manager referenced version {{ source "cert-manager" }}'
     kind: file
     spec:
       files: 
@@ -27,7 +28,6 @@ targets:
 
 actions:
   default:
-    title: 'Bump cert-manager version used within installation documentation to {{ source "cert-manager" }}'
     kind: github/pullrequest
     scmid: default
     spec:
@@ -44,7 +44,6 @@ scms:
       email: bot@epinio.io
       owner: epinio
       repository: docs
-      token: '{{ requiredEnv "UPDATECLI_GITHUB_TOKEN" }}'
-      username: '{{ requiredEnv "UPDATECLI_GITHUB_ACTOR" }}'
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GITHUB_ACTOR" }}'
       branch: main
-

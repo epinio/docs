@@ -48,8 +48,14 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
+    /* @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
+      },
       algolia: {
         appId: 'F9GBZ0DFYI',
         apiKey: 'b8442abfcf47dbbd23aba2434bf5c879',
@@ -65,82 +71,89 @@ const config = {
         items: [
           {
             type: 'docsVersionDropdown',
-            position: 'right',
+            position: 'left',
             dropdownItemsAfter: [{to: '/versions', label: 'All versions'}],
             dropdownActiveClassDisabled: true,
           },
           {
-            type: 'doc',
-            docId: 'intro',
-            position: 'right',
-            label: 'Docs',
+            type: 'search',
+            position: 'left',
           },
-          //{to: '/blog', label: 'Blog', position: 'right'},
           {
             href: 'https://github.com/epinio/epinio',
-            label: 'GitHub',
             position: 'right',
+            className: 'header-github-link',
+            'aria-label': 'GitHub repository',
           },
           {
-            href: 'https://www.rancher.com',
-            label: 'Rancher',
+            type: 'dropdown',
+            label: 'Community',
             position: 'right',
-          },
-          {
-            href: 'https://www.suse.com',
-            label: 'SUSE',
-            position: 'right',
-          },
-        ],
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Docs',
             items: [
-              {
-                label: 'Introduction',
-                to: '/',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/epinio',
-              },
               {
                 label: 'Slack',
                 href: 'https://rancher-users.slack.com',
               },
               {
-                label: 'Twitter',
+                label: 'X/Twitter',
                 href: 'https://twitter.com/Rancher_Labs/',
               },
+              //{
+                //label: 'Stack Overflow',
+                //href: 'https://stackoverflow.com/questions/tagged/epinio',
+              //},
             ],
           },
           {
-            title: 'More',
+            type: 'dropdown',
+            label: 'More from SUSE',
+            position: 'right',
             items: [
               {
-                label: 'GitHub',
-                href: 'https://github.com/epinio/epinio',
-              },
-              {
+                to: 'https://rancher.com',
                 label: 'Rancher',
-                href: 'https://rancher.com',
+                className: 'navbar__icon navbar__rancher',
               },
               {
-                label: 'SUSE',
-                href: 'https://suse.com',
+                type: 'html',
+                value: '<hr style="margin: 0.3rem 0;">',
               },
-            ],
+              {
+                to: 'https://elemental.docs.rancher.com',
+                label: 'Elemental',
+                className: 'navbar__icon navbar__elemental',
+              },
+              {
+                to: 'https://fleet.rancher.io',
+                label: 'Fleet',
+                className: 'navbar__icon navbar__fleet',
+              },
+              {
+                to: 'https://opni.io',
+                label: 'Opni',
+                className: 'navbar__icon navbar__opni',
+              },
+              {
+                to: 'https://rancherdesktop.io',
+                label: 'Rancher Desktop',
+                className: 'navbar__icon navbar__rd',
+              },
+              {
+                type: 'html',
+                value: '<hr style="margin: 0.3rem 0;">',
+              },
+              {
+                to: 'https://opensource.suse.com',
+                label: 'More projects',
+                className: 'navbar__icon navbar__suse',
+              }
+            ]
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} SUSE Rancher. All Rights Reserved.`,
+      },
+      footer: {
+        style: 'dark',
+        copyright: `Copyright © ${new Date().getFullYear()} SUSE. All Rights Reserved.`,
       },
       prism: {
         theme: lightCodeTheme,
