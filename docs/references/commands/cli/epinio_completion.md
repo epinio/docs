@@ -15,48 +15,72 @@ Generate completion script for a shell
 
 To load completions:
 
-Bash:
+#### Bash
 
+```
 $ source <(epinio completion bash)
+```
 
-# To load completions for each session, execute once:
+To load completions for each session, execute once:
+
 Linux:
-  $ epinio completion bash > /etc/bash_completion.d/epinio
+
+```
+$ epinio completion bash > /etc/bash_completion.d/epinio
+```
+
 MacOS:
-  $ epinio completion bash > /usr/local/etc/bash_completion.d/epinio
+
+```
+$ epinio completion bash > /usr/local/etc/bash_completion.d/epinio
+```
 
 ATTENTION:
     The generated script requires the bash-completion package.
     See https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
     for information on how to install and activate it.
 
-Zsh:
+#### Zsh
 
-# If shell completion is not already enabled in your environment you will need
-# to enable it.  You can execute the following once:
+If shell completion is not already enabled in your environment you will need to enable it.  You can execute the following once:
 
+```
 $ echo "autoload -U compinit; compinit" >> ~/.zshrc
+```
 
-# To load completions for each session, execute once:
+To load completions for each session, execute once:
+
+```
 $ epinio completion zsh > "${fpath[1]}/_epinio"
+```
 
-# You will need to start a new shell for this setup to take effect.
+You will need to start a new shell for this setup to take effect.
 
-Fish:
+#### Fish
 
+```
 $ epinio completion fish | source
+```
 
-# To load completions for each session, execute once:
+To load completions for each session, execute once:
+
+```
 $ epinio completion fish > ~/.config/fish/completions/epinio.fish
+```
 
-Powershell:
+#### Powershell
 
+```
 PS> epinio completion powershell | Out-String | Invoke-Expression
+```
 
-# To load completions for every new session, run:
+To load completions for every new session, run:
+
+```
 PS> epinio completion powershell > epinio.ps1
-# and source this file from your powershell profile.
+```
 
+and source this file from your powershell profile.
 
 ```
 epinio completion [bash|zsh|fish|powershell]
