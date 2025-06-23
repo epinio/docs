@@ -24,10 +24,13 @@ $ source <(epinio completion bash)
 To load completions for each session, execute once:
 
 Linux:
+
 ```
 $ epinio completion bash > /etc/bash_completion.d/epinio
 ```
+
 MacOS:
+
 ```
 $ epinio completion bash > /usr/local/etc/bash_completion.d/epinio
 ```
