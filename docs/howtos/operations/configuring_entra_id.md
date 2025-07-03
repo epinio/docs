@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Entra ID Authentication"
-sidebar_position: 27
+sidebar_position: 21
 title: "Entra ID Authentication"
 description: How-to configure SSO for Epinio using Microsoft Entra ID.
 keywords: [epinio, kubernetes, microsoft, azure, sso, entraid, entra, id, activedirectory, active, directory]
