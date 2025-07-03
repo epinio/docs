@@ -49,7 +49,7 @@ We should now have a `Client ID` and `Tenant ID` which will be used later to con
 
 We should now have a `Client Secret` which will be used later to configure our Dex connector.
 
-## 3. Grant Directory Permissions
+## Grant Directory Permissions
 
 Our App Registration will need some permissions to be utilized in authentication.
 
@@ -66,7 +66,7 @@ Our App Registration will need some permissions to be utilized in authentication
 
 We should now be able to plug these details into Dex and configure SSO.
 
-## 4. Add Connector to Dex Configuration
+## Add Connector to Dex Configuration
 
 Dex provides [documentation](https://dexidp.io/docs/connectors/microsoft/) on the exact process you may follow to set up SSO through Microsoft Entra ID.  Once you have created your **App Registration** and its respective **Client Secret**, we are ready to configure Dex with the resulting information:
 
