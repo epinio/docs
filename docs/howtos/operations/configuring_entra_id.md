@@ -77,7 +77,7 @@ Dex provides [documentation](https://dexidp.io/docs/connectors/microsoft/) on th
 
 We need to update the `dex-config` secret within the `epinio` namespace (depending on your installation namespace).  We will append the following block to the bottom of our config at secret key `config.yaml`:
 
-```
+```yaml
 connectors:
   - type: microsoft
     # Required field for connector id.
