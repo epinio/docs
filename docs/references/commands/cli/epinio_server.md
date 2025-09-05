@@ -34,10 +34,6 @@ epinio server [flags]
       --port int                              (PORT) The port to listen on. Leave empty to auto-assign a random port
       --registry-certificate-secret string    (REGISTRY_CERTIFICATE_SECRET) Secret for the registry's TLS certificate
       --s3-certificate-secret string          (S3_CERTIFICATE_SECRET) Secret for the S3 endpoint TLS certificate. Can be left empty if S3 is served with a trusted certificate.
-      --staging-resource-cpu string           (STAGING_RESOURCE_CPU)
-      --staging-resource-disk string          (STAGING_RESOURCE_DISK)
-      --staging-resource-memory string        (STAGING_RESOURCE_MEMORY)
-      --staging-service-account-name string   (STAGING_SERVICE_ACCOUNT_NAME)
       --tls-issuer string                     (TLS_ISSUER) The cluster issuer to use for workload certificates
       --upgrade-responder-address string      (UPGRADE_RESPONDER_ADDRESS) Disable tracking of the running Epinio and Kubernetes versions (default "https://epinio.version.rancher.io/v1/checkupgrade")
 ```
