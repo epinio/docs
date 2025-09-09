@@ -247,4 +247,4 @@ Users may be granted access to a particular namespace via two mechanisms:
             workspace2
         ```
 
-Additionally, this concept may be automated as part of OIDC authentication via Epinio's reference to a `rolesMapping` key within the `dex-config` secret data.  Please refer to our [documentation on OIDC Authentication](./authentication_oidc.md#groups-and-roles-mapping) for further explanation.  Note that the `roles` array within the `rolesMapping` secret can include the same `:` delimiter described here.
+Additionally, this concept may be automated as part of **OIDC authentication** via Epinio's reference to a `rolesMapping` key within the `dex-config` secret data.  Please refer to our [documentation on OIDC Authentication](./authentication_oidc.md#groups-and-roles-mapping) for further explanation.  Note specifically that the `roles` array within the `rolesMapping` secret value can include the same `:` delimiter described above.
