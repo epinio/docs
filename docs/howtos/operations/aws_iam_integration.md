@@ -85,7 +85,7 @@ aws iam delete-policy --policy-arn arn:aws:iam::${AWS_ACCOUNT_ID}:policy/EpinioE
 EKS is the Elastic Kubernetes Service.
 
 For increased security you can attach the policy to the Epinio pod ServiceAccount.
-You also need to create a specific ServiceAccount that you bind to the staging job with the `server.stagingServiceAccountName` value.
+You also need to create a specific ServiceAccount that you bind to the staging job with the `server.stagingWorkloads.serviceAccountName` value.
 
 To use AWS IAM roles for service accounts, an IAM OIDC provider must exist for your cluster's OIDC issuer URL.
 
@@ -180,14 +180,14 @@ eksctl create iamserviceaccount \
 ```
 
 You can update your Helm deployment specifying this new service account by adding the flag<br/>
-`--set server.stagingServiceAccountName=epinio-staging-service-account`<br/>
+`--set server.stagingWorkloads.serviceAccountName=epinio-staging-service-account`<br/>
 when upgrading Epinio:
 
 ```console
 helm upgrade epinio epinio/epinio \
     --namespace epinio --create-namespace \
     --set global.domain=<MY_DOMAIN> \
-    --set server.stagingServiceAccountName=epinio-staging-service-account \
+    --set server.stagingWorkloads.serviceAccountName=epinio-staging-service-account \
     --wait
 ```
 
