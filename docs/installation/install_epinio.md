@@ -193,7 +193,12 @@ These configurations can be set using the `server.stagingWorkloads` section of t
     - `server.stagingWorkloads.resources`
         - Provide Requests/Limits on CPU & Memory
     - `server.stagingWorkloads.storage`
-        - Provide Disk Size parameters for the staging workload's designated PVC
+        - `cache`
+            - Optionally toggle `emptyDir` to bypass PVC creation
+            - Provide parameters for `size`, `accessModes`, `volumeMode`, and `storageClassName`
+        - `sourceBlobs`
+            - Optionally toggle `emptyDir` to bypass PVC creation
+            - Provide parameters for `size`, `accessModes`, `volumeMode`, and `storageClassName`
 - Scheduling Constraints
     - `server.stagingWorkloads.nodeSelector`
         - Provide Node Selector labels to constrain scheduling to nodes that contain the specified label/value.
