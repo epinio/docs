@@ -43,26 +43,6 @@ wss: wss://epinio.mydomain.com
 
 An Epinio user is a BasicAuth Kubernetes Secret, with the `epinio.io/api-user-credentials` reserved label.
 
-The `epinio.io/roles` annotation is used to declare the list of the assigned roles. It's a comma separated string with the id of the roles.
-If a role is namespace-scoped the namespace where it applies appears after the `:` delimiter (i.e.: `admin:workspace`).
-
-```yaml
-apiVersion: v1
-kind: Secret
-type: BasicAuth
-metadata:
-  labels:
-    epinio.io/api-user-credentials: "true"
-  annotations:
-    epinio.io/roles: "user,admin:workspace"
-  name: my-epinio-user
-  namespace: epinio
-stringData:
-  username: myuser
-  # password is hashed with the Bcrypt algorithm
-  password: "$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS" # value is 'password'
-```
-
 To list the available users you can get the secrets from your cluster with `kubectl`, filtering them with the proper labels:
 
 ```bash
@@ -198,27 +178,73 @@ This action enable operations on Export Registries commands and resources. Only 
 | `export_registries_read`  | Read permissions
 
 
-## Assign namespaces
+## Assign Roles to User
 
-The authorized user's namespaces are an additional `namespaces` field in the Secret data, separated by a newline `\n`.  
-To modify them edit just that field:
+The `epinio.io/roles` annotation is used to declare the list of the assigned roles. It's a comma separated string with the ID of the roles.
 
-```
-cat <<EOF | kubectl apply -f -
+```yaml
 apiVersion: v1
 kind: Secret
 type: BasicAuth
 metadata:
   labels:
-    epinio.io/api-user-credentials: "true"
-    epinio.io/roles: "user,admin:foobar"
+    epinio.io/api-user-credentials: "true" # indicates this secret represents a user
+  annotations:
+    epinio.io/roles: "user,admin" # comma-separated list of roles
   name: my-epinio-user
   namespace: epinio
 stringData:
   username: myuser
-  password: "\$2a\$10\$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS"
-  namespaces: |
-    workspace
-    workspace2
-EOF
+  password: "$2a$10$6bCi5NMstMK781In7JGiL.B44pgoplUb330FQvm6mVXMppbXBPiXS" # password hashed with the Bcrypt algorithm
 ```
+
+### Define Role Access to a Namespace
+
+Users may be granted access to a particular namespace via two mechanisms:
+
+1. **Role Annotations with Scoping Delimiter `:` (recommended)**
+    - The roles assigned via the `epinio.io/roles` annotation on a user object may be namespace-scoped via the `:` delimiter.
+        - Format:  `roleName:namespace`
+    - For example, a user may be granted administrator privileges to a specific namespace while maintaining non-admin access elsewhere:
+        - Specifically, note the `admin:some-namespace` annotation item
+
+        ```yaml
+        apiVersion: v1
+        kind: Secret
+        type: BasicAuth
+        metadata:
+          labels:
+            epinio.io/api-user-credentials: "true"
+          annotations:
+            epinio.io/roles: "user,admin:some-namespace"
+          name: my-epinio-user
+          namespace: epinio
+        stringData:
+          username: myuser
+          password: "some-hashed-password"
+        ```
+    - We recommend this approach as it aligns with the automated flow through OIDC authentication, expanded upon below.
+
+2. **Namespaces Array on User Object**
+    - Namespaces can be assigned to a user via an additional `namespaces` key in the user Secret's data
+    - These namespaces are represented as an array separated by newlines.
+
+        ```yaml
+        apiVersion: v1
+        kind: Secret
+        type: BasicAuth
+        metadata:
+          labels:
+            epinio.io/api-user-credentials: "true"
+            epinio.io/roles: "user,admin"
+          name: my-epinio-user
+          namespace: epinio
+        stringData:
+          username: myuser
+          password: "some-hashed-password"
+          namespaces: |
+            workspace
+            workspace2
+        ```
+
+Additionally, this concept may be automated as part of **OIDC authentication** via Epinio's reference to a `rolesMapping` key within the `dex-config` secret data.  Please refer to our [documentation on OIDC Authentication](./authentication_oidc.md#groups-and-roles-mapping) for further explanation.  Note specifically that the `roles` array within the `rolesMapping` secret value can include the same `:` delimiter described above.
