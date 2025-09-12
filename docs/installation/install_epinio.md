@@ -190,6 +190,8 @@ Epinio uses staging workloads to build container images from source code.  As yo
 
 These configurations can be set using the `server.stagingWorkloads` section of the `values.yaml` file with which you may configure the following details:
 - Resource Consumption
+    - `server.stagingWorkloads.ttlSecondsAfterFinished`
+        - Configure time-to-live for completed staging job resources
     - `server.stagingWorkloads.resources`
         - Provide Requests/Limits on CPU & Memory
     - `server.stagingWorkloads.storage`
