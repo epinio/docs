@@ -262,3 +262,14 @@ Any container registry that supports basic auth authentication (e.g. gcr, docker
 instead, by setting this value to `false` and using
 [the relevant global values](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L107-L111)
 to point to the desired container registry.
+
+
+## Upgrade
+
+### Breaking Changes & Migrations
+
+#### 1.12 to 1.13
+
+Epinio 1.13 rehomes configurations for the staging workloads to a more Kubernetes-standardized format that supports a larger variety of configs.  These are no longer configured via ENV variables on the Epinio Server or through CLI flags but rather read from an in-cluster ConfigMap at staging time.
+
+Documentation has been udpated for both the [Epinio Server](https://github.com/epinio/epinio/blob/6936da831aae5ef85f512b4cc44e83a57343f8d4/README.md#112-to-113) and the [Epinio Helm Chart](https://github.com/epinio/helm-charts/blob/d66f6df1640c106cfe299ea3a3d88f7a597f7a86/chart/epinio/README.md#112-to-113).  These READMEs go into detail describing the changes to the environment variables, CLI flags, and changes to the `values.yaml` interface.  Please refer to these before upgrading to **1.13**.
