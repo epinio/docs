@@ -190,10 +190,17 @@ Epinio uses staging workloads to build container images from source code.  As yo
 
 These configurations can be set using the `server.stagingWorkloads` section of the `values.yaml` file with which you may configure the following details:
 - Resource Consumption
+    - `server.stagingWorkloads.ttlSecondsAfterFinished`
+        - Configure time-to-live for completed staging job resources
     - `server.stagingWorkloads.resources`
         - Provide Requests/Limits on CPU & Memory
     - `server.stagingWorkloads.storage`
-        - Provide Disk Size parameters for the staging workload's designated PVC
+        - `cache`
+            - Optionally toggle `emptyDir` to bypass PVC creation
+            - Provide parameters for `size`, `accessModes`, `volumeMode`, and `storageClassName`
+        - `sourceBlobs`
+            - Optionally toggle `emptyDir` to bypass PVC creation
+            - Provide parameters for `size`, `accessModes`, `volumeMode`, and `storageClassName`
 - Scheduling Constraints
     - `server.stagingWorkloads.nodeSelector`
         - Provide Node Selector labels to constrain scheduling to nodes that contain the specified label/value.
@@ -255,3 +262,14 @@ Any container registry that supports basic auth authentication (e.g. gcr, docker
 instead, by setting this value to `false` and using
 [the relevant global values](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L107-L111)
 to point to the desired container registry.
+
+
+## Upgrade
+
+### Breaking Changes & Migrations
+
+#### 1.12 to 1.13
+
+Epinio 1.13 rehomes configurations for the staging workloads to a more Kubernetes-standardized format that supports a larger variety of configs.  These are no longer configured via ENV variables on the Epinio Server or through CLI flags but rather read from an in-cluster ConfigMap at staging time.
+
+Documentation has been udpated for both the [Epinio Server](https://github.com/epinio/epinio?tab=readme-ov-file#112-to-113) and the [Epinio Helm Chart](https://github.com/epinio/helm-charts/tree/main/chart/epinio#112-to-113).  These READMEs go into detail describing the changes to the environment variables, CLI flags, and changes to the `values.yaml` interface.  Please refer to these before upgrading to **1.13**.
