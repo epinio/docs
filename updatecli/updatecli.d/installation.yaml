@@ -118,13 +118,13 @@ targets:
     scmid: default
 
   # Required yarn to be installed
-  #docusaurus:
-  #  kind: shell
-  #  name: "Set latest docusaurus version"
-  #  scmid: default
-  #  sourceid: epinio
-  #  spec:
-  #    # epinio source value is automatically added to the command as a parameter
-  #    command: "./updatecli/scripts/docusaurus.sh"
-  #    environments:
-  #      - name: PATH
+  docusaurus:
+    kind: shell
+    name: "Set latest docusaurus version"
+    scmid: default
+    sourceid: epinio
+    spec:
+      # epinio source value is automatically added to the command as a parameter
+      command: "./updatecli/scripts/docusaurus.sh"
+      environments:
+        - name: PATH
