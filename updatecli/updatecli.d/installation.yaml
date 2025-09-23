@@ -122,7 +122,7 @@ targets:
     kind: shell
     name: "Set latest docusaurus version"
     scmid: default
-    sourceid: epinioSubVersion
+    sourceid: epinio
     spec:
       # epinio source value is automatically added to the command as a parameter
       command: "./updatecli/scripts/docusaurus.sh"
