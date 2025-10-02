@@ -22,11 +22,12 @@ Epinio is a [Krumware](https://www.krum.io) project, in collaboration with [SUSE
 - set up with zero configuration
 - deploy to production in the same way as development
 
-**Operators**:
+**Operators and Platform Engineers**:
 
 - work directly with Kubernetes
 - decide on cluster setup (including Epinio installation and setup)
 - decide how application deployment happens
+- provide application and service templates
 
 ## Why Kubernetes
 
