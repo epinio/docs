@@ -12,7 +12,7 @@ Epinio lets developers to go from application sources to URL in a single step.
 Epinio is an Application Development Platform.
 It deploys on Kubernetes and lets application developers and operators work together without conflict.
 
-Epinio is a [SUSE](https://suse.com) project.
+Epinio is a [Krumware](https://www.krum.io) project, in collaboration with [SUSE](https://www.suse.com).
 
 **Developers**:
 
@@ -22,11 +22,12 @@ Epinio is a [SUSE](https://suse.com) project.
 - set up with zero configuration
 - deploy to production in the same way as development
 
-**Operators**:
+**Operators and Platform Engineers**:
 
 - work directly with Kubernetes
 - decide on cluster setup (including Epinio installation and setup)
 - decide how application deployment happens
+- provide application and service templates
 
 ## Why Kubernetes
 
