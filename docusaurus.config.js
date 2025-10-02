@@ -106,7 +106,7 @@ const config = {
           },
           {
             type: 'dropdown',
-            label: 'More from SUSE',
+            label: 'Related Projects',
             position: 'right',
             items: [
               {
@@ -129,11 +129,6 @@ const config = {
                 className: 'navbar__icon navbar__fleet',
               },
               {
-                to: 'https://opni.io',
-                label: 'Opni',
-                className: 'navbar__icon navbar__opni',
-              },
-              {
                 to: 'https://rancherdesktop.io',
                 label: 'Rancher Desktop',
                 className: 'navbar__icon navbar__rd',
@@ -153,7 +148,7 @@ const config = {
       },
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} SUSE. All Rights Reserved.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Krumware and SUSE. All Rights Reserved.`,
       },
       prism: {
         theme: lightCodeTheme,
