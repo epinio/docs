@@ -47,31 +47,49 @@ You're now able to login with the credentials in Epinio UI.
 
 ## Groups and Roles mapping
 
-The external identity providers may provide additional information about the user, for example the groups that he's member of.  
+Dex is configured through the `dex-config` secret that lives in the `epinio` namespace.  
+The secret is of type `Opaque` and carries multiple string values that Epinio reads at start-up:
 
-These groups can be used to associate specific roles to the user. To do so you need to add a `rolesMapping` key to the `dex-config` secret. The value of the key is a yaml string that will be used to map the groups of a provider to specific roles:
+- `config.yaml`: the Dex configuration file (connectors, static clients, etc.).
+- `rolesMapping`: optional mapping that links external groups to Epinio roles.
+
+When creating or updating the secret you must provide each entry as a separate key; do **not**
+append the roles block to `config.yaml`. The snippet below shows the structure using
+`stringData` for readability (Kubernetes will store the values base64-encoded under `data`):
 
 ```yaml
-rolesMapping: |-
-  - connectorId: github
-    groups:
-    - id: Org1:Admins
-      roles:
-      - admin
-    - id: Org1:TeamBlue
-      roles:
-      - user
-      - admin:workspace
-
-config.yaml: |-
-  connectors:
-  - type: github
-    id: github
-    name: GitHub
-    config:
-      loadAllGroups: true
-      orgs:
-      - name: Org1
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dex-config
+  namespace: epinio
+type: Opaque
+stringData:
+  config.yaml: |-
+    connectors:
+    - type: github
+      id: github
+      name: GitHub
+      config:
+        loadAllGroups: true
+        orgs:
+        - name: Org1
+  rolesMapping: |-
+    - connectorId: github
+      groups:
+      - id: Org1:Admins
+        roles:
+        - admin
+      - id: Org1:TeamBlue
+        roles:
+        - user
+        - admin:workspace
 ```
 
-In the previous example if the user is a member of both `Org1:Admins` and `Org1:TeamBlue` then that user will get the `admin`, `user` and `admin:workspace` roles. If no roles are found and a default role is set then the user will get this as its Epinio role.
+You can create the secret from files with
+`kubectl create secret generic dex-config -n epinio --from-file=config.yaml --from-file=rolesMapping`,
+or patch the existing secret using a YAML file structured as above.
+
+In the previous example, if the user is a member of both `Org1:Admins` and `Org1:TeamBlue`
+then that user will get the `admin`, `user` and `admin:workspace` roles. If no roles are found
+and a default role is set then the user will receive that default Epinio role.
