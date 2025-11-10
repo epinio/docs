@@ -93,3 +93,48 @@ or patch the existing secret using a YAML file structured as above.
 In the previous example, if the user is a member of both `Org1:Admins` and `Org1:TeamBlue`
 then that user will get the `admin`, `user` and `admin:workspace` roles. If no roles are found
 and a default role is set then the user will receive that default Epinio role.
+
+## Connector notes
+
+Dex ships with a broad catalogue of connectors (GitHub, GitLab, Google, LDAP, generic OIDC, Azure/Entra ID, and more).  
+Each connector exposes its own configuration keys and prerequisites. Refer to the official Dex connector
+reference for the complete list and latest options.[^dex-connectors]
+
+### Google (Gmail / Workspace)
+
+When integrating Google accounts via the Dex `google` connector:
+
+- Create an OAuth 2.0 **Web application** client in Google Cloud Console and note the `Client ID` and `Client secret`.
+- Add your Dex callback (for example `https://dex.example.org/callback`) to the OAuth client’s authorized redirect URIs and reuse it as the connector `redirectURI`.
+- Restrict access to specific Google Workspace domains by listing them under `hostedDomains`. Omit the field to allow personal Gmail accounts.
+- If you need group information for role mapping, supply a service account with Admin SDK rights (`serviceAccount` and `adminEmail`) and list the Workspace group email addresses in `groups`.
+- Optionally extend `scopes` or set `promptType: select_account` to let users pick among multiple Google logins.
+
+Example connector snippet:
+
+```yaml
+config.yaml: |-
+  connectors:
+  - type: google
+    id: google
+    name: Google
+    config:
+      clientID: <google-client-id>
+      clientSecret: <google-client-secret>
+      redirectURI: https://dex.example.org/callback
+      hostedDomains:
+      - example.com
+      serviceAccount: |-
+        {
+          "type": "service_account",
+          "...": "..."
+        }
+      adminEmail: admin@example.com
+      groups:
+      - name: engineering@example.com
+      promptType: select_account
+```
+
+Combine this connector definition with the `rolesMapping` key shown earlier to assign Epinio roles to Google groups.
+
+[^dex-connectors]: [Dex connector reference](https://dexidp.io/docs/connectors/)
