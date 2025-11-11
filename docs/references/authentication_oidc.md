@@ -5,7 +5,7 @@ title: ""
 
 # OIDC authentication
 
-Since version **1.3.0**, Epinio has integrated [Dex](https://dexidp.io/) as an identity provider which adds the support for external OIDC providers.
+Since version **1.3.0**, Epinio has integrated [Dex](https://dexidp.io/) as an identity provider, which adds support for external OIDC providers.
 
 To authenticate through Dex, you can use the login command with the `--oidc` flag. This will open a web page where you can authenticate with the configured providers.
 
@@ -13,14 +13,14 @@ To authenticate through Dex, you can use the login command with the `--oidc` fla
 epinio login --oidc https://epinio.mydomain.com
 ```
 
-If you are using the `epinio` cli on a machine without a browser you can provide the `--prompt` flag. This will give you the url of a web page where you can authenticate even on a different machine. After logging in and pressing the `Grant Access` button the page will return the authorization code that you have to copy and paste back to the `epinio` cli input to finish the authentication process.
+If you are using the `epinio` cli on a machine without a browser, you can provide the `--prompt` flag. This will give you the URL of a web page where you can authenticate even on a different machine. After logging in and pressing the `Grant Access` button, the page will return the authorization code that you have to copy and paste back to the `epinio` CLI input to finish the authentication process.
 
 ```bash
 epinio login --oidc --prompt https://epinio.172.21.0.4.sslip.io
 ```
 
-By default, only the local connector is setup with two users (`admin@epinio.io` and `epinio@epinio.io`).
-To add more connectors you can edit the Dex configuration file (key `config.yaml`), stored in the `dex-config` secret in the `epinio` namespace.
+By default, only the local connector is set up with two users (`admin@epinio.io` and `epinio@epinio.io`).
+To add more connectors, you can edit the Dex configuration file (key `config.yaml`), stored in the `dex-config` secret in the `epinio` namespace.
 
 After a successful login, a new Epinio user will be created with the username matching the email used to login and returned by the provider.
 
@@ -47,13 +47,13 @@ You're now able to login with the credentials in Epinio UI.
 
 ## Groups and Roles mapping
 
-Dex is configured through the `dex-config` secret that lives in the `epinio` namespace.  
+Dex is configured via the `dex-config` secret in the `epinio` namespace.  
 The secret is of type `Opaque` and carries multiple string values that Epinio reads at start-up:
 
 - `config.yaml`: the Dex configuration file (connectors, static clients, etc.).
 - `rolesMapping`: optional mapping that links external groups to Epinio roles.
 
-When creating or updating the secret you must provide each entry as a separate key; do **not**
+When creating or updating the secret, you must provide each entry as a separate key; do **not**
 append the roles block to `config.yaml`. The snippet below shows the structure using
 `stringData` for readability (Kubernetes will store the values base64-encoded under `data`):
 
@@ -100,7 +100,9 @@ Dex ships with a broad catalogue of connectors (GitHub, GitLab, Google, LDAP, ge
 Each connector exposes its own configuration keys and prerequisites. Refer to the official Dex connector
 reference for the complete list and latest options.[^dex-connectors]
 
-### Google (Gmail / Workspace)
+### Google (Gmail / Workspace) Example
+
+Below is just an example of how to set up a connector. Please reference the [Dex connector documentation](https://dexidp.io/docs/connectors) for more information. 
 
 When integrating Google accounts via the Dex `google` connector:
 
