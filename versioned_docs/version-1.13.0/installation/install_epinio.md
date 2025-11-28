@@ -23,6 +23,12 @@ See [system requirements](../references/system_requirements/global.md) for depen
 During installation using `helm` Epinio creates some Ingress resources for its internal components.
 These components depend on a running ingress controller providing a default `IngressClass`.
 
+:::tip
+
+For RKE2 users, note that you do not not need to install the default `ingress-controller` as Epinio uses `ingress-nginx` by default. 
+
+:::
+
 You can install `nginx-ingress-controller` using the `LoadBalancer` service type:
 
 ```bash
