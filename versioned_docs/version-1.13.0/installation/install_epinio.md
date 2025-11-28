@@ -137,6 +137,17 @@ It should point to the IP address of your running Ingress controller.
 
 - If you receive `Entity Too Large` errors when [uploading](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#custom-max-body-size) application source code into Epinio, you need to increase the `proxy-body-size` with `--set 'ingress.annotations.nginx\.ingress\.kubernetes\.io/proxy-body-size=1000m'`
 
+- If using nginx's other kubernetes ingress controller, nginx-ingress-controller, the annotation is `nginx.org/proxy-body-size`, and you may also need to set `nginx.org/client-max-body-size`. Further information about the annotations can be found in the [nginx-ingress-controller documentation](https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/#general-customization).
+
+In your values.yaml, these can be supplied as follows:
+
+```yaml
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 1000m
+    nginx.org/client-max-body-size: 1000m
+```
+
 :::
 
 :::note
