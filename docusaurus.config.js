@@ -79,6 +79,12 @@ const config = {
             type: 'search',
             position: 'left',
           },
+          { 
+            href: "https://epinio.io/",
+            position: "right",
+            className: "header-home-link",
+            'aria-label': "Epinio Homepage"
+          },
           {
             href: 'https://github.com/epinio/epinio',
             position: 'right',
