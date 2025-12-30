@@ -132,6 +132,7 @@ These actions enable operations on App commands and resources. They also enable 
 |-----------------|-------------
 | `app_read`        | Read permissions (app list and show, env list and show)
 | `app_logs`        | Read application logs
+| `app_restart`     | Restart permission (without write permissions) <br/>Depends on: `app_read`
 | `app_write`       | Write permissions (app create, delete, push, export, stage, env set and unset)<br/>Depends on: `app_read`, `app_logs`
 | `app_exec`        | Perform an exec into a running application
 | `app_portforward` | Open a tunnel with the `port-forward` command
