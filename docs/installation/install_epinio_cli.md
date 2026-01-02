@@ -73,9 +73,9 @@ From the repository you can download the three files:
 
 
 ```
-curl -LO https://github.com/epinio/epinio/releases/download/v1.13.5/epinio_1.13.6_checksums.txt.pem
-curl -LO https://github.com/epinio/epinio/releases/download/v1.13.5/epinio_1.13.6_checksums.txt.sig
-curl -LO https://github.com/epinio/epinio/releases/download/v1.13.5/epinio_1.13.6_checksums.txt
+curl -LO https://github.com/epinio/epinio/releases/download/v1.13.6/epinio_1.13.6_checksums.txt.pem
+curl -LO https://github.com/epinio/epinio/releases/download/v1.13.6/epinio_1.13.6_checksums.txt.sig
+curl -LO https://github.com/epinio/epinio/releases/download/v1.13.6/epinio_1.13.6_checksums.txt
 ```
 
 Once you have the three files locally, you can execute the following command
