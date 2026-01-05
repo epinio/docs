@@ -331,24 +331,35 @@ node_modules/
 
 ### What to Ignore
 
-✅ **Dependencies**: `node_modules/`, `vendor/`, `venv/`, etc.
-✅ **Build artifacts**: `dist/`, `build/`, `target/`, compiled binaries
-✅ **Local configuration**: `.env`, `.env.local`, local config files
-✅ **IDE/Editor files**: `.vscode/`, `.idea/`, editor-specific files
-✅ **Temporary files**: `*.log`, `*.tmp`, `*.swp`
-✅ **OS files**: `.DS_Store`, `Thumbs.db`
+**Dependencies**: `node_modules/`, `vendor/`, `venv/`, etc.
+
+**Build artifacts**: `dist/`, `build/`, `target/`, compiled binaries
+
+**Local configuration**: `.env`, `.env.local`, local config files
+
+**IDE/Editor files**: `.vscode/`, `.idea/`, editor-specific files
+
+**Temporary files**: `*.log`, `*.tmp`, `*.swp`
+
+**OS files**: `.DS_Store`, `Thumbs.db`
+
 
 ### What NOT to Ignore
 
-❌ **Source code**: Your application source files
-❌ **Required configuration**: Production configs that need to be deployed
-❌ **Dockerfiles**: If you use custom Dockerfiles
-❌ **Package files**: `package.json`, `requirements.txt`, `go.mod` (unless you have a good reason)
-❌ **Documentation**: README, docs that should be included
+**Source code**: Your application source files
+
+**Required configuration**: Production configs that need to be deployed
+
+**Dockerfiles**: If you use custom Dockerfiles
+
+**Package files**: `package.json`, `requirements.txt`, `go.mod` (unless you have a good reason)
+
+**Documentation**: README, docs that should be included
+
 
 ### Security Considerations
 
-⚠️ **Important**: The ignore feature excludes files from the tarball, but this is not a security feature. Sensitive files should not be in your repository in the first place.
+**Important**: The ignore feature excludes files from the tarball, but this is not a security feature. Sensitive files should not be in your repository in the first place.
 
 - Never commit secrets, API keys, or passwords to version control
 - Use environment variables or secret management for sensitive data
