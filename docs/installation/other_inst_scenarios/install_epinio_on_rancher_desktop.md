@@ -8,7 +8,7 @@ keywords: [epinio, kubernetes, rancher, rancher desktop]
 
 This How-to uses the following versions:
 
-* \\\\\\\\\\\\\\\\\\\\\[epinio helm chart 1.13.7\]\\\\\\\\\\\\\\\\\\\\\(https://github.com/epinio/helm-charts/releases/tag/epinio-1.13.7\)
+* \\\\\\\\\\\\\\\\\\\\\[epinio helm chart 1.13.7\]\\\\\\\\\\\\\\\\\\\\\\(https://github.com/epinio/helm-charts/releases/tag/epinio-1.13.7\)
 * Rancher Desktop 1.20.0
 
 ## Rancher Desktop prerequisites
