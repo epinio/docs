@@ -42,9 +42,10 @@ This ConfigMap is expected to have the following keys:
 |Key		|Content   |
 |---		|---	   |
 |`builder`	|Glob-pattern to match the image references supported by this spec.	|
-|`userID`	|User ID to run the `build` script with.				|
-|`groupID`	|Group ID to run the `build` script with.				|
+|`userID`	|User ID to run the `build` script with (as string, e.g., "1001").				|
+|`groupID`	|Group ID to run the `build` script with (as string, e.g., "1000").				|
 |`env`		|Standard environment for the scripts, YAML-formatted string, key/value map.	|
+|`staging-values.json`|Optional JSON object containing Helm values for staging workload configuration (resources, nodeSelector, tolerations, etc.).	|
 |||
 |`base`		|Optional redirect to the actual ConfigMap with the scripts.		|
 |||
@@ -127,7 +128,7 @@ Administrators can add new stage scripts for different build packs using two met
 
 ### Method 1: Using Helm Values (Recommended)
 
-The easiest way to add new stage scripts is through Helm values. This approach allows you to add scripts without modifying the Helm chart templates.
+The easiest way to add new stage scripts is through Helm values. This approach allows you to add scripts without modifying the Helm chart templates. The Helm chart will automatically create ConfigMaps from these values during installation or upgrade.
 
 Add your custom stage scripts to your `values.yaml` file or pass them via `--set` flags:
 
@@ -136,58 +137,96 @@ stagingScripts:
   custom:
     - name: epinio-stage-scripts-custom-builder
       builder: "myorg/my-builder:*"
-      userID: "1002"
-      groupID: "1000"
+      userID: 1002  # Can be number or string
+      groupID: 1000  # Can be number or string
       env: |
         CNB_PLATFORM_API: "0.12"
       base: epinio-stage-scripts  # Inherit download/unpack/build scripts from base
 ```
 
+:::note
+The `name` field is optional. If not provided, a name will be automatically generated from the builder pattern. However, it's recommended to provide a descriptive name for easier identification.
+:::
+
 **Using a base ConfigMap (recommended for most cases):**
 
-When your builder only differs in user/group IDs or environment variables, you can inherit the download, unpack, and build scripts from an existing base ConfigMap:
+When your builder only differs in user/group IDs or environment variables, you can inherit the download, unpack, and build scripts from an existing base ConfigMap. This is the most common use case:
 
 ```yaml
 stagingScripts:
   custom:
     - name: epinio-stage-scripts-my-builder
       builder: "myorg/my-builder:*"
-      userID: "1002"
-      groupID: "1000"
+      userID: 1002
+      groupID: 1000
       env: |
         CNB_PLATFORM_API: "0.12"
         MY_CUSTOM_VAR: "value"
       base: epinio-stage-scripts  # Inherits download, unpack, and build scripts
+      # Optional: Custom staging workload configuration
+      stagingValues:
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+        nodeSelector:
+          workload-type: "build"
 ```
+
+When using `base`, you only need to specify:
+- `builder`: The glob pattern to match your builder image
+- `userID` and `groupID`: The user/group IDs for the `cnb` user in your builder
+- `env`: Environment variables (especially `CNB_PLATFORM_API`)
+- `base`: The name of the base ConfigMap (usually `epinio-stage-scripts`)
+- `stagingValues` (optional): Custom workload configuration
 
 **Fully custom scripts:**
 
-If you need completely custom scripts, you can define them inline:
+If you need completely custom scripts (not using a base), you must provide all three scripts (`download`, `unpack`, and `build`). You can also optionally override the `downloadImage` and `unpackImage`:
 
 ```yaml
 stagingScripts:
   custom:
     - name: epinio-stage-scripts-fully-custom
       builder: "myorg/another-builder:*"
-      userID: "1003"
-      groupID: "1000"
+      userID: 1003
+      groupID: 1000
       env: |
         CNB_PLATFORM_API: "0.13"
+      # Optional: Override default images
       downloadImage: "ghcr.io/epinio/epinio-awscli:latest"
       unpackImage: "ghcr.io/epinio/epinio-unpacker:latest"
+      # Required when not using base: All three scripts must be provided
       download: |-
-        # Custom download script
+        # Parameters available: PROTOCOL, ENDPOINT, BUCKET, BLOBID
         echo "Downloading from custom source..."
-        # Your custom download logic here
+        aws --endpoint-url "${PROTOCOL}://${ENDPOINT}" s3 cp "s3://${BUCKET}/${BLOBID}" "/workspace/source/${BLOBID}"
       unpack: |-
-        # Custom unpack script
+        # Parameters available: BLOBID, USERID, GROUPID
         echo "Unpacking with custom logic..."
-        # Your custom unpack logic here
+        mkdir -p /workspace/source/app
+        tar -xzf "/workspace/source/${BLOBID}" -C /workspace/source/app
+        chown -R ${USERID}:${GROUPID} /workspace
       build: |-
-        # Custom build script
+        # Parameters available: PREIMAGE, APPIMAGE, USERID, GROUPID
         echo "Building with custom process..."
-        # Your custom build logic here
+        /cnb/lifecycle/creator \
+          -app=/workspace/source/app \
+          -cache-dir=/workspace/cache \
+          -uid=${USERID} \
+          -gid=${GROUPID} \
+          -layers=/layers \
+          -platform=/workspace/source \
+          "-previous-image=${PREIMAGE}" \
+          "${APPIMAGE}"
 ```
+
+:::warning
+When not using `base`, you must provide all three scripts (`download`, `unpack`, and `build`). The Helm chart will fail to render if any are missing.
+:::
 
 ### Example: Adding Support for Paketo Tiny Builder
 
@@ -200,8 +239,8 @@ stagingScripts:
       # Match all Paketo Tiny builder images
       builder: "paketobuildpacks/builder-tiny:*"
       # Tiny builder uses the same user/group IDs as Jammy builders
-      userID: "1001"
-      groupID: "1000"
+      userID: 1001
+      groupID: 1000
       env: |
         CNB_PLATFORM_API: "0.11"
       # Inherit download, unpack, and build scripts from the base
@@ -267,27 +306,76 @@ data:
 
 ### Best Practices
 
-1. **Use the base mechanism**: Most of the time, you only need to override `builder`, `userID`, `groupID`, and `env`. Use the `base` field to inherit the standard download, unpack, and build scripts.
+1. **Use the base mechanism**: Most of the time, you only need to override `builder`, `userID`, `groupID`, and `env`. Use the `base` field to inherit the standard download, unpack, and build scripts. This reduces maintenance and ensures consistency.
 
-2. **Naming convention**: Use descriptive names that indicate the builder type, e.g., `epinio-stage-scripts-jammy`, `epinio-stage-scripts-bionic`.
+2. **Naming convention**: Use descriptive names that indicate the builder type, e.g., `epinio-stage-scripts-jammy`, `epinio-stage-scripts-bionic`, `epinio-stage-scripts-tiny`. If you don't provide a name, one will be auto-generated, but explicit names are easier to identify in logs and ConfigMap listings.
 
 3. **Builder pattern matching**: Use glob patterns in the `builder` field to match multiple builder images. For example:
-   - `"paketobuildpacks/builder-jammy-*:*"` matches all jammy-based builders
+   - `"paketobuildpacks/builder-jammy-*:*"` matches all jammy-based builders (e.g., `builder-jammy-base`, `builder-jammy-full`)
    - `"myorg/my-builder:*"` matches all tags of a specific builder
-   - `"*"` matches everything (use only for fallback)
+   - `"*"` matches everything (use only for fallback ConfigMaps)
 
 4. **User and Group IDs**: Different builder images may use different user/group IDs. Check your builder image documentation or inspect the image to determine the correct IDs:
    ```bash
    docker run --rm myorg/my-builder id
+   # Look for the 'cnb' user output, e.g., uid=1001(cnb) gid=1000(cnb)
+   ```
+   You can specify IDs as numbers (`1001`) or strings (`"1001"`) in the YAML.
+
+5. **CNB_PLATFORM_API**: Different builder versions may require different `CNB_PLATFORM_API` values. Check your builder's documentation for the correct version. Common values:
+   - `"0.4"` for older Bionic-based builders
+   - `"0.11"` for most Jammy-based builders
+   - `"0.12"` or `"0.13"` for newer builders
+
+6. **Staging workload configuration**: Use `stagingValues` to customize resource limits, node selectors, tolerations, and other workload settings for specific builders:
+   ```yaml
+   stagingValues:
+     resources:
+       requests:
+         cpu: "1"
+         memory: "2Gi"
+       limits:
+         cpu: "4"
+         memory: "8Gi"
+     nodeSelector:
+       workload-type: "build"
+     tolerations:
+       - key: "build-workload"
+         operator: "Equal"
+         value: "true"
+         effect: "NoSchedule"
    ```
 
-5. **CNB_PLATFORM_API**: Different builder versions may require different `CNB_PLATFORM_API` values. Check your builder's documentation for the correct version.
-
-6. **Testing**: After adding a new stage script, test it by pushing an application that uses the matching builder image.
+7. **Testing**: After adding a new stage script:
+   - Verify the ConfigMap was created: `kubectl get configmap -n epinio | grep stage-scripts`
+   - Check the ConfigMap contents: `kubectl get configmap epinio-stage-scripts-<name> -n epinio -o yaml`
+   - Test by pushing an application with the matching builder: `epinio push --name myapp --builder-image <your-builder>`
 
 ### Troubleshooting
 
-- **Script not found**: Ensure your ConfigMap has the label `app.kubernetes.io/component: epinio-staging`
-- **Wrong script selected**: Check the builder pattern matches your builder image name and tag. Scripts are matched in lexicographic order by name.
-- **Build fails**: Verify the `userID` and `groupID` match the `cnb` user in your builder image
-- **Environment issues**: Ensure `CNB_PLATFORM_API` matches your builder's requirements
+- **Script not found**: 
+  - Ensure your ConfigMap has the label `app.kubernetes.io/component: epinio-staging`
+  - Verify the ConfigMap was created: `kubectl get configmap -n epinio -l app.kubernetes.io/component=epinio-staging`
+  - Check Helm rendered output: `helm template epinio epinio/epinio --values your-values.yaml | grep -A 20 stage-scripts`
+
+- **Wrong script selected**: 
+  - Check the builder pattern matches your builder image name and tag exactly (including registry prefix)
+  - Scripts are matched in lexicographic order by ConfigMap name, so more specific patterns should come first
+  - Test the glob pattern: `filepath.Match("your-pattern", "your-builder-image:tag")`
+
+- **Build fails**: 
+  - Verify the `userID` and `groupID` match the `cnb` user in your builder image
+  - Check staging job logs: `kubectl logs -n epinio -l app.kubernetes.io/component=epinio-staging --tail=100`
+
+- **Environment issues**: 
+  - Ensure `CNB_PLATFORM_API` matches your builder's requirements
+  - Check that environment variables are properly formatted as YAML key-value pairs
+
+- **Helm template errors**: 
+  - If using custom scripts without `base`, ensure all three scripts (`download`, `unpack`, `build`) are provided
+  - Verify YAML syntax is correct (proper indentation, quoted strings where needed)
+  - Check for typos in field names (e.g., `userID` not `userId`)
+
+- **ConfigMap not updating**: 
+  - After modifying `stagingScripts.custom` in values.yaml, run `helm upgrade` to apply changes
+  - Verify the new ConfigMap exists: `kubectl get configmap -n epinio | grep stage-scripts`
