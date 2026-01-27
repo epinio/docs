@@ -45,7 +45,7 @@ This ConfigMap is expected to have the following keys:
 |`userID`	|User ID to run the `build` script with (as string, e.g., "1001").				|
 |`groupID`	|Group ID to run the `build` script with (as string, e.g., "1000").				|
 |`env`		|Standard environment for the scripts, YAML-formatted string, key/value map.	|
-|`staging-values.json`|Optional JSON object containing Helm values for staging workload configuration (resources, nodeSelector, tolerations, etc.).	|
+|`staging-values.json`|Optional JSON object containing Helm values for staging workload configuration (resources, nodeSelector, tolerations, etc.). When omitted, no custom workload configuration is applied.	|
 |||
 |`base`		|Optional redirect to the actual ConfigMap with the scripts.		|
 |||
@@ -164,6 +164,7 @@ stagingScripts:
         MY_CUSTOM_VAR: "value"
       base: epinio-stage-scripts  # Inherits download, unpack, and build scripts
       # Optional: Custom staging workload configuration
+      # When omitted, default workload settings from server.stagingWorkloads are used
       stagingValues:
         resources:
           requests:
@@ -181,7 +182,7 @@ When using `base`, you only need to specify:
 - `userID` and `groupID`: The user/group IDs for the `cnb` user in your builder
 - `env`: Environment variables (especially `CNB_PLATFORM_API`)
 - `base`: The name of the base ConfigMap (usually `epinio-stage-scripts`)
-- `stagingValues` (optional): Custom workload configuration
+- `stagingValues` (optional): Custom workload configuration. When omitted, the default workload settings from `server.stagingWorkloads` in values.yaml are used, or system defaults if not specified.
 
 **Fully custom scripts:**
 
@@ -269,7 +270,25 @@ epinio push --name myapp --builder-image paketobuildpacks/builder-tiny:latest
 
 For more complex scenarios or when you need to version control your scripts with the chart, you can create new template files in the Helm chart.
 
-1. **Create a new template file** in `helm-charts/chart/epinio/templates/` following the naming pattern `stage-scripts-*.yaml`:
+**Recommended: Use the helper template** for consistency with other stage script definitions:
+
+Create a new template file in `helm-charts/chart/epinio/templates/` following the naming pattern `stage-scripts-*.yaml`:
+
+```yaml
+{{- include "epinio.stage-script" (dict
+  "name" "epinio-stage-scripts-my-builder"
+  "builder" "myorg/my-builder:*"
+  "userID" "1002"
+  "groupID" "1000"
+  "env" "CNB_PLATFORM_API: \"0.12\"\n"
+  "base" "epinio-stage-scripts"
+  "context" .
+) }}
+```
+
+**Alternative: Manual ConfigMap definition** (for advanced use cases where you need full control):
+
+If you need to define the ConfigMap manually without using the helper template:
 
 ```yaml
 apiVersion: v1
@@ -288,20 +307,6 @@ data:
   env: |-
     CNB_PLATFORM_API: "0.12"
   base: epinio-stage-scripts
-```
-
-2. **Or use the helper template** for consistency:
-
-```yaml
-{{- include "epinio.stage-script" (dict
-  "name" "epinio-stage-scripts-my-builder"
-  "builder" "myorg/my-builder:*"
-  "userID" "1002"
-  "groupID" "1000"
-  "env" "CNB_PLATFORM_API: \"0.12\"\n"
-  "base" "epinio-stage-scripts"
-  "context" .
-) }}
 ```
 
 ### Best Practices
