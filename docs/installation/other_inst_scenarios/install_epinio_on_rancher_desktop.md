@@ -8,7 +8,7 @@ keywords: [epinio, kubernetes, rancher, rancher desktop]
 
 This How-to uses the following versions:
 
-* [epinio helm chart 1.13.5](https://github.com/epinio/helm-charts/releases/tag/epinio-1.13.5)
+* \\\\\\\\\\\\\\\\\\\\\\\\\\\[epinio helm chart 1.13.7\]\\\\\\\\\\\\\\\\\\\\\\\\\\\(https://github.com/epinio/helm-charts/releases/tag/epinio-1.13.7\)
 * Rancher Desktop 1.20.0
 
 ## Rancher Desktop prerequisites
@@ -50,7 +50,7 @@ The Epinio installation is similar on Linux, macOS and Windows:
 1. Follow the [Epinio installation process](../../installation/install_epinio.md). It uses:
 
     ```shell
-    kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.yaml
+    kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.19.3/cert-manager.yaml
 
     # Wait for cert-manager to stabilize
 
