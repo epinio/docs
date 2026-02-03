@@ -27,6 +27,7 @@ epinio app update NAME [flags]
   -v, --chart-value strings   chart customization to be used
   -z, --clear-routes          clear routes / no routes
   -e, --env strings           environment variables to be used, the new environment variables will merge with the existing set.
+      --no-restart            do not restart app after updating values
   -h, --help                  help for update
   -i, --instances int32       The number of instances the application should have (default 1)
   -r, --route strings         Custom route to use for the application (a subdomain of the default domain will be used if this is not set). Can be set multiple times to use multiple routes with the same application.
