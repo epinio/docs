@@ -230,12 +230,6 @@ There exists examples within the `values.yaml` file under the `server.stagingWor
 
 The configurations under `server.stagingWorkloads` gets mapped to the build script ConfigMaps which is then processed by the Epinio Server when builds are kicked off.  These specifications are supplied to the newly created staging jobs.
 
-### Kubed
-
-Kubed is installed as a subchart when `.Values.kubed.enabled` is `true` (default).
-If you already have `kubed`, you can skip installation by setting
-the helm value `.Values.kubed.enabled` to `false`.
-
 ### S3 storage
 
 Epinio uses an S3 compatible storage to store the application source code.
@@ -283,8 +277,20 @@ to point to the desired container registry.
 
 ### Breaking Changes & Migrations
 
+#### 1.13.7 to 1.13.8
+Epinio **1.13.8** switches from using kubed to use [reflector](https://github.com/emberstack/kubernetes-reflector) for syncing ConfigMaps and Secrets across namespaces.  This change occured due to kubed being deprecated and unmaintained.
+
+If you are upgrading from **1.13.7** or earlier to **1.13.8** or later, you must manually uninstall kubed from your cluster after the upgrade is complete.
+
+You can view the changes made in the following files: 
+- [registry-secret.yaml](https://github.com/epinio/helm-charts/blob/main/chart/epinio/templates/registry-secret.yaml)
+- [certificate.yaml](https://github.com/epinio/helm-charts/blob/main/chart/epinio/templates/certificate.yaml)
+- [values.yaml](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml)
+
+By default the all of the namespaces are allowed but the reflector can be customized based on your deployment style. If you were not customizing kubed previously, no action is needed other than uninstalling kubed.
+
 #### 1.12 to 1.13
 
 Epinio 1.13 rehomes configurations for the staging workloads to a more Kubernetes-standardized format that supports a larger variety of configs.  These are no longer configured via ENV variables on the Epinio Server or through CLI flags but rather read from an in-cluster ConfigMap at staging time.
 
-Documentation has been udpated for both the [Epinio Server](https://github.com/epinio/epinio?tab=readme-ov-file#112-to-113) and the [Epinio Helm Chart](https://github.com/epinio/helm-charts/tree/main/chart/epinio#112-to-113).  These READMEs go into detail describing the changes to the environment variables, CLI flags, and changes to the `values.yaml` interface.  Please refer to these before upgrading to **1.13**.
+Documentation has been updated for both the [Epinio Server](https://github.com/epinio/epinio?tab=readme-ov-file#112-to-113) and the [Epinio Helm Chart](https://github.com/epinio/helm-charts/tree/main/chart/epinio#112-to-113).  These READMEs go into detail describing the changes to the environment variables, CLI flags, and changes to the `values.yaml` interface.  Please refer to these before upgrading to **1.13**.
