@@ -9,7 +9,7 @@ keywords: [epinio, kubernetes, k8s, installation, install]
 ## Introduction
 
 Epinio is installed from a single Helm chart.
-This also installs [`Kubed`](#kubed), [`MinIO`](#s3-storage), [`Dex`](#dex) and a [container registry](#container-registry) in your Kubernetes cluster.
+This also installs Reflector, [`MinIO`](#s3-storage), [`Dex`](#dex) and a [container registry](#container-registry) in your Kubernetes cluster.
 You can disable the installation of these additional "sub" charts by changing the settings as described in their sections below.
 
 ## Prerequisites
