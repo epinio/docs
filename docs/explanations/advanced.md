@@ -78,15 +78,11 @@ The Epinio API server runs on the cluster.
 It's reached using Kubernetes resources like
 Deployments, Services,  Ingresses and Secrets.
 
-### Kubed
+### Reflector
 
-[Kubed documentation](https://github.com/kubeops/kubed)
+[Relector documentation](https://github.com/emberstack/kubernetes-reflector)
 
-Epinio installs Kubed to keep secrets, needed in more than one namespace, synchronized.
-For example, the image pull secret is needed in every application namespace
-so that Kubernetes can pull the built application images from the [Container Registry](#container-registry).
-
-Kubed makes sure that if the source secret changes, the copies change too.
+Reflector is a Kubernetes addon designed to monitor changes to resources (secrets and configmaps) and reflect changes to mirror resources in the same or other namespaces.
 
 ### Minio
 
