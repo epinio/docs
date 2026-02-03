@@ -55,22 +55,6 @@ Use them only where absolutely necessary with everything else keeping to the aut
 The secret is used whenever a requested application route matches the wildcard pattern.
 This reduces the number of Secrets needing creation.
 
-1. You can automate distribution of routing secrets by using a component like Kubed.
-Kubed can automatically copy secrets between namespaces based on annotations.
-Kubed is a component of Epinio so is available.
-As an example,
-
-   1. Place a new routing secret `RS` into the namespace `epinio`.
-
-   1. Annotate the secret with
-
-      `kubed.appscode.com/sync="app.kubernetes.io/component=epinio-namespace"`
-
-   1. Kubed now distributes `RS` to all namespaces which have the label `app.kubernetes.io/component=epinio-namespace`.
-   These are all the namespaces under Epinio's control.
-
-   For a more limited distribution it's possible to add custom labels to the
-   desired namespaces and add matching annotations on the relevant Secrets.
-
-   The distribution automatically includes all new namespaces
-   matching whatever criteria are in place.
+1. You can automate distribution of routing secrets by using a component like [Reflector](https://github.com/emberstack/kubernetes-reflector).
+Reflector can automatically copy secrets between namespaces based on annotations.
+Reflector is a component of Epinio so is available.

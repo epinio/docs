@@ -24,7 +24,7 @@ epinio app push [flags] [PATH_TO_APPLICATION_MANIFEST]
   -v, --chart-value strings          chart customization to be used
   -z, --clear-routes                 clear routes / no routes
       --container-image-url string   Container image url for the app workload image
-  -e, --env strings                  environment variables to be used
+  -e, --env strings                  environment variables to be used, the new environment variables will merge with the existing set.
   -g, --git string                   Git repository and revision of sources separated by comma (e.g. GIT_URL,REVISION)
       --git-provider string          Git provider code [git|github|github_enterprise|gitlab|gitlab_enterprise]
   -h, --help                         help for push
@@ -32,6 +32,7 @@ epinio app push [flags] [PATH_TO_APPLICATION_MANIFEST]
   -n, --name string                  Application name. (mandatory if no manifest is provided)
   -p, --path string                  Path to application sources.
   -r, --route strings                Custom route to use for the application (a subdomain of the default domain will be used if this is not set). Can be set multiple times to use multiple routes with the same application.
+      --env-replace                  Replaces all environment variables with the new set defined.
 ```
 
 ### Options inherited from parent commands
