@@ -18,7 +18,7 @@ It's almost certain that you'll need more resources for typical development and 
 | OS/Kubernetes <sup>1</sup> | Linux: [RKE2](../../installation/other_inst_scenarios/install_epinio_on_rke.md), [K3s](../../installation/other_inst_scenarios/install_epinio_on_k3s.md),   [K3d](../../installation/other_inst_scenarios/install_epinio_on_k3d.md), [Rancher Desktop](../../installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md)<br/>Windows, macOS: [Rancher Desktop](../../installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md) |
 | CPU | 2–4 vCPUs |
 | Memory | 8 GB RAM (system memory + 4 GB) |
-| Storage | 10 GB Disk space (system disk + 5 GB) |
+| Storage | 10 GB Disk space minimum (system disk + 5 GB)<br/>**See [Storage recommendations](storage.md) for production deployments** |
 
 <sup>1</sup> Linux: x86_64, arm64 and s390x; macOS: x86_64, arm64 (Epinio CLI only); Windows: x86_64
 
