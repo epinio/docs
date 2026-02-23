@@ -14,23 +14,19 @@ This customization interacts with the
 [customization of buildpacks](staging.md).
 :::
 
-Epinio uses staging scripts to interact with Paketo [Cloud Native Buildpacks](https://buildpacks.io/).
+Epinio uses staging scripts to run [Cloud Native Buildpacks](https://buildpacks.io/) (e.g. Paketo or other builder images).
 
 Epinio automatically selects the set of staging scripts based on the name of the chosen builder
-image, and the images supported by a specific definition.
+image and the images supported by each script definition.
 
-By default Epinio installs three definitions.
+By default Epinio installs three definitions:
 
-  1. One to support Bionic-based builder images (`paketo-buildpacks/builder:*`).
-  1. One to support Jammy-based  builder images (`paketo-buildpacks/builder-jammy-*:*`).
-  1. One to serve as fallback for any images not captured by the other two.
+  1. One to support Bionic-based Paketo builder images (`paketo-buildpacks/builder:*`).
+  2. One to support Jammy-based Paketo builder images (`paketo-buildpacks/builder-jammy-*:*`).
+  3. One that serves as a fallback for any other builder image (including non-Paketo and custom builders).
 
-It is this last definition which is configured when [customizing buildpacks](staging.md)
-with a different image.
-
-By default this fallback is configured for Jammy-based images in general, and the
-[jammy full stack paketo builder image](https://github.com/paketo-buildpacks/builder-jammy-full)
-in particular
+When you [customize buildpacks](staging.md) to use a different default builder, or push with a non-Paketo builder via `--builder-image`, Epinio uses the fallback definition.
+By default that fallback is tuned for Jammy-based images and the [Paketo jammy full stack builder](https://github.com/paketo-buildpacks/builder-jammy-full).
 
 ## Specification
 
