@@ -41,13 +41,9 @@ You can then build the image for the application by running:
 pack build test/pip -B paketobuildpacks/builder:full
 ```
 
-However, since Epinio isn't using `pack` but the `lifecycle` directly
-([link 1](https://github.com/buildpacks/lifecycle),
-[link 2](https://github.com/epinio/helm-charts/blob/3954c214de3d7b957cfc2054ba4fa4bfa140f5a3/chart/epinio/templates/stage-scripts.yaml#L83)),
-using project.toml isn't possible:
-
-* https://github.com/buildpacks/lifecycle/issues/555
-* https://github.com/haliliceylan/rfcs/blob/2152fc5c817d971b6ead2069d82c459f432a7acc/text/0000-prepare-phase.md
+Epinio staging uses `pack` for modern builder images, so `project.toml`-based
+configuration is available when supported by the selected builder/buildpacks.
+Older lifecycle-based staging profiles may still exist for compatibility.
 
 ## Solution: Using a custom builder
 

@@ -66,9 +66,10 @@ Supported formats are: **zip**, **tar**, **tgz**, **tbz**, and **txz**
 
 ## Stage (step 7)
 
-The third step of staging uses the
-[Paketo buildpacks](https://paketo.io/)
-to create a container image for your application.
+The third step of staging uses
+[Cloud Native Buildpacks](https://buildpacks.io/)
+through the staging build script (typically via the `pack` CLI for modern
+builder profiles) to create a container image for your application.
 The result of a successful staging process is a new image.
 This image is pushed to the Registry component of Epinio.
 Read further information in the [Epinio Registry](../explanations/advanced.md#container-registry) documentation.
