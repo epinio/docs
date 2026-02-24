@@ -70,9 +70,42 @@ curl -u username:password \
   -d '{"staleDays": 30, "checkAppExists": true, "dryRun": true}'
 ```
 
-## Automated Cleanup with Kubernetes CronJob
+## Configuring automated cleanup via the Helm chart
 
-You can automate the cleanup process by creating a Kubernetes CronJob that runs periodically. This example runs daily at 2 AM:
+The recommended way to run cleanup automatically is to enable it in the Epinio Helm chart. This avoids manual CronJob setup and keeps configuration in one place.
+
+When installing or upgrading Epinio with the [Epinio Helm chart](https://github.com/epinio/helm-charts/tree/main/chart/epinio), set:
+
+```yaml
+staleCacheCleanup:
+  enabled: true
+  schedule: "0 2 * * *"   # Daily at 2 AM (cron format)
+  staleDays: 30
+  checkAppExists: true
+  credentialsSecret: "epinio-cache-cleanup-credentials"
+```
+
+You must create a Secret in the Epinio namespace with the API credentials used by the CronJob:
+
+```bash
+kubectl create secret generic epinio-cache-cleanup-credentials -n epinio \
+  --from-literal=username=admin \
+  --from-literal=password=YOUR_ADMIN_PASSWORD
+```
+
+Then install or upgrade with the chart, for example:
+
+```bash
+helm upgrade --install epinio epinio/epinio -n epinio \
+  --set staleCacheCleanup.enabled=true \
+  --set staleCacheCleanup.schedule="0 2 * * *"
+```
+
+If you use a custom Secret name, set `staleCacheCleanup.credentialsSecret` to that name.
+
+## Automated cleanup with a manual Kubernetes CronJob
+
+If you prefer not to use the Helm chart option, you can create a CronJob yourself. This example runs daily at 2 AM:
 
 ```yaml
 apiVersion: batch/v1
