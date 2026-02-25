@@ -41,9 +41,8 @@ You can then build the image for the application by running:
 pack build test/pip -B paketobuildpacks/builder:full
 ```
 
-Epinio staging uses `pack` for modern builder images, so `project.toml`-based
-configuration is available when supported by the selected builder/buildpacks.
-Older lifecycle-based staging profiles may still exist for compatibility.
+Epinio staging uses `pack`, so `project.toml`-based configuration is available
+when supported by the selected builder/buildpacks.
 
 ## Solution: Using a custom builder
 

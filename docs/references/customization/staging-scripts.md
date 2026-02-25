@@ -48,7 +48,7 @@ This ConfigMap is expected to have the following keys:
 |||
 |`base`		|Optional redirect to the actual ConfigMap with the scripts.		|
 |||
-|`buildEngine`	|Build command family used by `build` (for example `pack` or `lifecycle`).	|
+|`buildEngine`	|Build command family used by `build` (`pack`).	|
 |`buildImage`	|Container image used to execute the `build` script (for example a `pack` CLI image).	|
 |`build`	|Shell script to compile the unpacked sources into an image.<br/>Executed using the `buildImage`	|
 |`downloadImage`|Container image to run the `download` script with.			|
@@ -102,15 +102,14 @@ environment variables:
 
 |Name	  	|Content					|
 |---	  	|---						|
-|`BUILDENGINE`	|Build command family (`pack` or `lifecycle`)	|
+|`BUILDENGINE`	|Build command family (`pack`)	|
 |`BUILDERIMAGE`|Builder image reference passed to the build tool	|
 |`PREIMAGE`	|url to the result image from a previous push	|
 |`APPIMAGE`	|url to save the new application image under	|
 |`USERID`	|Numeric id of the `cnb` user used to run the `build` script	|
 |`GROUPID`	|Numeric id of the user group used to run the `build` script	|
 
-When `BUILDENGINE=pack`, `PREIMAGE` is passed as `--previous-image` to speed up rebuilds.
-When `BUILDENGINE=lifecycle`, `PREIMAGE` is passed to `/cnb/lifecycle/creator`.
+`PREIMAGE` is passed as `--previous-image` to speed up rebuilds.
 
 ## Search
 

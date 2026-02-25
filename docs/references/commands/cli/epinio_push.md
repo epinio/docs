@@ -20,7 +20,7 @@ epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
 ```
       --app-chart string             App chart to use for deployment
   -b, --bind strings                 configurations to bind immediately
-      --builder-image string         Paketo builder image to use for staging
+      --builder-image string         Builder image to use for staging
   -v, --chart-value strings          chart customization to be used
   -z, --clear-routes                 clear routes / no routes
       --container-image-url string   Container image url for the app workload image
@@ -52,4 +52,3 @@ epinio push [flags] [PATH_TO_APPLICATION_MANIFEST]
 ### SEE ALSO
 
 * [epinio](./epinio.md)	 - Epinio cli
-
