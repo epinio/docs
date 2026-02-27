@@ -205,6 +205,45 @@ spec:
           restartPolicy: OnFailure
 ```
 
+## Verifying that cleanup works
+
+After enabling cleanup (either via the Helm chart or a manual CronJob), you can quickly verify that it works:
+
+1. **Dry-run from outside the cluster**
+
+   ```bash
+   curl -u admin:YOUR_PASSWORD \
+     "https://<EPINIO_API>/api/v1/maintenance/cleanup-stale-caches?staleDays=30&checkAppExists=true&dryRun=true"
+   ```
+
+   You should see a JSON response with `staleCaches`, `deletedCount`, and `dryRun: true`. No PVCs are deleted in this mode.
+
+2. **Dry-run from inside the cluster**
+
+   ```bash
+   kubectl run curl --rm -it --restart=Never --image=curlimages/curl -n epinio -- \
+     curl -u admin:YOUR_PASSWORD \
+       "http://epinio-server.epinio.svc.cluster.local:8030/api/v1/maintenance/cleanup-stale-caches?staleDays=30&checkAppExists=true&dryRun=true"
+   ```
+
+3. **Verify the Helm-managed CronJob**
+
+   If you enabled `staleCacheCleanup.enabled=true` in the Helm chart:
+
+   ```bash
+   kubectl get cronjob -n epinio -l app.kubernetes.io/component=stale-cache-cleanup
+   kubectl get jobs -n epinio -l app.kubernetes.io/component=stale-cache-cleanup
+   ```
+
+   To force a one-off run without waiting for the schedule, create a Job from the CronJob and inspect its logs:
+
+   ```bash
+   kubectl create job -n epinio stale-cache-manual --from=cronjob/<CRONJOB_NAME>
+   kubectl logs -n epinio job/stale-cache-manual
+   ```
+
+   The logs should show the same JSON response you see when calling the API directly.
+
 ## Response Format
 
 The API returns a JSON response with the following structure:
