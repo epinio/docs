@@ -201,6 +201,15 @@ The Public Cloud [installation](other_inst_scenarios/install_epinio_on_public_cl
 
 ## Internal Epinio components
 
+### Server Configuration
+
+- **`server.defaultTokenExpiry`**: Controls the default expiry time for auth tokens (e.g. `"30s"`, `"60s"`, `"2m"`). Use this to mitigate clock drift in environments where short-lived tokens may expire before use—for example, in staging workloads or when Kubernetes hosts have time synchronization issues. The value is capped at 5 minutes for security. Default is `"30s"`.
+
+  ```yaml
+  server:
+    defaultTokenExpiry: "60s"  # Example: increase to 1 minute for clock drift
+  ```
+
 ### Staging Workloads
 
 Epinio uses staging workloads to build container images from source code.  As you can imagine, container builds can consume varying amounts of CPU, Memory, and Disk space depending on the application.  Because of this, it is important that these staging workloads can not only specify those resource amounts but also specify scheduling constraints so that your running applications can be protected from any buildtime resource consumption.  For example, you may configure your staging workloads to schedule to a particular node pool within your Kubernetes cluster that is dedicated to builds.
