@@ -104,6 +104,10 @@ You can use any storage provisioner which provides `ReadWriteMany` (RWX) Access 
 
 To verify that your cluster provides a default StorageClass run the command `kubectl get storageclass`. The default StorageClass is marked with the string `(default)` next to its name in the output list.
 
+:::tip Storage sizing
+Ensure your storage provisioner has adequate capacity for your expected workload. Storage requirements scale with the number of applications and their sizes. See [Storage recommendations](../references/system_requirements/storage.md) for detailed guidance on calculating storage needs.
+:::
+
 For example, you can deploy and configure the `local-path` dynamic storage provisioner by:
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
