@@ -21,3 +21,9 @@ If you installed Epinio in a namespace `epinio`, you uninstall with the command:
 ```bash
 $ helm uninstall -n epinio epinio
 ```
+
+If you installed Epinio in a custom namespace, replace `epinio` with your custom namespace:
+
+```bash
+$ helm uninstall -n <custom-namespace> epinio
+```
