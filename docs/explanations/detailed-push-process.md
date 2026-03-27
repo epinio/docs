@@ -29,10 +29,10 @@ BasicAuth, a session cookie or, if using WebSockets, a token.
 
 ## Copying the code to S3 (step 2)
 
-The Epinio helm-chart can install either [Minio](https://min.io/) (the default)
+The Epinio helm-chart can install either [SeaweedFS](https://github.com/seaweedfs/seaweedfs) (the default)
 or [s3gw](https://s3gw.io/) on your cluster.
 You can also [configure external S3](../howtos/customization/setup_external_s3.md).
-Both Minio and s3gw are S3-compatible storage solutions which Epinio uses to store application source code.
+Both SeaweedFS and s3gw are S3-compatible storage solutions which Epinio uses to store application source code.
 The chosen S3 storage solution is later used by the staging job.
 
 After successful authentication (step 1),
