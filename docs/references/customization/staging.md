@@ -9,6 +9,10 @@ keywords: [kubernetes, epinio, application development, buildpacks]
 This customization interacts with the [customization of staging scripts](staging-scripts.md).
 :::
 
+:::info Trigger-time overrides
+You can override staging workload configuration (resources, nodeSelector, tolerations, affinity, TTL, storage, and more) at build trigger-time via the staging API, without changing ConfigMap defaults. See [Staging configuration override at trigger time](../../howtos/customization/staging_config_override.md).
+:::
+
 By default, Epinio's staging process uses the [jammy full stack paketo builder image](https://github.com/paketo-buildpacks/builder-jammy-full) for Paketo [Cloud Native Buildpacks](https://buildpacks.io/).
 This converts application sources into deployable application images.
 
