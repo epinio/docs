@@ -117,6 +117,16 @@ This doesn't cover other tools included in Epinio.
 Kubernetes has its own [release versioning](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#kubernetes-release-versioning)
 scheme that's similar to SemVer but semantically different.
 
+## Version parity validation
+
+Epinio includes automated validation so that the binary release version matches the Helm chart version. This prevents users from installing a Helm chart that points at CLI binaries that don't exist (see [GitHub issue #2774](https://github.com/epinio/epinio/issues/2774)).
+
+- **Before creating a release**: Run `make validate-version-parity-strict` in the [epinio repository](https://github.com/epinio/epinio).
+- **When updating versions**: If you change `internal/version/version.go` or the helm-charts submodule, CI runs validation; fix any mismatches before merging.
+- **Local checks**: Use `make validate-version-parity` (informational) or `make validate-version-parity-strict` (fails on mismatch).
+
+For details, see [Version parity validation](./version_parity_validation.md).
+
 ## Coding style
 
 Epinio expects Go code formatted with `go fmt`.
