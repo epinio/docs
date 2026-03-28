@@ -11,9 +11,10 @@ to work through a more complex application with Epinio.
 
 Gitea is a self-hosted Git service, written in Go and Node.js.
 
+Epinio supports any [Cloud Native Buildpack](https://buildpacks.io/) builder image (default is Paketo; you can use custom or other builders via `--builder-image` or [staging customization](../references/customization/staging.md)).
 At the time of writing the Paketo Go buildpack doesn't support Node.js asset compilation,
 (see [issue #671](https://github.com/paketo-buildpacks/go/issues/671)),
-so you need to create a custom builder.
+so this tutorial uses a custom builder.
 
 The builder checks the needed Go and Node dependencies,
 and executes the `make` command to build both the front end and the back end.

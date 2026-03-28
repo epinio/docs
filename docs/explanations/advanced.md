@@ -163,8 +163,7 @@ from the sources to the Epinio server,
 copying into Epinio's internal (or external) S3 storage.
 It's then copied from that storage to a `PersistentVolumeClaim`
 to use in the job for staging.
-Staging is the compilation and creation of the docker image
-for use by the underlying Kubernetes cluster.
+Staging uses a [Cloud Native Buildpacks](https://buildpacks.io/) builder image (default: Paketo full stack) to build the container image for use by the underlying Kubernetes cluster; see the [detailed push process](detailed-push-process.md) and [buildpack customization](references/customization/staging.md).
 
 The process is different when using the Epinio client's "git mode".
 In this mode [`epinio push`](../references/commands/cli/epinio_push.md)

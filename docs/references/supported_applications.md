@@ -19,13 +19,17 @@ You can see a simplified diagram of the process in the image below:
 
 ![epinio-push-simplified](epinio-push-simple.svg?raw=true "Epinio push")
 
-After pushing your code, Epinio creates staging job which uses the [paketo buildpacks](https://paketo.io/) to build a runtime image for your application.
-If you are not familiar with how buildpacks work, you should have a look at the official docs: https://buildpacks.io/docs/
+After pushing your code, Epinio creates a staging job that uses a buildpack builder image to build a runtime image.
+By default Epinio uses the [Paketo full builder](https://paketo.io/); you can also use [non-Paketo or custom buildpack builders](customization/staging.md#using-non-paketo-buildpacks).
+If you are not familiar with how buildpacks work, see the official docs: https://buildpacks.io/docs/
 
 ## Supported buildpacks
 
-Epinio uses the [Paketo full builder image](https://github.com/paketo-buildpacks/full-builder) which means you can make use of any of the buildpacks
+Epinio uses a **default** [Paketo full builder image](https://github.com/paketo-buildpacks/builder-jammy-full) (jammy stack), so you can use any of the buildpacks
 documented here: https://paketo.io/docs/concepts/builders/#full
+
+You can override the builder image per push (e.g. `--builder-image`) or set a different default at install time.
+That allows using custom builders or other buildpack ecosystems; see [Buildpacks customization](customization/staging.md).
 
 The various buildpacks provide various configuration options. You can read on how to generally configure a buildpack here: https://paketo.io/docs/buildpacks/configuration/
 Each buildpack may support more configuration options, so you may have to read the documentation of the buildpacks you are interested in.

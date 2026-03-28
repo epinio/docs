@@ -33,7 +33,7 @@ Further defaults:
   - No environment variables.
   - No bound configurations.
   - One replica/instance.
-  - Standard paketo builder image (`paketobuildpacks/builder:full`).
+  - Default buildpack builder image (Paketo full stack; [customizable](customization/staging.md)).
   - Current directory for the application sources.
 
 ## Syntax `epinio (apps) push`
