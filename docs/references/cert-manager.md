@@ -54,7 +54,7 @@ The Epinio chart then falls back to the data for `epinio`.
 The information is ignored when the `dex` and/or `ui` components are disabled.
 
 The `s3` information applies to whichever internal S3-compatible store is configured when installing
-Epinio, i.e. `minio` or `s3gw`. The `s3` information is not applied when Epinio is configured to use
+Epinio, i.e. `seaweedfs` or `s3gw`. The `s3` information is not applied when Epinio is configured to use
 an external S3 store.
 
 :::note
@@ -62,16 +62,16 @@ an external S3 store.
 The certificates for `epinio` (including workloads) and `dex` are served through public domains and
 are permitted to use wildcard domains (e.g. `*.1.2.3.4.nip.io`) in their `CN`/`SAN` fields.
     
-The certificates for `registry` and `s3`(minio) are inter-cluster "private" domains
+The certificates for `registry` and `s3` (SeaweedFS) are inter-cluster "private" domains
 (`registry.<ns>.svc.cluster.local` and
-`minio.<ns>.svc.cluster.local`).
+`seaweedfs-s3.<ns>.svc.cluster.local`).
 The placeholder `<ns>` refers to the namespace Epinio is installed in.
 
 :::
 
 :::caution
 
-When used with Minio the `s3` certificate cannot use wildcard domains in its `CN`/`SAN` fields.
+When used with SeaweedFS the `s3` certificate cannot use wildcard domains in its `CN`/`SAN` fields.
 
 :::
 
