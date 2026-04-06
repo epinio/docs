@@ -44,6 +44,10 @@ responds with a `blobUID` that can be later used to reference the uploaded packa
 When the upload request is complete, the CLI sends a request to the `stage` endpoint of the Epinio API server.
 This instructs the server to start the staging of the uploaded code.
 
+If you are using the Dashboard (UI), the staging/build and deploy flow can be started with a single asynchronous request
+to the `deployments` endpoint. This endpoint performs staging/build (when a `blobUID` is provided) and then deploys the
+resulting image. The UI can query deployment status without having to keep the page open.
+
 ## Trigger the job (step 4)
 
 When the Epinio API server receives the stage request,
@@ -78,8 +82,15 @@ Read further information in the [Epinio Registry](../explanations/advanced.md#co
 Only having a container image isn't enough to run a workload on Kubernetes.
 You need, as a minimum, a Pod running, with at least one container running that image.
 
-The API server provides these requirements
-on demand by the client (8a) after it finishes the staging process.
+The API server provides these requirements on demand by the client (8a) after it finishes the staging process.
+
+To avoid long-running UI-driven requests (and failures due to timeouts or client navigation), Epinio also exposes an
+asynchronous deployment flow:
+
+- `POST /api/v1/namespaces/:namespace/applications/:app/deployments` starts the stage/build/deploy pipeline and returns
+  immediately with a deployment id.
+- `GET /api/v1/namespaces/:namespace/applications/:app/deployments/:deployment_id` returns the current status (for example,
+  `staging`, `deploying`, `succeeded`, `failed`) plus metadata like `stage_id`.
 
 The most important resources created (8c) are a
 [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/),

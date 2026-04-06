@@ -19,6 +19,11 @@ The responses are all JSON objects, except for some cases where you get an error
 
 The endpoints are documented in the [OpenAPI Spec](https://www.openapis.org/) format. You can find the definition of the API here: https://github.com/epinio/epinio/blob/v1.13.8/docs/references/api/swagger.json
 
-__Make sure__ you change to the Epinio release you have deployed.
+__Make sure__ you change to the Epinio release you have deployed (use the matching git tag/branch) so the spec matches your running server.
+
+Recent API additions include the asynchronous application deployment flow:
+
+- `POST /api/v1/namespaces/:namespace/applications/:app/deployments`
+- `GET  /api/v1/namespaces/:namespace/applications/:app/deployments/:deployment_id`
 
 There are various tools you can use to easily browse the API (e.g. https://editor.swagger.io/). If you have a Golang environment set up locally, you may find it easier to run `make swagger swagger-serve` from the root of the Epinio repository.
