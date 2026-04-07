@@ -9,7 +9,12 @@ doc-persona: [epinio-developer, epinio-operator]
 ---
 ## epinio app show
 
-Describe the named application
+Describe the named application. Shows details such as status, instances, routes, bound configurations, and environment.
+
+With `-o json`, the response includes application `configuration` with:
+
+- **`environment`** — User-set environment variables (key-value map).
+- **`environment_grouped`** — Environment variables grouped by origin (`user` and `service`), same structure as [epinio app env show](env/epinio_app_env_show.md) when using the API with `?grouped=true`. Use this to tell user-defined variables apart from those injected by bound services.
 
 ```
 epinio app show NAME [flags]

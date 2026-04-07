@@ -9,7 +9,7 @@ keywords: [epinio, kubernetes, k8s, installation, install]
 ## Introduction
 
 Epinio is installed from a single Helm chart.
-This also installs Reflector, [`MinIO`](#s3-storage), [`Dex`](#dex) and a [container registry](#container-registry) in your Kubernetes cluster.
+This also installs Reflector, [SeaweedFS](#s3-storage) (S3-compatible storage), [`Dex`](#dex) and a [container registry](#container-registry) in your Kubernetes cluster.
 You can disable the installation of these additional "sub" charts by changing the settings as described in their sections below.
 
 ## Prerequisites
@@ -233,11 +233,11 @@ The configurations under `server.stagingWorkloads` gets mapped to the build scri
 ### S3 storage
 
 Epinio uses an S3 compatible storage to store the application source code.
-This chart will install [Minio](https://min.io/) when `.Values.minio.enabled` is
+This chart will install [SeaweedFS](https://github.com/seaweedfs/seaweedfs) when `.Values.seaweedfs.enabled` is
 `true` (default).
 
-In addition to Minio, Epinio offers [s3gw](https://s3gw.io/) as another S3 compatible store.
-It is installed when `.Values.minio.enabled` is set to `false` and `.Values.s3gw.enabled` is set to `true`.
+In addition to SeaweedFS, Epinio offers [s3gw](https://s3gw.io/) as another S3 compatible store.
+It is installed when `.Values.seaweedfs.enabled` is set to `false` and `.Values.s3gw.enabled` is set to `true`.
 
 :::caution
 The s3gw support is __experimental__.
@@ -248,12 +248,12 @@ If there is an outage of the node where s3gw's pod is currently deployed, k8s wi
 
 Both choices for internal S3 compatible storage can be configured to use a user-defined storageClass.
 If no StorageClass is defined, the default storageClass is used.
-When using Minio set the custom storageClass to the value of `.Values.persistance.storageClass`.
+When using SeaweedFS set the custom storageClass to the value of `.Values.seaweedfs.persistence.storageClass`.
 When using s3gw set the custom storageClass to the value of `.Values.s3gw.storageClass.name`.
 
-Use any external S3 compatible solution by setting `.Values.minio.enabled` to `false`
+Use any external S3 compatible solution by setting `.Values.seaweedfs.enabled` to `false`
 (`.Values.s3gw.enabled` is `false` by default) and using
-[the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44)
+[the values under `s3`](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml)
 to point to the required S3 server.
 
 ### Dex

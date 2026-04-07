@@ -75,3 +75,7 @@ filesystem of that application, namely:
 
 The application can now read these files and use their content to connect to the configuration,
 authenticate, and then use it.
+
+### Viewing environment variables by origin
+
+Environment variables from bound configurations are also exposed as application environment variables. To see user-set variables separately from service-provided ones (from bound configurations), use [epinio app show](commands/cli/app/epinio_app_show.md) with `-o json` and read `configuration.environment_grouped`, or use the API's environment endpoint with `?grouped=true`.
