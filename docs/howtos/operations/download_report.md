@@ -26,23 +26,3 @@ The report includes:
 :::note Admin only
 
 Downloading the report requires admin permissions. If you see an authorization error, use an admin account or ask your operator to download the report.
-
-:::
-
-## Download via API
-
-You can fetch the same report from the API for automation or scripting.
-
-- **Text report** (human-readable):
-
-  ```bash
-  curl -H "Authorization: Bearer YOUR_TOKEN" "https://EPINIO_API_URL/api/v1/report/nodes?format=text"
-  ```
-
-- **JSON report** (machine-readable):
-
-  ```bash
-  curl -H "Authorization: Bearer YOUR_TOKEN" "https://EPINIO_API_URL/api/v1/report/nodes"
-  ```
-
-Use the same admin token you use for the Epinio UI or CLI. The JSON response includes `clusters`, `systemPods`, `applications` (with `lastScaleAt`, `lastScaleBy`, `lastScaleFrom`, `lastScaleTo`), and metadata such as `epinioVersion` and `kubernetesVersion`.
