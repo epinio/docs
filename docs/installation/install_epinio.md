@@ -278,9 +278,9 @@ to point to the desired container registry.
 ### Breaking Changes & Migrations
 
 #### 1.12 and 1.13.X to 1.13.10
-Epinio **1.13.10** replaces MinIO with SeaweedFS as the default S3 compatible storage solution. If you have no custom configuration for your S3 storage, you can simply uninstall MinIO and SeaweedFS will be installed by default with the Epinio Helm Chart. To read more about this documentation, reference the SeaweedFS documentation [here](../howtos/other/seaweedfs).
+Epinio **1.13.10** replaces MinIO with SeaweedFS as the default S3 compatible storage solution. If you do not have a custom configuration for your S3 storage, you can simply uninstall MinIO and SeaweedFS will be installed by default with the Epinio Helm Chart. To read more about this, reference the SeaweedFS documentation [here](../howtos/other/seaweedfs).
 
-Note that the user permissions have changed in this update as well. While fully backwards compatible additional options have been added as well as several default roles. You can read more about this in the Authentication and Authorization documentation [here](../references/authorization#built-in-role-examples).
+Note that the user permissions have changed in the **1.13.10** update. While fully backwards compatible, additional user right actions and default installed roles have been added. You can read more about this in the Authentication and Authorization documentation [here](../references/authorization#built-in-role-examples).
 
 #### 1.12 and 1.13.7 to 1.13.8
 Epinio **1.13.8** switches from using kubed to use [reflector](https://github.com/emberstack/kubernetes-reflector) for syncing ConfigMaps and Secrets across namespaces.  This change occured due to kubed being deprecated and unmaintained.
