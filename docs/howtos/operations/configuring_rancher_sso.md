@@ -1,67 +1,167 @@
 ---
-sidebar_label: "Rancher-aligned SSO"
+sidebar_label: "Rancher as OIDC Provider"
 sidebar_position: 22
-title: "Rancher-aligned SSO"
-description: How to align Epinio sign-in with authentication used by Rancher Manager.
+title: "Using Rancher as an OIDC Provider for Epinio"
+description: How to configure Rancher Manager as an OIDC identity provider for Epinio via Dex.
 keywords: [epinio, kubernetes, rancher, sso, oidc, dex, identity]
 doc-type: [how-to]
 doc-topic: [epinio, customize, operations, rancher, sso]
 ---
 
-How to align Epinio single sign-on with the identity setup used by Rancher Manager.
+# Using Rancher as an OIDC Provider for Epinio
 
-# Aligning Epinio SSO with Rancher
+Rancher Manager (v2.12+) can act as an OpenID Connect (OIDC) identity provider. This guide walks through configuring Rancher as the OIDC issuer and connecting it to Epinio's Dex instance so that users authenticated in Rancher can sign in to Epinio with SSO.
 
-[Rancher Manager](https://ranchermanager.docs.rancher.com/) signs users in through **external auth providers** (for example Generic OIDC, SAML, Active Directory, GitHub, and others). It is **not** an OpenID Connect issuer for arbitrary workloads: you cannot point Epinio’s Dex at “Rancher” as if Rancher were Keycloak or Entra ID.
+## Prerequisites
 
-The supported way to get a **consistent SSO experience** for operators who use both Rancher and Epinio is:
+- Rancher Manager with an external auth provider already configured (e.g., GitHub, Active Directory, SAML). Rancher's OIDC provider surfaces the identities from whatever upstream auth Rancher itself uses.
+- The `oidc-provider` feature flag enabled on Rancher. Enable it under **☰ → Global Settings → Feature Flags**, or via:
+  ```bash
+  kubectl patch features oidc-provider -p '{"spec":{"value":true}}' --type merge
+  ```
+- Epinio installed with Dex enabled.
+- Access to the `dex-config` secret in the `epinio` namespace.
 
-1. **Use the same upstream identity provider for both products.**  
-   Configure Rancher’s auth with the provider you already use (see Rancher’s [Authentication configuration](https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/authentication-permissions-and-global-configuration/authentication-config)).  
-   Configure Epinio’s **Dex** with a connector for that **same** provider.
+## Overview
 
-2. **Register Dex as a separate OAuth/OIDC client** (or equivalent) in that provider.  
-   Rancher’s own OAuth client settings do not apply to Epinio. You need your IdP to allow a second client (or additional redirect URIs on one client, if your IdP supports it) for Dex’s callback URL, typically `https://auth.<your-epinio-domain>/callback` (match the host you use for Dex in your cluster).
+The integration has two sides:
 
-3. **Sign in to Epinio with OIDC** after Dex is configured:
+1. **Rancher side** — Register an OIDC client for Dex in Rancher. Rancher generates a client ID and secret. See [Configure Rancher as an OIDC Provider](https://ranchermanager.docs.rancher.com/how-to-guides/advanced-user-guides/configure-oidc-provider).
+2. **Dex side** — Configure an OIDC connector in Dex that points at Rancher's OIDC issuer, using the credentials from step 1.
 
-   ```bash
-   epinio login --oidc https://epinio.<your-domain>
-   ```
+```
+User → Epinio UI → Dex → Rancher (OIDC) → Upstream IdP (e.g., GitHub)
+                     ↑                          ↓
+                     ←──── id_token + claims ────┘
+```
 
-   See [OIDC authentication](../../references/authentication_oidc.md) for Dex configuration, the `dex-config` secret, and optional [groups and roles mapping](../../references/authentication_oidc.md#groups-and-roles-mapping).
+## Step 1: Register Dex as an OIDC Client in Rancher
 
-## Examples by Rancher auth type
+Follow the Rancher documentation to create an `OIDCClient` for Epinio's Dex, either via `kubectl` or through the Rancher UI (**☰ → Users & Authentication → OIDC Apps → Add Application**):
 
-| Rancher auth | Epinio (Dex) approach |
-|--------------|------------------------|
-| **Generic OIDC** (Okta, Keycloak, Auth0, etc.) | Use Dex’s [`oidc` connector](https://dexidp.io/docs/connectors/oidc/) with the **same issuer** and metadata Rancher uses. Use a dedicated `clientID` / `clientSecret` (or public client + PKCE, per Dex docs) for Epinio. |
-| **Microsoft Entra ID** (Azure AD) | Follow [Configuring Microsoft Entra ID SSO](./configuring_entra_id.md) for Dex; mirror the same tenant and app model Rancher uses, with a separate app registration (or additional redirect URI) for Dex. |
-| **Active Directory / OpenLDAP** | If Rancher binds via LDAP, you can use Dex’s [`ldap` connector](https://dexidp.io/docs/connectors/ldap/) against the **same directory**, with a service account and filters appropriate for your org. |
-| **SAML only** (no OIDC at the IdP) | Dex can use a [SAML connector](https://dexidp.io/docs/connectors/saml/) in some setups; otherwise prefer adding an **OIDC application** alongside SAML in your IdP for Epinio, or an OIDC-capable broker. Exact steps depend on the IdP—Rancher’s SAML settings are not reused by Dex automatically. |
+[Configure Rancher as an OIDC Provider](https://ranchermanager.docs.rancher.com/how-to-guides/advanced-user-guides/configure-oidc-provider)
 
-## Generic OIDC connector sketch
+When creating the client, set the **redirect URI** to match Dex's callback URL:
 
-After you create an OIDC client in your IdP with redirect URI `https://auth.<your-domain>/callback`, extend the `config.yaml` key inside the `dex-config` secret (namespace `epinio` by default) with a connector similar to:
+```
+https://auth.<your-epinio-domain>/callback
+```
+
+Once created, note the generated **client ID** and **client secret** — you will need both for the Dex connector configuration in the next step.
+
+## Step 2: Configure the Dex OIDC Connector
+
+Edit the `config.yaml` key inside the `dex-config` secret in the `epinio` namespace. Add (or update) an OIDC connector block pointing at Rancher.
 
 ```yaml
 connectors:
   - type: oidc
-    id: corporate-idp
-    name: Corporate IdP
+    id: rancher
+    name: Rancher
     config:
-      issuer: https://your-idp.example.com
-      clientID: <client-id-for-epinio-dex>
-      clientSecret: <client-secret>
-      redirectURI: https://auth.<your-domain>/callback
+      issuer: https://<rancher-url>/oidc
+      clientID: <client-id-from-step-1>
+      clientSecret: <client-secret-from-step-1>
+      redirectURI: https://auth.<your-epinio-domain>/callback
+
+      # Rancher's OIDC provider only supports these scopes.
+      # Requesting others (e.g., "email", "groups") will cause errors.
+      scopes:
+        - openid
+        - profile
+        - offline_access
+
+      # Required: Rancher does not return groups in the standard scopes.
+      # This tells Dex to request them outside of the normal scope flow.
+      insecureEnableGroups: true
+
+      # Claim mapping — Rancher may not return an "email" claim.
+      # If your upstream IdP populates the "name" claim but not "email",
+      # map it so Dex can identify the user.
+      claimMapping:
+        email: name
 ```
 
-Use your IdP’s documentation for scopes and claim names. If you map **groups** from the IdP into tokens, you can tie them to Epinio roles via the `rolesMapping` key on the same secret, as described in [OIDC authentication](../../references/authentication_oidc.md#groups-and-roles-mapping).
+### Key configuration notes
 
-Restart the Dex workload after changing `dex-config`.
+**Scopes:** Rancher's OIDC provider only supports `openid`, `profile`, and `offline_access`. Do not add `email` or `groups` to the `scopes` list — they are not recognized and will cause token request failures.
 
-## Related documentation
+**`insecureEnableGroups`:** Because groups are not surfaced through a standard scope, this flag is required for Dex to include group information in the token. Without it, the `groups` claim will be empty even if the user belongs to groups in the upstream IdP.
 
-- [Installing Epinio on Rancher](../../installation/other_inst_scenarios/install_epinio_on_rancher.md)
-- [OIDC authentication](../../references/authentication_oidc.md)
-- [Configuring Microsoft Entra ID SSO](./configuring_entra_id.md)
+**`claimMapping`:** Rancher's userinfo response depends on the upstream auth provider. If your provider does not populate a standard `email` claim, you need to map an alternative claim. For example, when Rancher uses GitHub auth, the `name` field is typically populated with the GitHub username, so `claimMapping.email: name` tells Dex to treat that value as the email identifier.
+
+## Step 3: Group Claims and Roles Mapping
+
+When Rancher's upstream auth is GitHub, group claims are returned as **numeric GitHub team IDs** in the format:
+
+```
+github_team://123456
+```
+
+These are not human-readable team names like `my-org:my-team`. This is a Rancher behavior — it maps GitHub teams to their numeric IDs internally.
+
+To map these to Epinio roles, use the `rolesMapping` key in the `dex-config` secret. You can map both formats if you have connectors that return different group name styles:
+
+```yaml
+rolesMapping:
+  # From a direct GitHub connector (human-readable)
+  "my-org:my-team":
+    - "user"
+    - "admin:my-namespace"
+
+  # From the Rancher OIDC connector (numeric GitHub team IDs)
+  "github_team://123456":
+    - "admin"
+```
+
+### Finding your GitHub team IDs
+
+You can look up numeric team IDs via the GitHub API:
+
+```bash
+# List teams and their IDs for an org
+curl -H "Authorization: token <your-github-pat>" \
+  https://api.github.com/orgs/<your-org>/teams
+```
+
+Each team object includes an `id` field — use that value after the `github_team://` prefix in your `rolesMapping`.
+
+## Step 4: Apply and Restart
+
+After updating the `dex-config` secret, restart the Dex workload so it picks up the new configuration:
+
+```bash
+kubectl rollout restart deployment dex -n epinio
+```
+
+Verify the OIDC flow:
+
+```bash
+epinio login --oidc https://epinio.<your-domain>
+```
+
+This should redirect you through Dex to the Rancher login page (which in turn may redirect to your upstream IdP, e.g., GitHub OAuth).
+
+## Troubleshooting
+
+**"Invalid scopes" or token errors:** Verify your connector only requests `openid`, `profile`, and `offline_access`. Remove any other scopes.
+
+**Groups claim is empty:** Confirm `insecureEnableGroups: true` is set in the connector config. Also verify the user actually belongs to a team/group in the upstream IdP — org-level membership alone may not populate groups.
+
+**User identity not recognized:** Check which claim Rancher returns for user identification. Inspect the token with:
+
+```bash
+# Decode a JWT token payload
+echo '<token>' | cut -d. -f2 | base64 -d 2>/dev/null | python3 -m json.tool
+```
+
+If the `email` field is empty but `name` is populated, add `claimMapping.email: name` to the connector config.
+
+**Numeric group IDs don't match:** Use the GitHub API to confirm the team ID. Rancher uses the numeric `id`, not the `slug` or display name.
+
+## Related Documentation
+
+- [Configure Rancher as an OIDC Provider](https://ranchermanager.docs.rancher.com/how-to-guides/advanced-user-guides/configure-oidc-provider) (Rancher docs)
+- [Dex OIDC Connector](https://dexidp.io/docs/connectors/oidc/)
+- [OIDC authentication](../../references/authentication_oidc.md) (Epinio docs)
+- [Groups and roles mapping](../../references/authentication_oidc.md#groups-and-roles-mapping) (Epinio docs)
