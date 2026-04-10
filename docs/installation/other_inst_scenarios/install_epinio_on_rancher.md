@@ -106,3 +106,7 @@ Once using your Epinio instance, you can deploy and delete:
 - applications
 - namespaces
 - configurations.
+
+## Single sign-on with Rancher
+
+Rancher and Epinio each integrate with your identity provider separately. To align operator sign-in with the same accounts and groups you use in Rancher, see [Rancher-aligned SSO](../../howtos/operations/configuring_rancher_sso.md).
