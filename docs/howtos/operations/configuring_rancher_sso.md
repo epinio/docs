@@ -114,18 +114,6 @@ rolesMapping:
     - "admin"
 ```
 
-### Finding your GitHub team IDs
-
-You can look up numeric team IDs via the GitHub API:
-
-```bash
-# List teams and their IDs for an org
-curl -H "Authorization: token <your-github-pat>" \
-  https://api.github.com/orgs/<your-org>/teams
-```
-
-Each team object includes an `id` field — use that value after the `github_team://` prefix in your `rolesMapping`.
-
 ## Step 4: Apply and Restart
 
 After updating the `dex-config` secret, restart the Dex workload so it picks up the new configuration:
@@ -147,15 +135,6 @@ This should redirect you through Dex to the Rancher login page (which in turn ma
 **"Invalid scopes" or token errors:** Verify your connector only requests `openid`, `profile`, and `offline_access`. Remove any other scopes.
 
 **Groups claim is empty:** Confirm `insecureEnableGroups: true` is set in the connector config. Also verify the user actually belongs to a team/group in the upstream IdP — org-level membership alone may not populate groups.
-
-**User identity not recognized:** Check which claim Rancher returns for user identification. Inspect the token with:
-
-```bash
-# Decode a JWT token payload
-echo '<token>' | cut -d. -f2 | base64 -d 2>/dev/null | python3 -m json.tool
-```
-
-If the `email` field is empty but `name` is populated, add `claimMapping.email: name` to the connector config.
 
 **Numeric group IDs don't match:** Use the GitHub API to confirm the team ID. Rancher uses the numeric `id`, not the `slug` or display name.
 
