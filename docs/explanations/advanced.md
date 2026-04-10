@@ -84,11 +84,11 @@ Deployments, Services,  Ingresses and Secrets.
 
 Reflector is a Kubernetes addon designed to monitor changes to resources (secrets and configmaps) and reflect changes to mirror resources in the same or other namespaces.
 
-### Minio
+### SeaweedFS
 
-[Minio project link](https://github.com/minio/minio)
+[SeaweedFS project link](https://github.com/seaweedfs/seaweedfs)
 
-Minio is a storage solution implementing the same API as [Amazon S3](https://aws.amazon.com/s3/).
+SeaweedFS is a distributed S3-compatible storage used by Epinio to store application source code.
 
 When the user pushes an application using a source code directory
 (with the [`epinio push`](../references/commands/cli/epinio_push.md) command),
@@ -97,16 +97,16 @@ It then uploads it to the Epinio API server.
 The API server copies that to the configured S3 storage for
 use during the staging of the application.
 
-When installing Epinio, you choose to use external S3 compatible storage,
-or let Epinio install one of Minio or s3gw on the cluster.
-You can see a [How-to here](../howtos/customization/setup_external_s3.md).
+When installing Epinio, you can use external S3 compatible storage,
+or let Epinio install SeaweedFS or s3gw on the cluster.
+See [Setup external S3](../howtos/customization/setup_external_s3.md).
 
 ### s3gw
 
 [The s3gw project link](https://github.com/aquarist-labs/s3gw)
 
 S3gw is a lightweight S3-compatible solution.
-You can specify it in the Epinio Helm chart as an alternative to Minio or an external S3 provider.
+You can specify it in the Epinio Helm chart as an alternative to SeaweedFS or an external S3 provider.
 
 ### Container registry
 

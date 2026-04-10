@@ -8,11 +8,11 @@ sidebar_label: "Source Code Storage"
 Epinio saves the uploaded sources of applications to be deployed to an S3 compatible
 storage system. The staging process then retrieves the sources from that storage.
 
-By default Epinio uses [minio](https://min.io/) as the store, as an internal component.
+By default Epinio uses [SeaweedFS](https://github.com/seaweedfs/seaweedfs) as the S3-compatible store, as an internal component.
 
 To use an external S3 compatible storage it is necessary to
 
-  - Set chart key `minio.enabled=false`, and
+  - Set chart key `seaweedfs.enabled=false`, and
   - the various S3 connection keys, i.e.
 
       - `s3.endpoint`
