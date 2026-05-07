@@ -9,7 +9,7 @@ keywords: [epinio, kubernetes, k8s, installation, install]
 ## Introduction
 
 Epinio is installed from a single Helm chart.
-This also installs Reflector, [`MinIO`](#s3-storage), [`Dex`](#dex) and a [container registry](#container-registry) in your Kubernetes cluster.
+This also installs Reflector, [SeaweedFS](#s3-storage) (S3-compatible storage), [`Dex`](#dex) and a [container registry](#container-registry) in your Kubernetes cluster.
 You can disable the installation of these additional "sub" charts by changing the settings as described in their sections below.
 
 ## Prerequisites
@@ -213,6 +213,15 @@ The Public Cloud [installation](other_inst_scenarios/install_epinio_on_public_cl
 
 ## Internal Epinio components
 
+### Server Configuration
+
+- **`server.defaultTokenExpiry`**: Controls the default expiry time for auth tokens (e.g. `"30s"`, `"60s"`, `"2m"`). Use this to mitigate clock drift in environments where short-lived tokens may expire before use—for example, in staging workloads or when Kubernetes hosts have time synchronization issues. The value is capped at 5 minutes for security. Default is `"30s"`.
+
+  ```yaml
+  server:
+    defaultTokenExpiry: "60s"  # Example: increase to 1 minute for clock drift
+  ```
+
 ### Staging Workloads
 
 Epinio uses staging workloads to build container images from source code.  As you can imagine, container builds can consume varying amounts of CPU, Memory, and Disk space depending on the application.  Because of this, it is important that these staging workloads can not only specify those resource amounts but also specify scheduling constraints so that your running applications can be protected from any buildtime resource consumption.  For example, you may configure your staging workloads to schedule to a particular node pool within your Kubernetes cluster that is dedicated to builds.
@@ -245,11 +254,11 @@ The configurations under `server.stagingWorkloads` gets mapped to the build scri
 ### S3 storage
 
 Epinio uses an S3 compatible storage to store the application source code.
-This chart will install [Minio](https://min.io/) when `.Values.minio.enabled` is
+This chart will install [SeaweedFS](https://github.com/seaweedfs/seaweedfs) when `.Values.seaweedfs.enabled` is
 `true` (default).
 
-In addition to Minio, Epinio offers [s3gw](https://s3gw.io/) as another S3 compatible store.
-It is installed when `.Values.minio.enabled` is set to `false` and `.Values.s3gw.enabled` is set to `true`.
+In addition to SeaweedFS, Epinio offers [s3gw](https://s3gw.io/) as another S3 compatible store.
+It is installed when `.Values.seaweedfs.enabled` is set to `false` and `.Values.s3gw.enabled` is set to `true`.
 
 :::caution
 The s3gw support is __experimental__.
@@ -260,12 +269,12 @@ If there is an outage of the node where s3gw's pod is currently deployed, k8s wi
 
 Both choices for internal S3 compatible storage can be configured to use a user-defined storageClass.
 If no StorageClass is defined, the default storageClass is used.
-When using Minio set the custom storageClass to the value of `.Values.persistance.storageClass`.
+When using SeaweedFS set the custom storageClass to the value of `.Values.seaweedfs.persistence.storageClass`.
 When using s3gw set the custom storageClass to the value of `.Values.s3gw.storageClass.name`.
 
-Use any external S3 compatible solution by setting `.Values.minio.enabled` to `false`
+Use any external S3 compatible solution by setting `.Values.seaweedfs.enabled` to `false`
 (`.Values.s3gw.enabled` is `false` by default) and using
-[the values under `s3`](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L44)
+[the values under `s3`](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml)
 to point to the required S3 server.
 
 ### Dex
@@ -289,7 +298,12 @@ to point to the desired container registry.
 
 ### Breaking Changes & Migrations
 
-#### 1.13.7 to 1.13.8
+#### 1.12 and 1.13.X to 1.13.10
+Epinio **1.13.10** replaces MinIO with SeaweedFS as the default S3 compatible storage solution. If you do not have a custom configuration for your S3 storage, you can simply uninstall MinIO and SeaweedFS will be installed by default with the Epinio Helm Chart. To read more about this, reference the SeaweedFS documentation [here](../howtos/other/seaweedfs).
+
+Note that the user permissions have changed in the **1.13.10** update. While fully backwards compatible, additional user right actions and default installed roles have been added. You can read more about this in the Authentication and Authorization documentation [here](../references/authorization#built-in-role-examples).
+
+#### 1.12 and 1.13.7 to 1.13.8
 Epinio **1.13.8** switches from using kubed to use [reflector](https://github.com/emberstack/kubernetes-reflector) for syncing ConfigMaps and Secrets across namespaces.  This change occured due to kubed being deprecated and unmaintained.
 
 If you are upgrading from **1.13.7** or earlier to **1.13.8** or later, you must manually uninstall kubed from your cluster after the upgrade is complete.
