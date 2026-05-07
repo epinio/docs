@@ -121,6 +121,18 @@ helm repo update
 helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespace \
     --set global.domain=myepiniodomain.org
 ```
+
+### Install Epinio in a custom namespace
+
+You can install Epinio in a custom namespace by changing the `--namespace` flag.
+
+```bash
+helm repo add epinio https://epinio.github.io/helm-charts
+helm repo update
+helm upgrade --install epinio epinio/epinio --namespace my-custom-namespace --create-namespace \
+    --set global.domain=myepiniodomain.org
+```
+
 Or you can install using "Let's Encrypt" certificates.
 
 To generate trusted TLS certificates with "Let's Encrypt" for your public domain set `.Values.global.tlsIssuer` to `letsencrypt-production` and the value for the `.Values.global.tlsIssuerEmail` key to your e-mail address. Then:
