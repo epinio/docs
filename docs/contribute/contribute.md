@@ -1,11 +1,11 @@
 ---
-sidebar_label: "Contributing to Epinio"
+sidebar_label: 'Contributing to Epinio'
 sidebar_position: 1
-title: "Contributing to Epinio"
+title: 'Contributing to Epinio'
 description: How to go about contributing to Epinio. What you need to know.
 keywords: [epinio, contributing]
-doc-type: [how-to]
-doc-topic: [contribute-to-epinio]
+doc-type: [contribute]
+doc-topic: [contribution-overview]
 ---
 
 Epinio welcomes your participation in the project.
