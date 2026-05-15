@@ -1,11 +1,11 @@
 ---
-sidebar_label: "Contributing to Epinio"
+sidebar_label: 'Contributing to Epinio'
 sidebar_position: 1
-title: "Contributing to Epinio"
+title: 'Contributing to Epinio'
 description: How to go about contributing to Epinio. What you need to know.
 keywords: [epinio, contributing]
-doc-type: [how-to]
-doc-topic: [contribute-to-epinio]
+doc-type: [contribute]
+doc-topic: [contribution-overview]
 ---
 
 Epinio welcomes your participation in the project.
@@ -95,6 +95,28 @@ The `Author` and `Signed-off-by` lines match.
 If not, the Developer Certificate of Origin (DCO) check rejects the pull request.
 
 :::
+
+## Development Environment
+
+For detailed instructions on setting up a local development environment, please refer to the [Development Guidelines](https://github.com/epinio/epinio/blob/main/docs/howtos/development.md) in the Epinio repository.
+
+### Updating the running Epinio server
+
+Every time a change is made in the Epinio source code, the binary running inside
+the epinio-server Pod has to be replaced with a freshly compiled one. This can
+be achieved by running the following command:
+
+```bash
+make && make patch-epinio-deployment
+```
+
+If Epinio is installed in a custom namespace, you need to specify it using the `EPINIO_NAMESPACE` environment variable:
+
+```bash
+EPINIO_NAMESPACE=my-namespace make && EPINIO_NAMESPACE=my-namespace make patch-epinio-deployment
+```
+
+This first compiles a new binary locally and then replaces the one running inside the Pod with it.
 
 ## Pull requests
 
