@@ -5,7 +5,7 @@ title: Epinio Performance Settings
 description: How to change the performance settings available in Epinio
 keywords: [epinio, kubernetes, rate limiting, performance tuning]
 doc-type: [how-to]
-doc-topic: [epinio, how-to, port-forwarding]
+doc-topic: [epinio, how-to, performance-tuning]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
@@ -32,5 +32,4 @@ Epinio server.
 > [API Priority and Fairness](https://kubernetes.io/docs/concepts/cluster-administration/flow-control/)
 > by default, configured via `FlowSchema` and `PriorityLevelConfiguration` objects.
 > Older clusters use the `--max-requests-inflight` and `--max-mutating-requests-inflight`
-> [kube-apiserver
-flags](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/).
+> [kube-apiserver flags](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/).
