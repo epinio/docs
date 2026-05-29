@@ -298,6 +298,9 @@ to point to the desired container registry.
 
 ### Breaking Changes & Migrations
 
+#### 1.13.X to 1.14.0
+While there are no breaking changes in this release, we have added some additional documentation around performance. In particular, we have added a new section to the documentation around [performance tuning](../howtos/other/performance_tuning) that includes some best practices and recommendations for optimizing Epinio performance.
+
 #### 1.12 and 1.13.X to 1.13.10
 Epinio **1.13.10** replaces MinIO with SeaweedFS as the default S3 compatible storage solution. If you do not have a custom configuration for your S3 storage, you can simply uninstall MinIO and SeaweedFS will be installed by default with the Epinio Helm Chart. To read more about this, reference the SeaweedFS documentation [here](../howtos/other/seaweedfs).
 
