@@ -121,6 +121,18 @@ helm repo update
 helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespace \
     --set global.domain=myepiniodomain.org
 ```
+
+### Install Epinio in a custom namespace
+
+You can install Epinio in a custom namespace by changing the `--namespace` flag.
+
+```bash
+helm repo add epinio https://epinio.github.io/helm-charts
+helm repo update
+helm upgrade --install epinio epinio/epinio --namespace my-custom-namespace --create-namespace \
+    --set global.domain=myepiniodomain.org
+```
+
 Or you can install using "Let's Encrypt" certificates.
 
 To generate trusted TLS certificates with "Let's Encrypt" for your public domain set `.Values.global.tlsIssuer` to `letsencrypt-production` and the value for the `.Values.global.tlsIssuerEmail` key to your e-mail address. Then:
@@ -200,6 +212,15 @@ To help you, see the following documents for some well-known clusters:
 The Public Cloud [installation](other_inst_scenarios/install_epinio_on_public_cloud.md) describes the three major cloud providers but Epinio can run on any Kubernetes cluster.
 
 ## Internal Epinio components
+
+### Server Configuration
+
+- **`server.defaultTokenExpiry`**: Controls the default expiry time for auth tokens (e.g. `"30s"`, `"60s"`, `"2m"`). Use this to mitigate clock drift in environments where short-lived tokens may expire before use—for example, in staging workloads or when Kubernetes hosts have time synchronization issues. The value is capped at 5 minutes for security. Default is `"30s"`.
+
+  ```yaml
+  server:
+    defaultTokenExpiry: "60s"  # Example: increase to 1 minute for clock drift
+  ```
 
 ### Staging Workloads
 

@@ -104,6 +104,10 @@ You can use any storage provisioner which provides `ReadWriteMany` (RWX) Access 
 
 To verify that your cluster provides a default StorageClass run the command `kubectl get storageclass`. The default StorageClass is marked with the string `(default)` next to its name in the output list.
 
+:::tip Storage sizing
+Ensure your storage provisioner has adequate capacity for your expected workload. Storage requirements scale with the number of applications and their sizes. See [Storage recommendations](../references/system_requirements/storage.md) for detailed guidance on calculating storage needs.
+:::
+
 For example, you can deploy and configure the `local-path` dynamic storage provisioner by:
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
@@ -297,6 +301,9 @@ to point to the desired container registry.
 ## Upgrade
 
 ### Breaking Changes & Migrations
+
+#### 1.13.X to 1.14.0
+While there are no breaking changes in this release, we have added some additional documentation around performance. In particular, we have added a new section to the documentation around [performance tuning](../howtos/other/performance_tuning) that includes some best practices and recommendations for optimizing Epinio performance.
 
 #### 1.12 and 1.13.X to 1.13.10
 Epinio **1.13.10** replaces MinIO with SeaweedFS as the default S3 compatible storage solution. If you do not have a custom configuration for your S3 storage, you can simply uninstall MinIO and SeaweedFS will be installed by default with the Epinio Helm Chart. To read more about this, reference the SeaweedFS documentation [here](../howtos/other/seaweedfs).
