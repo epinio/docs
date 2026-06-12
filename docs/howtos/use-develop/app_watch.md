@@ -120,13 +120,14 @@ binary mode or override defaults. All fields are optional.
 | `binary` | — | Path to the built binary relative to the source root. |
 | `binary_dest` | `/epinio-sync/app` | Destination path inside the pod for the synced binary. Only change this if the supervisor is configured to match. |
 | `files_dest` | `/workspace/source/app` | Destination directory inside the pod for files mode syncs. |
-| `process_cmd` | `/cnb/process/web` | Command the supervisor runs to start the app on first boot. Override for non-Paketo buildpacks. |
+| `process_cmd` | auto-discovered | Command the supervisor runs to start the app on first boot. By default it uses `/cnb/process/web` when the buildpack defines it, otherwise the image's first CNB process. Override for non-CNB images. |
 
-### Non-Paketo buildpacks
+### Non-CNB builders
 
-If your builder does not follow the Paketo convention, set `process_cmd` to
-the command that starts your app, and `binary_dest` or `files_dest` to match
-wherever the buildpack places the workload:
+Cloud Native Buildpacks images are handled automatically. If your builder
+produces an image without `/cnb/process` entries, set `process_cmd` to the
+command that starts your app, and `binary_dest` or `files_dest` to match
+wherever the builder places the workload:
 
 ```yaml
 process_cmd: "/app/bin/start"
@@ -146,6 +147,28 @@ Patterns from both files are combined. Either file may be absent.
 
 The watch state file (`.epinio-patch-state`) and config file
 (`.epinio-sync.yaml`) are always excluded automatically.
+
+### Performance on large codebases
+
+To detect changes, `app watch` hashes every non-ignored file in the source
+directory on each poll cycle (every 500 ms). On a large codebase this adds
+noticeable CPU and disk load, and slows down change detection.
+
+Use the ignore files to keep the watched set small. Dependency directories
+and build output are the usual offenders:
+
+```gitignore
+# .epinioignore (or .gitignore)
+node_modules/
+vendor/
+.venv/
+dist/
+bin/
+*.log
+```
+
+Everything excluded here is also excluded from the sync payload, so a tight
+ignore list makes both change detection and uploads faster.
 
 ## State file
 
