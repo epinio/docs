@@ -19,6 +19,7 @@ epinio app delete NAME1 [NAME2 ...] [flags]
 
 ```
       --all    Delete all applications
+      --delete-image delete OCI image on application delete
   -h, --help   help for delete
 ```
 
