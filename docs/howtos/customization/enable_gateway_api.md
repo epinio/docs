@@ -99,7 +99,7 @@ There are additional configurations to control the behavior for Epinio's usage o
 - `gateway.gatewayClassName`
     - Determines the Gateway Controller's class that we wish to use.  For this walkthrough, we installed Traefik, thus our class name is `traefik` which happens to be the default.
 - `gateway.tls.enabled`
-    - Determines whether or not we secure traffic to Epinio with an HTTPS redirect within Kubernetes at the Gateway.  In order to enable an HTTPS redirect, set to `true`.  **Required for the Epinio UI to function** without it the gateway has no HTTPS listener and the browser will block login requests with a null-status CORS error.
+    - Determines whether or not we secure traffic to Epinio with an HTTPS redirect within Kubernetes at the Gateway.  In order to enable an HTTPS redirect, set to `true`.  **Required for the Epinio UI to function** without it the gateway has no HTTPS listener and the browser/cli will block login requests with a null-status CORS error.
 - `gateway.annotations` & `httpRoute.annotations`
     - Provide any annotations necessary for your custom implementations, such as certificate issuers.
 
