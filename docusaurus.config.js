@@ -86,69 +86,16 @@ const config = {
             'aria-label': 'GitHub repository',
           },
           {
-            type: 'dropdown',
-            label: 'Community',
+            href: 'https://rancher-users.slack.com',
             position: 'right',
-            items: [
-              {
-                label: 'Slack',
-                href: 'https://rancher-users.slack.com',
-              },
-              {
-                label: 'X/Twitter',
-                href: 'https://twitter.com/Rancher_Labs/',
-              },
-              //{
-                //label: 'Stack Overflow',
-                //href: 'https://stackoverflow.com/questions/tagged/epinio',
-              //},
-            ],
-          },
-          {
-            type: 'dropdown',
-            label: 'Related Projects',
-            position: 'right',
-            items: [
-              {
-                to: 'https://rancher.com',
-                label: 'Rancher',
-                className: 'navbar__icon navbar__rancher',
-              },
-              {
-                type: 'html',
-                value: '<hr style="margin: 0.3rem 0;">',
-              },
-              {
-                to: 'https://elemental.docs.rancher.com',
-                label: 'Elemental',
-                className: 'navbar__icon navbar__elemental',
-              },
-              {
-                to: 'https://fleet.rancher.io',
-                label: 'Fleet',
-                className: 'navbar__icon navbar__fleet',
-              },
-              {
-                to: 'https://rancherdesktop.io',
-                label: 'Rancher Desktop',
-                className: 'navbar__icon navbar__rd',
-              },
-              {
-                type: 'html',
-                value: '<hr style="margin: 0.3rem 0;">',
-              },
-              {
-                to: 'https://opensource.suse.com',
-                label: 'More projects',
-                className: 'navbar__icon navbar__suse',
-              }
-            ]
+            className: 'header-slack-link',
+            'aria-label': 'Slack',
           },
         ],
       },
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} Krumware and SUSE. All Rights Reserved.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Krumware. All Rights Reserved.`,
       },
       prism: {
         theme: lightCodeTheme,

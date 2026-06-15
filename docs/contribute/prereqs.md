@@ -39,7 +39,7 @@ rancher:
   url: '<url of the location that serves the dashboard, for dev this would be https://localhost:8005>'
 ```
 
-6. [Install Epinio](../../installation/install_epinio)
+6. [Install Epinio](../getting-started/install-epinio.md)
 
 6a. Note once you hit the installation step for epinio itself, you can supplement the command with `helm install epinio -n epinio --create-namespace epinio/epinio -f epinio-values.yaml` to target your newly created helm values file.
 

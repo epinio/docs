@@ -56,8 +56,12 @@ Epinio adds the needed abstractions and tools to let developers to use Kubernete
 
 ## Next steps
 
-To try Epinio, look at the [Quickstart](./tutorials/quickstart.md) tutorial.
+To try Epinio, follow [Getting Started](./getting-started/install-epinio.md): check the
+requirements, install Epinio, then run through the [Quickstart](./getting-started/quickstart.md).
 
-For more detailed information, check the **Explanations** section, for a variety of topics.
+From there:
 
-The **How-tos** section describes scenarios with examples.
+- **Develop & Deploy Apps** walks application developers through the day-to-day workflow.
+- **Operate Epinio** covers installation scenarios, cluster configuration, and operations for platform engineers.
+- The **Web UI / Dashboard** section covers working with Epinio from the browser.
+- **Reference** holds the CLI, server and API, Helm chart, and configuration details.
