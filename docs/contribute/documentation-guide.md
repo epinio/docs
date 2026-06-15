@@ -13,9 +13,6 @@ This guide keeps documentation pages consistent and helps you put content in the
 right place. Use it when writing a new page, and use it to raise existing pages to
 the same bar when you touch them.
 
-The short version is the [submission checklist](#submission-checklist) at the
-bottom. The sections above it explain each item.
-
 ## 1. Put the page in the right place (Diátaxis)
 
 We organize docs by the **mode the reader is in**, following
