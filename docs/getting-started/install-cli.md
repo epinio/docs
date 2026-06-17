@@ -4,26 +4,14 @@ sidebar_position: 3
 title: "Install the Epinio CLI"
 description: How to install the Epinio CLI on Windows, Linux and Mac
 keywords: [epinio, install, cli, windows, mac, linux, homebrew]
+doc-type: [how-to]
+doc-persona: [epinio-developer]
+doc-topic: [epinio, getting-started, cli]
 ---
 
 The `epinio` CLI can be used to interact with a cluster with Epinio installed.
 Requests to the Epinio API server are authenticated with Basic Auth.
 No direct access to the cluster is required (e.g. through kubectl).
-
-## Install from Homebrew (Linux and Mac)
-
-Epinio has a formula available in the homebrew/core tap.
-
-```bash
-brew install epinio
-```
-
-Alternatively, if you want to get the latest Epinio CLI faster, there is a custom tap you can use:
-
-```bash
-brew tap epinio/tap
-brew install epinio/tap/epinio
-```
 
 ## Install from the Binary Releases
 
@@ -32,22 +20,20 @@ Find the latest version at [Releases](https://github.com/epinio/epinio/releases)
 ### Linux
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.11.0/epinio-linux-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.14.0/epinio-linux-x86_64
 ```
 
 ### MacOS
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.11.0/epinio-darwin-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.14.0/epinio-darwin-x86_64
 ```
 
 ### Windows
 
 ```bash
- curl -LO https://github.com/epinio/epinio/releases/download/v1.11.0/epinio-windows-x86_64.zip
+ curl -LO https://github.com/epinio/epinio/releases/download/v1.14.0/epinio-windows-x86_64.zip
 ```
-
-Extract the zip archive then make sure that the `PATH` environment variable references the directory where the `epinio` binary is located.
 
 ### Make the Binary Executable (Linux and Mac)
 
@@ -115,7 +101,7 @@ For Windows the checksum is for the zip archive, not for the binary inside.
 
 :::
 
-# Verify the Installation
+## Verify the Installation
 
 Run `epinio version` to test the successful installation.
 
@@ -125,3 +111,21 @@ Epinio Version: v1.14.0
 Go Version: go1.20
 ```
 
+## Install from Homebrew (Linux and Mac)
+
+Epinio has a formula available in the homebrew/core tap.
+
+```bash
+brew install epinio
+```
+
+Alternatively, if you want to get the latest Epinio CLI faster, there is a 
+custom tap you can use:
+
+```bash
+brew tap epinio/tap
+brew install epinio/tap/epinio
+```
+
+Extract the zip archive then make sure that the `PATH` environment variable 
+references the directory where the `epinio` binary is located.

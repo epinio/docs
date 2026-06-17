@@ -2,10 +2,11 @@
 sidebar_label: 'Standalone'
 sidebar_position: 2
 title: 'Getting The Epinio Standalone Instance Running'
-description: How to setup the standalone version of Epinio locally.
+description: How to set up the standalone version of Epinio locally.
 keywords: [epinio, contributing, ui, standalone]
 doc-type: [contribute]
 doc-topic: [ui-contribution-standalone]
+doc-persona: [epinio-developer]
 ---
 
 If you haven't already completed the [prerequisites](../prereqs), do those now.
@@ -15,10 +16,10 @@ If you haven't already completed the [prerequisites](../prereqs), do those now.
 1. Ensure your epinio instance is running, which is detailed in the [prerequisites](../prereqs) page.
 2. Ensure you have Go installed.
 3. Clone the repository `git clone git@github.com:epinio/ui.git`.
-4. Navigate to the `backend/src/jetstream` and run `npm run build-backend`.
+4. Navigate to the `backend/src/jetstream` directory and run `npm run build-backend`.
 5. Create a `config.properties` file for the backend. You can use the example below to get started.
 
-```
+```properties
 # Database connectivity environment variables
 DATABASE_PROVIDER=sqlite
 HTTP_CONNECTION_TIMEOUT_IN_SECS=10

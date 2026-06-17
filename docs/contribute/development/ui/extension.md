@@ -2,10 +2,11 @@
 sidebar_label: 'Rancher Extension'
 sidebar_position: 3
 title: 'Getting The Rancher Extension Running'
-description: How to setup the extension version of Epinio locally.
+description: How to set up the extension version of Epinio locally.
 keywords: [epinio, contributing, ui, extension, rancher]
 doc-type: [contribute]
 doc-topic: [ui-contribution-extension]
+doc-persona: [epinio-developer]
 ---
 
 If you haven't already completed the [prerequisites](../prereqs), do those now.

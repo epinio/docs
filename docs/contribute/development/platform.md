@@ -2,13 +2,14 @@
 sidebar_label: 'Platform'
 sidebar_position: 3
 title: 'Epinio Platform Development Guidelines'
-description: How to setup the Epinio platform for local development.
+description: How to set up the Epinio platform for local development.
 keywords: [epinio, contributing]
 doc-type: [contribute]
 doc-topic: [ui-contribution-extension]
+doc-persona: [epinio-developer]
 ---
 
-### Run the current development build
+## Run the current development build
 
 Every time a change is made in the Epinio source code, the binary running inside
 the epinio-server Pod has to be replaced with a freshly compiled one. This can
@@ -37,6 +38,6 @@ base image doesn't match the one on the build system. To get past that
 issue it is necessary to build a statically linked binary with a
 command like:
 
-```
+```bash
 GOARCH="amd64" GOOS="linux" CGO_ENABLED=0 go build -o dist/epinio-linux-amd64
 ```

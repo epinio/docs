@@ -24,7 +24,7 @@ is installed.
 
 ## Version
 
-Epinio development uses Cert Manager version 1.8.2.  For details of this version see the
+Epinio development uses Cert Manager version 1.19.3.  For details of this version see the
 [releases](https://cert-manager.io/docs/installation/supported-releases/).
 
 ## Advanced - Epinio without Cert manager

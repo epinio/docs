@@ -6,6 +6,7 @@ description: Prerequisites to begin contributing to the Epinio UI.
 keywords: [epinio, contributing, ui]
 doc-type: [contribute]
 doc-topic: [ui-contribution-prerequisites]
+doc-persona: [epinio-developer]
 ---
 
 There are two ways to set up a development environment for Epinio:
@@ -17,12 +18,23 @@ There are two ways to set up a development environment for Epinio:
 
 1. We can use Minikube, k3d, etc to do this. For these instructions, we will use Minikube. Go ahead and install Minikube.
 2. After installation, run `minikube start`.
-3. Enable NGINX Ingress, run `minikube addons enable ingress`. Note: if you are having issues with this on Windows or MacOS, you may run `minikube tunnel` ([source](https://stackoverflow.com/questions/69161998/exposing-minikube-running-on-docker-ip/76663822#76663822)).
+3. Install Traefik bound to the node's ports, so the cluster is reachable at its node IP:
+
+   ```bash
+   helm repo add traefik https://traefik.github.io/charts
+   helm repo update
+   helm upgrade --install traefik traefik/traefik --namespace traefik --create-namespace \
+       --set ingressClass.isDefaultClass=true \
+       --set ports.web.hostPort=80 \
+       --set ports.websecure.hostPort=443
+   ```
+
+   Note: on Windows or macOS the node IP may not be directly reachable; run `minikube tunnel` in a separate terminal.
 4. [Install Rancher](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster) on your new cluster.
 
    4a. Ensure you have switched your context if minikube didn't do so already.
 
-   4b. Note that when setting this up, your hostname should be `rancher.<minikube ip>.nip.io`. To get your Minikube IP, run `minikube ip`.
+   4b. Note that when setting this up, your hostname should be `rancher.<minikube ip>.sslip.io`. To get your Minikube IP, run `minikube ip`.
 
    4c. Use the stable branch when adding your Helm charts locally unless you are testing specific features against Epinio.
 
@@ -39,7 +51,7 @@ rancher:
   url: '<url of the location that serves the dashboard, for dev this would be https://localhost:8005>'
 ```
 
-6. [Install Epinio](../getting-started/install-epinio.md)
+6. [Install Epinio](../../getting-started/install-epinio.md)
 
 6a. Note once you hit the installation step for epinio itself, you can supplement the command with `helm install epinio -n epinio --create-namespace epinio/epinio -f epinio-values.yaml` to target your newly created helm values file.
 

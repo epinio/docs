@@ -39,10 +39,13 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        googleAnalytics: {
-          trackingID: 'UA-56382716-12',
-          anonymizeIP: true,
-        },
+        // Universal Analytics (UA) - throws "window.ga is not a function" in the
+        // dev server because the GA script is not injected there. Re-enable for
+        // production, or migrate to GA4 via the `gtag` option with a G- id.
+        // googleAnalytics: {
+        //   trackingID: 'UA-56382716-12',
+        //   anonymizeIP: true,
+        // },
       }),
     ],
   ],
