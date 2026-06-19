@@ -1,6 +1,7 @@
 ---
 title: "Application Charts"
 sidebar_label: "Application Charts"
+sidebar_position: 6
 ---
 
 Epinio uses Application charts as templates for the structure of deployed applications,

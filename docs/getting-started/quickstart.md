@@ -140,7 +140,7 @@ There is also information about the more advanced [git model](../how-to/operator
 
 :::note
 
-For details of the `epinio push` process, read the [detailed push docs](../how-to/developer/concepts/detailed-push-process.md).
+For details of the `epinio push` process, read the [detailed push docs](../reference/detailed-push-process.md).
 
 :::
 

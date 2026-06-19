@@ -114,7 +114,7 @@ The result of Epinio's application staging is a container image.
 You use this image to create a Kubernetes deployment to run the application code.
 The staging job writes the image to a container registry.
 There is further information in the
-[detailed push process](../developer/concepts/detailed-push-process.md) documentation.
+[detailed push process](../../reference/detailed-push-process.md) documentation.
 
 By default, the Epinio installation deploys a container registry inside the Kubernetes cluster, making the process fast and convenient.
 
@@ -157,7 +157,7 @@ The quick way of pushing an application, explained in
 [Quickstart: push an application](../../getting-started/quickstart.md#push-an-application),
 uses a local directory containing a checkout of the application's sources.
 
-Internally this is a [complex](../developer/concepts/detailed-push-process.md) procedure.
+Internally this is a [complex](../../reference/detailed-push-process.md) procedure.
 The client creates and uploads an archive (tarball or zip)
 from the sources to the Epinio server,
 copying into Epinio's internal (or external) S3 storage.

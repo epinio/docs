@@ -1,9 +1,8 @@
 ---
 sidebar_label: "Configurations"
-title: ""
+title: "Configurations"
+sidebar_position: 3
 ---
-
-# Configurations
 
 ## Overview
 

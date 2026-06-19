@@ -1,6 +1,7 @@
 ---
 sidebar_label: "Services"
 title: "Services"
+sidebar_position: 4
 ---
 
 Most real world applications work together with other services to store data, logs, to exchange messages with other systems etc.

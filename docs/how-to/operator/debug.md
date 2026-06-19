@@ -45,7 +45,7 @@ Your `package.json` has to be similar to:
 ```
 
 After deploying the application ,
-use [port forwarding](../../operator/networking/port_forwarding.md)
+use [port forwarding](./networking/port_forwarding.md)
 to attach the debugger.
 By default, it runs on port `9229`:
 

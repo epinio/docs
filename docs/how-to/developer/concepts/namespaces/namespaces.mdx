@@ -14,45 +14,23 @@ import TabItem from '@theme/TabItem';
 
 This guide explores working with namespaces. Namespaces allow users to group applications and resources together. For more information see the [namespaces reference](../../../../reference/configuration/namespaces.md) page.
 
-## Working with namespaces
+## View Namespaces
 
 <Tabs>
 <TabItem value="ui" label="UI" default>
 
-### View Namespaces
-To view a table of all the namespaces available, navigate via the side menu to the namespaces page.
+To view a table of all available namespaces, navigate to the **Namespaces** page from the side navigation menu.
+
 <img
   src={require('./namespaces-screen.png').default}
   alt="View of the Namespaces screen"
 />
 
-### Create Namespace
-Creating a namespace is simple. Click the Create button on the namespaces page to open up the creation modal. Input the namespace name, and then click the Create button and the newly created namespace will appear in the table.
-<img
-  src={require('./namespaces-create-modal.png').default}
-  alt="Create Namespace Modal"
-  width="400"
-/>
-
-### Delete Namespace
-To delete a namespace, click on the action menu in the table row for the namespace you would like to remove. Clicking on the Delete option will open up the modal, where you will be required to confirm the action by entering the namespace name.
-<img
-  src={require('./namespaces-delete-modal.png').default}
-  alt="Delete Namespace Modal"
-  width="400"
-/>
-
-### Using Namespaces
-When creating resources (Applications, Services, etc.) in Epinio you will be prompted to select a namespace for that resource to be associated with. When viewing the lists of resources, you can filter based on the namespace using the dropdown menu in the top bar.
-<img
-  src={require('./namespaces-dropdown.png').default}
-  alt="Namespace Filter Dropdown"
-/>
-
 </TabItem>
+
 <TabItem value="cli" label="CLI">
 
-Once Epinio is deployed, check the existence of the pre-configured namespace `workspace`:
+To list all namespaces:
 
 ```console
 epinio namespace list
@@ -60,7 +38,7 @@ epinio namespace list
 
 Output:
 
-```
+```text
 🚢  Listing namespaces
 
 ✔️  Epinio Namespaces:
@@ -68,6 +46,26 @@ Output:
 |-----------|-------------------------------|--------------|----------------|
 | workspace | 2023-03-14 09:48:11 +0100 CET |              |                |
 ```
+
+</TabItem>
+</Tabs>
+
+## Create a Namespace
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Click **Create** on the Namespaces page, enter a namespace name, and click **Create**.
+
+<img
+  src={require('./namespaces-create-modal.png').default}
+  alt="Create Namespace Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
 
 Create a new namespace:
 
@@ -77,63 +75,34 @@ epinio namespace create newnamespace
 
 Output:
 
-```
+```text
 🚢  Creating namespace...
 Name: newnamespace
 
 ✔️  Namespace created.
 ```
 
-Inspect the details of a namespace (creation date, applications, configurations):
+</TabItem>
+</Tabs>
 
-```console
-epinio namespace show newnamespace
-```
+## Delete a Namespace
 
-Output:
+<Tabs>
+<TabItem value="ui" label="UI" default>
 
-```
-🚢  Showing namespace...
-Name: newnamespace
+Open the action menu for the namespace and select **Delete**. Confirm the deletion by entering the namespace name.
 
-✔️  Details:
-|      KEY       |             VALUE             |
-|----------------|-------------------------------|
-| Name           | newnamespace                  |
-| Created        | 2023-03-14 15:27:48 +0100 CET |
-| Applications   |                               |
-| Configurations |                               |
-```
+<img
+  src={require('./namespaces-delete-modal.png').default}
+  alt="Delete Namespace Modal"
+  width="400"
+/>
 
-Epinio creates the default namespace `workspace` at installation time, and `epinio login` sets it as the current namespace. To see the current namespace, invoke the command without an argument:
+</TabItem>
 
-```console
-epinio target
-```
+<TabItem value="cli" label="CLI">
 
-Output:
-
-```
-✔️
-Currently targeted namespace: workspace
-```
-
-To target the namespace `newnamespace` for future Epinio operations:
-
-```console
-epinio target newnamespace
-```
-
-Output:
-
-```
-🚢  Targeting namespace...
-Name: newnamespace
-
-✔️  Namespace targeted.
-```
-
-To start working with a different existing namespace, run `epinio target` again with its name. Finally, delete the namespace `newnamespace`:
+Delete a namespace:
 
 ```console
 epinio namespace delete newnamespace
@@ -141,7 +110,7 @@ epinio namespace delete newnamespace
 
 Output:
 
-```
+```text
 You are about to delete namespace newnamespace and everything it includes, i.e. applications, configurations, etc. Are you sure? (y/n): y
 
 🚢  Deleting namespace...
@@ -153,3 +122,53 @@ Name: newnamespace
 </TabItem>
 </Tabs>
 
+## Select a Namespace
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+When creating resources such as applications and services, you can select which namespace they belong to. You can also filter displayed resources using the namespace selector in the top navigation bar.
+
+<img
+  src={require('./namespaces-dropdown.png').default}
+  alt="Namespace Filter Dropdown"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+View the currently targeted namespace:
+
+```console
+epinio target
+```
+
+Output:
+
+```text
+✔️
+Currently targeted namespace: workspace
+```
+
+Target a different namespace:
+
+```console
+epinio target newnamespace
+```
+
+Output:
+
+```text
+🚢  Targeting namespace...
+Name: newnamespace
+
+✔️  Namespace targeted.
+```
+
+</TabItem>
+</Tabs>
+
+## Additional CLI Docs
+
+For additional documentation on the CLI commands above, along with additional commands, see the [epinio namespace](../../../../reference/cli/namespace/epinio_namespace.md) CLI reference.

@@ -1,6 +1,7 @@
 ---
 sidebar_label: "Namespaces"
 title: "Namespaces"
+sidebar_position: 1
 ---
 
 Like Kubernetes, Epinio has an idea of namespaces, and the means of working with them. Working with many namespaces is a little different in Epinio than with Kubernetes.

@@ -1,13 +1,11 @@
 ---
-sidebar_label: "Supported Applications"
-title: ""
+sidebar_label: "Applications"
+title: "Applications"
+sidebar_position: 2
 ---
-
-# Epinio supported applications
 
 This section describes what kind of application you can expect to work with Epinio.
 To understand what enables an application to work with Epinio, you need to know how staging works.
-
 
 ## How it works
 
@@ -40,4 +38,4 @@ Note: if your application needs to explicit a particular command to start, you s
 ## Detailed push process
 
 The above image is a simplified explanation of the `epinio push` process. If you don't want to know all the details on how that works, the above diagram should
-be all the information you need. If you are curious about the details, then read here: [Detailed push docs](../../how-to/developer/concepts/detailed-push-process.md)
+be all the information you need. If you are curious about the details, then read here: [Detailed push docs](../detailed-push-process.md)
