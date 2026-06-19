@@ -12,9 +12,9 @@ applications, without being a direct part of the applications.
 
 Examples of configurations are
 
-  - databases,
-  - message brokers,
-  - interfaces to other kinds of systems,
+  - databases
+  - message brokers
+  - interfaces to other kinds of systems
   - etc.
 
 In Epinio configurations are identified by a name and the namespace they are defined in. Beyond
@@ -79,3 +79,5 @@ authenticate, and then use it.
 ### Viewing environment variables by origin
 
 Environment variables from bound configurations are also exposed as application environment variables. To see user-set variables separately from service-provided ones (from bound configurations), use [epinio app show](../cli/app/epinio_app_show.md) with `-o json` and read `configuration.environment_grouped`, or use the API's environment endpoint with `?grouped=true`.
+
+The [configurations how-to](../../how-to/developer/concepts/configurations/configurations.mdx) contains information on how to work with configurations via the UI or CLI.

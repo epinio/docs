@@ -1,0 +1,44 @@
+---
+sidebar_label: Service Catalog
+sidebar_position: 5
+title: Service Catalog
+description: How to use Epinio Service Catalog.
+keywords: [epinio, kubernetes, Service Catalog]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, Service Catalog]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide explores working with the services catalog. Epinio provides a catalog of templates that are used to create [service instances](../services/services.mdx). For more information see the [service catalog reference](../../../../reference/configuration/catalog.md) page.
+
+## Working with the service catalog
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+### View Service Catalog
+To view the service catalog, navigate via the side menu to the catalog page under the services menu item. Here is a list of all the different services available to create instances from.
+<img
+  src={require('./catalog-screen.png').default}
+  alt="View of the Services Catalog screen"
+/>
+
+### View Catalog Service Details
+Clicking on one of the service catalog cards will bring you to a details page listing all the instances that have been created. You can also create additional instances as well as edit and delete existing ones, see the [services how-to](../services/services.mdx) for more info.
+<img
+  src={require('./catalog-service-screen.png').default}
+  alt="View of the Catalog Service Details screen"
+/>
+
+### Service Catalog CRUD Coming Soon!
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Services Catalog CLI Info
+
+</TabItem>
+</Tabs>

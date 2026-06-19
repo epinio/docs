@@ -1,0 +1,67 @@
+---
+sidebar_label: Configurations
+sidebar_position: 4
+title: Configurations
+description: How to use Epinio configurations, including the create, list, show, and delete workflow.
+keywords: [epinio, kubernetes, configurations, app configurations]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, configurations]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide explores working with configurations. Configurations are reusable collections of application settings or service bindings that can be attached to applications. For more information see the [configurations reference](../../../../reference/configuration/configurations.md) page.
+
+## Working with configurations
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+### View Configurations
+To view a table of the all the configurations available, navigate via the side menu to the configurations page under the advanced menu item.
+<img
+  src={require('./configurations-screen.png').default}
+  alt="View of the Configurations screen"
+/>
+
+### Create Configuration
+Click the Create button on the configurations page to open up the creation modal. Select the namespace that the configuration will belong to. If this configuration is to be bound to an existing application, this can be done here. Otherwise configurations can be bound/unbound to applications during app creation/editing or by editing the configuration. Finally, add the configuration data.
+
+To assist in the creation of configruations, a couple of upload options are available. To add bulk data, a txt file can be uploaded via the `Read From File` button. This will read data from the file and into the inputs so long as it is in the following form:
+```
+name1=val1
+name2=val2
+name3=val3
+```
+In some situations values may be large and formatted, like yaml or json. In these instances the `Upload` button can be used to read those files right into the input.
+<img
+  src={require('./configurations-create-modal.png').default}
+  alt="Create Configurations Modal"
+  width="400"
+/>
+
+### Edit Configuration
+To Edit a configuration, click on the action menu in the table and select Edit. Here you can bind/unbind the configuration from applications and update the data.
+<img
+  src={require('./configurations-edit-modal.png').default}
+  alt="Edit Configuration Modal"
+  width="400"
+/>
+
+### Delete Configuration
+To delete a configuration, click on the action menu in the table and select Delete. Deleting a configuration that is bound to an application will unbind the configuration prior to deletion.
+<img
+  src={require('./configurations-delete-modal.png').default}
+  alt="Delete Configuration Modal"
+  width="400"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Configurations CLI Info
+
+</TabItem>
+</Tabs>

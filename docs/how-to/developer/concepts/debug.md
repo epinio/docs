@@ -1,6 +1,6 @@
 ---
 sidebar_label: Debugging an application
-sidebar_position: 4
+sidebar_position: 11
 title: Debugging an application
 description: How to debug an Epinio application.
 keywords: [epinio, kubernetes, application debugging]

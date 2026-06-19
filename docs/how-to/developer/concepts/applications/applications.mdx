@@ -1,0 +1,127 @@
+---
+sidebar_label: Applications
+sidebar_position: 5
+title: Applications
+description: How to use Epinio Applications.
+keywords: [epinio, kubernetes, applications]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, applications]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide explores working with applications. Applications are deployable workloads that Epinio builds, deploys, and manages on Kubernetes. For more information, see the applications reference page.
+
+## Working with applications
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+### View Applications
+To view a table of all your applications, navigate via the side menu to the applications page. Here you will see all your applications grouped by [namespace]('../namespaces/namespaces.mdx').
+<img
+  src={require('./apps-screen.png').default}
+  alt="View of the Applications screen"
+/>
+
+### Create Applications
+To create an application, open the creation modal by clicking the Create button on the applications page. App creation involves four main steps. The first step is to inform Epinio of the application source code. The second step is to provide some additional information that you would like Epinio to use in the deployment of your app. The third step is to bind any configurations and services as desired. The fourth and final step is the building and deployment of the app itself.
+#### Application Source
+There are many ways to establish your application source in Epinio. If you have an [application manifest](../../../../reference/configuration/manifests.md) you can upload it directly. You can also provide your app source to Epinio in any of the following ways:
+
+- Container image
+- Archive File
+- From Folder
+- Git URL
+- GitHub
+- GitLab
+
+After providing your app source to Epinio, you can then select the [application chart](../app-charts/app-charts.mdx) and builder image you would like Epinio to use in the creation of your application.
+<img
+  src={require('./apps-create-modal.png').default}
+  alt="Create Application Modal"
+  width="800"
+/>
+
+#### Application Details
+Next you are required to assign your application to a [namespace]('../namespaces/namespaces.mdx') and provide it a name. You can also increase the number of instances of your application that Epinio will create. You can also provide [custom routes](../custom_routes.md) for Epinio to use. Depending on the selected [application chart](../app-charts/app-charts.mdx), additional settings may also become available on this tab. Finally, you can also establish any enviornment variables that your app will need.
+<img
+  src={require('./apps-create-details.png').default}
+  alt="Create Application Modal Details"
+  width="800"
+/>
+
+#### Application Bindings
+After setting up your application source and details, you can then bind any [configurations]('../namespaces/configurations.mdx') and [services]('../namespaces/services.mdx') that your app may need, so long as they are under the same namespace.
+<img
+  src={require('./apps-create-bindings.png').default}
+  alt="Create Application Modal Bindings"
+  width="800"
+/>
+
+#### Application Progress
+The final step is to watch as Epinio builds and deploys your application! Or feel free to close the modal, as app creation will continue in the background and you will be notified when it is complete. Upon starting app creation you will also notice a shell terminal appear from the bottom of your screen, letting you monitor the entire process.
+<img
+  src={require('./apps-create-progress.png').default}
+  alt="Create Application Modal Progress"
+  width="800"
+/>
+
+### View Application Details
+Clicking on an application name in the table will route you to a page containing lots of helpful information about that application. Here you can change the number of application instances and view bound services and configurations. If your application source is from Git, you can also change the commit to trigger a rebuild.
+<img
+  src={require('./apps-details-screen.png').default}
+  alt="View of the Application Details screen"
+/>
+
+### Edit Applications
+Applications can be edited by opening the modal via the action menu on the table row or details page. Making changes to the app source will require rebuilding a redeployment of your app.
+<img
+  src={require('./apps-edit-modal.png').default}
+  alt="Edit Application Modal"
+  width="800"
+/>
+
+### Delete Application
+Applications can be deleted via the action menu on the table row or details page.
+<img
+  src={require('./apps-delete-modal.png').default}
+  alt="Delete App Modal"
+  width="400"
+/>
+
+### Additional Application Actions
+Beyond the actions listed above, additional actions are available via the action menu on the table row and details page.
+
+#### App Shell
+This action opens up an interactive terminal session inside the running application container for debugging, inspection and troubleshooting purposes.
+
+#### App Logs
+This action opens up a terminal containing logs of the application's runtime output, including informational messages, warnings, errors, and other diagnostic information.
+
+#### Last Build Logs
+As expected, this application opens up a terminal containing logs form the latest application build.
+
+#### Rebuild
+Rebuild creates a new application image from the application's source code and deployment configuration, then deploys the updated version.
+
+#### Restart
+Restart restarts an application's running instances without rebuilding its container image or changing its configuration.
+
+#### Export
+Export allows you to download an application's deployment artifacts like its manifest, application charts, and container images, so they can be backed up, shared, or imported into another Epinio environment.
+<img
+  src={require('./apps-export-modal.png').default}
+  alt="Export App Modal"
+  width="500"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Applications CLI Info
+
+</TabItem>
+</Tabs>

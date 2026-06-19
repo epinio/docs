@@ -1,7 +1,7 @@
 ---
 sidebar_label: Namespaces
-sidebar_position: 2
-title: Working with namespaces
+sidebar_position: 1
+title: Namespaces
 description: How to use Epinio namespaces, including the current (targeted) namespace and the create, list, show, and delete workflow.
 keywords: [epinio, kubernetes, namespaces, multiple namespaces, targeting]
 doc-type: [how-to]
@@ -12,25 +12,42 @@ doc-persona: [epinio-developer, epinio-operator]
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide explores working with namespaces. It assumes that Epinio is installed; if you need to install, see [install Epinio](../../../getting-started/install-epinio.md).
-
-Like Kubernetes, Epinio has an idea of namespaces, and the means of working with them. Working with many namespaces is a little different in Epinio than with Kubernetes.
-
-In Kubernetes the `kubectl` client accepts an option `--namespace` for all its commands, naming the namespace to work with. Epinio instead maintains a **current namespace** in its local state, often also called the **targeted namespace**. Commands that operate on a namespace use the current one.
-
-There are a few points to note:
-
-- The current namespace is **local state**, specific to the user invoking the Epinio client. The state information isn't shared between users.
-- Creating a new namespace **doesn't** make it the current namespace.
-- Deleting the current namespace **doesn't** undo the targeting. The removed namespace stays targeted and so the next commands fail.
-- While installation of Epinio creates the pre-defined namespace `workspace`, the Helm chart is **not able** to automatically target this namespace. The user must do this. This means whatever namespace was the last target in a preceding installation of Epinio continues to be the target in a new installation.
+This guide explores working with namespaces. Namespaces allow users to group applications and resources together. For more information see the [namespaces reference](../../../../reference/configuration/namespaces.md) page.
 
 ## Working with namespaces
 
 <Tabs>
 <TabItem value="ui" label="UI" default>
 
-_UI walkthrough coming soon._
+### View Namespaces
+To view a table of all the namespaces available, navigate via the side menu to the namespaces page.
+<img
+  src={require('./namespaces-screen.png').default}
+  alt="View of the Namespaces screen"
+/>
+
+### Create Namespace
+Creating a namespace is simple. Click the Create button on the namespaces page to open up the creation modal. Input the namespace name, and then click the Create button and the newly created namespace will appear in the table.
+<img
+  src={require('./namespaces-create-modal.png').default}
+  alt="Create Namespace Modal"
+  width="400"
+/>
+
+### Delete Namespace
+To delete a namespace, click on the action menu in the table row for the namespace you would like to remove. Clicking on the Delete option will open up the modal, where you will be required to confirm the action by entering the namespace name.
+<img
+  src={require('./namespaces-delete-modal.png').default}
+  alt="Delete Namespace Modal"
+  width="400"
+/>
+
+### Using Namespaces
+When creating resources (Applications, Services, etc.) in Epinio you will be prompted to select a namespace for that resource to be associated with. When viewing the lists of resources, you can filter based on the namespace using the dropdown menu in the top bar.
+<img
+  src={require('./namespaces-dropdown.png').default}
+  alt="Namespace Filter Dropdown"
+/>
 
 </TabItem>
 <TabItem value="cli" label="CLI">
@@ -136,10 +153,3 @@ Name: newnamespace
 </TabItem>
 </Tabs>
 
-## See also
-
-- [epinio namespace create](../../../reference/cli/namespace/epinio_namespace_create.md) - Creates an epinio-controlled namespace
-- [epinio namespace delete](../../../reference/cli/namespace/epinio_namespace_delete.md) - Deletes an epinio-controlled namespace
-- [epinio namespace list](../../../reference/cli/namespace/epinio_namespace_list.md) - Lists all epinio-controlled namespaces
-- [epinio namespace show](../../../reference/cli/namespace/epinio_namespace_show.md) - Shows the details of an epinio-controlled namespace
-- [epinio target](../../../reference/cli/epinio_target.md) - Targets an epinio-controlled namespace
