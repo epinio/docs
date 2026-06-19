@@ -37,8 +37,6 @@ metadata:
 ### Check Epinio installation
 
 If you are using Rancher, you can install Epinio directly from there.
-For more information check the
-[Rancher configuration](../install-scenarios/install_epinio_on_rancher.md) with Epinio.
 
 Once you have deployed Epinio,
 log in as admin and verify that the namespace `workspace` exists.
@@ -86,7 +84,7 @@ spec:
         restartPolicy: "Never"
         containers:
         # This version should match your epinio deployment
-        - image: "ghcr.io/epinio/epinio-server:v1.8.1"
+        - image: "ghcr.io/epinio/epinio-server:v1.14.0"
           name: epinio-push
           volumeMounts:
           - name: settings

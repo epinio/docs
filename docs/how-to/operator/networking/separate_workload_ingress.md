@@ -17,7 +17,7 @@ Set the Helm template variable `server.ingressClassName` to the name of the Ingr
 
 ```console
 helm install \
-  --set server.ingressClassName=nginx
+  --set server.ingressClassName=<app-ingress-class>
   ... (other options here) \
   epinio epinio/epinio
 ```

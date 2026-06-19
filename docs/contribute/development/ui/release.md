@@ -6,13 +6,14 @@ description: How to build and release the Epinio UI, update the Helm charts, and
 keywords: [epinio, contributing, ui, extension, rancher, standalone, release]
 doc-type: [contribute]
 doc-topic: [ui-contribution-release]
+doc-persona: [epinio-developer]
 ---
 
 ## Developer Guide
 
 ### Built-in / Embedded
 
-Any merge to `main` that changes `dashboard/pkg/epinio/package.json` will kick off a build of the epinio extension with a version matching that from `dashboard/pkg/epinio/package.json`. If there is an existing release with the same name it will overwrite it. This is done via the `Build and Release Extension` gh action. Builds won't be available until the `pages-build-deployment` gh action completes as well.
+Any merge to `main` that changes `dashboard/pkg/epinio/package.json` will kick off a build of the epinio extension with a version matching that from `dashboard/pkg/epinio/package.json`. If there is an existing release with the same name it will overwrite it. This is done via the `Build and Release Extension` GitHub Action. Builds won't be available until the `pages-build-deployment` GitHub Action completes as well.
 
 ### Standalone
 
@@ -20,7 +21,7 @@ Any merge to `main` that changes `dashboard/pkg/epinio/package.json` will kick o
 
 1. Create the builds by pushing a tag to `epinio/ui`
    - It must start with `v`, for example `v0.6.1-0.0.1`.
-   - A github [action](https://github.com/epinio/ui/backend/actions) will be kicked off which will..
+   - A github [action](https://github.com/epinio/ui/backend/actions) will be kicked off, which will:
      - Build the ui frontend
      - Build the ui backend
      - Build a container containing both ui front and backend (output at https://github.com/epinio/ui/backend/pkgs/container/epinio-ui)
@@ -41,9 +42,9 @@ These steps will get the image that was just built into the epinio-ui chart, and
 
   The new epinio-ui chart needs to be published to the public epinio repo (https://epinio.github.io/helm-charts).
 
-  The manual step is to triggering the `release` (?) action in the `helm-chart` repo
+  The manual step is to trigger the `release` action in the `helm-charts` repo
 
-- Semi-Automated Step - Build epinio-ui helm chart tgx
+- Semi-Automated Step - Build epinio-ui helm chart .tgz
 
   The `.github/workflows/updatecli.yml` job should run again and create another PR containing the new `tgz` and reference it from the root epinio chart.
 

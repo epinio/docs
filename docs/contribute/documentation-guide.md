@@ -1,6 +1,6 @@
 ---
 sidebar_label: Documentation Guide
-sidebar_position: 1
+sidebar_position: 2
 title: Documentation Contribution Guide
 description: Conventions and a checklist for writing and reviewing Epinio documentation pages.
 keywords: [epinio, documentation, contributing, style guide, checklist, diataxis]

@@ -16,7 +16,7 @@ It's almost certain that you'll need more resources for typical development and 
 
 | Component | Description |
 | --- | --- |
-| OS/Kubernetes <sup>1</sup> | Linux: [RKE2](../how-to/operator/install-scenarios/install_epinio_on_rke.md), [K3s](../how-to/operator/install-scenarios/install_epinio_on_k3s.md),   [K3d](../how-to/operator/install-scenarios/install_epinio_on_k3d.md), [Rancher Desktop](../how-to/operator/install-scenarios/install_epinio_on_rancher_desktop.md)<br/>Windows, macOS: [Rancher Desktop](../how-to/operator/install-scenarios/install_epinio_on_rancher_desktop.md) |
+| OS/Kubernetes <sup>1</sup> | Linux: RKE2, K3s, K3d, etc<br/>Windows, macOS: minikube, etc |
 | CPU | 2–4 vCPUs |
 | Memory | 8 GB RAM (system memory + 4 GB) |
 | Storage | 10 GB Disk space minimum (system disk + 5 GB)<br/>**See [Storage recommendations](../reference/storage.md) for production deployments** |
@@ -52,13 +52,11 @@ distribution, as it provides the first three and much more. You can get `helm`,
 
 ## Kubernetes requirements
 
-- A Kubernetes cluster v1.20-v1.28
+- A Kubernetes cluster (v1.34, v1.35, or v1.36)
 - An optional, but recommended, deployed [cert-manager](https://cert-manager.io/docs/installation/helm/) resources
 - A deployed [metrics-server](https://github.com/kubernetes-sigs/metrics-server#installation) resources
-- A deployed Ingress Controller as [Traefik](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart)
-or [nginx-ingress](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/) with `default` IngressClass set
-- A deployed Persistent Volume Provisioner as [Longhorn](https://longhorn.io)
-or [local-path](https://github.com/rancher/local-path-provisioner) providing a `default` StorageClass.
+- A deployed Ingress Controller with a `default` IngressClass set. We recommend [Traefik](https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart).
+- A deployed Persistent Volume Provisioner that provides a `default` StorageClass (for example, [local-path](https://github.com/rancher/local-path-provisioner)).
 For preference, use access mode `ReadWriteMany` (RWX).
 - _Optional_. You need an external load-balancer solution in conjunction with an Ingress controller for exposing Epinio HTTP(S) workload on the Internet.
 More information [here](../how-to/operator/cluster-config/provision_external_ip_for_local_kubernetes.md).

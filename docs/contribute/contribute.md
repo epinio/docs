@@ -6,11 +6,21 @@ description: How to go about contributing to Epinio. What you need to know.
 keywords: [epinio, contributing]
 doc-type: [contribute]
 doc-topic: [contribution-overview]
+doc-persona: [epinio-developer, epinio-operator]
 ---
 
 Epinio welcomes your participation in the project.
 Epinio accepts contributions via GitHub issues and pull requests.
 This document outlines what you need to make a successful contribution to the project.
+
+## Contribution guides
+
+Pick the track that fits your contribution:
+
+- **Documentation** — improve or add docs following our conventions. See the [Documentation Guide](./documentation-guide.md).
+- **Development** — set up a local environment and build Epinio. Start with the [Prerequisites](./development/prereqs.md), then the [Platform](./development/platform.md) and [UI](./development/ui/standalone.md) guides.
+
+The rest of this page covers the process common to all contributions: issues, commit sign-off, pull requests, and coding style.
 
 ## Start with an issue
 

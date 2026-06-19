@@ -2,36 +2,59 @@
 sidebar_label: "Quickstart"
 sidebar_position: 1
 title: "Quickstart"
-description: Get started quickly with Epinio.
-keywords: [epinio, kubernetes, quickstart, installation]
+description: Install Epinio on a cluster and push your first application, with copy-paste commands.
+keywords: [epinio, kubernetes, quickstart, install, minikube, helm]
+doc-type: [tutorial]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, getting-started, quickstart]
 ---
 
-This guide helps you deploy and use Epinio, with the default options.
-It's a good configuration for evaluation, or testing,
-using an existing Kubernetes cluster.
-For advanced Epinio deployment scenarios look at the
-[installation](./install-epinio.md) documentation.
+Install Epinio and push an application, with default options. Copy-paste the
+commands below in order.
 
-## Installation
+## Prerequisites
 
-Check your Kubernetes environment meets the Epinio [requirements](./system-requirements.md).
-You'll need both a default **StorageClass** and a default **IngressClass**.
-If you don't yet have a suitable Kubernetes cluster, you can follow the [RKE2 Installation](../how-to/operator/install-scenarios/install_epinio_on_rke.md) section to get started.
+- [`kubectl`](https://kubernetes.io/docs/tasks/tools/) and [`helm`](https://helm.sh/docs/intro/install/) installed.
+- A Kubernetes cluster with a default **StorageClass** and a default **IngressClass**.
+  No cluster? Start one with [minikube](#no-cluster-start-minikube) below.
 
-### Deploy Epinio
+For anything beyond a trial, see [system requirements](./system-requirements.md)
+and the full [installation](./install-epinio.md) guide.
 
-Run the `kubectl get nodes -o wide` command to get the `INTERNAL-IP` value of the first Kubernetes node in your cluser.
-You'll use this value along with a wildcard DNS service domain
-(for eg. `sslip.io`)
-as the helm `global.domain` value for installing Epinio.
+## No cluster? Start minikube
 
-:::tip
+```bash
+minikube start --cpus 4 --memory 8g
+helm repo add traefik https://traefik.github.io/charts
+helm repo update
+helm upgrade --install traefik traefik/traefik --namespace traefik --create-namespace \
+    --set ingressClass.isDefaultClass=true \
+    --set ports.web.hostPort=80 \
+    --set ports.websecure.hostPort=443
+```
 
-If you use a local Kubernetes cluster, the value should be `127.0.0.1` no matter the output from the `kubectl get nodes` command above.
+This installs [Traefik](https://traefik.io/) bound to the node's `:80`/`:443`, so
+the cluster is reachable at its node IP. minikube already provides a default
+StorageClass, so storage needs no extra setup.
 
+:::note
+On macOS or Windows the minikube node IP isn't directly reachable from the host;
+run `minikube tunnel` in a separate terminal, or use Linux.
 :::
 
-#### Install cert-manager
+## Set your domain
+
+Epinio needs a wildcard domain that points at your ingress. With minikube, use its
+IP and a wildcard DNS service such as [`sslip.io`](https://sslip.io):
+
+```bash
+export EPINIO_DOMAIN="$(minikube ip).sslip.io"
+```
+
+On an existing cluster, set `EPINIO_DOMAIN` to a wildcard domain that resolves to
+your ingress (for example `<INGRESS-IP>.sslip.io`).
+
+## Install cert-manager
 
 ```bash
 helm repo add jetstack https://charts.jetstack.io
@@ -41,153 +64,59 @@ helm upgrade --install cert-manager jetstack/cert-manager \
     --set crds.enabled=true
 ```
 
-#### Install Epinio
-
-Then install Epinio by using `helm` as shown below.
-Replace the `<INTERNAL-IP>` placeholder with the correct IP address:
+## Install Epinio
 
 ```bash
 helm repo add epinio https://epinio.github.io/helm-charts
 helm repo update
 helm upgrade --install epinio epinio/epinio \
     --namespace epinio --create-namespace \
-    --set global.domain=<INTERNAL-IP>.sslip.io
+    --set global.domain="$EPINIO_DOMAIN"
 ```
 
-You can then point your browser, or Epinio, CLI at the `https://epinio.<INTERNAL-IP>.sslip.io` url.
+## Install the Epinio CLI
 
-#### Download the Epinio CLI binary
+Download the binary (Linux shown, for macOS replace `linux` with `darwin`):
 
-Install the latest Epinio CLI with `brew`:
+```bash
+curl -Lo epinio https://github.com/epinio/epinio/releases/latest/download/epinio-linux-x86_64
+chmod +x epinio
+sudo mv epinio /usr/local/bin/
+```
+
+For macOS, Windows, and signature verification, see
+[Install the Epinio CLI](./install-cli.md). If you use Homebrew:
 
 ```bash
 brew install epinio
 ```
 
-Or, download the desired version from the Assets section of
-https://github.com/epinio/epinio/releases/.
-
-## Deploy an application with Epinio
-
-### Login
-
-The first task after an Epinio installation is to [login](../reference/cli/epinio_login.md) with the `epinio` binary:
-
-```shell
-epinio login -u admin 'https://epinio.127.0.0.1.sslip.io'
-
-# Trust the certificate by pressing 'y' and 'enter'
-```
-
-:::tip
-
-You may encounter an x509 error due to mismatched certificates after a restart.
-You can resolve it by reloading certificates.
-Us the command `epinio settings update-ca`.
-It will not be necessary to log in again.
-
-:::
-
-To confirm that you're logged check the Epinio settings:
-
-```shell
-epinio settings show
-```
-
-### Push an application
-
-#### Sample applications
-
-If you want to try a working application use the one inside the
-[sample-app directory](https://github.com/epinio/epinio/tree/main/assets/sample-app).
-
-You can copy it to your system with the following commands:
+## Log in
 
 ```bash
-git clone https://github.com/epinio/epinio.git
-cd epinio/assets/
+epinio login -u admin "https://epinio.$EPINIO_DOMAIN"
 ```
 
-#### Push an application
+Press `y` to trust the self-signed certificate.
 
-There are two ways to push an application:
-
-1. You can provide an [Application Manifest](../reference/configuration/manifests.md) which has the needed configuration for the applications.
+## Push your first application
 
 ```bash
-epinio push manifest.yaml
+git clone https://github.com/epinio/example-12factor.git
+epinio push --name sample --path example-12factor
 ```
 
-1. You can give the configuration as parameters, in which case `--name` is required.
-As the default route is used the name must be unique across all namespaces.
-
-```bash
-epinio push --name sample --path sample-app
-```
-
-:::note
-
-The `--path` parameter is optional.
-If not specified the current working directory is used.
-Always check that the chosen directory has a supported application.
-
-:::
-
-You can read about the applications supported in [Epinio supported applications](../reference/configuration/supported_applications.md).
-
-There is also information about the more advanced [git model](../how-to/operator/cluster-prerequisites.md#git-pushing).
-
-
-:::note
-
-For details of the `epinio push` process, read the [detailed push docs](../reference/detailed-push-process.md).
-
-:::
-
-#### Check your application is working
-
-When pushing the application, a unique URL is printed on the console.
-You use this to access your application.
-You can get this URL again by running:
+When the push finishes, Epinio prints the application URL. Open it in your browser,
+or print it again with:
 
 ```bash
 epinio app show sample
 ```
 
-Navigate to the "Routes" section.
+That is the whole loop: from sources to a live URL in one command.
 
-Go ahead and open the application URL in your browser!
+## Next steps
 
-### List all commands
-
-To see a list of deployed applications, use the command:
-
-```bash
-epinio apps list
-```
-
-### Delete an application
-
-To delete the application named "sample" run the following command:
-
-```bash
-epinio delete sample
-```
-
-### Create a separate namespace
-
-To keep your applications separated, you can use namespaces.
-Create a new namespace with this command:
-
-```bash
-epinio namespace create newspace
-```
-
-To start deploying application to this new namespace you have to target it:
-
-
-```bash
-epinio target newspace
-```
-
-Until you target another namespace, `epinio push` deploys to `newspace`.
+- Work with [namespaces](../how-to/developer/concepts/namespaces.mdx) to separate your apps.
+- Browse every command in the [CLI reference](../reference/cli/index.md).
+- See which application types are supported in [supported applications](../reference/configuration/supported_applications.md).

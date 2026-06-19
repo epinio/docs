@@ -4,6 +4,8 @@ title: "Versions"
 
 # Epinio documentation versions
 
+Upgrading between versions? See [Upgrading Epinio](./reference/upgrading) for breaking changes and migration steps.
+
 ### Current version (Stable)
 Here you can find the documentation for current released version.
 
