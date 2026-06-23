@@ -124,10 +124,9 @@ spec:
 
 ```bash
 kubectl apply -f backup-job.yaml
-kubectl logs -f job/epinio-s3-backup -n epinio
+kubectl wait --for=condition=complete job/epinio-s3-backup -n epinio --timeout=600s
+kubectl logs job/epinio-s3-backup -n epinio
 ```
-
-Wait for the Job to complete successfully before continuing.
 
 ## Step 2: Upgrade Epinio
 
@@ -137,7 +136,7 @@ Export your current deployed values:
 helm get values epinio -n epinio -o yaml > epinio-values.yaml
 ```
 
-Open `epinio-values.yaml`, remove the `minio:` block if present, and add the following `seaweedfs` block:
+Open `epinio-values.yaml`, remove the `minio:` block if present, and add the following `seaweedfs` block. If you previously customized `minio.persistence.storageClass`, set `persistence.storageClass` in the same block; otherwise omit `persistence`:
 
 ```yaml title="epinio-values.yaml"
 seaweedfs:
@@ -148,14 +147,8 @@ seaweedfs:
     existingConfigSecret: seaweedfs-creds
   tls:
     enabled: false
-```
-
-If you previously customized `minio.persistence.storageClass`, carry it over:
-
-```yaml title="epinio-values.yaml"
-seaweedfs:
   persistence:
-    storageClass: <your-storage-class>
+    storageClass: <your-storage-class>  # omit this block if you did not customize MinIO storage
 ```
 
 Then upgrade:
@@ -234,7 +227,8 @@ spec:
 
 ```bash
 kubectl apply -f restore-job.yaml
-kubectl logs -f job/epinio-s3-restore -n epinio
+kubectl wait --for=condition=complete job/epinio-s3-restore -n epinio --timeout=600s
+kubectl logs job/epinio-s3-restore -n epinio
 ```
 
 ## Verification
