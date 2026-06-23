@@ -18,10 +18,11 @@ directly into a running pod, skipping the full buildpack pipeline on every save.
 
 **Startup (first run)**
 
-On the first run there is no local state file, so `app watch` performs a full
-buildpack push to prime the build cache. It then patches the running deployment
-to inject a supervisor wrapper as PID 1. The supervisor starts your app and
-watches for an updated binary or source files delivered by the sync phase.
+On the first `app watch` run (no local `.epinio-patch-state` file), Epinio
+patches the app's existing source blob, runs buildpack staging, and patches the
+running deployment to inject a supervisor wrapper as PID 1. The supervisor
+starts your app and relaunches it when sync delivers an updated binary or
+source files.
 
 **Sync (subsequent runs)**
 
@@ -32,8 +33,8 @@ detects a changed file it enters sync mode:
   binary, and uploads it to the running pod via the Epinio API. The pod-side
   supervisor replaces the running binary and restarts the app in place.
 - **Files mode** (interpreted languages): tars only the changed files and
-  uploads them into the pod's source directory. If your runtime watches for
-  file changes (Node.js, Python, etc.) it will pick them up automatically.
+  uploads them into the pod's source directory. The supervisor then restarts
+  the app process with the updated files.
 
 The mode is chosen by the presence of `build_cmd` and `binary` in
 `.epinio-sync.yaml`. If neither is set, files mode is used.
@@ -42,19 +43,22 @@ The mode is chosen by the presence of `build_cmd` and `binary` in
 
 - The application namespace is targeted (`epinio target <namespace>`) or you
   pass `--namespace`.
-- The application must be known to Epinio. `app watch` creates it on the first
-  push if it does not exist yet.
+- The application must already exist in Epinio and have been pushed at least
+  once (`epinio app push`). `app watch` patches the existing source blob; it
+  cannot bootstrap a brand-new app on its own.
 - Your workstation runs Linux, macOS, or Windows with WSL.
 
 ## Quick start
 
 ```console
 cd my-app/
+epinio app push my-app
 epinio app watch my-app
 ```
 
-On first run this is equivalent to `epinio app push`. Once the startup push
-completes, save any source file and the terminal will show sync progress:
+Run `epinio app push` once before the first `app watch` session. On the first
+watch run, Epinio restages the app and installs the supervisor; after that,
+save any source file and the terminal will show sync progress:
 
 ```
 Synced in 312ms (via API)
@@ -185,6 +189,11 @@ rm .epinio-patch-state
 epinio app watch my-app
 ```
 
+While an app is under `watch`, its deployment keeps the supervisor wrapper and
+pinned image. Run a regular `epinio app push` or `epinio app restage` when you
+are done with inner-loop development to restore the standard Helm-managed
+deployment.
+
 ## CLI flags
 
 | Flag | Default | Description |
@@ -194,6 +203,6 @@ epinio app watch my-app
 
 ## See also
 
-- [epinio app push](../../references/commands/cli/epinio_push.md) — full push without watching
+- [epinio app push](../../references/commands/cli/app/epinio_app_push.md) — full push without watching
 - [epinio app watch (reference)](../../references/commands/cli/app/epinio_app_watch.md) — CLI flag reference
 - [Debugging an application](./debug.md) — attaching a debugger to a running app
