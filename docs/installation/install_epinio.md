@@ -306,7 +306,12 @@ to point to the desired container registry.
 While there are no breaking changes in this release, we have added some additional documentation around performance. In particular, we have added a new section to the documentation around [performance tuning](../howtos/other/performance_tuning) that includes some best practices and recommendations for optimizing Epinio performance.
 
 #### 1.12 and 1.13.X to 1.13.10
-Epinio **1.13.10** replaces MinIO with SeaweedFS as the default S3 compatible storage solution. If you do not have a custom configuration for your S3 storage, you can simply uninstall MinIO and SeaweedFS will be installed by default with the Epinio Helm Chart. To read more about this, reference the SeaweedFS documentation [here](../howtos/other/seaweedfs).
+Epinio **1.13.10** replaces MinIO with SeaweedFS as the default S3-compatible storage solution.
+
+- **External S3 users**: No action needed. Remove any `minio.*` Helm values and upgrade.
+- **Internal MinIO users**: Back up your source blobs before upgrading and restore them to SeaweedFS after. MinIO resources are removed automatically during the Helm upgrade. See the [MinIO to SeaweedFS migration guide](../howtos/other/migrate_minio_to_seaweedfs) for step-by-step instructions.
+
+See the [SeaweedFS how-to](../howtos/other/seaweedfs) for information on accessing the internal S3 service.
 
 Note that the user permissions have changed in the **1.13.10** update. While fully backwards compatible, additional user right actions and default installed roles have been added. You can read more about this in the Authentication and Authorization documentation [here](../references/authorization#built-in-role-examples).
 
