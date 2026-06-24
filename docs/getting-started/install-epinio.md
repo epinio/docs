@@ -110,6 +110,11 @@ helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespac
     --set global.domain=myepiniodomain.org
 ```
 
+:::note
+The default API credentials are `admin` / `password`. Set `api.adminPassword` (or
+configure `api.users`) to change them — see the [Helm chart reference](../reference/helm.md).
+:::
+
 ### Install Epinio in a custom namespace
 
 You can install Epinio in a custom namespace by changing the `--namespace` flag.

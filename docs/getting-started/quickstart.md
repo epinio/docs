@@ -97,7 +97,9 @@ brew install epinio
 epinio login -u admin "https://epinio.$EPINIO_DOMAIN"
 ```
 
-Press `y` to trust the self-signed certificate.
+When prompted, enter the default password `password`, then press `y` to trust the
+self-signed certificate. Change the default by setting `api.adminPassword` in the
+Helm chart (see the [Helm chart reference](../reference/helm.md)).
 
 ## Push your first application
 
