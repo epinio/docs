@@ -1,9 +1,11 @@
 ---
-title: ""
+title: "Application Charts"
 sidebar_label: "Application Charts"
+sidebar_position: 6
 ---
 
 # Application Charts
+
 
 Epinio uses Application charts as templates for the structure of deployed applications,
 i.e. of the kubernetes resources used to run an application image.
@@ -133,6 +135,8 @@ Epinio adds the following labels to the `Pods`:
 Read the [contents of the standard application chart](https://github.com/epinio/helm-charts/tree/main/chart/application).
 
 :::
+
+The [application charts how-to](../../how-to/developer/concepts/app-charts/app-charts.mdx) contains information on how to work with app charts via the UI or CLI.
 
 # Related
 

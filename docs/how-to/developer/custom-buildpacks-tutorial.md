@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Epinio Journey: Deploy complex applications with a custom builder image"
-sidebar_position: 4
+sidebar_position: 5
 title: "Deploying a complex application"
 description: A walk-through for a more complex application deployment with Epinio.
 keywords: [Epinio, kubernetes, application development, application deployment, complex application]

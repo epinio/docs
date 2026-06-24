@@ -1,17 +1,11 @@
 ---
-sidebar_label: "Namespaces"
-title: ""
-sidebar_position: 4
+title: "Namespaces"
+sidebar_position: 1
 ---
 
-# Namespaces
+Like Kubernetes, Epinio has an idea of namespaces, and the means of working with them. Working with many namespaces is a little different in Epinio than with Kubernetes.
 
-Epinio has the same concept of namespaces as the underlying Kubernetes, i.e.
-a means of grouping applications, configurations, and services into some kind
-of related sets.
-
-In contrast to Kubernetes the Epinio client however maintains local state, the
-__current namespace__, often also called the __targeted namespace__.
+In Kubernetes the `kubectl` client accepts an option `--namespace` for all its commands, naming the namespace to work with. Epinio instead maintains a **current namespace** in its local state, often also called the **targeted namespace**. Commands that operate on a namespace use the current one.
 
 Where users of Kubernetes's client (`kubectl`) have to explicitly specify the
 namespace to work with with each command, users of Epinio's client (`epinio`)
@@ -20,7 +14,11 @@ of the client use that namespace in their operation.
 
 The relevant command is [epinio target](../cli/epinio_target.md).
 
-All other namespace management (creation, inspection, deletion) is done through
-the [epinio namespace](../cli/namespace/epinio_namespace.md) ensemble. 
+There are a few points to note:
 
-The [namespaces how-to](../../how-to/developer/concepts/namespaces.mdx) contains a full set of examples for working with namespaces.
+- The current namespace is **local state**, specific to the user invoking the Epinio client. The state information isn't shared between users.
+- Creating a new namespace **doesn't** make it the current namespace.
+- Deleting the current namespace **doesn't** undo the targeting. The removed namespace stays targeted and so the next commands fail.
+- While installation of Epinio creates the pre-defined namespace `workspace`, the Helm chart is **not able** to automatically target this namespace. The user must do this. This means whatever namespace was the last target in a preceding installation of Epinio continues to be the target in a new installation.
+
+The [namespaces how-to](../../how-to/developer/concepts/namespaces/namespaces.mdx) contains information on how to work with namespaces via the UI or CLI.
