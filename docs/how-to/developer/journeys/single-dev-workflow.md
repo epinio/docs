@@ -137,7 +137,7 @@ Then Epinio uses the image to create a container
 with your application container image,
 which runs on your Kubernetes cluster.
 You can find more information about this in the
-[detailed push process](../concepts/detailed-push-process.md#7-stage)
+[detailed push process](../../../reference/detailed-push-process.md#7-stage)
 documentation.
 
 Epinio also creates a new `ingress route`,

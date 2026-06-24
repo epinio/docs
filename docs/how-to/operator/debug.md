@@ -1,6 +1,6 @@
 ---
 sidebar_label: Debugging an application
-sidebar_position: 4
+sidebar_position: 11
 title: Debugging an application
 description: How to debug an Epinio application.
 keywords: [epinio, kubernetes, application debugging]
@@ -45,7 +45,7 @@ Your `package.json` has to be similar to:
 ```
 
 After deploying the application ,
-use [port forwarding](../../operator/networking/port_forwarding.md)
+use [port forwarding](./networking/port_forwarding.md)
 to attach the debugger.
 By default, it runs on port `9229`:
 

@@ -1,6 +1,6 @@
 ---
 sidebar_label: Recovering applications after CRD cycling
-sidebar_position: 4
+sidebar_position: 10
 title: Recovering applications after CRD cycling
 description: How to recover applications after cycling the Epinio CRDs
 keywords: [epinio, kubernetes, application recovery, crd]

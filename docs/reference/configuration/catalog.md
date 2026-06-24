@@ -1,9 +1,8 @@
 ---
-title: ""
+title: "Service Catalog"
 sidebar_label: "Service Catalog"
+sidebar_position: 5
 ---
-
-# Customization point: Service Catalog
 
 Epinio uses Services classes as templates for service instances, i.e. of the kubernetes
 resources required to run a specific kind of service.
@@ -16,6 +15,6 @@ An installation of Epinio provides five standard service classes, one each for
   4. rabbitmq
   5. mongodb-dev
 
-If custom service classes adapted to the local environment are desired or needed please
-follow instructions on
-[How to create a custom service](../../how-to/operator/customization/create_custom_service.md)
+Services beyond what is listed here can also be added to the catalog for easy reuse.
+
+The [services catalog how-to](../../how-to/developer/concepts/services/services.mdx) contains information on how to work with the services catalog via the UI or CLI.
