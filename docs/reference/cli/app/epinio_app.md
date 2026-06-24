@@ -58,4 +58,5 @@ epinio app [flags]
 * [epinio app restart](./epinio_app_restart.md)	 - Restart the application
 * [epinio app show](./epinio_app_show.md)	 - Describe the named application
 * [epinio app update](./epinio_app_update.md)	 - Update the named application
+* [epinio app watch](./epinio_app_watch.md)	 - Watch a local directory and sync changes to the running application
 
