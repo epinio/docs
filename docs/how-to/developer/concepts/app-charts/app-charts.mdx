@@ -1,0 +1,43 @@
+---
+sidebar_label: App Charts
+sidebar_position: 6
+title: Application Charts
+description: How to use Epinio app charts.
+keywords: [epinio, kubernetes, app charts]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, app charts]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide explores working with application charts. App charts are reusable application templates packaged as Helm charts that allow users to deploy preconfigured applications. For more information see the [application charts reference](../../../../reference/concepts/appcharts.md) page.
+
+## View Application Charts
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To view all available application charts, navigate to the **Application Charts** page under the **Advanced** section of the side navigation menu.
+
+<img
+  src={require('./charts-screen.png').default}
+  alt="View of the Application Charts screen"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+List all application charts:
+
+```console
+epinio app chart list
+```
+
+</TabItem>
+</Tabs>
+
+### Application Charts CRUD Coming Soon!
+
+## Additional CLI Commands
+For additional documentation on the CLI commands above, along with additional commands, see the [epinio app chart](../../../../reference/cli/app/chart/epinio_app_chart.md) CLI reference.

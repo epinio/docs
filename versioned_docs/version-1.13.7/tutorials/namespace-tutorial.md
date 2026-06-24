@@ -8,7 +8,7 @@ keywords: [tutorial, epinio, namespaces]
 This guide explores working with namespaces.
 It assumes that Epinio is installed.
 If you need to install, please visit
-[install Epinio](docs/installation/install_epinio.md).
+[install Epinio](../installation/install_epinio.md).
 
 
 ## Workflow
