@@ -16,14 +16,18 @@ authoritative reference for every value and its default. The chart lives in the
 [epinio/helm-charts](https://github.com/epinio/helm-charts) repository; for the
 install walkthrough, see [Install Epinio](../getting-started/install-epinio.md).
 
-## Required Values
+## Key values
+
+The only **required** value is `global.domain`. Everything else has a working
+default (the Quickstart installs Epinio by setting `global.domain` alone). The
+values below are the ones you are most likely to change.
 
 | Value | Notes |
 | --- | --- |
 | `global.domain` | **Required.** The wildcard (`*.`) domain Epinio serves on (API, UI, registry). Point it at your ingress controller. |
-| `global.tlsIssuer` | TLS issuer: `epinio-ca` (default), `selfsigned-issuer`, `letsencrypt-staging`, or `letsencrypt-production`. Use `global.customTlsIssuer` to name your own ClusterIssuer. |
-| `global.tlsIssuerEmail` | Email for `letsencrypt-production` notifications. |
-| `api.adminPassword` / `api.users` | The initial users and the `admin` password. Change the defaults for anything beyond a trial. |
+| `global.tlsIssuer` | TLS issuer. Defaults to `epinio-ca`; other options are `selfsigned-issuer`, `letsencrypt-staging`, and `letsencrypt-production`. Use `global.customTlsIssuer` to name your own ClusterIssuer. |
+| `global.tlsIssuerEmail` | Email for `letsencrypt-production` notifications. Only needed with that issuer. |
+| `api.adminPassword` / `api.users` | The initial users and the `admin` password. Defaults to `admin` / `password`; change it for anything beyond a trial. |
 
 ## Configuration Groups
 
