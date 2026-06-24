@@ -1,7 +1,7 @@
 ---
-sidebar_label: Storage recommendations
-title: Storage recommendations
-sidebar_position: 7
+sidebar_label: Storage
+title: Storage
+sidebar_position: 1
 description: Storage recommendations for Epinio based on scale of users and applications.
 keywords: [epinio, kubernetes, storage, disk space, scale, requirements]
 doc-type: [reference]
@@ -299,7 +299,7 @@ Storage requirements for Epinio scale with:
 
 - **[Customizing and Securing Your Epinio Installation](https://www.suse.com/c/rancher_blog/customizing-and-securing-your-epinio-installation/)** - Article exploring various customization options for Epinio, including asset storage configurations and guidance on integrating external object storage and registries.
 
-- **[How to Setup External S3 Storage](../how-to/operator/cluster-config/setup_external_s3.md)** - Epinio documentation guide on configuring external S3-compatible storage for more flexible and scalable storage solutions.
+- **[How to Setup External S3 Storage](../../how-to/operator/cluster-config/setup_external_s3.md)** - Epinio documentation guide on configuring external S3-compatible storage for more flexible and scalable storage solutions.
 
 ### General Storage Planning and Best Practices
 

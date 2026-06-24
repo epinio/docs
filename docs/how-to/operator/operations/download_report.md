@@ -6,6 +6,7 @@ description: Download a Rancher-like node and scaling report from the Epinio UI 
 keywords: [epinio, report, nodes, scaling, support, dashboard]
 doc-type: [how-to]
 doc-topic: [epinio, operations, report]
+doc-persona: [epinio-operator]
 ---
 
 Epinio provides a **report** that summarizes your cluster and application scaling. It is similar to Rancher’s node report and is useful for support and understanding usage (e.g. for pricing).

@@ -19,7 +19,7 @@ It's almost certain that you'll need more resources for typical development and 
 | OS/Kubernetes <sup>1</sup> | Linux: RKE2, K3s, K3d, etc<br/>Windows, macOS: minikube, etc |
 | CPU | 2–4 vCPUs |
 | Memory | 8 GB RAM (system memory + 4 GB) |
-| Storage | 10 GB Disk space minimum (system disk + 5 GB)<br/>**See [Storage recommendations](../reference/storage.md) for production deployments** |
+| Storage | 10 GB Disk space minimum (system disk + 5 GB)<br/>**See [Storage recommendations](../reference/concepts/storage.md) for production deployments** |
 
 <sup>1</sup> Linux: x86_64, arm64 and s390x; macOS: x86_64, arm64 (Epinio CLI only); Windows: x86_64
 

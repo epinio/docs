@@ -3,7 +3,7 @@ title: ""
 sidebar_label: "Export Destination Registries"
 ---
 
-# Customization point: Export Destination Registries
+# Export Destination Registries
 
 Epinio uses `Export Destination Registries` (short: `EDR`) as targets for the `app export
 --registry` command. With this command a users is able to export an active application to one of the

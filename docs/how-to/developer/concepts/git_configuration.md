@@ -11,7 +11,7 @@ doc-persona: [epinio-operator]
 
 
 As described
-[in the Git Configuration reference page](../../../reference/configuration/git_configuration.md),
+[in the Git Configuration reference page](../../../reference/concepts/git_configuration.md),
 Epinio Git Configurations are Kubernetes secrets with a particular label.
 
 Creation is done with the

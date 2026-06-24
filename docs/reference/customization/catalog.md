@@ -3,7 +3,7 @@ title: ""
 sidebar_label: "Service Catalog"
 ---
 
-# Customization point: Service Catalog
+# Service Catalog
 
 Epinio uses Services classes as templates for service instances, i.e. of the kubernetes
 resources required to run a specific kind of service.

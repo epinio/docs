@@ -1,8 +1,11 @@
 ---
-sidebar_label: "Advanced topics"
-title: "Advanced topics"
-description: Advanced topics in Epinio application development environments
-keywords: [epinio, kubernetes, advanced topics]
+sidebar_label: "Cluster prerequisites"
+title: "Cluster prerequisites and components"
+description: The cluster components Epinio requires before installation, and the components the Helm chart installs.
+keywords: [epinio, kubernetes, prerequisites, components, architecture]
+doc-type: [explanation]
+doc-persona: [epinio-operator]
+doc-topic: [epinio, operator, prerequisites]
 ---
 
 ## Prerequisites
@@ -56,7 +59,7 @@ You can read more about certificate issuers in the
 
 The official, supported, way to install Epinio is with the
 [Epinio Helm chart](https://artifacthub.io/packages/helm/epinio/epinio).
-This Helm chart installs Epinio and it's component dependencies,
+This Helm chart installs Epinio and its component dependencies,
 listed below, needed for Epinio to work.
 
 ### Epinio API server
@@ -80,7 +83,7 @@ Deployments, Services,  Ingresses and Secrets.
 
 ### Reflector
 
-[Relector documentation](https://github.com/emberstack/kubernetes-reflector)
+[Reflector documentation](https://github.com/emberstack/kubernetes-reflector)
 
 Reflector is a Kubernetes addon designed to monitor changes to resources (secrets and configmaps) and reflect changes to mirror resources in the same or other namespaces.
 

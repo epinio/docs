@@ -12,7 +12,7 @@ doc-topic: [epinio, getting-started, install]
 ## Introduction
 
 Epinio is installed from a single Helm chart.
-This also installs Reflector, [SeaweedFS](../reference/helm.md#s3-storage) (S3-compatible storage), [`Dex`](../reference/helm.md#dex) and a [container registry](../reference/helm.md#container-registry) in your Kubernetes cluster.
+This also installs Reflector, [SeaweedFS](../reference/helm.md#s3-storage) (S3-compatible storage), [`Dex`](../reference/helm.md#identity-provider-dex) and a [container registry](../reference/helm.md#container-registry) in your Kubernetes cluster.
 You can disable the installation of these additional "sub" charts by changing the settings as described in their sections below.
 
 :::tip Upgrading an existing install?
@@ -89,7 +89,7 @@ You can use any storage provisioner which provides `ReadWriteMany` (RWX) Access 
 To verify that your cluster provides a default StorageClass run the command `kubectl get storageclass`. The default StorageClass is marked with the string `(default)` next to its name in the output list.
 
 :::tip Storage sizing
-Ensure your storage provisioner has adequate capacity for your expected workload. Storage requirements scale with the number of applications and their sizes. See [Storage recommendations](../reference/storage.md) for detailed guidance on calculating storage needs.
+Ensure your storage provisioner has adequate capacity for your expected workload. Storage requirements scale with the number of applications and their sizes. See [Storage recommendations](../reference/concepts/storage.md) for detailed guidance on calculating storage needs.
 :::
 
 For example, you can deploy and configure the `local-path` dynamic storage provisioner by:

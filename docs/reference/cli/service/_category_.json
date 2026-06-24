@@ -1,4 +1,8 @@
 {
-  "label": "service",
-  "collapsed": true
+  "label": "epinio service",
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "reference/cli/service/epinio_service"
+  }
 }

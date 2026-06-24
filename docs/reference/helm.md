@@ -1,18 +1,55 @@
 ---
 sidebar_label: "Helm Chart Options"
 sidebar_position: 3
-title: "Helm chart reference"
-description: Reference for the Epinio Helm chart values that control server, staging, storage, identity, and registry configuration.
+title: "Helm Chart Reference"
+description: Reference for the Epinio Helm chart values that control the server, ingress, authentication, storage, identity, and registry.
 keywords: [epinio, helm, chart, values, configuration, installation]
 doc-type: [reference]
 doc-persona: [epinio-operator]
 doc-topic: [epinio, reference, helm]
 ---
 
-Epinio's behavior is controlled through Helm chart values. The chart lives in the
-[epinio/helm-charts](https://github.com/epinio/helm-charts) repository; this page
-documents the values you are most likely to set. For the install walkthrough, see
-[Install Epinio](../getting-started/install-epinio.md).
+Epinio is configured through Helm chart values. This page documents the values you
+are most likely to set, grouped by area. The chart's full annotated
+[**`values.yaml`**](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml) is the complete,
+authoritative reference for every value and its default. The chart lives in the
+[epinio/helm-charts](https://github.com/epinio/helm-charts) repository; for the
+install walkthrough, see [Install Epinio](../getting-started/install-epinio.md).
+
+## Required Values
+
+| Value | Notes |
+| --- | --- |
+| `global.domain` | **Required.** The wildcard (`*.`) domain Epinio serves on (API, UI, registry). Point it at your ingress controller. |
+| `global.tlsIssuer` | TLS issuer: `epinio-ca` (default), `selfsigned-issuer`, `letsencrypt-staging`, or `letsencrypt-production`. Use `global.customTlsIssuer` to name your own ClusterIssuer. |
+| `global.tlsIssuerEmail` | Email for `letsencrypt-production` notifications. |
+| `api.adminPassword` / `api.users` | The initial users and the `admin` password. Change the defaults for anything beyond a trial. |
+
+## Configuration Groups
+
+Every top-level key in the chart and what it configures:
+
+| Group | Configures |
+| --- | --- |
+| `serviceAccount` | The Epinio server service account (creation, name, annotations). |
+| `image` | Container images and tags for Epinio components and build tools. |
+| `server` | API server: timeouts, token expiry, tracing, replicas, autoscaling, and staging workloads. |
+| `ingress` | API/UI ingress: class, hostnames, request body size, timeouts, annotations. |
+| `service` | The Epinio Service (port, container port, annotations). |
+| `strategy` | Deployment update strategy. Use `RollingUpdate` with `maxSurge: 0` on RWO storage. |
+| `certManager` | cert-manager integration, plus manual certificate overrides per component. |
+| `s3` | External S3 connection details (endpoint, bucket, credentials). |
+| `api` | API authentication: RBAC roles, default users, and passwords. |
+| `dex` | The bundled Dex OIDC provider (image, issuer, security context). |
+| `seaweedfs` | The bundled SeaweedFS S3-compatible storage. |
+| `epinioUI` | The web UI (theme, URLs, CORS origins, service). |
+| `reflector` | The reflector addon that mirrors secrets and configmaps across namespaces. |
+| `s3gw` | An alternative bundled S3 store (experimental). |
+| `containerregistry` | The bundled container registry (image, storage, ingress class). |
+| `serviceCatalog` | Service catalog development services. |
+| `helmController` | Scheduling (resources, nodeSelector, affinity, tolerations) for the Helm controller. |
+| `global` | Cross-cutting values: domain, TLS issuer, external registry, Dex enablement. |
+| `rancher` | The Rancher instance URL, used by the UI extension. |
 
 ## Server Configuration
 
@@ -23,36 +60,50 @@ documents the values you are most likely to set. For the install walkthrough, se
     defaultTokenExpiry: "60s"  # Example: increase to 1 minute for clock drift
   ```
 
+Other notable `server` values: `timeoutMultiplier`, `traceLevel`, `replicaCount`, and the `autoscaling` block.
+
 ## Staging Workloads
 
-Epinio uses staging workloads to build container images from source code.  As you can imagine, container builds can consume varying amounts of CPU, Memory, and Disk space depending on the application.  Because of this, it is important that these staging workloads can not only specify those resource amounts but also specify scheduling constraints so that your running applications can be protected from any buildtime resource consumption.  For example, you may configure your staging workloads to schedule to a particular node pool within your Kubernetes cluster that is dedicated to builds.
+Epinio uses staging workloads to build container images from source code. Container builds can consume varying amounts of CPU, memory, and disk depending on the application, so these workloads can specify both resource amounts and scheduling constraints to protect your running applications from build-time resource consumption (for example, scheduling builds onto a dedicated node pool).
 
-These configurations can be set using the `server.stagingWorkloads` section of the `values.yaml` file with which you may configure the following details:
-- Resource Consumption
-    - `server.stagingWorkloads.ttlSecondsAfterFinished`
-        - Configure time-to-live for completed staging job resources
-    - `server.stagingWorkloads.resources`
-        - Provide Requests/Limits on CPU & Memory
-    - `server.stagingWorkloads.storage`
-        - `cache`
-            - Optionally toggle `emptyDir` to bypass PVC creation
-            - Provide parameters for `size`, `accessModes`, `volumeMode`, and `storageClassName`
-        - `sourceBlobs`
-            - Optionally toggle `emptyDir` to bypass PVC creation
-            - Provide parameters for `size`, `accessModes`, `volumeMode`, and `storageClassName`
-- Scheduling Constraints
-    - `server.stagingWorkloads.nodeSelector`
-        - Provide Node Selector labels to constrain scheduling to nodes that contain the specified label/value.
-    - `server.stagingWorkloads.affinity`
-        - Provide Affinity rules to constrain scheduling to nodes that meet the specified criteria.
-    - `server.stagingWorkloads.tolerations`
-        - Provide Tolerations to allow scheduling to nodes with matching taints.
+Configure them under `server.stagingWorkloads`:
 
-There exists examples within the `values.yaml` file under the `server.stagingWorkloads` key.  Please review and modify these examples to suit your environmental needs.  Review these examples at the following lines:  [Epinio Helm Chart Values:  Staging Workloads](https://github.com/epinio/helm-charts/blob/4edcf8af4d6881da4162a04e532de1298f749662/chart/epinio/values.yaml#L64-L92).
+- Resource consumption
+  - `server.stagingWorkloads.ttlSecondsAfterFinished` — time-to-live for completed staging job resources.
+  - `server.stagingWorkloads.resources` — requests/limits on CPU and memory.
+  - `server.stagingWorkloads.storage.cache` and `.sourceBlobs` — toggle `emptyDir` to bypass PVC creation, or set `size`, `accessModes`, `volumeMode`, and `storageClassName`.
+- Scheduling constraints
+  - `server.stagingWorkloads.nodeSelector` — constrain scheduling to nodes with the given labels.
+  - `server.stagingWorkloads.affinity` — affinity rules.
+  - `server.stagingWorkloads.tolerations` — tolerate matching taints.
 
-The configurations under `server.stagingWorkloads` gets mapped to the build script ConfigMaps which is then processed by the Epinio Server when builds are kicked off.  These specifications are supplied to the newly created staging jobs.
+The annotated [`values.yaml`](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml) contains commented examples under `server.stagingWorkloads`.
 
-## S3 storage
+## Ingress
+
+The `ingress` section controls how the API server and UI are exposed:
+
+- **`ingress.ingressClassName`** — the IngressClass to use. Empty adds no class (relies on the cluster default).
+- **`ingress.proxyBodySize`** — maximum request body size (default `500m`). Raise it if large application uploads fail with `Entity Too Large`.
+- **`ingress.proxyReadTimeout`** — maximum response read time (default `600s`) for long-running deployments.
+- **`ingress.hostnameOverride` / `ingress.dexHostnameOverride`** — override the default `epinio.<global.domain>` / `auth.<global.domain>` hostnames.
+- **`ingress.annotations`** — extra annotations for the API ingress.
+
+## Authentication and Users
+
+- **`api.rbac.enabled`** (default `true`) — installs the role ConfigMaps (`application_manager`, `application_developer`, `view_only`, `system_manager`) so users can be granted scoped roles. When `false`, only the default `user` and `blank` roles exist.
+- **`api.users`** — the initial users, each with a `password` (or `passwordBcrypt`), `roles`, and optional `workspaces`.
+- **`api.adminPassword` / `api.epinioPassword`** — passwords for the built-in `admin` and `epinio` users. Set these for non-trial installs.
+
+## TLS and Domain
+
+The `global` section carries the cross-cutting settings:
+
+- **`global.domain`** (required) — the wildcard domain.
+- **`global.tlsIssuer`** — `epinio-ca`, `selfsigned-issuer`, `letsencrypt-staging`, or `letsencrypt-production`; or set **`global.customTlsIssuer`** to your own ClusterIssuer.
+- **`global.registryURL` / `registryUsername` / `registryPassword` / `registryNamespace`** — point Epinio at an external container registry (skip when `containerregistry.enabled` is `true`).
+
+## S3 Storage
 
 Epinio uses an S3 compatible storage to store the application source code.
 This chart will install [SeaweedFS](https://github.com/seaweedfs/seaweedfs) when `.Values.seaweedfs.enabled` is
@@ -68,17 +119,11 @@ This setup is risky, and not HA.
 If there is an outage of the node where s3gw's pod is currently deployed, k8s will fail trying to assign the volume on another node.
 :::
 
-Both choices for internal S3 compatible storage can be configured to use a user-defined storageClass.
-If no StorageClass is defined, the default storageClass is used.
-When using SeaweedFS set the custom storageClass to the value of `.Values.seaweedfs.persistence.storageClass`.
-When using s3gw set the custom storageClass to the value of `.Values.s3gw.storageClass.name`.
-
 Use any external S3 compatible solution by setting `.Values.seaweedfs.enabled` to `false`
-(`.Values.s3gw.enabled` is `false` by default) and using
-[the values under `s3`](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml)
-to point to the required S3 server.
+(`.Values.s3gw.enabled` is `false` by default) and using the values under `s3`
+(endpoint, bucket, region, credentials) to point to the required S3 server.
 
-## Dex
+## Identity Provider (Dex)
 
 [Dex](https://dexidp.io) OpenID Connect Provider is installed as a subchart when `.Values.global.dex.enabled` is set to `true` (default).
 
@@ -91,9 +136,17 @@ to store that image in a container registry. Epinio installs a container registr
 on the cluster when `.Values.containerregistry.enabled` is `true` (default).
 
 Any container registry that supports basic auth authentication (e.g. gcr, dockerhub, etc) can be used
-instead, by setting this value to `false` and using
-[the relevant global values](https://github.com/epinio/helm-charts/blob/b389a4875af9f03b484a911c49a14f834ba04b64/chart/epinio/values.yaml#L107-L111)
+instead, by setting this value to `false` and using the `global.registry*` values
 to point to the desired container registry.
+
+## Web UI
+
+The bundled dashboard is configured under `epinioUI` — set the **`theme`** (`light` or `dark`), CORS **`allowedOrigins`**, the log level, and the API/UI/Dex URLs for proxied connections. Disable it with `epinioUI.enabled: false`.
+
+## Complete Reference
+
+For every value and its default, see the chart's annotated
+[**`values.yaml`**](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml) on the `main` branch.
 
 ## Related
 

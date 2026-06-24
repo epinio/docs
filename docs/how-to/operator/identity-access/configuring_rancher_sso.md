@@ -6,9 +6,10 @@ description: How to configure Rancher Manager as an OIDC identity provider for E
 keywords: [epinio, kubernetes, rancher, sso, oidc, dex, identity]
 doc-type: [how-to]
 doc-topic: [epinio, customize, operations, rancher, sso]
+doc-persona: [epinio-operator]
 ---
 
-# Using Rancher as an OIDC Provider for Epinio
+## Using Rancher as an OIDC Provider for Epinio
 
 Rancher Manager (v2.12+) can act as an OpenID Connect (OIDC) identity provider. This guide walks through configuring Rancher as the OIDC issuer and connecting it to Epinio's Dex instance so that users authenticated in Rancher can sign in to Epinio with SSO.
 
@@ -29,7 +30,7 @@ The integration has two sides:
 1. **Rancher side** — Register an OIDC client for Dex in Rancher. Rancher generates a client ID and secret. See [Configure Rancher as an OIDC Provider](https://ranchermanager.docs.rancher.com/how-to-guides/advanced-user-guides/configure-oidc-provider).
 2. **Dex side** — Configure an OIDC connector in Dex that points at Rancher's OIDC issuer, using the credentials from step 1.
 
-```
+```text
 User → Epinio UI → Dex → Rancher (OIDC) → Upstream IdP (e.g., GitHub)
                      ↑                          ↓
                      ←──── id_token + claims ────┘
@@ -43,7 +44,7 @@ Follow the Rancher documentation to create an `OIDCClient` for Epinio's Dex, eit
 
 When creating the client, set the **redirect URI** to match Dex's callback URL:
 
-```
+```text
 https://auth.<your-epinio-domain>/callback
 ```
 
@@ -94,7 +95,7 @@ connectors:
 
 When Rancher's upstream auth is GitHub, group claims are returned as **numeric GitHub team IDs** in the format:
 
-```
+```text
 github_team://123456
 ```
 

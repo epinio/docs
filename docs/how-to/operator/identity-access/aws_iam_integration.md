@@ -6,6 +6,7 @@ description: How-to use Amazon Web Services (AWS) Identity and Access Management
 keywords: [epinio, kubernetes, aws, iam]
 doc-type: [how-to]
 doc-topic: [epinio, customize, operations, aws-iam]
+doc-persona: [epinio-operator]
 ---
 
 How-to use Amazon Web Services (AWS) Identity and Access Management (IAM) with Epinio.

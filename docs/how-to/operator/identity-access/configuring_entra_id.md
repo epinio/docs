@@ -6,11 +6,12 @@ description: How-to configure SSO for Epinio using Microsoft Entra ID.
 keywords: [epinio, kubernetes, microsoft, azure, sso, entraid, entra, id, activedirectory, active, directory]
 doc-type: [how-to]
 doc-topic: [epinio, customize, operations, microsoft, azure, entraId]
+doc-persona: [epinio-operator]
 ---
 
 How-to configure SSO for Epinio using Microsoft Entra ID
 
-# Configuring Microsoft Entra ID SSO
+## Configuring Microsoft Entra ID SSO
 
 In order to configure SSO using Microsoft Entra ID, we need to set up a client within Azure and configure Dex with that client's details.  This document will attempt to provide instructions as concisely as possible.  Here is the general outline of required steps:
 

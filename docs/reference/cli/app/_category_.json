@@ -1,4 +1,8 @@
 {
-  "label": "app",
-  "collapsed": true
+  "label": "epinio app",
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "reference/cli/app/epinio_app"
+  }
 }

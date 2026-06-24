@@ -4,6 +4,9 @@ sidebar_position: 5
 title: "Uninstall Epinio"
 description: Uninstalling Epinio and the implications of doing so.
 keywords: [epinio, uninstallation]
+doc-type: [how-to]
+doc-persona: [epinio-operator]
+doc-topic: [epinio, operator, uninstall]
 ---
 
 You should understand the implications of uninstalling Epinio. Uninstallation may affect your cluster's operation.

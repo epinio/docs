@@ -1,7 +1,7 @@
 ---
-sidebar_label: Custom values for service Helm charts
+sidebar_label: Custom Values For Service Helm Charts
 sidebar_position: 17
-title: Custom values for service Helm charts
+title: Custom Values For Service Helm Charts
 description: How to specify custom values for service Helm charts
 keywords: [epinio, kubernetes, custom service values]
 doc-type: [how-to]
@@ -21,7 +21,7 @@ It also shows Epinio users how to set values for the user settings of a service.
 ## General information
 
 Operators, should see
-[Creating A Custom Service](../how-to/operator/customization/create_custom_service.md)
+[Creating A Custom Service](../../how-to/operator/customization/create_custom_service.md)
 for the general syntax of
 user settings.
 

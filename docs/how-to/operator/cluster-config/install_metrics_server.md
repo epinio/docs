@@ -6,6 +6,7 @@ description: Installing a metrics server for an Epinio environment.
 keywords: [epinio, kubernetes, metrics server, installation]
 doc-type: [how-to]
 doc-topic: [epinio, customize, operations, metrics-server]
+doc-persona: [epinio-operator]
 ---
 
 If you don't have a metrics server in your Kubernetes cluster,

@@ -3,6 +3,9 @@ sidebar_label: "Security"
 title: "Epinio security"
 description: Epinio security, concepts and context
 keywords: [epinio, kubernetes, security, application development]
+doc-type: [explanation]
+doc-persona: [epinio-operator]
+doc-topic: [epinio, operator, security]
 ---
 
 Epinio secures access to its API with TLS and basic authentication.
@@ -40,4 +43,4 @@ This opens a web page where you can authenticate with the configured provider.
 
 We use Cosign to sign the Epinio images, rather than signing all individual release assets.
 You can use Cosign to check the images, following download.
-There is further information in the [installation documentation](https://docs.epinio.io/installation/install_epinio_cli#verify-file-checksum-signature).
+There is further information in the [installation documentation](../../getting-started/install-cli.md#verify-file-checksum-signature).

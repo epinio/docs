@@ -1,4 +1,8 @@
 {
-  "label": "settings",
-  "collapsed": true
+  "label": "epinio settings",
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "reference/cli/settings/epinio_settings"
+  }
 }

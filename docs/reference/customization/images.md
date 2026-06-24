@@ -3,7 +3,7 @@ title: ""
 sidebar_label: "Image Storage"
 ---
 
-# Customization point: Image Storage
+# Image Storage
 
 Epinio's staging process saves the generated application images to a docker compatible
 registry.

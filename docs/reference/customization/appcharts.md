@@ -3,7 +3,7 @@ title: ""
 sidebar_label: "Application Charts"
 ---
 
-# Customization point: Application Charts
+# Application Charts
 
 Epinio uses Application charts as templates for the structure of deployed applications,
 i.e. of the kubernetes resources used to run an application image.

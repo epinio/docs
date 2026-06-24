@@ -1,6 +1,7 @@
 ---
 sidebar_label: "Namespaces"
 title: ""
+sidebar_position: 4
 ---
 
 # Namespaces

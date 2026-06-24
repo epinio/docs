@@ -1,9 +1,12 @@
 ---
-sidebar_label: "DNS setup"
+sidebar_label: "DNS Setup"
 sidebar_position: 3
-title: "DNS setup"
+title: "DNS Setup"
 description: How to setup DNS for Epinio and associated issues.
 keywords: [epinio, kubernetes, k8s, DNS]
+doc-type: [how-to]
+doc-persona: [epinio-operator]
+doc-topic: [epinio, operator, dns]
 ---
 
 During an [Epinio installation](../../../getting-started/install-epinio.md),

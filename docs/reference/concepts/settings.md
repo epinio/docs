@@ -3,17 +3,11 @@ sidebar_label: "CLI Settings"
 title: ""
 ---
 
-# Epinio, CLI settings
+# CLI settings
 
 The Epinio command line client uses a settings file to store
 information which has to persist across invocations. This document
 discusses various aspects around this.
-
-## Table Of Contents
-
-  - [Location](#location)
-  - [Contents](#contents)
-  - [Commands](#commands)
 
 ## Location
 

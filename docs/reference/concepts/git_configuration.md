@@ -1,6 +1,7 @@
 ---
 sidebar_label: "Git Configuration"
 title: ""
+sidebar_position: 3
 ---
 
 # Git Configuration

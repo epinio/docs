@@ -35,7 +35,19 @@ const config = {
             },
           },
         },
-        blog: false,
+        blog: {
+          routeBasePath: 'blog',
+          path: 'blog',
+          blogTitle: 'Epinio Blog',
+          blogDescription: "The latest on whats new in Epinio..",
+          blogSidebarTitle: 'Blog',
+          blogSidebarCount: 'ALL',
+          showReadingTime: false,
+          feedOptions: {
+            type: 'rss',
+            title: 'Epinio Blog',
+          },
+        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -77,6 +89,11 @@ const config = {
             position: 'left',
             dropdownItemsAfter: [{to: '/versions', label: 'All versions'}],
             dropdownActiveClassDisabled: true,
+          },
+          {
+            to: '/blog',
+            label: 'Blog',
+            position: 'left',
           },
           {
             type: 'search',

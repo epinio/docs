@@ -1,5 +1,5 @@
 ---
-title: "Customization point: Buildpacks"
+title: "Buildpacks"
 sidebar_label: "Buildpacks"
 description: Using buildpacks in Epinio.
 keywords: [kubernetes, epinio, application development, buildpacks]
@@ -27,4 +27,4 @@ to the desired values before installation.
 
 To override the builder image on an individual basis use the option `--builder-image` of the [epinio push](../cli/epinio_push.md) command.
 
-Note also the related documentation about the [supported applications](../configuration/supported_applications.md).
+Note also the related documentation about the [supported applications](../concepts/supported_applications.md).

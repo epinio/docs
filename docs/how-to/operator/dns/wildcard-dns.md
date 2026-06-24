@@ -1,9 +1,12 @@
 ---
-sidebar_label: "Wildcard DNS setup"
+sidebar_label: "Wildcard DNS Setup"
 sidebar_position: 4
-title: "Wildcard DNS setup"
+title: "Wildcard DNS Setup"
 description: The description
 keywords: [epinio, wildcard dns, dns]
+doc-type: [how-to]
+doc-persona: [epinio-operator]
+doc-topic: [epinio, operator, dns]
 ---
 
 You need a working [DNS](./dns_setup.md) system domain for Epinio

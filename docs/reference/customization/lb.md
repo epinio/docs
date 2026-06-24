@@ -3,7 +3,7 @@ title: ""
 sidebar_label: "Load Balancers"
 ---
 
-# Customization point: Load Balancers
+# Load Balancers
 
 By default Epinio-created ingress resources for applications are based on the
 `networking/v1` Ingress and are not tagged with a specific ingress class name. They do use

@@ -36,7 +36,7 @@ You can override any of these settings by including a `stagingConfig` field in y
 
 ### API Endpoint
 
-```
+```text
 POST /api/v1/namespaces/{namespace}/applications/{app}/stage
 ```
 
@@ -353,4 +353,4 @@ This feature is **fully backward compatible**. Existing API calls without `stagi
 
 ## See Also
 
-- [API reference](../../../reference/server-api/api.md) for the full OpenAPI spec and staging endpoint details
+- [API reference](../../../reference/api.md) for the full OpenAPI spec and staging endpoint details

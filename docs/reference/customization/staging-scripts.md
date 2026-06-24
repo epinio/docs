@@ -5,7 +5,7 @@ description: Using staging scripts with Epinio.
 keywords: [epinio, application development, staging scripts, kubernetes]
 ---
 
-# Customization point: Staging Scripts
+# Staging Scripts
 
 ## Overview
 

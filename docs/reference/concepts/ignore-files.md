@@ -1,6 +1,7 @@
 ---
 sidebar_label: "Ignoring Files"
 title: ""
+sidebar_position: 6
 ---
 
 # Ignoring Files During Application Push

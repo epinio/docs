@@ -3,7 +3,7 @@ title: ""
 sidebar_label: "Source Code Storage"
 ---
 
-# Customization point: Source Code Storage
+# Source Code Storage
 
 Epinio saves the uploaded sources of applications to be deployed to an S3 compatible
 storage system. The staging process then retrieves the sources from that storage.

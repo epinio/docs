@@ -1,6 +1,7 @@
 ---
 sidebar_label: "Configurations"
 title: ""
+sidebar_position: 2
 ---
 
 # Configurations
