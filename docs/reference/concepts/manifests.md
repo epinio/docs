@@ -1,6 +1,11 @@
 ---
 sidebar_label: "Application Manifests"
 title: "Application Manifests"
+description: "The application manifest, a YAML file holding the full configuration used by epinio push."
+keywords: [epinio, application, manifests]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, manifests]
 ---
 
 ## Overview
@@ -164,7 +169,7 @@ only required argument.
 
 ### Example
 
-```
+```text
 name: zanzibar
 configuration:
   instances: 333

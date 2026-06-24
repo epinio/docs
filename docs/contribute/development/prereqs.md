@@ -44,7 +44,7 @@ There are two ways to set up a development environment for Epinio:
 
 5. Set up your Epinio Helm Values file. You can save this as epinio-values.yaml for use in the next step.
 
-```
+```yaml
 global:
   domain: '<ip>.sslip.io'
 rancher:
@@ -72,7 +72,7 @@ This guide walks you through setting up a local Epinio development environment u
 
 Before starting the devcontainer, add the following entries to your host machine's `/etc/hosts` file:
 
-```
+```text
 127.0.0.1  epinio.127.0.0.1.sslip.io auth.127.0.0.1.sslip.io
 ```
 

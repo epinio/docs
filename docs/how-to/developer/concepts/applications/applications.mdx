@@ -12,7 +12,7 @@ doc-persona: [epinio-developer, epinio-operator]
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide explores working with applications. Applications are deployable workloads that Epinio builds, deploys, and manages on Kubernetes. For more information, see the [applications](../../../../reference/configuration/supported_applications.md) reference page.
+This guide explores working with applications. Applications are deployable workloads that Epinio builds, deploys, and manages on Kubernetes. For more information, see the [applications](../../../../reference/concepts/supported_applications.md) reference page.
 
 ## View Applications
 
@@ -47,7 +47,7 @@ Click **Create** on the Applications page to open the creation modal. App creati
 
 #### Application Source
 
-Provide your application source to Epinio. If you have an [application manifest](../../../../reference/configuration/manifests.md) you can upload it directly. Otherwise, you can provide your source in any of the following ways:
+Provide your application source to Epinio. If you have an [application manifest](../../../../reference/concepts/manifests.md) you can upload it directly. Otherwise, you can provide your source in any of the following ways:
 
 - Container image
 - Archive file
@@ -66,7 +66,7 @@ After providing your source, select the [application chart](../app-charts/app-ch
 
 #### Application Details
 
-Assign your application to a [namespace](../namespaces/namespaces.mdx) and provide it a name. You can also configure the number of instances, set [custom routes](../custom_routes.md), define environment variables, and, depending on the selected [application chart](../app-charts/app-charts.mdx), configure additional chart-specific settings.
+Assign your application to a [namespace](../namespaces/namespaces.mdx) and provide it a name. You can also configure the number of instances, set [custom routes](../../../../reference/concepts/custom_routes.md), define environment variables, and, depending on the selected [application chart](../app-charts/app-charts.mdx), configure additional chart-specific settings.
 
 <img
   src={require('./apps-create-details.png').default}

@@ -5,6 +5,9 @@ sidebar_position: 1
 title: "Introduction"
 description: An introduction to Epinio and how it benefits developers
 keywords: [epinio, kubernetes, developer, operator, deployment]
+doc-type: [explanation]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, introduction]
 ---
 
 Epinio is a [Krumware](https://www.krum.io) project that lets developers go from

@@ -20,7 +20,7 @@ epinio app env set samplejava BPL_DEBUG_ENABLED true
 ```
 
 After the application has restarted (to integrate the change of the environment),
-use [port forwarding](../../operator/networking/port_forwarding.md) to attach the debugger.
+use [port forwarding](./networking/port_forwarding.md) to attach the debugger.
 It runs by default on the port `8000`:
 
 ```console

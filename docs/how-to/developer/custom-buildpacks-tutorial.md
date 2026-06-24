@@ -4,6 +4,9 @@ sidebar_position: 5
 title: "Deploying a complex application"
 description: A walk-through for a more complex application deployment with Epinio.
 keywords: [Epinio, kubernetes, application development, application deployment, complex application]
+doc-type: [tutorial]
+doc-persona: [epinio-developer]
+doc-topic: [epinio, how-to, buildpacks]
 ---
 
 In this tutorial you use [Gitea](https://github.com/go-gitea/gitea)

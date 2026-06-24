@@ -3,6 +3,9 @@ sidebar_label: "Epinio push process"
 title: "The Epinio push process in detail"
 description: The Epinio push process in detail
 keywords: [epinio, kubernetes, push process]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, detailed-push-process]
 ---
 
 Epinio makes use of well supported, well known projects.
@@ -31,7 +34,7 @@ BasicAuth, a session cookie or, if using WebSockets, a token.
 
 The Epinio helm-chart can install either [SeaweedFS](https://github.com/seaweedfs/seaweedfs) (the default)
 or [s3gw](https://s3gw.io/) on your cluster.
-You can also [configure external S3](../../operator/cluster-config/setup_external_s3.md).
+You can also [configure external S3](../how-to/operator/cluster-config/setup_external_s3.md).
 Both SeaweedFS and s3gw are S3-compatible storage solutions which Epinio uses to store application source code.
 The chosen S3 storage solution is later used by the staging job.
 
@@ -71,7 +74,7 @@ The third step of staging uses the
 to create a container image for your application.
 The result of a successful staging process is a new image.
 This image is pushed to the Registry component of Epinio.
-Read further information in the [Epinio Registry](../../operator/cluster-prerequisites.md#container-registry) documentation.
+Read further information in the [Epinio Registry](../how-to/operator/cluster-prerequisites.md#container-registry) documentation.
 
 ## Run (step 8)
 
@@ -114,7 +117,7 @@ The Kubernetes component that describes and implements this routing is the Ingre
 
 The ingress controller reads your Ingress Resource Definitions and implements the desired routing to the appropriate Services/Pods.
 
-There is further information in the ingress controller section in ["Advanced Topics"](../../operator/cluster-prerequisites.md#ingress-controller)
+There is further information in the ingress controller section in ["Advanced Topics"](../how-to/operator/cluster-prerequisites.md#ingress-controller)
 
 In Epinio, for every application, you create an Ingress that routes the traffic for the application through a subdomain that looks similar to this:
 

@@ -1,6 +1,12 @@
 ---
 title: "Configurations"
 sidebar_position: 3
+sidebar_label: "Configurations"
+description: "Configurations, the external components that provide configuration such as database credentials to applications."
+keywords: [epinio, configurations]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, configurations]
 ---
 
 ## Overview

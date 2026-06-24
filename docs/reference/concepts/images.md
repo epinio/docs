@@ -1,9 +1,12 @@
 ---
-title: ""
+title: "Image Storage"
 sidebar_label: "Image Storage"
+description: "How Epinio stores the application images produced by staging in a Docker-compatible registry."
+keywords: [epinio, image, storage]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, images]
 ---
-
-# Image Storage
 
 Epinio's staging process saves the generated application images to a docker compatible
 registry.

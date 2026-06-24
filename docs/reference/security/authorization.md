@@ -1,9 +1,12 @@
 ---
 sidebar_label: "Authorization"
-title: ""
+title: "Authorization"
+description: "Since version **1.11.0** Epinio is shipped with a new authorization layer with two default roles: **admin** and **user**."
+keywords: [epinio, authorization]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, security, authorization]
 ---
-
-# Authorization
 
 Since version **1.11.0** Epinio is shipped with a new authorization layer with two default roles: **admin** and **user**.
 Roles can be "namescoped", and they can be also customized with different permissions.
@@ -58,7 +61,7 @@ admin-epinio-user     BasicAuth   2      5m10s
 
 Since a user is simply a Kubernetes Secret you can create a new user with a `kubectl apply`:
 
-```
+```text
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret

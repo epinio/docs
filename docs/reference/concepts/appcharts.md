@@ -2,11 +2,12 @@
 title: "Application Charts"
 sidebar_label: "Application Charts"
 sidebar_position: 6
+description: "Application charts, the templates Epinio uses for the structure of deployed applications."
+keywords: [epinio, application, charts]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, appcharts]
 ---
-
-# Application Charts
-
-
 Epinio uses Application charts as templates for the structure of deployed applications,
 i.e. of the kubernetes resources used to run an application image.
 
@@ -25,7 +26,7 @@ Application charts are expected to create the following resources:
 
   - A `Service` to route web requests to the application.
 
-  - An [Ingress](./lb.md) per specified route to front the `Service`.
+  - An [Ingress](../customization/lb.md) per specified route to front the `Service`.
 
 :::note
 
@@ -40,7 +41,7 @@ Read the [contents of the standard application chart](https://github.com/epinio/
 
 :::
 
-# Further Expectations
+## Further Expectations
 
 Application Charts are expected to heed the following contraints to enable their use by
 Epinio:
@@ -87,7 +88,7 @@ Routes are maps composed of four keys:
 |`secret`       |string |Optional. Name of a `Secret` to directly use in securing the `Ingress` |
 
 :::note
-The [Routing Secrets](./routing_secrets.md) reference explains more about the `secrets` field.
+The [Routing Secrets](../customization/routing_secrets.md) reference explains more about the `secrets` field.
 :::
 
 Environment assigment are maps composed of two keys:
@@ -138,6 +139,6 @@ Read the [contents of the standard application chart](https://github.com/epinio/
 
 The [application charts how-to](../../how-to/developer/concepts/app-charts/app-charts.mdx) contains information on how to work with app charts via the UI or CLI.
 
-# Related
+## Related
 
-  - [Routing Secrets](./routing_secrets.md)
+  - [Routing Secrets](../customization/routing_secrets.md)

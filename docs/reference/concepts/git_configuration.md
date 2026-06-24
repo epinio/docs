@@ -1,10 +1,13 @@
 ---
 sidebar_label: "Git Configuration"
-title: ""
+title: "Git Configuration"
 sidebar_position: 3
+description: Starting with version **1.10.0**, Epinio supports Git configurations.
+keywords: [epinio, git, configuration]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, git-configuration]
 ---
-
-# Git Configuration
 
 ## Overview
 

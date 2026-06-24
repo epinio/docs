@@ -1,10 +1,13 @@
 ---
 sidebar_label: "Ignoring Files"
-title: ""
+title: "Ignoring Files During Application Push"
 sidebar_position: 6
+description: When pushing applications with `epinio push`, you can exclude files and directories from being included in the application tarball. This feature helps reduce upload bandwidth, prev
+keywords: [epinio, ignoring, files, during, application]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, ignore-files]
 ---
-
-# Ignoring Files During Application Push
 
 When pushing applications with `epinio push`, you can exclude files and directories from being included in the application tarball. This feature helps reduce upload bandwidth, prevent local build artifacts from being deployed, and ensure only necessary source code is pushed to the cluster.
 
@@ -23,7 +26,7 @@ When both are present, patterns from both sources are merged, with `.epinioignor
 
 Create a `.epinioignore` file in the root of your application directory:
 
-```bash
+```text
 # Create .epinioignore file
 cat > .epinioignore << EOF
 node_modules/
@@ -59,7 +62,7 @@ The ignore feature supports gitignore-style pattern matching with the following 
 
 Match files and directories by name:
 
-```
+```text
 node_modules/     # Matches node_modules directory
 *.log             # Matches all .log files
 dist/             # Matches dist directory
@@ -70,7 +73,7 @@ dist/             # Matches dist directory
 
 Patterns ending with `/` match only directories:
 
-```
+```text
 build/            # Only matches directories named "build"
 src/temp/         # Only matches directories
 *.tmp/            # Only matches directories ending with .tmp
@@ -82,7 +85,7 @@ src/temp/         # Only matches directories
 
 Use `*` to match any characters (except path separators):
 
-```
+```text
 *.log             # All .log files
 *.tmp             # All .tmp files
 temp.*            # Files starting with "temp."
@@ -93,7 +96,7 @@ temp.*            # Files starting with "temp."
 
 Use `**` to match any number of directories:
 
-```
+```text
 src/**/*.test.js          # All .test.js files in src and subdirectories
 **/node_modules/          # node_modules directories at any level
 a/**/b/**/c              # Complex nested patterns
@@ -109,7 +112,7 @@ a/**/b/**/c              # Complex nested patterns
 
 Patterns starting with `/` match only at the root of the application:
 
-```
+```text
 /root-only          # Only matches "root-only" at the root
 /subdir/            # Only matches "subdir" at the root
 /config.yaml        # Only matches "config.yaml" at the root
@@ -121,7 +124,7 @@ Patterns starting with `/` match only at the root of the application:
 
 Patterns starting with `!` un-ignore files that were previously ignored:
 
-```
+```text
 *.log               # Ignore all .log files
 !important.log      # But don't ignore important.log
 *.tmp               # Ignore all .tmp files
@@ -134,7 +137,7 @@ Patterns starting with `!` un-ignore files that were previously ignored:
 
 Lines starting with `#` are treated as comments and ignored:
 
-```
+```text
 # This is a comment
 node_modules/       # Ignore node_modules
 # Another comment
@@ -145,7 +148,7 @@ node_modules/       # Ignore node_modules
 
 ### Node.js/JavaScript Applications
 
-```bash
+```text
 # .epinioignore
 node_modules/
 npm-debug.log
@@ -163,7 +166,7 @@ build/
 
 ### Python Applications
 
-```bash
+```text
 # .epinioignore
 __pycache__/
 *.py[cod]
@@ -184,7 +187,7 @@ build/
 
 ### Go Applications
 
-```bash
+```text
 # .epinioignore
 vendor/
 *.exe
@@ -199,7 +202,7 @@ vendor/
 
 ### Build Artifacts
 
-```bash
+```text
 # .epinioignore
 dist/
 build/
@@ -215,7 +218,7 @@ bin/
 
 ### IDE and Editor Files
 
-```bash
+```text
 # .epinioignore
 .vscode/
 .idea/
@@ -228,7 +231,7 @@ Thumbs.db
 
 ### Local Configuration Files
 
-```bash
+```text
 # .epinioignore
 .env
 .env.local
@@ -242,7 +245,7 @@ settings.local.json
 ### Example 1: Simple Node.js Application
 
 **`.epinioignore`**:
-```
+```text
 node_modules/
 dist/
 *.log
@@ -254,7 +257,7 @@ dist/
 ### Example 2: Using Negation
 
 **`.epinioignore`**:
-```
+```text
 *.log
 !important.log
 *.tmp
@@ -266,7 +269,7 @@ dist/
 ### Example 3: Recursive Patterns
 
 **`.epinioignore`**:
-```
+```text
 src/**/*.test.js
 **/node_modules/
 build/
@@ -280,7 +283,7 @@ build/
 ### Example 4: Root-Relative Patterns
 
 **`.epinioignore`**:
-```
+```text
 /root-only
 /subdir/
 /config.yaml
@@ -315,7 +318,7 @@ configuration:
 ```
 
 **`.epinioignore`**:
-```
+```text
 node_modules/
 *.log
 !important.log

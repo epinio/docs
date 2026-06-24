@@ -1,6 +1,12 @@
 ---
 sidebar_label: "Services"
 sidebar_position: 4
+title: "services.md"
+description: Most real world applications work together with other services to store data, logs, to exchange messages with other systems etc.
+keywords: [epinio, ]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, services]
 ---
 
 Most real world applications work together with other services to store data, logs, to exchange messages with other systems etc.

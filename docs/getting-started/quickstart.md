@@ -117,6 +117,6 @@ That is the whole loop: from sources to a live URL in one command.
 
 ## Next steps
 
-- Work with [namespaces](../how-to/developer/concepts/namespaces.mdx) to separate your apps.
+- Work with [namespaces](../how-to/developer/concepts/namespaces/namespaces.mdx) to separate your apps.
 - Browse every command in the [CLI reference](../reference/cli/index.md).
 - See which application types are supported in [supported applications](../reference/concepts/supported_applications.md).

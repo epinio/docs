@@ -2,6 +2,11 @@
 sidebar_label: "Applications"
 title: "Applications"
 sidebar_position: 2
+description: This section describes what kind of application you can expect to work with Epinio.
+keywords: [epinio, applications]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, supported-applications]
 ---
 
 This section describes what kind of application you can expect to work with Epinio.

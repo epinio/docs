@@ -1,9 +1,12 @@
 ---
 sidebar_label: "Routing Secrets"
-title: ""
+title: "Routing Secrets"
+description: "Providing TLS certificates for application ingresses with routing Secrets labeled epinio.io/routing."
+keywords: [epinio, routing, secrets]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, customization, routing-secrets]
 ---
-
-# Routing Secrets
 
 ## Overview
 
@@ -31,4 +34,4 @@ over a longer one.
 
 ## Related
 
-  - [Application Charts](./appcharts.md)
+  - [Application Charts](../concepts/appcharts.md)

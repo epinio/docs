@@ -3,10 +3,10 @@ title: "Customization point: Staging scripts"
 sidebar_label: "Staging scripts"
 description: Using staging scripts with Epinio.
 keywords: [epinio, application development, staging scripts, kubernetes]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, customization, staging-scripts]
 ---
-
-# Staging Scripts
-
 ## Overview
 
 :::note

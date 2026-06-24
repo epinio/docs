@@ -1,7 +1,7 @@
 ---
-sidebar_label: Inner-loop development with app watch
-sidebar_position: 5
-title: Inner-loop development with app watch
+sidebar_label: Inner-Loop Development With App Watch
+sidebar_position: 14
+title: Inner-Loop Development With App Watch
 description: Use epinio app watch to sync local changes into a running application without a full push.
 keywords: [epinio, kubernetes, inner loop, live reload, app watch, hot reload]
 doc-type: [how-to]
@@ -60,7 +60,7 @@ Run `epinio app push` once before the first `app watch` session. On the first
 watch run, Epinio restages the app and installs the supervisor; after that,
 save any source file and the terminal will show sync progress:
 
-```
+```text
 Synced in 312ms (via API)
 ```
 
@@ -203,6 +203,6 @@ deployment.
 
 ## See also
 
-- [epinio app push](../../references/commands/cli/app/epinio_app_push.md) — full push without watching
-- [epinio app watch (reference)](../../references/commands/cli/app/epinio_app_watch.md) — CLI flag reference
-- [Debugging an application](./debug.md) — attaching a debugger to a running app
+- [epinio app push](../../../reference/cli/app/epinio_app_push.md) — full push without watching
+- [epinio app watch (reference)](../../../reference/cli/app/epinio_app_watch.md) — CLI flag reference
+- [Debugging an application](../../operator/debug.md) — attaching a debugger to a running app

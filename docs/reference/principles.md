@@ -3,6 +3,9 @@ sidebar_label: "Principles"
 title: "Epinio design principles"
 description: The design principles Epinio is based upon.
 keywords: [epinio, kubernetes, design principles]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, principles]
 ---
 
 These principles guide Epinio's development:

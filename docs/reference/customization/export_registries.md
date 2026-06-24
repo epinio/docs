@@ -1,9 +1,12 @@
 ---
-title: ""
+title: "Export Destination Registries"
 sidebar_label: "Export Destination Registries"
+description: "Configuring Export Destination Registries (EDR) as targets for the epinio app export --registry command."
+keywords: [epinio, export, destination, registries]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, customization, export-registries]
 ---
-
-# Export Destination Registries
 
 Epinio uses `Export Destination Registries` (short: `EDR`) as targets for the `app export
 --registry` command. With this command a users is able to export an active application to one of the
@@ -29,7 +32,7 @@ This namespace is usually named `epinio`.
 The `authentication secret` is labeled with `epinio.io/api-export-registry: "true"` and has to
 contain a stringData key `.dockerconfigjson`. The value for this key is a string in JSON format:
 
-```
+```yaml
 stringData:
   # certs: "<name of cert secret here>"
   .dockerconfigjson: |-
@@ -65,7 +68,7 @@ The examples use the generic type `Opaque`.
 
 Note the placeholders in brackets (`<...>`). `auth` is derived from the placeholders.
 
-```
+```text
 ---
 apiVersion: v1
 kind: Secret

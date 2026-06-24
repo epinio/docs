@@ -169,7 +169,7 @@ The following commands were tested using cosign version 2.1.1.
 The three core Epinio images are `epinio-server`, `epinio-unpacker`, and `epinio-ui`.
 The command to verify any of them is
 
-```
+```text
 cosign verify \
        --certificate-identity-regexp "https://github.com/epinio/epinio" \
        --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \

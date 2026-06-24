@@ -3,6 +3,9 @@ title: "Buildpacks"
 sidebar_label: "Buildpacks"
 description: Using buildpacks in Epinio.
 keywords: [kubernetes, epinio, application development, buildpacks]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, customization, staging]
 ---
 
 :::note

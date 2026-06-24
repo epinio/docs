@@ -1,6 +1,12 @@
 ---
 title: "Namespaces"
 sidebar_position: 1
+sidebar_label: "Namespaces"
+description: Like Kubernetes, Epinio has an idea of namespaces, and the means of working with them. Working with many namespaces is a little different in Epinio than with Kubernetes.
+keywords: [epinio, namespaces]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, namespaces]
 ---
 
 Like Kubernetes, Epinio has an idea of namespaces, and the means of working with them. Working with many namespaces is a little different in Epinio than with Kubernetes.

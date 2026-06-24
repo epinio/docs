@@ -34,4 +34,4 @@ epinio app push -n sample -p . --route sample.myawesomedomain.org
 ## References
 
 - [Load Balancers](../../../reference/customization/lb.md)
-- [Custom Routes](../../developer/concepts/custom_routes.md)
+- [Custom Routes](../../../reference/concepts/custom_routes.md)

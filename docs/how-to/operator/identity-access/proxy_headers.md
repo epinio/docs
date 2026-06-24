@@ -5,6 +5,7 @@ description: "Configure the Epinio CLI to use and optionally persist proxy authe
 keywords: [epinio, proxy, headers, authentication, iap]
 doc-type: [how-to]
 doc-topic: [operations]
+doc-persona: [epinio-operator]
 ---
 
 Some environments place the Epinio API behind an authenticating proxy (for example

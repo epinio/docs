@@ -1,9 +1,12 @@
 ---
 sidebar_label: "Cert Manager"
-title: ""
+title: "Cert Manager"
+description: "The cert-manager dependency Epinio uses to generate and renew the TLS certificates that secure its endpoints."
+keywords: [epinio, cert, manager]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, security, cert-manager]
 ---
-
-# Cert Manager
 
 ## Purpose
 

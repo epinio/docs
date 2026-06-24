@@ -1,9 +1,12 @@
 ---
 title: "Versions"
+sidebar_label: "Versions"
+description: For a curated overview of what shipped in each release, see the blog.
+keywords: [epinio, versions]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, versions]
 ---
-
-# Epinio documentation versions
-
 For a curated overview of what shipped in each release, see the [blog](/blog).
 
 Upgrading between versions? See [Upgrading Epinio](./reference/upgrading) for breaking changes and migration steps.

@@ -88,7 +88,7 @@ doc-topic: [epinio, how-to, topic]
 
 When a task can be done in both the dashboard and the CLI, use tabs. This project
 runs MDX v1, which is strict about structure. Follow this exact pattern (see
-[the namespaces page](../how-to/developer/concepts/namespaces.mdx) for a working
+[the namespaces page](../how-to/developer/concepts/namespaces/namespaces.mdx) for a working
 example):
 
 - Name the file `.mdx` and import the components at the top.

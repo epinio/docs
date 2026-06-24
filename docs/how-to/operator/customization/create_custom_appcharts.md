@@ -87,7 +87,7 @@ The result should look like:
 The templating uses the `.Values.epinio.appName` field to insert the application name into the annotation.
 
 An explanation of the values Epinio sets when deploying an application using the chart is in the
-[Application Chart Reference](../../../reference/customization/appcharts.md#configuration).
+[Application Chart Reference](../../../reference/concepts/appcharts.md#configuration).
 It's also available locally in the comments at the top of file `helm-charts/chart/application/values.yaml`.
 
 Once you have modified the chart, use the following command to package the changed chart into a tarball:

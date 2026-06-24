@@ -58,7 +58,7 @@ From the repository you can download the three files:
 - `epinio_1.14.0_checksums.txt`
 
 
-```
+```bash
 curl -LO https://github.com/epinio/epinio/releases/download/v1.14.0/epinio_1.14.0_checksums.txt.pem
 curl -LO https://github.com/epinio/epinio/releases/download/v1.14.0/epinio_1.14.0_checksums.txt.sig
 curl -LO https://github.com/epinio/epinio/releases/download/v1.14.0/epinio_1.14.0_checksums.txt
@@ -66,7 +66,7 @@ curl -LO https://github.com/epinio/epinio/releases/download/v1.14.0/epinio_1.14.
 
 Once you have the three files locally, you can execute the following command
 
-```
+```bash
 cosign verify-blob \
 	--certificate-identity-regexp "https://github.com/epinio/epinio" \
 	--certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
@@ -77,7 +77,7 @@ cosign verify-blob \
 
 A successful output looks like
 
-```
+```text
 Verified OK
 ```
 
@@ -88,7 +88,7 @@ Now you can verify the asset's checksum integrity.
 Before verifying the file integrity, you should first verify the checksum file signature.
 Once you’ve downloaded both the checksums and your binary, you can verify integrity by running:
 
-```
+```bash
 sha256sum --ignore-missing -c epinio_1.14.0_checksums.txt
 ```
 

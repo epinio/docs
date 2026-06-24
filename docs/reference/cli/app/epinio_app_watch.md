@@ -26,7 +26,7 @@ without going through the buildpack pipeline.
 
 Configure binary mode (compiled languages) or override sync paths by placing
 an `.epinio-sync.yaml` file in the source directory.
-See [Inner-loop development with app watch](../../../../howtos/use-develop/app_watch.md)
+See [Inner-loop development with app watch](../../../how-to/developer/concepts/app_watch.md)
 for a full guide.
 
 ### Options

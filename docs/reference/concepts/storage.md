@@ -103,7 +103,7 @@ Epinio uses several storage components that need to be considered when planning 
 
 If using internal S3 and internal registry:
 
-```
+```text
 Total Storage = S3 Storage + (Cache PVCs + Source Blobs PVCs) + Registry Storage
 ```
 
@@ -117,12 +117,12 @@ Where:
 
 For quick estimation with default configurations:
 
-```
+```text
 Total Storage (GB) ≈ N apps × (Source blob size + Cache size + Source PVC size + Image size × Versions)
 ```
 
 With typical defaults (1 GiB cache, 1 GiB source PVC, 50 MB source blob, 500 MB image, 3 versions):
-```
+```text
 Total Storage (GB) ≈ N apps × (0.05 + 1 + 1 + 0.5 × 3) = N apps × 3.55 GB
 ```
 

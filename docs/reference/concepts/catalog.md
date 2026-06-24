@@ -2,6 +2,11 @@
 title: "Service Catalog"
 sidebar_label: "Service Catalog"
 sidebar_position: 5
+description: "Service classes, the templates Epinio uses to provision service instances from the catalog."
+keywords: [epinio, service, catalog]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, catalog]
 ---
 
 Epinio uses Services classes as templates for service instances, i.e. of the kubernetes
