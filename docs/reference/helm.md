@@ -145,7 +145,19 @@ to point to the desired container registry.
 
 ## Web UI
 
-The bundled dashboard is configured under `epinioUI` — set the **`theme`** (`light` or `dark`), CORS **`allowedOrigins`**, the log level, and the API/UI/Dex URLs for proxied connections. Disable it with `epinioUI.enabled: false`.
+The bundled dashboard runs by default and is served at `https://epinio.<domain>`,
+the same host as the API (the API lives under `/api`, the dashboard gets the rest).
+No extra configuration is needed. The values you may want to set:
+
+| Value | Notes |
+| --- | --- |
+| `epinioUI.enabled` | Run the dashboard. Default `true`. Set `false` to disable it. |
+| `epinioUI.theme` | `light` or `dark`. |
+| `epinioUI.ingress.enabled` | **Optional.** Publishes a *second* ingress that also serves the dashboard at the bare `global.domain` (root). Default `false`. The dashboard is already reachable at `epinio.<domain>` without it. |
+
+If you enable the root-domain ingress, also point the UI and the Dex redirect at
+that host so OIDC login agrees: `epinioUI.uiURL`, `epinioUI.allowedOrigins`, and
+`dex.ui.redirectURI` all default to `epinio.<domain>`.
 
 ## Complete Reference
 

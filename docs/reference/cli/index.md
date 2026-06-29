@@ -15,7 +15,7 @@ flags, see [`epinio`](./epinio.md).
 :::tip First time here?
 If you have not installed the CLI yet, start with
 [Install the CLI](../../getting-started/install-cli.md), then run through the
-[Quickstart](../../getting-started/quickstart.md).
+[Quickstart](../../getting-started/quickstart.mdx).
 :::
 
 ## Session

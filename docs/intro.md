@@ -66,7 +66,7 @@ Epinio adds the abstractions and tools needed to let developers use Kubernetes a
 
 ## Next steps
 
-To try Epinio, follow the [Quickstart](./getting-started/quickstart.md) guide.
+To try Epinio, follow the [Quickstart](./getting-started/quickstart.mdx) guide.
 
 From there:
 

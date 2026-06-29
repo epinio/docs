@@ -49,7 +49,7 @@ distributions already ship one; if yours does, you can skip this step.
 The command above uses a `LoadBalancer` Service, which suits clusters that have a
 load balancer. On a local, single-node cluster without one (minikube, k3d), bind
 Traefik to the node's ports instead by adding `--set ports.web.hostPort=80 --set
-ports.websecure.hostPort=443`. See the [Quickstart](./quickstart.md) for the full
+ports.websecure.hostPort=443`. See the [Quickstart](./quickstart.mdx) for the full
 local flow.
 :::
 
@@ -112,8 +112,15 @@ helm upgrade --install epinio epinio/epinio --namespace epinio --create-namespac
 
 :::note
 The default API credentials are `admin` / `password`. Set `api.adminPassword` (or
-configure `api.users`) to change them — see the [Helm chart reference](../reference/helm.md).
+configure `api.users`) to change them. See the [Helm chart reference](../reference/helm.md).
 :::
+
+### Web dashboard
+
+The dashboard (`epinioUI`) runs by default and is served at `https://epinio.<domain>`,
+the same host as the API. No extra configuration is needed. To publish it at the
+bare `global.domain` as well, or to change the theme, see the
+[Helm chart reference](../reference/helm.md#web-ui).
 
 ### Install Epinio in a custom namespace
 

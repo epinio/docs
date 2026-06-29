@@ -157,7 +157,7 @@ Communication between the staging job and container registry is TLS encrypted ev
 ### Git pushing
 
 The quick way of pushing an application, explained in
-[Quickstart: push an application](../../getting-started/quickstart.md#push-an-application),
+[Quickstart: push an application](../../getting-started/quickstart.mdx#push-your-first-application),
 uses a local directory containing a checkout of the application's sources.
 
 Internally this is a [complex](../../reference/detailed-push-process.md) procedure.

@@ -98,12 +98,11 @@ helm repo add epinio https://epinio.github.io/helm-charts
 helm repo update
 helm upgrade --install epinio epinio/epinio \
     --namespace epinio --create-namespace \
-    --set global.domain="$EPINIO_DOMAIN" \
-    --set epinioUI.ingress.enabled=true \
-    --set epinioUI.uiURL="https://$EPINIO_DOMAIN" \
-    --set epinioUI.allowedOrigins="https://$EPINIO_DOMAIN" \
-    --set dex.ui.redirectURI="https://$EPINIO_DOMAIN/auth/verify/"
+    --set global.domain="$EPINIO_DOMAIN"
 ```
+
+This also brings up the web dashboard at `https://epinio.$EPINIO_DOMAIN` (the same
+host as the API).
 
 ## Log in
 
