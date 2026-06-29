@@ -1,0 +1,125 @@
+---
+sidebar_label: "Quickstart"
+sidebar_position: 1
+title: "Quickstart"
+description: Install Epinio on a cluster and push your first application, with copy-paste commands.
+keywords: [epinio, kubernetes, quickstart, install, minikube, helm]
+doc-type: [tutorial]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, getting-started, quickstart]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Install Epinio and push an application, with default options. Copy-paste the
+commands below in order.
+
+## Prerequisites
+
+- [`kubectl`](https://kubernetes.io/docs/tasks/tools/) and [`helm`](https://helm.sh/docs/intro/install/) installed.
+- A Kubernetes cluster with a default **StorageClass** and a default **IngressClass**.
+  
+
+For anything beyond a trial, see [system requirements](./system-requirements.md)
+and the full [installation](./install-epinio.md) guide.
+
+<Tabs>
+<TabItem value="existing-cluster" label="Existing Cluster" default>
+
+```bash
+helm repo add traefik https://traefik.github.io/charts
+helm repo update
+helm upgrade --install traefik traefik/traefik --namespace traefik --create-namespace \
+    --set ingressClass.isDefaultClass=true \
+    --set ports.web.hostPort=80 \
+    --set ports.websecure.hostPort=443
+```
+
+## Set your domain
+
+```bash
+export EPINIO_DOMAIN="$(<INGRESS-IP>).sslip.io"
+```
+
+On an existing cluster, set `EPINIO_DOMAIN` to a wildcard domain that resolves to
+your ingress (for example `<INGRESS-IP>.sslip.io`).
+
+</TabItem>
+<TabItem value="new-cluster" label="New Cluster">
+
+## No cluster? Start minikube
+
+```bash
+minikube start --cpus 4 --memory 8g
+helm repo add traefik https://traefik.github.io/charts
+helm repo update
+helm upgrade --install traefik traefik/traefik --namespace traefik --create-namespace \
+    --set ingressClass.isDefaultClass=true \
+    --set ports.web.hostPort=80 \
+    --set ports.websecure.hostPort=443
+```
+
+:::note
+On macOS or Windows the minikube node IP isn't directly reachable from the host;
+run `minikube tunnel` in a separate terminal, or use Linux.
+:::
+
+## Set your domain
+
+Epinio needs a wildcard domain that points at your ingress. With minikube, use its
+IP and a wildcard DNS service such as [`sslip.io`](https://sslip.io):
+
+```bash
+export EPINIO_DOMAIN="$(minikube ip).sslip.io"
+```
+
+</TabItem>
+</Tabs>
+
+This installs [Traefik](https://traefik.io/) bound to the node's `:80`/`:443`, so
+the cluster is reachable at its node IP. minikube already provides a default
+StorageClass, so storage needs no extra setup.
+
+## Install cert-manager
+
+```bash
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm upgrade --install cert-manager jetstack/cert-manager \
+    --namespace cert-manager --create-namespace \
+    --set crds.enabled=true
+```
+
+## Install Epinio
+
+```bash
+helm repo add epinio https://epinio.github.io/helm-charts
+helm repo update
+helm upgrade --install epinio epinio/epinio \
+    --namespace epinio --create-namespace \
+    --set global.domain="$EPINIO_DOMAIN" \
+    --set epinioUI.ingress.enabled=true \
+    --set epinioUI.uiURL="https://$EPINIO_DOMAIN" \
+    --set epinioUI.allowedOrigins="https://$EPINIO_DOMAIN" \
+    --set dex.ui.redirectURI="https://$EPINIO_DOMAIN/auth/verify/"
+```
+
+## Log in
+
+Navigate to the `epinio.<EPINIO_DOMAIN>` in your browser and log in. 
+
+When prompted, enter the default username `admin` and  password `password`.
+
+## Push your first application
+
+In the application creation window, search for `example-12factor` in the `epinio` org under the GitHub source type. 
+The application creation window will [guide](../how-to/developer/concepts/applications#create-an-application) you through your first install. 
+
+That is the whole loop: from sources to a live URL in one command.
+
+## Next steps
+
+- Work with [namespaces](../how-to/developer/concepts/namespaces/namespaces.mdx) to separate your apps.
+- Browse every command in the [CLI reference](../reference/cli/index.md).
+- See which application types are supported in [supported applications](../reference/concepts/supported_applications.md).
