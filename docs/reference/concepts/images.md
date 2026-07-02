@@ -1,0 +1,30 @@
+---
+title: "Image Storage"
+sidebar_label: "Image Storage"
+description: "How Epinio stores the application images produced by staging in a Docker-compatible registry."
+keywords: [epinio, image, storage]
+doc-type: [reference]
+doc-persona: [epinio-developer, epinio-operator]
+doc-topic: [epinio, reference, concepts, images]
+---
+
+Epinio's staging process saves the generated application images to a docker compatible
+registry.
+
+By default Epinio uses the regular [docker registry](https://docs.docker.com/registry/) as
+the store, as an internal component.
+
+To use an external docker compatible registry it is necessary to
+
+  - Set chart key `containerregistry.enabled=false`, and
+  - the various registry keys, i.e.
+
+      - `global.registryURL`
+      - `global.registryUsername`
+      - `global.registryPassword`
+      - `global.registryNamespace`
+
+    to suitable values.
+
+__Note__ Do not confuse this registry with whatever registry is used to retrieve Epinio's
+own images when Epinio is deployed.
