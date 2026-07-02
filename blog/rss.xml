@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Epinio Blog</title>
+        <link>https://docs.epinio.io/blog</link>
+        <description>Epinio docs Blog</description>
+        <lastBuildDate>Fri, 29 May 2026 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.14.0!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-14-0</link>
+            <guid>epinio-1-14-0</guid>
+            <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[We have been teasing this release for a while, and the 1.13.X series was laying the]]></description>
+            <content:encoded><![CDATA[<p>We have been teasing this release for a while, and the 1.13.X series was laying the
+groundwork for exactly this moment. 1.14.0 is here, and it delivers the Epinio UI
+overhaul, major performance improvements, and a long list of features and fixes
+across the board.</p><p>Customers currently on a prior release are encouraged to review the documentation
+for updates and <a href="https://docs.epinio.io/reference/upgrading" target="_blank" rel="noopener noreferrer">breaking changes</a>. You can also schedule time with us to review these updates.</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features-and-improvements">New features and improvements<a class="hash-link" href="#new-features-and-improvements" title="Direct link to heading">​</a></h2><ul><li>Applications now deploy in the background — leave the page once you kick off a deploy and let Epinio handle the rest.</li><li>Server-side search and pagination across application and resource tables to increase client performance.</li><li>Application deployment progress is now visible via the notifications panel.</li><li>Epinio can now be installed in <a href="https://docs.epinio.io/installation/install_epinio#install-epinio-in-a-custom-namespace" target="_blank" rel="noopener noreferrer">namespaces other than</a> <code>epinio</code>.</li><li>Default token expiry is <a href="https://docs.epinio.io/installation/install_epinio#server-configuration" target="_blank" rel="noopener noreferrer">now configurable</a>.</li><li>Improved performance via the <code>KUBE_API_QPS</code> and <code>KUBE_API_BURST</code> environment variables.</li></ul><h2 class="anchor anchorWithStickyNavbar_LWe7" id="ui">UI<a class="hash-link" href="#ui" title="Direct link to heading">​</a></h2><p>This release delivers the full Trailhand design system rollout across Epinio. Every
+major area of the UI has been updated, including applications, services,
+configurations, catalog, and the about page. This also lets us move much quicker on
+future updates to the UI and backend, now that we are less restricted by legacy UI
+components.</p><ul><li>Application creation and editing now use a streamlined modal flow.</li><li>Service detail pages now show internal paths.</li><li>Namespace column added to the services and configuration tables.</li><li>Removed the redundant "Show Configuration" feature from the Rancher Extension.</li><li>Added UI guards to match the backend permission guards.</li></ul><h2 class="anchor anchorWithStickyNavbar_LWe7" id="maintenance-and-fixes">Maintenance and fixes<a class="hash-link" href="#maintenance-and-fixes" title="Direct link to heading">​</a></h2><ul><li>Fixed service bindings taking too long to complete.</li><li>Fixed application creation error messages not displaying correctly.</li><li>Fixed inconsistent column spacing across namespace tables.</li><li>Fixed Dex login issues when multiple clusters are present in the Rancher Extension.</li><li>Improved application creation progress step copy for clarity.</li><li>Allow rebuild to succeed with missing resources when there is a git source.</li></ul><h2 class="anchor anchorWithStickyNavbar_LWe7" id="documentation-updates">Documentation updates<a class="hash-link" href="#documentation-updates" title="Direct link to heading">​</a></h2><ul><li>We started the process of reorganizing and adding additional documentation.</li><li><a href="https://docs.epinio.io/howtos/other/performance_tuning" target="_blank" rel="noopener noreferrer">Added documentation around the</a> <code>KUBE_API_QPS</code> and <code>KUBE_API_BURST</code> performance variables.</li></ul><h2 class="anchor anchorWithStickyNavbar_LWe7" id="dependency-updates">Dependency updates<a class="hash-link" href="#dependency-updates" title="Direct link to heading">​</a></h2><ul><li>Bumped Dex to v2.45.1.</li><li>Bumped dozens of dependencies.</li></ul><h2 class="anchor anchorWithStickyNavbar_LWe7" id="epinio-mcp-experimental">Epinio MCP (experimental)<a class="hash-link" href="#epinio-mcp-experimental" title="Direct link to heading">​</a></h2><p>We recently made an early version of the <a href="https://github.com/epinio/mcp" target="_blank" rel="noopener noreferrer">Epinio MCP server available</a>. Note that this is still experimental, and we will update you all as it becomes stable.</p><hr><p>For the complete technical changelog, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.14.0" target="_blank" rel="noopener noreferrer">1.14.0 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.10!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-10</link>
+            <guid>epinio-1-13-10</guid>
+            <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Customers currently on a prior release are encouraged to review the documentation]]></description>
+            <content:encoded><![CDATA[<p>Customers currently on a prior release are encouraged to review the documentation
+for updates and <a href="https://docs.epinio.io/reference/upgrading" target="_blank" rel="noopener noreferrer">breaking changes</a>. You can also schedule time with us to review these updates.</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features-and-improvements">New features and improvements<a class="hash-link" href="#new-features-and-improvements" title="Direct link to heading">​</a></h2><ul><li>Added additional role options and default roles.</li><li>Several loading-time performance improvements.</li><li><strong>UI</strong><ul><li>Rancher Extension Epinio one-click install.</li><li>Added a Cluster Metrics Report download feature under System → About.</li></ul></li></ul><h2 class="anchor anchorWithStickyNavbar_LWe7" id="maintenance-and-fixes">Maintenance and fixes<a class="hash-link" href="#maintenance-and-fixes" title="Direct link to heading">​</a></h2><ul><li>Replaced MinIO with SeaweedFS.</li><li>Fixed several form updating and saving issues under certain conditions.</li><li>Fixed service bindings being wiped out when an application is redeployed.</li><li>Switched the Dex version for full OIDC support.</li><li>Bumped the default timeout limit for various long-running tasks.</li><li>Replaced SPDY with Kubernetes-native websockets.</li><li>Dependency updates.</li></ul><hr><p>For the complete technical changelog, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.13.10" target="_blank" rel="noopener noreferrer">1.13.10 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.9!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-9</link>
+            <guid>epinio-1-13-9</guid>
+            <pubDate>Tue, 03 Feb 2026 10:09:00 GMT</pubDate>
+            <description><![CDATA[Epinio 1.13.9 is a maintenance release with bug fixes and dependency updates.]]></description>
+            <content:encoded><![CDATA[<p>Epinio 1.13.9 is a maintenance release with bug fixes and dependency updates.</p><p>For the full list of changes, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.13.9" target="_blank" rel="noopener noreferrer">1.13.9 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.8!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-8</link>
+            <guid>epinio-1-13-8</guid>
+            <pubDate>Tue, 03 Feb 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[This release continues our focus on performance, security improvements, and bug]]></description>
+            <content:encoded><![CDATA[<p>This release continues our focus on performance, security improvements, and bug
+fixes. We were also able to squeeze a few new features in.</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="new-features-and-improvements">New features and improvements<a class="hash-link" href="#new-features-and-improvements" title="Direct link to heading">​</a></h2><ul><li>Added the <code>app_restart</code> action to the permissions set, to allow the functionality without write permissions.</li><li>Added parallel binding to speed up service-binding wait times.</li><li>Moved to a new centralized logging system.</li><li>Improved websocket performance for log viewing.</li><li><strong>CLI</strong><ul><li>Use <code>--no-restart</code> to update an application without triggering a restart.</li><li>Delete an image from the Epinio registry with the <code>--delete-image</code> flag.</li><li><a href="https://docs.epinio.io/references/ignore-files" target="_blank" rel="noopener noreferrer">Ignore certain files</a> on app push via <code>.epinioignore</code> or the <code>configuration.ignore</code> section of your Epinio manifest.</li></ul></li><li><strong>UI</strong><ul><li>Filter by container, tail, since, and since-time in the App and Build Logs widget.</li><li>Delete an image from the Epinio registry via a checkbox when deleting an application.</li><li>Download a log bundle for the Epinio instance, with the option to include or exclude application logs.</li></ul></li></ul><h2 class="anchor anchorWithStickyNavbar_LWe7" id="maintenance-and-fixes">Maintenance and fixes<a class="hash-link" href="#maintenance-and-fixes" title="Direct link to heading">​</a></h2><ul><li>Replaced kubed with reflector.</li><li>Fixed an issue where environment variables conflicted with Epinio manifest variables.</li><li>Fixed several UI forms not loading data correctly.</li><li>Fixed the application page not showing proper information when instances are scaled to 0.</li><li>Fixed MinIO and Dex privilege-escalation issues.</li></ul><hr><p>For the complete technical changelog, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.13.8" target="_blank" rel="noopener noreferrer">1.13.8 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.7!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-7</link>
+            <guid>epinio-1-13-7</guid>
+            <pubDate>Mon, 15 Dec 2025 10:07:00 GMT</pubDate>
+            <description><![CDATA[Epinio 1.13.7 is a maintenance release with bug fixes and dependency updates.]]></description>
+            <content:encoded><![CDATA[<p>Epinio 1.13.7 is a maintenance release with bug fixes and dependency updates.</p><p>For the full list of changes, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.13.7" target="_blank" rel="noopener noreferrer">1.13.7 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.6!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-6</link>
+            <guid>epinio-1-13-6</guid>
+            <pubDate>Mon, 15 Dec 2025 10:06:00 GMT</pubDate>
+            <description><![CDATA[Epinio 1.13.6 is a maintenance release with bug fixes and dependency updates.]]></description>
+            <content:encoded><![CDATA[<p>Epinio 1.13.6 is a maintenance release with bug fixes and dependency updates.</p><p>For the full list of changes, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.13.6" target="_blank" rel="noopener noreferrer">1.13.6 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.5!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-5</link>
+            <guid>epinio-1-13-5</guid>
+            <pubDate>Mon, 15 Dec 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Customers currently on a prior release are encouraged to review the breaking changes documentation. You can also schedule time with us to review these updates.]]></description>
+            <content:encoded><![CDATA[<p>Customers currently on a prior release are encouraged to review the <a href="https://docs.epinio.io/reference/upgrading" target="_blank" rel="noopener noreferrer">breaking changes</a> documentation. You can also schedule time with us to review these updates.</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="helm-chart-enhancements">Helm chart enhancements<a class="hash-link" href="#helm-chart-enhancements" title="Direct link to heading">​</a></h2><ul><li>Updated Bitnami packages.</li><li>Node selector support for the Helm controller.</li><li>ServiceAccount annotation support for the Epinio server.</li><li>Additional deployment configuration options for the Epinio UI.</li></ul><h2 class="anchor anchorWithStickyNavbar_LWe7" id="performance-enhancements">Performance enhancements<a class="hash-link" href="#performance-enhancements" title="Direct link to heading">​</a></h2><ul><li>New centralized logger (we'll migrate fully to this in 1.13.6).</li><li>Service bindings, especially multiple bindings, now run in parallel.</li><li>Server support for tailing and date-time filtering of logs (UI support coming in 1.13.6).</li></ul><h2 class="anchor anchorWithStickyNavbar_LWe7" id="ui-and-cli-changes">UI and CLI changes<a class="hash-link" href="#ui-and-cli-changes" title="Direct link to heading">​</a></h2><ul><li>The new user experience has been designed, and we've begun implementing components. This reforms how the UI looks (while staying familiar) and improves performance over the next few updates up to 1.14.0.</li><li>Dark/light mode toggle.</li><li>Updated table component using our new design system, including client-side pagination (server-side pagination coming in 1.13.6).</li><li>CLI logging improvements and general bug fixes.</li><li>Several bug fixes around buttons and form flow.</li></ul><h2 class="anchor anchorWithStickyNavbar_LWe7" id="dependency-and-security-updates">Dependency and security updates<a class="hash-link" href="#dependency-and-security-updates" title="Direct link to heading">​</a></h2><p>This release also includes a range of dependency and security updates.</p><hr><p>For the complete technical changelog, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.13.5" target="_blank" rel="noopener noreferrer">1.13.5 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.4!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-4</link>
+            <guid>epinio-1-13-4</guid>
+            <pubDate>Thu, 11 Dec 2025 10:04:00 GMT</pubDate>
+            <description><![CDATA[Epinio 1.13.4 is a maintenance release with bug fixes and dependency updates.]]></description>
+            <content:encoded><![CDATA[<p>Epinio 1.13.4 is a maintenance release with bug fixes and dependency updates.</p><p>For the full list of changes, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.13.4" target="_blank" rel="noopener noreferrer">1.13.4 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.3!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-3</link>
+            <guid>epinio-1-13-3</guid>
+            <pubDate>Thu, 11 Dec 2025 10:03:00 GMT</pubDate>
+            <description><![CDATA[Epinio 1.13.3 is a maintenance release with bug fixes and dependency updates.]]></description>
+            <content:encoded><![CDATA[<p>Epinio 1.13.3 is a maintenance release with bug fixes and dependency updates.</p><p>For the full list of changes, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.13.3" target="_blank" rel="noopener noreferrer">1.13.3 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.2!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-2</link>
+            <guid>epinio-1-13-2</guid>
+            <pubDate>Mon, 27 Oct 2025 10:02:00 GMT</pubDate>
+            <description><![CDATA[Epinio 1.13.2 is a maintenance release with bug fixes and dependency updates.]]></description>
+            <content:encoded><![CDATA[<p>Epinio 1.13.2 is a maintenance release with bug fixes and dependency updates.</p><p>For the full list of changes, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.13.2" target="_blank" rel="noopener noreferrer">1.13.2 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.1!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-1</link>
+            <guid>epinio-1-13-1</guid>
+            <pubDate>Mon, 29 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Epinio 1.13.1 is a UI maintenance release.]]></description>
+            <content:encoded><![CDATA[<p>Epinio 1.13.1 is a UI maintenance release.</p><ul><li>Fixed the application create button.</li></ul><p>For the full list of changes, see the
+<a href="https://github.com/epinio/ui/releases/tag/v1.13.1" target="_blank" rel="noopener noreferrer">1.13.1 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.13.0!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-13-0</link>
+            <guid>epinio-1-13-0</guid>
+            <pubDate>Wed, 24 Sep 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Customers currently on a prior release are encouraged to review the breaking changes documentation. You can also schedule time with us to review]]></description>
+            <content:encoded><![CDATA[<p>Customers currently on a prior release are encouraged to review the <a href="https://docs.epinio.io/reference/upgrading" target="_blank" rel="noopener noreferrer">breaking changes</a> documentation. You can also schedule time with us to review
+these updates.</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="highlights">Highlights<a class="hash-link" href="#highlights" title="Direct link to heading">​</a></h2><ul><li>Storage configurability for staging via Helm charts.</li><li>Staging scheduling configurability via Helm charts.</li><li>Dependency updates for the Epinio server and Epinio UI.</li><li>Epinio UI fixes and cleanup for Rancher 2.12.0+.</li><li>Documentation updates for the storage and scheduling capabilities.</li></ul><hr><p>For the complete technical changelog, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.13.0" target="_blank" rel="noopener noreferrer">1.13.0 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkepinio_docusaurus=self.webpackChunkepinio_docusaurus||[]).push([[69179],{53457:function(e){e.exports=JSON.parse('[{"label":"release","permalink":"/blog/tags/release","count":12}]')}}]);

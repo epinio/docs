@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkepinio_docusaurus=self.webpackChunkepinio_docusaurus||[]).push([[81406],{641:function(e){e.exports=JSON.parse('{"permalink":"/blog/tags/release/page/2","page":2,"postsPerPage":10,"totalPages":2,"totalCount":12,"previousPage":"/blog/tags/release","blogDescription":"The latest on whats new in Epinio..","blogTitle":"Epinio Blog"}')}}]);
