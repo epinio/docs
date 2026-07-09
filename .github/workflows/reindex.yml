@@ -4,9 +4,10 @@ name: Reindex Algolia (DocSearch)
 # DocSearch scraper. Runs after each successful Pages deploy, and can be
 # triggered manually from the Actions tab (needed for the first-ever index).
 #
-# Requires two repo secrets (from your Algolia app, Settings > API Keys):
-#   ALGOLIA_APP_ID           - the Application ID
+# Requires one repo secret (Settings > Secrets and variables > Actions > Repository secrets):
 #   ALGOLIA_ADMIN_API_KEY    - the Admin API Key (write access; keep secret)
+# The Application ID is public (it also ships in docusaurus.config.js), so it is
+# hardcoded below rather than stored as a secret.
 # The site's search UI uses the Search-Only API Key, set in docusaurus.config.js.
 
 on:
@@ -29,14 +30,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify Algolia admin key is present
+        env:
+          API_KEY: ${{ secrets.ALGOLIA_ADMIN_API_KEY }}
+        run: |
+          if [ -z "$API_KEY" ]; then
+            echo "::error::Repo secret ALGOLIA_ADMIN_API_KEY is not set. Add it under Settings > Secrets and variables > Actions (Repository secrets), named exactly ALGOLIA_ADMIN_API_KEY."
+            exit 1
+          fi
+
       - name: Wait for GitHub Pages to publish
         # Pages finishes deploying a little after the build workflow reports done.
         run: sleep 90
 
       - name: Run DocSearch scraper
+        env:
+          # Application ID is public (it also ships in docusaurus.config.js), so it is
+          # safe to hardcode. Only the admin (write) key must stay a secret.
+          APPLICATION_ID: K463YJU60O
+          API_KEY: ${{ secrets.ALGOLIA_ADMIN_API_KEY }}
         run: |
           docker run --rm \
-            -e APPLICATION_ID="${{ secrets.ALGOLIA_APP_ID }}" \
-            -e API_KEY="${{ secrets.ALGOLIA_ADMIN_API_KEY }}" \
+            -e APPLICATION_ID \
+            -e API_KEY \
             -e CONFIG="$(jq -r tostring docsearch.config.json)" \
             algolia/docsearch-scraper
