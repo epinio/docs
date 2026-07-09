@@ -1,0 +1,42 @@
+name: Reindex Algolia (DocSearch)
+
+# Rebuilds the Algolia search index from the live site with the open-source
+# DocSearch scraper. Runs after each successful Pages deploy, and can be
+# triggered manually from the Actions tab (needed for the first-ever index).
+#
+# Requires two repo secrets (from your Algolia app, Settings > API Keys):
+#   ALGOLIA_APP_ID           - the Application ID
+#   ALGOLIA_ADMIN_API_KEY    - the Admin API Key (write access; keep secret)
+# The site's search UI uses the Search-Only API Key, set in docusaurus.config.js.
+
+on:
+  workflow_run:
+    workflows: ["GitHub Pages"]
+    types: [completed]
+  workflow_dispatch:
+
+concurrency:
+  group: algolia-reindex
+  cancel-in-progress: true
+
+jobs:
+  reindex:
+    # Run on manual dispatch, or only when the deploy actually succeeded.
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Wait for GitHub Pages to publish
+        # Pages finishes deploying a little after the build workflow reports done.
+        run: sleep 90
+
+      - name: Run DocSearch scraper
+        run: |
+          docker run --rm \
+            -e APPLICATION_ID="${{ secrets.ALGOLIA_APP_ID }}" \
+            -e API_KEY="${{ secrets.ALGOLIA_ADMIN_API_KEY }}" \
+            -e CONFIG="$(jq -r tostring docsearch.config.json)" \
+            algolia/docsearch-scraper
