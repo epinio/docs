@@ -72,8 +72,8 @@ const config = {
         },
       },
       algolia: {
-        appId: 'K463YJU60O',
-        apiKey: 'f5d0ad0096483eb4cf95e11ee062cc29',
+        appId: 'F9GBZ0DFYI',
+        apiKey: 'b8442abfcf47dbbd23aba2434bf5c879',
         indexName: 'epinio',
         contextualSearch: true,
       },
