@@ -19,7 +19,7 @@ For GitHub and Gitlab instances a user can create the git config with the userna
 If Git, GitHub Enterprise, and GitLab Enterprise options are selected the same fields are available, but in addition to that there is the git host option where the user can specify the git host url. This is useful for self-hosted git instances.
 
 
-## Github/Gitlab specialities
+## Github/Gitlab Specialities
 
 The public Github and Gitlab repositories support the use of a `PAT` (Personal Access Token)
 over a plain combination of user and password.
@@ -30,7 +30,11 @@ When using a PAT it has to be set as the password, and the user can be set to an
 For reference, it is useful to set it to the username used to generate the token.
 :::
 
-## Detailed specification
+## Github Enterprise Cloud vs Github Enterprise Server
+
+When trying to add a Git Config for a Github Enterprise Cloud instance, you can use the GitHub Enterpise Cloud type, which allows you to enter a custom URL needed to pull from the Enterprise Organization. The GitHub Enterprise Server type is used for self-hosted instances of GitHub Enterprise. You can enter the host URL and Epinio will append the necessary routes to access the Github API on the self-hosted instance. 
+
+## Detailed Specification
 
 A Git configuration is a Kubernetes secret with the `epinio.io/api-git-credentials: "true"` label.
 
@@ -46,6 +50,8 @@ The fields are:
 |`skipSSL`	   |	    | used to skip the SSL verification						|
 | `global`     |       | used to make the configuration available to all users     |
 |`certificate` |	| the CA bundle to load for the SSL verification with self-signed certificates	|
+
+## Git Configuration Flow
 
 <img
   src={require('./git-config-flow.png').default}

@@ -1,6 +1,6 @@
 ---
 sidebar_label: Upgrading Epinio
-sidebar_position: 8
+sidebar_position: 5
 title: Upgrading Epinio
 description: Breaking changes and migration steps when upgrading Epinio between versions.
 keywords: [epinio, upgrade, migration, breaking changes, versions]
