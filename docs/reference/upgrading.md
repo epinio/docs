@@ -21,10 +21,12 @@ practices and recommendations for optimizing Epinio performance.
 
 ## 1.12 and 1.13.X to 1.13.10
 
-Epinio **1.13.10** replaces MinIO with SeaweedFS as the default S3-compatible
-storage solution. If you do not have a custom configuration for your S3 storage,
-you can uninstall MinIO and SeaweedFS will be installed by default with the Epinio
-Helm chart. See the [SeaweedFS documentation](../how-to/operator/cluster-config/seaweedfs.md).
+Epinio **1.13.10** replaces MinIO with SeaweedFS as the default S3-compatible storage solution.
+
+- **External S3 users**: No action needed. Remove any `minio.*` Helm values and upgrade.
+- **Internal MinIO users**: Back up your source blobs before upgrading and restore them to SeaweedFS after. MinIO resources are removed automatically during the Helm upgrade. See the [MinIO to SeaweedFS migration guide](../how-to/operator/networking/migrate_minio_to_seaweedfs) for step-by-step instructions.
+
+See the [SeaweedFS how-to](../how-to/operator/cluster-config/seaweedfs) for information on accessing the internal S3 service.
 
 User permissions changed in **1.13.10**. While fully backwards compatible,
 additional user-right actions and default installed roles were added. See the
