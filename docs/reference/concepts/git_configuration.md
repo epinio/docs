@@ -14,9 +14,17 @@ doc-topic: [epinio, reference, concepts, git-configuration]
 Configurations enable cloning of private repositories, disabling of SSL verification, and/or
 extending verification through a custom bundle of certificates.
 
-For GitHub and Gitlab instances a user can create the git config with the username and password/token, along with skip ssl verification, and the global configuration flag. A global configuration means anyone with access to create applications can use it. If its not flagged as global, the user who created it and system admins are the only ones that can see the configuration. 
+For GitHub and GitLab instances you create a git configuration with a username and
+password/token, and optionally the skip-SSL-verification and global flags. A **global**
+configuration can be used by any user; a non-global one is visible and usable only to the user who
+created it and to administrators. Only administrators may create a global configuration.
 
-If Git, GitHub Enterprise, and GitLab Enterprise options are selected the same fields are available, but in addition to that there is the git host option where the user can specify the git host url. This is useful for self-hosted git instances.
+For the `git`, GitHub Enterprise (Cloud and Self-Hosted), and GitLab Enterprise types the same
+fields are available plus a **git host** field, where you enter the instance URL.
+
+You attach a configuration to an application by **selecting it** when you set the application's Git
+source. Epinio does not implicitly match a configuration to a repository URL; the selection is
+explicit, and a private repository will fail to clone if no usable configuration is selected.
 
 
 ## Github/Gitlab Specialities
@@ -30,9 +38,19 @@ When using a PAT it has to be set as the password, and the user can be set to an
 For reference, it is useful to set it to the username used to generate the token.
 :::
 
-## Github Enterprise Cloud vs Github Enterprise Server
+## Enterprise and self-hosted instances
 
-When trying to add a Git Config for a Github Enterprise Cloud instance, you can use the GitHub Enterpise Cloud type, which allows you to enter a custom URL needed to pull from the Enterprise Organization. The GitHub Enterprise Server type is used for self-hosted instances of GitHub Enterprise. You can enter the host URL and Epinio will append the necessary routes to access the Github API on the self-hosted instance. 
+The enterprise and generic `git` types take a **git host** URL in addition to the credential
+fields:
+
+- **GitHub Enterprise Self-Hosted** (`github_enterprise_self_hosted`): enter the instance host URL
+  (for example `https://github.mycorp.com`). Epinio appends the GitHub Enterprise Server REST path
+  (`/api/v3`).
+- **GitHub Enterprise Cloud** (`github_enterprise_cloud`): enter the API host URL for your
+  Enterprise Cloud instance, for example `https://api.github.com`, or `https://api.<subdomain>.ghe.com`
+  for a data-residency instance. Epinio uses it as given.
+- **GitLab Enterprise** (`gitlab_enterprise`) and generic **Git** (`git`): enter the instance host
+  URL. GitLab is accessed under `/api/v4`.
 
 ## Detailed Specification
 
@@ -44,12 +62,22 @@ The fields are:
 |---		   |---	    |---										|
 |`id`          |yes     | the name of the secret                                |
 |`url`		   |	    | the host of the git instance							|
-|`provider`	   |yes	    | one of `github`, `gitlab`, `git`, `github_enterprise`, `gitlab_enterprise`	|
+|`provider`	   |yes	    | one of `github`, `gitlab`, `git`, `github_enterprise_cloud`, `github_enterprise_self_hosted`, `gitlab_enterprise`	|
 |`username`	   |	    | used during the Basic Authentication						|
 |`password`	   |	    | used during the Basic Authentication						|
 |`skipSSL`	   |	    | used to skip the SSL verification						|
 | `global`     |       | used to make the configuration available to all users     |
 |`certificate` |	| the CA bundle to load for the SSL verification with self-signed certificates	|
+
+Notes:
+
+- `url` is optional for the SaaS `github` and `gitlab` providers (the host is implied). It is
+  required for `git`, `github_enterprise_cloud`, `github_enterprise_self_hosted`, and
+  `gitlab_enterprise`.
+- `global` may only be set by an administrator.
+- `password` and `certificate` are **write-only**: they are never returned when a configuration is
+  read. There is no update endpoint, editing a configuration means deleting and recreating it, so
+  the password and certificate must be provided again each time.
 
 ## Git Configuration Flow
 

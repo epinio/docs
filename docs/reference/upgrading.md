@@ -13,6 +13,29 @@ Review the breaking changes and migration steps for your target version before
 upgrading. For the full list of releases and their release notes, see
 [versions](../versions.md).
 
+## 1.13.X and 1.14.0 to 1.14.1
+
+Git configuration handling changed. Selecting a configuration when deploying from a **private**
+repository is now **explicit**: Epinio no longer implicitly matches a stored configuration to a
+repository URL at push time.
+
+- **New private-repo pushes must select a git configuration.** In the dashboard, choose one in the
+  application's Git source. From the CLI or automation, the git origin must carry
+  `origin.git.gitconfig`; a push that sends no configuration clones unauthenticated and fails with
+  `authentication required`.
+- **Existing applications keep working.** On redeploy, a compatibility fallback still matches
+  configuration-less apps to a stored configuration by repository URL, so they continue to clone as
+  before.
+- **Credentials are bound to their instance host.** A configuration's credentials are only sent to
+  the host it is scoped to; selecting a configuration whose host does not match the repository is
+  rejected.
+- **Global configurations are administrator-only to create.** Non-admin users can use global
+  configurations but cannot create them.
+
+This release also adds a `spec.origin.git.gitconfig` field to the `apps` CRD. If you install CRDs
+from the Helm chart's `crds/` directory out of band, apply the updated CRD on upgrade so the field
+is not pruned. See [Git Configuration](./concepts/git_configuration.md).
+
 ## 1.13.X to 1.14.0
 
 There are no breaking changes in this release. Documentation around performance was
