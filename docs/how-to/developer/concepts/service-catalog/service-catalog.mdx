@@ -62,7 +62,79 @@ epinio service catalog myservice
 </TabItem>
 </Tabs>
 
-### Service Catalog CRUD Coming Soon!
+## Create a Catalog Service
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Click **Create** on the Catalog page to open the creation modal. Here you can provide a name and descriptions used to identify the service.
+
+You can also provide an image url that will be used as the icon when displaying the service in the catalog.
+
+You will need to provide the name of the chart to install and can optionally provide the version of the chart and/or the version of the app packaged by the chart. Next, provide the information relating to the Helm repo where the chart lives.
+
+You can also add configurable settings that can be provided when provisioning the service.
+
+Under the Advanced Options you can tell Epinio what kinds of Kubernetes Secrets are compatible with the service.
+
+<img
+  src={require('./catalog-service-create-modal.png').default}
+  alt="Create Catalog Service Modal"
+  width="800"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+CLI CRUD Coming Soon!
+
+</TabItem>
+</Tabs>
+
+## Edit a Catalog Service
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Select **Edit** from the action menu from the card of the catalog service you wish to edit. You can also open the edit modal from the details page. Use caution when editing catalog services when there are associated service instances.
+
+<img
+  src={require('./catalog-service-edit-modal.png').default}
+  alt="Edit Catalog Service Modal"
+  width="800"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+CLI CRUD Coming Soon!
+
+</TabItem>
+</Tabs>
+
+## Delete a Catalog Service
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Open the action menu for the catalog service and select **Delete**. Confirm the deletion. This can also be done from the details page
+
+<img
+  src={require('./catalog-service-delete-modal.png').default}
+  alt="Delete Catalog Service Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+CLI CRUD Coming Soon
+
+</TabItem>
+</Tabs>
 
 ## Additional CLI Commands
 For additional documentation on the CLI commands above, along with additional commands, see the [epinio service catalog](../../../../reference/cli/service/epinio_service_catalog.md) CLI reference.

@@ -117,4 +117,4 @@ stringData:
     -----END CERTIFICATE-----
 ```
 
-For more examples check the [How-to](../../how-to/developer/concepts/git_configuration.md).
+For more examples check the [How-to](../../how-to/developer/concepts/git-configs).
