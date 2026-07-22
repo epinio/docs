@@ -19,10 +19,11 @@ epinio app watch NAME [flags]
 
 Watches the source directory for changes and syncs them into the running pod.
 
-On the first run (no local state file) a full buildpack push is performed and
-the running deployment is patched with a supervisor wrapper. On subsequent runs
-only changed files or the rebuilt binary are uploaded via the Epinio API,
-without going through the buildpack pipeline.
+On startup a full buildpack push is performed and the running deployment is
+patched with a supervisor wrapper. This happens on every `app watch` run so the
+supervisor is always re-established, even after a plain `epinio app push`. While
+watching, only changed files or the rebuilt binary are uploaded via the Epinio
+API, without going through the buildpack pipeline.
 
 Configure binary mode (compiled languages) or override sync paths by placing
 an `.epinio-sync.yaml` file in the source directory.
