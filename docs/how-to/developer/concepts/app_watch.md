@@ -9,6 +9,11 @@ doc-topic: [epinio, how-to, use-develop, app-watch]
 doc-persona: [epinio-developer]
 ---
 
+:::caution Experimental
+app watch is experimental: it has been validate on a limited set of frameworks
+and builder iamges. Behavior on other app types and binary layouts is not yet
+guaranteed. 
+:::
 `epinio app watch` shortens the edit-compile-test loop by syncing local changes
 directly into a running pod, skipping the full buildpack pipeline on every save.
 
@@ -16,13 +21,16 @@ directly into a running pod, skipping the full buildpack pipeline on every save.
 
 `app watch` has two phases:
 
-**Startup (first run)**
+**Startup (every run)**
 
-On the first `app watch` run (no local `.epinio-patch-state` file), Epinio
-patches the app's existing source blob, runs buildpack staging, and patches the
-running deployment to inject a supervisor wrapper as PID 1. The supervisor
-starts your app and relaunches it when sync delivers an updated binary or
-source files.
+Each time you start `app watch`, Epinio patches the app's existing source
+blob, runs buildpack staging, and patches the running deployment to inject a
+supervisor wrapper as PID 1. The supervisor starts your app and relaunches it
+when sync delivers an updated binary or source files.
+
+The startup push runs on every invocation, not just the first. This is
+deliberate: a normal `epinio app push` (or any redeploy) recreates the pod
+without the supervisor, so re-running `app watch` always re-establishes it.
 
 **Sync (subsequent runs)**
 
@@ -56,9 +64,9 @@ epinio app push my-app
 epinio app watch my-app
 ```
 
-Run `epinio app push` once before the first `app watch` session. On the first
-watch run, Epinio restages the app and installs the supervisor; after that,
-save any source file and the terminal will show sync progress:
+Run `epinio app push` once so the app exists. When you start `app watch`,
+Epinio restages the app and installs the supervisor; after that, save any
+source file and the terminal will show sync progress:
 
 ```text
 Synced in 312ms (via API)
@@ -81,8 +89,8 @@ On every save, `app watch` runs `build_cmd`, uploads the new binary into the
 pod, and the supervisor restarts the app automatically. No extra tooling
 required.
 
-Delete `.epinio-patch-state` and re-run `app watch` after `go.mod` changes
-to trigger a fresh buildpack run that re-resolves dependencies.
+After `go.mod` changes, restart `app watch`: the startup push re-runs the
+buildpack and re-resolves dependencies before watching resumes.
 
 ### Node.js
 
@@ -176,18 +184,13 @@ ignore list makes both change detection and uploads faster.
 
 ## State file
 
-`app watch` writes `.epinio-patch-state` in the source directory after a
-successful startup push. This file records the file hashes used to detect
-changes on the next run.
+`app watch` writes `.epinio-patch-state` in the source directory during a
+watch session. This file records the file hashes used to detect changes
+between poll cycles.
 
-If this file is present, `app watch` skips the startup push and goes straight
-into sync mode. To force a fresh startup push (for example, after a dependency
-change), delete the state file:
-
-```console
-rm .epinio-patch-state
-epinio app watch my-app
-```
+The state file is cleared automatically at the start of every `app watch`
+run, so each session begins with a fresh startup push that reinstalls the
+supervisor. You do not need to delete it by hand.
 
 While an app is under `watch`, its deployment keeps the supervisor wrapper and
 pinned image. Run a regular `epinio app push` or `epinio app restage` when you

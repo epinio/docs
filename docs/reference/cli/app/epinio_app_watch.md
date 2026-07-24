@@ -7,6 +7,13 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-app-watch]
 doc-persona: [epinio-developer]
 ---
+
+:::caution Experimental
+app watch is experimental: it has been validate on a limited set of frameworks
+and builder iamges. Behavior on other app types and binary layouts is not yet
+guaranteed. 
+:::
+
 ## epinio app watch
 
 Watch a local directory and sync changes to the running application
@@ -19,10 +26,11 @@ epinio app watch NAME [flags]
 
 Watches the source directory for changes and syncs them into the running pod.
 
-On the first run (no local state file) a full buildpack push is performed and
-the running deployment is patched with a supervisor wrapper. On subsequent runs
-only changed files or the rebuilt binary are uploaded via the Epinio API,
-without going through the buildpack pipeline.
+On startup a full buildpack push is performed and the running deployment is
+patched with a supervisor wrapper. This happens on every `app watch` run so the
+supervisor is always re-established, even after a plain `epinio app push`. While
+watching, only changed files or the rebuilt binary are uploaded via the Epinio
+API, without going through the buildpack pipeline.
 
 Configure binary mode (compiled languages) or override sync paths by placing
 an `.epinio-sync.yaml` file in the source directory.

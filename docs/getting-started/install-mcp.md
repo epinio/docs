@@ -15,7 +15,7 @@ runs on your cluster and talks to the Epinio API on the agent's behalf. For the
 full tool list and the optional capabilities, see the
 [MCP server reference](../reference/mcp).
 
-:::caution Experimental
+:::caution Beta
 The MCP server is under active development and not yet stable. Tool names,
 capabilities, and install steps may change. It is not recommended for production
 use.
