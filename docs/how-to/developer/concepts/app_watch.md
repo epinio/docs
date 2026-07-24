@@ -9,6 +9,11 @@ doc-topic: [epinio, how-to, use-develop, app-watch]
 doc-persona: [epinio-developer]
 ---
 
+:::caution Experimental
+app watch is experimental: it has been validate on a limited set of frameworks
+and builder iamges. Behavior on other app types and binary layouts is not yet
+guaranteed. 
+:::
 `epinio app watch` shortens the edit-compile-test loop by syncing local changes
 directly into a running pod, skipping the full buildpack pipeline on every save.
 

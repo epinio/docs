@@ -7,6 +7,13 @@ doc-type: [reference]
 doc-topic: [epinio, reference, epinio-cli, epinio-app-watch]
 doc-persona: [epinio-developer]
 ---
+
+:::caution Experimental
+app watch is experimental: it has been validate on a limited set of frameworks
+and builder iamges. Behavior on other app types and binary layouts is not yet
+guaranteed. 
+:::
+
 ## epinio app watch
 
 Watch a local directory and sync changes to the running application
