@@ -86,4 +86,4 @@ Notes:
   alt="Git Configuration in Epinio"
 />
 
-For more examples check the [How-to](../../how-to/developer/concepts/git_configuration.md).
+For more examples check the [How-to](../../how-to/developer/concepts/git-configs).
