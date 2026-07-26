@@ -22,7 +22,10 @@ not yet recommended for production use.
 
 ## Prerequisites
 
-- A Kubernetes cluster with [Epinio](./install-epinio.md) installed.
+- A Kubernetes cluster with [Epinio](./install-epinio.md) **1.14.1 or later**
+  installed. The server relies on the builder-image, catalog-service, and
+  app-chart CRUD API and the source-retrieval endpoint added in 1.14.1, so it
+  will not work against earlier releases.
 - `kubectl` and the [`epinio` CLI](./install-cli.md) pointed at your cluster.
 - `make` and a Go toolchain, plus a clone of [epinio/mcp](https://github.com/epinio/mcp).
 

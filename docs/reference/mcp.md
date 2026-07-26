@@ -20,6 +20,12 @@ The MCP server is in beta. Tool names and options may still change, and it is
 not yet recommended for production use.
 :::
 
+:::info Requires Epinio 1.14.1 or later
+The server depends on the builder-image, catalog-service, and app-chart CRUD API
+and the source-retrieval endpoint, all introduced in Epinio 1.14.1. It will not
+work against earlier releases.
+:::
+
 To stand it up on your cluster, see [Install the MCP server](../getting-started/install-mcp).
 
 ## How it connects
