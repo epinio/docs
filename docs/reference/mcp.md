@@ -2,7 +2,7 @@
 sidebar_label: "MCP Server"
 sidebar_position: 4
 title: "Epinio MCP Server Reference"
-description: The Model Context Protocol server that exposes Epinio as tools for AI agents, and the capabilities it provides.
+description: The Model Context Protocol server that exposes Epinio as tools for AI agents, and the optional elevated tier.
 keywords: [epinio, mcp, model context protocol, ai, agent, tools, claude]
 doc-type: [reference]
 doc-persona: [epinio-developer, epinio-operator]
@@ -15,10 +15,9 @@ Epinio API as tools for AI agents such as Claude and other MCP-compatible client
 It translates MCP tool calls into Epinio REST API requests, so an agent can deploy
 and manage applications on your cluster through conversation.
 
-:::caution Experimental
-The MCP server is under active development and not yet stable. Tool names,
-capabilities, and install steps may change. It is not recommended for production
-use.
+:::caution Beta
+The MCP server is in beta. Tool names and options may still change, and it is
+not yet recommended for production use.
 :::
 
 To stand it up on your cluster, see [Install the MCP server](../getting-started/install-mcp).
@@ -30,7 +29,7 @@ agent and the Epinio REST API to the cluster:
 
 ```text
 AI Agent (Claude, etc.)
-    | MCP protocol (Streamable HTTP, /mcp endpoint)
+    | MCP protocol (Streamable HTTP, served at the server root)
 Epinio MCP Server
     | REST API (Basic Auth or OIDC, TLS)
 Epinio API Server
@@ -43,9 +42,13 @@ Authentication is per request: the agent passes an `Authorization` header
 Epinio. When no header is present, the server falls back to the credentials it was
 configured with (default `admin` / `password`).
 
-## Tools
+By default every tool wires **only** to the Epinio REST API, as the calling user.
+An optional [elevated tier](#elevated-tier) that reaches directly into Kubernetes
+is off unless explicitly enabled.
 
-The server exposes 44 tools, grouped below by the area of Epinio they act on.
+## Core tools
+
+These are always available and act purely through the Epinio API.
 
 ### Server and namespaces
 
@@ -73,6 +76,9 @@ The server exposes 44 tools, grouped below by the area of Epinio they act on.
 | `app_logs` | Fetch runtime or staging/build logs from an application. |
 | `get_app_manifest` | Inspect full app configuration (image, routes, env, settings). |
 | `clone_app` | Clone an existing app to a new name using its built image. |
+| `get_app_source` | Retrieve a deployed app's staging source (raw tarball or extracted files). |
+| `list_app_files` | List file paths and sizes in a deployed app's source (no file contents). |
+| `get_connection_info` | Return a ready-to-dial WebSocket URL for streaming an app's logs directly. |
 
 ### Environment variables
 
@@ -92,62 +98,77 @@ The server exposes 44 tools, grouped below by the area of Epinio they act on.
 | `bind_configuration` | Bind configurations to an app. |
 | `unbind_configuration` | Unbind a configuration from an app. |
 
-### Services
+### Services and catalog
 
 | Tool | Description |
 | --- | --- |
 | `list_services` | List service instances in a namespace. |
-| `list_catalog_services` | List available catalog services with their settings schemas. |
-| `show_catalog_service` | Fetch a single catalog service's full details and settings schema. |
-| `create_service` | Create a service from the catalog. |
+| `create_service` | Create a service instance from a catalog entry. |
 | `delete_service` | Delete a service instance. |
 | `bind_service` | Bind a service to an app. |
 | `unbind_service` | Unbind a service from an app. |
+| `list_catalog_services` | List catalog entries with their settings schemas. |
+| `show_catalog_service` | Fetch a single catalog entry's details and settings schema. |
+| `create_catalog_service` | Register a new catalog entry (service template). |
+| `update_catalog_service` | Update a catalog entry. |
+| `delete_catalog_service` | Delete a catalog entry. |
 
-### Charts and builders
+### App charts
 
 | Tool | Description |
 | --- | --- |
-| `list_appcharts` | List AppCharts registered on the cluster (valid values for `appchart`), with per-chart settings schemas. |
+| `list_appcharts` | List AppCharts registered on the cluster (valid values for `appchart`), with settings schemas. |
 | `show_appchart` | Fetch a single AppChart's description and settings schema. |
-| `list_builders` | List Cloud Native Buildpacks builder images usable with this cluster and the ecosystems each supports. |
-| `get_build_guidance` | Return guidance on deploying, appchart selection, builder selection, and build troubleshooting. |
+| `create_appchart` | Register a new AppChart. |
+| `update_appchart` | Update an AppChart. |
+| `delete_appchart` | Delete an AppChart. |
+
+### Builder images
+
+The BuilderImage registry is the cluster's list of builder images an app can
+stage with — the valid values for `push_app`'s `builder_image` parameter.
+
+| Tool | Description |
+| --- | --- |
+| `list_builder_images` | List registered builder images (the one marked default is used when none is given). |
+| `show_builder_image` | Fetch a single builder image. |
+| `create_builder_image` | Register a new builder image. |
+| `update_builder_image` | Update a builder image. |
+| `delete_builder_image` | Delete a builder image. |
+| `get_build_guidance` | Guidance on deploying, appchart selection, builder selection, and build troubleshooting. |
+
+## Elevated tier
+
+A small set of capabilities reach **directly into Kubernetes** rather than
+through the Epinio API — currently just workload **adoption**. They are **off by
+default** and enabled with the `EPINIO_MCP_ELEVATED` environment variable, which
+also requires the `standard-elevated` app chart's RBAC. See
+[Install the MCP server](../getting-started/install-mcp) for how to turn it on.
 
 ### Adopting existing workloads
 
 | Tool | Description |
 | --- | --- |
-| `adopt_app` | Bring an existing kubectl-managed Deployment into Epinio's view: label it, create an App CRD, and make it visible to `epinio app list/show/logs/exec`. |
+| `adopt_app` | Bring an existing kubectl-managed Deployment into Epinio's view: label it, create an App CRD, and make it visible to `epinio app list/show/logs`. |
 | `reconcile_app` | Sync an adopted app's CRD to observed reality (image URL, routes from Ingresses). Supports `dry_run`. |
 | `release_app` | Remove Epinio labels and the App CRD for an adopted app. The underlying Deployment keeps running. |
 
-### Capabilities and gated tools
+When adoption is enabled, the core destructive tools (`delete_app`,
+`restart_app`, `scale_app`, `update_app`, and configuration bind/unbind) refuse
+to act on adopted apps — use `kubectl` for their lifecycle, or `release_app` to
+convert back to a plain Kubernetes workload.
+
+### Capabilities
 
 | Tool | Description |
 | --- | --- |
-| `check_capabilities` | Report readiness of optional capabilities (such as `app_editing`) and what is missing. |
-| `enable_capability` | Fulfill a capability's satisfiable requirements (create service instances, bind configurations). |
-| `get_app_source` | Retrieve a deployed app's staging tarball via the S3 gateway. Gated by the `app_editing` capability. |
-| `list_app_files` | List file paths and sizes in a deployed app's source (no bytes returned). Gated by `app_editing`. |
-| `get_connection_info` | Return the URL and forwarded OIDC token a caller needs to connect directly to a capability's backing service (for example, Epinio's log WebSocket). |
+| `check_capabilities` | Report readiness of optional capabilities and what is missing. |
+| `enable_capability` | Fulfill a capability's satisfiable requirements. |
 
-## Optional capabilities (gated)
-
-Some tools require extra cluster infrastructure. They are gated behind named
-capabilities so the server reports readiness explicitly instead of failing
-silently. Call `check_capabilities` to see what is ready, and `enable_capability`
-to fulfill the pieces it can.
-
-| Capability | Gates | Requires |
+| Capability | Purpose | Requires |
 | --- | --- | --- |
-| `app_editing` | `get_app_source`, `list_app_files` | An `s3-gateway` catalog entry and S3 credentials available to the server, plus `get apps.application.epinio.io` RBAC on the server's pod. |
-| `log_streaming` | Advertises WebSocket reachability (environmental) | Ingress that preserves the `Upgrade` header and a reachable Epinio `/authtoken` endpoint. |
-| `self_adoption` | Internal housekeeping (no gated tools) | The server's own App CRD exists, is annotated `epinio.io/adopted=true`, and matches the running Deployment. |
-
-`enable_capability` can fulfill the user-scope pieces (service instance,
-configuration binding, self-adoption metadata, and writing S3 credentials into the
-server's own Secret). Cluster-admin items, such as catalog install and
-cross-namespace RBAC, are reported as `needs_admin`.
+| `self_adoption` | Completes the MCP's own adoption when installed via `kubectl apply` | The server's own App CRD exists, is annotated `epinio.io/adopted=true`, and matches the running Deployment. |
+| `log_streaming` | Reports WebSocket reachability for `get_connection_info` (diagnostic) | Ingress that preserves the `Upgrade` header and a reachable Epinio `/authtoken` endpoint. |
 
 ## Health probes
 
