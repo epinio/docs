@@ -55,7 +55,19 @@ Click **Create** on the Application Charts page to open the creation modal. Here
 
 <TabItem value="cli" label="CLI">
 
-CLI CRUD Coming Soon!
+Create an application chart:
+
+```console
+epinio app chart create --name mychart \
+    --short-description "My application chart" \
+    --description "A longer description of my application chart" \
+    --helm-repo https://charts.example.com \
+    --helm-chart https://charts.example.com/mychart-1.0.0.tgz \
+    --set replicaCount=2 \
+    --set image.tag=latest
+```
+
+The `--set` flag takes a `key=value` pair and can be repeated to provide multiple values.
 
 </TabItem>
 </Tabs>
@@ -77,7 +89,14 @@ Select **Edit** from the action menu for the row of the app chart you wish to ed
 
 <TabItem value="cli" label="CLI">
 
-CLI CRUD Coming Soon!
+Update an application chart. Flags you do not set leave the corresponding fields unchanged:
+
+```console
+epinio app chart update mychart \
+    --short-description "An updated description" \
+    --helm-chart https://charts.example.com/mychart-1.1.0.tgz \
+    --set replicaCount=3
+```
 
 </TabItem>
 </Tabs>
@@ -99,7 +118,11 @@ Open the action menu for the application chart and select **Delete**. Confirm th
 
 <TabItem value="cli" label="CLI">
 
-CLI CRUD Coming Soon
+Delete an application chart:
+
+```console
+epinio app chart delete mychart
+```
 
 </TabItem>
 </Tabs>

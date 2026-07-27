@@ -29,7 +29,17 @@ To view all available builder images, navigate to the **Builder Images** page un
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-CLI CRUD Coming Soon!
+List all known builder images:
+
+```console
+epinio buildimage list
+```
+
+Show the details of a single builder image:
+
+```console
+epinio buildimage show myimage
+```
 
 </TabItem>
 </Tabs>
@@ -51,7 +61,14 @@ Click **Create** on the Builder Images page to open the creation modal. Here you
 
 <TabItem value="cli" label="CLI">
 
-CLI CRUD Coming Soon!
+Create a builder image. Both `--name` and `--image` are required:
+
+```console
+epinio buildimage create --name myimage \
+    --image paketobuildpacks/builder-jammy-full:latest \
+    --short-description "My builder image" \
+    --description "A longer description of my builder image"
+```
 
 </TabItem>
 </Tabs>
@@ -73,7 +90,13 @@ Select **Edit** from the action menu for the row of the builder image you wish t
 
 <TabItem value="cli" label="CLI">
 
-CLI CRUD Coming Soon!
+Update a builder image. Flags you do not set leave the corresponding fields unchanged:
+
+```console
+epinio buildimage update myimage \
+    --image paketobuildpacks/builder-jammy-full:0.4.0 \
+    --short-description "An updated description"
+```
 
 </TabItem>
 </Tabs>
@@ -95,11 +118,15 @@ Open the action menu for the builder image and select **Delete**. Confirm the de
 
 <TabItem value="cli" label="CLI">
 
-CLI CRUD Coming Soon
+Delete a builder image:
+
+```console
+epinio buildimage delete myimage
+```
 
 </TabItem>
 </Tabs>
 
 
 ## Additional CLI Commands
-CLI CRUD Coming Soon
+For additional documentation on the CLI commands above, along with additional commands, see the [epinio buildimage](../../../../reference/cli/buildimage/epinio_buildimage.md) CLI reference.

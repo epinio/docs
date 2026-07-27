@@ -87,7 +87,30 @@ Under the Advanced Options you can tell Epinio what kinds of Kubernetes Secrets 
 
 <TabItem value="cli" label="CLI">
 
-CLI CRUD Coming Soon!
+Create a catalog service. Both `--name` and `--chart` are required:
+
+```console
+epinio service catalog create --name mysql \
+    --chart mysql \
+    --chart-version 9.4.1 \
+    --app-version 8.0.30 \
+    --helm-repo-name bitnami \
+    --helm-repo-url https://charts.bitnami.com/bitnami \
+    --short-description "MySQL database" \
+    --description "A MySQL database provisioned from the Bitnami chart" \
+    --service-icon https://example.com/mysql.png \
+    --secret-types "mysql,database"
+```
+
+Use `--values-file` to pass a YAML file with the settings that can be configured when provisioning the service:
+
+```console
+epinio service catalog create --name mysql --chart mysql \
+    --helm-repo-url https://charts.bitnami.com/bitnami \
+    --values-file ./mysql-values.yaml
+```
+
+If the Helm repository requires credentials, reference the secret holding them with `--helm-repo-secret`.
 
 </TabItem>
 </Tabs>
@@ -109,7 +132,13 @@ Select **Edit** from the action menu from the card of the catalog service you wi
 
 <TabItem value="cli" label="CLI">
 
-CLI CRUD Coming Soon!
+Update a catalog service. Flags you do not set leave the corresponding fields unchanged:
+
+```console
+epinio service catalog update mysql \
+    --chart-version 9.5.0 \
+    --short-description "An updated description"
+```
 
 </TabItem>
 </Tabs>
@@ -131,7 +160,11 @@ Open the action menu for the catalog service and select **Delete**. Confirm the 
 
 <TabItem value="cli" label="CLI">
 
-CLI CRUD Coming Soon
+Delete a catalog service:
+
+```console
+epinio service catalog delete mysql
+```
 
 </TabItem>
 </Tabs>
