@@ -32,9 +32,28 @@ repository URL at push time.
 - **Global configurations are administrator-only to create.** Non-admin users can use global
   configurations but cannot create them.
 
-This release also adds a `spec.origin.git.gitconfig` field to the `apps` CRD. If you install CRDs
-from the Helm chart's `crds/` directory out of band, apply the updated CRD on upgrade so the field
-is not pruned. See [Git Configuration](./concepts/git_configuration.md).
+This release also adds a new `BuilderImage` CRD and a `spec.origin.git.gitconfig` field on the
+`apps` CRD. Helm never upgrades the contents of a chart's `crds/` directory on `helm upgrade`, so
+the chart now runs a `pre-install`/`pre-upgrade` hook Job that applies the CRDs with `kubectl` and
+waits for them to be established before the rest of the release. No manual `kubectl apply` is
+required. See [Git Configuration](./concepts/git_configuration.md).
+
+The upgrade blocks on this hook and fails if the Job cannot run, so make sure it can. The Job pulls
+the `kubectl` image (`image.kubectl.*`; mirror it first on air-gapped or private-registry clusters),
+relies on the cluster-scoped RBAC the chart creates for it to manage `CustomResourceDefinitions`,
+and runs with no custom `securityContext` (a `restricted` Pod Security label on the Epinio namespace
+can reject it). If an upgrade hangs or rolls back, inspect the `epinio-crd-upgrade-<release>` Job and
+its logs in the Epinio namespace. If you instead manage CRDs out of band, apply the updated CRDs
+yourself on upgrade so the new fields are not pruned.
+
+App Charts, Builder Images, and Catalog Services are now manageable through the API, which adds new
+authorization actions. The change is backward compatible: existing roles keep working, and read
+access to the new resources comes with `app_read` (which now implies `chart_read`). If you use
+custom roles, add `builderimage_read`/`builderimage_write` to manage Builder Images and `chart_write`
+to create, update, or delete App Charts. Creating, updating, or deleting Catalog Services is now
+covered by the existing `service_write` right, so anyone granted `service_write` can now manage the
+shared service catalog as well. See the
+[authorization reference](./security/authorization.md#actions).
 
 ## 1.13.X to 1.14.0
 
