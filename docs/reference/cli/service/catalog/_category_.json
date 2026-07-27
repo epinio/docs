@@ -1,0 +1,8 @@
+{
+  "label": "epinio service catalog",
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "reference/cli/service/catalog/epinio_service_catalog"
+  }
+}
