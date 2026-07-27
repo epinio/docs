@@ -40,6 +40,23 @@ If everything worked correctly, you can see your Service in the Epinio `service-
 epinio service catalog
 ```
 
+:::tip
+
+Instead of applying the custom resource with `kubectl`, you can create the catalog service directly with Epinio:
+
+```console
+epinio service catalog create --name mysql-custom \
+    --chart mysql \
+    --helm-repo-name bitnami \
+    --helm-repo-url https://charts.bitnami.com/bitnami \
+    --short-description "MySQL database"
+```
+
+The same can be done from the **Catalog** page in the web UI.
+See the [service catalog how-to](../../developer/concepts/service-catalog/service-catalog.mdx) for details.
+
+:::
+
 ## Adding an Image to the service
 
 The consumers of the API (that is, the web UI of Epinio) can show an icon when listing the available services.
