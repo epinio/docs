@@ -97,6 +97,18 @@ You can then push your application to Epinio and use your image with the `--buil
 epinio push -n myapp -p app_directory --builder-image myorg/epicustombuilder:latest
 ```
 
+Alternatively, register the image with Epinio so it's offered to your developers as a choice when
+they create an application:
+
+```console
+epinio buildimage create --name epicustombuilder \
+    --image myorg/epicustombuilder:latest \
+    --short-description "Custom builder with Python support"
+```
+
+The same can be done from the **Builder Images** page in the web UI.
+See the [builder images how-to](../../developer/concepts/builder-images/builder-images.mdx) for details.
+
 ## More examples
 
 You can find a more complete example on how to build and deploy a custom builder at

@@ -20,6 +20,7 @@ epinio gitconfig create ID URL [flags]
 ```
       --cert-file string      path to file holding supporting certificates
       --git-provider string   Git provider code [git|github|github_enterprise|gitlab|gitlab_enterprise] (default "git")
+      --global                make the configuration available to all users
   -h, --help                  help for create
       --password string       password for logging into the host
       --repository string     specific repository
