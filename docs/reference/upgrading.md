@@ -47,12 +47,18 @@ its logs in the Epinio namespace. If you instead manage CRDs out of band, apply 
 yourself on upgrade so the new fields are not pruned.
 
 App Charts, Builder Images, and Catalog Services are now manageable through the API, which adds new
-authorization actions. The change is backward compatible: existing roles keep working, and read
-access to the new resources comes with `app_read` (which now implies `chart_read`). If you use
-custom roles, add `builderimage_read`/`builderimage_write` to manage Builder Images and `chart_write`
-to create, update, or delete App Charts. Creating, updating, or deleting Catalog Services is now
-covered by the existing `service_write` right, so anyone granted `service_write` can now manage the
-shared service catalog as well. See the
+authorization actions. The shipped default `user` role and the built-in roles (`view_only`,
+`application_developer`, `application_manager`, `system_manager`) already include `builderimage_read`,
+so a default installation picks it up automatically on upgrade.
+
+If you use **custom roles**, add `builderimage_read` to them. It is required, not optional: it is not
+implied by `app_read`, and the dashboard lists builder images both on the application create/deploy
+screen and on the Builder Images page. Without it those views return `403 Forbidden`, so affected
+users cannot deploy an application from the dashboard. Add the write actions only where users should
+manage these resources: `builderimage_write` for Builder Images and `chart_write` to create, update,
+or delete App Charts (`chart_read` is already implied by `app_read`). Creating, updating, or deleting
+Catalog Services is now covered by the existing `service_write` right, so anyone granted
+`service_write` can now manage the shared service catalog as well. See the
 [authorization reference](./security/authorization.md#actions).
 
 ## 1.13.X to 1.14.0
