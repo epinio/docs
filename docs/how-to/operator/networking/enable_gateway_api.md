@@ -1,3 +1,14 @@
+---
+sidebar_label: Gateway API
+sidebar_position: 1
+title: Epinio with Gateway API
+description: How to set up and use the Gateway API with Epinio
+keywords: [epinio, gateway, api]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, gateway-api]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
 # Epinio with Gateway API
 
 Gateway API is now supported by Epinio as an alternative to Ingress that also coincides with the EOL of Ingress NGINX.  If you are asking yourself why you should make the switch, we will refer you to official Kubernetes documentation on [Reasons to Switch to Gateway API](https://gateway-api.sigs.k8s.io/guides/getting-started/migrating-from-ingress/#reasons-to-switch-to-gateway-api).
