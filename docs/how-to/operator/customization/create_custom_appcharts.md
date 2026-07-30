@@ -163,6 +163,22 @@ You can also see the details of the chart in Epinio:
 epinio app chart show fluentd
 ```
 
+:::tip
+
+Instead of applying the custom resource with `kubectl`, you can register the chart directly with Epinio:
+
+```console
+epinio app chart create --name fluentd \
+    --short-description "Fluentd filterable standard deployment" \
+    --description "Epinio standard support chart extended for fluentd filtering" \
+    --helm-chart https://mydomain.org/epinio-application-fluentd.tgz
+```
+
+The same can be done from the **Application Charts** page in the web UI.
+See the [app charts how-to](../../developer/concepts/app-charts/app-charts.mdx) for details.
+
+:::
+
 ### User-settable configuration values
 
 To expose the user-settable configuration value `foo` the created application chart has to look for this variable in the `.Values.userConfig` map.

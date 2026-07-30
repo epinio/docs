@@ -28,6 +28,7 @@ epinio server [flags]
       --disable-tracking                      (DISABLE_TRACKING) Disable tracking of the running Epinio and Kubernetes versions
   -h, --help                                  help for server
       --ingress-class-name string             (INGRESS_CLASS_NAME) Name of the ingress class to use for apps. Leave empty to add no ingressClassName to the ingress.
+      --gateway-class-name string             (GATEWAY_CLASS_NAME) Name of the gateway class to use for apps. Leave empty to add no gatewayClassName to the gateway.
       --kube-api-burst int                    (KUBE_API_BURST) Maximum burst for throttle of the Kubernetes client. (default 10)
       --kube-api-qps float32                  (KUBE_API_QPS) The QPS indicates the maximum QPS of the Kubernetes client. (default 5)
   -n, --namespace string                      (NAMESPACE) The namespace to use (default "epinio")

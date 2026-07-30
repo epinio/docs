@@ -1,6 +1,6 @@
 ---
 sidebar_label: Upgrading Epinio
-sidebar_position: 8
+sidebar_position: 5
 title: Upgrading Epinio
 description: Breaking changes and migration steps when upgrading Epinio between versions.
 keywords: [epinio, upgrade, migration, breaking changes, versions]
@@ -12,6 +12,54 @@ doc-topic: [epinio, reference, upgrade]
 Review the breaking changes and migration steps for your target version before
 upgrading. For the full list of releases and their release notes, see
 [versions](../versions.md).
+
+## 1.13.X and 1.14.0 to 1.14.1
+
+Git configuration handling changed. Selecting a configuration when deploying from a **private**
+repository is now **explicit**: Epinio no longer implicitly matches a stored configuration to a
+repository URL at push time.
+
+- **New private-repo pushes must select a git configuration.** In the dashboard, choose one in the
+  application's Git source. From the CLI or automation, the git origin must carry
+  `origin.git.gitconfig`; a push that sends no configuration clones unauthenticated and fails with
+  `authentication required`.
+- **Existing applications keep working.** On redeploy, a compatibility fallback still matches
+  configuration-less apps to a stored configuration by repository URL, so they continue to clone as
+  before.
+- **Credentials are bound to their instance host.** A configuration's credentials are only sent to
+  the host it is scoped to; selecting a configuration whose host does not match the repository is
+  rejected.
+- **Global configurations are administrator-only to create.** Non-admin users can use global
+  configurations but cannot create them.
+
+This release also adds a new `BuilderImage` CRD and a `spec.origin.git.gitconfig` field on the
+`apps` CRD. Helm never upgrades the contents of a chart's `crds/` directory on `helm upgrade`, so
+the chart now runs a `pre-install`/`pre-upgrade` hook Job that applies the CRDs with `kubectl` and
+waits for them to be established before the rest of the release. No manual `kubectl apply` is
+required. See [Git Configuration](./concepts/git_configuration.md).
+
+The upgrade blocks on this hook and fails if the Job cannot run, so make sure it can. The Job pulls
+the `kubectl` image (`image.kubectl.*`; mirror it first on air-gapped or private-registry clusters),
+relies on the cluster-scoped RBAC the chart creates for it to manage `CustomResourceDefinitions`,
+and runs with no custom `securityContext` (a `restricted` Pod Security label on the Epinio namespace
+can reject it). If an upgrade hangs or rolls back, inspect the `epinio-crd-upgrade-<release>` Job and
+its logs in the Epinio namespace. If you instead manage CRDs out of band, apply the updated CRDs
+yourself on upgrade so the new fields are not pruned.
+
+App Charts, Builder Images, and Catalog Services are now manageable through the API, which adds new
+authorization actions. The shipped default `user` role and the built-in roles (`view_only`,
+`application_developer`, `application_manager`, `system_manager`) already include `builderimage_read`,
+so a default installation picks it up automatically on upgrade.
+
+If you use **custom roles**, add `builderimage_read` to them. It is required, not optional: it is not
+implied by `app_read`, and the dashboard lists builder images both on the application create/deploy
+screen and on the Builder Images page. Without it those views return `403 Forbidden`, so affected
+users cannot deploy an application from the dashboard. Add the write actions only where users should
+manage these resources: `builderimage_write` for Builder Images and `chart_write` to create, update,
+or delete App Charts (`chart_read` is already implied by `app_read`). Creating, updating, or deleting
+Catalog Services is now covered by the existing `service_write` right, so anyone granted
+`service_write` can now manage the shared service catalog as well. See the
+[authorization reference](./security/authorization.md#actions).
 
 ## 1.13.X to 1.14.0
 

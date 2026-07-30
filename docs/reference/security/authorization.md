@@ -11,7 +11,7 @@ doc-topic: [epinio, reference, security, authorization]
 Since version **1.11.0** Epinio is shipped with a new authorization layer with two default roles: **admin** and **user**.
 Roles can be "namescoped", and they can be also customized with different permissions.
 
-A user with the admin role will have the permission to perform any operation. A standard user will have only read permissions, but also has the permissions to create namespaces. When a user creates a namespace, they will automatically have the admin permission for it.
+A user with the admin role will have the permission to perform any operation. A standard user has read access across resources and can create namespaces (automatically gaining admin permission on namespaces they create). As of 1.14.1 the default `user` role also grants builder-image management; see the role definition below.
 
 By default, after the installation two users are available: `admin` and `epinio`, both with the password `password`. The operator can control the creation of those users through the `api.users` key in [values.yaml](https://github.com/epinio/helm-charts/blob/main/chart/epinio/values.yaml).
 In a production setup, the default `api.users` value needs to be overridden.
@@ -97,11 +97,14 @@ data:
   name: "Epinio User Role"
   default: "true"
   actions: |
-    namespace
+    namespace_write
     app_read
     configuration_read
     service_read
     gitconfig_read
+    export_registries_read
+    builderimage_read
+    builderimage_write
 ```
 
 ### Fields
@@ -129,7 +132,7 @@ These actions enable operations on Namespace commands and resources.
 
 ### App
 
-These actions enable operations on App commands and resources. They also enable commands related to  AppCharts (`epinio app chart`) and application environment variables.
+These actions enable operations on App commands and resources, plus application environment variables. Read access to AppCharts comes bundled here (`app_read` depends on `chart_read`); AppChart *management* has its own actions, see [Chart](#chart) below.
 
 | Action ID             | Description 
 |-----------------------|-------------
@@ -153,6 +156,26 @@ These actions enable operations on App commands and resources. They also enable 
 | `app_portforward`     | Open a tunnel with the `port-forward` command
 | `app`                 | All app permissions (including granular app actions, logs, exec and port-forward)
 
+### Chart
+
+These actions enable operations on AppChart commands and resources (`epinio app chart`). AppCharts are cluster-scoped, so these actions are only effective when granted by a global (non-namespaced) role.
+
+| Action ID      | Description
+|----------------|-------------
+| `chart_read`   | Read permissions (list, show, match). Granted automatically to any role with `app_read`.
+| `chart_write`  | Write permissions (create, update, delete)<br/>Depends on: `chart_read`
+| `chart`        | All the above<br/>Depends on: `chart_read`, `chart_write`
+
+### Builder Image
+
+These actions enable operations on BuilderImage commands and resources. BuilderImages are cluster-scoped, so these actions are only effective when granted by a global (non-namespaced) role.
+
+| Action ID            | Description
+|----------------------|-------------
+| `builderimage_read`  | Read permissions (list, show, match)
+| `builderimage_write` | Write permissions (create, update, delete)<br/>Depends on: `builderimage_read`
+| `builderimage`       | All the above<br/>Depends on: `builderimage_read`, `builderimage_write`
+
 ### Configuration
 
 These actions enable operations on Configuration commands and resources. Be aware that to bind a configuration you still need the `app_write` permission as well.
@@ -166,12 +189,12 @@ These actions enable operations on Configuration commands and resources. Be awar
 
 ### Service
 
-These actions enable operations on Service commands and resources. 
+These actions enable operations on Service commands and resources, covering both service instances (namespaced) and catalog services (cluster-scoped).
 
 | Action ID             | Description 
 |-----------------------|-------------
-| `service_read`        | Read permissions (list, show)
-| `service_write`       | Write permissions (create, delete, bind, unbind)<br/>Depends on: `service_read`
+| `service_read`        | Read permissions (list, show) for service instances and catalog services
+| `service_write`       | Write permissions for service instances (create, update, delete, bind, unbind) and catalog services (create, update, delete)<br/>Depends on: `service_read`
 | `service_portforward` | Open a tunnel with the `port-forward` command
 | `service`             | All the above<br/>Depends on: `service_read`, `service_write`, `service_portforward`
 
@@ -193,16 +216,25 @@ This action enable operations on Export Registries commands and resources. Only 
 |---------------------------|-------------
 | `export_registries_read`  | Read permissions
 
+### Resource scope: cluster-scoped vs namespaced
+
+Epinio resources fall into two scopes, and the scope decides which of a user's roles can grant an action:
+
+- **Namespaced** resources (applications, configurations, service instances, and deleting an existing namespace) live inside a namespace. Actions on them are evaluated against the roles the user holds *for that namespace*, whether a namespace-scoped role such as `admin:workspace` or a global role.
+- **Cluster-scoped** resources (app charts, builder images, git configs, catalog services, and creating a namespace) do not live in a namespace. Actions on them are evaluated against the user's **global** (non-namespaced) roles only.
+
+The practical consequence: a user who is admin of a single namespace (for example `admin:workspace`) can fully manage applications and delete that namespace, but cannot create an app chart, builder image, git config, catalog service, or a new namespace unless a global role grants it. The default `user` role is global, so everything it carries (including `namespace_write` and `builderimage_write`) applies cluster-wide.
+
 ## Built-in Role Examples
 
 The following roles are shipped as ConfigMaps and can be assigned directly to users:
 
 | Role ID | Intended scope |
 |---------|----------------|
-| `view_only` | Read-only access to application, configuration, service, gitconfig and export-registry resources |
-| `application_developer` | Create/update applications without application delete and without non-application write permissions |
-| `application_manager` | Full application CRUD and runtime operations, without non-application write permissions |
-| `system_manager` | No-delete role: application create/update/runtime operations plus read-only access on other resource types |
+| `view_only` | Read-only access across all resource types (applications, builder images, configurations, services, git configs, export registries) |
+| `application_developer` | Application create/update (no delete) and runtime, plus builder-image, configuration and service write. No app-chart write |
+| `application_manager` | Full application CRUD and runtime operations, plus builder-image, configuration and service write. No app-chart write |
+| `system_manager` | No-delete role: application create/update/runtime, plus builder-image, app-chart, configuration and service write |
 
 
 ## Assign Roles to User

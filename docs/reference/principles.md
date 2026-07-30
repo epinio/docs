@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Principles"
+sidebar_position: 7
 title: "Epinio design principles"
 description: The design principles Epinio is based upon.
 keywords: [epinio, kubernetes, design principles]

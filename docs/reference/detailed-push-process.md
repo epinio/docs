@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Epinio push process"
+sidebar_position: 6
 title: "The Epinio push process in detail"
 description: The Epinio push process in detail
 keywords: [epinio, kubernetes, push process]

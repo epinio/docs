@@ -41,6 +41,20 @@ If you have not installed the CLI yet, start with
 | [`epinio app port-forward`](./app/epinio_app_port-forward.md) | Forward a local port to an application |
 | [`epinio app env`](./app/env/epinio_app_env.md) | Manage application environment variables |
 | [`epinio app chart`](./app/chart/epinio_app_chart.md) | Inspect and select application charts |
+| [`epinio app chart create`](./app/chart/epinio_app_chart_create.md) | Create an application chart |
+| [`epinio app chart update`](./app/chart/epinio_app_chart_update.md) | Update an application chart |
+| [`epinio app chart delete`](./app/chart/epinio_app_chart_delete.md) | Delete an application chart |
+
+## Builder images
+
+| Command | What it does |
+| --- | --- |
+| [`epinio buildimage`](./buildimage/epinio_buildimage.md) | Top-level command for builder image management |
+| [`epinio buildimage list`](./buildimage/epinio_buildimage_list.md) | List builder images |
+| [`epinio buildimage show`](./buildimage/epinio_buildimage_show.md) | Describe a builder image |
+| [`epinio buildimage create`](./buildimage/epinio_buildimage_create.md) | Create a builder image |
+| [`epinio buildimage update`](./buildimage/epinio_buildimage_update.md) | Update a builder image |
+| [`epinio buildimage delete`](./buildimage/epinio_buildimage_delete.md) | Delete a builder image |
 
 ## Configurations
 
@@ -56,7 +70,10 @@ If you have not installed the CLI yet, start with
 | Command | What it does |
 | --- | --- |
 | [`epinio service`](./service/epinio_service.md) | Top-level command for service management |
-| [`epinio service catalog`](./service/epinio_service_catalog.md) | Browse the service catalog |
+| [`epinio service catalog`](./service/catalog/epinio_service_catalog.md) | Browse the service catalog |
+| [`epinio service catalog create`](./service/catalog/epinio_service_catalog_create.md) | Create a catalog service |
+| [`epinio service catalog update`](./service/catalog/epinio_service_catalog_update.md) | Update a catalog service |
+| [`epinio service catalog delete`](./service/catalog/epinio_service_catalog_delete.md) | Delete a catalog service |
 | [`epinio service create`](./service/epinio_service_create.md) | Provision a service from the catalog |
 | [`epinio service bind`](./service/epinio_service_bind.md) | Bind a service to an application |
 
