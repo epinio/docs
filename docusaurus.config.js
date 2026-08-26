@@ -1,8 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const {themes: prismThemes} = require('prism-react-renderer');
+const lightCodeTheme = prismThemes.github;
+const darkCodeTheme = prismThemes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -11,11 +12,19 @@ const config = {
   url: 'https://docs.epinio.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.png',
   organizationName: 'epinio', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
   trailingSlash: false,
+
+  markdown: {
+    // Legacy content (1700+ .md files written pre-MDX-v3) keeps parsing as
+    // plain CommonMark; only .mdx files opt in to MDX v3 parsing.
+    format: 'detect',
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   presets: [
     [
