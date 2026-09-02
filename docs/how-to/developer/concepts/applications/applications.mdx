@@ -209,6 +209,11 @@ To delete an application, open the action menu on the table row or details page 
   width="400"
 />
 
+The confirmation dialog offers two optional cleanups, both unchecked by default:
+
+- **Remove the application's container image from registry** deletes the built image from the container registry.
+- **Delete the application's persistent storage** deletes the PersistentVolumeClaims holding data the application wrote.
+
 </TabItem>
 <TabItem value="cli" label="CLI">
 
@@ -218,8 +223,42 @@ Delete an application:
 epinio app delete myapp
 ```
 
+Delete it along with its container image and its persistent data:
+
+```console
+epinio app delete myapp --delete-image --delete-pvc
+```
+
+Both flags default to false. See [`epinio app delete`](../../../../reference/cli/app/epinio_app_delete.md) for the full flag list.
+
 </TabItem>
 </Tabs>
+
+### What deletion removes
+
+Deleting an application always removes its workload, its configuration bindings, its
+stored sources, any staging jobs, and the staging PersistentVolumeClaims holding the
+build cache and the source blobs. Those staging volumes only ever hold data that Epinio
+rebuilds from object storage on the next stage, so nothing is lost by reclaiming them.
+
+Application data volumes are treated differently. An
+[application chart](../app-charts/app-charts.mdx) that provisions storage, for example a
+chart deploying a StatefulSet with `volumeClaimTemplates`, leaves behind
+PersistentVolumeClaims holding data your application wrote. Epinio preserves those by
+default, so deleting and recreating an application does not silently discard a database.
+Opt in with the checkbox or `--delete-pvc` when you do want that data gone.
+
+:::caution
+Deleting persistent storage cannot be undone. Whether the underlying PersistentVolume is
+removed with the claim, and whether its data is recoverable afterwards, depends on the
+reclaim policy of the StorageClass that provisioned it.
+:::
+
+Epinio selects an application's data volumes by the `app.kubernetes.io/name` label within
+the application's namespace. A volume your chart provisions without that label is not
+deleted, and has to be removed with `kubectl`. See
+[storage lifecycle](../../../../reference/concepts/storage.md#storage-lifecycle) for how
+this affects capacity planning.
 
 ## Additional Actions
 

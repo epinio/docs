@@ -20,6 +20,12 @@ The MCP server is in beta. Tool names and options may still change, and it is
 not yet recommended for production use.
 :::
 
+:::tip No cluster to install on?
+If you cannot run a server but you do have the `epinio` CLI, the
+[CLI agent skill](../reference/cli/agent-skill.md) gives an agent the same
+capabilities through CLI commands, with nothing to deploy.
+:::
+
 ## Prerequisites
 
 - A Kubernetes cluster with [Epinio](./install-epinio.md) **1.14.1 or later**

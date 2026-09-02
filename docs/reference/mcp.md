@@ -28,6 +28,12 @@ work against earlier releases.
 
 To stand it up on your cluster, see [Install the MCP server](../getting-started/install-mcp).
 
+:::tip Cannot run MCP?
+If your environment cannot host or reach an MCP server, the
+[CLI agent skill](./cli/agent-skill.md) maps every core tool on this page to an
+`epinio` command an agent can run in a terminal instead.
+:::
+
 ## How it connects
 
 The server sits between an AI agent and an Epinio instance, speaking MCP to the
