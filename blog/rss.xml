@@ -4,10 +4,47 @@
         <title>Epinio Blog</title>
         <link>https://docs.epinio.io/blog</link>
         <description>Epinio docs Blog</description>
-        <lastBuildDate>Mon, 27 Jul 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 03 Sep 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.14.2!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-14-2</link>
+            <guid>https://docs.epinio.io/blog/epinio-1-14-2</guid>
+            <pubDate>Thu, 03 Sep 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[This release includes the usual bug fixes, dependency updates, and maintenance, along with several new features.]]></description>
+            <content:encoded><![CDATA[<p>This release includes the usual bug fixes, dependency updates, and maintenance, along with several new features.</p>
+<p>We encourage you to review the documentation for <a href="https://docs.epinio.io/reference/upgrading" target="_blank" rel="noopener noreferrer" class="">upgrading Epinio</a>. In this release specifically we have made changes to CRDs and added new user permissions, so it is important to review the upgrade documentation before upgrading.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-features-and-improvements">New Features and Improvements<a href="https://docs.epinio.io/blog/epinio-1-14-2#new-features-and-improvements" class="hash-link" aria-label="Direct link to New Features and Improvements" title="Direct link to New Features and Improvements" translate="no">​</a></h2>
+<ul>
+<li class="">Docker builds are now supported. Select your build mode in the UI or CLI to build from a Dockerfile in your own sources. See <a href="https://docs.epinio.io/reference/concepts/build_modes" target="_blank" rel="noopener noreferrer" class="">Build modes</a> for what changes when you do, and <a href="https://docs.epinio.io/reference/customization/dockerfile-builds" target="_blank" rel="noopener noreferrer" class="">Dockerfile builds</a> for the chart keys operators configure.</li>
+<li class=""><a href="https://docs.epinio.io/how-to/developer/concepts/app-charts" target="_blank" rel="noopener noreferrer" class="">App chart</a> changes can now be applied to an already deployed application, from the UI or with <a href="https://docs.epinio.io/reference/cli/app/epinio_app_update" target="_blank" rel="noopener noreferrer" class=""><code>epinio app update --app-chart</code></a>.</li>
+<li class="">Build and deploy failures now provide more information and clearer indicators.</li>
+<li class="">You can now <a href="https://docs.epinio.io/how-to/developer/concepts/applications#what-deletion-removes" target="_blank" rel="noopener noreferrer" class="">delete an application's Persistent Volume Claims</a> from the UI or with <code>epinio app delete --delete-pvc</code>. Application data is still preserved by default.</li>
+<li class="">Several improvements to the Epinio UI around resource loading and searching.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://docs.epinio.io/blog/epinio-1-14-2#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class="">Allow <a href="https://docs.epinio.io/how-to/developer/concepts/applications#rebuild" target="_blank" rel="noopener noreferrer" class="">redeploy</a> of a locally sourced application.</li>
+<li class=""><a href="https://docs.epinio.io/how-to/developer/concepts/app_watch" target="_blank" rel="noopener noreferrer" class="">App Watch</a> now correctly waits for old pods to spin down and new pods to spin up before reporting a successful deployment.</li>
+<li class=""><a href="https://docs.epinio.io/reference/cli/app/epinio_app_watch" target="_blank" rel="noopener noreferrer" class=""><code>epinio app watch</code></a> supports all initial deployment types.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mcp">MCP<a href="https://docs.epinio.io/blog/epinio-1-14-2#mcp" class="hash-link" aria-label="Direct link to MCP" title="Direct link to MCP" translate="no">​</a></h2>
+<ul>
+<li class="">Updated the <a href="https://docs.epinio.io/reference/mcp" target="_blank" rel="noopener noreferrer" class="">Epinio MCP server</a> to feature parity with the CLI. See <a href="https://docs.epinio.io/getting-started/install-mcp" target="_blank" rel="noopener noreferrer" class="">Install the MCP Server</a> to stand it up on your cluster.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="documentation">Documentation<a href="https://docs.epinio.io/blog/epinio-1-14-2#documentation" class="hash-link" aria-label="Direct link to Documentation" title="Direct link to Documentation" translate="no">​</a></h2>
+<ul>
+<li class="">Added a downloadable <a href="https://docs.epinio.io/reference/cli/agent-skill" target="_blank" rel="noopener noreferrer" class="">agent skill for the CLI</a>, which teaches an AI assistant to drive Epinio through <code>epinio</code> commands in environments where the MCP server is unavailable.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="dependency-updates">Dependency updates<a href="https://docs.epinio.io/blog/epinio-1-14-2#dependency-updates" class="hash-link" aria-label="Direct link to Dependency updates" title="Direct link to Dependency updates" translate="no">​</a></h2>
+<p>Updated server, UI, and Helm chart dependencies.</p>
+<hr>
+<p>For the complete technical changelog, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.14.2" target="_blank" rel="noopener noreferrer" class="">1.14.2 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
         <item>
             <title><![CDATA[Announcing Epinio 1.14.1!]]></title>
             <link>https://docs.epinio.io/blog/epinio-1-14-1</link>
