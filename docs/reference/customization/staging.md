@@ -12,6 +12,12 @@ doc-topic: [epinio, reference, customization, staging]
 This customization interacts with the [customization of staging scripts](./staging-scripts.md).
 :::
 
+:::note
+This page covers the `buildpack` build mode, which is the default. Applications built
+from a Dockerfile do not use a builder image at all, see
+[Dockerfile builds](./dockerfile-builds.md).
+:::
+
 :::info Trigger-time overrides
 You can override staging workload configuration (resources, nodeSelector, tolerations, affinity, TTL, storage, and more) at build trigger-time via the staging API, without changing ConfigMap defaults. See [Staging configuration override at trigger time](../../how-to/operator/cluster-config/staging_config_override.md).
 :::
@@ -31,3 +37,9 @@ to the desired values before installation.
 To override the builder image on an individual basis use the option `--builder-image` of the [epinio push](../cli/epinio_push.md) command.
 
 Note also the related documentation about the [supported applications](../concepts/supported_applications.md).
+
+## See also
+
+- [Build modes](../concepts/build_modes.md)
+- [Dockerfile builds](./dockerfile-builds.md)
+- [Staging scripts](./staging-scripts.md)

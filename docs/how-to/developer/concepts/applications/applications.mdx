@@ -56,9 +56,16 @@ Provide your application source to Epinio. If you have an [application manifest]
 - GitHub
 - GitLab
 
-Selecting any of the Git options will allow you to select from your [git configurations](../git-configs/git-configs.mdx) so Epinio can access prive repos/projects.
+Selecting any of the Git options will allow you to select from your [git configurations](../git-configs/git-configs.mdx) so Epinio can access private repos/projects.
 
-After providing your source, select the [builder image](../builder-images/builder-images.mdx) you would like Epinio to use when building your application and the [application chart](../app-charts/app-charts.mdx) you would like Epinio to use when deploying it.
+After providing your source, choose a **Build Method**. Epinio offers this for every source type it builds; a container image is already built, so it has no build method.
+
+- **Buildpack (Paketo)** is the default. Epinio detects your language and framework and builds the image for you. Select the [builder image](../builder-images/builder-images.mdx) you would like it to use.
+- **Dockerfile** builds the image from a Dockerfile in your own sources. The **Builder Image** selector is replaced by a **Dockerfile Path** field, which defaults to `Dockerfile`. Set it to the path of your Dockerfile relative to the root of your sources, for example `docker/Dockerfile`.
+
+For which one to pick and what changes between them, see [build modes](../../../../reference/concepts/build_modes.md).
+
+Finally, select the [application chart](../app-charts/app-charts.mdx) you would like Epinio to use when deploying your application.
 
 <img
   src={require('./apps-create-modal.png').default}
@@ -105,6 +112,32 @@ Deploy an application from the current directory:
 epinio app push -n myapp
 ```
 
+This builds with buildpacks. To build from a Dockerfile in your sources instead:
+
+```console
+epinio app push -n myapp --build-mode dockerfile
+```
+
+`--dockerfile-path` selects a Dockerfile that is not at the root of your sources:
+
+```console
+epinio app push -n myapp --build-mode dockerfile --dockerfile-path docker/Dockerfile
+```
+
+The path is relative to the root of your sources. Absolute paths and `..` segments are
+rejected. When pushing from a local folder, Epinio checks that the file exists before
+uploading anything.
+
+Both settings can live in an [application manifest](../../../../reference/concepts/manifests.md)
+instead, so a push does not have to repeat them:
+
+```yaml
+name: myapp
+staging:
+  buildMode: dockerfile
+  dockerfilePath: docker/Dockerfile
+```
+
 </TabItem>
 </Tabs>
 
@@ -139,6 +172,8 @@ epinio app show myapp
 
 To edit an application, open the action menu on the table row or details page and select **Edit**. Changes to the application source will require a rebuild and redeployment.
 
+The **Build Method** and **Dockerfile Path** can be changed here as well, so an application can be moved between buildpack and Dockerfile builds without recreating it.
+
 <img
   src={require('./apps-edit-modal.png').default}
   alt="Edit Application Modal"
@@ -153,6 +188,10 @@ Update an application:
 ```console
 epinio app update myapp
 ```
+
+`epinio app update` cannot change an application's build method or Dockerfile path.
+Those are set at build time, so change them with `epinio app push`, either through
+the flags above or through the application's manifest.
 
 </TabItem>
 </Tabs>
@@ -309,3 +348,10 @@ epinio app export myapp
 ## Additional CLI Commands
 
 For additional documentation on the CLI commands above, along with additional commands, see the [epinio app](../../../../reference/cli/app/epinio_app.md) CLI reference.
+
+## See also
+
+- [Build modes](../../../../reference/concepts/build_modes.md), for choosing between buildpacks and a Dockerfile
+- [Application manifests](../../../../reference/concepts/manifests.md), for the full set of manifest keys
+- [Supported applications](../../../../reference/concepts/supported_applications.md)
+- [Builder images](../builder-images/builder-images.mdx) and [application charts](../app-charts/app-charts.mdx)
