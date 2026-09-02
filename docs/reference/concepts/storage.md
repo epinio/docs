@@ -97,6 +97,52 @@ Epinio uses several storage components that need to be considered when planning 
 - **Internal Registry**: Storage is provisioned within the cluster
 - **External Registry**: Storage is managed externally (Docker Hub, AWS ECR, etc.) - no cluster storage needed
 
+### 5. Application Data (PVC)
+
+**Purpose**: Stores data written by the application itself.
+
+**Storage Type**: Kubernetes PersistentVolumeClaim (PVC)
+
+**Provisioned by**: The [application chart](../../how-to/developer/concepts/app-charts/app-charts.mdx), not by Epinio directly. The default chart deploys a stateless Deployment and provisions nothing. A custom chart that deploys a StatefulSet with `volumeClaimTemplates` provisions one PVC per volume template per replica.
+
+**Calculation**:
+- Storage = `Number of stateful apps × Replicas × Volume size per replica`
+- Only applications using a storage-provisioning app chart contribute
+
+**Configuration Impact**: Unlike the staging volumes above, this storage is not reclaimed when the application is deleted unless the deletion explicitly asks for it. See [Storage lifecycle](#storage-lifecycle).
+
+## Storage Lifecycle
+
+Deleting an application reclaims most, but deliberately not all, of the storage it used.
+
+| Storage | Reclaimed when the application is deleted |
+|---|---|
+| Application source blobs (S3) | Always |
+| Application build cache (PVC) | Always |
+| Application source blobs (PVC) | Always |
+| Container image in the registry | Only with `--delete-image`, or the matching checkbox in the dashboard |
+| Application data (PVC) | Only with `--delete-pvc`, or the matching checkbox in the dashboard |
+
+The staging volumes are always removed because they hold nothing that Epinio cannot
+rebuild from object storage on the next stage. Application data volumes are preserved by
+default, so that deleting and recreating an application does not silently discard the
+data the application wrote.
+
+Two consequences for capacity planning:
+
+- Application data volumes accumulate. An instance where stateful applications are
+  deleted and recreated regularly will hold PVCs belonging to applications that no longer
+  exist. Audit them with `kubectl get pvc -n NAMESPACE`.
+- Reclaiming a PVC does not necessarily free the disk. If the StorageClass that
+  provisioned it uses a `Retain` reclaim policy, the PersistentVolume and its data stay in
+  place after the claim is gone, and have to be removed separately.
+
+Epinio selects an application's data volumes by the `app.kubernetes.io/name` label within
+the application's namespace. A volume provisioned by a chart without that label is never
+deleted by Epinio. See
+[deleting an application](../../how-to/developer/concepts/applications/applications.mdx#what-deletion-removes)
+for how to request each cleanup.
+
 ## Storage Calculation Formulas
 
 ### Total Cluster Storage (Internal Components Only)
@@ -261,7 +307,7 @@ Total Storage (GB) ≈ N apps × (0.05 + 1 + 1 + 0.5 × 3) = N apps × 3.55 GB
 
 1. **Old Source Blobs**: Implement lifecycle policies to delete old S3 objects
 2. **Old Images**: Configure registry garbage collection for unused images
-3. **Unused PVCs**: Clean up PVCs for deleted applications
+3. **Unused PVCs**: Clean up PVCs left behind by deleted applications, see [Storage lifecycle](#storage-lifecycle)
 4. **Build Cache**: Periodically clear build caches for applications that haven't been rebuilt recently
 
 ## Example Scenarios
