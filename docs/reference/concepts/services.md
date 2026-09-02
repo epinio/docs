@@ -1,7 +1,7 @@
 ---
 sidebar_label: "Services"
 sidebar_position: 4
-title: "services.md"
+title: "Services"
 description: Most real world applications work together with other services to store data, logs, to exchange messages with other systems etc.
 keywords: [epinio, ]
 doc-type: [reference]
