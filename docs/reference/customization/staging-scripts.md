@@ -14,7 +14,9 @@ This customization interacts with the
 [customization of buildpacks](./staging.md).
 :::
 
-Epinio uses staging scripts to interact with Paketo [Cloud Native Buildpacks](https://buildpacks.io/).
+Epinio uses staging scripts to interact with Paketo [Cloud Native Buildpacks](https://buildpacks.io/),
+and to run [Dockerfile builds](./dockerfile-builds.md) for applications whose build mode
+is `dockerfile`.
 
 Epinio automatically selects the set of staging scripts based on the name of the chosen builder
 image, and the images supported by a specific definition.
@@ -53,6 +55,8 @@ This ConfigMap is expected to have the following keys:
 |`download`	|Shell script to retrieve the app sources from the Epinio's S3 storage.<br/>Executed using the `downloadImage`	|
 |`unpackImage`	|Container image to run the `unpack` script with.			|
 |`unpack`	|Shell script to unpack the app sources into a directory tree.<br/>Executed using the `unpackImage`	|
+|`dockerfileBuildImage`	|Container image to run the `dockerfile-build` script with.		|
+|`dockerfile-build`	|Shell script to build the unpacked sources from a Dockerfile.<br/>Executed using the `dockerfileBuildImage`	|
 
 When `base` is specified it refers to a ConfigMap which contains all the keys listed after `base`.
 
@@ -108,6 +112,30 @@ a two environment variables:
 When present the `PREIMAGE` is used by `/cnb/lifecycle/creator` as a cache for layers,
 speeding up compilation.
 
+The `build` script is only used by applications whose build mode is `buildpack`. It is
+the default mode, so it is used unless an application selects otherwise.
+
+### Staging script API, Dockerfile build
+
+For applications whose build mode is `dockerfile`, the `dockerfile-build` script
+replaces `build` as the final staging step. It is executed using the
+`dockerfileBuildImage` instead of the chosen builder image, and receives the same
+environment as `build` plus one variable:
+
+|Name	  	|Content							|
+|---	  	|---								|
+|`APPIMAGE`	|url to save the new application image under			|
+|`DOCKERFILE_PATH`	|Path of the Dockerfile to build, relative to the app sources	|
+
+`DOCKERFILE_PATH` is set only in this mode, and is validated by the API server before
+the job is created. `PREIMAGE`, `USERID`, and `GROUPID` are present but unused by the
+default script, which relies on its own layer cache instead of a previous image.
+
+Unlike the `build` container, the `dockerfile-build` container runs without a
+`SecurityContext`, so `userID` and `groupID` do not apply to it and its `RUN` steps
+execute as root. See [Build modes](../concepts/build_modes.md) for what follows from
+that.
+
 ## Search
 
 Epinio determines the set of staging scripts to use by glob-matching the chosen builder image (name
@@ -120,3 +148,17 @@ specifications match everything and the last found is used as the fallback if an
 specification matched.
 
 If no specification matched, and no fallback was found, staging fails.
+
+The search is driven by the builder image, which a Dockerfile build does not have, so
+it does not apply to that mode. Dockerfile builds instead read the ConfigMap named
+`epinio-stage-scripts` directly, and take their `dockerfileBuildImage` and
+`dockerfile-build` script from it. That is the ConfigMap the chart installs as the
+fallback specification, so in a default installation the two coincide, but a
+Dockerfile build ignores any additional specification you add and fails if
+`epinio-stage-scripts` carries no `dockerfileBuildImage`.
+
+## See also
+
+- [Dockerfile builds](./dockerfile-builds.md)
+- [Buildpacks](./staging.md)
+- [Build modes](../concepts/build_modes.md)

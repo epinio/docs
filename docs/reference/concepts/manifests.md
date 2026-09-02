@@ -109,11 +109,27 @@ allowed. Mixing forms causes push to report an error.
     the nicer separators (`:`, `@`) are both used in urls, making extraction difficult due
     to the ambiguities coming out of that.
 
-The last option controls staging:
+The last options control staging:
 
   - `--builder-image` `IMAGE`
 
-    The name of the image to use for staging the application's sources.
+    The name of the Paketo builder image to use for staging the application's sources.
+    Only used by the `buildpack` build mode.
+
+  - `--build-mode` `MODE`
+
+    How Epinio builds the application image from its sources. One of `buildpack` or
+    `dockerfile`. Optional. Defaults to `buildpack`. An unknown value is rejected, it
+    does not fall back to the default.
+
+  - `--dockerfile-path` `PATH`
+
+    The path of the Dockerfile to build, relative to the root of the application
+    sources. Optional. Defaults to `Dockerfile`. Only used by the `dockerfile` build
+    mode. The path must stay inside the sources: absolute paths, `..` segments, and
+    characters outside letters, digits, `.`, `_`, `-`, and `/` are rejected.
+
+    See [Build modes](./build_modes.md) for how the two modes differ.
 
 ## Manifest format
 
@@ -139,6 +155,11 @@ The keys of this mapping specify the various elements of an application's config
     controlling the application's staging.
 
       - `builder`. See `--builder-image`. Optional.
+
+      - `buildMode`. See `--build-mode`. Optional. Defaults to `buildpack`.
+
+      - `dockerfilePath`. See `--dockerfile-path`. Optional. Defaults to `Dockerfile`.
+        Only used when `buildMode` is `dockerfile`.
 
   - `origin`. Optional. The value of this key is a mapping whose keys specify the origin
     of the application (sources), namely:
@@ -183,3 +204,17 @@ origin:
   path: /somewhere/over/there
 
 ```
+
+A manifest for an application built from a Dockerfile instead:
+
+```text
+name: zanzibar
+staging:
+  buildMode: dockerfile
+  dockerfilePath: docker/Dockerfile
+origin:
+  path: /somewhere/over/there
+```
+
+`epinio app manifest` writes the `staging` keys back out, so exporting a Dockerfile
+application and pushing the result reproduces the same build.
