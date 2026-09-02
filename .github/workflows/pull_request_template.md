@@ -9,3 +9,4 @@
   - [ ] Links to other docs are relative `.md`/`.mdx` links (no `docs.epinio.io` URLs).
   - [ ] A `## See also` section is present where related material exists.
   - [ ] `yarn build` passes with no broken links.
+  - [ ] The Agent Skill does not need updates
