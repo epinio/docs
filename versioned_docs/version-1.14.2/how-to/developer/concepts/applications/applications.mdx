@@ -1,0 +1,396 @@
+---
+sidebar_label: Applications
+sidebar_position: 2
+title: Applications
+description: How to use Epinio applications, including the create, view, edit, and delete workflow.
+keywords: [epinio, kubernetes, applications]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, applications]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide explores working with applications. Applications are deployable workloads that Epinio builds, deploys, and manages on Kubernetes. For more information, see the [applications](../../../../reference/concepts/supported_applications.md) reference page.
+
+## View Applications
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To view all your applications, navigate to the **Applications** page in the side navigation menu. Applications are grouped by [namespace](../namespaces/namespaces.mdx).
+
+<img
+  src={require('./apps-screen.png').default}
+  alt="View of the Applications screen"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+List all applications:
+
+```console
+epinio app list
+```
+
+</TabItem>
+</Tabs>
+
+## Create an Application
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Click **Create** on the Applications page to open the creation modal. App creation involves four steps.
+
+#### Application Source
+
+Provide your application source to Epinio. If you have an [application manifest](../../../../reference/concepts/manifests.md) you can upload it directly. Otherwise, you can provide your source in any of the following ways:
+
+- Container image
+- Archive file
+- From folder
+- Git URL
+- GitHub
+- GitLab
+
+Selecting any of the Git options will allow you to select from your [git configurations](../git-configs/git-configs.mdx) so Epinio can access private repos/projects.
+
+After providing your source, choose a **Build Method**. Epinio offers this for every source type it builds; a container image is already built, so it has no build method.
+
+- **Buildpack (Paketo)** is the default. Epinio detects your language and framework and builds the image for you. Select the [builder image](../builder-images/builder-images.mdx) you would like it to use.
+- **Dockerfile** builds the image from a Dockerfile in your own sources. The **Builder Image** selector is replaced by a **Dockerfile Path** field, which defaults to `Dockerfile`. Set it to the path of your Dockerfile relative to the root of your sources, for example `docker/Dockerfile`.
+
+For which one to pick and what changes between them, see [build modes](../../../../reference/concepts/build_modes.md).
+
+Finally, select the [application chart](../app-charts/app-charts.mdx) you would like Epinio to use when deploying your application.
+
+<img
+  src={require('./apps-create-modal.png').default}
+  alt="Create Application Modal"
+  width="800"
+/>
+
+#### Application Details
+
+Assign your application to a [namespace](../namespaces/namespaces.mdx) and provide it a name. You can also configure the number of instances, set [custom routes](../../../../reference/concepts/custom_routes.md), define environment variables, and, depending on the selected [application chart](../app-charts/app-charts.mdx), configure additional chart-specific settings.
+
+<img
+  src={require('./apps-create-details.png').default}
+  alt="Create Application Modal Details"
+  width="800"
+/>
+
+#### Application Bindings
+
+Bind any [configurations](../configurations/configurations.mdx) and [services](../services/services.mdx) that your application requires. Bindings are limited to resources in the same namespace.
+
+<img
+  src={require('./apps-create-bindings.png').default}
+  alt="Create Application Modal Bindings"
+  width="800"
+/>
+
+#### Application Progress
+
+Epinio will now build and deploy your application. You can watch the progress in the modal or close it, creation continues in the background and you will be notified when complete. A shell terminal will also appear at the bottom of the screen to let you monitor the process in real time.
+
+<img
+  src={require('./apps-create-progress.png').default}
+  alt="Create Application Modal Progress"
+  width="800"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Deploy an application from the current directory:
+
+```console
+epinio app push -n myapp
+```
+
+This builds with buildpacks. To build from a Dockerfile in your sources instead:
+
+```console
+epinio app push -n myapp --build-mode dockerfile
+```
+
+`--dockerfile-path` selects a Dockerfile that is not at the root of your sources:
+
+```console
+epinio app push -n myapp --build-mode dockerfile --dockerfile-path docker/Dockerfile
+```
+
+The path is relative to the root of your sources. Absolute paths and `..` segments are
+rejected. When pushing from a local folder, Epinio checks that the file exists before
+uploading anything.
+
+Both settings can live in an [application manifest](../../../../reference/concepts/manifests.md)
+instead, so a push does not have to repeat them:
+
+```yaml
+name: myapp
+staging:
+  buildMode: dockerfile
+  dockerfilePath: docker/Dockerfile
+```
+
+</TabItem>
+</Tabs>
+
+## View Application Details
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Click an application name in the table to open its details page. From here you can change the number of instances, view bound services and configurations, and, if your source is from Git, change the commit to trigger a rebuild.
+
+<img
+  src={require('./apps-details-screen.png').default}
+  alt="View of the Application Details screen"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Show details for an application:
+
+```console
+epinio app show myapp
+```
+
+</TabItem>
+</Tabs>
+
+## Edit an Application
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To edit an application, open the action menu on the table row or details page and select **Edit**. Changes to the application source will require a rebuild and redeployment.
+
+The **Build Method** and **Dockerfile Path** can be changed here as well, so an application can be moved between buildpack and Dockerfile builds without recreating it.
+
+<img
+  src={require('./apps-edit-modal.png').default}
+  alt="Edit Application Modal"
+  width="800"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Update an application:
+
+```console
+epinio app update myapp
+```
+
+`epinio app update` cannot change an application's build method or Dockerfile path.
+Those are set at build time, so change them with `epinio app push`, either through
+the flags above or through the application's manifest.
+
+</TabItem>
+</Tabs>
+
+## Delete an Application
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To delete an application, open the action menu on the table row or details page and select **Delete**.
+
+<img
+  src={require('./apps-delete-modal.png').default}
+  alt="Delete App Modal"
+  width="400"
+/>
+
+The confirmation dialog offers two optional cleanups, both unchecked by default:
+
+- **Remove the application's container image from registry** deletes the built image from the container registry.
+- **Delete the application's persistent storage** deletes the PersistentVolumeClaims holding data the application wrote.
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Delete an application:
+
+```console
+epinio app delete myapp
+```
+
+Delete it along with its container image and its persistent data:
+
+```console
+epinio app delete myapp --delete-image --delete-pvc
+```
+
+Both flags default to false. See [`epinio app delete`](../../../../reference/cli/app/epinio_app_delete.md) for the full flag list.
+
+</TabItem>
+</Tabs>
+
+### What deletion removes
+
+Deleting an application always removes its workload, its configuration bindings, its
+stored sources, any staging jobs, and the staging PersistentVolumeClaims holding the
+build cache and the source blobs. Those staging volumes only ever hold data that Epinio
+rebuilds from object storage on the next stage, so nothing is lost by reclaiming them.
+
+Application data volumes are treated differently. An
+[application chart](../app-charts/app-charts.mdx) that provisions storage, for example a
+chart deploying a StatefulSet with `volumeClaimTemplates`, leaves behind
+PersistentVolumeClaims holding data your application wrote. Epinio preserves those by
+default, so deleting and recreating an application does not silently discard a database.
+Opt in with the checkbox or `--delete-pvc` when you do want that data gone.
+
+:::caution
+Deleting persistent storage cannot be undone. Whether the underlying PersistentVolume is
+removed with the claim, and whether its data is recoverable afterwards, depends on the
+reclaim policy of the StorageClass that provisioned it.
+:::
+
+Epinio selects an application's data volumes by the `app.kubernetes.io/name` label within
+the application's namespace. A volume your chart provisions without that label is not
+deleted, and has to be removed with `kubectl`. See
+[storage lifecycle](../../../../reference/concepts/storage.md#storage-lifecycle) for how
+this affects capacity planning.
+
+## Additional Actions
+
+The following actions are available from the action menu in the Applications table or on the Application Details page.
+
+### App Shell
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Selecting **App Shell** in the action menu opens an interactive terminal session inside the running application container for debugging, inspection, and troubleshooting.
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Open a shell session inside a running application container:
+
+```console
+epinio app exec myapp
+```
+
+</TabItem>
+</Tabs>
+
+### App Logs
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Selecting **App Logs** in the action menu opens a terminal displaying the application's runtime output, including informational messages, warnings, errors, and other diagnostic information.
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Stream an application's runtime logs:
+
+```console
+epinio app logs myapp
+```
+
+</TabItem>
+</Tabs>
+
+### Last Build Logs
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Selecting **Last Build Logs** in the action menu opens a terminal displaying logs from the latest application build.
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Stream logs from the latest application build:
+
+```console
+epinio app logs myapp --staging
+```
+
+</TabItem>
+</Tabs>
+
+### Rebuild
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Selecting **Rebuild** in the action menu creates a new application image from the application's source code and deployment configuration, then deploys the updated version.
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Rebuild and redeploy an application:
+
+```console
+epinio app restage myapp
+```
+
+</TabItem>
+</Tabs>
+
+### Restart
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Selecting **Restart** in the action menu restarts an application's running instances without rebuilding its container image or changing its configuration.
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Restart an application's running instances:
+
+```console
+epinio app restart myapp
+```
+
+</TabItem>
+</Tabs>
+
+### Export
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Selecting **Export** in the action menu downloads an application's deployment artifacts — including its manifest, application charts, and container images — for backup, sharing, or importing into another Epinio environment.
+
+<img
+  src={require('./apps-export-modal.png').default}
+  alt="Export App Modal"
+  width="500"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Export an application's artifacts:
+
+```console
+epinio app export myapp
+```
+
+</TabItem>
+</Tabs>
+
+## Additional CLI Commands
+
+For additional documentation on the CLI commands above, along with additional commands, see the [epinio app](../../../../reference/cli/app/epinio_app.md) CLI reference.
+
+## See also
+
+- [Build modes](../../../../reference/concepts/build_modes.md), for choosing between buildpacks and a Dockerfile
+- [Application manifests](../../../../reference/concepts/manifests.md), for the full set of manifest keys
+- [Supported applications](../../../../reference/concepts/supported_applications.md)
+- [Builder images](../builder-images/builder-images.mdx) and [application charts](../app-charts/app-charts.mdx)
