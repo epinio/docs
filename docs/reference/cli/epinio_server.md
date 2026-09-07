@@ -31,6 +31,8 @@ epinio server [flags]
       --kube-api-burst int                   (KUBE_API_BURST) Maximum burst for throttle of the Kubernetes client. (default 10)
       --kube-api-qps float32                 (KUBE_API_QPS) The QPS indicates the maximum QPS of the Kubernetes client. (default 5)
   -n, --namespace string                     (NAMESPACE) The namespace to use (default "epinio")
+      --otel-exporter-otlp-endpoint string   (OTEL_EXPORTER_OTLP_ENDPOINT) OTLP collector endpoint to export traces to, including scheme (e.g. http://collector:4317 for grpc, http://collector:4318 for http/protobuf). Leave empty to disable tracing.
+      --otel-exporter-otlp-protocol string   (OTEL_EXPORTER_OTLP_PROTOCOL) OTLP export protocol: grpc or http/protobuf. Leave empty to use the OTel SDK default (grpc).
       --port int                             (PORT) The port to listen on. Leave empty to auto-assign a random port
       --registry-certificate-secret string   (REGISTRY_CERTIFICATE_SECRET) Secret for the registry's TLS certificate
       --s3-certificate-secret string         (S3_CERTIFICATE_SECRET) Secret for the S3 endpoint TLS certificate. Can be left empty if S3 is served with a trusted certificate.
