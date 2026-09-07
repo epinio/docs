@@ -258,7 +258,9 @@ Epinio selects an application's data volumes by the `app.kubernetes.io/name` lab
 the application's namespace. A volume your chart provisions without that label is not
 deleted, and has to be removed with `kubectl`. See
 [storage lifecycle](../../../../reference/concepts/storage.md#storage-lifecycle) for how
-this affects capacity planning.
+this affects capacity planning, and
+[Removing leftover PVCs without Epinio](../../../operator/operations/remove_pvcs_without_epinio.md)
+for a kubectl Job-based cleanup when the application is already gone or Epinio is unavailable.
 
 ## Additional Actions
 

@@ -141,7 +141,9 @@ Epinio selects an application's data volumes by the `app.kubernetes.io/name` lab
 the application's namespace. A volume provisioned by a chart without that label is never
 deleted by Epinio. See
 [deleting an application](../../how-to/developer/concepts/applications/applications.mdx#what-deletion-removes)
-for how to request each cleanup.
+for how to request each cleanup, and
+[Removing leftover PVCs without Epinio](../../how-to/operator/operations/remove_pvcs_without_epinio.md)
+to reclaim claims with `kubectl` when Epinio cannot delete them.
 
 ## Storage Calculation Formulas
 
@@ -307,7 +309,7 @@ Total Storage (GB) ≈ N apps × (0.05 + 1 + 1 + 0.5 × 3) = N apps × 3.55 GB
 
 1. **Old Source Blobs**: Implement lifecycle policies to delete old S3 objects
 2. **Old Images**: Configure registry garbage collection for unused images
-3. **Unused PVCs**: Clean up PVCs left behind by deleted applications, see [Storage lifecycle](#storage-lifecycle)
+3. **Unused PVCs**: Clean up PVCs left behind by deleted applications — see [Storage lifecycle](#storage-lifecycle) and [Removing leftover PVCs without Epinio](../../how-to/operator/operations/remove_pvcs_without_epinio.md)
 4. **Build Cache**: Periodically clear build caches for applications that haven't been rebuilt recently
 
 ## Example Scenarios
