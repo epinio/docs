@@ -2,245 +2,261 @@
 sidebar_label: Removing leftover PVCs without Epinio
 sidebar_position: 26
 title: Removing leftover PVCs without Epinio
-description: How to find, inspect, and delete leftover Epinio application PVCs with kubectl Jobs when you cannot (or choose not to) use Epinio
-keywords: [epinio, kubernetes, pvc, storage, cleanup, statefulset, job]
+description: Find, back up, and delete Epinio PersistentVolumeClaims that no longer belong to an application, using kubectl alone
+keywords: [epinio, kubernetes, pvc, storage, cleanup, statefulset, staging]
 doc-type: [how-to]
 doc-topic: [epinio, how-to, operations, remove-pvcs]
 doc-persona: [epinio-operator]
 ---
 
-Epinio preserves **application data** PersistentVolumeClaims by default when an application is deleted.
-Staging volumes (build cache and source-blob PVCs) are removed automatically on delete; data volumes from a StatefulSet `volumeClaimTemplates` chart are not, unless you pass `--delete-pvc`.
-
-This guide shows how to reclaim those leftover claims with `kubectl` and one-off Jobs.
-It does **not** add or rely on Epinio maintenance API endpoints.
+Epinio leaves two kinds of PersistentVolumeClaim behind, for two different reasons.
+This guide finds both with one command, backs up the ones worth keeping, and deletes them using only `kubectl`.
 
 :::tip Prefer Epinio when you can
 
-On Epinio **1.14.2+**, delete the application with PVC cleanup instead of this procedure:
+If the application still exists and you are on Epinio **1.14.2+**, delete it with its data in one step:
 
 ```bash
 epinio app delete <app> --delete-pvc
 ```
 
-Use this document when the application is already gone, Epinio is unavailable, or the claim was never labeled for Epinio to discover.
+Use this guide when the application is already gone, when Epinio is unavailable, or when a claim was left behind by a delete that did not finish.
 
 :::
 
-## Who needs to follow this guide
+## The two kinds of leftover claim
 
-| Situation | Action required |
-|---|---|
-| App deleted **without** `--delete-pvc`, and StatefulSet data PVCs remain | Follow all steps below. |
-| App scaled down; older ordinal PVCs remain | Follow all steps below. |
-| Staging cache / source-blob PVC left behind (failed delete, manual edits, older install) | [Identify](#step-1-identify-target-pvcs) and [delete](#step-4-delete-the-pvc) those claims in the Epinio namespace. |
-| You still have the app and run Epinio 1.14.2+ | Prefer `epinio app delete --delete-pvc` (or the UI checkbox). |
-| Platform storage (SeaweedFS, registry, `image-export-pvc`) | **Do not** use this guide. Those claims belong to the Epinio install. |
+Almost every question about leftover claims comes from treating these as one thing. They are not.
 
-## Overview of Epinio PVCs
+| | Application data | Staging cache |
+|---|---|---|
+| Lives in | the application namespace | the Epinio install namespace (default `epinio`) |
+| Named | `stateful-<statefulset>-<ordinal>` | `<ns>-<cache\|sourceblobs>-<app>-<sha1>` |
+| Labeled | `app.kubernetes.io/name=<app>` | **nothing**: no labels, no owner references |
+| Holds | data your application wrote | buildpack layers from the last build |
+| Left behind because | you deleted the app without `--delete-pvc` (**by design**) | a delete did not finish (**a fault**) |
+| Worth backing up | yes | no, the next build rebuilds it |
+| Created by | the chart's `volumeClaimTemplates` | every staging run |
 
-| Kind | Namespace | Typical name | Created when | Removed by `epinio app delete` |
-|---|---|---|---|---|
-| Build cache | Epinio install namespace (default `epinio`) | `<ns>-cache-<app>-<hash>` | Staging with `server.stagingWorkload.storage.cache.emptyDir: false` (the default) | Always |
-| Source blobs (staging workspace) | Epinio install namespace | `<ns>-sourceblobs-<app>-<hash>` | Staging with `sourceBlobs.emptyDir: false` (default is `true`, so usually absent) | Always |
-| Application data | Application namespace | e.g. `stateful-r-<hash>-0` | App chart with `volumeClaimTemplates` (bundled `application-stateful` chart) | Only with `--delete-pvc` |
-| Platform | Epinio install namespace | SeaweedFS / registry / `image-export-pvc` | Helm install | Never by app delete — leave alone |
+The consequences of that table are what make the two cases feel inconsistent:
 
-Default staging storage (current chart):
+- **Application data claims are labeled**, because Kubernetes copies the StatefulSet's selector onto every claim its template creates. That label is how `--delete-pvc` finds them.
+- **Staging claims are not labeled at all.** Epinio finds them by recomputing their name from the application, so a staging claim whose application is gone can no longer be found by anything. It is invisible, and it keeps its disk.
 
-```yaml
-server:
-  stagingWorkload:
-    storage:
-      cache:
-        emptyDir: false
-        size: 1Gi
-      sourceBlobs:
-        emptyDir: true
-```
+:::caution Platform storage is not in scope
 
-The bundled stateful app chart mounts application data at `/mnt/state` from a `volumeClaimTemplates` entry named `stateful`.
-Kubernetes names each claim `{volumeClaimTemplate}-{statefulSetName}-{ordinal}` (for one replica, typically `stateful-r-<sha1>-0`).
-
-Epinio discovers application data PVCs with label `app.kubernetes.io/name=<app>` in the application namespace.
-Claims without that label are never deleted by Epinio and must be cleaned up with the steps below.
-
-## Step 1: Identify target PVCs
-
-List claims in the application namespace:
-
-```bash
-kubectl get pvc -n <app-namespace>
-```
-
-Narrow by app label when present (same selector Epinio uses):
-
-```bash
-kubectl get pvc -n <app-namespace> -l app.kubernetes.io/name=<app>
-```
-
-List staging claims in the Epinio namespace (replace `epinio` if you installed elsewhere):
-
-```bash
-kubectl get pvc -n epinio | grep -E 'cache|sourceblobs' || true
-```
-
-Confirm nothing important still uses a claim before you delete it:
-
-```bash
-kubectl describe pvc -n <namespace> <pvc-name>
-kubectl get pods -n <namespace> -o json \
-  | jq -r --arg pvc '<pvc-name>' '
-      .items[]
-      | select([.spec.volumes[]? | select(.persistentVolumeClaim.claimName == $pvc)] | length > 0)
-      | .metadata.name'
-```
-
-:::caution
-
-A PVC that is still mounted stays in `Terminating` until every Pod using it is gone.
-Scale the workload to zero or delete the leftover Pods before Step 4.
+SeaweedFS, the registry, and `image-export-pvc` belong to the Epinio installation itself.
+They are never leftovers. Do not delete them.
 
 :::
 
-## Step 2: (Optional) Inspect or back up with a one-off Job
+## Step 1: Identify
 
-Mount the claim in a short-lived Job, the same pattern as the [MinIO → SeaweedFS migration](../networking/migrate_minio_to_seaweedfs.md) Jobs.
-No Epinio API is involved.
-
-```yaml title="inspect-pvc-job.yaml"
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: epinio-pvc-inspect
-  namespace: <app-namespace>   # same namespace as the PVC
-spec:
-  ttlSecondsAfterFinished: 600
-  template:
-    spec:
-      restartPolicy: Never
-      volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: <pvc-name>   # e.g. stateful-r-....-0
-      containers:
-      - name: inspect
-        image: busybox:1.36
-        command: ["/bin/sh", "-c"]
-        args:
-        - |
-          set -e
-          echo "=== listing /data ==="
-          ls -la /data
-          du -sh /data 2>/dev/null || true
-          # Optional: copy out anything you must keep, e.g. to another mounted volume
-          # tar -czf /tmp/backup.tgz -C /data .
-        volumeMounts:
-        - name: data
-          mountPath: /data
-```
+This function lists every claim that no longer has an application behind it, of either kind.
+Paste it into your shell once; the later steps reuse it.
 
 ```bash
-kubectl apply -f inspect-pvc-job.yaml
-kubectl wait --for=condition=complete job/epinio-pvc-inspect -n <app-namespace> --timeout=120s
-kubectl logs job/epinio-pvc-inspect -n <app-namespace>
+# Lists Epinio PersistentVolumeClaims that no longer have an application.
+# Usage: epinio-dangling-pvcs [--names]
+epinio-dangling-pvcs() {
+  local install_ns="${EPINIO_NAMESPACE:-epinio}" expected apps
+
+  # Every staging claim name the surviving applications can account for.
+  expected=$(kubectl get apps.application.epinio.io -A \
+      -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' |
+    while read -r ns app; do
+      [ -n "$app" ] || continue
+      for kind in cache sourceblobs; do
+        n="$ns-$kind-$app"
+        printf '%s-%s\n' "${n:0:22}" "$(printf '%s' "$n" | sha1sum | cut -d' ' -f1)"
+      done
+    done)
+
+  apps=$(kubectl get apps.application.epinio.io -A \
+    -o jsonpath='{range .items[*]}{.metadata.namespace}/{.metadata.name}{"\n"}{end}')
+
+  kubectl get pvc -A -o json | jq -r \
+    --arg install_ns "$install_ns" --arg expected "$expected" \
+    --arg apps "$apps" --arg names "${1:-}" '
+    ($expected | split("\n") | map(select(length > 0))) as $ok |
+    ($apps     | split("\n") | map(select(length > 0))) as $live |
+    [ .items[]
+      | . as $p
+      | $p.metadata.namespace as $ns
+      | $p.metadata.name      as $n
+      | ($p.metadata.labels // {}) as $l
+      | (if ($ns == $install_ns and ($n | test("-(cache|sourceblobs)-")))
+         then (if ($ok | index($n)) then empty else {kind:"staging", app:"-"} end)
+         elif ($l["app.kubernetes.io/name"] and ($l["app.kubernetes.io/instance"] | not))
+         then (if ($live | index($ns + "/" + $l["app.kubernetes.io/name"]))
+               then empty
+               else {kind:"app-data", app:$l["app.kubernetes.io/name"]} end)
+         else empty end) as $hit
+      | {ns:$ns, name:$n, kind:$hit.kind, app:$hit.app,
+         size:($p.status.capacity.storage // "-"), phase:$p.status.phase}
+    ] as $rows |
+    if $names == "--names" then
+      $rows[] | "\(.ns) \(.name)"
+    else
+      (["KIND","NAMESPACE","CLAIM","SIZE","APP"] | @tsv),
+      ($rows[] | [.kind, .ns, .name, .size, .app] | @tsv)
+    end'
+}
 ```
 
-:::note Sidecar alternative for a still-running Pod
-
-If the application Pod is still running and you only need a quick look at the mounted volume, use an ephemeral debug container instead of a Job:
+Run it:
 
 ```bash
-kubectl debug -n <app-namespace> <pod-name> -it --image=busybox:1.36 --target=<app-container> -- sh
+epinio-dangling-pvcs | column -t -s$'\t'
 ```
 
-Then inspect the same mount path the app uses (`/mnt/state` for the bundled stateful chart).
-Scale the app down before deleting the PVC.
+```
+KIND      NAMESPACE  CLAIM                                     SIZE  APP
+staging   epinio     workspace-cache-exampl-1f9956f9...          1Gi   -
+app-data  workspace  stateful-r-09b90aa6...-0                    1Gi   my-stateful-app
+```
+
+Anything not listed still has an application that owns it. Claims belonging to Epinio **services** are skipped, because a service chart also sets `app.kubernetes.io/instance` and this function treats that as a sign the claim is owned by something else.
+
+:::note Custom application charts
+
+The `app-data` check assumes the claim carries `app.kubernetes.io/name` and no `app.kubernetes.io/instance`, which is what the bundled charts produce.
+A custom chart that sets extra labels is skipped rather than listed. That errs toward leaving claims alone, so review a custom chart's claims by hand.
 
 :::
 
-## Step 3: Ensure the claim is unused
+## Step 2: Back up
 
-If the application still exists, scale it to zero (or delete it **without** expecting Epinio to remove data PVCs):
-
-```bash
-# Example for a leftover StatefulSet from the stateful chart
-kubectl scale statefulset -n <app-namespace> <statefulset-name> --replicas=0
-kubectl wait --for=delete pod -n <app-namespace> -l app.kubernetes.io/name=<app> --timeout=120s
-```
-
-If only orphan Pods remain:
+Only worth doing for `app-data` claims. A staging cache is rebuilt by the next `epinio push`, so there is nothing in it to lose.
 
 ```bash
-kubectl delete pod -n <app-namespace> <pod-name> --grace-period=0 --force
+# Copies the contents of a claim into a local tarball.
+# Usage: epinio-pvc-backup <namespace> <claim> <output.tgz>
+epinio-pvc-backup() {
+  local ns="$1" claim="$2" out="$3" pod rc elsewhere
+
+  if [ -z "$ns" ] || [ -z "$claim" ] || [ -z "$out" ]; then
+    echo "usage: epinio-pvc-backup <namespace> <claim> <output.tgz>" >&2
+    return 2
+  fi
+
+  if ! kubectl get pvc -n "$ns" "$claim" >/dev/null 2>&1; then
+    echo "No claim '$claim' in namespace '$ns'." >&2
+    elsewhere=$(kubectl get pvc -A \
+      -o jsonpath="{range .items[?(@.metadata.name=='$claim')]}{.metadata.namespace}{'\n'}{end}" 2>/dev/null)
+    if [ -n "$elsewhere" ]; then
+      echo "It is in namespace '$elsewhere'. A staging claim is named after the" >&2
+      echo "application's namespace but lives in the Epinio install namespace." >&2
+    fi
+    return 1
+  fi
+
+  pod="pvc-backup-$RANDOM$RANDOM"
+  kubectl run "$pod" -n "$ns" --restart=Never --quiet --image=busybox:1.36 \
+    --overrides="$(printf '%s' '{"spec":{"volumes":[{"name":"d","persistentVolumeClaim":{"claimName":"CLAIM"}}],
+      "containers":[{"name":"b","image":"busybox:1.36","command":["sleep","3600"],
+      "volumeMounts":[{"name":"d","mountPath":"/d","readOnly":true}]}]}}' | sed "s/CLAIM/$claim/")" >/dev/null || return 1
+
+  if kubectl wait --for=condition=Ready "pod/$pod" -n "$ns" --timeout=5m >&2; then
+    kubectl exec -n "$ns" "$pod" -- tar -czf - -C /d . > "$out"; rc=$?
+  else
+    echo "the backup Pod never became Ready. Inspect it with:" >&2
+    echo "  kubectl describe pod -n $ns $pod" >&2
+    rc=1
+  fi
+
+  kubectl delete pod -n "$ns" "$pod" --wait=false >/dev/null 2>&1
+  [ "$rc" -eq 0 ] && echo "wrote $out ($(wc -c < "$out") bytes)" >&2
+  return "$rc"
+}
 ```
 
-Re-check that no Pod mounts the claim (command in Step 1).
-
-## Step 4: Delete the PVC
+Pass the namespace from the `NAMESPACE` column of Step 1, not the one embedded in the claim's name:
 
 ```bash
-kubectl delete pvc -n <namespace> <pvc-name>
+epinio-pvc-backup workspace stateful-r-09b90aa6...-0 my-app-data.tgz
+tar -tzf my-app-data.tgz
 ```
 
-Delete several labeled app-data claims at once:
+The claim is mounted read-only, and the Pod is removed whether the copy succeeds or fails.
 
-```bash
-kubectl delete pvc -n <app-namespace> -l app.kubernetes.io/name=<app>
-```
+:::caution A ReadWriteOnce claim in use cannot be read
 
-Delete a known staging cache claim in the Epinio namespace:
-
-```bash
-kubectl delete pvc -n epinio <cache-pvc-name> --ignore-not-found
-kubectl delete pvc -n epinio <sourceblobs-pvc-name> --ignore-not-found
-```
-
-:::caution Deletion is irreversible for the claim
-
-Whether the underlying PersistentVolume and its data are removed depends on the StorageClass `reclaimPolicy`.
-See Step 5 for `Retain`.
+These claims attach to one **node** at a time. If a Pod still mounts the claim, the backup Pod never becomes Ready unless it happens to schedule onto that same node, and the function reports that rather than hanging.
+Scale the workload down first. See [Step 3](#step-3-delete).
 
 :::
 
-## Step 5: Clean up `Retain` PersistentVolumes (if needed)
+:::note Why this uses `kubectl exec` rather than an attached Pod
 
-If the StorageClass uses `Retain`, deleting the PVC leaves a Released PV and the disk data:
+Streaming the archive out of `kubectl run -i` looks simpler and quietly produces a **truncated tarball**: the container starts writing before `kubectl` finishes attaching, and the output produced in that window is lost.
+The symptom is a `couldn't fetch pre-attach logs` warning and an archive that fails `gzip -t`. On a small volume it can appear to work.
+`kubectl exec` against an already-running Pod has no such race and is binary-safe, which is the same mechanism `kubectl cp` uses.
+
+:::
+
+## Step 3: Delete
+
+Delete one claim:
 
 ```bash
-kubectl get pv
-kubectl describe pv <pv-name>
+kubectl delete pvc -n <namespace> <claim>
 ```
 
-Only after you are sure the data can go:
+Delete every dangling claim of both kinds:
 
 ```bash
-kubectl delete pv <pv-name>
+epinio-dangling-pvcs --names | while read -r ns name; do
+  kubectl delete pvc -n "$ns" "$name"
+done
 ```
 
-Your storage provider may still need a separate volume delete; follow that provider’s process if the PV does not free capacity on its own.
+Preview it first. The same loop with `--dry-run=client` changes nothing:
+
+```bash
+epinio-dangling-pvcs --names | while read -r ns name; do
+  kubectl delete pvc -n "$ns" "$name" --dry-run=client
+done
+```
+
+:::caution A claim in use will not go away
+
+Deleting a claim that a Pod still mounts leaves it in `Terminating` until that Pod is gone.
+Scale the workload down first:
+
+```bash
+kubectl get statefulset -n <namespace> -l app.kubernetes.io/name=<app>
+kubectl scale statefulset -n <namespace> <statefulset> --replicas=0
+kubectl wait --for=delete pod -n <namespace> -l app.kubernetes.io/name=<app> --timeout=120s
+```
+
+Force-deleting a Pod (`--grace-period=0 --force`) removes the Pod object without waiting for the kubelet to unmount, which can leave the volume attached and the claim stuck. Reserve it for a node that is genuinely unreachable.
+
+:::
+
+## Check the volumes were actually reclaimed
+
+Deleting a claim does not guarantee the disk came back. That is decided by the StorageClass `reclaimPolicy` on the PersistentVolume behind it.
+
+```bash
+kubectl get pv -o custom-columns=\
+'NAME:.metadata.name,STATUS:.status.phase,POLICY:.spec.persistentVolumeReclaimPolicy,CLAIM:.spec.claimRef.name' \
+  | awk 'NR==1 || $2=="Released"'
+```
+
+- **`Retain`**: a `Released` volume here is expected. The data is intact and waiting for you. Remove it with `kubectl delete pv <name>`, then reclaim the disk through your storage provider if it does not free on its own.
+- **`Delete`**: a `Released` volume here is a **fault**. The provisioner should have removed the volume and its data and did not, so that disk is still allocated with nothing pointing at it. `kubectl delete pv` removes the API object but does not necessarily reclaim the underlying disk; check the provisioner's logs and your storage backend.
 
 ## Verification
 
-Confirm the claims are gone:
-
 ```bash
-kubectl get pvc -n <app-namespace> -l app.kubernetes.io/name=<app>
-kubectl get pvc -n epinio | grep -E '<app>|cache|sourceblobs' || true
+epinio-dangling-pvcs
 ```
 
-If you deleted data for an app you still intend to run, push or restage it and confirm a **new** empty claim is provisioned (StatefulSet charts create a fresh PVC on the next deploy).
-
-## Cleanup
-
-Remove the inspect Job after you are done:
-
-```bash
-kubectl delete job epinio-pvc-inspect -n <app-namespace> --ignore-not-found
-```
+Empty output means nothing is dangling. If you deleted data for an application you still intend to run, push it again and confirm a **new** empty claim is provisioned. StatefulSet charts create a fresh one on the next deploy.
 
 ## Related
 
-- [What deletion removes](../../developer/concepts/applications/applications.mdx#what-deletion-removes) — Epinio’s built-in `--delete-pvc` / `--delete-image` behavior
-- [Storage lifecycle](../../../reference/concepts/storage.md#storage-lifecycle) — capacity planning for leftover data volumes
-- [Migrating from MinIO to SeaweedFS](../networking/migrate_minio_to_seaweedfs.md) — same Job-based operator pattern for storage work
+- [What deletion removes](../../developer/concepts/applications/applications.mdx#what-deletion-removes): Epinio's built-in `--delete-pvc` / `--delete-image` behavior
+- [Storage lifecycle](../../../reference/concepts/storage.md#storage-lifecycle): capacity planning for leftover data volumes
+- [Migrating from MinIO to SeaweedFS](../networking/migrate_minio_to_seaweedfs.md): the Job-based pattern for larger storage work
