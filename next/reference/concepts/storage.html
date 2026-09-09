@@ -9,8 +9,8 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Epinio docs" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.f624dab9.css">
-<script src="/assets/js/runtime~main.820ccad7.js" defer="defer"></script>
-<script src="/assets/js/main.46ebc86a.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ab113884.js" defer="defer"></script>
+<script src="/assets/js/main.432151dc.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -157,7 +157,9 @@ place after the claim is gone, and have to be removed separately.</li>
 the application&#x27;s namespace. A volume provisioned by a chart without that label is never
 deleted by Epinio. See
 <a class="" href="/next/how-to/developer/concepts/applications#what-deletion-removes">deleting an application</a>
-for how to request each cleanup.</p>
+for how to request each cleanup, and
+<a class="" href="/next/how-to/operator/operations/remove_pvcs_without_epinio">Removing leftover PVCs without Epinio</a>
+to reclaim claims with <code>kubectl</code> when Epinio cannot delete them.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="storage-calculation-formulas">Storage Calculation Formulas<a href="#storage-calculation-formulas" class="hash-link" aria-label="Direct link to Storage Calculation Formulas" title="Direct link to Storage Calculation Formulas" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="total-cluster-storage-internal-components-only">Total Cluster Storage (Internal Components Only)<a href="#total-cluster-storage-internal-components-only" class="hash-link" aria-label="Direct link to Total Cluster Storage (Internal Components Only)" title="Direct link to Total Cluster Storage (Internal Components Only)" translate="no">​</a></h3>
 <p>If using internal S3 and internal registry:</p>
@@ -307,7 +309,7 @@ for how to request each cleanup.</p>
 <ol>
 <li class=""><strong>Old Source Blobs</strong>: Implement lifecycle policies to delete old S3 objects</li>
 <li class=""><strong>Old Images</strong>: Configure registry garbage collection for unused images</li>
-<li class=""><strong>Unused PVCs</strong>: Clean up PVCs left behind by deleted applications, see <a href="#storage-lifecycle" class="">Storage lifecycle</a></li>
+<li class=""><strong>Unused PVCs</strong>: Clean up PVCs left behind by deleted applications — see <a href="#storage-lifecycle" class="">Storage lifecycle</a> and <a class="" href="/next/how-to/operator/operations/remove_pvcs_without_epinio">Removing leftover PVCs without Epinio</a></li>
 <li class=""><strong>Build Cache</strong>: Periodically clear build caches for applications that haven&#x27;t been rebuilt recently</li>
 </ol>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="example-scenarios">Example Scenarios<a href="#example-scenarios" class="hash-link" aria-label="Direct link to Example Scenarios" title="Direct link to Example Scenarios" translate="no">​</a></h2>
@@ -317,7 +319,7 @@ for how to request each cleanup.</p>
 <li class=""><strong>Configuration</strong>: Internal S3, internal registry, EmptyDir for cache/source</li>
 <li class=""><strong>Storage Needed</strong>: ~3 GB (S3) + ~4 GB (registry) = <strong>~7 GB total</strong></li>
 </ul>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="scenario-2-medium-production-environment">Scenario 2: Medium Production Environment<a href="#scenario-2-medium-production-environment" class="hash-link" aria-label="Direct link to Scenario 2: Medium Production Environment" title="Direct link to Scenario 2: Medium Production Environment" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="scenario-2-medium-production-environment">Scenario 2: Medium Production Environment<a href="#scenario-2-medium-production-environment" class="hash-link" aria-label="Direct link to Scenario 2: Medium Production Environment" title="Direct link to Scenario 2: Medium Production Environment" translate="no"> ​</a></h3>
 <ul>
 <li class=""><strong>30 apps</strong>, average 100 MB source, 500 MB images, 5 versions</li>
 <li class=""><strong>Configuration</strong>: Internal S3, internal registry, PVCs (1 GiB each)</li>

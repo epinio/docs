@@ -9,8 +9,8 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Epinio docs" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.f624dab9.css">
-<script src="/assets/js/runtime~main.820ccad7.js" defer="defer"></script>
-<script src="/assets/js/main.46ebc86a.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.ab113884.js" defer="defer"></script>
+<script src="/assets/js/main.432151dc.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -63,7 +63,9 @@ reclaim policy of the StorageClass that provisioned it.</p></div></div>
 the application&#x27;s namespace. A volume your chart provisions without that label is not
 deleted, and has to be removed with <code>kubectl</code>. See
 <a class="" href="/next/reference/concepts/storage#storage-lifecycle">storage lifecycle</a> for how
-this affects capacity planning.</p>
+this affects capacity planning, and
+<a class="" href="/next/how-to/operator/operations/remove_pvcs_without_epinio">Removing leftover PVCs without Epinio</a>
+for a kubectl Job-based cleanup when the application is already gone or Epinio is unavailable.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="additional-actions">Additional Actions<a href="#additional-actions" class="hash-link" aria-label="Direct link to Additional Actions" title="Direct link to Additional Actions" translate="no">​</a></h2>
 <p>The following actions are available from the action menu in the Applications table or on the Application Details page.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="app-shell">App Shell<a href="#app-shell" class="hash-link" aria-label="Direct link to App Shell" title="Direct link to App Shell" translate="no">​</a></h3>
