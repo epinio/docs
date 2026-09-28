@@ -18,7 +18,4 @@ When a client requests the export of the image of an application from the Epinio
 
 Cleanup is done only if all the operations succeeded. The job will be not removed if some error occurs, to keep the logs for further investigations.
 
-<img
-  src={require('./app-image-export.png').default}
-  alt="Application Export Flow"
-/>
+![Application Export Flow](./app-image-export.png)

@@ -81,9 +81,6 @@ Notes:
 
 ## Git Configuration Flow
 
-<img
-  src={require('./git-config-flow.png').default}
-  alt="Git Configuration in Epinio"
-/>
+![Git Configuration in Epinio](./git-config-flow.png)
 
 For more examples check the [How-to](../../how-to/developer/concepts/git-configs).

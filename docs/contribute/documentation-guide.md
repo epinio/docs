@@ -83,11 +83,15 @@ doc-topic: [epinio, how-to, topic]
 - Linking to docs uses **relative** links to the `.md`/`.mdx` file, not absolute
   `https://docs.epinio.io/...` URLs. Relative links are checked at build time and
   survive page moves; absolute self-links silently rot.
+- Images use Markdown syntax with a relative path: `![Alt text](./diagram.png)`.
+  A `.md` file is parsed as plain CommonMark, so a JSX `<img src={require('./x.png').default} />`
+  renders as literal text on the page. Reach for `.mdx` only when the image needs
+  attributes such as `width`.
 
 ### Showing UI and CLI together
 
 When a task can be done in both the dashboard and the CLI, use tabs. This project
-runs MDX v1, which is strict about structure. Follow this exact pattern (see
+runs MDX v3 with `format: 'detect'`, so only `.mdx` files are parsed as MDX. Follow this exact pattern (see
 [the namespaces page](../how-to/developer/concepts/namespaces/namespaces.mdx) for a working
 example):
 
