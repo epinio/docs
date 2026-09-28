@@ -9,7 +9,7 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Epinio docs" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.f624dab9.css">
-<script src="/assets/js/runtime~main.e8a377a6.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.e9f7db14.js" defer="defer"></script>
 <script src="/assets/js/main.c31ebe10.js" defer="defer"></script>
 </head>
 <body>
@@ -149,10 +149,14 @@ already renders it.</li>
 <li class="">Linking to docs uses <strong>relative</strong> links to the <code>.md</code>/<code>.mdx</code> file, not absolute
 <code>https://docs.epinio.io/...</code> URLs. Relative links are checked at build time and
 survive page moves; absolute self-links silently rot.</li>
+<li class="">Images use Markdown syntax with a relative path: <code>![Alt text](./diagram.png)</code>.
+A <code>.md</code> file is parsed as plain CommonMark, so a JSX <code>&lt;img src={require(&#x27;./x.png&#x27;).default} /&gt;</code>
+renders as literal text on the page. Reach for <code>.mdx</code> only when the image needs
+attributes such as <code>width</code>.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="showing-ui-and-cli-together">Showing UI and CLI together<a href="#showing-ui-and-cli-together" class="hash-link" aria-label="Direct link to Showing UI and CLI together" title="Direct link to Showing UI and CLI together" translate="no">​</a></h3>
 <p>When a task can be done in both the dashboard and the CLI, use tabs. This project
-runs MDX v1, which is strict about structure. Follow this exact pattern (see
+runs MDX v3 with <code>format: &#x27;detect&#x27;</code>, so only <code>.mdx</code> files are parsed as MDX. Follow this exact pattern (see
 <a class="" href="/how-to/developer/concepts/namespaces">the namespaces page</a> for a working
 example):</p>
 <ul>
