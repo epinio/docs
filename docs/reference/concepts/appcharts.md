@@ -139,6 +139,25 @@ Read the [contents of the standard application chart](https://github.com/epinio/
 
 The [application charts how-to](../../how-to/developer/concepts/app-charts/app-charts.mdx) contains information on how to work with app charts via the UI or CLI.
 
+## Chart Sources
+
+The chart an application chart is made from is specified by the two fields `helmChart` and
+`helmRepo` of the `AppChart` resource, in one of three ways:
+
+|`helmRepo`             |`helmChart`                    |Meaning                                                |
+|---                    |---                            |---                                                    |
+|empty                  |URL                            |Direct link to the chart tarball                       |
+|URL                    |`NAME` or `NAME:VERSION`       |Chart in a Helm repository, i.e. one with an `index.yaml` |
+|`oci://REGISTRY/PATH`  |`NAME` or `NAME:VERSION`       |Chart in an OCI registry                               |
+
+The default application charts of Epinio are stored in an OCI registry.
+The registry is configured through the value `appChart.repo` of the Epinio Helm chart.
+To not use it, set the values `appChart.default` and `appChart.gatewayAPI` to tarball URLs.
+
+Custom charts can be stored in Epinio's own registry with
+[`epinio app chart push`](../cli/app/chart/epinio_app_chart_push.md).
+See [How to create custom application Helm charts](../../how-to/operator/customization/create_custom_appcharts.md#pushing-the-chart-to-epinios-registry).
+
 ## Related
 
   - [Routing Secrets](../customization/routing_secrets.md)

@@ -2,7 +2,7 @@
 sidebar_label: 'OCI Registry Support for App Charts'
 sidebar_position: 2
 title: 'OCI Registry Support for Application Charts'
-description: How Epinio resolves and deploys Application Charts stored in OCI registries, and how to verify the feature end to end.
+description: How the Epinio server resolves, deploys, and stores Application Charts in OCI registries, and how to verify this end to end.
 keywords: [epinio, contributing, server, appcharts, oci, registry, helm]
 doc-type: [contribute]
 doc-topic: [server-contribution-oci-appcharts]
@@ -11,221 +11,150 @@ doc-persona: [epinio-developer]
 
 # OCI Registry Support for Application Charts
 
-## Background
+This page describes how the Epinio server handles [Application Charts](../../../reference/concepts/appcharts.md)
+stored in OCI registries, and how to verify it on a cluster.
+For the user-facing description see
+[How to create custom application Helm charts](../../../how-to/operator/customization/create_custom_appcharts.md#pushing-the-chart-to-epinios-registry).
 
-Epinio deploys applications using [Application Charts](../../../reference/concepts/appcharts.md):
-Helm charts that define the Kubernetes resources an application is rendered into. Prior to this
-change, an `AppChart` custom resource could reference its underlying Helm chart in only two ways:
+## Chart reference resolution
 
-- A direct URL to a chart archive (`.tgz`), such as a GitHub Release asset.
-- A classic Helm chart repository (an `index.yaml`-based repository, added via
-  `helm repo add` semantics).
+The `helmChart` and `helmRepo` fields of an `AppChart` together locate its Helm chart.
+The server resolves them in `getChartReference` (`internal/helm/helm.go`), in one of three ways:
 
-Modern Helm chart distribution increasingly happens through **OCI registries** (the same kind of
-registry container images are stored in), addressed with an `oci://` reference instead of an
-`index.yaml` repository. Epinio had no support for this: an `AppChart` pointing at an OCI
-reference would fail, because the chart-resolution code only understood the two mechanisms above.
+1. **Direct URL or file.** `helmRepo` is empty, and `helmChart` is the location of the chart tarball.
+2. **OCI registry.** `helmRepo` starts with `oci://`. `helmChart` is `NAME` or `NAME:VERSION`.
+   The chart reference passed to Helm is `oci://<host>/<path>/NAME`, with the version passed separately.
+   OCI registries have no `index.yaml`, so there is no `helm repo add` style bookkeeping for them.
+3. **Classic repository.** Any other non-empty `helmRepo`, with an `index.yaml`.
 
-Separately, Epinio already runs its own internal container registry (used to store the images
-built from application source). This registry is a standard OCI-Distribution-compatible registry,
-which makes it a strong candidate for also hosting Helm charts as OCI artifacts, without
-introducing any new infrastructure.
+### Authentication
 
-This document describes the change that teaches Epinio's chart-resolution code to understand
-`oci://` chart references, and how to verify it.
+Epinio's own registry runs with a self-signed certificate. Charts stored there by
+[`epinio app chart push`](#pushing-charts) are pulled with the registry credentials the server already
+uses for application images, from the `registry-creds` secret. No user-supplied credentials are involved.
 
-## What Changed
+- If the host of `helmRepo` matches a registry in `registry-creds`, the server logs in with these credentials
+  before pulling. Certificate verification is skipped for registries running inside the cluster,
+  like it is for application images. It is not skipped for a registry outside of the cluster.
+- If the secret does not exist, or the host does not match, no login is attempted.
+  The chart is pulled anonymously, and Epinio's credentials are never sent to another host.
+- Failing to read the secret for any other reason fails the deployment, with the reason.
 
-The chart reference resolution function used during application deployment was extended with a
-third resolution path:
+:::note
 
-1. **Direct URL/file** (pre-existing) — used when the `AppChart`'s `helmRepo` field is empty.
-2. **OCI registry** (new) — used when `helmRepo` is an `oci://` URL.
-3. **Classic (`index.yaml`) repository** (pre-existing) — used for any other non-empty `helmRepo`.
-
-When the OCI path is taken, the server additionally decides whether it needs to authenticate:
-
-- If the OCI registry host matches **Epinio's own internal registry**, the server logs in
-  automatically, using the same registry credentials secret it already uses for pushing
-  application images. No user-supplied credentials are involved.
-- If the OCI registry host does **not** match Epinio's own registry (e.g. a public external OCI
-  registry hosting a chart), no login is attempted at all, and the chart is fetched anonymously.
-
-This mirrors how Epinio already treats its container registry for application images: the
-server holds the credentials, end users never see or supply them.
-
-## How It Works
-
-### Chart reference resolution
-
-An `AppChart`'s `helmChart` and `helmRepo` fields together describe where its Helm chart lives.
-When `helmRepo` starts with `oci://`, it is treated as an OCI registry reference:
-
-- `helmRepo` is combined with `helmChart` (and an optional `:<version>` suffix on `helmChart`) to
-  build the final `oci://<host>/<path>/<chart-name>` reference and version that get passed to the
-  underlying Helm client for install/upgrade.
-- No `helm repo add`-style bookkeeping happens for OCI references — OCI registries don't use the
-  `index.yaml` mechanism that classic repositories rely on.
-
-### Authenticating to Epinio's own registry
-
-Before resolving the chart, the server checks whether the OCI host matches the connection details
-already available from Epinio's registry credentials secret (the same secret used for image
-pushes). If it matches, the server performs a registry login with those credentials before
-proceeding.
-
-Epinio's built-in registry runs with a self-signed TLS certificate. The server already has an
-established pattern elsewhere in the codebase for trusting this certificate (skipping TLS
-verification specifically for the internal registry, since the registry's host is known and
-trusted). The same approach is used here for the registry login call.
-
-### External OCI registries
-
-When the OCI host does not match Epinio's own registry, no login is attempted at all — the code
-falls through and lets the underlying Helm client attempt an anonymous pull, the same way it would
-for any publicly reachable OCI registry. This means default charts (or any chart) hosted on a
-public OCI registry can be referenced without any credentials.
-
-:::note Not supported yet
-
-Authenticating to an **external, private** OCI registry (one that isn't Epinio's own and requires
-credentials) is not supported. The `AppChart` model currently has no field to carry such
-credentials. See [Known Limitations](#known-limitations--not-yet-implemented) below.
+Helm applies the login settings to the registry client, which the server shares between operations on
+the same namespace. Do not use that client for unrelated registries.
 
 :::
 
-## Verifying the Feature
+Authenticating to an external, private OCI registry is not supported.
+The `AppChart` has no field for credentials.
 
-The following steps describe how to verify the feature end to end on any Kubernetes cluster with
-Epinio installed (the exact cluster domain, namespace, and IP addresses will differ per
-environment — substitute your own).
+### Other places needing the chart
 
-### 1. Confirm the registry can serve OCI charts
+Some server operations need the chart archive itself instead of deploying it:
+the `chart` and `archive` parts of an application, and the export of an application.
+`chartArchiveFile` (`internal/api/v1/application/part.go`) provides it for all kinds of chart.
+For OCI charts the archive is pulled into a temporary directory by `helm.FetchOCIChartArchive`,
+which the caller removes when done. The other kinds are located by `chartArchiveURL`, and fetched through
+the URL cache.
 
-Before touching any code, confirm that Epinio's registry (deployed as part of the `epinio` Helm
-chart) can store and serve Helm charts as OCI artifacts, the same way it already does for
-container images:
+When redeploying an application the server compares old and new chart name and version to decide whether
+to reuse the Helm values (`shouldReuseHelmValues`). This works for OCI charts too.
 
-```bash
-# Make the registry reachable locally
-kubectl port-forward -n <epinio-namespace> svc/registry 5000:5000 &
+## Pushing charts
 
-# Trust the registry's self-signed certificate for this test
-kubectl get secret epinio-registry-tls -n <epinio-namespace> \
-  -o jsonpath='{.data.ca\.crt}' | base64 -d > registry-ca.crt
+`POST /api/v1/appcharts/push` stores a chart in Epinio's registry, and creates the `AppChart` for it.
+The request is `multipart/form-data`, with these parts:
 
-# The registry's certificate is issued for its in-cluster DNS name, so map it locally
-echo "127.0.0.1 registry.<epinio-namespace>.svc.cluster.local" | sudo tee -a /etc/hosts
+|Part                 |Meaning                                                    |
+|---                  |---                                                        |
+|`file`               |The chart tarball, as created by `helm package`. Required. |
+|`name`               |Name of the new `AppChart`. Required.                      |
+|`description`        |Optional.                                                  |
+|`short_description`  |Optional.                                                  |
 
-helm registry login registry.<epinio-namespace>.svc.cluster.local:5000 \
-  -u <registry-username> -p <registry-password> --ca-file registry-ca.crt
+The handler (`internal/api/v1/appchart/push.go`)
 
-# Package any existing application chart and push it as an OCI artifact
-helm package <path-to-a-helm-chart-directory>
-helm push <chart-name>-<version>.tgz \
-  oci://registry.<epinio-namespace>.svc.cluster.local:5000/epinio-charts \
-  --ca-file registry-ca.crt
+1. checks the name, and that the upload is a valid Helm chart of type `application` (or with no type),
+   before touching the cluster,
+2. refuses names of existing `AppChart`s with `409 Conflict`,
+3. pushes the chart with Helm to `oci://<registry>/epinio-charts`, logged in as described above, and
+4. creates an `AppChart` with `helmRepo: oci://<registry>/epinio-charts` and `helmChart: NAME:VERSION`,
+   taking name and version from the chart.
 
-# Pull it back to confirm the round trip
-helm pull oci://registry.<epinio-namespace>.svc.cluster.local:5000/epinio-charts/<chart-name> \
-  --version <version> --ca-file registry-ca.crt
-```
+The action `chart_write` is required. The size of the upload is limited to 32 MiB.
 
-A successful push and pull with matching digests confirms the registry itself is a viable OCI
-chart store, independent of any server code changes.
+The registry keeps one chart per name and version.
+Pushing the same name and version again replaces it for all `AppChart`s referencing it.
 
-### 2. Build and run a server with the change
+## Default charts
 
-Build the `epinio-server` binary from source with the change applied, and get it running in your
-cluster (either by building and loading a new container image, or by using whatever
-fast-iteration mechanism your development setup provides for swapping the running binary).
+The default charts `standard` and `gateway-api-application` are stored in an OCI registry too.
+The Epinio Helm chart references them through its values `appChart.repo`, `appChart.default`,
+and `appChart.gatewayAPI`, see [Helm Chart Options](../../../reference/helm.md#application-charts).
+Setting a value to a tarball URL selects the direct URL resolution for it.
 
-### 3. Register an AppChart pointing at the OCI chart
+The `Release Charts` workflow of the `epinio/helm-charts` repository publishes the application charts
+to `oci://ghcr.io/<owner>/charts`, in the job `publish-oci`. Versions already published are skipped.
 
-Since a chart is already sitting in the registry from step 1, register an `AppChart` resource
-pointing at it. This can be applied directly as a Kubernetes resource:
+## Verifying the feature
 
-```yaml
-apiVersion: application.epinio.io/v1
-kind: AppChart
-metadata:
-  name: oci-test-chart
-  namespace: <epinio-namespace>
-spec:
-  shortDescription: OCI chart resolution test
-  description: Verifies that AppCharts can resolve charts from an OCI registry
-  helmChart: "<chart-name>:<version>"
-  helmRepo: "oci://registry.<epinio-namespace>.svc.cluster.local:5000/epinio-charts"
-  settings:
-    appListeningPort:
-      type: 'integer'
-      minimum: '0'
-```
+The following steps verify the feature on a cluster with a development build of the server.
+The exact names, namespaces, and domains differ per environment.
+
+### 1. Push a chart
 
 ```bash
-kubectl apply -f oci-test-chart.yaml
-kubectl get appcharts -n <epinio-namespace>
+helm package <path-to-a-chart-directory> --version 0.9.0
+epinio app chart push oci-test ./<chart-name>-0.9.0.tgz --short-description "OCI test"
+epinio app chart show oci-test
 ```
 
-### 4. Deploy an application and verify
+`Helm Repository` has to be `oci://<registry>/epinio-charts`, and `Helm Chart` `<chart-name>:0.9.0`.
+
+Optionally check the registry itself. This is for verification only, users do not need it.
+The registry credentials are in the secret `registry-creds`:
 
 ```bash
-epinio push --name oci-test-app --app-chart oci-test-chart --path <path-to-any-source-app>
+kubectl -n <epinio-namespace> port-forward svc/registry 5000:5000 &
+curl -k -u <username>:<password> https://localhost:5000/v2/epinio-charts/<chart-name>/tags/list
 ```
 
-A successful deployment confirms the full path works. Two additional checks provide direct
-evidence that the **new** code path was used, rather than the app coincidentally deploying through
-some other mechanism:
+The tag `0.9.0` has to be listed.
+
+### 2. Deploy an application with the chart
 
 ```bash
-# If the referenced chart deploys a StatefulSet (as opposed to a Deployment), confirm the
-# expected controller and its PVC were created — proof the correct chart was actually used.
-kubectl get statefulset,pvc -n <app-namespace>
-
-# Confirm from the server's own logs which resolution path was taken
-kubectl logs -n <epinio-namespace> deployment/epinio-server --tail=200 | grep -i "helm-chart-ref"
+epinio push --name oci-app --app-chart oci-test --path <path-to-any-source-app>
+kubectl -n <epinio-namespace> logs deploy/epinio-server | grep helm-chart-ref
 ```
 
-The log line reporting the resolved chart reference should show an `oci://` URL, not a
-repository-hash-prefixed reference (which would indicate the classic, non-OCI path was taken
-instead).
+The log has to report a chart reference starting with `oci://`, and the version.
 
-### 5. Negative tests
+### 3. Export and redeploy
 
-Two negative cases are worth exercising explicitly, since they cover code paths a purely
-successful deployment does not:
+`epinio app export oci-app <directory>` has to save the chart archive, values, and image.
 
-**A. A chart version that does not exist in the registry.** Point an `AppChart` at a version that
-was never pushed, and push an application against it. Expect a clear, immediate failure
-identifying the missing chart/version — not a hang, timeout, or unrelated crash.
+Push a chart with a new version under another name, and switch the application to it with
+`epinio app update oci-app --app-chart <other-name>`. The server log has to show
+`app chart package changed, disabling ReuseValues`, with both chart versions, and no
+`unable to resolve next chart identity`.
 
-**B. An OCI host that is not Epinio's own registry.** Point an `AppChart`'s `helmRepo` at some
-other `oci://` host (a nonexistent or unrelated one is fine for this purpose) and push an
-application against it. Expect the failure to occur while trying to **fetch** the chart (a
-connection/lookup failure for that host), and confirm the failure is **not** a login/authentication
-error. This proves that the server correctly recognized the registry as external and skipped
-attempting to authenticate against it with Epinio's own credentials — the more security-sensitive
-of the two new branches.
+### 4. Negative tests
 
-## Known Limitations / Not Yet Implemented
+|Test                                                       |Expected result                                    |
+|---                                                        |---                                                |
+|Push again with the same `AppChart` name                   |`409`, `already exists`                            |
+|Push a file which is not a chart archive                   |`400`, `not a valid helm chart archive`            |
+|Push with a name which is not a valid Kubernetes name      |`400`, `invalid application chart name`            |
+|Deploy with an `AppChart` whose `helmRepo` is a host which is not Epinio's own, for example `oci://registry.invalid.example:5000/charts`|Failure to fetch the chart from that host. The request to the host carries no `Authorization` header, and there is no login error.|
 
-This change adds the ability for the server to **resolve and deploy** an `AppChart` from an OCI
-registry. It intentionally does not include:
+## Known limitations
 
-- **An upload/push API.** There is currently no Epinio API or CLI command for a user to push a
-  custom chart into a registry (Epinio's own or otherwise). Publishing a chart into Epinio's
-  registry today requires the same manual `helm registry login` / `helm push` steps used for
-  verification above, with direct registry credentials. A dedicated upload endpoint — mirroring
-  how `epinio push` already handles application images, so that the server performs the actual
-  registry push on the user's behalf and no registry credentials are ever exposed to the user — is
-  a natural next step, but is separate, follow-up work.
-- **Authenticating to private external OCI registries.** Only Epinio's own registry (auto-login)
-  and anonymous/public external registries are supported. There is no way today to supply
-  credentials for a private third-party OCI registry.
-- **Migrating the default application charts to OCI.** The default charts (`standard`,
-  `gateway-api`, and any others shipped with Epinio) still reference their GitHub Release URLs.
-  This change makes it *possible* to point them at an OCI registry instead, but does not do so —
-  that would require updating the default chart values and the chart publishing pipeline.
+- Private external OCI registries are not supported.
+- Charts can only be pushed to Epinio's own registry.
+- Pushing a chart again with the same name and version replaces the stored chart.
 
 ## Related
 

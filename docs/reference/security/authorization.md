@@ -163,7 +163,7 @@ These actions enable operations on AppChart commands and resources (`epinio app 
 | Action ID      | Description
 |----------------|-------------
 | `chart_read`   | Read permissions (list, show, match). Granted automatically to any role with `app_read`.
-| `chart_write`  | Write permissions (create, update, delete)<br/>Depends on: `chart_read`
+| `chart_write`  | Write permissions (create, push, update, delete)<br/>Depends on: `chart_read`
 | `chart`        | All the above<br/>Depends on: `chart_read`, `chart_write`
 
 ### Builder Image

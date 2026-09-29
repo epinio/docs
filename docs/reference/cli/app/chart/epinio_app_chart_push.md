@@ -1,24 +1,39 @@
 ---
-sidebar_label: epinio app chart
+sidebar_label: epinio app chart push
 title: ""
-description: epinio app chart
-keywords: [epinio, kubernetes, epinio app chart]
+description: epinio app chart push
+keywords: [epinio, kubernetes, epinio app chart push]
 doc-type: [reference]
-doc-topic: [epinio, reference, epinio-cli, epinio-app-chart]
+doc-topic: [epinio, reference, epinio-cli, epinio-app-chart-push]
 doc-persona: [epinio-developer, epinio-operator]
 ---
-## epinio app chart
+## epinio app chart push
 
-Epinio application chart management
+Push a helm chart archive to Epinio's registry as application chart
 
 ### Synopsis
 
-Manage epinio application charts
+Push a helm chart archive (a .tgz, as created by 'helm package') to Epinio's own
+registry, and create the application chart NAME referencing it.
+
+The registry credentials are held by the Epinio server. They are neither needed nor exposed.
+
+```
+epinio app chart push NAME CHART-ARCHIVE [flags]
+```
+
+### Examples
+
+```
+epinio app chart push mychart ./mychart-0.1.0.tgz --short-description 'My chart'
+```
 
 ### Options
 
 ```
-  -h, --help   help for chart
+      --description string         long description
+  -h, --help                       help for push
+      --short-description string   short description
 ```
 
 ### Options inherited from parent commands
@@ -36,12 +51,5 @@ Manage epinio application charts
 
 ### SEE ALSO
 
-* [epinio app](../epinio_app.md)	 - Epinio application features
-* [epinio app chart create](./epinio_app_chart_create.md)	 - Create an application chart
-* [epinio app chart default](./epinio_app_chart_default.md)	 - Set or show app chart default
-* [epinio app chart delete](./epinio_app_chart_delete.md)	 - Delete an application chart
-* [epinio app chart list](./epinio_app_chart_list.md)	 - List application charts
-* [epinio app chart push](./epinio_app_chart_push.md)	 - Push a helm chart archive to Epinio's registry as application chart
-* [epinio app chart show](./epinio_app_chart_show.md)	 - Describe application chart
-* [epinio app chart update](./epinio_app_chart_update.md)	 - Update an application chart
+* [epinio app chart](./epinio_app_chart.md)	 - Epinio application chart management
 
