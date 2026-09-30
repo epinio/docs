@@ -97,6 +97,39 @@ targets:
     transformers:
       - trimprefix: "v"
 
+  cosign-image-tag:
+    name: 'docs: update cosign verify image tag to {{ source "epinio" }}'
+    kind: file
+    sourceid: epinio
+    spec:
+      files:
+        - 'docs/getting-started/install-epinio.md'
+      matchpattern: '(?m)ghcr\.io/epinio/<IMAGE>:v(\d+)\.(\d+)\.(\d+)'
+      replacepattern: 'ghcr.io/epinio/<IMAGE>:v{{ source "epinio" }}'
+    scmid: default
+
+  binary-download-url:
+    name: 'docs: update Epinio CLI binary URLs to {{ source "epinio" }}'
+    kind: file
+    sourceid: epinio
+    spec:
+      files:
+        - 'docs/getting-started/install-cli.md'
+      matchpattern: '(?m)https://github\.com/epinio/epinio/releases/download/v(\d+)\.(\d+)\.(\d+)/epinio-'
+      replacepattern: 'https://github.com/epinio/epinio/releases/download/v{{ source "epinio" }}/epinio-'
+    scmid: default
+
+  gitjob-image-tag:
+    name: 'docs: update gitjob epinio-server image tag to {{ source "epinio" }}'
+    kind: file
+    sourceid: epinio
+    spec:
+      files:
+        - 'docs/how-to/operator/networking/gitjob_push.md'
+      matchpattern: '(?m)ghcr\.io/epinio/epinio-server:v(\d+)\.(\d+)\.(\d+)'
+      replacepattern: 'ghcr.io/epinio/epinio-server:v{{ source "epinio" }}'
+    scmid: default
+
   # Required yarn to be installed
   docusaurus:
     kind: shell
