@@ -50,7 +50,7 @@ targets:
     sourceid: epinio
     spec:
       files:
-        - 'docs/installation/install_epinio_cli.md'
+        - 'docs/getting-started/install-cli.md'
       matchpattern: '(?m)epinio_(\d*).(\d*).(\d*)'
       replacepattern: 'epinio_{{ source "epinio" }}'
     scmid: default
@@ -62,7 +62,7 @@ targets:
     kind: file
     spec:
       files:
-        - "docs/installation/*.md"
+        - "docs/getting-started/*.md"
       matchpattern: '(?m)https://github.com/epinio/epinio/releases/download/v(.*)/epinio_(\d*).(\d*).(\d*)_'
       replacepattern: 'https://github.com/epinio/epinio/releases/download/v{{ source "epinio" }}/epinio_{{ source "epinio" }}_'
       searchpattern: true
@@ -77,9 +77,9 @@ targets:
     kind: file
     spec:
       files:
-        - "docs/references/*.md"
-      matchpattern: '(?m)https://github.com/epinio/epinio/blob/(.*)/docs/references/api/swagger.json'
-      replacepattern: 'https://github.com/epinio/epinio/blob/v{{ source "epinio" }}/docs/references/api/swagger.json'
+        - "docs/reference/api.md"
+      matchpattern: '(?m)https://raw.githubusercontent.com/epinio/epinio/([^/]*)/docs/references/api/swagger.json'
+      replacepattern: 'https://raw.githubusercontent.com/epinio/epinio/v{{ source "epinio" }}/docs/references/api/swagger.json'
       searchpattern: true
     scmid: default
     sourceid: epinio
@@ -90,32 +90,12 @@ targets:
     sourceid: epinio
     spec:
       files:
-        - 'docs/installation/install_epinio_cli.md'
+        - 'docs/getting-started/install-cli.md'
       matchpattern: '(?m)Epinio Version: (.*)'
       replacepattern: 'Epinio Version: v{{ source "epinio" }}'
     scmid: default
     transformers:
       - trimprefix: "v"
-
-  ep-on-rd-download-url:
-    name: 'Update Helm chart URL'
-    kind: file
-    spec:
-      file: docs/installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md
-      matchpattern: '\(https://github.com/epinio/helm-charts/releases/tag/epinio-(.*)\)'
-      replacepattern: '\(https://github.com/epinio/helm-charts/releases/tag/epinio-{{ source "epinio" }}\)'
-    scmid: default
-    sourceid: epinio
-
-  ep-on-rd-epinio-version:
-    name: 'Update Epinio Version for EP on RD'
-    kind: file
-    sourceid: epinio
-    spec:
-      file: docs/installation/other_inst_scenarios/install_epinio_on_rancher_desktop.md
-      matchpattern: '\[epinio helm chart (.*)\]'
-      replacepattern: '\[epinio helm chart {{ source "epinio" }}\]'
-    scmid: default
 
   # Required yarn to be installed
   docusaurus:

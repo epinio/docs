@@ -28,4 +28,4 @@ reaches the Epinio server (for example, a misconfigured cluster).
 The full endpoint reference is rendered from the OpenAPI specification:
 
 - [**API reference**](pathname:///api-reference/) — browse every endpoint, parameter, and schema.
-- Download the raw [OpenAPI spec](https://raw.githubusercontent.com/epinio/epinio/main/docs/references/api/swagger.json).
+- Download the raw [OpenAPI spec](https://raw.githubusercontent.com/epinio/epinio/v1.14.2/docs/references/api/swagger.json).
