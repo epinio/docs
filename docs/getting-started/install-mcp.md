@@ -34,6 +34,8 @@ capabilities through CLI commands, with nothing to deploy.
   will not work against earlier releases.
 - `kubectl` and the [`epinio` CLI](./install-cli.md) pointed at your cluster.
 - `make` and a Go toolchain, plus a clone of [epinio/mcp](https://github.com/epinio/mcp).
+- A route for the MCP server. OAuth clients outside the cluster require a
+  publicly reachable HTTPS URL.
 
 ## Choose an install path
 
@@ -57,23 +59,98 @@ This targets the `mcp` namespace (creating it if needed), pushes the server, and
 smoke-tests `/healthz` and `/readyz`. Override the namespace with
 `make setup NAMESPACE=<name>`, and run `make help` to see every target.
 
-`epinio.yml` carries the connection details. Fill in the `environment` section
-with your cluster's API URL and credentials (default `admin` / `password`):
+`epinio.yml` carries the connection and OAuth discovery details. Fill in the
+`environment` section:
 
 ```yaml
 environment:
   EPINIO_API_URL: "https://epinio.your-cluster.example.com"
-  EPINIO_USERNAME: "admin"
-  EPINIO_PASSWORD: "your-password"
+  EPINIO_MCP_RESOURCE_URL: "https://epinio-mcp.your-cluster.example.com"
+  EPINIO_MCP_OIDC_ISSUER: "https://auth.your-cluster.example.com"
 ```
 
-For OIDC clusters, leave the username and password empty and set `EPINIO_TOKEN`,
-`EPINIO_REFRESH_TOKEN`, and `EPINIO_TOKEN_ENDPOINT` instead.
+`EPINIO_MCP_RESOURCE_URL` must exactly match the URL entered in the MCP client,
+including any path. `EPINIO_MCP_OIDC_ISSUER` is the issuer reported by Dex's
+OpenID Connect discovery document. Both values are required.
+
+The server does not store an Epinio username, password, access token, or refresh
+token. Every MCP request must carry credentials that Epinio accepts. Tools
+therefore run with the calling user's permissions instead of a shared server
+identity.
 
 The push runs the full build cycle (upload source, stage, deploy, wait for ready)
 and assigns a route, for example `https://epinio-mcp.192.168.X.X.sslip.io`. The
 MCP endpoint is that route's root — point your agent at the URL as-is (no `/mcp`
 suffix).
+
+## Configure Dex for OAuth clients
+
+OAuth-capable MCP clients discover Dex through the MCP server, open the Dex
+login page, and return an access token to the server. Dex requires each client
+and its exact callback URI to be registered in the `dex-config` Secret.
+
+For example, a public client used by Claude can be added to `staticClients`:
+
+```yaml
+- id: claude-mcp
+  name: Claude MCP
+  public: true
+  redirectURIs:
+    # Claude on the web
+    - https://claude.ai/api/mcp/auth_callback
+    # Claude Code with --callback-port 3118
+    - http://localhost:3118/callback
+    - http://127.0.0.1:3118/callback
+```
+
+Also add the client ID to the `trustedPeers` of `epinio-api`:
+
+```yaml
+- id: epinio-api
+  # ...
+  trustedPeers:
+    - epinio-cli
+    - epinio-ui
+    - claude-mcp
+```
+
+Back up the Secret before changing it:
+
+```bash
+kubectl get secret dex-config -n epinio -o yaml > dex-config-backup.yaml
+kubectl get secret dex-config -n epinio \
+  -o jsonpath='{.data.config\.yaml}' | base64 -d > dex-config.yaml
+```
+
+After editing `dex-config.yaml`, update only its key in the existing Secret so
+the other Dex settings are preserved, then restart Dex:
+
+```bash
+CONFIG=$(base64 < dex-config.yaml | tr -d '\n')
+kubectl patch secret dex-config -n epinio --type merge \
+  -p "{\"data\":{\"config.yaml\":\"${CONFIG}\"}}"
+kubectl rollout restart deployment/dex -n epinio
+kubectl rollout status deployment/dex -n epinio
+```
+
+:::note
+The Epinio Helm chart manages `dex-config`. Reapply this customization after an
+upgrade that replaces the Secret.
+:::
+
+Dex does not support dynamic client registration or Client ID Metadata
+Documents (CIMD). Configure the client ID explicitly in clients that support
+it. For Claude Code:
+
+```bash
+claude mcp add --transport http \
+  --client-id claude-mcp --callback-port 3118 \
+  epinio https://epinio-mcp.your-cluster.example.com
+```
+
+Other MCP clients can use the same OAuth flow, but need their own registered
+client ID and exact callback URI. A local Epinio user can instead supply HTTP
+Basic credentials when the MCP client supports manual authorization headers.
 
 ### Elevated tier (optional)
 
@@ -97,7 +174,8 @@ RBAC. The install manifest is self-contained: it creates the namespace, the
 server's ServiceAccount and RBAC, the Deployment and Service, and an Epinio `App`
 record so `epinio app list/show/logs` keep working.
 
-Deploy the server (edit the image tag, credentials, and Ingress host first):
+Deploy the server (edit the image tag, authentication URLs, and Ingress host
+first):
 
 ```bash
 kubectl apply -f install/epinio-mcp.yaml
@@ -130,6 +208,18 @@ A healthy `/readyz` response reports the Epinio version it reached:
 ```json
 {"epinio":{"kube_version":"...","platform":"...","version":"..."},"status":"ok","version":"..."}
 ```
+
+Verify OAuth discovery:
+
+```bash
+curl https://epinio-mcp.<your-route>/.well-known/oauth-protected-resource
+curl -i https://epinio-mcp.<your-route>/
+```
+
+The metadata request returns the configured resource and Dex issuer. The
+unauthenticated MCP request returns `401 Unauthorized` with a
+`WWW-Authenticate` header pointing to that metadata. A client can then begin
+the OAuth flow.
 
 ## See also
 

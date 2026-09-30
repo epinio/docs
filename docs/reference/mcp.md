@@ -41,22 +41,64 @@ agent and the Epinio REST API to the cluster:
 
 ```text
 AI Agent (Claude, etc.)
-    | MCP protocol (Streamable HTTP, served at the server root)
+    | MCP protocol (Streamable HTTP) + caller credentials
 Epinio MCP Server
-    | REST API (Basic Auth or OIDC, TLS)
+    | REST API using the same caller credentials
 Epinio API Server
     | Kubernetes API
 Kubernetes Cluster
 ```
 
-Authentication is per request: the agent passes an `Authorization` header
-(`Bearer <token>` or `Basic <base64(user:pass)>`) that the server forwards to
-Epinio. When no header is present, the server falls back to the credentials it was
-configured with (default `admin` / `password`).
+The MCP endpoint is served at the server root. Authentication is mandatory and
+per caller: the agent passes either an OIDC bearer token or HTTP Basic
+credentials, and the MCP server asks Epinio's authenticated `/me` endpoint to
+validate it. Epinio remains the authority for users and permissions.
+
+There is no anonymous mode or shared server-credential fallback. A request
+without credentials receives `401 Unauthorized` and cannot access tools. Every
+tool call uses an Epinio API client created from the caller's credential, so
+the result is limited by that user's Epinio permissions.
 
 By default every tool wires **only** to the Epinio REST API, as the calling user.
 An optional [elevated tier](#elevated-tier) that reaches directly into Kubernetes
 is off unless explicitly enabled.
+
+### OAuth discovery
+
+The server is an OAuth 2.0 protected resource. It exposes
+`/.well-known/oauth-protected-resource`, which contains:
+
+- The MCP resource URL.
+- The Dex authorization-server issuer.
+- The supported bearer-token method and scopes.
+
+An unauthenticated MCP request returns a `WWW-Authenticate` challenge pointing
+to this document. An OAuth-capable MCP client can then discover Dex, perform
+Authorization Code with PKCE, and send the resulting access token as
+`Authorization: Bearer <token>`.
+
+Epinio accepts tokens intended for the `epinio-api` client. The MCP OAuth client
+must therefore be registered as a trusted peer of `epinio-api`, and request the
+`audience:server:client_id:epinio-api` scope. Dex requires static client
+registration and an exact callback URI; it does not support dynamic client
+registration or Client ID Metadata Documents (CIMD).
+
+See [Install the MCP server](../getting-started/install-mcp#configure-dex-for-oauth-clients)
+for Dex configuration and a Claude Code example. Compatibility with another
+MCP client depends on its support for Streamable HTTP, protected-resource
+discovery, and an explicitly configured OAuth client ID.
+
+### Authentication configuration
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `EPINIO_API_URL` | Yes | Epinio API base URL. |
+| `EPINIO_MCP_RESOURCE_URL` | Yes | Exact MCP URL entered by users and advertised in protected-resource metadata. |
+| `EPINIO_MCP_OIDC_ISSUER` | Yes | Dex issuer URL advertised to OAuth clients. |
+
+The resource URL is compared exactly by OAuth clients, so scheme, hostname,
+port, and path must match. The issuer must match the `issuer` field in Dex's
+OpenID Connect discovery document.
 
 ## Core tools
 
