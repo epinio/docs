@@ -20,19 +20,19 @@ Find the latest version at [Releases](https://github.com/epinio/epinio/releases)
 ### Linux
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.14.0/epinio-linux-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.14.2/epinio-linux-x86_64
 ```
 
 ### MacOS
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.14.0/epinio-darwin-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.14.2/epinio-darwin-x86_64
 ```
 
 ### Windows
 
 ```bash
- curl -LO https://github.com/epinio/epinio/releases/download/v1.14.0/epinio-windows-x86_64.zip
+ curl -LO https://github.com/epinio/epinio/releases/download/v1.14.2/epinio-windows-x86_64.zip
 ```
 
 ### Make the Binary Executable (Linux and Mac)
@@ -53,15 +53,15 @@ The following commands were tested using cosign version 2.1.1.
 Instead of signing all release assets, Epinio signs a file containing checksums for the release assets.
 From the repository you can download the three files:
 
-- `epinio_1.14.0_checksums.txt.pem`,
-- `epinio_1.14.0_checksums.txt.sig`,
-- `epinio_1.14.0_checksums.txt`
+- `epinio_1.14.2_checksums.txt.pem`,
+- `epinio_1.14.2_checksums.txt.sig`,
+- `epinio_1.14.2_checksums.txt`
 
 
 ```bash
-curl -LO https://github.com/epinio/epinio/releases/download/v1.14.0/epinio_1.14.0_checksums.txt.pem
-curl -LO https://github.com/epinio/epinio/releases/download/v1.14.0/epinio_1.14.0_checksums.txt.sig
-curl -LO https://github.com/epinio/epinio/releases/download/v1.14.0/epinio_1.14.0_checksums.txt
+curl -LO https://github.com/epinio/epinio/releases/download/v1.14.2/epinio_1.14.2_checksums.txt.pem
+curl -LO https://github.com/epinio/epinio/releases/download/v1.14.2/epinio_1.14.2_checksums.txt.sig
+curl -LO https://github.com/epinio/epinio/releases/download/v1.14.2/epinio_1.14.2_checksums.txt
 ```
 
 Once you have the three files locally, you can execute the following command
@@ -70,9 +70,9 @@ Once you have the three files locally, you can execute the following command
 cosign verify-blob \
 	--certificate-identity-regexp "https://github.com/epinio/epinio" \
 	--certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
-	--cert      epinio_1.14.0_checksums.txt.pem \
-	--signature epinio_1.14.0_checksums.txt.sig \
-	epinio_1.14.0_checksums.txt
+	--cert      epinio_1.14.2_checksums.txt.pem \
+	--signature epinio_1.14.2_checksums.txt.sig \
+	epinio_1.14.2_checksums.txt
 ```
 
 A successful output looks like
@@ -89,7 +89,7 @@ Before verifying the file integrity, you should first verify the checksum file s
 Once you’ve downloaded both the checksums and your binary, you can verify integrity by running:
 
 ```bash
-sha256sum --ignore-missing -c epinio_1.14.0_checksums.txt
+sha256sum --ignore-missing -c epinio_1.14.2_checksums.txt
 ```
 
 :::note
@@ -107,7 +107,7 @@ Run `epinio version` to test the successful installation.
 
 ```bash
 > epinio version
-Epinio Version: v1.14.0
+Epinio Version: v1.14.2
 Go Version: go1.20
 ```
 
