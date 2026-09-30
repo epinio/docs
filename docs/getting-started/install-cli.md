@@ -20,19 +20,19 @@ Find the latest version at [Releases](https://github.com/epinio/epinio/releases)
 ### Linux
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.14.0/epinio-linux-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.14.2/epinio-linux-x86_64
 ```
 
 ### MacOS
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.14.0/epinio-darwin-x86_64
+curl -o epinio -L https://github.com/epinio/epinio/releases/download/v1.14.2/epinio-darwin-x86_64
 ```
 
 ### Windows
 
 ```bash
- curl -LO https://github.com/epinio/epinio/releases/download/v1.14.0/epinio-windows-x86_64.zip
+ curl -LO https://github.com/epinio/epinio/releases/download/v1.14.2/epinio-windows-x86_64.zip
 ```
 
 ### Make the Binary Executable (Linux and Mac)
