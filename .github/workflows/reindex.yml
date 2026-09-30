@@ -47,7 +47,7 @@ jobs:
         env:
           # Application ID is public (it also ships in docusaurus.config.js), so it is
           # safe to hardcode. Only the admin (write) key must stay a secret.
-          APPLICATION_ID: K463YJU60O
+          APPLICATION_ID: F9GBZ0DFYI
           API_KEY: ${{ secrets.ALGOLIA_ADMIN_API_KEY }}
         run: |
           docker run --rm \
