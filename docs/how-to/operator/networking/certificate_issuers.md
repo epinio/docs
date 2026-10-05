@@ -217,3 +217,16 @@ Example:
 The same is true for applications,
 `epinio push` creates a `certificate` in the app's workspace and
 cert-manager creates a secret for the app's ingress.
+
+## Certificate renewal
+
+cert-manager renews certificates before they expire, including the `epinio-ca` certificate authority itself.
+Components that read their certificate only at startup, such as the built-in container registry, keep serving the old certificate until they restart.
+If staging fails with `x509` errors after a renewal, see
+[Fixing registry certificate errors after CA renewal](../operations/registry_certificate_renewal.md).
+
+## See also
+
+- [Fixing registry certificate errors after CA renewal](../operations/registry_certificate_renewal.md)
+- [Cert Manager](../../../reference/security/cert-manager.md)
+- [Helm chart values](../../../reference/helm.md)

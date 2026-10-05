@@ -152,6 +152,9 @@ Communication between the staging job and container registry is TLS encrypted ev
 
 :::
 
+If staging starts failing with `x509` certificate errors from the built-in registry after cert-manager renews the `epinio-ca` certificate,
+see [Fixing registry certificate errors after CA renewal](./operations/registry_certificate_renewal.md).
+
 ## Other advanced topics
 
 ### Git pushing

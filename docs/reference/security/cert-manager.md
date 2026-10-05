@@ -30,6 +30,14 @@ is installed.
 Epinio development uses Cert Manager version 1.19.3.  For details of this version see the
 [releases](https://cert-manager.io/docs/installation/supported-releases/).
 
+:::note CA renewal with cert-manager 1.18 and later
+
+From version 1.18, cert-manager generates a new private key each time it renews a certificate.
+When the `epinio-ca` certificate renews, the built-in registry keeps serving a certificate signed by the previous CA until its pod restarts, and staging fails with `x509` errors.
+See [Fixing registry certificate errors after CA renewal](../../how-to/operator/operations/registry_certificate_renewal.md).
+
+:::
+
 ## Advanced - Epinio without Cert manager
 
 When Cert Manager (CM) is not installed installation of Epinio is still possible.
