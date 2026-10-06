@@ -185,7 +185,7 @@ The command to verify any of them is
 cosign verify \
        --certificate-identity-regexp "https://github.com/epinio/epinio" \
        --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
-       ghcr.io/epinio/<IMAGE>:v1.14.0
+       ghcr.io/epinio/<IMAGE>:v1.14.2
 ```
 
 where `<IMAGE>` is the name of the image to verify.
