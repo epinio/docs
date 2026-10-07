@@ -74,19 +74,35 @@ The request is `multipart/form-data`, with these parts:
 |`description`        |Optional.                                                  |
 |`short_description`  |Optional.                                                  |
 
-The handler (`internal/api/v1/appchart/push.go`)
+The handler (`internal/api/v1/appchart/push.go`) reads the upload, checks the name, loads the chart, and maps
+errors to HTTP statuses. Loading (`appchart.LoadChartArchive`) checks that the upload is a valid Helm chart of
+type `application` (or with no type), before the cluster is touched. The rest of the work is done in
+`internal/appchart` (`appchart.Push`), like the creation of an `AppChart` is done by `appchart.Create`. It
 
-1. checks the name, and that the upload is a valid Helm chart of type `application` (or with no type),
-   before touching the cluster,
-2. refuses names of existing `AppChart`s with `409 Conflict`,
-3. pushes the chart with Helm to `oci://<registry>/epinio-charts`, logged in as described above, and
-4. creates an `AppChart` with `helmRepo: oci://<registry>/epinio-charts` and `helmChart: NAME:VERSION`,
-   taking name and version from the chart.
+1. refuses names of existing `AppChart`s with `409 Conflict`,
+2. refuses a chart name and version which is already stored for the `AppChart`, with `409 Conflict`,
+3. creates an `AppChart` with `helmRepo: oci://<registry>/epinio-charts/<AppChart name>` and
+   `helmChart: NAME:VERSION`, taking name and version from the chart, and
+4. pushes the chart with Helm to that repository, logged in as described above. When the push fails
+   the `AppChart` is removed again.
+
+Creating the `AppChart` first reserves the name, and leaves nothing in the registry should the creation fail.
 
 The action `chart_write` is required. The size of the upload is limited to 32 MiB.
 
-The registry keeps one chart per name and version.
-Pushing the same name and version again replaces it for all `AppChart`s referencing it.
+Every `AppChart` has a repository of its own, named after it. The charts of different `AppChart`s can
+therefore not replace each other. A stored chart version is never replaced, so that the chart behind
+deployed applications does not change.
+
+## Deleting charts
+
+`DELETE /api/v1/appcharts/<name>` (`appchart.DeleteWithChart`) removes the chart from the registry
+before it deletes the `AppChart`, if the chart is stored in the repository of Epinio's registry named like
+the `AppChart`. Only that repository is touched. `AppChart`s referencing a URL, a Helm repository,
+or another OCI registry are not stored by Epinio, and only the `AppChart` is deleted for them.
+
+The `AppChart` is kept when the chart cannot be removed, so that the deletion can be retried.
+Removing a chart which is not in the registry is not an error.
 
 ## Default charts
 
@@ -111,14 +127,14 @@ epinio app chart push oci-test ./<chart-name>-0.9.0.tgz --short-description "OCI
 epinio app chart show oci-test
 ```
 
-`Helm Repository` has to be `oci://<registry>/epinio-charts`, and `Helm Chart` `<chart-name>:0.9.0`.
+`Helm Repository` has to be `oci://<registry>/epinio-charts/oci-test`, and `Helm Chart` `<chart-name>:0.9.0`.
 
 Optionally check the registry itself. This is for verification only, users do not need it.
 The registry credentials are in the secret `registry-creds`:
 
 ```bash
 kubectl -n <epinio-namespace> port-forward svc/registry 5000:5000 &
-curl -k -u <username>:<password> https://localhost:5000/v2/epinio-charts/<chart-name>/tags/list
+curl -k -u <username>:<password> https://localhost:5000/v2/epinio-charts/oci-test/<chart-name>/tags/list
 ```
 
 The tag `0.9.0` has to be listed.
@@ -146,15 +162,27 @@ Push a chart with a new version under another name, and switch the application t
 |Test                                                       |Expected result                                    |
 |---                                                        |---                                                |
 |Push again with the same `AppChart` name                   |`409`, `already exists`                            |
+|Delete the `AppChart` with `kubectl`, and push the same chart for the same name again|`409`, the version is already stored, bump the version|
 |Push a file which is not a chart archive                   |`400`, `not a valid helm chart archive`            |
 |Push with a name which is not a valid Kubernetes name      |`400`, `invalid application chart name`            |
 |Deploy with an `AppChart` whose `helmRepo` is a host which is not Epinio's own, for example `oci://registry.invalid.example:5000/charts`|Failure to fetch the chart from that host. The request to the host carries no `Authorization` header, and there is no login error.|
+
+### 5. Delete
+
+`epinio app chart delete oci-test` has to remove the `AppChart`, and the chart from the registry. The list of
+tags of `oci-test/<chart-name>` is empty afterwards, and the same chart can be pushed again under that name.
+The log of the server shows `Deleting image from registry`. For an `AppChart` referencing a URL it does not.
 
 ## Known limitations
 
 - Private external OCI registries are not supported.
 - Charts can only be pushed to Epinio's own registry.
-- Pushing a chart again with the same name and version replaces the stored chart.
+- An `AppChart` deleted with `kubectl` leaves its chart in the registry.
+  Deleting it with `epinio app chart delete` removes both.
+- When the server stops between the creation of the `AppChart` and the push of the chart, the `AppChart`
+  exists without a chart. Deleting it removes it.
+- Removing a chart deletes its manifest and tags from the registry. The data blobs stay in the storage of the
+  registry until its garbage collection is run. Epinio does not schedule one, as for application images.
 
 ## Related
 

@@ -111,8 +111,8 @@ The `global` section carries the cross-cutting settings:
 
 The default [application charts](concepts/appcharts.md#chart-sources) are stored in an OCI registry:
 
-- **`appChart.repo`** — the OCI repository (`oci://...`) holding the default application charts. Defaults to `oci://ghcr.io/epinio/charts`.
-- **`appChart.default` / `appChart.gatewayAPI`** — name and version (`NAME:VERSION`) of the `standard` and `gateway-api-application` charts in that repository.
+- **`appChart.repo`** â€” the OCI repository (`oci://...`) holding the default application charts. Defaults to `oci://ghcr.io/epinio/charts`.
+- **`appChart.default` / `appChart.gatewayAPI`** â€” name and version (`NAME:VERSION`) of the `standard` and `gateway-api-application` charts in that repository.
 
 To fetch a default chart from a tarball URL instead, set its value to the URL, for example
 `appChart.default: https://example.com/epinio-application-0.1.26.tgz`. The `repo` is then ignored for that chart.
