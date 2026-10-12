@@ -70,40 +70,75 @@ The commands assume Epinio is installed in the `epinio` namespace.
      | base64 -d | openssl x509 -noout -dates -fingerprint
    ```
 
-1. Check when the registry pod started:
+1. Check when the registry container last started:
 
    ```bash
-   kubectl -n epinio get pods -l app.kubernetes.io/name=epinio-registry
+   kubectl -n epinio get pods -l app.kubernetes.io/name=epinio-registry -o jsonpath=\
+   '{.items[0].status.containerStatuses[?(@.name=="registry")].state.running.startedAt}{"\n"}'
    ```
 
-If the fingerprints differ, and the pod is older than the `notBefore` date of the secret's certificate, the registry is serving a stale certificate. Continue with the fix.
+If the fingerprints differ, and the container started before the `notBefore` date of the secret's certificate, the registry is serving a stale certificate. Continue with the fix.
 
-## Fix: restart the registry pod
+## Check where the registry stores images
 
-Delete the registry pod. Its Deployment recreates it, and the new pod loads the current certificate:
+Before restarting anything, check which volume holds the registry's images:
 
 ```bash
-kubectl -n epinio delete pod -l app.kubernetes.io/name=epinio-registry
-kubectl -n epinio rollout status deployment/registry
+kubectl -n epinio get deployment registry \
+  -o jsonpath='{.spec.template.spec.volumes[?(@.name=="registry")]}{"\n"}'
 ```
 
-:::note Stored images are kept
+| Output contains | Storage | Images survive a new pod? |
+| --- | --- | --- |
+| `"emptyDir":{}` | Scratch space inside the pod. The chart default (`containerregistry.storage.emptyDir: true`). | **No.** Every image is deleted with the pod. |
+| `"persistentVolumeClaim"` | The `epinio-registry` PersistentVolumeClaim (`containerregistry.storage.emptyDir: false`) | Yes |
 
-The registry stores images on the `epinio-registry` PersistentVolumeClaim, which survives the pod being replaced.
-The registry is unavailable for the few seconds it takes the new pod to start. Pushes and image pulls during that window fail and need to be retried.
+:::warning Do not delete the registry pod on `emptyDir` storage
 
-:::
-
-:::tip Why not `kubectl rollout restart`?
-
-`rollout restart` starts the new pod before stopping the old one.
-With a `ReadWriteOnce` volume, which most block storage provides, the new pod can't attach the volume while the old pod holds it. If the new pod lands on another node, it waits forever and the old pod keeps serving the stale certificate.
-Deleting the pod releases the volume first.
+With `emptyDir` storage, deleting the registry pod, `kubectl rollout restart`, a node drain, or anything else that replaces the pod deletes every stored image.
+Running applications keep working from images their nodes have already pulled, but an application that starts on a node without its image fails with `ImagePullBackOff` until you rebuild it with `epinio app restage <app>`.
+Use the fix below, which restarts only the registry container and keeps the pod.
 
 :::
+
+## Fix: restart the registry container
+
+Restarting the `registry` container inside the existing pod makes it read the current certificate.
+The pod, and the images on its volume, stay in place. This works for both storage types.
+
+1. Wait until the pod sees the renewed certificate.
+   Kubernetes updates the mounted copy of the `epinio-registry-tls` secret within a minute or two of the renewal.
+   Compare its fingerprint with the secret's, from step 2 of [Confirm the cause](#confirm-the-cause):
+
+   ```bash
+   kubectl -n epinio exec deploy/registry -c registry -- cat /certs/tls.crt \
+     | openssl x509 -noout -fingerprint
+   ```
+
+   Repeat until the two fingerprints match.
+
+1. Restart the container and wait for it to become ready:
+
+   ```bash
+   kubectl -n epinio exec deploy/registry -c registry -- kill 1
+   sleep 5   # let Kubernetes notice the container stopped
+   kubectl -n epinio wait pod -l app.kubernetes.io/name=epinio-registry \
+     --for=condition=Ready --timeout=120s
+   ```
+
+   `kubectl get pods` now shows one more restart for the pod, and the same pod name.
+
+The registry is unavailable for the few seconds it takes the container to start. Pushes and image pulls during that window fail and need to be retried.
 
 Repeat the first command from [Confirm the cause](#confirm-the-cause). The fingerprint now matches the secret.
 Push the application again to confirm staging succeeds.
+
+:::tip With `persistentVolumeClaim` storage you can also delete the pod
+
+Deleting the pod (`kubectl -n epinio delete pod -l app.kubernetes.io/name=epinio-registry`) also works when images are on the PersistentVolumeClaim.
+Avoid `kubectl rollout restart`: it starts the new pod before stopping the old one, and with a `ReadWriteOnce` volume, which most block storage provides, a new pod on another node can't attach the volume while the old pod holds it.
+
+:::
 
 ## Stay ahead of the next renewal
 
@@ -128,7 +163,9 @@ Then pick one of these approaches:
   ```
 
   The Epinio chart doesn't set this annotation, so check that it is still present after each Epinio upgrade.
-  Reloader performs a rolling restart, so the `ReadWriteOnce` limit described in the tip above still applies.
+  Reloader performs a rolling restart, which replaces the pod. Use it only with `persistentVolumeClaim` storage: on `emptyDir` storage every renewal would delete all stored images. The `ReadWriteOnce` limit described in the tip above also applies.
+
+To keep images across pod restarts, node failures and upgrades, move the registry to persistent storage. See [Run the registry and SeaweedFS on persistent storage](../cluster-config/persistent_storage.md).
 
 ## See also
 
