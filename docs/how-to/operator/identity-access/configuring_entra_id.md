@@ -76,10 +76,19 @@ Dex provides [documentation](https://dexidp.io/docs/connectors/microsoft/) on th
 - **Client Secret** (from Step #2)
 - **Redirect URI**
 
-We need to update the `dex-config` secret within the `epinio` namespace (depending on your installation namespace).  We will append the following block to the bottom of our config at secret key `config.yaml`:
+Store the client secret in a Kubernetes secret, so it stays out of your Helm
+values:
+
+```bash
+kubectl create secret generic dex-entra -n epinio \
+  --from-literal=clientSecret='<client-secret>'
+```
+
+Add the connector to your Helm values, for example in `dex-values.yaml`:
 
 ```yaml
-connectors:
+dex:
+  connectors:
   - type: microsoft
     # Required field for connector id.
     id: microsoft
@@ -87,9 +96,23 @@ connectors:
     name: Microsoft
     config:
       clientID: <client-id>
-      clientSecret: <client-secret>
+      # Dex expands this from the environment variable set below.
+      clientSecret: $ENTRA_CLIENT_SECRET
       redirectURI: https://auth.<your-domain>/callback
       tenant: <tenant-id>
+  envVars:
+  - name: ENTRA_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: dex-entra
+        key: clientSecret
 ```
 
-Restart or redeploy the **Dex** deployment in your cluster.  The Entra ID connector set up should now be complete and you should be able to log in through Microsoft Entra ID.
+Apply it and restart Dex, which reads its configuration only at startup:
+
+```bash
+helm upgrade epinio epinio/epinio -n epinio --reuse-values -f dex-values.yaml
+kubectl rollout restart deployment dex -n epinio
+```
+
+The Entra ID connector set up should now be complete and you should be able to log in through Microsoft Entra ID. Do not edit the `dex-config` secret directly: the next `helm upgrade` overwrites it. See [Configuring Dex](../../../reference/security/authentication_oidc.md#configuring-dex) for the full set of values.
