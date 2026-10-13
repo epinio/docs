@@ -1,0 +1,75 @@
+---
+sidebar_label: Helm Charts
+sidebar_position: 3
+title: Releasing Helm Charts
+description: Overview of the process for publishing updated Epinio Helm charts.
+keywords: [epinio, contribute, helm, charts, release]
+doc-type: [contribute]
+doc-topic: [epinio, contribute, helm, charts]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+## Overview
+
+<img
+  src={require('./app-charts-overview.png').default}
+  alt="Helm Chart Overview"
+  width="800"
+/>
+
+## Release Process
+
+### 1. Preparing for Release
+
+a. You do not start this by hand. The server release sends an `epinio-release` repository dispatch, which runs __Updatecli__ (`updatecli.yml`) and opens a version bump PR. Updatecli also runs hourly on a cron.
+
+b. Review and merge that PR. It bumps the chart versions in chart/*/Chart.yaml and the Epinio image tags in `chart/epinio/values.yaml`.
+
+c. Before merging, check that every chart's `name:` in its `Chart.yaml` is unique and matches its directory name. Nothing in CI checks this and a collision fails silently later.
+
+d. The PR runs __Lint and test chart installation__ (`main-ci.yml`): `lint-test` runs `ct lint`, then `installation-test` spins up a k3d cluster and runs `ct install`. Note that `ct` only touches charts that changed, so an untouched chart is neither linted nor installed.
+
+### 2. Building the epiniod Image
+
+a. Run the __Build epiniod image__ workflow (`build-epiniod.yml`) first, per the release docs. It is `workflow_dispatch`, so you trigger it from the Actions tab.
+
+b. It derives its tag from `helm show chart epinio/epinio` against the published Helm repo, then builds and pushes `ghcr.io/epinio/epiniod` at that version plus `:latest` from the `images/` directory.
+
+### 3. Releasing the Charts
+
+a. Run the __Release Charts__ workflow (`release.yml`). It is `workflow_dispatch` only, so nothing triggers it automatically. Merging the bump PR does not publish anything.
+
+b. The workflow installs Helm v3.7.2, adds the nine chart dependency repos, then runs `chart-releaser-action@v1.7.0` over `charts_dir: chart`. 
+
+c. chart-releaser packages every chart, creates a git tag and GitHub release per chart, and pushes the updated `index.yaml` and `.tgz` assets to the `gh-pages` branch.
+
+d. `pages-build-deployment` then publishes `gh-pages`, so the charts become installable from `https://epinio.github.io/helm-charts`.
+
+### 4. Post Release Tasking
+
+a. __Verify each chart actually published__. For every chart you expected, confirm the git tag, the GitHub release, the `.tgz` asset, and a matching key in the published `index.yaml`.
+
+b. That check matters because `CR_SKIP_EXISTING: true` makes chart-releaser skip anything whose tag already exists and still report success. A chart name collision or an already-taken tag therefore looks like a clean release. This is how `application-gateway-api` went unpublished for the whole 1.14.1 cycle while every run was green.
+
+c. To backfill a missing artifact, re-run the workflow: with `CR_SKIP_EXISTING` a re-run is purely additive. To change something already published, bump the version. Never delete a release and recreate it to replace content.
+
+d. Its important to close out or update any public GitHub issues that were resolved as part of the release, clean up branches, and ensure that main and any future version branches are synced.
+
+## Closer Look
+
+To learn more about each of the workflows that run take a look at the mapping and visual flow below.
+
+| File |Process |
+| --------------- | --------------- |
+| release.yml   | Release Charts. chart-releaser packages and publishes every chart in `chart/`. Manual trigger only   |
+| build-epiniod.yml   | Build epiniod image. Pushes `ghcr.io/epinio/epiniod`, tagged from the published chart version   |
+| main-ci.yml   | Lint and test chart installation. `lint-test` then `installation-test` on k3d   |
+| updatecli.yml   | Updatecli dependency management. Opens the version bump PR on dispatch from the server release, and hourly   |
+| sync-readme.yml   | Copies README.md from main onto the gh-pages branch   |
+| add_issue_to_project.yml   | Repository hygiene   |
+
+<img
+  src={require('./app-charts-workflow.png').default}
+  alt="Helm Chart Workflow"
+  width="800"
+/>

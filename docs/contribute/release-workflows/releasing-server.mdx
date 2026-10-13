@@ -1,0 +1,77 @@
+---
+sidebar_label: Server
+sidebar_position: 2
+title: Releasing Server
+description: Overview of the process for publishing updated Epinio Server.
+keywords: [epinio, contribute, server, release]
+doc-type: [contribute]
+doc-topic: [epinio, contribute, server]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+## Overview
+
+<img
+  src={require('./server-overview.png').default}
+  alt="Server Overview"
+  width="800"
+/>
+
+## Release Process
+
+### 1. Preparing for Release
+
+a. Nothing in the repository needs a version bump. GoReleaser stamps the version from the tag into `internal/version.Version`.
+
+b. Check the `helm-charts` submodule points at the commit you want. The release attaches `helm-charts/chart/epinio/crds/*` as assets, and the checkout is `submodules: recursive`.
+
+c. Optionally run __Release Sandbox__ (`release-sandbox.yml`) first. It runs GoReleaser in snapshot mode and publishes nothing, so it is a safe dry run of the whole build.
+
+### 2. Cutting the Release
+
+a. Push a tag of the form `v<version>`. For example if I wanted to release `1.14.1`, I would push `v1.14.1`. Release candidates use `v1.14.2-rc1` and GoReleaser marks them as pre-releases via `prerelease: auto`.
+
+b. The __Release__ workflow (`release.yml`) kicks off. GoReleaser 1.20.0 builds the CLI for seven targets, builds and pushes the `epinio-server` and `epinio-unpacker` images with their multi-arch manifests plus `:latest`, generates SBOMs with syft, and signs the images and checksum with cosign.
+
+c. Release Drafter runs again after GoReleaser, because the changelog is delegated to it (`changelog.skip: true`) and GoReleaser replaces the draft.
+
+d. The workflow verifies both images with `cosign verify`, then sends an `epinio-release` repository dispatch to `epinio/helm-charts` to start the chart version bump.
+
+### 3. Publishing the Release
+
+a. __GoReleaser leaves the GitHub release as a draft__ (`release.draft: true`). Nothing downstream of the release event runs until someone publishes it by hand.
+
+b. Review the generated notes, then publish. Publish a GA version as a full release, not a pre-release.
+
+c. Publishing fires __Release Published__ (`release-publish.yml`), which dispatches `epinio-release` to `epinio/docs` and `epinio/extension-docker-desktop`, and bumps the Homebrew formula in `epinio/homebrew-tap`.
+
+d. Homebrew is covered in two places. GoReleaser pushes the formula for `rc` tags, and Release Published bumps it for everything else. Release Published listens for the `released` event, so it never runs for a pre-release.
+
+### 4. Post Release Tasking
+
+a. Confirm the version bump PR opened on `epinio/helm-charts`, then follow the Helm Chart Release Workflow to publish the chart.
+
+b. Confirm the version bump PR opened on `epinio/docs`.
+
+c. Its important to close out or update any public GitHub issues that were resolved as part of the release, clean up branches, and ensure that main, development, and any future version branches are created or synced.
+
+## Closer Look
+
+To learn more about each of the workflows that run take a look at the mapping and visual flow below.
+
+| File |Process |
+| --------------- | --------------- |
+| release.yml   | Release: GoReleaser build, sign, draft the release, dispatch to helm-charts   |
+| release-publish.yml   | Release Published: dispatch to docs and the Docker Desktop extension, Homebrew bump   |
+| release-sandbox.yml   | Release dry run. GoReleaser snapshot, publishes nothing   |
+| release-drafter.yml   | Drafts the release notes   |
+| main.yml   | Acceptance test suites (CLI, API, apps, services)   |
+| golangci-lint.yml   | Lint   |
+| clientsync.yml   | Client and server version sync test   |
+| codeql-analysis.yml   | CodeQL analysis   |
+
+<img
+  src={require('./server-workflow.png').default}
+  alt="Server Workflow"
+  width="800"
+/>

@@ -1,0 +1,72 @@
+---
+sidebar_label: Install Operator
+sidebar_position: 6
+title: Releasing Install Operator
+description: Overview of the process for publishing updated Epinio Install Operator.
+keywords: [epinio, contribute, install, operator, release]
+doc-type: [contribute]
+doc-topic: [epinio, contribute, install, operator]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+## Overview
+
+<img
+  src={require('./install-operator-overview.png').default}
+  alt="Install Operator Overview"
+  width="800"
+/>
+
+## Release Process
+
+### 1. Preparing for Release
+
+a. Nothing in the repository needs a version bump. The image tag comes from the git tag via `github.ref_name`.
+
+b. Run `make manifests generate` locally and commit any diff. CI runs both as part of `make test`, but it regenerates in place and then tests the regenerated tree, so it will never fail on stale CRDs or `zz_generated` files.
+
+c. This is a Kubebuilder v4 project. The API is `InstallEpinio` `v1alpha1` in group `epinio`, domain `apps.epinio.io`, so a change to `api/v1alpha1` means regenerated CRDs under `config/crd/bases`.
+
+### 2. Reviewing the PR
+
+a. Three checks run on every PR: __Lint__ (`lint.yml`), __Tests__ (`test.yml`), and __E2E Tests__ (`test-e2e.yml`). Each one is also exposed as a reusable workflow via `workflow_call`.
+
+b. All three name their job `Run on Ubuntu`, so the PR shows three checks with the same name. You have to open each one to tell lint from unit tests from e2e.
+
+c. E2E creates a real kind cluster called `epinio-test-e2e`, runs the ginkgo suite in `test/e2e/`, then deletes the cluster.
+
+### 3. Cutting the Release
+
+a. Push a tag of the form `v<version>`. Only a tag push triggers __Publish__ (`publish.yml`); there is no manual dispatch.
+
+b. Publish re-runs lint, test, and test-e2e as reusable workflows, then runs `build-push` with `needs: [lint, test, test-e2e]`, so a failure in any of the three blocks the image.
+
+c. `build-push` logs into ghcr.io using the `GHCR_PUSH` secret, sets up Buildx, and runs `make docker-buildx IMG=ghcr.io/epinio/install-operator:<tag>` across four platforms: `linux/amd64`, `arm64`, `s390x`, and `ppc64le`.
+
+### 4. Post Release Tasking
+
+a. __Confirm the image actually exists at__ `ghcr.io/epinio/install-operator:<tag>`. The `docker-buildx` target in the Makefile prefixes its `buildx build --push` line with a dash, so make ignores a failed push and the workflow still reports success. A green Publish run is not proof that anything was pushed.
+
+b. No `:latest` tag is pushed, so anything tracking latest needs the explicit version.
+
+c. The Helm chart in `charts/install-operator` is not published by any workflow. If consumers need it, package and publish it by hand, or install it from the repo.
+
+d. Its important to close out or update any public GitHub issues that were resolved as part of the release, and clean up branches.
+
+## Closer Look
+
+To learn more about each of the workflows that run take a look at the mapping and visual flow below.
+
+| File |Process |
+| --------------- | --------------- |
+| publish.yml   | Publish. On tags `v*`, calls the three checks then builds and pushes the multi-arch image   |
+| lint.yml   | Lint. `make lint-config` then `make lint`, using a custom golangci-lint built from `.custom-gcl.yml`. Also reusable   |
+| test.yml   | Tests. envtest unit tests with coverage, e2e excluded. Also reusable   |
+| test-e2e.yml   | E2E Tests. kind cluster plus the ginkgo suite in `test/e2e`. Also reusable   |
+
+
+<img
+  src={require('./install-operator-workflow.png').default}
+  alt="Install Operator Workflow"
+  width="800"
+/>
