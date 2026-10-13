@@ -185,7 +185,8 @@ See the [app charts how-to](../../developer/concepts/app-charts/app-charts.mdx) 
 ### Pushing the chart to Epinio's registry
 
 Instead of hosting the tarball on a web server you can push it to Epinio.
-Epinio stores the chart in its own container registry, as an OCI artifact,
+Epinio stores the chart as an OCI artifact in the registry it stores application images in,
+the bundled one or an [external one](../cluster-config/setup_external_registry.md),
 and registers the application chart for it:
 
 ```console
@@ -194,7 +195,7 @@ epinio app chart push fluentd ./epinio-application-0.1.0.tgz \
     --description "Epinio standard support chart extended for fluentd filtering"
 ```
 
-The first argument is the name of the new application chart.
+The first argument is the name of the application chart.
 The second argument is the chart tarball, as created by `helm package`.
 
 The Epinio server validates the chart, creates the application chart referencing it, and stores the
@@ -202,27 +203,31 @@ chart in the registry. The registry credentials are held by the server.
 You neither need nor see them, just like for the images of your applications.
 
 Use `epinio app chart show fluentd` to see where the chart was stored.
-The `Helm Repository` is a reference of the form `oci://REGISTRY/epinio-charts/fluentd`,
-i.e. the repository is named after the application chart.
+The `Helm Repository` is `oci://REGISTRY/NAMESPACE`, the location of the application images,
+and the `Helm Chart` is `epinio_appchart_fluentd:0.1.0`. The chart is stored under the name of the
+application chart, not its own name.
 
 :::note
 
   - Pushing charts requires permission to write application charts (`chart_write`).
     Of the default roles this is available to the `system_manager` and `admin` roles.
 
-  - The name of the application chart must not be in use yet.
+  - Pushing to the name of an application chart which was pushed before replaces its chart.
+    This is refused (`409 Conflict`) while applications use the application chart, so that their
+    chart does not change behind their back. Earlier versions stay in the registry until the
+    application chart is deleted.
 
-  - The chart of an application chart is stored in a repository of its own.
-    The charts of different application charts can therefore not replace each other.
+  - The name of an application chart which was not pushed, for example one referencing a URL,
+    cannot be used (`409 Conflict`).
 
-  - A stored chart is never replaced. A chart name and version which is already stored
-    for the application chart is refused (`409 Conflict`), so that the chart behind deployed
-    applications does not change. Change the chart version when changing the chart.
+  - The chart and Helm repository of a pushed application chart cannot be changed with
+    `epinio app chart update`. Push the new chart to the same name instead.
 
   - `epinio app chart delete` removes the chart from the registry together with the application chart.
+    A registry which does not allow deletion keeps the chart, see
+    [Setting up an external container registry](../cluster-config/setup_external_registry.md#application-charts).
     An application chart deleted in any other way, for example with `kubectl`, leaves its chart in the
-    registry. Pushing the same chart version for an application chart of that name is then refused.
-    Use another chart version or another name.
+    registry. A later push to that name replaces it.
 
 :::
 

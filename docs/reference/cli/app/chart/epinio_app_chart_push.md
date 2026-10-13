@@ -13,8 +13,12 @@ Push a helm chart archive to Epinio's registry as application chart
 
 ### Synopsis
 
-Push a helm chart archive (a .tgz, as created by 'helm package') to Epinio's own
-registry, and create the application chart NAME referencing it.
+Push a helm chart archive (a .tgz, as created by 'helm package')
+to the registry Epinio stores application images in, bundled or external,
+and create the application chart NAME referencing it.
+
+When NAME is an application chart which was pushed before, its chart is replaced. This is
+refused while applications use the application chart.
 
 The registry credentials are held by the Epinio server. They are neither needed nor exposed.
 
