@@ -61,12 +61,16 @@ lost.
 | `dex.rolesMapping` | Maps connector groups to Epinio roles. See [Groups and roles mapping](#groups-and-roles-mapping). |
 | `dex.enablePasswordDB` | Enables the local password database. Default `true`. |
 | `dex.staticPasswords` | Local users. Default `null` keeps `admin@epinio.io` and `epinio@epinio.io`; `[]` removes them. |
-| `dex.additionalStaticClients` | Static clients added after Epinio's own. |
+| `dex.extraStaticClients` | Static clients added after Epinio's own. |
 | `dex.extraConfig` | Other top-level Dex settings, such as `expiry`, `logger` or `frontend`. |
+| `dex.apiTrustedPeers` | Static client IDs the Epinio API trusts to request tokens on its behalf. |
 
-`dex.extraConfig` cannot set keys the chart renders itself (`web`, `issuer`,
-`storage`, `oauth2`, `enablePasswordDB`, `staticPasswords`, `staticClients`,
-`connectors`). The install fails with a message naming the key if it tries.
+`dex.extraConfig` is merged into the same file, so it cannot repeat a key the
+chart already writes. Set `connectors`, `enablePasswordDB` and
+`staticPasswords` through their own values above, and add clients with
+`dex.extraStaticClients`. `web`, `issuer`, `storage` and `oauth2` are fixed by
+the chart. If `extraConfig` contains any of these keys, the install fails with
+a message naming the key.
 
 ### Keeping client secrets out of values
 
