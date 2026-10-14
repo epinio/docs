@@ -28,10 +28,12 @@ capabilities through CLI commands, with nothing to deploy.
 
 ## Prerequisites
 
-- A Kubernetes cluster with [Epinio](./install-epinio.md) **1.14.1 or later**
-  installed. The server relies on the builder-image, catalog-service, and
-  app-chart CRUD API and the source-retrieval endpoint added in 1.14.1, so it
-  will not work against earlier releases.
+- A Kubernetes cluster with a current
+  [Epinio release](https://github.com/epinio/epinio/releases) installed. The
+  server relies on the builder-image, catalog-service, and app-chart CRUD API
+  and the source-retrieval endpoint, and login relies on the chart's
+  `dex.extraStaticClients` and `dex.apiTrustedPeers` values. Older releases
+  lack one or the other.
 - `kubectl` and the [`epinio` CLI](./install-cli.md) pointed at your cluster.
 - `make` and a Go toolchain, plus a clone of [epinio/mcp](https://github.com/epinio/mcp).
 - A route for the MCP server. OAuth clients outside the cluster require a
@@ -83,75 +85,6 @@ and assigns a route, for example `https://epinio-mcp.192.168.X.X.sslip.io`. The
 MCP endpoint is that route's root — point your agent at the URL as-is (no `/mcp`
 suffix).
 
-## Configure Dex for OAuth clients
-
-OAuth-capable MCP clients discover Dex through the MCP server, open the Dex
-login page, and return an access token to the server. Dex requires each client
-and its exact callback URI to be registered in the `dex-config` Secret.
-
-For example, a public client used by Claude can be added to `staticClients`:
-
-```yaml
-- id: claude-mcp
-  name: Claude MCP
-  public: true
-  redirectURIs:
-    # Claude on the web
-    - https://claude.ai/api/mcp/auth_callback
-    # Claude Code with --callback-port 3118
-    - http://localhost:3118/callback
-    - http://127.0.0.1:3118/callback
-```
-
-Also add the client ID to the `trustedPeers` of `epinio-api`:
-
-```yaml
-- id: epinio-api
-  # ...
-  trustedPeers:
-    - epinio-cli
-    - epinio-ui
-    - claude-mcp
-```
-
-Back up the Secret before changing it:
-
-```bash
-kubectl get secret dex-config -n epinio -o yaml > dex-config-backup.yaml
-kubectl get secret dex-config -n epinio \
-  -o jsonpath='{.data.config\.yaml}' | base64 -d > dex-config.yaml
-```
-
-After editing `dex-config.yaml`, update only its key in the existing Secret so
-the other Dex settings are preserved, then restart Dex:
-
-```bash
-CONFIG=$(base64 < dex-config.yaml | tr -d '\n')
-kubectl patch secret dex-config -n epinio --type merge \
-  -p "{\"data\":{\"config.yaml\":\"${CONFIG}\"}}"
-kubectl rollout restart deployment/dex -n epinio
-kubectl rollout status deployment/dex -n epinio
-```
-
-:::note
-The Epinio Helm chart manages `dex-config`. Reapply this customization after an
-upgrade that replaces the Secret.
-:::
-
-Dex does not support dynamic client registration or Client ID Metadata
-Documents (CIMD). Configure the client ID explicitly in clients that support
-it. For Claude Code:
-
-```bash
-claude mcp add --transport http \
-  --client-id claude-mcp --callback-port 3118 \
-  epinio https://epinio-mcp.your-cluster.example.com
-```
-
-Other MCP clients can use the same OAuth flow, but need their own registered
-client ID and exact callback URI. A local Epinio user can instead supply HTTP
-Basic credentials when the MCP client supports manual authorization headers.
-
 ### Elevated tier (optional)
 
 The core install wires only to the Epinio API. To turn on the opt-in
@@ -190,6 +123,53 @@ Run enable_capability for self_adoption.
 
 To upgrade, edit the image tag and re-apply `install/epinio-mcp.yaml`; to
 uninstall, run `kubectl delete -f install/epinio-mcp.yaml`.
+
+## Configure Dex for OAuth clients
+
+OAuth-capable MCP clients discover Dex through the MCP server, open the Dex
+login page, and return an access token to the server. Dex requires each client
+and its exact callback URI to be registered, and Epinio only accepts the token
+if that client is a trusted peer of `epinio-api`. Both are Epinio chart values
+(see [Configuring Dex](../reference/security/authentication_oidc#configuring-dex)).
+
+For example, a public client used by Claude, in `dex-values.yaml`:
+
+```yaml
+dex:
+  extraStaticClients:
+    - id: claude-mcp
+      name: Claude MCP
+      public: true
+      redirectURIs:
+        # Claude on the web
+        - https://claude.ai/api/mcp/auth_callback
+        # Claude Code with --callback-port 3118
+        - http://localhost:3118/callback
+        - http://127.0.0.1:3118/callback
+  apiTrustedPeers:
+    - claude-mcp
+```
+
+Apply it and restart Dex, which reads its configuration only at startup:
+
+```bash
+helm upgrade epinio epinio/epinio -n epinio --reuse-values -f dex-values.yaml
+kubectl rollout restart deployment dex -n epinio
+```
+
+Dex does not support dynamic client registration or Client ID Metadata
+Documents (CIMD). Configure the client ID explicitly in clients that support
+it. For Claude Code:
+
+```bash
+claude mcp add --transport http \
+  --client-id claude-mcp --callback-port 3118 \
+  epinio https://epinio-mcp.your-cluster.example.com
+```
+
+Other MCP clients can use the same OAuth flow, but need their own registered
+client ID and exact callback URI. A local Epinio user can instead supply HTTP
+Basic credentials when the MCP client supports manual authorization headers.
 
 ## Verify the server is up
 

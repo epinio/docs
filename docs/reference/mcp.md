@@ -20,10 +20,12 @@ The MCP server is in beta. Tool names and options may still change, and it is
 not yet recommended for production use.
 :::
 
-:::info Requires Epinio 1.14.1 or later
+:::info Requires a current Epinio release
 The server depends on the builder-image, catalog-service, and app-chart CRUD API
-and the source-retrieval endpoint, all introduced in Epinio 1.14.1. It will not
-work against earlier releases.
+and the source-retrieval endpoint, and login depends on the chart's
+`dex.extraStaticClients` and `dex.apiTrustedPeers` values. Use a current
+[Epinio release](https://github.com/epinio/epinio/releases); older ones lack
+one or the other.
 :::
 
 To stand it up on your cluster, see [Install the MCP server](../getting-started/install-mcp).
@@ -127,6 +129,8 @@ These are always available and act purely through the Epinio API.
 | `push_app` | Full push workflow: create, upload, stage, and deploy from source files. |
 | `upload_and_stage` | Upload source and build without deploying, so logs can be inspected first. |
 | `deploy_staged` | Deploy a previously staged build. |
+| `watch_app_startup` | Experimental. Upload source, stage, and start the app under a supervisor so `sync_app` can update it in place. Run again after any redeploy that recreates the pod. |
+| `sync_app` | Experimental. Push changed source files, or one rebuilt binary, into an app under watch; the supervisor restarts it without a rebuild. |
 | `app_logs` | Fetch runtime or staging/build logs from an application. |
 | `get_app_manifest` | Inspect full app configuration (image, routes, env, settings). |
 | `clone_app` | Clone an existing app to a new name using its built image. |
@@ -226,12 +230,13 @@ convert back to a plain Kubernetes workload.
 
 ## Health probes
 
-Besides the MCP endpoints, the server exposes two plain-HTTP probes:
+Besides the MCP endpoints, the server exposes these unauthenticated paths:
 
 | Path | Type | Behavior |
 | --- | --- | --- |
 | `/healthz` | Liveness | Returns 200 whenever the process is up. |
 | `/readyz` | Readiness | Calls Epinio `/info`; returns 200 on success, 503 on upstream failure. |
+| `/.well-known/oauth-protected-resource` | Discovery | OAuth protected-resource metadata. See [OAuth discovery](#oauth-discovery). |
 
 ## See also
 
