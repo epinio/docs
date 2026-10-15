@@ -143,6 +143,21 @@ Any container registry that supports basic auth authentication (e.g. gcr, docker
 instead, by setting this value to `false` and using the `global.registry*` values
 to point to the desired container registry.
 
+The built-in registry's storage and security values:
+
+| Value | Default | Notes |
+| --- | --- | --- |
+| `containerregistry.storage.emptyDir` | `true` | `true` keeps images in an `emptyDir` inside the registry pod, and **every image is deleted when the pod is replaced**. `false` stores them on a PersistentVolumeClaim named `epinio-registry`. |
+| `containerregistry.storage.size` | `1Gi` | Size of the claim. Only used when `emptyDir` is `false`. |
+| `containerregistry.storage.storageClassName` | cluster default | StorageClass for the claim. |
+| `containerregistry.storage.accessModes` | `[ReadWriteOnce]` | Access modes for the claim. |
+| `containerregistry.storage.volumeMode` | `Filesystem` | Volume mode for the claim. |
+| `containerregistry.podSecurityContext` | `fsGroup: 1000`, `fsGroupChangePolicy: OnRootMismatch` | Pod security context of the registry. The registry runs as user ID 1000, and `fsGroup` makes a new root-owned volume writable for it. Set keys to override them, or `null` to remove the security context. |
+
+The volume must be writable by user ID 1000. Storage that ignores `fsGroup`, such as NFS with `root_squash`, needs that ownership set up front.
+[Running the registry and SeaweedFS on persistent storage](../how-to/operator/cluster-config/persistent_storage.md) covers the setup and storage requirements.
+Releases 1.13.0 through 1.14.2 don't set `fsGroup`, so a registry on root-owned storage can't write. The same page has a workaround.
+
 ## Web UI
 
 The bundled dashboard runs by default and is served at `https://epinio.<domain>`,
