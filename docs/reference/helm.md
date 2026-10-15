@@ -143,6 +143,8 @@ Use any external S3 compatible solution by setting `.Values.seaweedfs.enabled` t
 
 If you don't need to use an identity provider, set the value to `false` and use only local Epinio users. [OIDC Authentication](./security/authentication_oidc.md) has more information.
 
+Connectors, the groups-to-roles mapping, local users and other Dex settings are set with `dex.connectors`, `dex.rolesMapping`, `dex.staticPasswords`, `dex.extraStaticClients` and `dex.extraConfig`. The chart renders them into the `dex-config` secret, so they survive upgrades. See [Configuring Dex](./security/authentication_oidc.md#configuring-dex).
+
 ## Container Registry
 
 When Epinio builds a container image for an application from source, it needs
