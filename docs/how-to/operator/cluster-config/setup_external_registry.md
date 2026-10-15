@@ -42,6 +42,15 @@ Assuming that `epinio-external-registry-tls` is the name of the Kubernetes secre
 ```
 
 is enough to make the certificate known to Epinio.
+Epinio trusts it, in addition to the system CAs, when building application images,
+when deleting them, and when pushing, pulling, and deleting
+[application charts](#application-charts).
+
+Epinio reads the certificate when it starts. After changing the certificate, restart the Epinio server:
+
+```console
+kubectl -n epinio rollout restart deployment epinio-server
+```
 
 :::note
 
@@ -60,3 +69,38 @@ sudo cp CA.pem /etc/pki/trust/anchors/
 sudo update-ca-certificates
 sudo systemctl restart k3s[-agent].service
 ```
+
+## Application charts
+
+Charts pushed with `epinio app chart push` are stored in the same registry and namespace as the
+application images, in a repository named `epinio_appchart_NAME`, after the application chart.
+See [Pushing the chart to Epinio's registry](../customization/create_custom_appcharts.md#pushing-the-chart-to-epinios-registry).
+
+The registry credentials therefore need permission to push, pull, and delete in that namespace.
+Without delete permission, or on a registry with deletion disabled, `epinio app chart delete`
+deletes the application chart, and its chart stays in the registry. A later push to the same name
+replaces it.
+
+Docker Hub removes the tags of a deleted chart, and keeps the empty repository.
+Delete it on Docker Hub, if needed.
+
+### Example: Harbor
+
+With [Harbor](https://goharbor.io/), create a project for Epinio, for example `epinio`,
+and a robot account for it with the `push`, `pull`, and `delete` permissions on repositories.
+Then install Epinio with:
+
+```console
+helm install \
+  --set containerregistry.enabled=false \
+  --set global.registryURL=harbor.example.com \
+  --set global.registryNamespace=epinio \
+  --set 'global.registryUsername=robot$epinio+epinio' \
+  --set global.registryPassword=$ROBOT_SECRET \
+  --set containerregistry.certificateSecret=epinio-external-registry-tls \
+  ... (other options here) \
+  epinio epinio/epinio
+```
+
+The `containerregistry.certificateSecret` is only needed when the certificate of Harbor is not signed
+by a CA the system trusts. As described above, the kubelets have to trust it too.

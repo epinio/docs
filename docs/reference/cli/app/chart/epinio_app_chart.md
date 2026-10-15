@@ -41,6 +41,7 @@ Manage epinio application charts
 * [epinio app chart default](./epinio_app_chart_default.md)	 - Set or show app chart default
 * [epinio app chart delete](./epinio_app_chart_delete.md)	 - Delete an application chart
 * [epinio app chart list](./epinio_app_chart_list.md)	 - List application charts
+* [epinio app chart push](./epinio_app_chart_push.md)	 - Push a helm chart archive to Epinio's registry as application chart
 * [epinio app chart show](./epinio_app_chart_show.md)	 - Describe application chart
 * [epinio app chart update](./epinio_app_chart_update.md)	 - Update an application chart
 
