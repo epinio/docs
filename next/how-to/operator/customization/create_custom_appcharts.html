@@ -9,8 +9,8 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Epinio docs" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.f624dab9.css">
-<script src="/assets/js/runtime~main.aedf63de.js" defer="defer"></script>
-<script src="/assets/js/main.b9ede873.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.4398fa34.js" defer="defer"></script>
+<script src="/assets/js/main.3c343ecb.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -62,8 +62,11 @@ It&#x27;s also available locally in the comments at the top of file <code>helm-c
 Versioned chart development is out of scope for this How-to.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="making-the-helm-chart-known-to-epinio">Making the helm Chart known to Epinio<a href="#making-the-helm-chart-known-to-epinio" class="hash-link" aria-label="Direct link to Making the helm Chart known to Epinio" title="Direct link to Making the helm Chart known to Epinio" translate="no">​</a></h3>
 <p>Once you have created the new chart,
-it&#x27;s necessary to place the generated tarball on a web server.
-A few possible options are:</p>
+it&#x27;s necessary to make the generated tarball available to Epinio.
+You can either let Epinio store it in its own registry,
+as described in <a href="#pushing-the-chart-to-epinios-registry" class="">Pushing the chart to Epinio&#x27;s registry</a>,
+or place it on a web server.
+A few possible options for the web server are:</p>
 <ul>
 <li class="">A server in the public cloud available to you</li>
 <li class="">The company&#x27;s host web server, if available, and permitted by company policies</li>
@@ -88,6 +91,54 @@ In this example, it provides the information about the name, the source and desc
 <div class="language-console codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-console codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">epinio app chart show fluentd</span><br></div></code></pre></div></div>
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Instead of applying the custom resource with <code>kubectl</code>, you can register the chart directly with Epinio:</p><div class="language-console codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-console codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">epinio app chart create --name fluentd \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    --short-description &quot;Fluentd filterable standard deployment&quot; \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    --description &quot;Epinio standard support chart extended for fluentd filtering&quot; \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    --helm-chart https://mydomain.org/epinio-application-fluentd.tgz</span><br></div></code></pre></div></div><p>The same can be done from the <strong>Application Charts</strong> page in the web UI.
 See the <a class="" href="/next/how-to/developer/concepts/app-charts">app charts how-to</a> for details.</p></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="pushing-the-chart-to-epinios-registry">Pushing the chart to Epinio&#x27;s registry<a href="#pushing-the-chart-to-epinios-registry" class="hash-link" aria-label="Direct link to Pushing the chart to Epinio&#x27;s registry" title="Direct link to Pushing the chart to Epinio&#x27;s registry" translate="no">​</a></h3>
+<p>Instead of hosting the tarball on a web server you can push it to Epinio.
+Epinio stores the chart as an OCI artifact in the registry it stores application images in,
+the bundled one or an <a class="" href="/next/how-to/operator/cluster-config/setup_external_registry">external one</a>,
+and registers the application chart for it:</p>
+<div class="language-console codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-console codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">epinio app chart push fluentd ./epinio-application-0.1.0.tgz \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    --short-description &quot;Fluentd filterable standard deployment&quot; \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    --description &quot;Epinio standard support chart extended for fluentd filtering&quot;</span><br></div></code></pre></div></div>
+<p>The first argument is the name of the application chart.
+The second argument is the chart tarball, as created by <code>helm package</code>.</p>
+<p>The Epinio server validates the chart, creates the application chart referencing it, and stores the
+chart in the registry. The registry credentials are held by the server.
+You neither need nor see them, just like for the images of your applications.</p>
+<p>Use <code>epinio app chart show fluentd</code> to see where the chart was stored.
+The <code>Helm Repository</code> is <code>oci://REGISTRY/NAMESPACE</code>, the location of the application images,
+and the <code>Helm Chart</code> is <code>epinio_appchart_fluentd:0.1.0</code>. The chart is stored under the name of the
+application chart, not its own name.</p>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><ul>
+<li class="">
+<p>Pushing charts requires permission to write application charts (<code>chart_write</code>).
+Of the default roles this is available to the <code>system_manager</code> and <code>admin</code> roles.</p>
+</li>
+<li class="">
+<p>Pushing to the name of an application chart which was pushed before replaces its chart.
+This is refused (<code>409 Conflict</code>) while applications use the application chart, so that their
+chart does not change behind their back. Earlier versions stay in the registry until the
+application chart is deleted.</p>
+</li>
+<li class="">
+<p>The name of an application chart which was not pushed, for example one referencing a URL,
+cannot be used (<code>409 Conflict</code>).</p>
+</li>
+<li class="">
+<p>The chart and Helm repository of a pushed application chart cannot be changed with
+<code>epinio app chart update</code>. Push the new chart to the same name instead.</p>
+</li>
+<li class="">
+<p><code>epinio app chart delete</code> removes the chart from the registry together with the application chart.
+A registry which does not allow deletion keeps the chart, see
+<a class="" href="/next/how-to/operator/cluster-config/setup_external_registry#application-charts">Setting up an external container registry</a>.
+An application chart deleted in any other way, for example with <code>kubectl</code>, leaves its chart in the
+registry. A later push to that name replaces it.</p>
+</li>
+</ul></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="using-a-chart-from-another-oci-registry">Using a chart from another OCI registry<a href="#using-a-chart-from-another-oci-registry" class="hash-link" aria-label="Direct link to Using a chart from another OCI registry" title="Direct link to Using a chart from another OCI registry" translate="no">​</a></h3>
+<p>A chart which is already available in an OCI registry can be referenced directly.
+Set the registry as the Helm repository, and specify chart name and version in the chart reference:</p>
+<div class="language-console codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-console codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">epinio app chart create --name fluentd \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    --helm-repo oci://registry.example.com/charts \</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    --helm-chart epinio-application-fluentd:0.1.0</span><br></div></code></pre></div></div>
+<div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>caution</div><div class="admonitionContent_BuS1"><p>Epinio pulls the chart without credentials, except for its own registry.
+Registries requiring authentication are not supported.</p></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="user-settable-configuration-values">User-settable configuration values<a href="#user-settable-configuration-values" class="hash-link" aria-label="Direct link to User-settable configuration values" title="Direct link to User-settable configuration values" translate="no">​</a></h3>
 <p>To expose the user-settable configuration value <code>foo</code> the created application chart has to look for this variable in the <code>.Values.userConfig</code> map.
 That is, it has to use the helm variable <code>.Values.userConfig.foo</code>.</p>
@@ -163,6 +214,6 @@ This lets Epinio&#x27;s server locate the required resources and use them.</p>
 <p>The value of <code>epinio.io/app-container</code> is the name of the application&#x27;s main <code>Container</code>, used by <code>epinio exec</code>.
 This label has to match the actual name of the container in the pod spec.</p>
 </li>
-</ol></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/epinio/docs/edit/main/docs/how-to/operator/customization/create_custom_appcharts.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/next/how-to/operator/customization/custom_builder"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Custom builders</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/next/how-to/operator/customization/using_custom_appcharts"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Custom application Helm charts</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#setting-up-a-custom-helm-chart" class="table-of-contents__link toc-highlight">Setting up a custom Helm chart</a><ul><li><a href="#creating-the-helm-chart" class="table-of-contents__link toc-highlight">Creating the Helm chart</a></li><li><a href="#making-the-helm-chart-known-to-epinio" class="table-of-contents__link toc-highlight">Making the helm Chart known to Epinio</a></li><li><a href="#user-settable-configuration-values" class="table-of-contents__link toc-highlight">User-settable configuration values</a></li></ul></li><li><a href="#troubleshooting" class="table-of-contents__link toc-highlight">Troubleshooting</a></li><li><a href="#going-further" class="table-of-contents__link toc-highlight">Going further</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Krumware. All Rights Reserved.</div></div></div></footer></div>
+</ol></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/epinio/docs/edit/main/docs/how-to/operator/customization/create_custom_appcharts.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/next/how-to/operator/customization/custom_builder"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Custom builders</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/next/how-to/operator/customization/using_custom_appcharts"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Custom application Helm charts</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#setting-up-a-custom-helm-chart" class="table-of-contents__link toc-highlight">Setting up a custom Helm chart</a><ul><li><a href="#creating-the-helm-chart" class="table-of-contents__link toc-highlight">Creating the Helm chart</a></li><li><a href="#making-the-helm-chart-known-to-epinio" class="table-of-contents__link toc-highlight">Making the helm Chart known to Epinio</a></li><li><a href="#pushing-the-chart-to-epinios-registry" class="table-of-contents__link toc-highlight">Pushing the chart to Epinio&#39;s registry</a></li><li><a href="#using-a-chart-from-another-oci-registry" class="table-of-contents__link toc-highlight">Using a chart from another OCI registry</a></li><li><a href="#user-settable-configuration-values" class="table-of-contents__link toc-highlight">User-settable configuration values</a></li></ul></li><li><a href="#troubleshooting" class="table-of-contents__link toc-highlight">Troubleshooting</a></li><li><a href="#going-further" class="table-of-contents__link toc-highlight">Going further</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Krumware. All Rights Reserved.</div></div></div></footer></div>
 </body>
 </html>

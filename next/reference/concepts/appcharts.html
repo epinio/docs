@@ -9,8 +9,8 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Epinio docs" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.f624dab9.css">
-<script src="/assets/js/runtime~main.aedf63de.js" defer="defer"></script>
-<script src="/assets/js/main.b9ede873.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.4398fa34.js" defer="defer"></script>
+<script src="/assets/js/main.3c343ecb.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -253,9 +253,167 @@ more information about using user-settable chart values when deploying an applic
 <table><thead><tr><th>Label</th><th>Meaning</th></tr></thead><tbody><tr><td><code>app.kubernetes.io/component</code></td><td>Fixed: <code>application</code></td></tr><tr><td><code>app.kubernetes.io/created-by</code></td><td>The name of the user deploying the application</td></tr><tr><td><code>app.kubernetes.io/managed-by</code></td><td>Fixed: <code>epinio</code></td></tr><tr><td><code>app.kubernetes.io/name</code></td><td>The application&#x27;s name.</td></tr><tr><td><code>app.kubernetes.io/part-of</code></td><td>The application&#x27;s namespace</td></tr><tr><td><code>epinio.io/app-container</code></td><td>The name of the main Pod container, running the app image</td></tr><tr><td><code>epinio.io/stage-id</code></td><td>Id of the stage run which generated the app image</td></tr><tr><td><code>helm.sh/chart</code></td><td>Chart name and version used to deploy the application</td></tr></tbody></table>
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Read the <a href="https://github.com/epinio/helm-charts/tree/main/chart/application" target="_blank" rel="noopener noreferrer" class="">contents of the standard application chart</a>.</p></div></div>
 <p>The <a class="" href="/next/how-to/developer/concepts/app-charts">application charts how-to</a> contains information on how to work with app charts via the UI or CLI.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="chart-sources">Chart Sources<a href="#chart-sources" class="hash-link" aria-label="Direct link to Chart Sources" title="Direct link to Chart Sources" translate="no">​</a></h2>
+<p>The chart an application chart is made from is specified by the two fields <code>helmChart</code> and
+<code>helmRepo</code> of the <code>AppChart</code> resource, in one of three ways:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th><code>helmRepo</code></th><th><code>helmChart</code></th><th>Meaning</th></tr></thead><tbody><tr><td>empty</td><td>URL</td><td>Direct link to the chart tarball</td></tr><tr><td>URL</td><td><code>NAME</code> or <code>NAME:VERSION</code></td><td>Chart in a Helm repository, i.e. one with an <code>index.yaml</code></td></tr><tr><td><code>oci://REGISTRY/PATH</code></td><td><code>NAME</code> or <code>NAME:VERSION</code></td><td>Chart in an OCI registry</td></tr></tbody></table>
+<p>For an OCI registry the chart reference passed to Helm is <code>oci://REGISTRY/PATH/NAME</code>, with the version
+passed separately. OCI registries have no <code>index.yaml</code>, so there is no <code>helm repo add</code> style bookkeeping
+for them.</p>
+<p>The default application charts of Epinio are stored in an OCI registry.
+The registry is configured through the value <code>appChart.repo</code> of the Epinio Helm chart.
+To not use it, set the values <code>appChart.default</code> and <code>appChart.gatewayAPI</code> to tarball URLs.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="pushed-charts">Pushed charts<a href="#pushed-charts" class="hash-link" aria-label="Direct link to Pushed charts" title="Direct link to Pushed charts" translate="no">​</a></h3>
+<p>Custom charts can be stored in Epinio&#x27;s registry with
+<a class="" href="/next/reference/cli/app/chart/epinio_app_chart_push"><code>epinio app chart push</code></a>, or <code>POST /api/v1/appcharts/push</code>.
+See <a class="" href="/next/how-to/operator/customization/create_custom_appcharts#pushing-the-chart-to-epinios-registry">How to create custom application Helm charts</a>.</p>
+<p>Epinio&#x27;s registry is the registry Epinio stores application images in: the bundled one, or an
+<a class="" href="/next/how-to/operator/cluster-config/setup_external_registry">external one</a> configured with
+<code>global.registryURL</code> and <code>global.registryNamespace</code>.</p>
+<p>The chart of the application chart <code>NAME</code> is stored in the repository <code>epinio_appchart_NAME</code>, next to the
+application images. The application chart references it as</p>
+<ul>
+<li class=""><code>helmRepo: oci://REGISTRY_URL/REGISTRY_NAMESPACE</code>, and</li>
+<li class=""><code>helmChart: epinio_appchart_NAME:VERSION</code>, with the version of the chart.</li>
+</ul>
+<p>The chart&#x27;s own name is not used. A single path segment below the registry namespace works on registries
+which do not allow deeper paths, like Docker Hub.
+An application chart counts as pushed when both its <code>helmRepo</code> is Epinio&#x27;s registry and its chart name is
+<code>epinio_appchart_NAME</code>.</p>
+<p>The push request is <code>multipart/form-data</code>, with these parts:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Part</th><th>Meaning</th></tr></thead><tbody><tr><td><code>file</code></td><td>The chart tarball, as created by <code>helm package</code>. Required.</td></tr><tr><td><code>name</code></td><td>Name of the application chart. Required.</td></tr><tr><td><code>description</code></td><td>Optional.</td></tr><tr><td><code>short_description</code></td><td>Optional.</td></tr></tbody></table>
+<p>The chart has to be a valid Helm chart of type <code>application</code>, or without type.
+The action <code>chart_write</code> is required. The size of the upload is limited to 32 MiB.</p>
+<p>Pushing to a new name creates the application chart, then stores the chart. When storing fails the
+application chart is removed again. A chart left in the registry by an earlier application chart of the
+same name is replaced.</p>
+<p>Pushing to an existing name:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Existing application chart</th><th>Result</th></tr></thead><tbody><tr><td>Not pushed (a URL, a Helm repository, another OCI registry)</td><td><code>409 Conflict</code>, <code>already exists</code></td></tr><tr><td>Pushed, used by applications</td><td><code>409 Conflict</code>. Their chart does not change behind their back.</td></tr><tr><td>Pushed, not used</td><td>The chart is replaced. Earlier versions stay in the repository until the application chart is deleted.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="changing-and-deleting">Changing and deleting<a href="#changing-and-deleting" class="hash-link" aria-label="Direct link to Changing and deleting" title="Direct link to Changing and deleting" translate="no">​</a></h3>
+<p><code>PATCH /api/v1/appcharts/NAME</code> (<code>epinio app chart update</code>) refuses changes to <code>helm_chart</code> and <code>helm_repo</code></p>
+<ul>
+<li class="">with <code>409 Conflict</code> while applications use the application chart, and</li>
+<li class="">with <code>400 Bad Request</code> for a pushed application chart. Push the new chart to the same name instead.</li>
+</ul>
+<p>Descriptions, values, and settings can always be changed.</p>
+<p>Deleting a pushed application chart removes all tags of its repository from the registry first. Deleting
+any other application chart touches no registry.</p>
+<ul>
+<li class="">When the chart cannot be removed, the application chart is kept, so that the deletion can be retried.</li>
+<li class="">When the registry refuses to delete (<code>405</code>, or <code>401</code> or <code>403</code> for credentials which can read the chart),
+the application chart is deleted anyway, and its chart stays in the registry, with a warning in the
+server log. A later push to the same name replaces it.</li>
+<li class="">Removing a chart which is not in the registry is not an error.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="registry-access">Registry access<a href="#registry-access" class="hash-link" aria-label="Direct link to Registry access" title="Direct link to Registry access" translate="no">​</a></h3>
+<p>Pushed charts are pulled with the credentials Epinio uses for application images, from the
+<code>registry-creds</code> secret. Users neither supply nor see them.</p>
+<ul>
+<li class="">When the host of <code>helmRepo</code> matches a registry in <code>registry-creds</code>, Epinio logs in with these credentials.
+Basic auth and token auth, as used by Docker Hub and Harbor, both work.</li>
+<li class="">Otherwise the chart is pulled anonymously, and Epinio&#x27;s credentials are never sent to another host.</li>
+<li class="">Failing to read the secret for another reason than its absence fails the deployment.</li>
+</ul>
+<p>Certificates:</p>
+<ul>
+<li class="">The certificate of the registry inside the cluster is not verified, like for application images. Only the
+hosts <code>localhost</code>, a loopback address, or a name ending in <code>.svc.cluster.local</code> count as inside.</li>
+<li class="">Any other registry is verified against the system CAs, plus the certificate in
+<code>containerregistry.certificateSecret</code>, if set. Epinio reads that certificate when it starts, so a changed
+certificate takes a restart of the Epinio server.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="limitations">Limitations<a href="#limitations" class="hash-link" aria-label="Direct link to Limitations" title="Direct link to Limitations" translate="no">​</a></h3>
+<ul>
+<li class="">Pushing, pulling, and deleting charts has been tested with the bundled registry, Docker Hub, and
+Harbor. Other registries may behave differently, in particular on deletion.</li>
+<li class="">Charts can only be pushed to Epinio&#x27;s registry. Credentials are only used for Epinio&#x27;s registry, so other
+OCI registries have to allow anonymous pulls.</li>
+<li class="">An application chart deleted with <code>kubectl</code> leaves its chart in the registry. A later push to that name
+replaces it.</li>
+<li class="">A registry refusing deletes keeps the chart of a deleted application chart. Docker Hub removes the tags, and
+keeps the empty repository.</li>
+<li class="">When the server stops between creating the application chart and storing its chart, the application chart
+exists without a chart. Deleting it removes it.</li>
+<li class="">Removing a chart deletes its manifest and tags. The data stays in the storage of the registry until its
+garbage collection runs. Epinio does not schedule one, as for application images.</li>
+</ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="related">Related<a href="#related" class="hash-link" aria-label="Direct link to Related" title="Direct link to Related" translate="no">​</a></h2>
 <ul>
 <li class=""><a class="" href="/next/reference/customization/routing_secrets">Routing Secrets</a></li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/epinio/docs/edit/main/docs/reference/concepts/appcharts.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/next/reference/concepts/catalog"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Service Catalog</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/next/reference/concepts/ignore-files"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Ignoring Files</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#further-expectations" class="table-of-contents__link toc-highlight">Further Expectations</a></li><li><a href="#configuration" class="table-of-contents__link toc-highlight">Configuration</a></li><li><a href="#pods" class="table-of-contents__link toc-highlight">Pods</a></li><li><a href="#related" class="table-of-contents__link toc-highlight">Related</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Krumware. All Rights Reserved.</div></div></div></footer></div>
+<li class=""><a class="" href="/next/how-to/operator/customization/create_custom_appcharts">How to create custom application Helm charts</a></li>
+<li class=""><a class="" href="/next/how-to/operator/customization/using_custom_appcharts">How to use custom application Helm charts</a></li>
+<li class=""><a class="" href="/next/how-to/operator/cluster-config/setup_external_registry">Setting up an external container registry</a></li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/epinio/docs/edit/main/docs/reference/concepts/appcharts.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/next/reference/concepts/catalog"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Service Catalog</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/next/reference/concepts/ignore-files"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Ignoring Files</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#further-expectations" class="table-of-contents__link toc-highlight">Further Expectations</a></li><li><a href="#configuration" class="table-of-contents__link toc-highlight">Configuration</a></li><li><a href="#pods" class="table-of-contents__link toc-highlight">Pods</a></li><li><a href="#chart-sources" class="table-of-contents__link toc-highlight">Chart Sources</a><ul><li><a href="#pushed-charts" class="table-of-contents__link toc-highlight">Pushed charts</a></li><li><a href="#changing-and-deleting" class="table-of-contents__link toc-highlight">Changing and deleting</a></li><li><a href="#registry-access" class="table-of-contents__link toc-highlight">Registry access</a></li><li><a href="#limitations" class="table-of-contents__link toc-highlight">Limitations</a></li></ul></li><li><a href="#related" class="table-of-contents__link toc-highlight">Related</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Krumware. All Rights Reserved.</div></div></div></footer></div>
 </body>
 </html>

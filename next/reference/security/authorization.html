@@ -9,8 +9,8 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Epinio docs" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.f624dab9.css">
-<script src="/assets/js/runtime~main.aedf63de.js" defer="defer"></script>
-<script src="/assets/js/main.b9ede873.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.4398fa34.js" defer="defer"></script>
+<script src="/assets/js/main.3c343ecb.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -201,7 +201,7 @@ The password has to be base64 encoded. Below, <code>cGFzc3dvcmQ=</code> is the b
 
 
 
-<table><thead><tr><th>Action ID</th><th>Description</th></tr></thead><tbody><tr><td><code>chart_read</code></td><td>Read permissions (list, show, match). Granted automatically to any role with <code>app_read</code>.</td></tr><tr><td><code>chart_write</code></td><td>Write permissions (create, update, delete)<br>Depends on: <code>chart_read</code></td></tr><tr><td><code>chart</code></td><td>All the above<br>Depends on: <code>chart_read</code>, <code>chart_write</code></td></tr></tbody></table>
+<table><thead><tr><th>Action ID</th><th>Description</th></tr></thead><tbody><tr><td><code>chart_read</code></td><td>Read permissions (list, show, match). Granted automatically to any role with <code>app_read</code>.</td></tr><tr><td><code>chart_write</code></td><td>Write permissions (create, push, update, delete)<br>Depends on: <code>chart_read</code></td></tr><tr><td><code>chart</code></td><td>All the above<br>Depends on: <code>chart_read</code>, <code>chart_write</code></td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="builder-image">Builder Image<a href="#builder-image" class="hash-link" aria-label="Direct link to Builder Image" title="Direct link to Builder Image" translate="no">​</a></h3>
 <p>These actions enable operations on BuilderImage commands and resources. BuilderImages are cluster-scoped, so these actions are only effective when granted by a global (non-namespaced) role.</p>
 
