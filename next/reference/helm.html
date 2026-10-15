@@ -9,8 +9,8 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Epinio docs" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.f624dab9.css">
-<script src="/assets/js/runtime~main.5e8a31f9.js" defer="defer"></script>
-<script src="/assets/js/main.cafe9a48.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.aedf63de.js" defer="defer"></script>
+<script src="/assets/js/main.b9ede873.js" defer="defer"></script>
 </head>
 <body>
 <svg style="display: none;"><defs>
@@ -213,6 +213,51 @@ on the cluster when <code>.Values.containerregistry.enabled</code> is <code>true
 <p>Any container registry that supports basic auth authentication (e.g. gcr, dockerhub, etc) can be used
 instead, by setting this value to <code>false</code> and using the <code>global.registry*</code> values
 to point to the desired container registry.</p>
+<p>The built-in registry&#x27;s storage and security values:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Value</th><th>Default</th><th>Notes</th></tr></thead><tbody><tr><td><code>containerregistry.storage.emptyDir</code></td><td><code>true</code></td><td><code>true</code> keeps images in an <code>emptyDir</code> inside the registry pod, and <strong>every image is deleted when the pod is replaced</strong>. <code>false</code> stores them on a PersistentVolumeClaim named <code>epinio-registry</code>.</td></tr><tr><td><code>containerregistry.storage.size</code></td><td><code>1Gi</code></td><td>Size of the claim. Only used when <code>emptyDir</code> is <code>false</code>.</td></tr><tr><td><code>containerregistry.storage.storageClassName</code></td><td>cluster default</td><td>StorageClass for the claim.</td></tr><tr><td><code>containerregistry.storage.accessModes</code></td><td><code>[ReadWriteOnce]</code></td><td>Access modes for the claim.</td></tr><tr><td><code>containerregistry.storage.volumeMode</code></td><td><code>Filesystem</code></td><td>Volume mode for the claim.</td></tr><tr><td><code>containerregistry.podSecurityContext</code></td><td><code>fsGroup: 1000</code>, <code>fsGroupChangePolicy: OnRootMismatch</code></td><td>Pod security context of the registry. The registry runs as user ID 1000, and <code>fsGroup</code> makes a new root-owned volume writable for it. Set keys to override them, or <code>null</code> to remove the security context.</td></tr></tbody></table>
+<p>The volume must be writable by user ID 1000. Storage that ignores <code>fsGroup</code>, such as NFS with <code>root_squash</code>, needs that ownership set up front.
+<a class="" href="/next/how-to/operator/cluster-config/persistent_storage">Running the registry and SeaweedFS on persistent storage</a> covers the setup and storage requirements.
+Releases 1.13.0 through 1.14.2 don&#x27;t set <code>fsGroup</code>, so a registry on root-owned storage can&#x27;t write. The same page has a workaround.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="web-ui">Web UI<a href="#web-ui" class="hash-link" aria-label="Direct link to Web UI" title="Direct link to Web UI" translate="no">​</a></h2>
 <p>The bundled dashboard runs by default and is served at <code>https://epinio.&lt;domain&gt;</code>,
 the same host as the API (the API lives under <code>/api</code>, the dashboard gets the rest).
