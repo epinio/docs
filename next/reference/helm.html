@@ -9,7 +9,7 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Epinio docs" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.f624dab9.css">
-<script src="/assets/js/runtime~main.4398fa34.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.4a3cd25b.js" defer="defer"></script>
 <script src="/assets/js/main.3c343ecb.js" defer="defer"></script>
 </head>
 <body>
@@ -214,6 +214,7 @@ If there is an outage of the node where s3gw&#x27;s pod is currently deployed, k
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="identity-provider-dex">Identity Provider (Dex)<a href="#identity-provider-dex" class="hash-link" aria-label="Direct link to Identity Provider (Dex)" title="Direct link to Identity Provider (Dex)" translate="no">​</a></h2>
 <p><a href="https://dexidp.io" target="_blank" rel="noopener noreferrer" class="">Dex</a> OpenID Connect Provider is installed as a subchart when <code>.Values.global.dex.enabled</code> is set to <code>true</code> (default).</p>
 <p>If you don&#x27;t need to use an identity provider, set the value to <code>false</code> and use only local Epinio users. <a class="" href="/next/reference/security/authentication_oidc">OIDC Authentication</a> has more information.</p>
+<p>Connectors, the groups-to-roles mapping, local users and other Dex settings are set with <code>dex.connectors</code>, <code>dex.rolesMapping</code>, <code>dex.staticPasswords</code>, <code>dex.extraStaticClients</code> and <code>dex.extraConfig</code>. The chart renders them into the <code>dex-config</code> secret, so they survive upgrades. See <a class="" href="/next/reference/security/authentication_oidc#configuring-dex">Configuring Dex</a>.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="container-registry">Container Registry<a href="#container-registry" class="hash-link" aria-label="Direct link to Container Registry" title="Direct link to Container Registry" translate="no">​</a></h2>
 <p>When Epinio builds a container image for an application from source, it needs
 to store that image in a container registry. Epinio installs a container registry

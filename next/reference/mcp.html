@@ -9,7 +9,7 @@
 
 
 <link rel="search" type="application/opensearchdescription+xml" title="Epinio docs" href="/opensearch.xml"><link rel="stylesheet" href="/assets/css/styles.f624dab9.css">
-<script src="/assets/js/runtime~main.4398fa34.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.4a3cd25b.js" defer="defer"></script>
 <script src="/assets/js/main.3c343ecb.js" defer="defer"></script>
 </head>
 <body>
@@ -23,9 +23,11 @@ It translates MCP tool calls into Epinio REST API requests, so an agent can depl
 and manage applications on your cluster through conversation.</p>
 <div class="theme-admonition theme-admonition-caution admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>Beta</div><div class="admonitionContent_BuS1"><p>The MCP server is in beta. Tool names and options may still change, and it is
 not yet recommended for production use.</p></div></div>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Requires Epinio 1.14.1 or later</div><div class="admonitionContent_BuS1"><p>The server depends on the builder-image, catalog-service, and app-chart CRUD API
-and the source-retrieval endpoint, all introduced in Epinio 1.14.1. It will not
-work against earlier releases.</p></div></div>
+<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>Requires a current Epinio release</div><div class="admonitionContent_BuS1"><p>The server depends on the builder-image, catalog-service, and app-chart CRUD API
+and the source-retrieval endpoint, and login depends on the chart&#x27;s
+<code>dex.extraStaticClients</code> and <code>dex.apiTrustedPeers</code> values. Use a current
+<a href="https://github.com/epinio/epinio/releases" target="_blank" rel="noopener noreferrer" class="">Epinio release</a>; older ones lack
+one or the other.</p></div></div>
 <p>To stand it up on your cluster, see <a class="" href="/next/getting-started/install-mcp">Install the MCP server</a>.</p>
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>Cannot run MCP?</div><div class="admonitionContent_BuS1"><p>If your environment cannot host or reach an MCP server, the
 <a class="" href="/next/reference/cli/agent-skill">CLI agent skill</a> maps every core tool on this page to an
@@ -33,14 +35,69 @@ work against earlier releases.</p></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-it-connects">How it connects<a href="#how-it-connects" class="hash-link" aria-label="Direct link to How it connects" title="Direct link to How it connects" translate="no">​</a></h2>
 <p>The server sits between an AI agent and an Epinio instance, speaking MCP to the
 agent and the Epinio REST API to the cluster:</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">AI Agent (Claude, etc.)</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    | MCP protocol (Streamable HTTP, served at the server root)</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">Epinio MCP Server</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    | REST API (Basic Auth or OIDC, TLS)</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">Epinio API Server</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    | Kubernetes API</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">Kubernetes Cluster</span><br></div></code></pre></div></div>
-<p>Authentication is per request: the agent passes an <code>Authorization</code> header
-(<code>Bearer &lt;token&gt;</code> or <code>Basic &lt;base64(user:pass)&gt;</code>) that the server forwards to
-Epinio. When no header is present, the server falls back to the credentials it was
-configured with (default <code>admin</code> / <code>password</code>).</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">AI Agent (Claude, etc.)</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    | MCP protocol (Streamable HTTP) + caller credentials</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">Epinio MCP Server</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    | REST API using the same caller credentials</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">Epinio API Server</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    | Kubernetes API</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">Kubernetes Cluster</span><br></div></code></pre></div></div>
+<p>The MCP endpoint is served at the server root. Authentication is mandatory and
+per caller: the agent passes either an OIDC bearer token or HTTP Basic
+credentials, and the MCP server asks Epinio&#x27;s authenticated <code>/me</code> endpoint to
+validate it. Epinio remains the authority for users and permissions.</p>
+<p>There is no anonymous mode or shared server-credential fallback. A request
+without credentials receives <code>401 Unauthorized</code> and cannot access tools. Every
+tool call uses an Epinio API client created from the caller&#x27;s credential, so
+the result is limited by that user&#x27;s Epinio permissions.</p>
 <p>By default every tool wires <strong>only</strong> to the Epinio REST API, as the calling user.
 An optional <a href="#elevated-tier" class="">elevated tier</a> that reaches directly into Kubernetes
 is off unless explicitly enabled.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="oauth-discovery">OAuth discovery<a href="#oauth-discovery" class="hash-link" aria-label="Direct link to OAuth discovery" title="Direct link to OAuth discovery" translate="no">​</a></h3>
+<p>The server is an OAuth 2.0 protected resource. It exposes
+<code>/.well-known/oauth-protected-resource</code>, which contains:</p>
+<ul>
+<li class="">The MCP resource URL.</li>
+<li class="">The Dex authorization-server issuer.</li>
+<li class="">The supported bearer-token method and scopes.</li>
+</ul>
+<p>An unauthenticated MCP request returns a <code>WWW-Authenticate</code> challenge pointing
+to this document. An OAuth-capable MCP client can then discover Dex, perform
+Authorization Code with PKCE, and send the resulting access token as
+<code>Authorization: Bearer &lt;token&gt;</code>.</p>
+<p>Epinio accepts tokens intended for the <code>epinio-api</code> client. The MCP OAuth client
+must therefore be registered as a trusted peer of <code>epinio-api</code>, and request the
+<code>audience:server:client_id:epinio-api</code> scope. Dex requires static client
+registration and an exact callback URI; it does not support dynamic client
+registration or Client ID Metadata Documents (CIMD).</p>
+<p>See <a class="" href="/next/getting-started/install-mcp#configure-dex-for-oauth-clients">Install the MCP server</a>
+for Dex configuration and a Claude Code example. Compatibility with another
+MCP client depends on its support for Streamable HTTP, protected-resource
+discovery, and an explicitly configured OAuth client ID.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="authentication-configuration">Authentication configuration<a href="#authentication-configuration" class="hash-link" aria-label="Direct link to Authentication configuration" title="Direct link to Authentication configuration" translate="no">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Variable</th><th>Required</th><th>Purpose</th></tr></thead><tbody><tr><td><code>EPINIO_API_URL</code></td><td>Yes</td><td>Epinio API base URL.</td></tr><tr><td><code>EPINIO_MCP_RESOURCE_URL</code></td><td>Yes</td><td>Exact MCP URL entered by users and advertised in protected-resource metadata.</td></tr><tr><td><code>EPINIO_MCP_OIDC_ISSUER</code></td><td>Yes</td><td>Dex issuer URL advertised to OAuth clients.</td></tr></tbody></table>
+<p>The resource URL is compared exactly by OAuth clients, so scheme, hostname,
+port, and path must match. The issuer must match the <code>issuer</code> field in Dex&#x27;s
+OpenID Connect discovery document.</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="core-tools">Core tools<a href="#core-tools" class="hash-link" aria-label="Direct link to Core tools" title="Direct link to Core tools" translate="no">​</a></h2>
 <p>These are always available and act purely through the Epinio API.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="server-and-namespaces">Server and namespaces<a href="#server-and-namespaces" class="hash-link" aria-label="Direct link to Server and namespaces" title="Direct link to Server and namespaces" translate="no">​</a></h3>
@@ -144,7 +201,15 @@ is off unless explicitly enabled.</p>
 
 
 
-<table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody><tr><td><code>list_apps</code></td><td>List applications, optionally filtered by namespace.</td></tr><tr><td><code>show_app</code></td><td>Get detailed app info (status, routes, instances, config).</td></tr><tr><td><code>create_app</code></td><td>Create an application without deploying it.</td></tr><tr><td><code>delete_app</code></td><td>Delete an application.</td></tr><tr><td><code>restart_app</code></td><td>Restart an application.</td></tr><tr><td><code>scale_app</code></td><td>Scale an application to a desired instance count.</td></tr><tr><td><code>update_app</code></td><td>Update app configuration (instances, routes, env, configurations, appchart, settings).</td></tr><tr><td><code>push_app</code></td><td>Full push workflow: create, upload, stage, and deploy from source files.</td></tr><tr><td><code>upload_and_stage</code></td><td>Upload source and build without deploying, so logs can be inspected first.</td></tr><tr><td><code>deploy_staged</code></td><td>Deploy a previously staged build.</td></tr><tr><td><code>app_logs</code></td><td>Fetch runtime or staging/build logs from an application.</td></tr><tr><td><code>get_app_manifest</code></td><td>Inspect full app configuration (image, routes, env, settings).</td></tr><tr><td><code>clone_app</code></td><td>Clone an existing app to a new name using its built image.</td></tr><tr><td><code>get_app_source</code></td><td>Retrieve a deployed app&#x27;s staging source (raw tarball or extracted files).</td></tr><tr><td><code>list_app_files</code></td><td>List file paths and sizes in a deployed app&#x27;s source (no file contents).</td></tr><tr><td><code>get_connection_info</code></td><td>Return a ready-to-dial WebSocket URL for streaming an app&#x27;s logs directly.</td></tr></tbody></table>
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody><tr><td><code>list_apps</code></td><td>List applications, optionally filtered by namespace.</td></tr><tr><td><code>show_app</code></td><td>Get detailed app info (status, routes, instances, config).</td></tr><tr><td><code>create_app</code></td><td>Create an application without deploying it.</td></tr><tr><td><code>delete_app</code></td><td>Delete an application.</td></tr><tr><td><code>restart_app</code></td><td>Restart an application.</td></tr><tr><td><code>scale_app</code></td><td>Scale an application to a desired instance count.</td></tr><tr><td><code>update_app</code></td><td>Update app configuration (instances, routes, env, configurations, appchart, settings).</td></tr><tr><td><code>push_app</code></td><td>Full push workflow: create, upload, stage, and deploy from source files.</td></tr><tr><td><code>upload_and_stage</code></td><td>Upload source and build without deploying, so logs can be inspected first.</td></tr><tr><td><code>deploy_staged</code></td><td>Deploy a previously staged build.</td></tr><tr><td><code>watch_app_startup</code></td><td>Experimental. Upload source, stage, and start the app under a supervisor so <code>sync_app</code> can update it in place. Run again after any redeploy that recreates the pod.</td></tr><tr><td><code>sync_app</code></td><td>Experimental. Push changed source files, or one rebuilt binary, into an app under watch; the supervisor restarts it without a rebuild.</td></tr><tr><td><code>app_logs</code></td><td>Fetch runtime or staging/build logs from an application.</td></tr><tr><td><code>get_app_manifest</code></td><td>Inspect full app configuration (image, routes, env, settings).</td></tr><tr><td><code>clone_app</code></td><td>Clone an existing app to a new name using its built image.</td></tr><tr><td><code>get_app_source</code></td><td>Retrieve a deployed app&#x27;s staging source (raw tarball or extracted files).</td></tr><tr><td><code>list_app_files</code></td><td>List file paths and sizes in a deployed app&#x27;s source (no file contents).</td></tr><tr><td><code>get_connection_info</code></td><td>Return a ready-to-dial WebSocket URL for streaming an app&#x27;s logs directly.</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="environment-variables">Environment variables<a href="#environment-variables" class="hash-link" aria-label="Direct link to Environment variables" title="Direct link to Environment variables" translate="no">​</a></h3>
 
 
@@ -392,7 +457,7 @@ convert back to a plain Kubernetes workload.</p>
 
 <table><thead><tr><th>Capability</th><th>Purpose</th><th>Requires</th></tr></thead><tbody><tr><td><code>self_adoption</code></td><td>Completes the MCP&#x27;s own adoption when installed via <code>kubectl apply</code></td><td>The server&#x27;s own App CRD exists, is annotated <code>epinio.io/adopted=true</code>, and matches the running Deployment.</td></tr><tr><td><code>log_streaming</code></td><td>Reports WebSocket reachability for <code>get_connection_info</code> (diagnostic)</td><td>Ingress that preserves the <code>Upgrade</code> header and a reachable Epinio <code>/authtoken</code> endpoint.</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="health-probes">Health probes<a href="#health-probes" class="hash-link" aria-label="Direct link to Health probes" title="Direct link to Health probes" translate="no">​</a></h2>
-<p>Besides the MCP endpoints, the server exposes two plain-HTTP probes:</p>
+<p>Besides the MCP endpoints, the server exposes these unauthenticated paths:</p>
 
 
 
@@ -413,12 +478,17 @@ convert back to a plain Kubernetes workload.</p>
 
 
 
-<table><thead><tr><th>Path</th><th>Type</th><th>Behavior</th></tr></thead><tbody><tr><td><code>/healthz</code></td><td>Liveness</td><td>Returns 200 whenever the process is up.</td></tr><tr><td><code>/readyz</code></td><td>Readiness</td><td>Calls Epinio <code>/info</code>; returns 200 on success, 503 on upstream failure.</td></tr></tbody></table>
+
+
+
+
+
+<table><thead><tr><th>Path</th><th>Type</th><th>Behavior</th></tr></thead><tbody><tr><td><code>/healthz</code></td><td>Liveness</td><td>Returns 200 whenever the process is up.</td></tr><tr><td><code>/readyz</code></td><td>Readiness</td><td>Calls Epinio <code>/info</code>; returns 200 on success, 503 on upstream failure.</td></tr><tr><td><code>/.well-known/oauth-protected-resource</code></td><td>Discovery</td><td>OAuth protected-resource metadata. See <a href="#oauth-discovery" class="">OAuth discovery</a>.</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="see-also">See also<a href="#see-also" class="hash-link" aria-label="Direct link to See also" title="Direct link to See also" translate="no">​</a></h2>
 <ul>
 <li class=""><a class="" href="/next/getting-started/install-mcp">Install the MCP server</a></li>
 <li class=""><a class="" href="/next/reference/api">Server API reference</a></li>
 <li class=""><a href="https://github.com/epinio/mcp" target="_blank" rel="noopener noreferrer" class="">Epinio MCP repository</a></li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/epinio/docs/edit/main/docs/reference/mcp.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/next/reference/helm"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Helm Chart Options</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/next/reference/upgrading"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Upgrading Epinio</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#how-it-connects" class="table-of-contents__link toc-highlight">How it connects</a></li><li><a href="#core-tools" class="table-of-contents__link toc-highlight">Core tools</a><ul><li><a href="#server-and-namespaces" class="table-of-contents__link toc-highlight">Server and namespaces</a></li><li><a href="#applications" class="table-of-contents__link toc-highlight">Applications</a></li><li><a href="#environment-variables" class="table-of-contents__link toc-highlight">Environment variables</a></li><li><a href="#configurations" class="table-of-contents__link toc-highlight">Configurations</a></li><li><a href="#services-and-catalog" class="table-of-contents__link toc-highlight">Services and catalog</a></li><li><a href="#app-charts" class="table-of-contents__link toc-highlight">App charts</a></li><li><a href="#builder-images" class="table-of-contents__link toc-highlight">Builder images</a></li></ul></li><li><a href="#elevated-tier" class="table-of-contents__link toc-highlight">Elevated tier</a><ul><li><a href="#adopting-existing-workloads" class="table-of-contents__link toc-highlight">Adopting existing workloads</a></li><li><a href="#capabilities" class="table-of-contents__link toc-highlight">Capabilities</a></li></ul></li><li><a href="#health-probes" class="table-of-contents__link toc-highlight">Health probes</a></li><li><a href="#see-also" class="table-of-contents__link toc-highlight">See also</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Krumware. All Rights Reserved.</div></div></div></footer></div>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/epinio/docs/edit/main/docs/reference/mcp.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/next/reference/helm"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Helm Chart Options</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/next/reference/upgrading"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Upgrading Epinio</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#how-it-connects" class="table-of-contents__link toc-highlight">How it connects</a><ul><li><a href="#oauth-discovery" class="table-of-contents__link toc-highlight">OAuth discovery</a></li><li><a href="#authentication-configuration" class="table-of-contents__link toc-highlight">Authentication configuration</a></li></ul></li><li><a href="#core-tools" class="table-of-contents__link toc-highlight">Core tools</a><ul><li><a href="#server-and-namespaces" class="table-of-contents__link toc-highlight">Server and namespaces</a></li><li><a href="#applications" class="table-of-contents__link toc-highlight">Applications</a></li><li><a href="#environment-variables" class="table-of-contents__link toc-highlight">Environment variables</a></li><li><a href="#configurations" class="table-of-contents__link toc-highlight">Configurations</a></li><li><a href="#services-and-catalog" class="table-of-contents__link toc-highlight">Services and catalog</a></li><li><a href="#app-charts" class="table-of-contents__link toc-highlight">App charts</a></li><li><a href="#builder-images" class="table-of-contents__link toc-highlight">Builder images</a></li></ul></li><li><a href="#elevated-tier" class="table-of-contents__link toc-highlight">Elevated tier</a><ul><li><a href="#adopting-existing-workloads" class="table-of-contents__link toc-highlight">Adopting existing workloads</a></li><li><a href="#capabilities" class="table-of-contents__link toc-highlight">Capabilities</a></li></ul></li><li><a href="#health-probes" class="table-of-contents__link toc-highlight">Health probes</a></li><li><a href="#see-also" class="table-of-contents__link toc-highlight">See also</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Krumware. All Rights Reserved.</div></div></div></footer></div>
 </body>
 </html>
