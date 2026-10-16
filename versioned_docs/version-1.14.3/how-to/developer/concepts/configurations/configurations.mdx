@@ -1,0 +1,149 @@
+---
+sidebar_label: Configurations
+sidebar_position: 3
+title: Configurations
+description: How to use Epinio configurations, including the create, list, edit, and delete workflow.
+keywords: [epinio, kubernetes, configurations, app configurations]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, configurations]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide explores working with configurations. Configurations are reusable collections of application settings or service bindings that can be attached to applications. For more information see the [configurations reference](../../../../reference/concepts/configurations.md) page.
+
+## View Configurations
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To view all available configurations, navigate to the **Configurations** page under the **Advanced** section of the side navigation menu.
+
+<img
+  src={require('./configurations-screen.png').default}
+  alt="View of the Configurations screen"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+List all configurations:
+
+```console
+epinio configuration list
+```
+
+</TabItem>
+</Tabs>
+
+## Create a Configuration
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Click **Create** on the Configurations page to open the creation modal.
+
+Select the namespace that the configuration belongs to. If the configuration should be bound to an existing application, this can be done during creation. Configurations can also be bound or unbound later by editing either the configuration or the application.
+
+Add the configuration data as key-value pairs.
+
+To assist with configuration creation, Epinio provides file upload options:
+
+- **Read From File** reads key-value pairs from a text file in the format:
+
+```text
+name1=val1
+name2=val2
+name3=val3
+```
+
+- **Upload** can be used for larger structured values such as JSON or YAML files.
+
+<img
+  src={require('./configurations-create-modal.png').default}
+  alt="Create Configurations Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Create a configuration:
+
+```console
+epinio configuration create myconfig
+```
+
+</TabItem>
+</Tabs>
+
+## Edit a Configuration
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To edit a configuration, open the action menu and select **Edit**. From here you can update configuration values and bind or unbind applications.
+
+<img
+  src={require('./configurations-edit-modal.png').default}
+  alt="Edit Configuration Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Update a configuration:
+
+```console
+epinio configuration update myconfig
+```
+
+Bind a configuration to an application:
+
+```console
+epinio configuration bind myconfig myapp
+```
+
+Unbind a configuration from an app:
+
+```console
+epinio configuration unbind myconfig myapp
+```
+
+</TabItem>
+</Tabs>
+
+## Delete a Configuration
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To delete a configuration, open the action menu and select **Delete**. If the configuration is currently bound to one or more applications, it will be unbound before deletion.
+
+<img
+  src={require('./configurations-delete-modal.png').default}
+  alt="Delete Configuration Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Delete a configuration:
+
+```console
+epinio configuration delete myconfig
+```
+
+</TabItem>
+</Tabs>
+
+## Additional CLI Commands
+For additional documentation on the CLI commands above, along with additional commands, see the [epinio configuration](../../../../reference/cli/configuration/epinio_configuration.md) CLI reference.

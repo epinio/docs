@@ -1,0 +1,131 @@
+---
+sidebar_label: Services
+sidebar_position: 4
+title: Services
+description: How to use Epinio services, including the create, list, show, and delete workflow.
+keywords: [epinio, kubernetes, services, app services]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, services]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide explores working with services. Epinio allows users to connect their applications to services such as databases and other backing services. For more information see the [services reference](../../../../reference/concepts/services.md) page.
+
+## View Services
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To view all service instances, navigate to the **Instances** page under the **Services** section in the side navigation menu.
+
+<img
+  src={require('./services-screen.png').default}
+  alt="View of the Services screen"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+List all services:
+
+```console
+epinio service list
+```
+
+</TabItem>
+</Tabs>
+
+## Create a Service
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Click **Create** on the Services page to open the creation modal. This modal can also be accessed from the [Service Catalog](../service-catalog/service-catalog.mdx).
+
+Select the namespace that the service belongs to, provide a unique name, and choose the catalog service that will be used to create the instance.
+
+If the service should be connected to an application, you can bind it during creation. Services can also be bound or unbound later by editing either the service or the application.
+
+<img
+  src={require('./services-create-modal.png').default}
+  alt="Create Service Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Create a service instance:
+
+```console
+epinio service create mysql-dev mydb
+```
+
+</TabItem>
+</Tabs>
+
+## Edit Service Bindings
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To edit a service, open the action menu for the service instance and select **Edit**. From here you can bind or unbind the service from applications.
+
+<img
+  src={require('./services-edit-modal.png').default}
+  alt="Edit Service Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Bind a service to an application:
+
+```console
+epinio service bind mydb sample
+```
+
+Unbind a service from an application:
+
+```console
+epinio service unbind mydb sample
+```
+
+</TabItem>
+</Tabs>
+
+## Delete a Service
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To delete a service instance, open the action menu and select **Delete**. If the service is currently bound to an application, Epinio will unbind it before removing the service.
+
+<img
+  src={require('./services-delete-modal.png').default}
+  alt="Delete Service Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Delete a service:
+
+```console
+epinio service delete mydb
+```
+
+</TabItem>
+</Tabs>
+
+## Additional CLI Docs
+For additional documentation on the CLI commands above, along with additional commands, see the [epinio service](../../../../reference/cli/service/epinio_service.md) CLI reference.
