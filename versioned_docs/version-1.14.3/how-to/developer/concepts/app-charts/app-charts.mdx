@@ -1,0 +1,132 @@
+---
+sidebar_label: App Charts
+sidebar_position: 6
+title: Application Charts
+description: How to use Epinio app charts.
+keywords: [epinio, kubernetes, app charts]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, app charts]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide explores working with application charts. App charts are reusable application templates packaged as Helm charts that allow users to deploy preconfigured applications. For more information see the [application charts reference](../../../../reference/concepts/appcharts.md) page.
+
+## View Application Charts
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To view all available application charts, navigate to the **Application Charts** page under the **Advanced** section of the side navigation menu.
+
+<img
+  src={require('./charts-screen.png').default}
+  alt="View of the Application Charts screen"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+List all application charts:
+
+```console
+epinio app chart list
+```
+
+</TabItem>
+</Tabs>
+
+## Create an Application Chart
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Click **Create** on the Application Charts page to open the creation modal. Here you can provide a name and short description which will be displayed when creating an application, a detailed description for display in the table, as well as a Helm Chart URL and/or a Helm Repo URL. You can also establish settings that will prompt the user for values during app creation if they select the corresponding chart.
+
+<img
+  src={require('./charts-create-modal.png').default}
+  alt="Create App Chart Modal"
+  width="800"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Create an application chart:
+
+```console
+epinio app chart create --name mychart \
+    --short-description "My application chart" \
+    --description "A longer description of my application chart" \
+    --helm-repo https://charts.example.com \
+    --helm-chart https://charts.example.com/mychart-1.0.0.tgz \
+    --set replicaCount=2 \
+    --set image.tag=latest
+```
+
+The `--set` flag takes a `key=value` pair and can be repeated to provide multiple values.
+
+</TabItem>
+</Tabs>
+
+## Edit an Application Chart
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Select **Edit** from the action menu for the row of the app chart you wish to edit. Use caution when editing charts that are being used by applications, as you may cause issues for future rebuilds.
+
+<img
+  src={require('./charts-edit-modal.png').default}
+  alt="Edit App Chart Modal"
+  width="800"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Update an application chart. Flags you do not set leave the corresponding fields unchanged:
+
+```console
+epinio app chart update mychart \
+    --short-description "An updated description" \
+    --helm-chart https://charts.example.com/mychart-1.1.0.tgz \
+    --set replicaCount=3
+```
+
+</TabItem>
+</Tabs>
+
+## Delete an Application Chart
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Open the action menu for the application chart and select **Delete**. Confirm the deletion.
+
+<img
+  src={require('./charts-delete-modal.png').default}
+  alt="Delete App Chart Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Delete an application chart:
+
+```console
+epinio app chart delete mychart
+```
+
+</TabItem>
+</Tabs>
+
+
+## Additional CLI Commands
+For additional documentation on the CLI commands above, along with additional commands, see the [epinio app chart](../../../../reference/cli/app/chart/epinio_app_chart.md) CLI reference.

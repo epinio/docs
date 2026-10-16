@@ -1,0 +1,173 @@
+---
+sidebar_label: Service Catalog
+sidebar_position: 5
+title: Service Catalog
+description: How to use the Epinio service catalog, including viewing catalog entries and service details.
+keywords: [epinio, kubernetes, service catalog, services]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, service-catalog]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide explores working with the service catalog. Epinio provides a catalog of templates that are used to create [service instances](../services/services.mdx). For more information see the [service catalog reference](../../../../reference/concepts/catalog.md) page.
+
+## View Service Catalog
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To view the service catalog, navigate to the **Catalog** page under the **Services** section of the side navigation menu.
+
+<img
+  src={require('./catalog-screen.png').default}
+  alt="View of the Services Catalog screen"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+List all available catalog services:
+
+```console
+epinio service catalog
+```
+
+</TabItem>
+</Tabs>
+
+## View Catalog Service Details
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Click on a service catalog card to open its details page. Here you can view all instances created from that service, create new instances, and edit or delete existing ones. See the [services how-to](../services/services.mdx) for more information.
+
+<img
+  src={require('./catalog-service-screen.png').default}
+  alt="View of the Catalog Service Details screen"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Show details for a specific catalog service:
+
+```console
+epinio service catalog myservice
+```
+
+</TabItem>
+</Tabs>
+
+## Create a Catalog Service
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Click **Create** on the Catalog page to open the creation modal. Here you can provide a name and descriptions used to identify the service.
+
+You can also provide an image url that will be used as the icon when displaying the service in the catalog.
+
+You will need to provide the name of the chart to install and can optionally provide the version of the chart and/or the version of the app packaged by the chart. Next, provide the information relating to the Helm repo where the chart lives.
+
+You can also add configurable settings that can be provided when provisioning the service.
+
+Under the Advanced Options you can tell Epinio what kinds of Kubernetes Secrets are compatible with the service.
+
+<img
+  src={require('./catalog-service-create-modal.png').default}
+  alt="Create Catalog Service Modal"
+  width="800"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Create a catalog service. Both `--name` and `--chart` are required:
+
+```console
+epinio service catalog create --name mysql \
+    --chart mysql \
+    --chart-version 9.4.1 \
+    --app-version 8.0.30 \
+    --helm-repo-name bitnami \
+    --helm-repo-url https://charts.bitnami.com/bitnami \
+    --short-description "MySQL database" \
+    --description "A MySQL database provisioned from the Bitnami chart" \
+    --service-icon https://example.com/mysql.png \
+    --secret-types "mysql,database"
+```
+
+Use `--values-file` to pass a YAML file with the settings that can be configured when provisioning the service:
+
+```console
+epinio service catalog create --name mysql --chart mysql \
+    --helm-repo-url https://charts.bitnami.com/bitnami \
+    --values-file ./mysql-values.yaml
+```
+
+If the Helm repository requires credentials, reference the secret holding them with `--helm-repo-secret`.
+
+</TabItem>
+</Tabs>
+
+## Edit a Catalog Service
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Select **Edit** from the action menu from the card of the catalog service you wish to edit. You can also open the edit modal from the details page. Use caution when editing catalog services when there are associated service instances.
+
+<img
+  src={require('./catalog-service-edit-modal.png').default}
+  alt="Edit Catalog Service Modal"
+  width="800"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Update a catalog service. Flags you do not set leave the corresponding fields unchanged:
+
+```console
+epinio service catalog update mysql \
+    --chart-version 9.5.0 \
+    --short-description "An updated description"
+```
+
+</TabItem>
+</Tabs>
+
+## Delete a Catalog Service
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Open the action menu for the catalog service and select **Delete**. Confirm the deletion. This can also be done from the details page
+
+<img
+  src={require('./catalog-service-delete-modal.png').default}
+  alt="Delete Catalog Service Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Delete a catalog service:
+
+```console
+epinio service catalog delete mysql
+```
+
+</TabItem>
+</Tabs>
+
+## Additional CLI Commands
+For additional documentation on the CLI commands above, along with additional commands, see the [epinio service catalog](../../../../reference/cli/service/catalog/epinio_service_catalog.md) CLI reference.
