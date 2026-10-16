@@ -4,10 +4,51 @@
         <title>Epinio Blog</title>
         <link>https://docs.epinio.io/blog</link>
         <description>Epinio docs Blog</description>
-        <lastBuildDate>Thu, 03 Sep 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 15 Oct 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Announcing Epinio 1.14.3!]]></title>
+            <link>https://docs.epinio.io/blog/epinio-1-14-3</link>
+            <guid>https://docs.epinio.io/blog/epinio-1-14-3</guid>
+            <pubDate>Thu, 15 Oct 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[This release includes the usual bug fixes, dependency updates, and maintenance, along with OCI registry support for app charts.]]></description>
+            <content:encoded><![CDATA[<p>This release includes the usual bug fixes, dependency updates, and maintenance, along with OCI registry support for app charts.</p>
+<p>We encourage you to review the documentation for <a href="https://docs.epinio.io/reference/upgrading" target="_blank" rel="noopener noreferrer" class="">upgrading Epinio</a>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-features-and-improvements">New Features and Improvements<a href="https://docs.epinio.io/blog/epinio-1-14-3#new-features-and-improvements" class="hash-link" aria-label="Direct link to New Features and Improvements" title="Direct link to New Features and Improvements" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://docs.epinio.io/reference/concepts/appcharts#chart-sources" target="_blank" rel="noopener noreferrer" class="">App charts</a> can now be sourced from OCI registries, alongside the existing support for remote sources. You can also push a packaged chart to Epinio's registry with <a href="https://docs.epinio.io/reference/cli/app/chart/epinio_app_chart_push" target="_blank" rel="noopener noreferrer" class=""><code>epinio app chart push</code></a>.</li>
+<li class="">Improved UI loading performance by caching Epinio resources.</li>
+<li class="">A stateful app chart now ships with Epinio by default, so you can deploy stateful applications without providing your own chart.</li>
+<li class="">Dex connectors can now be <a href="https://docs.epinio.io/reference/security/authentication_oidc#configuring-dex" target="_blank" rel="noopener noreferrer" class="">configured through Helm chart values</a>, allowing for more flexible authentication setups.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="fixes">Fixes<a href="https://docs.epinio.io/blog/epinio-1-14-3#fixes" class="hash-link" aria-label="Direct link to Fixes" title="Direct link to Fixes" translate="no">​</a></h2>
+<ul>
+<li class="">Fixed a bug where certain service instance configurations were not correctly applied during deployment.</li>
+<li class="">Fixed an issue where the Rancher extension did not allow external calls to Git providers.</li>
+<li class="">Fixed an issue where certain Docker Hub or Harbor registries were not correctly recognized due to missing CA certificates.</li>
+<li class="">Fixed an issue in the Helm chart where the <code>ingress.tls.enabled</code> value was not correctly applied, leading to misconfigured ingress resources.</li>
+<li class="">Fixed registry storage permission issues: <code>fsGroup</code> and <code>fsGroupChangePolicy</code> for the container registry can now be set through Helm chart values. See <a href="https://docs.epinio.io/how-to/operator/cluster-config/persistent_storage#file-ownership" target="_blank" rel="noopener noreferrer" class="">File ownership</a>.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mcp">MCP<a href="https://docs.epinio.io/blog/epinio-1-14-3#mcp" class="hash-link" aria-label="Direct link to MCP" title="Direct link to MCP" translate="no">​</a></h2>
+<ul>
+<li class=""><a href="https://docs.epinio.io/reference/mcp#how-it-connects" target="_blank" rel="noopener noreferrer" class="">MCP authentication</a> is now per user, giving more granular access control and improved security.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="documentation">Documentation<a href="https://docs.epinio.io/blog/epinio-1-14-3#documentation" class="hash-link" aria-label="Direct link to Documentation" title="Direct link to Documentation" translate="no">​</a></h2>
+<ul>
+<li class="">Added <a href="https://docs.epinio.io/how-to/operator/customization/create_custom_appcharts#using-a-chart-from-another-oci-registry" target="_blank" rel="noopener noreferrer" class="">Using a chart from another OCI registry</a> and <a href="https://docs.epinio.io/how-to/operator/customization/create_custom_appcharts#pushing-the-chart-to-epinios-registry" target="_blank" rel="noopener noreferrer" class="">Pushing the chart to Epinio's registry</a>.</li>
+<li class="">Added <a href="https://docs.epinio.io/how-to/operator/cluster-config/persistent_storage" target="_blank" rel="noopener noreferrer" class="">Running the registry and SeaweedFS on persistent storage</a>.</li>
+<li class="">Rewrote <a href="https://docs.epinio.io/reference/security/authentication_oidc" target="_blank" rel="noopener noreferrer" class="">OIDC authentication</a> around the new Dex Helm values, including keeping client secrets out of values.</li>
+<li class="">Updated <a href="https://docs.epinio.io/getting-started/install-mcp" target="_blank" rel="noopener noreferrer" class="">Installing the Epinio MCP Server</a> and the <a href="https://docs.epinio.io/reference/mcp" target="_blank" rel="noopener noreferrer" class="">MCP reference</a> for per-user authentication.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="dependency-updates">Dependency updates<a href="https://docs.epinio.io/blog/epinio-1-14-3#dependency-updates" class="hash-link" aria-label="Direct link to Dependency updates" title="Direct link to Dependency updates" translate="no">​</a></h2>
+<p>Updated server, UI, and Helm chart dependencies.</p>
+<hr>
+<p>For the complete technical changelog, see the
+<a href="https://github.com/epinio/epinio/releases/tag/v1.14.3" target="_blank" rel="noopener noreferrer" class="">1.14.3 release on GitHub</a>.</p>]]></content:encoded>
+            <category>release</category>
+        </item>
         <item>
             <title><![CDATA[Announcing Epinio 1.14.2!]]></title>
             <link>https://docs.epinio.io/blog/epinio-1-14-2</link>
