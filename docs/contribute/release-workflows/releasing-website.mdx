@@ -1,0 +1,66 @@
+---
+sidebar_label: Website
+sidebar_position: 5
+title: Releasing Website
+description: Overview of the process for publishing updated Epinio Website.
+keywords: [epinio, contribute, website, release]
+doc-type: [contribute]
+doc-topic: [epinio, contribute, website]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+## Overview
+
+<img
+  src={require('./website-overview.png').default}
+  alt="Website Overview"
+  width="800"
+/>
+
+## Release Process
+
+### 1. Preparing for Release
+
+a. The site is not versioned, so there is no version to bump and no tag to push. A release here is simply a merge to `main`.
+
+b. Content lives in `src/content/` and `src/pages/` as MDX. Layout and components are in `src/layouts/` and `src/components/`, and the shared component library comes from `@krumio/trailhand-ui`.
+
+c. Run `yarn lint` and `yarn build` locally before opening the PR. Nothing in CI runs either one, so this is the only place they get checked.
+
+### 2. Reviewing the PR
+
+a. __There are no PR checks on this repository at all__. No build, no lint, no deploy preview. A PR shows zero check runs, so a broken build is not visible until it has already landed on `main`.
+
+b. Review by pulling the branch and running `yarn dev`, or by running `yarn build` to confirm the static output still generates.
+
+### 3. Publishing
+
+a. Merge to `main`. That triggers __Deploy to GitHub Pages__ (`deploy.yaml`), which can also be run manually from the Actions tab.
+
+b. The `build` job checks out the repo and hands off to `withastro/action@v6`, which installs dependencies, runs the Astro build, and uploads the site as a Pages artifact. It needs two secrets at build time: `PUBLIC_RECAPTCHA_SITE_KEY` and `PUBLIC_API_URL`.
+
+c. The `deploy` job runs after build and publishes the artifact with `actions/deploy-pages@v5` into the `github-pages` environment, which serves `epinio.io`.
+
+### 4. Post Release Tasking
+
+a. Load the site and check the pages you changed. Since nothing validated the build before merge, the deploy run is the first real signal.
+
+b. Triage Dependabot. It runs daily for npm and github-actions, but its PRs get no CI, so each one needs a local build to verify. Note that PRs predating the Astro rewrite may bump packages that are no longer in `package.json` and can simply be closed.
+
+c. Its important to close out or update any public GitHub issues that were resolved as part of the release, and clean up branches.
+
+## Closer Look
+
+To learn more about each of the workflows that run take a look at the mapping and visual flow below.
+
+| File |Process |
+| --------------- | --------------- |
+| deploy.yaml   | Deploy to GitHub Pages. `build` job runs withastro/action, then `deploy` job publishes to the github-pages environment   |
+| .github/dependabot.yaml   | Daily npm and github-actions bumps. No CI runs on the resulting PRs   |
+| astro.config.mjs   | Astro config. `output: "static"`, site `https://epinio.io`, MDX and sitemap integrations   |
+
+<img
+  src={require('./website-workflow.png').default}
+  alt="Website Workflow"
+  width="800"
+/>

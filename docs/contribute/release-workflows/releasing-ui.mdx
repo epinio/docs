@@ -1,0 +1,68 @@
+---
+sidebar_label: UI
+sidebar_position: 1
+title: Releasing UI
+description: Overview of the process for publishing updated Epinio UI.
+keywords: [epinio, contribute, ui, release]
+doc-type: [contribute]
+doc-topic: [epinio, contribute, ui]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+## Overview
+
+<img
+  src={require('./ui-overview.png').default}
+  alt="UI Overview"
+  width="800"
+/>
+
+## Release Process
+
+### 1. Preparing for Release
+
+a. In order for the Rancher Extension build process to complete successfully the `package.json` in the `dashboard` directory and `pkg` directory needs to have its version attribute set to what is being released. 
+
+b. <mark>There is some opportunity to streamline this via a GitHub workflow, but design work needs to occur first.</mark>
+
+### 2. Releasing the Rancher Extension
+
+a. When the release is prepared, create a release with `epinio-<version>` as the tag and release name. For example if I wanted to release `1.14.1`, I would enter `epinio-1.14.1` in the tag and release name. 
+
+b. Make sure to generate release notes before creating the release. 
+
+c. The GitHub Workflow will kick off for the extension build. The workflow files start with `.github/workflows/dashboard-build-extension-runner.yml` which then references the build via the `.github/workflows/dashboard-build-extension.yml` file. This is a fairly standard workflow for build rancher extensions based on their documentation. 
+
+d. Once the deployment finishes, the assets are published via GitHub pages so people can either directly reference it or use the Partner Extensions which references our extension. 
+
+e. Speaking of Partner Extensions, every time we update we need to bump the version in their tracking repository so the new updates show as available via their repository. To do so open a PR against their repository and add the new versions. For example, check out this [PR](https://github.com/rancher/partner-extensions/pull/74). 
+
+### 3. Releasing the Standalone UI
+
+a. When the release is prepared and the Rancher Extension has passed its build. You need to create a release with `v<version>` as the tag and release name. For example if I wanted to release `1.14.1`, I would enter `v1.14.1` into the tag and release name. 
+
+b. Make sure to generate release notes before creating the release. 
+
+c. Once the release is created the GitHub Workflow will kick off for the standalone build. The workflow file `.github/workflows/release.yml` contains all of the steps to build the standalone version. It packages the UI into a container that can be referenced directly or from a Helm Chart. 
+
+### 4. Post Release Tasking
+
+a. Its important to close out or update any public GitHub issues that were resolved as part of the update, clean up branches, and ensure that main, development, and any future version branches are created or synced. 
+
+## Closer Look
+
+To learn more about each of the workflows that run take a look at the mapping and visual flow below.
+
+| File |Process |
+| --------------- | --------------- |
+| release.yml   | Standalone Release   |
+| dashboard-build-extension-runner.yml->dashboard-build-extension.yml   | Extension Release   |
+| dashboard-test.yaml   | Tests (Just linter at the moment)   |
+| release-drafter.yaml   | Currently not functioning properly   |
+
+
+<img
+  src={require('./ui-workflow.png').default}
+  alt="UI Workflow"
+  width="800"
+/>
