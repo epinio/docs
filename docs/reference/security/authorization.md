@@ -23,6 +23,11 @@ The password has to be base64 encoded. Below, `cGFzc3dvcmQ=` is the base64 encod
 
 You can also login again with the `epinio login [URL]` command.
 
+For CI or one-off invocations without editing the settings file, set
+`EPINIO_USER` with `EPINIO_PASSWORD` (plaintext) or `EPINIO_PASSWORD_B64`
+(base64), or set `EPINIO_API_TOKEN`. See [CLI settings](../concepts/settings.md)
+for the full environment-variable reference.
+
 
 ```yaml
 api: https://epinio.mydomain.com
