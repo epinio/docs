@@ -1,0 +1,8 @@
+{
+  "label": "epinio app build",
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "reference/cli/app/build/epinio_app_build"
+  }
+}

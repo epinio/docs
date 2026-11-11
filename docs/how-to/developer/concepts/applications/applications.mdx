@@ -14,16 +14,23 @@ import TabItem from '@theme/TabItem';
 
 This guide explores working with applications. Applications are deployable workloads that Epinio builds, deploys, and manages on Kubernetes. For more information, see the [applications](../../../../reference/concepts/supported_applications.md) reference page.
 
+This guide also touches on application builds. Builds are applications that have been built but not deployed. For more information, see the [app builds](../../../../reference/concepts/builds.md) reference page.
+
 ## View Applications
 
 <Tabs>
 <TabItem value="ui" label="UI" default>
 
-To view all your applications, navigate to the **Applications** page in the side navigation menu. Applications are grouped by [namespace](../namespaces/namespaces.mdx).
+To view all your applications, navigate to the **Applications** page in the side navigation menu. Applications are split into two tables based on their status. The first table displays deployed applications. The second table displays application builds.
 
 <img
-  src={require('./apps-screen.png').default}
-  alt="View of the Applications screen"
+  src={require('./apps-screen-deployed.png').default}
+  alt="View of the Applications screen deployed tab"
+/>
+
+<img
+  src={require('./apps-screen-undeployed.png').default}
+  alt="View of the Applications screen undeployed tab"
 />
 
 </TabItem>
@@ -33,6 +40,12 @@ List all applications:
 
 ```console
 epinio app list
+```
+
+List undeployed applications:
+
+```console
+epinio app build list
 ```
 
 </TabItem>
@@ -49,14 +62,24 @@ Click **Create** on the Applications page to open the creation modal. App creati
 
 Provide your application source to Epinio. If you have an [application manifest](../../../../reference/concepts/manifests.md) you can upload it directly. Otherwise, you can provide your source in any of the following ways:
 
-- Container image
-- Archive file
-- From folder
-- Git URL
-- GitHub
-- GitLab
+- **Container image**: Deploy a prebuilt image from a container registry (such as Docker Hub or GHCR) or your own Epinio app builds.
+- **Archive file**: Upload a compressed archive (such as `.zip` or `.tar.gz`) containing your application source, which Epinio will stage and build for you.
+- **From folder**: Select a local directory containing your application source, which Epinio packages and uploads for staging.
+- **Git URL**: Point Epinio at a Git repository by URL, along with a branch, tag, or commit to build from.
+- **GitHub**: Pull your source directly from a GitHub repository, choosing the repository and branch or commit to deploy.
+- **GitLab**: Pull your source directly from a GitLab repository, choosing the repository and branch or commit to deploy.
 
 Selecting any of the Git options will allow you to select from your [git configurations](../git-configs/git-configs.mdx) so Epinio can access private repos/projects.
+
+
+
+<img
+  src={require('./apps-create-modal.png').default}
+  alt="Create Application Modal"
+  width="800"
+/>
+
+#### Application Build Options
 
 After providing your source, choose a **Build Method**. Epinio offers this for every source type it builds; a container image is already built, so it has no build method.
 
@@ -65,11 +88,13 @@ After providing your source, choose a **Build Method**. Epinio offers this for e
 
 For which one to pick and what changes between them, see [build modes](../../../../reference/concepts/build_modes.md).
 
-Finally, select the [application chart](../app-charts/app-charts.mdx) you would like Epinio to use when deploying your application.
+Next, select the [application chart](../app-charts/app-charts.mdx) you would like Epinio to use when deploying your application.
+
+Finally, use the toggle to confirm that you want to deploy your application after it is built.
 
 <img
-  src={require('./apps-create-modal.png').default}
-  alt="Create Application Modal"
+  src={require('./apps-create-build.png').default}
+  alt="Create Application Build Options"
   width="800"
 />
 
@@ -106,6 +131,12 @@ Epinio will now build and deploy your application. You can watch the progress in
 </TabItem>
 <TabItem value="cli" label="CLI">
 
+Create an application:
+
+```console
+epinio app create myapp
+```
+
 Deploy an application from the current directory:
 
 ```console
@@ -138,6 +169,43 @@ staging:
   dockerfilePath: docker/Dockerfile
 ```
 
+#### Build an application image without deploying it
+
+`epinio app push` builds and deploys in one step. To build the image first and deploy it
+later, use `epinio app build` and `epinio app deploy` separately.
+
+Build the application from the current directory. This stores the image but does not deploy it:
+
+```console
+epinio app build -n myapp
+```
+
+`epinio app build` accepts the same source options as `epinio app push`, such as `--path`,
+`--git`, `--build-mode` and `--dockerfile-path`, as well as an application manifest:
+
+```console
+epinio app build -n myapp --build-mode dockerfile --dockerfile-path docker/Dockerfile
+```
+
+:::note
+Building from a container image URL (`--container-image-url`) is not supported, because
+there is nothing to build. Use `epinio app push` for those.
+:::
+
+List the builds that have not been deployed yet, with their build status and image:
+
+```console
+epinio app build list
+```
+
+When the build is ready, deploy it:
+
+```console
+epinio app deploy myapp
+```
+
+`epinio app deploy` deploys the application's current build and does not build anything new.
+
 </TabItem>
 </Tabs>
 
@@ -160,6 +228,12 @@ Show details for an application:
 
 ```console
 epinio app show myapp
+```
+
+Show the current build of an application:
+
+```console
+epinio app build show myapp
 ```
 
 </TabItem>
@@ -223,6 +297,12 @@ Delete an application:
 epinio app delete myapp
 ```
 
+Delete the current build of an application:
+
+```console
+epinio app build delete myapp
+```
+
 Delete it along with its container image and its persistent data:
 
 ```console
@@ -266,7 +346,9 @@ for a kubectl Job-based cleanup when the application is already gone or Epinio i
 
 The following actions are available from the action menu in the Applications table or on the Application Details page.
 
-### App Shell
+### Deployed Apps
+
+#### App Shell
 
 <Tabs>
 <TabItem value="ui" label="UI" default>
@@ -285,7 +367,7 @@ epinio app exec myapp
 </TabItem>
 </Tabs>
 
-### App Logs
+#### App Logs
 
 <Tabs>
 <TabItem value="ui" label="UI" default>
@@ -304,7 +386,7 @@ epinio app logs myapp
 </TabItem>
 </Tabs>
 
-### Last Build Logs
+#### Last Build Logs
 
 <Tabs>
 <TabItem value="ui" label="UI" default>
@@ -323,17 +405,17 @@ epinio app logs myapp --staging
 </TabItem>
 </Tabs>
 
-### Rebuild
+#### Restage
 
 <Tabs>
 <TabItem value="ui" label="UI" default>
 
-Selecting **Rebuild** in the action menu creates a new application image from the application's source code and deployment configuration, then deploys the updated version.
+Selecting **Restage** in the action menu creates a new application image from the application's source code and deployment configuration, then deploys the updated version.
 
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-Rebuild and redeploy an application:
+Restage and redeploy an application:
 
 ```console
 epinio app restage myapp
@@ -342,7 +424,7 @@ epinio app restage myapp
 </TabItem>
 </Tabs>
 
-### Restart
+#### Restart
 
 <Tabs>
 <TabItem value="ui" label="UI" default>
@@ -361,7 +443,7 @@ epinio app restart myapp
 </TabItem>
 </Tabs>
 
-### Export
+#### Export
 
 <Tabs>
 <TabItem value="ui" label="UI" default>
@@ -373,6 +455,28 @@ Selecting **Export** in the action menu downloads an application's deployment ar
   alt="Export App Modal"
   width="500"
 />
+
+### Undeployed Apps
+
+#### Deploy
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Selecting **Deploy** in the action menu opens up the application modal, allowing for final changes before deploying the application.
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Deploy an application:
+
+```console
+epinio app deploy myapp
+```
+
+</TabItem>
+</Tabs>
+
 
 </TabItem>
 <TabItem value="cli" label="CLI">
