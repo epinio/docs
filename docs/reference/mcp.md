@@ -177,9 +177,10 @@ These are always available and act purely through the Epinio API.
 | --- | --- |
 | `list_appcharts` | List AppCharts registered on the cluster (valid values for `appchart`), with settings schemas. |
 | `show_appchart` | Fetch a single AppChart's description and settings schema. |
-| `create_appchart` | Register a new AppChart. |
-| `update_appchart` | Update an AppChart. |
-| `delete_appchart` | Delete an AppChart. |
+| `create_appchart` | Register a new AppChart by chart/repo reference (URL, Helm repo, or external OCI). |
+| `push_appchart` | Upload a helm chart archive to Epinio's registry and register it as an AppChart. |
+| `update_appchart` | Update an AppChart. For pushed charts, replace the chart with `push_appchart` instead of changing `helm_chart` / `helm_repo`. |
+| `delete_appchart` | Delete an AppChart (also removes a pushed chart from Epinio's registry). |
 
 ### Builder images
 
