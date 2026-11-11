@@ -41,7 +41,7 @@ epinio app [flags]
 ### SEE ALSO
 
 * [epinio](../epinio.md)	 - Epinio cli
-* [epinio app build](./epinio_app_build.md)	 - Build and store an application image without deploying it
+* [epinio app build](./build/epinio_app_build.md)	 - Build and store an application image without deploying it
 * [epinio app chart](./chart/epinio_app_chart.md)	 - Epinio application chart management
 * [epinio app create](./epinio_app_create.md)	 - Create just the app, without creating a workload
 * [epinio app delete](./epinio_app_delete.md)	 - Deletes one or more applications

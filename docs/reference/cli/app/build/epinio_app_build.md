@@ -55,7 +55,7 @@ epinio app build [flags] [PATH_TO_APPLICATION_MANIFEST]
 
 ### SEE ALSO
 
-* [epinio app](./epinio_app.md)	 - Epinio application features
+* [epinio app](../epinio_app.md)	 - Epinio application features
 * [epinio app build delete](./epinio_app_build_delete.md)	 - Delete the named application's current build
 * [epinio app build list](./epinio_app_build_list.md)	 - List applications and their current build
 * [epinio app build show](./epinio_app_build_show.md)	 - Show the named application's current build
