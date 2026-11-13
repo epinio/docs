@@ -136,7 +136,14 @@ Push the application again to confirm staging succeeds.
 :::tip With `persistentVolumeClaim` storage you can also delete the pod
 
 Deleting the pod (`kubectl -n epinio delete pod -l app.kubernetes.io/name=epinio-registry`) also works when images are on the PersistentVolumeClaim.
-Avoid `kubectl rollout restart`: it starts the new pod before stopping the old one, and with a `ReadWriteOnce` volume, which most block storage provides, a new pod on another node can't attach the volume while the old pod holds it.
+
+From Epinio 1.14.4, when the registry Deployment uses `strategy.type: Recreate` (the chart default for PVC storage when `containerregistry.strategy` is unset), `kubectl rollout restart` releases the volume before the new pod starts.
+
+:::
+
+:::note Epinio 1.14.3 and earlier
+
+These releases leave the registry on the Kubernetes default `RollingUpdate`. Avoid `kubectl rollout restart` on `ReadWriteOnce` storage: a new pod on another node can hit a Multi-Attach stall. Delete the pod instead, or see [Persistent storage](../cluster-config/persistent_storage.md) for recovery. The same applies if you overrode `containerregistry.strategy` to `RollingUpdate`.
 
 :::
 
@@ -163,7 +170,7 @@ Then pick one of these approaches:
   ```
 
   The Epinio chart doesn't set this annotation, so check that it is still present after each Epinio upgrade.
-  Reloader performs a rolling restart, which replaces the pod. Use it only with `persistentVolumeClaim` storage: on `emptyDir` storage every renewal would delete all stored images. The `ReadWriteOnce` limit described in the tip above also applies.
+  Reloader replaces the pod using the Deployment's strategy. Use it only with `persistentVolumeClaim` storage: on `emptyDir` storage every renewal would delete all stored images. From Epinio 1.14.4, that strategy defaults to `Recreate` for PVC storage when `containerregistry.strategy` is unset, so Reloader avoids the Multi-Attach stall described above. On Epinio 1.14.3 and earlier, or with a `RollingUpdate` override, the stall in the note above still applies.
 
 To keep images across pod restarts, node failures and upgrades, move the registry to persistent storage. See [Run the registry and SeaweedFS on persistent storage](../cluster-config/persistent_storage.md).
 

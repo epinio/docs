@@ -164,6 +164,7 @@ The built-in registry's storage and security values:
 | `containerregistry.storage.storageClassName` | cluster default | StorageClass for the claim. |
 | `containerregistry.storage.accessModes` | `[ReadWriteOnce]` | Access modes for the claim. |
 | `containerregistry.storage.volumeMode` | `Filesystem` | Volume mode for the claim. |
+| `containerregistry.strategy` | unset | Deployment strategy for the registry (Epinio 1.14.4 and later). When unset, `emptyDir` keeps the Kubernetes default (`RollingUpdate`); a PersistentVolumeClaim defaults to `type: Recreate` so a `ReadWriteOnce` volume is released before the new pod starts (avoids a Multi-Attach stall; brief registry outage). Set this to override, for example `RollingUpdate` when using `ReadWriteMany`. |
 | `containerregistry.podSecurityContext` | `fsGroup: 1000`, `fsGroupChangePolicy: OnRootMismatch` | Pod security context of the registry. The registry runs as user ID 1000, and `fsGroup` makes a new root-owned volume writable for it. Set keys to override them, or `null` to remove the security context. |
 
 The volume must be writable by user ID 1000. Storage that ignores `fsGroup`, such as NFS with `root_squash`, needs that ownership set up front.

@@ -101,11 +101,25 @@ Pass the values file to `helm install` as usual. Nothing else is needed.
 
 1. **Restage or push your applications again**, as described in [Before you begin](#before-you-begin).
 
-:::tip A new registry pod stuck in `ContainerCreating`
+:::tip Multi-Attach stall on `ReadWriteOnce` storage
 
-The registry Deployment replaces its pod by starting the new one first.
-With a `ReadWriteOnce` volume, a new pod on a different node can't attach the volume while the old pod holds it, and its events show a `Multi-Attach error`.
-Delete the old pod to release the volume. This can happen on any later upgrade that changes the registry, not only this one.
+Most block storage (EBS, Longhorn, Ceph RBD) only offers `ReadWriteOnce`: the volume attaches to one node at a time.
+A `RollingUpdate` starts the new registry pod before stopping the old one. If the scheduler places the new pod on another node, it stays in `ContainerCreating` with a `Multi-Attach error`, and the rollout never finishes on its own.
+
+From Epinio 1.14.4, when `containerregistry.storage.emptyDir` is `false` and `containerregistry.strategy` is unset, the chart sets `strategy.type: Recreate`, so the old pod releases the volume before the new one starts (a short registry outage instead of a stuck upgrade).
+
+Override with `containerregistry.strategy` if you use `ReadWriteMany`, or if you need a different strategy. See [Container Registry](../../../reference/helm.md#container-registry).
+
+:::
+
+:::note Epinio 1.14.3 and earlier
+
+These releases leave the registry on the Kubernetes default `RollingUpdate`. If a new pod stays in `ContainerCreating` with a `Multi-Attach error`, or if you overrode `containerregistry.strategy` back to `RollingUpdate`, delete the **old** Running pod (not the new one) to release the volume:
+
+```bash
+kubectl -n epinio get pods -l app.kubernetes.io/name=epinio-registry -o wide
+kubectl -n epinio delete pod <old-registry-pod>
+```
 
 :::
 
