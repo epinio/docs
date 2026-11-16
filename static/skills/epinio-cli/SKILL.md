@@ -482,6 +482,7 @@ and need the CLI equivalent of a tool you know by name:
 | `create_catalog_service` / `update_catalog_service` / `delete_catalog_service` | `epinio service catalog create` / `update` / `delete` |
 | `list_appcharts` / `show_appchart` | `epinio app chart list` / `show NAME` |
 | `create_appchart` / `update_appchart` / `delete_appchart` | `epinio app chart create` / `update` / `delete` |
+| `push_appchart` | `epinio app chart push NAME CHART-ARCHIVE [--description TEXT] [--short-description TEXT]` |
 | `list_builder_images` / `show_builder_image` | `epinio buildimage list` / `show NAME` |
 | `create_builder_image` / `update_builder_image` / `delete_builder_image` | `epinio buildimage create` / `update` / `delete` |
 | `list_gitconfigs` / `show_gitconfig` / `create_gitconfig` / `delete_gitconfig` | `epinio gitconfig list` / `show` / `create` / `delete` |
