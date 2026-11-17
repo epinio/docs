@@ -66,7 +66,7 @@ there is nothing to do. Use `epinio (apps) push` for such applications.
 A build uses one of two modes, selected with `--build-mode` or with `staging.buildMode`
 in a manifest, and defaulting to `buildpack`:
 
-  - `buildpack`, building with Paketo buildpacks.
+  - `buildpack`, building with buildpacks.
 
   - `dockerfile`, building from a Dockerfile in the sources.
 
