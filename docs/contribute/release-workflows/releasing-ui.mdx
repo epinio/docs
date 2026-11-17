@@ -11,19 +11,11 @@ doc-persona: [epinio-developer, epinio-operator]
 
 ## Overview
 
-<img
-  src={require('./ui-overview.png').default}
-  alt="UI Overview"
-  width="800"
-/>
-
 ## Release Process
 
 ### 1. Preparing for Release
 
 a. In order for the Rancher Extension build process to complete successfully the `package.json` in the `dashboard` directory and `pkg` directory needs to have its version attribute set to what is being released. 
-
-b. <mark>There is some opportunity to streamline this via a GitHub workflow, but design work needs to occur first.</mark>
 
 ### 2. Releasing the Rancher Extension
 
@@ -35,7 +27,7 @@ c. The GitHub Workflow will kick off for the extension build. The workflow files
 
 d. Once the deployment finishes, the assets are published via GitHub pages so people can either directly reference it or use the Partner Extensions which references our extension. 
 
-e. Speaking of Partner Extensions, every time we update we need to bump the version in their tracking repository so the new updates show as available via their repository. To do so open a PR against their repository and add the new versions. For example, check out this [PR](https://github.com/rancher/partner-extensions/pull/74). 
+e. Every time we update we need to bump the version in their tracking repository so the new updates show as available via their repository. To do so open a PR against their repository and add the new versions. For example, check out this [PR](https://github.com/rancher/partner-extensions/pull/74). 
 
 ### 3. Releasing the Standalone UI
 
@@ -48,21 +40,3 @@ c. Once the release is created the GitHub Workflow will kick off for the standal
 ### 4. Post Release Tasking
 
 a. Its important to close out or update any public GitHub issues that were resolved as part of the update, clean up branches, and ensure that main, development, and any future version branches are created or synced. 
-
-## Closer Look
-
-To learn more about each of the workflows that run take a look at the mapping and visual flow below.
-
-| File |Process |
-| --------------- | --------------- |
-| release.yml   | Standalone Release   |
-| dashboard-build-extension-runner.yml->dashboard-build-extension.yml   | Extension Release   |
-| dashboard-test.yaml   | Tests (Just linter at the moment)   |
-| release-drafter.yaml   | Currently not functioning properly   |
-
-
-<img
-  src={require('./ui-workflow.png').default}
-  alt="UI Workflow"
-  width="800"
-/>

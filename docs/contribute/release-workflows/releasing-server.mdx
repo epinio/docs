@@ -11,12 +11,6 @@ doc-persona: [epinio-developer, epinio-operator]
 
 ## Overview
 
-<img
-  src={require('./server-overview.png').default}
-  alt="Server Overview"
-  width="800"
-/>
-
 ## Release Process
 
 ### 1. Preparing for Release
@@ -54,24 +48,3 @@ a. Confirm the version bump PR opened on `epinio/helm-charts`, then follow the H
 b. Confirm the version bump PR opened on `epinio/docs`.
 
 c. Its important to close out or update any public GitHub issues that were resolved as part of the release, clean up branches, and ensure that main, development, and any future version branches are created or synced.
-
-## Closer Look
-
-To learn more about each of the workflows that run take a look at the mapping and visual flow below.
-
-| File |Process |
-| --------------- | --------------- |
-| release.yml   | Release: GoReleaser build, sign, draft the release, dispatch to helm-charts   |
-| release-publish.yml   | Release Published: dispatch to docs and the Docker Desktop extension, Homebrew bump   |
-| release-sandbox.yml   | Release dry run. GoReleaser snapshot, publishes nothing   |
-| release-drafter.yml   | Drafts the release notes   |
-| main.yml   | Acceptance test suites (CLI, API, apps, services)   |
-| golangci-lint.yml   | Lint   |
-| clientsync.yml   | Client and server version sync test   |
-| codeql-analysis.yml   | CodeQL analysis   |
-
-<img
-  src={require('./server-workflow.png').default}
-  alt="Server Workflow"
-  width="800"
-/>

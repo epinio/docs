@@ -9,14 +9,6 @@ doc-topic: [epinio, contribute, install, operator]
 doc-persona: [epinio-developer, epinio-operator]
 ---
 
-## Overview
-
-<img
-  src={require('./install-operator-overview.png').default}
-  alt="Install Operator Overview"
-  width="800"
-/>
-
 ## Release Process
 
 ### 1. Preparing for Release
@@ -52,21 +44,3 @@ b. No `:latest` tag is pushed, so anything tracking latest needs the explicit ve
 c. The Helm chart in `charts/install-operator` is not published by any workflow. If consumers need it, package and publish it by hand, or install it from the repo.
 
 d. Its important to close out or update any public GitHub issues that were resolved as part of the release, and clean up branches.
-
-## Closer Look
-
-To learn more about each of the workflows that run take a look at the mapping and visual flow below.
-
-| File |Process |
-| --------------- | --------------- |
-| publish.yml   | Publish. On tags `v*`, calls the three checks then builds and pushes the multi-arch image   |
-| lint.yml   | Lint. `make lint-config` then `make lint`, using a custom golangci-lint built from `.custom-gcl.yml`. Also reusable   |
-| test.yml   | Tests. envtest unit tests with coverage, e2e excluded. Also reusable   |
-| test-e2e.yml   | E2E Tests. kind cluster plus the ginkgo suite in `test/e2e`. Also reusable   |
-
-
-<img
-  src={require('./install-operator-workflow.png').default}
-  alt="Install Operator Workflow"
-  width="800"
-/>

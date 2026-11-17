@@ -11,12 +11,6 @@ doc-persona: [epinio-developer, epinio-operator]
 
 ## Overview
 
-<img
-  src={require('./app-charts-overview.png').default}
-  alt="Helm Chart Overview"
-  width="800"
-/>
-
 ## Release Process
 
 ### 1. Preparing for Release
@@ -54,22 +48,3 @@ b. That check matters because `CR_SKIP_EXISTING: true` makes chart-releaser skip
 c. To backfill a missing artifact, re-run the workflow: with `CR_SKIP_EXISTING` a re-run is purely additive. To change something already published, bump the version. Never delete a release and recreate it to replace content.
 
 d. Its important to close out or update any public GitHub issues that were resolved as part of the release, clean up branches, and ensure that main and any future version branches are synced.
-
-## Closer Look
-
-To learn more about each of the workflows that run take a look at the mapping and visual flow below.
-
-| File |Process |
-| --------------- | --------------- |
-| release.yml   | Release Charts. chart-releaser packages and publishes every chart in `chart/`. Manual trigger only   |
-| build-epiniod.yml   | Build epiniod image. Pushes `ghcr.io/epinio/epiniod`, tagged from the published chart version   |
-| main-ci.yml   | Lint and test chart installation. `lint-test` then `installation-test` on k3d   |
-| updatecli.yml   | Updatecli dependency management. Opens the version bump PR on dispatch from the server release, and hourly   |
-| sync-readme.yml   | Copies README.md from main onto the gh-pages branch   |
-| add_issue_to_project.yml   | Repository hygiene   |
-
-<img
-  src={require('./app-charts-workflow.png').default}
-  alt="Helm Chart Workflow"
-  width="800"
-/>
