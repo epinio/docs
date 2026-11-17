@@ -43,7 +43,9 @@ epinio app chart list
 <Tabs>
 <TabItem value="ui" label="UI" default>
 
-Click **Create** on the Application Charts page to open the creation modal. Here you can provide a name and short description which will be displayed when creating an application, a detailed description for display in the table, as well as a Helm Chart URL and/or a Helm Repo URL. You can also establish settings that will prompt the user for values during app creation if they select the corresponding chart.
+Click **Create** on the Application Charts page to open the creation modal. Here you can provide a name and short description which will be displayed when creating an application and a detailed description for display in the table. 
+
+Epinio supports creating Application Charts via both linking and upload. To link a chart you must provide a Helm Chart URL and/or a Helm Repo URL. You can also establish settings that will prompt the user for values during app creation if they select the corresponding chart.
 
 <img
   src={require('./charts-create-modal.png').default}
@@ -51,11 +53,21 @@ Click **Create** on the Application Charts page to open the creation modal. Here
   width="800"
 />
 
+To upload an Application Chart simply select `Upload Archive` in the `Chart Source` dropdown. Then press the `Select File` button and upload the `.tgz` file produced by `helm package`. For an uploaded Application Chart the chart settings can be added after creation by editing the chart.
+
+<img
+  src={require('./charts-create-modal-2.png').default}
+  alt="Create App Chart Modal (Upload)"
+  width="800"
+/>
+
 </TabItem>
 
 <TabItem value="cli" label="CLI">
 
-Create an application chart:
+Epinio supports creating Application Charts via both linking and upload. 
+
+Create an application chart via linking:
 
 ```console
 epinio app chart create --name mychart \
@@ -68,6 +80,16 @@ epinio app chart create --name mychart \
 ```
 
 The `--set` flag takes a `key=value` pair and can be repeated to provide multiple values.
+
+Create an application chart via upload:
+
+```console
+epinio app chart push mychart ./mychart-0.1.0.tgz \
+    --short-description "My application chart" \
+    --description "A longer description of my application chart" \
+```
+
+ For an uploaded Application Chart the chart settings can be added after creation by editing the chart. When `name` is an application chart which was pushed before, its chart is replaced. This is refused while applications use the application chart.
 
 </TabItem>
 </Tabs>
