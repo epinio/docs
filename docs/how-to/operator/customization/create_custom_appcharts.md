@@ -104,8 +104,11 @@ Versioned chart development is out of scope for this How-to.
 ### Making the helm Chart known to Epinio
 
 Once you have created the new chart,
-it's necessary to place the generated tarball on a web server.
-A few possible options are:
+it's necessary to make the generated tarball available to Epinio.
+You can either let Epinio store it in its own registry,
+as described in [Pushing the chart to Epinio's registry](#pushing-the-chart-to-epinios-registry),
+or place it on a web server.
+A few possible options for the web server are:
 
 - A server in the public cloud available to you
 - The company's host web server, if available, and permitted by company policies
@@ -176,6 +179,73 @@ epinio app chart create --name fluentd \
 
 The same can be done from the **Application Charts** page in the web UI.
 See the [app charts how-to](../../developer/concepts/app-charts/app-charts.mdx) for details.
+
+:::
+
+### Pushing the chart to Epinio's registry
+
+Instead of hosting the tarball on a web server you can push it to Epinio.
+Epinio stores the chart as an OCI artifact in the registry it stores application images in,
+the bundled one or an [external one](../cluster-config/setup_external_registry.md),
+and registers the application chart for it:
+
+```console
+epinio app chart push fluentd ./epinio-application-0.1.0.tgz \
+    --short-description "Fluentd filterable standard deployment" \
+    --description "Epinio standard support chart extended for fluentd filtering"
+```
+
+The first argument is the name of the application chart.
+The second argument is the chart tarball, as created by `helm package`.
+
+The Epinio server validates the chart, creates the application chart referencing it, and stores the
+chart in the registry. The registry credentials are held by the server.
+You neither need nor see them, just like for the images of your applications.
+
+Use `epinio app chart show fluentd` to see where the chart was stored.
+The `Helm Repository` is `oci://REGISTRY/NAMESPACE`, the location of the application images,
+and the `Helm Chart` is `epinio_appchart_fluentd:0.1.0`. The chart is stored under the name of the
+application chart, not its own name.
+
+:::note
+
+  - Pushing charts requires permission to write application charts (`chart_write`).
+    Of the default roles this is available to the `system_manager` and `admin` roles.
+
+  - Pushing to the name of an application chart which was pushed before replaces its chart.
+    This is refused (`409 Conflict`) while applications use the application chart, so that their
+    chart does not change behind their back. Earlier versions stay in the registry until the
+    application chart is deleted.
+
+  - The name of an application chart which was not pushed, for example one referencing a URL,
+    cannot be used (`409 Conflict`).
+
+  - The chart and Helm repository of a pushed application chart cannot be changed with
+    `epinio app chart update`. Push the new chart to the same name instead.
+
+  - `epinio app chart delete` removes the chart from the registry together with the application chart.
+    A registry which does not allow deletion keeps the chart, see
+    [Setting up an external container registry](../cluster-config/setup_external_registry.md#application-charts).
+    An application chart deleted in any other way, for example with `kubectl`, leaves its chart in the
+    registry. A later push to that name replaces it.
+
+:::
+
+### Using a chart from another OCI registry
+
+A chart which is already available in an OCI registry can be referenced directly.
+Set the registry as the Helm repository, and specify chart name and version in the chart reference:
+
+```console
+epinio app chart create --name fluentd \
+    --helm-repo oci://registry.example.com/charts \
+    --helm-chart epinio-application-fluentd:0.1.0
+```
+
+:::caution
+
+Epinio pulls the chart without credentials, except for its own registry.
+Registries requiring authentication are not supported.
 
 :::
 

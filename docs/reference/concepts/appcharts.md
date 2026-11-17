@@ -139,6 +139,124 @@ Read the [contents of the standard application chart](https://github.com/epinio/
 
 The [application charts how-to](../../how-to/developer/concepts/app-charts/app-charts.mdx) contains information on how to work with app charts via the UI or CLI.
 
+## Chart Sources
+
+The chart an application chart is made from is specified by the two fields `helmChart` and
+`helmRepo` of the `AppChart` resource, in one of three ways:
+
+|`helmRepo`             |`helmChart`                    |Meaning                                                |
+|---                    |---                            |---                                                    |
+|empty                  |URL                            |Direct link to the chart tarball                       |
+|URL                    |`NAME` or `NAME:VERSION`       |Chart in a Helm repository, i.e. one with an `index.yaml` |
+|`oci://REGISTRY/PATH`  |`NAME` or `NAME:VERSION`       |Chart in an OCI registry                               |
+
+For an OCI registry the chart reference passed to Helm is `oci://REGISTRY/PATH/NAME`, with the version
+passed separately. OCI registries have no `index.yaml`, so there is no `helm repo add` style bookkeeping
+for them.
+
+The default application charts of Epinio are stored in an OCI registry.
+The registry is configured through the value `appChart.repo` of the Epinio Helm chart.
+To not use it, set the values `appChart.default` and `appChart.gatewayAPI` to tarball URLs.
+
+### Pushed charts
+
+Custom charts can be stored in Epinio's registry with
+[`epinio app chart push`](../cli/app/chart/epinio_app_chart_push.md), or `POST /api/v1/appcharts/push`.
+See [How to create custom application Helm charts](../../how-to/operator/customization/create_custom_appcharts.md#pushing-the-chart-to-epinios-registry).
+
+Epinio's registry is the registry Epinio stores application images in: the bundled one, or an
+[external one](../../how-to/operator/cluster-config/setup_external_registry.md) configured with
+`global.registryURL` and `global.registryNamespace`.
+
+The chart of the application chart `NAME` is stored in the repository `epinio_appchart_NAME`, next to the
+application images. The application chart references it as
+
+- `helmRepo: oci://REGISTRY_URL/REGISTRY_NAMESPACE`, and
+- `helmChart: epinio_appchart_NAME:VERSION`, with the version of the chart.
+
+The chart's own name is not used. A single path segment below the registry namespace works on registries
+which do not allow deeper paths, like Docker Hub.
+An application chart counts as pushed when both its `helmRepo` is Epinio's registry and its chart name is
+`epinio_appchart_NAME`.
+
+The push request is `multipart/form-data`, with these parts:
+
+|Part                 |Meaning                                                    |
+|---                  |---                                                        |
+|`file`               |The chart tarball, as created by `helm package`. Required. |
+|`name`               |Name of the application chart. Required.                   |
+|`description`        |Optional.                                                  |
+|`short_description`  |Optional.                                                  |
+
+The chart has to be a valid Helm chart of type `application`, or without type.
+The action `chart_write` is required. The size of the upload is limited to 32 MiB.
+
+Pushing to a new name creates the application chart, then stores the chart. When storing fails the
+application chart is removed again. A chart left in the registry by an earlier application chart of the
+same name is replaced.
+
+Pushing to an existing name:
+
+|Existing application chart                       |Result                                              |
+|---                                              |---                                                 |
+|Not pushed (a URL, a Helm repository, another OCI registry)|`409 Conflict`, `already exists`          |
+|Pushed, used by applications                     |`409 Conflict`. Their chart does not change behind their back. |
+|Pushed, not used                                 |The chart is replaced. Earlier versions stay in the repository until the application chart is deleted. |
+
+### Changing and deleting
+
+`PATCH /api/v1/appcharts/NAME` (`epinio app chart update`) refuses changes to `helm_chart` and `helm_repo`
+
+- with `409 Conflict` while applications use the application chart, and
+- with `400 Bad Request` for a pushed application chart. Push the new chart to the same name instead.
+
+Descriptions, values, and settings can always be changed.
+
+Deleting a pushed application chart removes all tags of its repository from the registry first. Deleting
+any other application chart touches no registry.
+
+- When the chart cannot be removed, the application chart is kept, so that the deletion can be retried.
+- When the registry refuses to delete (`405`, or `401` or `403` for credentials which can read the chart),
+  the application chart is deleted anyway, and its chart stays in the registry, with a warning in the
+  server log. A later push to the same name replaces it.
+- Removing a chart which is not in the registry is not an error.
+
+### Registry access
+
+Pushed charts are pulled with the credentials Epinio uses for application images, from the
+`registry-creds` secret. Users neither supply nor see them.
+
+- When the host of `helmRepo` matches a registry in `registry-creds`, Epinio logs in with these credentials.
+  Basic auth and token auth, as used by Docker Hub and Harbor, both work.
+- Otherwise the chart is pulled anonymously, and Epinio's credentials are never sent to another host.
+- Failing to read the secret for another reason than its absence fails the deployment.
+
+Certificates:
+
+- The certificate of the registry inside the cluster is not verified, like for application images. Only the
+  hosts `localhost`, a loopback address, or a name ending in `.svc.cluster.local` count as inside.
+- Any other registry is verified against the system CAs, plus the certificate in
+  `containerregistry.certificateSecret`, if set. Epinio reads that certificate when it starts, so a changed
+  certificate takes a restart of the Epinio server.
+
+### Limitations
+
+- Pushing, pulling, and deleting charts has been tested with the bundled registry, Docker Hub, and
+  Harbor. Other registries may behave differently, in particular on deletion.
+- Charts can only be pushed to Epinio's registry. Credentials are only used for Epinio's registry, so other
+  OCI registries have to allow anonymous pulls.
+- An application chart deleted with `kubectl` leaves its chart in the registry. A later push to that name
+  replaces it.
+- A registry refusing deletes keeps the chart of a deleted application chart. Docker Hub removes the tags, and
+  keeps the empty repository.
+- When the server stops between creating the application chart and storing its chart, the application chart
+  exists without a chart. Deleting it removes it.
+- Removing a chart deletes its manifest and tags. The data stays in the storage of the registry until its
+  garbage collection runs. Epinio does not schedule one, as for application images.
+
 ## Related
 
   - [Routing Secrets](../customization/routing_secrets.md)
+  - [How to create custom application Helm charts](../../how-to/operator/customization/create_custom_appcharts.md)
+  - [How to use custom application Helm charts](../../how-to/operator/customization/using_custom_appcharts.md)
+  - [Setting up an external container registry](../../how-to/operator/cluster-config/setup_external_registry.md)

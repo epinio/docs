@@ -107,6 +107,16 @@ The `global` section carries the cross-cutting settings:
 - **`global.tlsIssuer`** — `epinio-ca`, `selfsigned-issuer`, `letsencrypt-staging`, or `letsencrypt-production`; or set **`global.customTlsIssuer`** to your own ClusterIssuer.
 - **`global.registryURL` / `registryUsername` / `registryPassword` / `registryNamespace`** — point Epinio at an external container registry (skip when `containerregistry.enabled` is `true`).
 
+## Application Charts
+
+The default [application charts](concepts/appcharts.md#chart-sources) are stored in an OCI registry:
+
+- **`appChart.repo`** — the OCI repository (`oci://...`) holding the default application charts. Defaults to `oci://ghcr.io/epinio/charts`.
+- **`appChart.default` / `appChart.gatewayAPI`** — name and version (`NAME:VERSION`) of the `standard` and `gateway-api-application` charts in that repository.
+
+To fetch a default chart from a tarball URL instead, set its value to the URL, for example
+`appChart.default: https://example.com/epinio-application-0.1.26.tgz`. The `repo` is then ignored for that chart.
+
 ## S3 Storage
 
 Epinio uses an S3 compatible storage to store the application source code.
@@ -133,6 +143,8 @@ Use any external S3 compatible solution by setting `.Values.seaweedfs.enabled` t
 
 If you don't need to use an identity provider, set the value to `false` and use only local Epinio users. [OIDC Authentication](./security/authentication_oidc.md) has more information.
 
+Connectors, the groups-to-roles mapping, local users and other Dex settings are set with `dex.connectors`, `dex.rolesMapping`, `dex.staticPasswords`, `dex.extraStaticClients` and `dex.extraConfig`. The chart renders them into the `dex-config` secret, so they survive upgrades. See [Configuring Dex](./security/authentication_oidc.md#configuring-dex).
+
 ## Container Registry
 
 When Epinio builds a container image for an application from source, it needs
@@ -142,6 +154,21 @@ on the cluster when `.Values.containerregistry.enabled` is `true` (default).
 Any container registry that supports basic auth authentication (e.g. gcr, dockerhub, etc) can be used
 instead, by setting this value to `false` and using the `global.registry*` values
 to point to the desired container registry.
+
+The built-in registry's storage and security values:
+
+| Value | Default | Notes |
+| --- | --- | --- |
+| `containerregistry.storage.emptyDir` | `true` | `true` keeps images in an `emptyDir` inside the registry pod, and **every image is deleted when the pod is replaced**. `false` stores them on a PersistentVolumeClaim named `epinio-registry`. |
+| `containerregistry.storage.size` | `1Gi` | Size of the claim. Only used when `emptyDir` is `false`. |
+| `containerregistry.storage.storageClassName` | cluster default | StorageClass for the claim. |
+| `containerregistry.storage.accessModes` | `[ReadWriteOnce]` | Access modes for the claim. |
+| `containerregistry.storage.volumeMode` | `Filesystem` | Volume mode for the claim. |
+| `containerregistry.podSecurityContext` | `fsGroup: 1000`, `fsGroupChangePolicy: OnRootMismatch` | Pod security context of the registry. The registry runs as user ID 1000, and `fsGroup` makes a new root-owned volume writable for it. Set keys to override them, or `null` to remove the security context. |
+
+The volume must be writable by user ID 1000. Storage that ignores `fsGroup`, such as NFS with `root_squash`, needs that ownership set up front.
+[Running the registry and SeaweedFS on persistent storage](../how-to/operator/cluster-config/persistent_storage.md) covers the setup and storage requirements.
+Releases 1.13.0 through 1.14.2 don't set `fsGroup`, so a registry on root-owned storage can't write. The same page has a workaround.
 
 ## Web UI
 

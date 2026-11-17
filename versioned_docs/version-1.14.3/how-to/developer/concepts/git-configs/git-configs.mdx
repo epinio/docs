@@ -1,0 +1,108 @@
+---
+sidebar_label: Git Configurations
+sidebar_position: 8
+title: Git Configurations
+description: How to use Epinio git configurations.
+keywords: [epinio, kubernetes, git configuartions]
+doc-type: [how-to]
+doc-topic: [epinio, how-to, git configurations]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+This guide explores working with git configurations. Git configurations enable cloning of private repositories, disabling of SSL verification, and/or extending verification through a custom bundle of certificates. For more information see the [git configurations reference](../../../../reference/concepts/git_configuration.md) page.
+
+## View Git Configurations
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+To view all available git configurations, navigate to the **Git Configs** page under the **Advanced** section of the side navigation menu.
+
+<img
+  src={require('./git-configs-screen.png').default}
+  alt="View of the Git Configs screen"
+/>
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+List all git configs:
+
+```console
+epinio gitconfig list
+```
+
+</TabItem>
+</Tabs>
+
+## Create a Git Configuration
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Click **Create** on the Git Configs page to open the creation modal. First, you must provide a unique id for your git config.
+
+Epinio offers several git providers to choose from, including GitHub and GitLab. If you select enterprise versions of GitHub or GitLab, you will also have to provide the host URL.
+
+You can also provide your Git username, as well as a password/token, so Epinio can access private repos/projects.
+
+Finally, you can provide epinio with git certificates and toggle some addtional config options.
+
+<img
+  src={require('./git-configs-create-modal.png').default}
+  alt="Create Git Config Modal"
+  width="800"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Create git config:
+
+```console
+epinio gitconfig create github-epinio-example-go-configuration https://github.com \
+    --git-provider github \
+    --user-org epinio \
+    --repository example-go \
+    --skip-ssl \
+    --username myuser \
+    --password abcde12345 \
+    --cert-file /path/to/some/certfile
+```
+
+</TabItem>
+</Tabs>
+
+## Delete a Git Configuration
+
+<Tabs>
+<TabItem value="ui" label="UI" default>
+
+Open the action menu for the git config and select **Delete**. Confirm the deletion.
+
+<img
+  src={require('./git-configs-delete-modal.png').default}
+  alt="Delete Git Config Modal"
+  width="400"
+/>
+
+</TabItem>
+
+<TabItem value="cli" label="CLI">
+
+Delete git config:
+
+```console
+epinio gitconfig delete my-git-config
+```
+
+</TabItem>
+</Tabs>
+
+
+## Additional CLI Commands
+For additional documentation on the CLI commands above, along with additional commands, see the [epinio gitconfig chart](../../../../reference/cli/gitconfig/epinio_gitconfig.md) CLI reference.

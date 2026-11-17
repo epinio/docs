@@ -20,10 +20,12 @@ The MCP server is in beta. Tool names and options may still change, and it is
 not yet recommended for production use.
 :::
 
-:::info Requires Epinio 1.14.1 or later
+:::info Requires a current Epinio release
 The server depends on the builder-image, catalog-service, and app-chart CRUD API
-and the source-retrieval endpoint, all introduced in Epinio 1.14.1. It will not
-work against earlier releases.
+and the source-retrieval endpoint, and login depends on the chart's
+`dex.extraStaticClients` and `dex.apiTrustedPeers` values. Use a current
+[Epinio release](https://github.com/epinio/epinio/releases); older ones lack
+one or the other.
 :::
 
 To stand it up on your cluster, see [Install the MCP server](../getting-started/install-mcp).
@@ -41,22 +43,64 @@ agent and the Epinio REST API to the cluster:
 
 ```text
 AI Agent (Claude, etc.)
-    | MCP protocol (Streamable HTTP, served at the server root)
+    | MCP protocol (Streamable HTTP) + caller credentials
 Epinio MCP Server
-    | REST API (Basic Auth or OIDC, TLS)
+    | REST API using the same caller credentials
 Epinio API Server
     | Kubernetes API
 Kubernetes Cluster
 ```
 
-Authentication is per request: the agent passes an `Authorization` header
-(`Bearer <token>` or `Basic <base64(user:pass)>`) that the server forwards to
-Epinio. When no header is present, the server falls back to the credentials it was
-configured with (default `admin` / `password`).
+The MCP endpoint is served at the server root. Authentication is mandatory and
+per caller: the agent passes either an OIDC bearer token or HTTP Basic
+credentials, and the MCP server asks Epinio's authenticated `/me` endpoint to
+validate it. Epinio remains the authority for users and permissions.
+
+There is no anonymous mode or shared server-credential fallback. A request
+without credentials receives `401 Unauthorized` and cannot access tools. Every
+tool call uses an Epinio API client created from the caller's credential, so
+the result is limited by that user's Epinio permissions.
 
 By default every tool wires **only** to the Epinio REST API, as the calling user.
 An optional [elevated tier](#elevated-tier) that reaches directly into Kubernetes
 is off unless explicitly enabled.
+
+### OAuth discovery
+
+The server is an OAuth 2.0 protected resource. It exposes
+`/.well-known/oauth-protected-resource`, which contains:
+
+- The MCP resource URL.
+- The Dex authorization-server issuer.
+- The supported bearer-token method and scopes.
+
+An unauthenticated MCP request returns a `WWW-Authenticate` challenge pointing
+to this document. An OAuth-capable MCP client can then discover Dex, perform
+Authorization Code with PKCE, and send the resulting access token as
+`Authorization: Bearer <token>`.
+
+Epinio accepts tokens intended for the `epinio-api` client. The MCP OAuth client
+must therefore be registered as a trusted peer of `epinio-api`, and request the
+`audience:server:client_id:epinio-api` scope. Dex requires static client
+registration and an exact callback URI; it does not support dynamic client
+registration or Client ID Metadata Documents (CIMD).
+
+See [Install the MCP server](../getting-started/install-mcp#configure-dex-for-oauth-clients)
+for Dex configuration and a Claude Code example. Compatibility with another
+MCP client depends on its support for Streamable HTTP, protected-resource
+discovery, and an explicitly configured OAuth client ID.
+
+### Authentication configuration
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `EPINIO_API_URL` | Yes | Epinio API base URL. |
+| `EPINIO_MCP_RESOURCE_URL` | Yes | Exact MCP URL entered by users and advertised in protected-resource metadata. |
+| `EPINIO_MCP_OIDC_ISSUER` | Yes | Dex issuer URL advertised to OAuth clients. |
+
+The resource URL is compared exactly by OAuth clients, so scheme, hostname,
+port, and path must match. The issuer must match the `issuer` field in Dex's
+OpenID Connect discovery document.
 
 ## Core tools
 
@@ -85,6 +129,8 @@ These are always available and act purely through the Epinio API.
 | `push_app` | Full push workflow: create, upload, stage, and deploy from source files. |
 | `upload_and_stage` | Upload source and build without deploying, so logs can be inspected first. |
 | `deploy_staged` | Deploy a previously staged build. |
+| `watch_app_startup` | Experimental. Upload source, stage, and start the app under a supervisor so `sync_app` can update it in place. Run again after any redeploy that recreates the pod. |
+| `sync_app` | Experimental. Push changed source files, or one rebuilt binary, into an app under watch; the supervisor restarts it without a rebuild. |
 | `app_logs` | Fetch runtime or staging/build logs from an application. |
 | `get_app_manifest` | Inspect full app configuration (image, routes, env, settings). |
 | `clone_app` | Clone an existing app to a new name using its built image. |
@@ -184,12 +230,13 @@ convert back to a plain Kubernetes workload.
 
 ## Health probes
 
-Besides the MCP endpoints, the server exposes two plain-HTTP probes:
+Besides the MCP endpoints, the server exposes these unauthenticated paths:
 
 | Path | Type | Behavior |
 | --- | --- | --- |
 | `/healthz` | Liveness | Returns 200 whenever the process is up. |
 | `/readyz` | Readiness | Calls Epinio `/info`; returns 200 on success, 503 on upstream failure. |
+| `/.well-known/oauth-protected-resource` | Discovery | OAuth protected-resource metadata. See [OAuth discovery](#oauth-discovery). |
 
 ## See also
 

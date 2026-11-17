@@ -21,7 +21,7 @@ Rancher Manager (v2.12+) can act as an OpenID Connect (OIDC) identity provider. 
   kubectl patch features oidc-provider -p '{"spec":{"value":true}}' --type merge
   ```
 - Epinio installed with Dex enabled.
-- Access to the `dex-config` secret in the `epinio` namespace.
+- Permission to run `helm upgrade` on the Epinio release and to create secrets in the `epinio` namespace.
 
 ## Overview
 
@@ -52,17 +52,35 @@ Once created, note the generated **client ID** and **client secret** — you wil
 
 ## Step 2: Configure the Dex OIDC Connector
 
-Edit the `config.yaml` key inside the `dex-config` secret in the `epinio` namespace. Add (or update) an OIDC connector block pointing at Rancher.
+Store the client secret from step 1 in a Kubernetes secret, so it stays out of
+your Helm values:
+
+```bash
+kubectl create secret generic dex-rancher-oidc -n epinio \
+  --from-literal=clientSecret='<client-secret-from-step-1>'
+```
+
+Add an OIDC connector pointing at Rancher to your Helm values, for example in
+`dex-values.yaml`. Do not edit the `dex-config` secret directly: the next
+`helm upgrade` overwrites it.
 
 ```yaml
-connectors:
+dex:
+  envVars:
+  - name: RANCHER_OIDC_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: dex-rancher-oidc
+        key: clientSecret
+  connectors:
   - type: oidc
     id: rancher
     name: Rancher
     config:
       issuer: https://<rancher-url>/oidc
       clientID: <client-id-from-step-1>
-      clientSecret: <client-secret-from-step-1>
+      # Dex expands this from the environment variable set above.
+      clientSecret: $RANCHER_OIDC_CLIENT_SECRET
       redirectURI: https://auth.<your-epinio-domain>/callback
 
       # Rancher's OIDC provider only supports these scopes.
@@ -101,26 +119,44 @@ github_team://123456
 
 These are not human-readable team names like `my-org:my-team`. This is a Rancher behavior — it maps GitHub teams to their numeric IDs internally.
 
-To map these to Epinio roles, use the `rolesMapping` key in the `dex-config` secret. You can map both formats if you have connectors that return different group name styles:
+To map these to Epinio roles, add `dex.rolesMapping` to the same values file.
+Each entry names a connector by its `id`, so a direct GitHub connector and the
+Rancher connector can map their different group name styles separately:
 
 ```yaml
-rolesMapping:
-  # From a direct GitHub connector (human-readable)
-  "my-org:my-team":
-    - "user"
-    - "admin:my-namespace"
-
+dex:
+  rolesMapping:
   # From the Rancher OIDC connector (numeric GitHub team IDs)
-  "github_team://123456":
-    - "admin"
+  - connectorId: rancher
+    groups:
+    - id: "github_team://123456"
+      roles:
+      - admin
+
+  # From a direct GitHub connector (human-readable)
+  - connectorId: github
+    groups:
+    - id: "my-org:my-team"
+      roles:
+      - user
+      - admin:my-namespace
 ```
 
 ## Step 4: Apply and Restart
 
-After updating the `dex-config` secret, restart the Dex workload so it picks up the new configuration:
+Apply the values, then restart Dex, which reads its configuration only at
+startup:
 
 ```bash
+helm upgrade epinio epinio/epinio -n epinio --reuse-values -f dex-values.yaml
 kubectl rollout restart deployment dex -n epinio
+```
+
+Dex skips a connector that fails to start rather than exiting, so confirm the
+Rancher connector opened:
+
+```bash
+kubectl logs deployment/dex -n epinio | grep -i connector
 ```
 
 Verify the OIDC flow:
