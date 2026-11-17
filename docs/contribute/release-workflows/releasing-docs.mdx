@@ -1,0 +1,42 @@
+---
+sidebar_label: Docs
+sidebar_position: 4
+title: Releasing Docs
+description: Overview of the process for publishing updated Epinio Docs.
+keywords: [epinio, contribute, docs, release]
+doc-type: [contribute]
+doc-topic: [epinio, contribute, docs]
+doc-persona: [epinio-developer, epinio-operator]
+---
+
+## Overview
+
+## Release Process
+
+### 1. Preparing for Release
+
+a. You do not start this by hand. The server release sends an `epinio-release` repository dispatch, which runs __Updatecli__ (`updatecli.yml`) and opens a PR as `epinio-bot`, labelled `chore`.
+
+b. The important part of that PR is the new version of the docs. __Updatecli__ runs `updatecli/scripts/docusaurus.sh`, which calls `yarn run docusaurus docs:version <version>` and snapshots the current `docs/` tree into `versioned_docs/version-<version>`, adds the sidebar, and prepends the version to `versions.json`.
+
+c. The same PR is supposed to rewrite the Epinio version strings and download URLs inside the docs. Those targets currently point at paths that no longer exist, so check them by hand for now. See Post Release Tasking.
+
+### 2. Reviewing the PR
+
+a. Netlify builds a deploy preview for every PR, through the Netlify GitHub App rather than a workflow in the repo. The site is `epinio-docs-staging`and the build settings live in the Netlify dashboard, not in a `netlify.toml`.
+
+b. Open the preview at `deploy-preview-<pr>--epinio-docs-staging.netlify.app` and check the new version appears in the version dropdown and that the versioned pages render.
+
+c. The preview is the only build check on the PR. If it fails, the Docusaurus build is broken and merging will break the live site.
+
+### 3. Publishing
+
+a. Merge to `main`. That triggers GitHub Pages (`deploy.yml`), which runs `yarn install --frozen-lockfile` and `yarn build`, then publishes `./build` to the `gh-pages` branch with `peaceiris/actions-gh-pages@v3`.
+
+b. GitHub Pages serves `gh-pages` at docs.epinio.io via the `CNAME` file.
+
+### 4. Post Release Tasking
+
+a. Confirm the version strings and download URLs in the new versioned docs actually point at the release you just cut. 
+
+b. Its important to close out or update any public GitHub issues that were resolved as part of the release, and clean up branches.
